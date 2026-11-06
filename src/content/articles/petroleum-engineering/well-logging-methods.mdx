@@ -1,0 +1,147 @@
+---
+title: "Well Logging Methods: Resistivity, Gamma Ray and Sonic Logs"
+description: "Well logging methods explained: gamma ray, resistivity, density, neutron and sonic logs, wireline vs LWD, interpretation and an Archie example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: petroleum-engineering
+subcategory: well-logging
+focusKeyword: "well logging methods"
+image: { src: /images/featured/well-logging-methods.webp, alt: "Well Logging Methods: Resistivity, Gamma Ray and Sonic Logs: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [well-logging, petrophysics, resistivity-log, gamma-ray-log, sonic-log]
+faq:
+  - q: "What is the difference between wireline logging and LWD?"
+    a: "Wireline logging lowers tools on an electric cable after a section of hole has been drilled. Logging while drilling (LWD) places sensors in the drill string, so measurements are taken during drilling, before mud invades the formation deeply. LWD is essential in high angle and horizontal wells where wireline tools cannot easily be run."
+  - q: "Why does hydrocarbon show high resistivity?"
+    a: "Rock grains and oil or gas do not conduct electricity well; current flows mainly through the salty formation water in the pores. When hydrocarbons replace much of that water, there is less conductive path, so resistivity rises. A high deep resistivity in a porous zone is a classic sign of hydrocarbons."
+  - q: "How does a gamma ray log identify shale?"
+    a: "Shales contain clay minerals rich in potassium, thorium and uranium, which are naturally radioactive. Clean sandstones and limestones contain little of these. A high gamma ray reading therefore usually indicates shale, and a low reading indicates clean reservoir rock, although some exceptions exist, such as radioactive feldspar sands."
+references:
+  - text: "G. B. Asquith and D. Krygowski, Basic Well Log Analysis, 2nd ed., AAPG Methods in Exploration 16"
+  - text: "G. E. Archie, The Electrical Resistivity Log as an Aid in Determining Some Reservoir Characteristics, Trans. AIME, 1942"
+  - text: "O. Serra, Fundamentals of Well-Log Interpretation, Elsevier"
+  - text: "D. V. Ellis and J. M. Singer, Well Logging for Earth Scientists, 2nd ed., Springer"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Well logging methods** record rock and fluid properties continuously along a borehole using tools lowered on a cable (**wireline**) or built into the drill string (**logging while drilling**, LWD). The main logs are **gamma ray** (natural radioactivity, to tell shale from clean rock), **resistivity** (to detect hydrocarbons versus salt water), **density** and **neutron** (to measure porosity) and **sonic** (acoustic travel time, for porosity and rock mechanics). Combined, they tell engineers where the reservoir is, how porous it is and what fluids it contains.
+
+</Key>
+
+Cores give direct samples, but they are expensive and cover only short intervals. Well logs measure the whole well, foot by foot, within hours of drilling. They are the main source of data for deciding which zones to test, perforate and produce, and for building the reservoir model.
+
+## How logging is done
+
+- **Wireline logging:** after drilling a section, a string of sondes is lowered on an armoured electric cable. Measurements are recorded as the tool is pulled up at a steady speed and transmitted to a surface logging unit.
+- **Logging while drilling (LWD):** sensors in drill collars just above the bit measure as the well is drilled and send selected data to surface by mud pulse telemetry, storing the full data in memory.
+- **Cased hole logging:** tools run inside steel casing to check cement quality, corrosion and production profiles.
+
+Logs are plotted against depth in tracks, typically gamma ray on the left, resistivity in the middle and porosity logs on the right.
+
+<figure>
+<svg width="600" height="330" viewBox="0 0 600 330" fill="none" role="img" aria-label="Simplified log display with three tracks against depth: gamma ray track shows high readings in shale and low readings in sand; resistivity track shows high resistivity in the upper oil bearing sand and low resistivity in the lower water bearing sand; density and neutron porosity track shows crossover in the gas or porous zone">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="155" y="22">Gamma ray</text><text x="315" y="22">Resistivity</text><text x="475" y="22">Density / neutron</text></g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#ffffff"><rect x="80" y="32" width="150" height="270" /><rect x="240" y="32" width="150" height="270" /><rect x="400" y="32" width="150" height="270" /></g>
+<g fill-opacity="0.35"><rect x="80" y="100" width="470" height="70" fill="#f5b800" /><rect x="80" y="210" width="470" height="60" fill="#13a89e" /></g>
+<path d="M210 32V100L105 104V168L210 172V210L108 214V268L210 272V302" stroke="#0b2545" stroke-width="2.5" fill="none" />
+<path d="M255 32V100L370 106V166L258 172V210L262 214V268L255 272V302" stroke="#b42318" stroke-width="2.5" fill="none" />
+<path d="M500 32V100L430 106V166L500 172V210L440 214V268L500 272V302" stroke="#0b2545" stroke-width="2.5" fill="none" />
+<path d="M470 32V100L520 106V166L470 172V210L455 214V268L470 272V302" stroke="#13a89e" stroke-width="2.5" stroke-dasharray="6 3" fill="none" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="10" y="70">Shale</text><text x="10" y="140">Oil sand</text><text x="10" y="194">Shale</text><text x="10" y="244">Water</text><text x="10" y="258">sand</text><text x="10" y="290">Shale</text>
+<text x="115" y="320">Low GR = clean sand</text><text x="268" y="320">High R = oil</text><text x="420" y="320">Solid: density, dashed: neutron</text>
+</g>
+</svg>
+<figcaption>Simplified log tracks: low gamma ray marks sands; high resistivity distinguishes the oil sand from the water sand.</figcaption>
+</figure>
+
+## Main well logging methods
+
+### Gamma ray log
+
+Measures natural gamma radiation from potassium, thorium and uranium in the rock, in API units. Shales are radioactive; clean sandstones and carbonates are not. The gamma ray log is used to identify lithology, pick formation tops, estimate shale volume and correlate between wells. **Spectral gamma ray** tools separate the three elements for better mineral identification.
+
+### Spontaneous potential (SP) log
+
+Records natural voltage differences between the borehole mud and formation water. It helps identify permeable beds and estimate formation water resistivity, but only works in water based mud.
+
+### Resistivity logs
+
+Measure how strongly the formation resists electric current, in ohm metres (Ω·m).
+
+- **Laterolog** tools focus current into the formation and work best in salty, conductive mud.
+- **Induction** tools induce eddy currents with coils and work in oil based or fresh mud.
+- Tools read at several **depths of investigation**: shallow readings see the zone invaded by mud filtrate; deep readings see the undisturbed formation, giving true resistivity Rt.
+
+High deep resistivity in a porous zone usually indicates hydrocarbons.
+
+### Density log
+
+A gamma ray source sends radiation into the formation; detectors count the scattered rays, which depend on electron density and therefore bulk density ρ_b. Porosity follows from:
+
+$$
+\phi_D = \frac{\rho_{ma} - \rho_b}{\rho_{ma} - \rho_f}
+$$
+
+where ρ_ma is the matrix density (2.65 g/cm³ for sandstone, 2.71 for limestone) and ρ_f the fluid density.
+
+### Neutron log
+
+A neutron source bombards the formation; hydrogen atoms slow the neutrons most effectively. Since hydrogen is mainly in pore fluids, the log responds to porosity. Gas has low hydrogen density, so neutron porosity reads low in gas zones while density porosity reads high: this **crossover** is a classic gas indicator.
+
+### Sonic log
+
+Measures the travel time of a sound wave through the formation, Δt, in microseconds per foot. Slower travel means more porosity. Sonic data also gives rock strength and elastic properties for drilling and fracturing design, and ties wells to seismic surveys.
+
+### Advanced logs
+
+Nuclear magnetic resonance (pore size and free fluid), borehole imaging (fractures and bedding), formation pressure testers and fluid samplers complement the basic suite.
+
+## Well logging methods compared
+
+| Log | Measures | Main use |
+| --- | --- | --- |
+| Gamma ray | Natural radioactivity | Shale vs sand, correlation |
+| SP | Natural electrical potential | Permeable beds, Rw |
+| Resistivity | Electrical resistance | Hydrocarbon vs water |
+| Density | Bulk density | Porosity, lithology |
+| Neutron | Hydrogen content | Porosity, gas detection |
+| Sonic | Acoustic travel time | Porosity, rock mechanics, seismic tie |
+
+## Water saturation and Archie's equation
+
+G. E. Archie showed in 1942 that for clean rocks, water saturation S_w can be calculated from resistivity and porosity:
+
+$$
+S_w = \left(\frac{a\,R_w}{\phi^m\,R_t}\right)^{1/n}
+$$
+
+with a ≈ 1, m ≈ 2 and n ≈ 2 for many sandstones. Hydrocarbon saturation is 1 − S_w.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A clean sandstone zone reads bulk density 2.32 g/cm³ and deep resistivity Rt = 20 Ω·m. Formation water resistivity Rw = 0.05 Ω·m. Matrix density 2.65 g/cm³, fluid density 1.0 g/cm³. Use a = 1, m = 2, n = 2.</dd>
+<dt>Find</dt><dd>Porosity, water saturation and hydrocarbon saturation.</dd>
+<dt>Assumptions</dt><dd>Clean (shale free) sand; Archie parameters valid.</dd>
+<dt>Solution</dt><dd>φ = (2.65 − 2.32) ÷ (2.65 − 1.0) = 0.33 ÷ 1.65 = 0.20<br />S_w = √(1 × 0.05 ÷ (0.20² × 20)) = √(0.05 ÷ 0.8) = √0.0625 = 0.25<br />S_h = 1 − 0.25 = 0.75</dd>
+<dt>Answer</dt><dd><strong>Porosity 20%, water saturation 25%, hydrocarbon saturation 75%: a promising hydrocarbon zone</strong></dd>
+<dt>Limitations</dt><dd>Shaly sands need modified equations; Archie parameters should be confirmed with core measurements.</dd>
+</dl>
+</Example>
+
+## Practical challenges
+
+Log quality depends on borehole conditions. Washed out or rough holes spoil density and neutron readings, which need good pad contact. Mud filtrate invasion alters shallow resistivity readings, so deep reading tools and invasion corrections are used. Tool calibration, depth matching between runs and environmental corrections for mud weight, hole size and temperature are all part of preparing logs for interpretation. Radioactive sources in density and neutron tools require strict handling procedures, and pulsed neutron generators are increasingly used instead of chemical sources.
+
+## Well logging methods in the digital era
+
+Log data is now delivered digitally in standard formats such as LAS and DLIS, interpreted with specialist software, and increasingly combined with machine learning to predict missing curves or classify rock types across many wells.
+
+## Using the results
+
+Log interpretation identifies net pay thickness, porosity and saturation, which together with area give hydrocarbons in place. Logs also guide where to set casing, which intervals to perforate, and how to model [porosity and permeability](/petroleum-engineering/porosity-and-permeability/) across the field. Logs are run from the [drilling rig](/petroleum-engineering/rotary-drilling-rig-components/), and later production logs help diagnose wells that need [artificial lift](/petroleum-engineering/artificial-lift-methods/) or water shut off.

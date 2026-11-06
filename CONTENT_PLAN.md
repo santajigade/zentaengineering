@@ -134,14 +134,14 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| reservoir-engineering | Porosity and Permeability of Reservoir Rocks | porosity-and-permeability | fundamentals | to write |
-| drilling | Rotary Drilling Rig Components and How They Work | rotary-drilling-rig-components | equipment | to write |
-| well-logging | Well Logging Methods: Resistivity, Gamma Ray and Sonic Logs | well-logging-methods | explanation | to write |
-| production-engineering | Artificial Lift Methods in Oil Production | artificial-lift-methods | explanation | to write |
-| gas-processing-lng | How Natural Gas Is Liquefied: The LNG Process | lng-process | explanation | to write |
-| refining | Crude Oil Distillation in Refineries Explained | crude-oil-distillation | working-principle | to write |
-| pipelines | Pipeline Pigging: Types and Purposes | pipeline-pigging | explanation | to write |
-| offshore | Types of Offshore Oil and Gas Platforms | offshore-platform-types | explanation | to write |
+| reservoir-engineering | Porosity and Permeability of Reservoir Rocks | porosity-and-permeability | fundamentals | draft |
+| drilling | Rotary Drilling Rig Components and How They Work | rotary-drilling-rig-components | equipment | draft |
+| well-logging | Well Logging Methods: Resistivity, Gamma Ray and Sonic Logs | well-logging-methods | explanation | draft |
+| production-engineering | Artificial Lift Methods in Oil Production | artificial-lift-methods | explanation | draft |
+| gas-processing-lng | How Natural Gas Is Liquefied: The LNG Process | lng-process | explanation | draft |
+| refining | Crude Oil Distillation in Refineries Explained | crude-oil-distillation | working-principle | draft |
+| pipelines | Pipeline Pigging: Types and Purposes | pipeline-pigging | explanation | draft |
+| offshore | Types of Offshore Oil and Gas Platforms | offshore-platform-types | explanation | draft |
 
 ## renewable-energy
 

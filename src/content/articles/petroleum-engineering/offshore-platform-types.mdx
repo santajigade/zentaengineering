@@ -1,0 +1,145 @@
+---
+title: "Offshore Platform Types in Oil and Gas Explained"
+description: "Offshore platform types explained: fixed jackets, gravity based, jack-ups, TLPs, spars, semi-submersibles and FPSOs, water depths and selection."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: petroleum-engineering
+subcategory: offshore
+focusKeyword: "offshore platform types"
+image: { src: /images/featured/offshore-platform-types.webp, alt: "Offshore Platform Types in Oil and Gas Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [offshore, oil-platforms, fpso, jacket-platform, subsea]
+faq:
+  - q: "What is the deepest type of offshore platform?"
+    a: "Floating systems such as spars, semi-submersibles and FPSOs operate in the deepest waters, beyond 2000 to 3000 m. Fixed platforms become uneconomic beyond about 400 to 500 m because the steel structure grows very large. Subsea wells tied back to floating hosts reach the greatest depths."
+  - q: "What is the difference between a drilling rig and a production platform?"
+    a: "A drilling rig, such as a jack-up, semi-submersible or drillship, is mobile and moves from well to well. A production platform stays at one field for decades to process and export oil and gas. Some production platforms also carry a drilling rig for their own wells."
+  - q: "Why are FPSOs so widely used?"
+    a: "An FPSO combines production processing and crude storage in one ship shaped hull, so no export pipeline is needed: shuttle tankers take the oil. It can be built in a shipyard, reused at other fields and installed quickly, which suits remote, deep water and marginal fields."
+references:
+  - text: "API RP 2A-WSD, Planning, Designing and Constructing Fixed Offshore Platforms: Working Stress Design"
+  - text: "ISO 19900 series, Petroleum and natural gas industries: Offshore structures"
+  - text: "S. K. Chakrabarti (ed.), Handbook of Offshore Engineering, Elsevier, 2005"
+  - text: "DNV-OS-C101, Design of Offshore Steel Structures, General"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Offshore platform types** fall into two groups. **Bottom founded (fixed)** structures stand on the seabed: **steel jackets** (up to about 400 m water depth), **gravity based structures** of concrete, **compliant towers**, and **jack-ups**. **Floating** systems are moored or tethered: **tension leg platforms (TLPs)**, **spars**, **semi-submersibles** and **FPSOs** (floating production, storage and offloading vessels), used in deep water from a few hundred to over 3000 m. Water depth, field size, environment and export route decide the choice.
+
+</Key>
+
+Around a quarter of the world's oil and gas comes from offshore fields, from shallow coastal waters to ultra deep water far from land. An offshore platform must support drilling, processing, living quarters and export equipment while resisting waves, wind, currents and sometimes ice for 20 to 40 years.
+
+## What a production platform does
+
+A production platform's **topsides** typically include:
+
+- Wellheads and manifolds, or connections to subsea wells through flexible **risers**.
+- Separation of oil, gas and water in [pressure vessels](/chemical-engineering/pressure-vessels-basics/).
+- Gas compression, dehydration and sometimes reinjection.
+- Water treatment and injection for pressure support.
+- Power generation, utilities, safety systems and accommodation.
+- Export by pipeline or, for floaters, to shuttle tankers.
+
+The **substructure** or **hull** carries the topsides and transfers loads to the seabed or to moorings.
+
+<figure>
+<svg width="600" height="320" viewBox="0 0 600 320" fill="none" role="img" aria-label="Offshore platform types arranged by increasing water depth from left to right: jack-up and fixed jacket in shallow water, compliant tower, tension leg platform with vertical tendons, spar with a tall cylindrical hull and catenary moorings, and FPSO ship with turret moorings; seabed slopes down to the right">
+<path d="M10 70H590" stroke="#13a89e" stroke-width="2" />
+<path d="M10 150L110 160L200 200L300 240L420 270L590 290" stroke="#8a6d3b" stroke-width="2.5" fill="none" />
+<g stroke="#0b2545" stroke-width="2" fill="none">
+<rect x="22" y="40" width="50" height="16" fill="#fff7e0" /><path d="M28 56V152M66 56V152" />
+<rect x="95" y="40" width="50" height="16" fill="#fff7e0" /><path d="M100 56L90 158M140 56L150 160M104 90H136M108 120H132" />
+<rect x="175" y="40" width="44" height="16" fill="#fff7e0" /><path d="M190 56L186 196M204 56L208 196M190 120H206" />
+<rect x="255" y="40" width="60" height="16" fill="#fff7e0" /><rect x="262" y="56" width="46" height="34" fill="#eef1f6" /><path d="M268 90V240M302 90V240" stroke="#7b8794" />
+<rect x="355" y="40" width="50" height="16" fill="#fff7e0" /><rect x="368" y="56" width="24" height="120" fill="#eef1f6" /><path d="M368 170Q330 230 320 260M392 170Q440 230 460 272" stroke="#7b8794" stroke-dasharray="4 3" />
+<path d="M470 62H580L572 82H478Z" fill="#eef1f6" /><rect x="495" y="46" width="60" height="16" fill="#fff7e0" /><path d="M500 82Q500 200 480 274M500 82Q520 220 560 288" stroke="#7b8794" stroke-dasharray="4 3" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="47" y="30">Jack-up</text><text x="120" y="30">Jacket</text><text x="197" y="30">Compliant</text><text x="285" y="30">TLP</text><text x="380" y="30">Spar</text><text x="525" y="30">FPSO</text>
+<text x="100" y="310">Shallow</text><text x="500" y="310">Deep water</text>
+</g>
+<path d="M150 305H450" stroke="#7b8794" stroke-width="1.5" /><path d="M450 300l9 5-9 5z" fill="#7b8794" />
+</svg>
+<figcaption>Platform types arranged roughly by water depth (not to scale).</figcaption>
+</figure>
+
+## Bottom founded platforms
+
+### Steel jacket platforms
+
+A **jacket** is a welded tubular steel space frame fixed to the seabed by **piles** driven through its legs. It is the most common offshore structure, used from a few metres to about 400 m water depth. Jackets are fabricated onshore, transported on barges and lifted or launched into place. Topsides are installed in one lift or several modules. Tubular members follow principles similar to land based [steel sections](/civil-engineering/steel-sections-types/), designed for wave fatigue and corrosion.
+
+### Gravity based structures (GBS)
+
+Massive concrete bases sit on the seabed and are held in place by their own weight, needing no piles. Their hollow cells can store crude oil. GBS platforms suit harsh environments such as the North Sea and iceberg prone waters off Canada, in depths up to about 300 m.
+
+### Compliant towers
+
+Slender towers that flex with wave forces instead of resisting them rigidly, used in about 300 to 900 m of water. Few have been built, as floaters have become more economical at these depths.
+
+### Jack-up platforms
+
+A floating hull with three or four legs that are lowered to the seabed, then the hull is jacked up above the waves. Jack-ups are mostly mobile drilling rigs in up to about 120 to 150 m of water, but some serve as production or accommodation units.
+
+## Floating platforms
+
+### Tension leg platforms (TLP)
+
+A buoyant hull is held down by vertical steel **tendons** anchored to the seabed and kept in high tension by excess buoyancy. Heave (vertical motion) is almost eliminated, allowing **dry trees**, wellheads on deck, which simplifies well access. Used in about 300 to 1500 m.
+
+### Spar platforms
+
+A very deep draft vertical cylinder, often 150 to 200 m long, ballasted at the bottom and held by catenary or taut **mooring lines**. The deep draft gives small motions, also allowing dry trees in water depths up to about 3000 m.
+
+### Semi-submersibles
+
+A deck supported by columns on submerged pontoons. The small waterplane area reduces wave motion. Semi-submersibles serve as drilling rigs and production platforms, usually with subsea wells, in depths from about 100 m to over 3000 m.
+
+### FPSO
+
+A ship shaped vessel, new built or converted from a tanker, with process plant on deck and crude storage in its hull. It is moored by a **turret** that lets it weathervane with the wind and waves, or spread moored in calm regions. **Shuttle tankers** offload the oil. FPSOs dominate deep water developments offshore Brazil and West Africa and are widely used elsewhere. Gas fields can use FLNG vessels that also liquefy gas, using the [LNG process](/petroleum-engineering/lng-process/).
+
+## Offshore platform types compared
+
+| Type | Typical water depth | Support | Oil storage | Wells |
+| --- | --- | --- | --- | --- |
+| Steel jacket | Up to about 400 m | Piles | No | Dry trees |
+| Gravity based | Up to about 300 m | Own weight | Often | Dry trees |
+| Jack-up | Up to about 150 m | Legs on seabed | No | Dry trees |
+| TLP | About 300 to 1500 m | Vertical tendons | No | Dry or wet |
+| Spar | About 500 to 3000 m | Moorings | Limited | Dry or wet |
+| Semi-submersible | About 100 to 3000 m | Moorings | No | Wet (subsea) |
+| FPSO | About 20 to 3000 m | Turret or spread mooring | Yes | Wet (subsea) |
+
+## Buoyancy in floating platforms
+
+A floater's hull displaces water equal to the total weight it supports (Archimedes' principle):
+
+$$
+\rho_w\,g\,V_\text{displaced} = W
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A TLP has a total weight (hull, topsides and risers) of 40 000 tonnes. Its submerged hull displaces 52 000 m³ of seawater with density 1025 kg/m³.</dd>
+<dt>Find</dt><dd>The total tendon tension.</dd>
+<dt>Assumptions</dt><dd>Still water; tendons carry all excess buoyancy.</dd>
+<dt>Solution</dt><dd>Buoyancy = 52 000 × 1025 = 53.3 million kg = 53 300 tonnes force<br />Excess buoyancy = 53 300 − 40 000 = 13 300 tonnes<br />Tension = 13 300 × 1000 × 9.81 ≈ 130 MN</dd>
+<dt>Answer</dt><dd><strong>The tendons carry about 13 300 tonnes (130 MN) of pretension, which keeps the hull from heaving</strong></dd>
+<dt>Limitations</dt><dd>Waves, currents and payload changes vary the tension; designs ensure tendons never go slack in storms.</dd>
+</dl>
+</Example>
+
+## Decommissioning
+
+At the end of field life, platforms must be removed or made safe. Topsides are usually lifted off in modules or in one piece by heavy lift vessels, jackets are cut and removed, and wells are permanently plugged with cement barriers. Regulations in many regions require full removal of structures in shallow water, while some large concrete bases may stay in place under agreed conditions. Some regions allow parts of jackets to remain as artificial reefs.
+
+## Choosing a concept
+
+Selection weighs water depth, reservoir size and life, distance to shore and existing infrastructure, environmental loads, need for dry trees, oil storage and export route, schedule, and cost. Small fields near existing hubs are often developed with subsea wells tied back to a host platform. The wells themselves are drilled by mobile [rotary drilling rigs](/petroleum-engineering/rotary-drilling-rig-components/) and maintained with [pipeline pigging](/petroleum-engineering/pipeline-pigging/) and inspection programmes across the life of the field.

@@ -1,0 +1,148 @@
+---
+title: "Porosity and Permeability of Reservoir Rocks"
+description: "Porosity and permeability of reservoir rocks explained: definitions, types, Darcy's law, units, typical values, measurement methods and a worked flow example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: petroleum-engineering
+subcategory: reservoir-engineering
+focusKeyword: "porosity and permeability"
+image: { src: /images/featured/porosity-and-permeability.webp, alt: "Porosity and Permeability of Reservoir Rocks: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [reservoir-engineering, porosity, permeability, darcys-law, petrophysics]
+faq:
+  - q: "Can a rock have high porosity but low permeability?"
+    a: "Yes. Shale and some chalks can have porosity of 10 to 30% but permeability in the nanodarcy to microdarcy range, because their pores are tiny and poorly connected. They store fluid but do not let it flow easily, which is why shale reservoirs need hydraulic fracturing to produce."
+  - q: "What is a good permeability for an oil reservoir?"
+    a: "As a rough guide, below 1 mD is tight, 1 to 10 mD is fair, 10 to 100 mD is good, and above 100 mD is very good to excellent. What counts as commercial also depends on oil viscosity, reservoir thickness, pressure and well design."
+  - q: "What is the difference between absolute and effective permeability?"
+    a: "Absolute permeability is measured with a single fluid filling the pores. Effective permeability is the ability to flow one fluid when other fluids are also present, such as oil flowing with water. Effective permeability divided by absolute permeability is the relative permeability, which ranges from 0 to 1."
+references:
+  - text: "L. P. Dake, Fundamentals of Reservoir Engineering, Elsevier, 1978"
+  - text: "D. Tiab and E. C. Donaldson, Petrophysics: Theory and Practice of Measuring Reservoir Rock and Fluid Transport Properties, 4th ed., Gulf Professional Publishing"
+  - text: "API RP 40, Recommended Practices for Core Analysis, American Petroleum Institute"
+  - text: "T. Ahmed, Reservoir Engineering Handbook, 5th ed., Gulf Professional Publishing"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Porosity and permeability** are the two most important properties of a reservoir rock. **Porosity** (φ) is the fraction of the rock's volume that is pore space, which sets **how much** oil, gas or water the rock can **store**. **Permeability** (k) is the rock's ability to let fluids **flow** through connected pores, measured in **darcies** or millidarcies (mD) and defined by **Darcy's law**. A good reservoir needs both: enough porosity to hold hydrocarbons and enough permeability to produce them at useful rates.
+
+</Key>
+
+Oil and gas are not found in underground lakes. They fill tiny spaces between grains of sand or within fractures and cavities in carbonate rocks. How much fluid those spaces hold, and how easily it can move towards a well, decides whether a discovery is commercial. Reservoir engineers, geologists and petrophysicists therefore spend a great deal of effort measuring porosity and permeability.
+
+## Porosity
+
+Porosity is the ratio of pore volume to total (bulk) rock volume:
+
+$$
+\phi = \frac{V_p}{V_b}
+$$
+
+It is expressed as a fraction or a percentage. Typical reservoir sandstones have 10 to 30% porosity; carbonates range widely from a few percent to over 30%.
+
+### Types of porosity
+
+- **Total porosity:** all pore space, connected or isolated.
+- **Effective porosity:** only interconnected pores that contribute to flow. This is what matters for production.
+- **Primary porosity:** formed when the sediment was deposited, such as spaces between sand grains.
+- **Secondary porosity:** formed later by dissolution (vugs in limestone), fracturing or dolomitisation.
+
+### Factors controlling porosity
+
+- **Sorting:** well sorted grains of similar size leave more pore space than poorly sorted ones, where small grains fill the gaps.
+- **Grain packing:** loosely packed (cubic) spheres give about 47.6% porosity; tightly packed (rhombohedral) about 26%.
+- **Cementation:** minerals such as quartz and calcite precipitate between grains and reduce porosity.
+- **Compaction:** burial under thick sediment squeezes grains together, so porosity generally decreases with depth.
+
+Grain size alone does not control porosity for ideal packing: uniform small spheres and uniform large spheres have the same porosity. It does strongly control permeability.
+
+## Permeability and Darcy's law
+
+Henry Darcy discovered in 1856, while designing water filters for Dijon, that flow through a sand pack is proportional to the pressure difference and the area, and inversely proportional to the length. For a fluid of viscosity μ flowing through rock of permeability k:
+
+$$
+q = \frac{k A \,\Delta P}{\mu L}
+$$
+
+where q is the flow rate, A the cross sectional area, ΔP the pressure drop over length L.
+
+One **darcy** is the permeability that allows 1 cm³/s of a 1 cP fluid to flow through 1 cm² under a gradient of 1 atm/cm. Because reservoir values are usually much smaller, the **millidarcy** (mD) is common. One darcy is about 0.987 × 10⁻¹² m².
+
+| Rating | Permeability |
+| --- | --- |
+| Tight | Below 1 mD |
+| Fair | 1 to 10 mD |
+| Good | 10 to 100 mD |
+| Very good | 100 to 1000 mD |
+| Excellent | Above 1000 mD |
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Two rock cores. Left: well sorted large grains with large connected pores, high porosity and high permeability, with flow arrows passing through easily. Right: tightly cemented small grains with isolated small pores, low permeability, flow arrows blocked">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="150" y="24">Good reservoir rock</text><text x="450" y="24">Tight rock</text></g>
+<rect x="40" y="40" width="220" height="180" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<rect x="340" y="40" width="220" height="180" fill="#c9d2de" stroke="#0b2545" stroke-width="2" />
+<g fill="#f5e6c8" stroke="#8a6d3b" stroke-width="1.5">
+<circle cx="70" cy="70" r="24" /><circle cx="125" cy="70" r="24" /><circle cx="180" cy="70" r="24" /><circle cx="235" cy="70" r="20" />
+<circle cx="97" cy="120" r="24" /><circle cx="152" cy="120" r="24" /><circle cx="207" cy="120" r="24" /><circle cx="60" cy="125" r="16" />
+<circle cx="70" cy="175" r="24" /><circle cx="125" cy="175" r="24" /><circle cx="180" cy="175" r="24" /><circle cx="235" cy="178" r="20" />
+</g>
+<g fill="#f5e6c8" stroke="#8a6d3b" stroke-width="1">
+<circle cx="360" cy="60" r="12" /><circle cx="385" cy="60" r="12" /><circle cx="410" cy="60" r="12" /><circle cx="435" cy="60" r="12" /><circle cx="460" cy="60" r="12" /><circle cx="485" cy="60" r="12" /><circle cx="510" cy="60" r="12" /><circle cx="537" cy="60" r="12" />
+<circle cx="372" cy="100" r="13" /><circle cx="398" cy="100" r="13" /><circle cx="424" cy="100" r="13" /><circle cx="450" cy="100" r="13" /><circle cx="476" cy="100" r="13" /><circle cx="502" cy="100" r="13" /><circle cx="530" cy="100" r="13" />
+<circle cx="360" cy="140" r="12" /><circle cx="385" cy="140" r="12" /><circle cx="410" cy="140" r="12" /><circle cx="435" cy="140" r="12" /><circle cx="460" cy="140" r="12" /><circle cx="485" cy="140" r="12" /><circle cx="510" cy="140" r="12" /><circle cx="537" cy="140" r="12" />
+<circle cx="372" cy="180" r="13" /><circle cx="398" cy="180" r="13" /><circle cx="424" cy="180" r="13" /><circle cx="450" cy="180" r="13" /><circle cx="476" cy="180" r="13" /><circle cx="502" cy="180" r="13" /><circle cx="530" cy="180" r="13" />
+</g>
+<g stroke="#13a89e" stroke-width="2.5" fill="none"><path d="M20 97H280" /><path d="M20 150H280" /></g>
+<g fill="#13a89e"><path d="M280 92l9 5-9 5z" /><path d="M280 145l9 5-9 5z" /></g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M320 120H350" /><path d="M352 110v20" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle"><text x="150" y="242">Large connected pores: φ about 25%, k above 100 mD</text><text x="450" y="242">Small, cemented pores: k below 1 mD</text></g>
+</svg>
+<figcaption>Well sorted, coarse grains give high porosity and permeability; fine, cemented grains block flow.</figcaption>
+</figure>
+
+## Porosity and permeability relationship
+
+Porosity and permeability are related but not the same. Permeability depends mainly on **pore throat size** and **connectivity**, not just pore volume. Coarse, well sorted sands have large throats and high permeability. Fine grained rocks can have the same porosity but far lower permeability. Fractures can give tight rocks high permeability despite low porosity. Within one rock type, engineers often fit a log linear trend of permeability against porosity from core data, then use it to estimate permeability from porosity logs.
+
+Permeability is also often **anisotropic**: horizontal permeability is usually higher than vertical because of layering, which affects coning of gas or water towards wells.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A core plug is 5 cm long with a cross sectional area of 10 cm². Brine of viscosity 1 cP flows through it at 0.5 cm³/s under a pressure difference of 2 atm.</dd>
+<dt>Find</dt><dd>The absolute permeability in darcies and millidarcies.</dd>
+<dt>Assumptions</dt><dd>Steady, laminar, single phase flow; the plug is fully saturated with brine.</dd>
+<dt>Solution</dt><dd>Rearranging Darcy's law: k = qμL ÷ (AΔP)<br />k = (0.5 × 1 × 5) ÷ (10 × 2) = 2.5 ÷ 20 = 0.125 D</dd>
+<dt>Answer</dt><dd><strong>k = 0.125 darcy = 125 mD, a very good reservoir permeability</strong></dd>
+<dt>Limitations</dt><dd>Gas measurements need a Klinkenberg correction for slip at low pressure; lab values at surface stress may be higher than in situ values.</dd>
+</dl>
+</Example>
+
+## How porosity and permeability are measured
+
+### Core analysis
+
+Rock samples (cores) cut during drilling are tested in the laboratory following practices such as API RP 40:
+
+- **Porosity:** helium porosimetry using Boyle's law, or saturating the sample with liquid and weighing it.
+- **Permeability:** flowing gas or brine through a plug and applying Darcy's law, as in the example above.
+
+### Well logs
+
+Continuous measurements down the borehole estimate porosity from density, neutron and sonic logs, as described in [well logging methods](/petroleum-engineering/well-logging-methods/). Permeability is harder to log directly; it is estimated from correlations, nuclear magnetic resonance logs or formation testers.
+
+### Well tests
+
+Pressure transient tests, where a well is flowed and then shut in while pressure is recorded, give the average permeability of the reservoir around the well, a much larger volume than any core. Accurate downhole and surface [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) is essential for these tests.
+
+## Fluid saturation and reservoir quality
+
+Porosity tells how much space exists, but not what fills it. **Water saturation** is the fraction of pore volume filled with water; the rest holds oil or gas. Fine grained rocks with small pores hold more water by capillary forces, so poor permeability often comes with high water saturation. Engineers therefore combine porosity, permeability and saturation into **net pay**: the thickness of rock that meets cut offs for all three and can contribute to production. Thin, high quality layers can matter more than thick, tight ones.
+
+## Why they matter
+
+Porosity, together with reservoir area, thickness and water saturation, gives the volume of hydrocarbons in place. Permeability, with fluid viscosity and pressure, controls how fast wells can produce, how many wells are needed, and whether techniques such as [artificial lift](/petroleum-engineering/artificial-lift-methods/) or hydraulic fracturing are required. Together, porosity and permeability shape every major decision in developing an oil or gas field, from drilling with a [rotary rig](/petroleum-engineering/rotary-drilling-rig-components/) to designing the surface facilities.

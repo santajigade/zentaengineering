@@ -1,0 +1,132 @@
+---
+title: "Crude Oil Distillation in Refineries Explained"
+description: "Crude oil distillation explained: desalting, furnace, atmospheric and vacuum columns, fractions and boiling ranges, side strippers and an API example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: petroleum-engineering
+subcategory: refining
+focusKeyword: "crude oil distillation"
+image: { src: /images/featured/crude-oil-distillation.webp, alt: "Crude Oil Distillation in Refineries Explained: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [refining, crude-distillation, cdu, vacuum-distillation, petroleum-fractions]
+faq:
+  - q: "Why is vacuum distillation needed after atmospheric distillation?"
+    a: "The heavy residue from the atmospheric column contains valuable gas oils that boil above about 370 °C. Heating it further at atmospheric pressure would crack the molecules and form coke. Under vacuum, boiling points drop by around 150 °C or more, so these gas oils can be separated without thermal cracking."
+  - q: "Does distillation change the chemistry of crude oil?"
+    a: "No. Distillation is a physical separation by boiling point. It splits crude into fractions but does not change molecules. Conversion units downstream, such as catalytic crackers, hydrocrackers and reformers, change the chemistry to make more gasoline and diesel and improve quality."
+  - q: "What is a crude assay?"
+    a: "A crude assay is a laboratory analysis of a crude oil that reports its API gravity, sulphur, metals, acidity and a true boiling point curve showing how much of each fraction it will yield. Refiners use assays to choose crudes and to set column operating conditions."
+references:
+  - text: "J. H. Gary, G. E. Handwerk and M. J. Kaiser, Petroleum Refining: Technology and Economics, 5th ed., CRC Press"
+  - text: "J. G. Speight, The Chemistry and Technology of Petroleum, 5th ed., CRC Press"
+  - text: "ASTM D2892, Standard Test Method for Distillation of Crude Petroleum (15-Theoretical Plate Column)"
+  - text: "ASTM D287, Standard Test Method for API Gravity of Crude Petroleum and Petroleum Products"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Crude oil distillation** is the first and largest process in every refinery. Crude is **desalted**, preheated, then heated in a **furnace** to about **350 to 380 °C** and fed to an **atmospheric distillation column**, where vapours rise and condense on trays at different heights according to boiling point. Products are drawn off from top to bottom: **gases and naphtha**, **kerosene**, **diesel (gas oil)** and **atmospheric residue**. The residue is heated again and sent to a **vacuum column**, which separates **vacuum gas oils** from **vacuum residue** at lower temperatures to avoid cracking.
+
+</Key>
+
+Crude oil is a mixture of thousands of hydrocarbons, from methane to molecules with more than 70 carbon atoms. It is not useful as it comes from the ground. Distillation separates it into fractions by boiling range, which become fuels directly or feed downstream conversion units. Because all crude passes through it, the crude distillation unit (CDU) sets the refinery's capacity.
+
+## Crude oil quality and API gravity
+
+Crudes are described by density, usually expressed as **API gravity**:
+
+$$
+\text{°API} = \frac{141.5}{SG} - 131.5
+$$
+
+where SG is specific gravity at 60 °F. Light crudes (above about 31 °API) yield more naphtha and diesel; heavy crudes (below about 22 °API) yield more residue. Sulphur content divides crudes into sweet (below about 0.5%) and sour.
+
+<Calculator path="engineering/api-gravity" title="API Gravity Calculator" />
+
+## Step 1: desalting and preheating
+
+Crude contains salt water, sediment and salts that would corrode equipment and foul exchangers. It is mixed with wash water and passed through an **electrostatic desalter**, where an electric field coalesces water droplets that settle out. The crude is then preheated to about 250 to 280 °C in a train of [heat exchangers](/chemical-engineering/heat-exchanger-types/) against hot product streams, recovering energy.
+
+## Step 2: furnace
+
+A fired heater raises the crude to about 350 to 380 °C, partly vaporising it. Temperature is limited because hydrocarbons start to crack thermally above this range, forming coke and gas.
+
+## Step 3: atmospheric distillation column
+
+The hot mixture enters the **flash zone** near the bottom of a tall column (often 50 m high) operating slightly above atmospheric pressure. Vapours rise through 30 to 50 **trays**, meeting liquid flowing down. On each tray, heavier components condense and lighter ones vaporise, so temperature falls from bottom to top. This is the same principle explained in [distillation column working principle](/chemical-engineering/distillation-column-working-principle/).
+
+- **Overhead:** vapours are condensed; non-condensable gases (methane to butane) go to gas processing, and **naphtha** is partly returned as reflux.
+- **Side draws:** **kerosene** and **light and heavy gas oil (diesel)** are withdrawn from intermediate trays. Each passes through a small **side stripper** where steam removes light components, improving the flash point.
+- **Pumparounds:** liquid is drawn off, cooled and returned lower in the column to remove heat and balance vapour loads.
+- **Bottom:** steam is injected to strip light ends from the **atmospheric residue**.
+
+<figure>
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" role="img" aria-label="Atmospheric crude distillation column: crude from furnace enters near the bottom; products drawn from top to bottom are gas and naphtha at about 30 to 180 degrees Celsius, kerosene 150 to 250, diesel 230 to 350, and atmospheric residue above 350 degrees Celsius at the bottom, which goes to the vacuum column">
+<rect x="230" y="20" width="100" height="300" rx="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<g stroke="#7b8794" stroke-width="1.5"><path d="M240 70H320M240 100H320M240 130H320M240 160H320M240 190H320M240 220H320M240 250H320" /></g>
+<rect x="80" y="245" width="70" height="60" rx="4" fill="#ffe9e7" stroke="#0b2545" stroke-width="2" />
+<path d="M100 290L108 270L115 285L122 265L130 290" stroke="#b42318" stroke-width="2" fill="none" />
+<g stroke="#13a89e" stroke-width="2"><path d="M20 275H80M150 270H230" /><path d="M280 20V8H360M330 95H420M330 165H420M330 225H420M280 320V332H420" /></g>
+<g fill="#13a89e"><path d="M222 265l8 5-8 5z" /><path d="M412 90l8 5-8 5z" /><path d="M412 160l8 5-8 5z" /><path d="M412 220l8 5-8 5z" /><path d="M412 327l8 5-8 5z" /><path d="M352 3l8 5-8 5z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<text x="20" y="266">Crude</text><text x="88" y="240" font-size="12">Furnace</text><text x="88" y="320" font-size="11">350 to 380 °C</text>
+<text x="368" y="14">Gases and naphtha (30 to 180 °C)</text>
+<text x="428" y="100">Kerosene</text><text x="428" y="116" font-size="11">150 to 250 °C</text>
+<text x="428" y="170">Diesel / gas oil</text><text x="428" y="186" font-size="11">230 to 350 °C</text>
+<text x="428" y="230">Heavy gas oil</text>
+<text x="428" y="328">Residue above 350 °C</text>
+<text x="190" y="60" font-size="11">Cooler</text><text x="190" y="310" font-size="11">Hotter</text>
+</g>
+<path d="M205 70V300" stroke="#7b8794" stroke-width="1.5" /><path d="M200 292l5 9 5-9z" fill="#7b8794" />
+</svg>
+<figcaption>Atmospheric column: temperature rises from top to bottom, and fractions are drawn by boiling range. Ranges are typical and overlap.</figcaption>
+</figure>
+
+## Step 4: vacuum distillation
+
+The atmospheric residue is reheated to about 380 to 420 °C and fed to a **vacuum column** operating at an absolute pressure of roughly 25 to 100 mbar at the top, produced by steam ejectors or vacuum pumps. Lower pressure lowers boiling points, so heavy molecules can be vaporised without cracking. Vacuum columns are very wide and use structured **packing** instead of trays to minimise pressure drop.
+
+Products:
+
+- **Light and heavy vacuum gas oil (VGO):** feed for fluid catalytic cracking or hydrocracking, or for lube oil base stocks.
+- **Vacuum residue:** feed for cokers, visbreakers, deasphalting or bitumen production.
+
+## Typical fractions and uses
+
+| Fraction | Approximate boiling range | Main uses |
+| --- | --- | --- |
+| Refinery gas, LPG | Below 30 °C | Fuel gas, LPG, petrochemicals |
+| Light naphtha | 30 to 90 °C | Gasoline blending, isomerisation |
+| Heavy naphtha | 90 to 180 °C | Catalytic reforming to gasoline |
+| Kerosene | 150 to 250 °C | Jet fuel, kerosene |
+| Diesel (gas oil) | 230 to 350 °C | Diesel, heating oil |
+| Vacuum gas oil | 350 to 550 °C | FCC and hydrocracker feed, lubes |
+| Vacuum residue | Above 550 °C | Coker feed, bitumen, fuel oil |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A refinery processes 10 000 tonnes per day of a crude with specific gravity 0.85. Its assay shows 25% naphtha and lighter, 12% kerosene, 23% diesel and 40% atmospheric residue by mass.</dd>
+<dt>Find</dt><dd>The API gravity and the daily mass of each atmospheric product.</dd>
+<dt>Assumptions</dt><dd>Ideal cuts matching the assay; no losses.</dd>
+<dt>Solution</dt><dd>°API = 141.5 ÷ 0.85 − 131.5 = 166.5 − 131.5 = 35.0<br />Naphtha and lighter: 0.25 × 10 000 = 2500 t<br />Kerosene: 0.12 × 10 000 = 1200 t<br />Diesel: 0.23 × 10 000 = 2300 t<br />Residue: 0.40 × 10 000 = 4000 t</dd>
+<dt>Answer</dt><dd><strong>A 35 °API light crude yielding 2500 t naphtha, 1200 t kerosene, 2300 t diesel and 4000 t residue per day</strong></dd>
+<dt>Limitations</dt><dd>Real cuts overlap, and operators adjust cut points to shift yields with market demand; the [material balance](/chemical-engineering/material-balance/) must also close on losses and fuel.</dd>
+</dl>
+</Example>
+
+## Energy use in crude oil distillation
+
+The crude unit is one of the largest energy users in a refinery, mainly through the furnace. Good heat integration in the preheat train, designed with methods such as [pinch analysis](/chemical-engineering/pinch-analysis/), can recover most of the heat in the products and cut fuel use substantially. Fouling of preheat exchangers by asphaltenes and salts gradually lowers the furnace inlet temperature, so exchangers are cleaned on a planned schedule and antifoulant chemicals are injected. Some units add a preflash drum or column before the furnace to remove light ends early and free furnace capacity.
+
+## Control and operation
+
+Operators control furnace outlet temperature, column top pressure and temperature, reflux rate, pumparound duties and side draw rates to meet product specifications such as flash point, distillation end point and colour. Key instruments include thermocouples along the column, [flow meters](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) on every stream, differential pressure across trays and online analysers. Corrosion from salts, naphthenic acids and sulphur is managed through desalting, chemical injection and material selection.
+
+## After crude oil distillation
+
+Distillation only separates; conversion units then upgrade the fractions: reformers raise naphtha octane, hydrotreaters remove sulphur, catalytic crackers and hydrocrackers turn gas oils into gasoline and diesel, and cokers upgrade residue. The light ends removed in distillation also feed gas plants related to the [LNG process](/petroleum-engineering/lng-process/), and the refined products leave by [pipeline](/petroleum-engineering/pipeline-pigging/), ship, rail or truck.

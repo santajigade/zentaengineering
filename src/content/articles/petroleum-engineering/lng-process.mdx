@@ -1,0 +1,125 @@
+---
+title: "How Natural Gas Is Liquefied: The LNG Process"
+description: "The LNG process explained: gas pretreatment, acid gas and water removal, liquefaction cycles, storage, shipping and regasification, with an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: petroleum-engineering
+subcategory: gas-processing-lng
+focusKeyword: "lng process"
+image: { src: /images/featured/lng-process.webp, alt: "How Natural Gas Is Liquefied: The LNG Process: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [lng, natural-gas, liquefaction, cryogenic, gas-processing]
+faq:
+  - q: "Why is natural gas liquefied?"
+    a: "Liquefying gas at about −162 °C reduces its volume roughly 600 times, so large quantities can be shipped across oceans in insulated tankers where pipelines are not practical. LNG lets gas fields reach distant markets and lets importing countries diversify supply."
+  - q: "Is LNG stored under pressure?"
+    a: "No. LNG is stored at close to atmospheric pressure in heavily insulated full containment tanks. It is kept cold by its own boiling: a small amount of boil off gas evaporates, absorbing heat that leaks in. The boil off is recompressed, reliquefied or used as fuel."
+  - q: "What happens if LNG is spilled?"
+    a: "LNG is not explosive as a liquid and does not burn until it vaporises and mixes with air to between about 5 and 15% gas by volume. A spill boils rapidly into a cold vapour cloud that can ignite if it meets an ignition source. LNG cannot pollute water or soil like oil, but cryogenic burns and brittle fracture of ordinary steel are hazards."
+references:
+  - text: "S. Mokhatab, J. Y. Mak, J. V. Valappil and D. A. Wood, Handbook of Liquefied Natural Gas, Gulf Professional Publishing, 2014"
+  - text: "GPSA Engineering Data Book, 14th ed., Gas Processors Suppliers Association"
+  - text: "EN 1473, Installation and equipment for liquefied natural gas: Design of onshore installations"
+  - text: "NFPA 59A, Standard for the Production, Storage, and Handling of Liquefied Natural Gas"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **LNG process** cools natural gas to about **−162 °C**, at which it becomes a liquid occupying roughly **1/600** of its gas volume at standard conditions. The chain has five steps: **pretreatment** (remove acid gases, water, mercury and heavy hydrocarbons), **liquefaction** in refrigeration cycles such as propane precooled mixed refrigerant (C3MR), **storage** in insulated tanks near atmospheric pressure, **shipping** in LNG carriers, and **regasification** at the receiving terminal before the gas enters the pipeline grid.
+
+</Key>
+
+Pipelines are the cheapest way to move gas over land, but they are impractical across oceans or over very long distances. Liquefied natural gas solves this by turning gas into a dense liquid that can be shipped anywhere. LNG now carries a large share of the world's internationally traded gas.
+
+## Step 1: gas pretreatment
+
+Feed gas from the field must be cleaned to very tight limits, because anything that can freeze at cryogenic temperatures would block the heat exchangers.
+
+- **Inlet separation:** remove free liquids, condensate and solids.
+- **Acid gas removal:** amine units (often MDEA based) absorb carbon dioxide to below about 50 ppm and hydrogen sulphide to a few ppm. CO₂ would freeze as dry ice.
+- **Dehydration:** molecular sieve beds reduce water to below about 1 ppm, preventing ice and hydrates.
+- **Mercury removal:** fixed beds of sulphur impregnated carbon or metal sulphides, because mercury corrodes aluminium heat exchangers.
+- **Heavy hydrocarbon removal:** a scrub column or NGL extraction removes benzene, C5+ and part of the ethane, propane and butane, which are sold separately or used as refrigerant makeup.
+
+## Step 2: liquefaction
+
+Liquefaction is the heart of the plant and its largest energy user. Gas at around 50 to 70 bar passes through cryogenic heat exchangers where it is cooled, condensed and subcooled by refrigerants that are compressed, cooled and expanded in closed loops, on the same principle as the [vapour compression refrigeration cycle](/mechanical-engineering/vapour-compression-refrigeration-cycle/).
+
+Main process types:
+
+- **C3MR (propane precooled mixed refrigerant):** propane cools the gas to about −35 °C, then a mixed refrigerant of nitrogen, methane, ethane and propane completes liquefaction in a large spiral wound heat exchanger. Widely used in large baseload trains.
+- **AP-X:** adds a nitrogen expander loop to C3MR for very large trains.
+- **Cascade (such as ConocoPhillips Optimized Cascade):** three pure refrigerant loops of propane, ethylene and methane in series.
+- **Dual mixed refrigerant (DMR):** two mixed refrigerant loops, used in cold climates and some floating plants.
+- **Nitrogen expander:** simpler and safer, suited to small scale and floating LNG.
+
+The liquid is finally let down to near atmospheric pressure through an expander or valve; the flash gas, rich in nitrogen, is used as fuel. Large trains produce several million tonnes of LNG per year each.
+
+<figure>
+<svg width="600" height="240" viewBox="0 0 600 240" fill="none" role="img" aria-label="LNG value chain as connected blocks: gas field, pretreatment, liquefaction at minus 162 degrees Celsius, storage tank, LNG carrier ship, receiving terminal with regasification, then pipeline grid">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="10" y="80" width="70" height="60" rx="6" fill="#eef1f6" /><rect x="95" y="80" width="80" height="60" rx="6" fill="#e6f6f4" /><rect x="190" y="80" width="85" height="60" rx="6" fill="#e6f6f4" />
+<rect x="290" y="80" width="70" height="60" rx="6" fill="#fff7e0" /><rect x="375" y="80" width="70" height="60" rx="6" fill="#fff7e0" /><rect x="460" y="80" width="70" height="60" rx="6" fill="#ffe9e7" /><rect x="545" y="80" width="50" height="60" rx="6" fill="#eef1f6" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M80 110h10M175 110h10M275 110h10M360 110h10M445 110h10M530 110h10" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="45" y="106" font-weight="700">Gas</text><text x="45" y="122">field</text>
+<text x="135" y="106" font-weight="700">Pretreat</text><text x="135" y="122" font-size="10">CO₂, H₂O, Hg</text>
+<text x="232" y="106" font-weight="700">Liquefy</text><text x="232" y="122" font-size="10">−162 °C</text>
+<text x="325" y="106" font-weight="700">Store</text><text x="325" y="122" font-size="10">tank</text>
+<text x="410" y="106" font-weight="700">Ship</text><text x="410" y="122" font-size="10">carrier</text>
+<text x="495" y="106" font-weight="700">Regas</text><text x="495" y="122" font-size="10">vaporise</text>
+<text x="570" y="106" font-weight="700">Grid</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle"><text x="140" y="60">Export terminal</text><text x="410" y="60">Sea transport</text><text x="530" y="60">Import terminal</text><text x="300" y="180">Gas volume shrinks about 600 times when liquefied</text></g>
+<g stroke="#7b8794" stroke-width="1.5"><path d="M95 68H360M375 68H445M460 68H595" /></g>
+</svg>
+<figcaption>The LNG value chain from gas field to pipeline grid.</figcaption>
+</figure>
+
+## Step 3: storage
+
+LNG is stored at slightly above atmospheric pressure in large **full containment tanks**, typically 160 000 to 200 000 m³, with an inner tank of 9% nickel steel and an outer concrete tank. Thick insulation limits heat leak, and the small **boil off gas** that forms is recompressed for fuel or reliquefied. Level, temperature and density are monitored throughout the tank height to detect stratification and prevent rollover, a sudden mixing of layers that releases large amounts of vapour. Accurate cryogenic [level measurement](https://www.instrumentationblog.in/category/process-instrumentation/level-measurement/) and [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) are critical here.
+
+## Step 4: shipping
+
+LNG carriers hold 125 000 to 270 000 m³ in Moss spherical tanks or membrane containment systems. Boil off gas, typically around 0.1% of cargo per day, is burned in dual fuel engines or reliquefied. Loading and unloading use cryogenic arms, and custody transfer measures the energy delivered from volume, density and gas composition.
+
+## Step 5: regasification
+
+At the receiving terminal, LNG is pumped to pipeline pressure as a liquid, which needs much less energy than compressing gas, and then vaporised:
+
+- **Open rack vaporisers:** seawater flows over aluminium panels.
+- **Submerged combustion vaporisers:** gas burners heat a water bath.
+- **Intermediate fluid vaporisers** and shell and tube units using glycol or propane.
+
+**Floating storage and regasification units (FSRUs)**, converted or purpose built ships, now provide fast, flexible import capacity.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>LNG density is about 450 kg/m³. Natural gas at standard conditions (15 °C, 1.013 bar) has a density of about 0.75 kg/m³. A carrier unloads 170 000 m³ of LNG.</dd>
+<dt>Find</dt><dd>The volume reduction ratio, and the volume of gas delivered at standard conditions.</dd>
+<dt>Assumptions</dt><dd>Mostly methane composition; values typical, varying with composition.</dd>
+<dt>Solution</dt><dd>Ratio = 450 ÷ 0.75 = 600<br />Mass of cargo = 170 000 × 450 = 76.5 million kg<br />Gas volume = 76.5 × 10⁶ ÷ 0.75 = 102 × 10⁶ m³</dd>
+<dt>Answer</dt><dd><strong>LNG takes about 1/600 of the gas volume; one cargo delivers about 102 million standard m³ of gas</strong></dd>
+<dt>Limitations</dt><dd>Real cargoes lose some volume to boil off, and composition varies by source.</dd>
+</dl>
+</Example>
+
+## Small scale and floating LNG
+
+Not all LNG comes from giant baseload trains. Small scale plants of a few hundred thousand tonnes per year supply trucks, ships and remote power stations, often using simpler nitrogen expander or single mixed refrigerant cycles. Floating LNG (FLNG) vessels place the whole pretreatment and liquefaction plant on a ship moored over an offshore gas field, avoiding long pipelines to shore. Their compact, motion tolerant designs favour expander or dual mixed refrigerant processes. LNG is also increasingly used as a marine fuel, delivered by bunkering vessels.
+
+## Energy use and safety
+
+Liquefaction consumes roughly 8 to 12% of the feed gas as fuel for compressor drivers, gas turbines or electric motors. Efficiency improvements include aeroderivative turbines, electric drives powered by renewable electricity, and carbon capture of the CO₂ removed in pretreatment.
+
+Key safety measures include spill containment, gas and fire detection, emergency shutdown systems, cryogenic material selection and hazard studies such as HAZOP.
+
+## Summary of the LNG process
+
+The LNG process transforms gas through cleaning, deep refrigeration, storage, shipping and vaporisation. It relies heavily on [heat exchangers](/chemical-engineering/heat-exchanger-types/), compressors and precise instrumentation, and it is closely linked to [crude oil distillation](/petroleum-engineering/crude-oil-distillation/) and gas processing operations that handle the heavier hydrocarbons removed along the way.

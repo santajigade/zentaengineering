@@ -1,0 +1,140 @@
+---
+title: "Rotary Drilling Rig Components and How They Work"
+description: "Rotary drilling rig components explained: hoisting, rotating, circulating, power and well control systems, drill string, bits, mud and a hook load example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: petroleum-engineering
+subcategory: drilling
+focusKeyword: "rotary drilling rig components"
+image: { src: /images/featured/rotary-drilling-rig-components.webp, alt: "Rotary Drilling Rig Components and How They Work: featured diagram" }
+format: equipment
+pillar: true
+math: true
+tags: [drilling, drilling-rig, drilling-mud, blowout-preventer, oil-and-gas]
+faq:
+  - q: "What is the difference between a kelly and a top drive?"
+    a: "A kelly is a square or hexagonal pipe turned by a rotary table on the rig floor; drilling stops every 9 to 12 m to add a joint of pipe. A top drive is a motor hanging from the travelling block that turns the drill string from the top, allowing drilling with three joint stands, back reaming and faster connections. Most modern rigs use top drives."
+  - q: "Why is drilling mud so important?"
+    a: "Drilling fluid carries rock cuttings to the surface, cools and lubricates the bit, supports the borehole wall, and most importantly provides hydrostatic pressure that holds back formation fluids. If mud weight is too low, oil, gas or water can enter the well and cause a kick; if too high, it can fracture the formation and cause losses."
+  - q: "What does a blowout preventer do?"
+    a: "A blowout preventer (BOP) is a stack of large valves on top of the well that can close and seal it in an emergency. Annular preventers seal around any pipe shape; ram preventers close around pipe or across an open hole; shear rams cut the drill pipe and seal the well as a last resort."
+references:
+  - text: "API Spec 7-1, Specification for Rotary Drill Stem Elements, American Petroleum Institute"
+  - text: "API Standard 53, Well Control Equipment Systems for Drilling Wells"
+  - text: "A. T. Bourgoyne Jr. et al., Applied Drilling Engineering, SPE Textbook Series, Vol. 2"
+  - text: "IADC Drilling Manual, 12th ed., International Association of Drilling Contractors"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Rotary drilling rig components** are grouped into five systems. The **hoisting system** (derrick or mast, drawworks, crown and travelling blocks) lifts and lowers the drill string. The **rotating system** (top drive or rotary table and kelly) turns it. The **circulating system** (mud pumps, standpipe, mud tanks and solids control equipment) pumps drilling fluid down the pipe and back up the annulus. The **power system** supplies energy, and the **well control system** (blowout preventer and choke manifold) keeps formation fluids under control. The **drill string** and **bit** do the actual cutting.
+
+</Key>
+
+Almost every oil and gas well, and many geothermal and water wells, is drilled by rotary drilling. A bit at the bottom of a long string of steel pipe is turned and pressed into the rock while fluid is circulated to remove the cuttings. A land rig may drill wells 3000 to 6000 m deep; offshore rigs reach over 10 000 m of measured depth. Understanding each component explains how this remarkable machine works.
+
+<figure>
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" role="img" aria-label="Rotary drilling rig schematic: derrick with crown block at the top, travelling block and top drive below it, drill line from the drawworks, drill floor, blowout preventer below the floor, wellbore with drill string and bit; mud pump sends mud through the standpipe into the drill string, mud returns up the annulus to the shale shaker and mud tank">
+<g stroke="#0b2545" stroke-width="2" fill="none">
+<path d="M200 170L250 20H310L360 170" /><path d="M215 125H345M230 80H330" stroke-width="1" />
+<rect x="255" y="12" width="50" height="16" fill="#eef1f6" />
+<rect x="262" y="60" width="36" height="22" fill="#fff7e0" />
+<rect x="266" y="88" width="28" height="22" fill="#e6f6f4" />
+<path d="M280 28V60M280 110V170" />
+<path d="M160 170H400" stroke-width="3" />
+<rect x="262" y="178" width="36" height="34" fill="#ffe9e7" />
+<path d="M262 212V320M298 212V320" stroke="#7b8794" />
+<path d="M277 110V300M283 110V300" stroke-width="2.5" />
+<path d="M272 300L280 316L288 300Z" fill="#0b2545" />
+<rect x="140" y="150" width="50" height="20" fill="#eef1f6" />
+<path d="M165 150L258 22" stroke-width="1" stroke-dasharray="4 3" />
+<rect x="440" y="230" width="70" height="40" fill="#eef1f6" /><rect x="440" y="180" width="70" height="30" fill="#e6f6f4" /><rect x="60" y="230" width="70" height="40" fill="#fff7e0" />
+</g>
+<g stroke="#13a89e" stroke-width="2" fill="none"><path d="M130 250H220V60H262" /><path d="M298 260H385V195H440" stroke="#b42318" /><path d="M475 210V230" stroke="#b42318" /><path d="M440 255H360V280H95V270" stroke="#7b8794" stroke-dasharray="5 4" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="315" y="24">Crown block</text><text x="342" y="76">Travelling block</text><text x="345" y="104">Top drive</text>
+<text x="80" y="146">Drawworks</text><text x="410" y="166">Drill floor</text><text x="306" y="200">BOP stack</text>
+<text x="20" y="225">Mud pump</text><text x="515" y="198">Shale shaker</text><text x="515" y="254">Mud tanks</text>
+<text x="150" y="98">Standpipe</text><text x="300" y="296">Drill string</text><text x="296" y="330">Bit</text><text x="304" y="252" fill="#b42318">Returns</text>
+</g>
+</svg>
+<figcaption>Main rotary drilling rig components and the mud circulation path (simplified).</figcaption>
+</figure>
+
+## 1. Hoisting system
+
+The hoisting system raises and lowers the drill string, casing and tools, and controls the weight applied to the bit.
+
+- **Derrick or mast:** the steel tower that supports the blocks. Its height (often 40 to 50 m) sets how long a stand of pipe can be racked.
+- **Drawworks:** a large winch with a drum, brakes and motor that reels the **drilling line** (wire rope) in and out.
+- **Crown block:** fixed sheaves at the top of the derrick.
+- **Travelling block and hook:** moving sheaves that hang from the drilling line and carry the top drive or swivel. Reeving the line through several sheaves multiplies the lifting force.
+- **Deadline anchor:** holds the fixed end of the line and carries a load cell that measures **hook load**.
+
+## 2. Rotating system
+
+- **Top drive:** an electric or hydraulic motor suspended from the travelling block that turns the drill string from the top. It allows drilling with stands of three joints and makes connections faster and safer.
+- **Rotary table and kelly:** the older arrangement, where a turntable in the drill floor rotates a square or hexagonal kelly attached to the top of the string.
+- **Downhole motors:** mud motors and rotary steerable systems turn or steer the bit using mud flow, essential for directional and horizontal wells.
+
+## 3. Circulating system
+
+Drilling fluid, or **mud**, is pumped continuously:
+
+1. **Mud pumps**, usually triplex piston pumps, deliver high pressure mud (often 200 to 350 bar).
+2. Mud travels up the **standpipe**, through the rotary hose and top drive, and down inside the drill string.
+3. It exits through **nozzles in the bit**, cleaning and cooling it.
+4. It returns up the **annulus**, the gap between the drill string and the hole wall, carrying cuttings.
+5. At the surface, **shale shakers**, desanders, desilters and centrifuges remove solids.
+6. Clean mud returns to the **mud tanks** for treatment and recirculation.
+
+Mud density controls well pressure, while viscosity and gel strength control hole cleaning. Return flow and pit volumes are closely monitored because a gain signals a possible kick. Accurate [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) and [level measurement](https://www.instrumentationblog.in/category/process-instrumentation/level-measurement/) in the pits are key safety instruments.
+
+The hydrostatic pressure of the mud column at depth h is:
+
+$$
+P = \rho g h
+$$
+
+## 4. Power system
+
+Most rigs use diesel engines driving generators, with variable frequency drives powering the drawworks, top drive and mud pumps. Some rigs run on grid power or gas engines to cut emissions and fuel cost.
+
+## 5. Well control system
+
+- **Blowout preventer (BOP) stack:** annular preventer, pipe rams, blind rams and shear rams mounted on the wellhead.
+- **Accumulator unit:** stores hydraulic energy to close the BOP within seconds, even without rig power.
+- **Choke and kill manifold:** controls flow from the well and allows heavy mud to be pumped in to regain control.
+- **Mud gas separator:** removes gas from returning mud safely.
+
+## Drill string and bit
+
+- **Drill pipe:** jointed steel pipe, typically about 9.5 m long, connected by threaded tool joints.
+- **Bottom hole assembly (BHA):** heavy **drill collars** that put weight on the bit, stabilisers, measurement while drilling (MWD) and logging while drilling tools.
+- **Bits:** **PDC bits** with fixed polycrystalline diamond cutters shear rock and dominate most drilling today; **roller cone (tricone) bits** crush and gouge harder or mixed formations.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A drill string has 3000 m of drill pipe weighing 29 kg/m and a BHA of 150 m of drill collars weighing 220 kg/m. Mud density is 1300 kg/m³ and steel density 7850 kg/m³.</dd>
+<dt>Find</dt><dd>The buoyed hook load of the string, ignoring the block weight.</dd>
+<dt>Assumptions</dt><dd>Vertical hole, no friction; buoyancy factor BF = 1 − ρ_mud ÷ ρ_steel.</dd>
+<dt>Solution</dt><dd>Air weight = 3000 × 29 + 150 × 220 = 87 000 + 33 000 = 120 000 kg<br />BF = 1 − 1300 ÷ 7850 = 0.834<br />Buoyed mass = 120 000 × 0.834 = 100 100 kg<br />Hook load = 100 100 × 9.81 ≈ 982 kN</dd>
+<dt>Answer</dt><dd><strong>Hook load is about 982 kN (about 100 tonnes) before any weight is set on the bit</strong></dd>
+<dt>Limitations</dt><dd>Deviated wells add friction (drag), and the travelling block and top drive weigh several tonnes more.</dd>
+</dl>
+</Example>
+
+## Rotary drilling rig components for automation and safety
+
+Modern rigs add a layer of automation on top of the mechanical systems. Pipe handling robots and iron roughnecks make and break connections, keeping crews out of the most dangerous zone on the drill floor. The driller works from a cabin with joystick controls and screens showing hook load, weight on bit, torque, pump pressure, flow and pit volumes. Software can automate drilling parameters and trip speeds to limit pressure surges in the well. Sensors on every key component support condition monitoring of top drives, drawworks and mud pumps.
+
+## Types of rotary rigs
+
+- **Land rigs:** truck mounted, skid or walking rigs for onshore wells.
+- **Jack-up rigs:** legs stand on the seabed in shallow water, up to about 120 to 150 m.
+- **Semi-submersibles and drillships:** floating rigs for deep water, using subsea BOPs and riser systems.
+- **Platform rigs:** installed on fixed production platforms, described in [offshore platform types](/petroleum-engineering/offshore-platform-types/).
+
+Drilling delivers access to the reservoir whose [porosity and permeability](/petroleum-engineering/porosity-and-permeability/) decide its value, and the cuttings and logs gathered while drilling are the first real data about the rock. Once the well is drilled, it is evaluated with [well logging](/petroleum-engineering/well-logging-methods/) and completed for production.

@@ -1,0 +1,139 @@
+---
+title: "Pipeline Pigging: Types and Purposes"
+description: "Pipeline pigging explained: utility, cleaning, batching, gauging and intelligent inspection pigs, launchers and receivers, operation and a speed example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: petroleum-engineering
+subcategory: pipelines
+focusKeyword: "pipeline pigging"
+image: { src: /images/featured/pipeline-pigging.webp, alt: "Pipeline Pigging: Types and Purposes: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [pipelines, pigging, inline-inspection, pipeline-integrity, oil-and-gas]
+faq:
+  - q: "Why is it called a pig?"
+    a: "The name is commonly said to come from the squealing noise early leather and straw cleaning devices made as they travelled through pipelines. A popular backronym is Pipeline Inspection Gauge, but the word was in use before that phrase."
+  - q: "How often should a pipeline be pigged?"
+    a: "It depends on the purpose. Cleaning pigs may run weekly or monthly in lines that accumulate wax, water or sand. Intelligent inspection pigs are typically run every few years, at intervals set by integrity management plans and regulations based on the line's condition and risk."
+  - q: "What makes a pipeline unpiggable?"
+    a: "Tight bends, changes in diameter, unbarred tees, reduced bore valves, missing launchers and receivers, very low flow or pressure, and short or complex layouts can prevent a standard pig from passing. Such lines may need special multi-diameter or tethered tools, robotic crawlers or modification."
+references:
+  - text: "J. N. H. Tiratsoo (ed.), Pipeline Pigging and Integrity Technology, 4th ed., Clarion Technical Publishers"
+  - text: "API Std 1163, In-line Inspection Systems Qualification"
+  - text: "NACE SP0102, In-Line Inspection of Pipelines"
+  - text: "ASME B31.8S, Managing System Integrity of Gas Pipelines"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Pipeline pigging** is the practice of sending devices called **pigs** through a pipeline, pushed by the flowing product, to **clean** it, **separate** different products, **check** its internal geometry or **inspect** its condition. Main types are **utility pigs** (foam, mandrel, solid cast and sphere pigs for cleaning, dewatering and batching), **gauging pigs** that check for dents, and **intelligent (smart) pigs** that use magnetic flux leakage, ultrasonic or geometry sensors to detect corrosion, cracks and deformation. Pigs enter at a **launcher** and leave at a **receiver**.
+
+</Key>
+
+Oil, gas, product and water pipelines run for thousands of kilometres and cannot be opened for routine inspection. Pigging lets operators maintain and inspect them from the inside while they stay in service. It is a key part of flow assurance and pipeline integrity management.
+
+## Why pipelines are pigged
+
+- **Cleaning:** remove wax, scale, sand, debris and deposits that raise pressure drop and promote corrosion.
+- **Liquid removal:** sweep water and condensate from gas lines, which improves efficiency and reduces corrosion.
+- **Batching and product separation:** separate different products, such as gasoline and diesel, in multi-product lines, or isolate chemicals during treatment.
+- **Commissioning:** clean, gauge, fill, hydrotest and dry new pipelines.
+- **Inspection:** measure wall loss, cracks, dents and pipeline route with inline inspection (ILI) tools.
+- **Chemical application:** spread corrosion inhibitor evenly along the pipe wall.
+
+## Types of pigs
+
+### Utility pigs
+
+- **Foam pigs:** polyurethane foam, light and flexible, pass through tight bends and reduced bores; used for drying, light cleaning and proving that a line is piggable.
+- **Mandrel pigs:** a steel body carrying replaceable cups or discs, brushes or blades; robust and reusable for heavy cleaning.
+- **Solid cast pigs:** moulded entirely from polyurethane, used for cleaning and batching in smaller lines.
+- **Spheres:** inflatable or solid balls used for liquid removal in gas lines and batching; they pass easily through bends and branches.
+
+### Gauging pigs
+
+Carry a soft aluminium **gauge plate** slightly smaller than the internal diameter. If the plate comes out bent, there is a dent, buckle or obstruction that would trap a more expensive tool.
+
+### Intelligent pigs (inline inspection tools)
+
+- **Magnetic flux leakage (MFL):** strong magnets saturate the pipe wall; sensors detect flux leaking around metal loss caused by corrosion. The workhorse for corrosion inspection, including gas lines.
+- **Ultrasonic (UT):** transducers measure wall thickness directly, or detect cracks with angled shear waves. Needs a liquid couplant, so it suits liquid lines.
+- **Electromagnetic acoustic (EMAT):** generates ultrasound without couplant, good for stress corrosion cracks in gas lines.
+- **Geometry (caliper) pigs:** mechanical or electronic arms measure dents, ovality and wrinkles.
+- **Inertial mapping (IMU):** records the pipeline route in three dimensions and detects bending strain from ground movement.
+
+Smart pigs record data on board for analysis after the run. Results feed fitness for service assessments and repair plans.
+
+<figure>
+<svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Pigging system: a pig launcher with a closure door and kicker line at the left, the pipeline in the middle with a pig travelling with the flow, and a pig receiver with a closure door at the right; isolation valves at both ends and pig signallers along the line">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="30" y="90" width="130" height="50" rx="4" fill="#eef1f6" />
+<path d="M160 104H440M160 126H440" />
+<rect x="440" y="90" width="130" height="50" rx="4" fill="#eef1f6" />
+<rect x="20" y="88" width="12" height="54" fill="#0b2545" /><rect x="568" y="88" width="12" height="54" fill="#0b2545" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#ffffff"><path d="M170 96L190 115L170 134Z" /><path d="M210 96L190 115L210 134Z" /><path d="M400 96L420 115L400 134Z" /><path d="M440 96L420 115L440 134Z" /></g>
+<rect x="290" y="105" width="44" height="20" rx="6" fill="#f5b800" stroke="#0b2545" stroke-width="1.5" /><path d="M292 102V128M332 102V128" stroke="#0b2545" stroke-width="3" />
+<g stroke="#13a89e" stroke-width="2.5"><path d="M95 40V90" /><path d="M60 40H95" /><path d="M500 140V190H560" /></g>
+<g fill="#13a89e"><path d="M90 82l5 9 5-9z" /><path d="M552 185l9 5-9 5z" /></g>
+<path d="M240 160H360" stroke="#13a89e" stroke-width="2" /><path d="M360 155l9 5-9 5z" fill="#13a89e" />
+<g fill="#b42318"><circle cx="250" cy="96" r="5" /><circle cx="380" cy="96" r="5" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="95" y="160" font-weight="700">Launcher</text><text x="545" y="160" font-weight="700">Receiver</text><text x="312" y="145">Pig</text>
+<text x="70" y="32">Kicker line</text><text x="300" y="178">Flow drives the pig</text><text x="315" y="82" font-size="11" fill="#b42318">Pig signallers</text>
+<text x="25" y="76">Closure</text><text x="535" y="212">Bypass to plant</text>
+<text x="190" y="80" font-size="11">Valve</text><text x="420" y="80" font-size="11">Valve</text>
+</g>
+</svg>
+<figcaption>A pig is loaded in the launcher, driven by product flow along the pipeline, and recovered in the receiver.</figcaption>
+</figure>
+
+## Launchers, receivers and signallers
+
+A **launcher** is an oversized barrel with a quick opening closure, connected to the pipeline by an isolation valve and a **kicker line** that diverts flow behind the pig. A **receiver** at the far end is similar, with space for the pig and debris. **Pig signallers**, mechanical flags or non-intrusive sensors, confirm when the pig passes key points. Pressure and flow are monitored throughout; the differential pressure across the pig shows whether it is moving freely or stuck. Reliable [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) are essential.
+
+## A typical pigging run
+
+1. **Plan:** confirm the line is piggable, choose the pig, check flow rate and pressure, and inform operations.
+2. **Launch:** isolate and depressurise the launcher, open the closure, insert the pig, close and pressurise, then open the kicker line and main valve so flow pushes the pig into the line.
+3. **Track:** follow the pig with signallers, transmitters or calculated travel time.
+4. **Receive:** when the pig arrives, isolate the receiver, depressurise and drain it safely, then open and remove the pig and debris.
+5. **Evaluate:** inspect the pig wear and debris, or download and analyse inspection data.
+
+Opening pressurised closures is a hazardous step; interlocks, pressure indicators and procedures ensure the barrel is fully depressurised first.
+
+## Pig speed and travel time
+
+Pig speed is roughly the average flow velocity in the pipe:
+
+$$
+v = \frac{Q}{A} = \frac{4Q}{\pi D^2}
+$$
+
+Cleaning pigs typically run at about 1 to 5 m/s; inspection tools have an optimum speed window, often around 1 to 3 m/s, for good data quality. In gas lines, speed control is harder because gas is compressible, and some tools use speed control bypass valves.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 40 km crude oil pipeline has an internal diameter of 0.40 m and carries 1000 m³/h.</dd>
+<dt>Find</dt><dd>The expected pig speed and travel time.</dd>
+<dt>Assumptions</dt><dd>The pig travels at the average liquid velocity with negligible bypass or slip.</dd>
+<dt>Solution</dt><dd>Q = 1000 ÷ 3600 = 0.278 m³/s<br />A = π × 0.40² ÷ 4 = 0.1257 m²<br />v = 0.278 ÷ 0.1257 = 2.21 m/s<br />Travel time = 40 000 ÷ 2.21 = 18 100 s ≈ 5.0 h</dd>
+<dt>Answer</dt><dd><strong>The pig moves at about 2.2 m/s and should arrive about 5 hours after launch</strong></dd>
+<dt>Limitations</dt><dd>Wax build up, elevation changes and pig friction can slow or stall the pig; tracking confirms progress.</dd>
+</dl>
+</Example>
+
+## Pipeline pigging risks
+
+Pigs can get stuck at dents, valves or large deposits, especially when a dirty line is pigged for the first time with an aggressive tool. A heavy wax plug pushed ahead of a pig can block the line or overwhelm the receiver and downstream separators. Good practice is to start with soft foam pigs, increase aggressiveness gradually, and prepare a plan for locating and recovering a stuck pig, such as raising differential pressure, reversing flow or cutting the line as a last resort.
+
+## Designing for pigging
+
+New pipelines are designed to be piggable: constant internal diameter, long radius bends (usually at least 3D, five times the diameter for some inspection tools), full bore valves, barred tees on branches, and permanent launchers and receivers. Subsea and offshore lines, described in [offshore platform types](/petroleum-engineering/offshore-platform-types/), often use subsea pig launchers or loop back arrangements.
+
+## Pipeline pigging and integrity
+
+Pipeline pigging is central to pipeline integrity management systems required by many regulators. Inspection data, combined with cathodic protection surveys and risk assessment, tells operators where to dig and repair before a leak occurs. Regular cleaning also protects throughput: deposits in crude lines from [crude oil distillation](/petroleum-engineering/crude-oil-distillation/) feeds or waxy fields can sharply raise pumping power and reduce capacity.
