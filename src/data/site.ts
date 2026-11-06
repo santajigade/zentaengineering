@@ -1,7 +1,7 @@
 // Site-wide settings. Only true information here.
 // PREVIEW=1 builds the private review copy (preview.zentaengineering.com): drafts shown, never indexed.
 export const IS_PREVIEW = process.env.PREVIEW === '1';
-const LAUNCHED = false; // set true at launch (Phase 6)
+const LAUNCHED = true; // set true at launch (Phase 6)
 // Before launch (site hidden from Google) and on the preview site, unreviewed drafts are shown with a Draft label.
 // At launch they disappear automatically until reviewed.
 export const SHOW_UNREVIEWED = !LAUNCHED || IS_PREVIEW;
