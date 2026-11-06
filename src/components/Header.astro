@@ -3,6 +3,10 @@ import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 import { MAIN_NAV, SITE } from '../data/site';
 import { FAMILIES, byFamily, DISCIPLINES } from '../data/disciplines';
+import { liveArticles } from '../lib/content';
+const arts = await liveArticles();
+const n = (slug: string) => arts.filter((a) => a.data.discipline === slug).length;
+const label = (name: string, slug: string) => (n(slug) > 0 ? `${name} (${n(slug)})` : name);
 const path = Astro.url.pathname;
 const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 const seg = path.split('/')[1] ?? '';
@@ -36,7 +40,7 @@ const inCategories = seg === 'engineering-categories' || DISCIPLINES.some((d) =>
           {FAMILIES.map((f) => (
             <div class={`fam-${f.slug}`}>
               <div class="fam-title">{f.name}</div>
-              {byFamily(f.slug).map((d) => <a href={`/${d.slug}/`}>{d.short}</a>)}
+              {byFamily(f.slug).map((d) => <a href={`/${d.slug}/`}>{label(d.short, d.slug)}</a>)}
             </div>
           ))}
         </div>
@@ -55,7 +59,7 @@ const inCategories = seg === 'engineering-categories' || DISCIPLINES.some((d) =>
       {FAMILIES.map((f) => (
         <details class="fam">
           <summary>{f.name}</summary>
-          {byFamily(f.slug).map((d) => <a href={`/${d.slug}/`}>{d.name}</a>)}
+          {byFamily(f.slug).map((d) => <a href={`/${d.slug}/`}>{label(d.name, d.slug)}</a>)}
         </details>
       ))}
       <a href="/engineering-categories/">All categories</a>

@@ -46,7 +46,7 @@ const subName = (slug?: string) => d.subcategories.find((s) => s.slug === slug)?
       <div class="grid" style="--min:220px">
         {subs.map((s) =>
           s.n > 0 ? (
-            <a class="card" href={`/${d.slug}/${s.slug}/`} style="padding:16px;flex-direction:column;gap:4px"><b style="color:var(--ze-navy)">{s.name}</b><span class="muted" style="font-size:14px">{s.n} {s.n === 1 ? 'item' : 'items'}</span></a>
+            <a class="card" href={`/${d.slug}/${s.slug}/`} style="padding:16px;flex-direction:column;gap:4px"><b style="color:var(--ze-navy)">{s.name}</b><span class="muted" style="font-size:14px">{s.n} {s.n === 1 ? 'article' : 'articles'}</span></a>
           ) : (
             <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:4px"><b style="color:var(--ze-ink-2)">{s.name}</b><span class="muted" style="font-size:14px">Coming soon</span></div>
           ),
