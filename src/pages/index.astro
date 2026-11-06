@@ -47,7 +47,7 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
   </section>
   <div class="wrap">
     <section class="section">
-      <div class="section-head"><h2 class="h2">Browse by discipline</h2><a class="more" href="/engineering-categories/">All disciplines <Icon name="arrow" size={16} stroke={2} /></a></div>
+      <div class="section-head"><h2 class="h2">Browse by Category</h2><a class="more" href="/engineering-categories/">All categories <Icon name="arrow" size={16} stroke={2} /></a></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">{FAMILIES.map((f) => <span class={`chip chip-fam fam-${f.slug}`}>{f.name}</span>)}</div>
       <div class="grid" style="--min:250px">{DISCIPLINES.map((d) => <DisciplineCard d={d} />)}</div>
     </section>

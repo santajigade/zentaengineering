@@ -1,0 +1,119 @@
+---
+title: "Von Neumann vs Harvard Architecture"
+description: "Von Neumann vs Harvard architecture compared: shared and separate memories and buses, the Von Neumann bottleneck, modified Harvard designs and uses."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: computer-science
+subcategory: computer-architecture
+focusKeyword: "Von Neumann vs Harvard architecture"
+image: { src: /images/featured/von-neumann-vs-harvard-architecture.webp, alt: "Von Neumann vs Harvard Architecture: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [von-neumann, harvard-architecture, computer-architecture, cpu, memory]
+faq:
+  - q: "Do modern PCs use Von Neumann or Harvard architecture?"
+    a: "Both, in a sense. Programs and data share one main memory, which is Von Neumann at the system level. Inside the processor, the first level cache is split into separate instruction and data caches that can be accessed at the same time, which is Harvard style. This combination is called a modified Harvard architecture."
+  - q: "What is the Von Neumann bottleneck?"
+    a: "The limit on performance caused by a single path between the processor and memory. Instructions and data must take turns on that path, and the processor can execute far faster than main memory can supply them, so it often waits. Caches, wider buses and parallel fetching reduce the effect."
+  - q: "Why do microcontrollers often use Harvard architecture?"
+    a: "Many microcontrollers keep the program in flash and data in RAM. Separate buses let the CPU fetch the next instruction while reading or writing data, giving predictable single cycle execution, and different word widths can be used for program and data memory."
+references:
+  - text: "J. von Neumann, First Draft of a Report on the EDVAC, 1945"
+  - text: "J. L. Hennessy and D. A. Patterson, Computer Architecture: A Quantitative Approach, 6th ed., Morgan Kaufmann"
+  - text: "D. A. Patterson and J. L. Hennessy, Computer Organization and Design, RISC-V Edition, Morgan Kaufmann"
+  - text: "J. Backus, Can Programming Be Liberated from the von Neumann Style?, Communications of the ACM, 1978"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **Von Neumann vs Harvard architecture**, a **Von Neumann** computer stores program instructions and data in the same memory and reaches them over one shared bus, so it cannot fetch an instruction and access data at the same moment. A **Harvard** computer has separate memories and buses for instructions and data, so it can do both at once. Most modern processors are a **modified Harvard** design: split instruction and data caches inside the chip, one shared main memory outside.
+
+</Key>
+
+Every digital computer needs a way to fetch its program and move its data. The two classic answers are named after John von Neumann, whose 1945 report on the EDVAC described the stored program computer, and the Harvard Mark I, an electromechanical computer that read instructions from punched tape separately from its data. The difference shapes processor speed, design complexity and how programs can be loaded.
+
+## Von Neumann architecture
+
+<figure>
+<svg width="580" height="260" viewBox="0 0 580 260" fill="none" role="img" aria-label="Left: Von Neumann architecture with a CPU connected by a single bus to one memory that holds both instructions and data. Right: Harvard architecture with a CPU connected by two separate buses to an instruction memory and a data memory">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="140" y="24" font-weight="700">Von Neumann</text>
+<text x="430" y="24" font-weight="700">Harvard</text>
+<rect x="70" y="40" width="140" height="70" rx="10" fill="#0b2545" /><text x="140" y="70" fill="#ffffff">CPU</text><text x="140" y="90" fill="#9fd9d4" font-size="11">ALU, control, registers</text>
+<rect x="60" y="170" width="160" height="70" rx="10" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="140" y="198">Memory</text><text x="140" y="218" font-size="12">instructions + data</text>
+<text x="195" y="145" font-size="12" fill="#b42318" text-anchor="start">One shared bus</text>
+<rect x="360" y="40" width="140" height="70" rx="10" fill="#0b2545" /><text x="430" y="70" fill="#ffffff">CPU</text><text x="430" y="90" fill="#9fd9d4" font-size="11">ALU, control, registers</text>
+<rect x="300" y="170" width="120" height="70" rx="10" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="360" y="198">Instruction</text><text x="360" y="218">memory</text>
+<rect x="440" y="170" width="120" height="70" rx="10" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="500" y="198">Data</text><text x="500" y="218">memory</text>
+</g>
+<path d="M140 110V170" stroke="#b42318" stroke-width="6" />
+<path d="M395 110L360 170M465 110L500 170" stroke="#0b2545" stroke-width="5" />
+<path d="M290 30V250" stroke="#c9d2de" stroke-width="2" />
+</svg>
+<figcaption>Von Neumann: one memory and one path. Harvard: separate instruction and data memories and paths.</figcaption>
+</figure>
+
+The Von Neumann (or Princeton) architecture has four main parts: a **central processing unit** with a control unit, arithmetic logic unit (ALU) and registers; a single **memory** holding both instructions and data; **input and output** devices; and a **bus** connecting them.
+
+The processor repeats the **fetch, decode, execute** cycle:
+
+1. Fetch the instruction at the address in the program counter from memory.
+2. Decode it to find the operation and operands.
+3. Execute it, which may read or write data in the same memory.
+4. Update the program counter and repeat.
+
+Storing programs as data was a breakthrough. A program can be loaded, replaced or even generated by another program, which makes compilers, operating systems and [interpreters](/computer-science/compiled-vs-interpreted-languages/) possible. The cost is the **Von Neumann bottleneck**: instruction fetches and data accesses compete for one path, and memory is much slower than the processor.
+
+## Harvard architecture
+
+The Harvard architecture uses physically separate memories, and separate address and data buses, for instructions and data. The CPU can fetch the next instruction while the current one reads or writes data, so pipelined execution is smoother. The two memories can even have different widths and technologies, for example 16 bit wide flash for instructions and 8 bit wide RAM for data.
+
+The downsides are more wiring and pins, fixed division of memory between program and data, and less flexibility: a pure Harvard machine cannot easily treat its program as data, so special instructions or mechanisms are needed to read constants stored in program memory or to update firmware.
+
+## Von Neumann vs Harvard architecture: comparison
+
+| Feature | Von Neumann | Harvard |
+| --- | --- | --- |
+| Memory for instructions and data | One shared memory | Two separate memories |
+| Buses | One set, shared | Separate instruction and data buses |
+| Simultaneous fetch and data access | No | Yes |
+| Speed | Limited by the bottleneck | Higher throughput per clock |
+| Hardware complexity and cost | Lower | Higher |
+| Flexibility | Memory split decided by software | Fixed split between program and data |
+| Self-modifying or loaded code | Natural | Needs special support |
+| Typical use | General purpose computers (at system level) | Microcontrollers, DSPs, CPU caches |
+
+## Modified Harvard architecture
+
+Modern high performance processors combine both ideas. Main memory is shared (Von Neumann), so the operating system can load any program as data. But inside the chip, the level 1 cache is split into an **instruction cache** and a **data cache** with separate paths to the execution core (Harvard), so the processor can fetch instructions and load data in the same cycle. Higher cache levels are usually unified. Many microcontrollers are also "modified Harvard", allowing instructions to read constant tables from program memory.
+
+Caches exploit locality: programs tend to reuse recent data and access neighbouring addresses. That is why contiguous structures perform well, as shown in [arrays vs linked lists](/computer-science/arrays-vs-linked-lists/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A simple processor where every instruction needs one memory fetch, and 40 percent of instructions also need one data access. Each memory access takes one bus cycle.</dd>
+<dt>Find</dt><dd>Average bus cycles per instruction on a Von Neumann and a Harvard design.</dd>
+<dt>Assumptions</dt><dd>No caches; one access per bus per cycle; execution overlaps fully with memory access.</dd>
+<dt>Solution</dt><dd>Von Neumann: 1 fetch + 0.4 data = 1.4 cycles on the single bus per instruction<br />Harvard: fetch and data proceed on separate buses in parallel, so the limit is the busier bus: 1 cycle per instruction</dd>
+<dt>Answer</dt><dd><strong>About 1.4 cycles per instruction for Von Neumann against 1.0 for Harvard, roughly 40 percent more throughput in this simple model</strong></dd>
+<dt>Limitations</dt><dd>Real processors use caches, pipelines and wider buses, so the actual difference depends heavily on hit rates and workload.</dd>
+</dl>
+</Example>
+
+## The memory hierarchy
+
+Because main memory is far slower than the processor, every modern computer uses a hierarchy of storage: registers inside the core, then level 1, level 2 and level 3 caches, then main memory, then solid state or disk storage. Each level is larger and slower than the one above. The processor looks for data in the fastest level first and only goes further down on a miss. This hierarchy is the main practical answer to the Von Neumann bottleneck, and it is why the split L1 instruction and data caches matter so much: they keep the execution core fed every cycle.
+
+Programmers can help the hierarchy by keeping data that is used together close together in memory and by processing it in order.
+
+## Where each architecture is used
+
+- **Desktop, laptop and server processors:** modified Harvard, with split L1 caches and shared main memory.
+- **Microcontrollers:** many families (for example AVR and PIC) use Harvard; ARM Cortex-M cores have separate instruction and data bus interfaces. See [microcontroller vs microprocessor](/electronics-engineering/microcontroller-vs-microprocessor/).
+- **Digital signal processors:** Harvard or extended Harvard designs with multiple data memories to feed multiply accumulate operations every cycle, important in applications built on the [sampling theorem](/electronics-engineering/sampling-theorem/).
+- **Teaching models and simple CPUs:** usually Von Neumann.
+
+The architecture also affects software: operating systems manage how [processes and threads](/computer-science/process-vs-thread/) share memory, and the performance of algorithms depends on how well their memory access patterns suit the cache hierarchy.

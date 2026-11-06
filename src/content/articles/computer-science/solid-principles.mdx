@@ -1,0 +1,147 @@
+---
+title: "SOLID Principles of Software Design Explained"
+description: "The SOLID principles explained with code examples: single responsibility, open closed, Liskov substitution, interface segregation, dependency inversion."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: computer-science
+subcategory: software-design
+focusKeyword: "SOLID principles"
+image: { src: /images/featured/solid-principles.webp, alt: "SOLID Principles of Software Design Explained: featured diagram" }
+format: fundamentals
+pillar: true
+math: false
+tags: [solid, software-design, object-oriented-design, clean-code, design-principles]
+faq:
+  - q: "Who introduced the SOLID principles?"
+    a: "Robert C. Martin collected and popularised the principles in the early 2000s, building on earlier work: the open closed principle comes from Bertrand Meyer (1988) and the substitution principle from Barbara Liskov (1987). The SOLID acronym itself was coined by Michael Feathers."
+  - q: "Do SOLID principles apply only to object-oriented languages?"
+    a: "They were described for object-oriented design, but the ideas, small focused units, depending on abstractions and avoiding fragile coupling, apply equally to functional code, modules and services."
+  - q: "Can following SOLID make code worse?"
+    a: "Yes, if applied mechanically. Adding interfaces, layers and classes for changes that never come makes code harder to read. The principles are guides for managing change where change is likely, not rules to apply everywhere."
+references:
+  - text: "R. C. Martin, Agile Software Development: Principles, Patterns, and Practices, Prentice Hall, 2002"
+  - text: "R. C. Martin, Clean Architecture, Prentice Hall, 2017"
+  - text: "B. Meyer, Object-Oriented Software Construction, Prentice Hall, 1988"
+  - text: "B. Liskov and J. Wing, A Behavioral Notion of Subtyping, ACM TOPLAS, 1994"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **SOLID principles** are five guidelines for designing classes and modules that are easy to change: **S**ingle responsibility (one reason to change), **O**pen closed (open for extension, closed for modification), **L**iskov substitution (subtypes must work wherever their base type is expected), **I**nterface segregation (small, focused interfaces) and **D**ependency inversion (depend on abstractions, not concrete details).
+
+</Key>
+
+Software rarely stays the same. Requirements change, new features arrive and bugs must be fixed without breaking what already works. Code that is tangled together turns every change into a risk. The SOLID principles, popularised by Robert C. Martin, describe how to structure code so that changes stay local, components can be reused and tested, and the design remains understandable as it grows.
+
+<figure>
+<svg width="580" height="210" viewBox="0 0 580 210" fill="none" role="img" aria-label="Five tiles spelling SOLID: S for single responsibility, O for open closed, L for Liskov substitution, I for interface segregation and D for dependency inversion">
+<g font-family="Open Sans Variable, Arial, sans-serif" text-anchor="middle">
+<rect x="10" y="20" width="104" height="170" rx="12" fill="#0b2545" /><text x="62" y="92" font-size="52" font-weight="800" fill="#f5b800">S</text><text x="62" y="130" font-size="12" fill="#ffffff">Single</text><text x="62" y="148" font-size="12" fill="#ffffff">responsibility</text>
+<rect x="124" y="20" width="104" height="170" rx="12" fill="#0e7f78" /><text x="176" y="92" font-size="52" font-weight="800" fill="#ffffff">O</text><text x="176" y="130" font-size="12" fill="#ffffff">Open</text><text x="176" y="148" font-size="12" fill="#ffffff">closed</text>
+<rect x="238" y="20" width="104" height="170" rx="12" fill="#0b2545" /><text x="290" y="92" font-size="52" font-weight="800" fill="#f5b800">L</text><text x="290" y="130" font-size="12" fill="#ffffff">Liskov</text><text x="290" y="148" font-size="12" fill="#ffffff">substitution</text>
+<rect x="352" y="20" width="104" height="170" rx="12" fill="#0e7f78" /><text x="404" y="92" font-size="52" font-weight="800" fill="#ffffff">I</text><text x="404" y="130" font-size="12" fill="#ffffff">Interface</text><text x="404" y="148" font-size="12" fill="#ffffff">segregation</text>
+<rect x="466" y="20" width="104" height="170" rx="12" fill="#0b2545" /><text x="518" y="92" font-size="52" font-weight="800" fill="#f5b800">D</text><text x="518" y="130" font-size="12" fill="#ffffff">Dependency</text><text x="518" y="148" font-size="12" fill="#ffffff">inversion</text>
+</g>
+</svg>
+<figcaption>The five SOLID principles.</figcaption>
+</figure>
+
+## S: Single responsibility principle
+
+A class or module should have **one reason to change**: it should serve one actor or one concern. A class that calculates an invoice, formats it as PDF and emails it will change when tax rules change, when the layout changes and when the mail server changes. Splitting it into InvoiceCalculator, InvoiceRenderer and InvoiceSender keeps each change local.
+
+```python
+class InvoiceCalculator:
+    def total(self, items): return sum(i.price * i.qty for i in items)
+
+class InvoiceRenderer:
+    def to_pdf(self, invoice): ...
+
+class InvoiceSender:
+    def send(self, pdf, address): ...
+```
+
+## O: Open closed principle
+
+Software entities should be **open for extension but closed for modification**. Adding a new behaviour should mean adding new code, not editing tested code. Long if-elif chains on a type field are a warning sign; polymorphism or a registry of strategies replaces them.
+
+```python
+class Shape:
+    def area(self): raise NotImplementedError
+
+class Circle(Shape):
+    def __init__(self, r): self.r = r
+    def area(self): return 3.14159 * self.r ** 2
+
+class Square(Shape):
+    def __init__(self, a): self.a = a
+    def area(self): return self.a ** 2
+
+def total_area(shapes): return sum(s.area() for s in shapes)   # new shapes need no change here
+```
+
+## L: Liskov substitution principle
+
+Objects of a subtype must be usable **wherever the base type is expected** without breaking correctness. A subclass must honour the base class contract: accept the same inputs, not strengthen preconditions, not weaken guarantees and not throw unexpected errors.
+
+The classic counterexample is a Square class inheriting from Rectangle. Code that sets width and height independently, then expects area to equal width × height, breaks when given a Square that forces both sides equal. The fix is to avoid that inheritance, for example by making both independent shapes.
+
+## I: Interface segregation principle
+
+Clients should not be forced to depend on methods they do not use. A large interface such as Machine with print, scan and fax forces a simple printer class to implement scan and fax with empty or failing methods. Splitting it into Printer, Scanner and Fax lets each class implement only what it supports, and changes to one capability do not affect unrelated clients.
+
+## D: Dependency inversion principle
+
+High level policy should not depend on low level details; **both should depend on abstractions**. An OrderService that creates a specific MySQL repository inside itself is tied to that database. Instead, it should depend on an OrderRepository interface, and the concrete implementation is passed in (dependency injection).
+
+```python
+class OrderRepository:                      # abstraction
+    def save(self, order): raise NotImplementedError
+
+class SqlOrderRepository(OrderRepository):  # detail
+    def save(self, order): ...              # writes to the database
+
+class OrderService:
+    def __init__(self, repo: OrderRepository):
+        self.repo = repo                    # injected, not created here
+    def place(self, order):
+        self.repo.save(order)
+```
+
+This is what makes [unit testing](/computer-science/types-of-software-testing/) easy: tests pass in an in-memory fake repository instead of a real database.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A ReportService class that queries the database, calculates statistics, builds HTML and sends the report by email. A new requirement asks for the same report as a CSV download through a REST API.</dd>
+<dt>Find</dt><dd>Which SOLID principles the current design violates and a better structure.</dd>
+<dt>Assumptions</dt><dd>Python or a similar language; the email and HTML output must keep working unchanged.</dd>
+<dt>Solution</dt><dd>Single responsibility is violated: data access, calculation, formatting and delivery are mixed<br />Open closed is violated: adding CSV means editing the class<br />Refactor into a ReportData repository (abstraction), a StatisticsCalculator, a Formatter interface with HtmlFormatter and CsvFormatter, and delivery classes for email and API<br />Inject the repository and formatter into a coordinating service</dd>
+<dt>Answer</dt><dd><strong>CSV support is added as a new CsvFormatter class with no change to calculation or email code, and each part can be tested alone</strong></dd>
+<dt>Limitations</dt><dd>For a one-off script, this structure would be overkill; apply it where the code will keep changing.</dd>
+</dl>
+</Example>
+
+## Benefits of the SOLID principles and cautions
+
+**Benefits:**
+
+- Changes stay local, so fewer regressions.
+- Smaller units are easier to understand, reuse and test.
+- Teams can work on separate modules in parallel.
+- Implementations can be swapped, for example changing a database or payment provider.
+
+**Cautions:**
+
+- Do not create abstractions for variations that may never happen (a principle often summarised as "you aren't gonna need it").
+- Too many tiny classes can scatter logic and make code harder to follow.
+- Apply the principles where requirements are most likely to change, and refactor towards them when change actually arrives.
+
+## How to start applying SOLID
+
+Begin with existing code that changes often or is hard to test. Look for classes with many unrelated methods, long conditional chains on type fields, subclasses that override methods to do nothing, and objects created deep inside business logic. Each is a sign of a specific principle being broken, and each can be fixed with a small, safe refactoring covered by tests.
+
+## SOLID in the bigger picture
+
+SOLID works alongside other ideas: design patterns such as Strategy, Factory and Adapter implement it; layered and clean architectures apply dependency inversion at the system level; and the same thinking about clean interfaces shapes good [REST API design](/computer-science/rest-api-basics/). Even the choice of [data structures](/computer-science/arrays-vs-linked-lists/) can be hidden behind an interface, so it can be changed later if performance analysis with [Big O notation](/computer-science/big-o-notation/) shows a better option.

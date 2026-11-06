@@ -78,16 +78,16 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| programming-languages | Compiled vs Interpreted Languages Explained | compiled-vs-interpreted-languages | comparison | to write |
-| data-structures | Arrays vs Linked Lists: Differences and Use Cases | arrays-vs-linked-lists | comparison | to write |
-| algorithms | Big O Notation Explained with Examples | big-o-notation | fundamentals | to write |
-| operating-systems | Process vs Thread in Operating Systems | process-vs-thread | comparison | to write |
-| databases | Database Normalization: 1NF, 2NF and 3NF Explained | database-normalization | fundamentals | to write |
-| computer-architecture | Von Neumann vs Harvard Architecture | von-neumann-vs-harvard-architecture | comparison | to write |
-| web-development | How the Web Works: HTTP Requests and Responses | how-http-works | fundamentals | to write |
-| apis-backend | REST API Basics: Methods, Status Codes and Design | rest-api-basics | fundamentals | to write |
-| software-design | SOLID Principles of Software Design Explained | solid-principles | fundamentals | to write |
-| software-testing | Types of Software Testing: Unit, Integration and System | types-of-software-testing | explanation | to write |
+| programming-languages | Compiled vs Interpreted Languages Explained | compiled-vs-interpreted-languages | comparison | draft |
+| data-structures | Arrays vs Linked Lists: Differences and Use Cases | arrays-vs-linked-lists | comparison | draft |
+| algorithms | Big O Notation Explained with Examples | big-o-notation | fundamentals | draft |
+| operating-systems | Process vs Thread in Operating Systems | process-vs-thread | comparison | draft |
+| databases | Database Normalization: 1NF, 2NF and 3NF Explained | database-normalization | fundamentals | draft |
+| computer-architecture | Von Neumann vs Harvard Architecture | von-neumann-vs-harvard-architecture | comparison | draft |
+| web-development | How the Web Works: HTTP Requests and Responses | how-http-works | fundamentals | draft |
+| apis-backend | REST API Basics: Methods, Status Codes and Design | rest-api-basics | fundamentals | draft |
+| software-design | SOLID Principles of Software Design Explained | solid-principles | fundamentals | draft |
+| software-testing | Types of Software Testing: Unit, Integration and System | types-of-software-testing | explanation | draft |
 
 ## automation-robotics
 

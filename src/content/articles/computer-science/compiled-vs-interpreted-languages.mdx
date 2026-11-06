@@ -1,0 +1,130 @@
+---
+title: "Compiled vs Interpreted Languages Explained"
+description: "Compiled vs interpreted languages explained: how compilers, interpreters, bytecode and JIT work, speed, portability, debugging and which languages use each."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: computer-science
+subcategory: programming-languages
+focusKeyword: "compiled vs interpreted languages"
+image: { src: /images/featured/compiled-vs-interpreted-languages.webp, alt: "Compiled vs Interpreted Languages Explained: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [compiler, interpreter, jit, bytecode, programming-languages]
+faq:
+  - q: "Is Python compiled or interpreted?"
+    a: "The standard implementation, CPython, first compiles source code to bytecode and then interprets that bytecode in a virtual machine. It is usually called an interpreted language because there is no separate build step producing native machine code. Other implementations such as PyPy add a JIT compiler."
+  - q: "Is Java compiled or interpreted?"
+    a: "Both. The javac compiler turns source into platform independent bytecode. The Java Virtual Machine then interprets that bytecode and compiles frequently used parts to native machine code at run time with a just-in-time (JIT) compiler."
+  - q: "Are compiled programs always faster?"
+    a: "Usually, for CPU heavy work, because the compiler can optimise the whole program ahead of time and no translation happens while it runs. But a good JIT can match or beat ahead-of-time code in some workloads, and for programs that mostly wait on disk or network the language implementation makes little difference."
+references:
+  - text: "A. V. Aho, M. S. Lam, R. Sethi and J. D. Ullman, Compilers: Principles, Techniques and Tools, 2nd ed., Pearson"
+  - text: "R. W. Sebesta, Concepts of Programming Languages, 12th ed., Pearson"
+  - text: "R. Nystrom, Crafting Interpreters, Genever Benning"
+  - text: "T. Lindholm et al., The Java Virtual Machine Specification, Oracle"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **compiled vs interpreted languages**, the difference is when source code is translated. A **compiler** translates the whole program into machine code before it runs, producing an executable (C, C++, Rust, Go). An **interpreter** reads and executes the program statement by statement at run time (classic BASIC, shell scripts). Many modern languages mix both: Java, C# and Python compile to **bytecode** that a virtual machine interprets or **JIT** compiles while the program runs.
+
+</Key>
+
+A processor only executes machine code: binary instructions for its own instruction set. Programs written in high level languages must be translated before the hardware can run them. Whether that translation happens once in advance or continuously while the program runs affects speed, portability, error checking and the development workflow. Strictly speaking, "compiled" and "interpreted" describe implementations, not languages, but most languages have a usual implementation, which is what people mean.
+
+## How a compiler works
+
+<figure>
+<svg width="580" height="250" viewBox="0 0 580 250" fill="none" role="img" aria-label="Three paths from source code: a compiler producing a native executable that runs on the CPU; an interpreter that reads source and executes it directly; and a bytecode compiler feeding a virtual machine that interprets bytecode and JIT compiles hot code">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<rect x="10" y="20" width="100" height="40" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="60" y="45">Source code</text>
+<rect x="160" y="20" width="110" height="40" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="215" y="45">Compiler</text>
+<rect x="320" y="20" width="120" height="40" rx="8" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="380" y="45">Machine code</text>
+<rect x="490" y="20" width="80" height="40" rx="8" fill="#0b2545" /><text x="530" y="45" fill="#ffffff">CPU</text>
+<rect x="10" y="100" width="100" height="40" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="60" y="125">Source code</text>
+<rect x="160" y="100" width="280" height="40" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="300" y="125">Interpreter (translate and execute)</text>
+<rect x="490" y="100" width="80" height="40" rx="8" fill="#0b2545" /><text x="530" y="125" fill="#ffffff">CPU</text>
+<rect x="10" y="180" width="100" height="40" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="60" y="205">Source code</text>
+<rect x="160" y="180" width="110" height="40" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="215" y="205">To bytecode</text>
+<rect x="320" y="180" width="120" height="40" rx="8" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="380" y="198">Virtual machine</text><text x="380" y="213" font-size="11">interpret + JIT</text>
+<rect x="490" y="180" width="80" height="40" rx="8" fill="#0b2545" /><text x="530" y="205" fill="#ffffff">CPU</text>
+<text x="290" y="88" font-size="12" fill="#0e7f78">Before run time (build)</text>
+<text x="300" y="168" font-size="12" fill="#0e7f78">Translation during run time</text>
+</g>
+<g stroke="#0b2545" stroke-width="2"><path d="M110 40H158M270 40H318M440 40H488M110 120H158M440 120H488M110 200H158M270 200H318M440 200H488" /></g>
+<g stroke="#0b2545" stroke-width="2" fill="none"><path d="M150 34L159 40L150 46M310 34L319 40L310 46M480 34L489 40L480 46M150 114L159 120L150 126M480 114L489 120L480 126M150 194L159 200L150 206M310 194L319 200L310 206M480 194L489 200L480 206" /></g>
+</svg>
+<figcaption>Ahead-of-time compilation (top), pure interpretation (middle) and the bytecode plus virtual machine approach (bottom).</figcaption>
+</figure>
+
+A compiler works in stages:
+
+1. **Lexical analysis** splits the text into tokens: keywords, names, numbers and symbols.
+2. **Parsing** checks the grammar and builds a syntax tree.
+3. **Semantic analysis** checks types, scopes and declarations.
+4. **Intermediate representation and optimisation** rewrite the program to run faster or use less memory, for example by removing dead code or inlining small functions.
+5. **Code generation** emits machine code for a particular processor and operating system.
+6. **Linking** combines the program with libraries into an executable.
+
+Because all of this happens before the program runs, many errors are caught at build time and the resulting executable runs at full hardware speed. The cost is a build step after every change and a separate executable for each target platform.
+
+## How an interpreter works
+
+An interpreter also parses the source, but instead of producing an executable it carries out the operations directly. A simple interpreter walks the syntax tree and performs each statement as it reaches it. Most practical interpreters first translate source into a compact **bytecode** and then run a loop that fetches, decodes and executes one bytecode instruction at a time, much like a software processor.
+
+Interpreters start immediately and make interactive work easy: type a line, see the result. The same program runs anywhere the interpreter exists. The cost is speed, since every instruction pays a translation overhead each time it runs, and errors such as a misspelt variable may appear only when that line executes.
+
+## Bytecode, virtual machines and JIT
+
+Many languages sit between the two extremes:
+
+- **Java and Kotlin** compile to JVM bytecode; **C#** compiles to .NET intermediate language.
+- A **virtual machine** loads that bytecode on any platform, interprets it at first and profiles which methods run most often.
+- A **just-in-time (JIT) compiler** then compiles those hot methods to native machine code while the program runs, using information about the actual data to optimise aggressively.
+- **JavaScript** engines in browsers use the same idea, starting with an interpreter and JIT compiling hot functions.
+
+This gives portability ("compile once, run on any JVM") with speed close to compiled code after a short warm-up.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A loop that adds one million numbers, written in C and in Python, run on the same computer.</dd>
+<dt>Find</dt><dd>Where the time goes in each case.</dd>
+<dt>Assumptions</dt><dd>GCC with optimisation for C; standard CPython for Python.</dd>
+<dt>Solution</dt><dd>C: the compiler turns the loop into a few machine instructions per iteration, often vectorised, before the program runs<br />Python: each iteration dispatches several bytecode instructions, checks object types and creates or updates number objects at run time</dd>
+<dt>Answer</dt><dd><strong>The C loop typically runs many times faster; Python closes the gap by calling compiled libraries such as NumPy for heavy numerical work</strong></dd>
+<dt>Limitations</dt><dd>The exact ratio depends on versions, hardware and code style; measure with a profiler rather than relying on general figures.</dd>
+</dl>
+</Example>
+
+## Transpilers and WebAssembly
+
+Some tools translate between high level languages rather than into machine code. TypeScript is compiled (transpiled) to JavaScript, and many languages can be compiled to **WebAssembly**, a compact binary format that browsers run at near native speed. This blurs the line further: a C++ library can be compiled once to WebAssembly and then run inside a browser alongside interpreted and JIT compiled JavaScript.
+
+## Compile time and run time errors
+
+A compiler for a statically typed language rejects many mistakes before the program runs: calling a function with the wrong number or type of arguments, using an undeclared variable, or returning the wrong type. In dynamically typed, interpreted languages the same mistakes appear only when the faulty line executes, possibly in production. Linters, type hints (for example in Python) and automated tests close much of this gap.
+
+## Compiled vs interpreted languages: comparison
+
+| Feature | Compiled (ahead of time) | Interpreted |
+| --- | --- | --- |
+| Translation | Once, before running | Every run, while running |
+| Output | Native executable | No separate executable |
+| Execution speed | Usually fastest | Slower, unless JIT compiled |
+| Start-up | Instant once built | Instant, no build step |
+| Error detection | Many errors at compile time | Many errors only at run time |
+| Portability | Rebuild for each platform | Runs wherever the interpreter runs |
+| Source distribution | Can ship binary only | Source or bytecode usually shipped |
+| Typical languages | C, C++, Rust, Go, Fortran | Python, Ruby, PHP, shell, classic BASIC |
+
+## Which should you choose?
+
+- **Systems software, embedded firmware and games** need predictable speed and low memory, so compiled languages such as C, C++ and Rust dominate. Firmware for a [microcontroller](/electronics-engineering/microcontroller-vs-microprocessor/) is almost always compiled.
+- **Scripting, data analysis and automation** value fast development, so Python and similar languages are common.
+- **Enterprise and Android applications** often use JVM languages for portability and mature tooling.
+- **Web front ends** use JavaScript or languages compiled to JavaScript or WebAssembly, served over the [HTTP request and response](/computer-science/how-http-works/) cycle.
+
+Performance also depends far more on the algorithm than on the language: an O(n²) algorithm in C will lose to an O(n log n) algorithm in Python for large inputs, as [Big O notation](/computer-science/big-o-notation/) explains. How the processor fetches compiled instructions from memory is covered in [Von Neumann vs Harvard architecture](/computer-science/von-neumann-vs-harvard-architecture/).

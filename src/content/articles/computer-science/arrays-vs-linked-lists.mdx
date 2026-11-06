@@ -1,0 +1,137 @@
+---
+title: "Arrays vs Linked Lists: Differences and Use Cases"
+description: "Arrays vs linked lists compared: memory layout, access, insertion and deletion costs, cache behaviour, memory overhead and when to use each, with examples."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: computer-science
+subcategory: data-structures
+focusKeyword: "arrays vs linked lists"
+image: { src: /images/featured/arrays-vs-linked-lists.webp, alt: "Arrays vs Linked Lists: Differences and Use Cases: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [arrays, linked-lists, data-structures, time-complexity, memory]
+faq:
+  - q: "Why is accessing an array element O(1)?"
+    a: "Array elements are stored next to each other and all have the same size. The address of element i is simply the start address plus i times the element size, so the processor can jump straight to it in one calculation, no matter how large the array is."
+  - q: "Is insertion in a linked list really O(1)?"
+    a: "Only if you already have a reference to the node where you want to insert, such as the head or a node found earlier. Finding a position by index or value first takes O(n) time, because the list must be walked from the start."
+  - q: "What is a dynamic array?"
+    a: "An array that grows automatically, such as Python's list, Java's ArrayList or C++'s std::vector. When it is full, it allocates a larger block, usually a constant multiple of the old size, and copies the elements. Occasional copies make appends amortised O(1)."
+references:
+  - text: "T. H. Cormen, C. E. Leiserson, R. L. Rivest and C. Stein, Introduction to Algorithms, 4th ed., MIT Press"
+  - text: "R. Sedgewick and K. Wayne, Algorithms, 4th ed., Addison-Wesley"
+  - text: "D. E. Knuth, The Art of Computer Programming, Vol. 1: Fundamental Algorithms, 3rd ed., Addison-Wesley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **arrays vs linked lists**, an **array** stores elements side by side in one block of memory, so any element can be read by index in constant time, but inserting or deleting in the middle means shifting elements. A **linked list** stores each element in a separate node that points to the next, so inserting or deleting at a known node is fast, but reaching the i-th element means walking the list. Arrays are usually faster in practice because of better cache use.
+
+</Key>
+
+Arrays and linked lists are the two basic ways to store a sequence of items. Almost every other data structure, from stacks and queues to hash tables and graphs, is built on one or both. Choosing between them depends on which operations a program performs most often and how much memory it can spare.
+
+## Memory layout
+
+<figure>
+<svg width="580" height="240" viewBox="0 0 580 240" fill="none" role="img" aria-label="Top: an array of five elements stored in adjacent memory cells with indices 0 to 4. Bottom: a singly linked list of four nodes scattered in memory, each node holding a value and a pointer to the next node, with the last pointer null">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545" text-anchor="middle">
+<text x="20" y="30" text-anchor="start" font-weight="700">Array (contiguous)</text>
+<rect x="20" y="45" width="70" height="44" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="55" y="73">12</text>
+<rect x="90" y="45" width="70" height="44" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="125" y="73">7</text>
+<rect x="160" y="45" width="70" height="44" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="195" y="73">31</text>
+<rect x="230" y="45" width="70" height="44" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="265" y="73">5</text>
+<rect x="300" y="45" width="70" height="44" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="335" y="73">18</text>
+<g font-size="12" fill="#0e7f78"><text x="55" y="106">[0]</text><text x="125" y="106">[1]</text><text x="195" y="106">[2]</text><text x="265" y="106">[3]</text><text x="335" y="106">[4]</text></g>
+<text x="390" y="72" text-anchor="start" font-size="12">address = base + i × size</text>
+<text x="20" y="145" text-anchor="start" font-weight="700">Linked list (nodes and pointers)</text>
+<rect x="20" y="165" width="50" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><rect x="70" y="165" width="30" height="40" fill="#ffffff" stroke="#f5b800" stroke-width="2" /><text x="45" y="191">12</text>
+<rect x="150" y="185" width="50" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><rect x="200" y="185" width="30" height="40" fill="#ffffff" stroke="#f5b800" stroke-width="2" /><text x="175" y="211">7</text>
+<rect x="290" y="160" width="50" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><rect x="340" y="160" width="30" height="40" fill="#ffffff" stroke="#f5b800" stroke-width="2" /><text x="315" y="186">31</text>
+<rect x="430" y="180" width="50" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><rect x="480" y="180" width="30" height="40" fill="#ffffff" stroke="#f5b800" stroke-width="2" /><text x="455" y="206">5</text>
+<text x="545" y="205" font-size="12">null</text>
+</g>
+<g stroke="#0b2545" stroke-width="2" fill="none"><path d="M85 185L148 203M215 205L288 182M355 180L428 198M495 200H522" /><path d="M140 196L150 204L139 208M281 177L290 181L282 188M420 191L430 199L419 203" /></g>
+</svg>
+<figcaption>An array stores elements contiguously; a linked list chains nodes that can sit anywhere in memory.</figcaption>
+</figure>
+
+### Arrays
+
+An array reserves one contiguous block for n elements of equal size. The address of element i is the base address plus i times the element size, so the processor reaches any element directly. Static arrays have a fixed size; **dynamic arrays** (Python list, Java ArrayList, C++ vector) grow by allocating a bigger block and copying when full.
+
+### Linked lists
+
+A linked list is a chain of **nodes**. Each node holds a value and a pointer (reference) to the next node. A program keeps a pointer to the first node, the **head**. Variants include:
+
+- **Singly linked list:** each node points to the next.
+- **Doubly linked list:** each node also points to the previous node, allowing backward traversal and easy removal of a given node.
+- **Circular linked list:** the last node points back to the first.
+
+## Arrays vs linked lists: operation costs
+
+| Operation | Array (dynamic) | Singly linked list |
+| --- | --- | --- |
+| Access element by index | O(1) | O(n) |
+| Search for a value (unsorted) | O(n) | O(n) |
+| Insert or delete at the end | Amortised O(1) | O(1) with a tail pointer (delete needs O(n) unless doubly linked) |
+| Insert or delete at the front | O(n), elements shift | O(1) |
+| Insert or delete in the middle, position known | O(n), elements shift | O(1) once the node is found |
+| Binary search on sorted data | O(log n) | Not practical |
+| Extra memory per element | None (some spare capacity) | One or two pointers |
+
+The notation is explained in [Big O notation](/computer-science/big-o-notation/). The table shows a trade-off: arrays win at reading by position, linked lists win at changing the structure in place.
+
+## Cache behaviour: why arrays are often faster
+
+Modern processors load memory into caches in lines of typically 64 bytes. Walking through an array touches consecutive addresses, so each cache line brings in several useful elements and the hardware prefetcher can predict what comes next. Linked list nodes are allocated separately and may be scattered, so each step can be a cache miss that costs far more time than the arithmetic itself. As a result, even operations with the same Big O cost, such as a linear search, usually run noticeably faster on arrays. Memory hierarchy is discussed further in [Von Neumann vs Harvard architecture](/computer-science/von-neumann-vs-harvard-architecture/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>One million 32-bit integers stored on a 64-bit system, either in an array or in a singly linked list.</dd>
+<dt>Find</dt><dd>Approximate memory used by each.</dd>
+<dt>Assumptions</dt><dd>4 byte integers; 8 byte pointers; nodes padded to 8 byte alignment; allocator overhead ignored.</dd>
+<dt>Solution</dt><dd>Array: 1,000,000 × 4 B = 4 MB<br />List node: 4 B value + 8 B pointer = 12 B, padded to 16 B<br />List: 1,000,000 × 16 B = 16 MB</dd>
+<dt>Answer</dt><dd><strong>About 4 MB for the array against about 16 MB for the list, four times more, before counting allocator overhead</strong></dd>
+<dt>Limitations</dt><dd>Real allocators add per-allocation headers, and languages with object headers (Java, Python) use even more per node.</dd>
+</dl>
+</Example>
+
+## When to use each
+
+**Use an array (or dynamic array) when:**
+
+- Elements are accessed by index or iterated in order.
+- The data is mostly appended at the end and read many times.
+- You need sorting, binary search or tight memory use.
+- Performance matters and cache friendliness counts, which is most of the time.
+
+**Use a linked list when:**
+
+- You frequently insert or remove items in the middle and already hold references to those positions, as in LRU caches combined with a hash map.
+- Elements must never move in memory because other structures point to them.
+- You need constant time splicing of whole lists, as in some memory allocators and operating system kernels, for example the ready queues used in [process and thread scheduling](/computer-science/process-vs-thread/).
+
+## Arrays and linked lists in popular languages
+
+- **Python:** the built-in list is a dynamic array of references; collections.deque is a linked structure of blocks with fast appends and pops at both ends.
+- **Java:** ArrayList is a dynamic array; LinkedList is a doubly linked list. ArrayList is the usual default.
+- **C++:** std::vector is a dynamic array, std::list is a doubly linked list and std::forward_list a singly linked one. std::vector is recommended as the default container.
+- **C:** arrays are built in; linked lists are written by hand with structs and pointers.
+- **JavaScript:** arrays are dynamic and engines optimise them heavily; linked lists are rarely needed.
+
+In most languages the standard advice is the same: start with the dynamic array and switch only when profiling shows a real need.
+
+When a program needs both fast indexing and cheap insertion, hybrid structures such as gap buffers, ropes or skip lists are worth considering.
+
+## Related structures
+
+- **Stacks and queues** can be built on either; arrays (ring buffers) are common in practice.
+- **Hash tables** use arrays of buckets, sometimes with linked lists for collisions.
+- **Trees and graphs** generalise linked lists with several pointers per node.
+- **Database tables** store rows in pages and use index structures such as B-trees; see [database normalization](/computer-science/database-normalization/) for how tables are designed.
+
+The right choice is the one that makes the program's most common operations cheap, and when in doubt, measure.

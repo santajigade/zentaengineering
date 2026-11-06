@@ -1,0 +1,136 @@
+---
+title: "Database Normalization: 1NF, 2NF and 3NF Explained"
+description: "Database normalization explained: anomalies, functional dependencies, keys, first, second and third normal form and BCNF, with a step-by-step worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: computer-science
+subcategory: databases
+focusKeyword: "database normalization"
+image: { src: /images/featured/database-normalization.webp, alt: "Database Normalization: 1NF, 2NF and 3NF Explained: featured diagram" }
+format: fundamentals
+pillar: true
+math: false
+tags: [normalization, relational-database, 1nf, 2nf, 3nf, bcnf]
+faq:
+  - q: "Why do we normalize a database?"
+    a: "To store each fact once. This prevents update, insertion and deletion anomalies, keeps data consistent, and reduces storage of repeated values. A normalized design is also easier to change as requirements grow."
+  - q: "Is a higher normal form always better?"
+    a: "Not always. Third normal form or BCNF is the usual target for transactional systems. Read-heavy reporting systems and data warehouses often denormalize deliberately, storing some repeated data to avoid many joins and speed up queries."
+  - q: "What is the difference between 3NF and BCNF?"
+    a: "In 3NF, every non-key attribute must depend only on keys, but a dependency whose left side is not a key is still allowed if its right side is part of some candidate key. BCNF removes that exception: the left side of every non-trivial functional dependency must be a superkey. Most 3NF tables are already in BCNF."
+references:
+  - text: "E. F. Codd, A Relational Model of Data for Large Shared Data Banks, Communications of the ACM, 1970"
+  - text: "R. Elmasri and S. B. Navathe, Fundamentals of Database Systems, 7th ed., Pearson"
+  - text: "A. Silberschatz, H. F. Korth and S. Sudarshan, Database System Concepts, 7th ed., McGraw-Hill"
+  - text: "C. J. Date, An Introduction to Database Systems, 8th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Database normalization** organises relational tables so that each fact is stored in exactly one place. It removes redundancy and the update, insert and delete anomalies it causes. **1NF** requires atomic values and no repeating groups. **2NF** removes attributes that depend on only part of a composite key. **3NF** removes attributes that depend on other non-key attributes. Most transactional databases are designed to 3NF or BCNF.
+
+</Key>
+
+A relational database stores data in tables of rows and columns. Poor table design repeats the same information in many rows, so a single change must be made in many places and mistakes creep in. Normalization, introduced by Edgar Codd in the early 1970s, is a set of rules for splitting tables so that data stays consistent.
+
+## The problem: anomalies
+
+Consider a single table for course enrolments:
+
+| StudentID | StudentName | CourseID | CourseTitle | Instructor | InstructorPhone |
+| --- | --- | --- | --- | --- | --- |
+| 101 | Asha | CS201 | Data Structures | Rao | 4411 |
+| 101 | Asha | CS205 | Databases | Mehta | 4420 |
+| 102 | Vikram | CS201 | Data Structures | Rao | 4411 |
+
+This design causes three anomalies:
+
+- **Update anomaly:** if Rao's phone changes, every row for CS201 must change; missing one leaves inconsistent data.
+- **Insertion anomaly:** a new course cannot be recorded until a student enrols in it.
+- **Deletion anomaly:** if Vikram and Asha drop CS201, the fact that Rao teaches it disappears.
+
+## Key concepts
+
+- **Functional dependency (X → Y):** the value of X determines the value of Y. CourseID → CourseTitle means each course ID has exactly one title.
+- **Candidate key:** a minimal set of attributes that uniquely identifies a row. One is chosen as the **primary key**.
+- **Composite key:** a key made of more than one attribute, such as (StudentID, CourseID).
+- **Prime attribute:** an attribute that is part of some candidate key.
+- **Partial dependency:** a non-prime attribute depends on part of a composite key.
+- **Transitive dependency:** a non-prime attribute depends on another non-prime attribute, which depends on the key.
+
+## First normal form (1NF)
+
+A table is in 1NF when:
+
+- Every column holds **atomic** (indivisible) values, not lists or sets.
+- There are no repeating groups of columns such as Course1, Course2, Course3.
+- Each row is unique, identified by a key.
+
+A row storing "CS201, CS205" in one Courses column violates 1NF. The fix is one row per student and course, as in the table above, with key (StudentID, CourseID).
+
+## Second normal form (2NF)
+
+A table is in 2NF when it is in 1NF and **every non-prime attribute depends on the whole of every candidate key**, not just part of it. 2NF only matters for tables with composite keys.
+
+In the enrolment table, StudentName depends only on StudentID, and CourseTitle, Instructor and InstructorPhone depend only on CourseID. These partial dependencies are removed by splitting into Student, Course and Enrolment tables.
+
+## Third normal form (3NF)
+
+A table is in 3NF when it is in 2NF and **no non-prime attribute depends transitively on the key**; that is, non-key attributes depend on the key, the whole key and nothing but the key.
+
+In the Course table, CourseID → Instructor and Instructor → InstructorPhone, so the phone depends on the key only through Instructor. Moving instructors to their own table removes this transitive dependency.
+
+<figure>
+<svg width="580" height="250" viewBox="0 0 580 250" fill="none" role="img" aria-label="Normalized design with four tables: Student with StudentID and StudentName; Enrolment with StudentID and CourseID as composite key; Course with CourseID, CourseTitle and InstructorID; Instructor with InstructorID, Name and Phone; lines show foreign keys from Enrolment to Student and Course, and from Course to Instructor">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<rect x="20" y="30" width="140" height="84" rx="8" fill="#ffffff" stroke="#0b2545" stroke-width="2" /><rect x="20" y="30" width="140" height="26" rx="8" fill="#0b2545" /><text x="90" y="48" text-anchor="middle" fill="#ffffff" font-weight="700">Student</text>
+<text x="32" y="78" font-weight="700">StudentID (PK)</text><text x="32" y="100">StudentName</text>
+<rect x="210" y="30" width="150" height="84" rx="8" fill="#ffffff" stroke="#0b2545" stroke-width="2" /><rect x="210" y="30" width="150" height="26" rx="8" fill="#0b2545" /><text x="285" y="48" text-anchor="middle" fill="#ffffff" font-weight="700">Enrolment</text>
+<text x="222" y="78" font-weight="700">StudentID (PK, FK)</text><text x="222" y="100" font-weight="700">CourseID (PK, FK)</text>
+<rect x="210" y="150" width="150" height="90" rx="8" fill="#ffffff" stroke="#0b2545" stroke-width="2" /><rect x="210" y="150" width="150" height="26" rx="8" fill="#0b2545" /><text x="285" y="168" text-anchor="middle" fill="#ffffff" font-weight="700">Course</text>
+<text x="222" y="194" font-weight="700">CourseID (PK)</text><text x="222" y="212">CourseTitle</text><text x="222" y="230">InstructorID (FK)</text>
+<rect x="410" y="150" width="150" height="90" rx="8" fill="#ffffff" stroke="#0b2545" stroke-width="2" /><rect x="410" y="150" width="150" height="26" rx="8" fill="#0b2545" /><text x="485" y="168" text-anchor="middle" fill="#ffffff" font-weight="700">Instructor</text>
+<text x="422" y="194" font-weight="700">InstructorID (PK)</text><text x="422" y="212">Name</text><text x="422" y="230">Phone</text>
+</g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M160 74H210" /><path d="M285 114V150" /><path d="M360 226H410" /></g>
+</svg>
+<figcaption>The enrolment data in third normal form. Each fact is stored once; foreign keys (FK) link the tables.</figcaption>
+</figure>
+
+## Boyce-Codd normal form (BCNF) and beyond
+
+**BCNF** strengthens 3NF: for every non-trivial functional dependency X → Y, X must be a superkey. It handles rare cases with overlapping candidate keys that 3NF allows. **4NF** deals with multivalued dependencies, and **5NF** with join dependencies; they matter in specialised designs.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>The original enrolment table with functional dependencies StudentID → StudentName; CourseID → CourseTitle, Instructor; Instructor → InstructorPhone.</dd>
+<dt>Find</dt><dd>A 3NF design and how it fixes the update anomaly.</dd>
+<dt>Assumptions</dt><dd>Each course has one instructor; each instructor has one phone; instructor names are replaced by an InstructorID key.</dd>
+<dt>Solution</dt><dd>1NF: one row per (StudentID, CourseID); already satisfied<br />2NF: remove partial dependencies into Student(StudentID, StudentName) and Course(CourseID, CourseTitle, InstructorID), keeping Enrolment(StudentID, CourseID)<br />3NF: remove the transitive dependency into Instructor(InstructorID, Name, Phone)</dd>
+<dt>Answer</dt><dd><strong>Four tables: Student, Enrolment, Course and Instructor. Rao's phone is now stored once, so changing it is a single row update</strong></dd>
+<dt>Limitations</dt><dd>Queries that need all the details must now join tables; indexes on the key columns keep those joins fast.</dd>
+</dl>
+</Example>
+
+## Normalization and keys in SQL
+
+In SQL, each normalized table becomes a CREATE TABLE statement with a PRIMARY KEY, and each relationship becomes a FOREIGN KEY constraint that references the parent table. The database then refuses an enrolment for a course that does not exist, or the deletion of a course that still has enrolments, unless a cascade rule says otherwise. This makes the design rules enforceable rather than just documented.
+
+## Denormalization: when to break the rules
+
+Joins have a cost. Reporting databases, data warehouses (star schemas) and caches often store repeated data on purpose to answer queries faster. The usual approach is to design a normalized source of truth first and denormalize copies for specific read patterns, accepting the extra work to keep them in sync.
+
+## Database normalization tips in practice
+
+- Identify entities (things) and their relationships before creating tables.
+- Give every table a primary key and declare foreign keys so the database enforces integrity.
+- Use surrogate keys (such as an auto-incrementing ID) where natural keys may change.
+- Index foreign key columns used in joins, keeping [Big O](/computer-science/big-o-notation/) costs of lookups low.
+- Name tables and columns consistently, and document the meaning and units of each column.
+- Use constraints (NOT NULL, UNIQUE, CHECK) so the database rejects invalid data instead of relying on application code alone.
+- Review the design whenever a new requirement adds attributes: ask which entity each new attribute really describes, and place it there.
+- Test schema changes and queries with realistic data as part of [software testing](/computer-science/types-of-software-testing/).
+
+Databases normally sit behind an application layer that exposes data through a [REST API](/computer-science/rest-api-basics/), and good normalization makes that API simpler because each resource maps to clean, consistent tables. The way rows are stored and scanned in memory links back to [arrays vs linked lists](/computer-science/arrays-vs-linked-lists/).
