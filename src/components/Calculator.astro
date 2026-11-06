@@ -1,0 +1,25 @@
+---
+// Embeds a calculator from ZentaCalculator.com. Use in MDX:
+// <Calculator path="electrical/transformer-turns-ratio" title="Transformer Turns Ratio Calculator" />
+// path = the calculator's category/slug on zentacalculator.com. Loads only when scrolled near.
+import { SITE } from '../data/site';
+interface Props { path: string; title: string }
+const { path, title } = Astro.props;
+const clean = path.replace(/^\/|\/$/g, '');
+const page = `${SITE.sister.calculator}/${clean}/`;
+const embed = `${SITE.sister.calculator}/embed/${clean}/`;
+---
+<div class="card calc not-prose">
+  <div class="calc-head"><b style="color:var(--ze-navy);font-size:15px">{title}</b><span class="muted">From <a href={page}>ZentaCalculator.com</a></span></div>
+  <iframe src={embed} title={title} loading="lazy" data-zcalc></iframe>
+  <div style="padding:10px 18px;font-size:14px;border-top:1px solid var(--ze-line)"><a href={page}>Open the full {title.toLowerCase()}</a></div>
+</div>
+<script>
+  // The embed posts its height as { zentaHeight }; resize the matching iframe.
+  addEventListener('message', (e) => {
+    if (e.origin !== 'https://zentacalculator.com' || typeof e.data?.zentaHeight !== 'number') return;
+    document.querySelectorAll<HTMLIFrameElement>('iframe[data-zcalc]').forEach((f) => {
+      if (f.contentWindow === e.source) f.style.height = Math.min(e.data.zentaHeight + 4, 2400) + 'px';
+    });
+  });
+</script>

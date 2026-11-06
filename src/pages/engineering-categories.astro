@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import DisciplineCard from '../components/DisciplineCard.astro';
+import { SITE } from '../data/site';
+import { FAMILIES, byFamily, DISCIPLINES } from '../data/disciplines';
+---
+<Base title={`Engineering Categories: ${DISCIPLINES.length} Disciplines | ${SITE.name}`} description={`Browse ${DISCIPLINES.length} engineering disciplines, from mechanical and electrical to aerospace and biomedical, grouped into five families.`}>
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[['Engineering Categories']]} />
+    <h1>Engineering Categories</h1>
+    <p class="lead">{DISCIPLINES.length} disciplines in five families. Each discipline page lists its subcategories, a starting reading order, tutorials, interview questions and projects.</p>
+  </div></div>
+  <div class="wrap">
+    {FAMILIES.map((f) => (
+      <section class={`section fam-${f.slug}`}>
+        <h2 class="h2" style="color:var(--fam)">{f.name}</h2>
+        <div class="grid" style="--min:320px">{byFamily(f.slug).map((d) => <DisciplineCard d={d} full />)}</div>
+      </section>
+    ))}
+  </div>
+</Base>

@@ -1,0 +1,24 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../data/site';
+const popular = [
+  ['Electrical Engineering', '/electrical-engineering/'], ['Electronics Engineering', '/electronics-engineering/'],
+  ['Mechanical Engineering', '/mechanical-engineering/'], ['Automation and Robotics', '/automation-robotics/'],
+  ['Renewable Energy', '/renewable-energy/'], ['Chemical Engineering', '/chemical-engineering/'],
+];
+const learn = [['All categories', '/engineering-categories/'], ['Tutorials and Guides', '/tutorials/'], ['Interview Questions', '/interview-questions/'], ['Engineering Projects', '/projects/'], ['Resources', '/resources/']];
+const about = [['About Us', '/about/'], ['Editorial Policy', '/editorial-policy/'], ['Contact', '/contact/'], ['Privacy Policy', '/privacy-policy/'], ['Terms of Use', '/terms-of-use/'], ['Disclaimer', '/disclaimer/']];
+---
+<footer class="site-footer">
+  <div class="wrap cols">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <a href="/" style="display:flex;align-items:center;gap:10px;color:#fff;font-size:18px"><Logo size={32} /><span><b>Zenta</b> Engineering</span></a>
+      <p style="margin:0;line-height:1.6">{SITE.tagline}</p>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </div>
+    <div><h2>Popular disciplines</h2><ul>{popular.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul></div>
+    <div><h2>Learn</h2><ul>{learn.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul></div>
+    <div><h2>About</h2><ul>{about.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul></div>
+  </div>
+  <div class="wrap legal">© {new Date().getFullYear()} Zenta Engineering</div>
+</footer>

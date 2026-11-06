@@ -1,0 +1,5 @@
+---
+interface Props { title?: string }
+const { title = 'Key points' } = Astro.props;
+---
+<div class="key"><b style="color:var(--ze-navy)">{title}</b><slot /></div>

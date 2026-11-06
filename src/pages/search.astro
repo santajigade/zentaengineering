@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../data/site';
+---
+<Base title={`Search | ${SITE.name}`} description="Search Zenta Engineering articles, tutorials, interview questions, projects and resources." noindex>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[['Search']]} />
+    <h1>Search</h1>
+  </div></div>
+  <div class="wrap section" style="max-width:860px"><div id="search"></div></div>
+  <style is:global>
+    #search { --pagefind-ui-primary: #0b2545; --pagefind-ui-text: #1b1f24; --pagefind-ui-border: #c5ced9; --pagefind-ui-border-radius: 8px; --pagefind-ui-font: 'Open Sans Variable', system-ui, sans-serif; }
+    #search mark { background: #e3f5f3; color: #0b2545; }
+  </style>
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    addEventListener('DOMContentLoaded', () => {
+      const ui = new PagefindUI({ element: '#search', showSubResults: true, showImages: false, autofocus: true, translations: { placeholder: 'Search topics, equipment, terms...' } });
+      const q = new URLSearchParams(location.search).get('q');
+      if (q) ui.triggerSearch(q);
+    });
+  </script>
+</Base>

@@ -1,0 +1,72 @@
+---
+// One route for two page kinds under a discipline: subcategory archives and articles.
+// The build refuses an article slug equal to a subcategory slug (lib/content.ts).
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Content from '../../layouts/Content.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import { DISCIPLINES, getDiscipline } from '../../data/disciplines';
+import { SITE } from '../../data/site';
+import { liveArticles, slugOf, articleUrl, counts, subcategoryIndexable, ARTICLE_FORMATS, type Article } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const articles = await liveArticles();
+  const { bySub } = await counts();
+  const subPages = DISCIPLINES.flatMap((d) =>
+    d.subcategories.filter((s) => (bySub.get(`${d.slug}/${s.slug}`) ?? 0) > 0)
+      .map((s) => ({ params: { discipline: d.slug, slug: s.slug }, props: { kind: 'sub' as const, sub: s.slug, n: bySub.get(`${d.slug}/${s.slug}`)! } })));
+  const articlePages = articles.map((a) => ({ params: { discipline: a.data.discipline, slug: slugOf(a) }, props: { kind: 'article' as const, entry: a } }));
+  return [...subPages, ...articlePages];
+}
+const props = Astro.props as { kind: 'sub'; sub: string; n: number } | { kind: 'article'; entry: Article };
+const d = getDiscipline(Astro.params.discipline!)!;
+
+let subData: { name: string; items: Article[]; indexable: boolean; others: { slug: string; name: string }[] } | undefined;
+let rendered: Awaited<ReturnType<typeof render>> | undefined;
+let related: Article[] = [];
+if (props.kind === 'sub') {
+  const s = d.subcategories.find((x) => x.slug === props.sub)!;
+  const items = (await liveArticles()).filter((a) => a.data.discipline === d.slug && a.data.subcategory === s.slug)
+    .sort((a, b) => Number(b.data.pillar) - Number(a.data.pillar));
+  const { bySub } = await counts();
+  const others = d.subcategories.filter((x) => x.slug !== s.slug && (bySub.get(`${d.slug}/${x.slug}`) ?? 0) > 0);
+  subData = { name: s.name, items, indexable: subcategoryIndexable(props.n), others };
+} else {
+  rendered = await render(props.entry);
+  const all = await liveArticles();
+  const e = props.entry;
+  const score = (x: Article) => (x.data.subcategory === e.data.subcategory ? 3 : 0) + x.data.tags.filter((t) => e.data.tags.includes(t)).length + (x.data.discipline === e.data.discipline ? 1 : 0);
+  related = all.filter((x) => x.id !== e.id).map((x) => [score(x), x] as const).filter(([s]) => s > 0).sort((a, b) => b[0] - a[0]).slice(0, 4).map(([, x]) => x);
+}
+const subName = (slug?: string) => d.subcategories.find((s) => s.slug === slug)?.name;
+---
+{props.kind === 'sub' && subData && (
+  <Base title={`${subData.name}: ${d.short} Engineering Articles | ${SITE.name}`} description={`${subData.name} articles in ${d.name}: explanations, worked examples and practical guides.`} noindex={!subData.indexable}>
+    <div class={`page-head fam-${d.family}`}><div class="wrap">
+      <Breadcrumbs items={[[d.name, `/${d.slug}/`], [subData.name]]} />
+      <h1>{subData.name}</h1>
+      <p class="lead">Articles on {subData.name.toLowerCase()} in {d.name}, starting with the main guide.</p>
+    </div></div>
+    <div class="wrap section">
+      <div class="grid" style="--min:300px">
+        {subData.items.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} text={a.data.description} chips={[{ label: a.data.pillar ? 'Start here' : ARTICLE_FORMATS[a.data.format], cls: a.data.pillar ? 'chip-teal' : '' }]} />)}
+      </div>
+      <h2 class="h2" style="margin-top:32px">More in {d.name}</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">{[{ slug: '', name: `All ${d.short}` }, ...subData.others].map((s) => <a class="chip" style="min-height:36px;padding:0 14px;background:#fff;border:1px solid var(--ze-line)" href={s.slug ? `/${d.slug}/${s.slug}/` : `/${d.slug}/`}>{s.name}</a>)}</div>
+    </div>
+  </Base>
+)}
+{props.kind === 'article' && rendered && (
+  <Content data={props.entry.data} type="Article" schemaType={props.entry.data.format === 'tutorial' ? 'TechArticle' : 'Article'} headings={rendered.headings}
+    crumbs={[[d.name, `/${d.slug}/`], ...(props.entry.data.subcategory ? [[subName(props.entry.data.subcategory)!, `/${d.slug}/${props.entry.data.subcategory}/`] as [string, string]] : []), [props.entry.data.title]]}
+    chips={[{ label: ARTICLE_FORMATS[props.entry.data.format] }]}>
+    <rendered.Content />
+    {related.length > 0 && (
+      <section slot="below" class="wrap section" data-pagefind-ignore>
+        <h2 class="h2">Related articles</h2>
+        <div class="grid">{related.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} chips={[{ label: ARTICLE_FORMATS[a.data.format] }]} />)}</div>
+      </section>
+    )}
+  </Content>
+)}

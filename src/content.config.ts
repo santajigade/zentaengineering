@@ -8,8 +8,8 @@ const common = {
   seoTitle: z.string().max(65).optional(), // overrides the <title> when set
   pubDate: z.coerce.date(), // goes live on this date (scheduled publishing)
   updatedDate: z.coerce.date().optional(), // only for meaningful edits
-  author: z.string().default('santaji-gadepatil'),
-  reviewedBy: z.string().optional(),
+  author: z.string().optional(), // empty = rule in authorFor(): Electronics by Santaji Gadepatil, others Editorial Staff
+  reviewedBy: z.string().optional(), // empty = 'Technical Team'
   reviewedDate: z.coerce.date().optional(), // set ONLY after a real technical review
   discipline: z.string(), // primary discipline slug: drives URL, breadcrumb, canonical
   subcategory: z.string().optional(),
@@ -17,6 +17,7 @@ const common = {
   tags: z.array(z.string()).default([]), // used for related content, never indexed
   draft: z.boolean().default(false),
   image: z.object({ src: z.string(), alt: z.string() }).optional(), // 1200x630
+  math: z.boolean().default(false), // true loads KaTeX styles for $$ equations
   faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
   references: z.array(z.object({ text: z.string(), url: z.string().url().optional() })).default([]),
 };

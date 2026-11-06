@@ -1,0 +1,22 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ItemCard from '../../../components/ItemCard.astro';
+import { SITE } from '../../../data/site';
+import { getDiscipline, type Discipline } from '../../../data/disciplines';
+import { liveInterview, interviewUrl, type InterviewSet } from '../../../lib/content';
+export async function getStaticPaths() {
+  const sets = await liveInterview();
+  const ds = [...new Set(sets.map((s) => s.data.discipline))];
+  return ds.map((slug) => ({ params: { discipline: slug }, props: { d: getDiscipline(slug)!, sets: sets.filter((s) => s.data.discipline === slug) } }));
+}
+const { d, sets } = Astro.props as { d: Discipline; sets: InterviewSet[] };
+---
+<Base title={`${d.name} Interview Questions and Answers | ${SITE.name}`} description={`${d.name} interview questions with full answers and practice MCQs, for freshers and experienced engineers.`}>
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[['Interview Questions', '/interview-questions/'], [d.name]]} />
+    <h1>{d.name} Interview Questions</h1>
+    <p class="lead">Question sets by subject, each with full answers and links to the articles that explain them.</p>
+  </div></div>
+  <div class="wrap section"><div class="grid" style="--min:300px">{sets.map((s) => <ItemCard href={interviewUrl(s)} title={s.data.title} text={s.data.description} chips={[{ label: `${s.data.questions.length} questions`, cls: 'chip-teal' }]} />)}</div></div>
+</Base>

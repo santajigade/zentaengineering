@@ -1,0 +1,37 @@
+---
+import { render } from 'astro:content';
+import Content from '../../../layouts/Content.astro';
+import { SERIES } from '../../../data/series';
+import { liveLessons, lessonUrl, slugOf, type Lesson } from '../../../lib/content';
+export async function getStaticPaths() {
+  const lessons = await liveLessons();
+  return lessons.filter((l) => SERIES.some((s) => s.slug === l.data.series)).map((l) => {
+    const siblings = lessons.filter((x) => x.data.series === l.data.series);
+    return { params: { series: l.data.series, lesson: slugOf(l) }, props: { l, siblings } };
+  });
+}
+const { l, siblings } = Astro.props as { l: Lesson; siblings: Lesson[] };
+const s = SERIES.find((x) => x.slug === l.data.series)!;
+const i = siblings.findIndex((x) => x.id === l.id);
+const prev = siblings[i - 1], next = siblings[i + 1];
+const { Content: Body, headings } = await render(l);
+---
+<Content data={l.data} type="Tutorial" schemaType="TechArticle" headings={headings}
+  crumbs={[['Tutorials and Guides', '/tutorials/'], [s.title, `/tutorials/${s.slug}/`], [`Lesson ${l.data.order}`]]}
+  chips={[{ label: `Lesson ${i + 1} of ${siblings.length}`, cls: 'chip-navy' }, { label: l.data.difficulty }]}>
+  <div slot="top" class="series-bar" style="margin-top:20px" data-pagefind-ignore>
+    <div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax={siblings.length} aria-valuenow={i + 1} aria-label={`Lesson ${i + 1} of ${siblings.length}`}><div style={`width:${Math.round(((i + 1) / siblings.length) * 100)}%`}></div></div>
+    <span style="font-size:14px;font-weight:600;color:var(--ze-navy)">Lesson {i + 1} of {siblings.length}</span>
+  </div>
+  <Body />
+  <nav slot="after" class="pager" aria-label="Lesson navigation" data-pagefind-ignore>
+    {prev ? <a class="card" href={lessonUrl(prev)}><span class="muted" style="font-size:13px">Previous</span><b style="color:var(--ze-navy)">Lesson {prev.data.order}: {prev.data.title}</b></a> : <span></span>}
+    {next && <a class="card next" href={lessonUrl(next)} style="background:var(--ze-navy);border-color:var(--ze-navy)"><span style="font-size:13px;color:#c9d3df">Next</span><b style="color:#fff">Lesson {next.data.order}: {next.data.title}</b></a>}
+  </nav>
+  <nav slot="side" class="card" style="padding:18px" aria-label={s.title}>
+    <span class="toc-label">{s.title}</span>
+    <ol class="lesson-list" style="margin-top:10px">
+      {siblings.map((x, k) => <li><a href={lessonUrl(x)} aria-current={x.id === l.id ? 'page' : undefined}><span class={`num ${x.id === l.id ? 'num-dark' : ''}`}>{k + 1}</span>{x.data.title}</a></li>)}
+    </ol>
+  </nav>
+</Content>

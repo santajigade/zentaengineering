@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import Icon from '../../components/Icon.astro';
+import AdSlot from '../../components/AdSlot.astro';
+import { DISCIPLINE_ICON } from '../../components/icons';
+import { DISCIPLINES, FAMILIES, getDiscipline, type Discipline } from '../../data/disciplines';
+import { SITE } from '../../data/site';
+import { liveArticles, liveLessons, liveInterview, liveProjects, liveResources, articleUrl, interviewUrl, projectUrl, resourceUrl, counts, disciplineIndexable, subcategoryIndexable, ARTICLE_FORMATS } from '../../lib/content';
+
+export const getStaticPaths = () => DISCIPLINES.map((d) => ({ params: { discipline: d.slug }, props: { d } }));
+const { d } = Astro.props as { d: Discipline };
+const fam = FAMILIES.find((f) => f.slug === d.family)!;
+const mine = <T extends { data: { discipline: string; alsoIn: string[] } }>(xs: T[]) => xs.filter((x) => x.data.discipline === d.slug || x.data.alsoIn.includes(d.slug));
+const articles = mine(await liveArticles());
+const pillars = articles.filter((a) => a.data.pillar && a.data.discipline === d.slug);
+const series = [...new Map(mine(await liveLessons()).map((l) => [l.data.series, l])).values()];
+const interview = mine(await liveInterview());
+const projects = mine(await liveProjects());
+const resources = mine(await liveResources());
+const { byDiscipline, bySub } = await counts();
+const total = byDiscipline.get(d.slug) ?? 0;
+const subs = d.subcategories.map((s) => ({ ...s, n: bySub.get(`${d.slug}/${s.slug}`) ?? 0 }));
+const related = (d.family ? DISCIPLINES.filter((x) => x.family === d.family && x.slug !== d.slug) : []).slice(0, 4);
+const subName = (slug?: string) => d.subcategories.find((s) => s.slug === slug)?.name;
+---
+<Base title={`${d.name}: Articles, Tutorials and Guides | ${SITE.name}`} description={d.description} noindex={!disciplineIndexable(total)}
+  jsonld={[{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: d.name, description: d.description, url: `${SITE.url}/${d.slug}/` }]}>
+  <div class={`page-head fam-${d.family}`}>
+    <div class="wrap">
+      <Breadcrumbs items={[['Engineering Categories', '/engineering-categories/'], [d.name]]} />
+      <div style="display:flex;gap:40px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1 1 520px;display:flex;flex-direction:column;gap:14px">
+          <span class="chip chip-fam" style="align-self:flex-start">{fam.name}</span>
+          <h1>{d.name}</h1>
+          <p class="lead">{d.description}</p>
+        </div>
+        <div class="icon-tile" style="width:180px;height:140px" aria-hidden="true"><Icon name={DISCIPLINE_ICON[d.slug]} size={80} stroke={1.4} /></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <section class="section">
+      <h2 class="h2">Subcategories</h2>
+      <div class="grid" style="--min:220px">
+        {subs.map((s) =>
+          s.n > 0 ? (
+            <a class="card" href={`/${d.slug}/${s.slug}/`} style="padding:16px;flex-direction:column;gap:4px"><b style="color:var(--ze-navy)">{s.name}</b><span class="muted" style="font-size:14px">{s.n} {s.n === 1 ? 'item' : 'items'}</span></a>
+          ) : (
+            <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:4px"><b style="color:var(--ze-ink-2)">{s.name}</b><span class="muted" style="font-size:14px">Coming soon</span></div>
+          ),
+        )}
+      </div>
+    </section>
+    {pillars.length > 0 && (
+      <section class="section">
+        <h2 class="h2">Start here</h2>
+        <div class="grid" style="--min:300px">{pillars.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} text={a.data.description} chips={[{ label: subName(a.data.subcategory) ?? 'Guide', cls: 'chip-teal' }]} />)}</div>
+      </section>
+    )}
+    {(series.length > 0 || interview.length > 0 || projects.length > 0) && (
+      <section class="section">
+        <h2 class="h2">Practice and build</h2>
+        <div class="grid" style="--min:280px">
+          {series.map((l) => <ItemCard href={`/tutorials/${l.data.series}/`} title={`${l.data.series.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())} Tutorial`} chips={[{ label: 'Tutorial series', cls: 'chip-navy' }]} />)}
+          {interview.map((s) => <ItemCard href={interviewUrl(s)} title={s.data.title} chips={[{ label: 'Interview questions', cls: 'chip-teal' }]} />)}
+          {projects.map((p) => <ItemCard href={projectUrl(p)} title={p.data.title} chips={[{ label: `${p.data.level[0].toUpperCase()}${p.data.level.slice(1)} project`, cls: 'chip-navy' }]} />)}
+        </div>
+      </section>
+    )}
+    <section class="section">
+      <h2 class="h2">All {d.name} articles</h2>
+      {articles.length > 0 ? (
+        <div class="grid" style="--min:300px">
+          {articles.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} chips={[{ label: subName(a.data.subcategory) ?? d.short }, { label: ARTICLE_FORMATS[a.data.format] }]} />)}
+        </div>
+      ) : (
+        <p class="empty">Articles for this discipline are being written and reviewed. Browse the <a href="/engineering-categories/">other disciplines</a> in the meantime.</p>
+      )}
+      <AdSlot slot="categoryList" />
+    </section>
+    {resources.length > 0 && (
+      <section class="section"><h2 class="h2">Resources</h2><div class="grid">{resources.map((r) => <ItemCard href={resourceUrl(r)} title={r.data.title} text={r.data.description} />)}</div></section>
+    )}
+    <section class="section">
+      <h2 class="h2">Related disciplines</h2>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">{related.map((r) => <a class="btn btn-ghost" href={`/${r.slug}/`}><Icon name={DISCIPLINE_ICON[r.slug]} size={20} /> {r.short}</a>)}</div>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,9 @@
+---
+interface Props { href: string; title: string; chips?: { label: string; cls?: string }[]; text?: string; fam?: string }
+const { href, title, chips = [], text, fam } = Astro.props;
+---
+<a class={`card item-card ${fam ? `fam-${fam}` : ''}`} href={href}>
+  {chips.length > 0 && <div class="meta">{chips.map((c) => <span class={`chip ${c.cls ?? ''}`}>{c.label}</span>)}</div>}
+  <span class="card-title" style="font-size:17px">{title}</span>
+  {text && <span class="muted" style="font-size:15px;line-height:1.5">{text}</span>}
+</a>

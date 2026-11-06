@@ -1,0 +1,16 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import type { Person } from '../data/site';
+interface Props { a: Person }
+const { a } = Astro.props;
+---
+<div class="card author-box" data-pagefind-ignore>
+  {a.photo ? <img src={a.photo} alt={a.name} width="64" height="64" loading="lazy" /> : <Logo size={64} class="mark" />}
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <a href={`/author/${a.slug}/`} style="font-weight:700;font-size:17px;color:var(--ze-navy);text-decoration:none">{a.name}</a>
+    <span class="muted" style="font-size:14px">{[a.role, ...a.credentials].join(', ')}</span>
+    <p style="margin:0;font-size:15px;line-height:1.6">{a.bio} <a href="/editorial-policy/">Editorial policy</a>.</p>
+    {a.linkedin && <a href={a.linkedin} rel="me noopener" style="display:inline-flex;gap:6px;align-items:center;font-size:14px"><Icon name="linkedin" size={18} /> LinkedIn</a>}
+  </div>
+</div>

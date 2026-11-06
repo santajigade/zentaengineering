@@ -1,0 +1,21 @@
+---
+import { render } from 'astro:content';
+import Content from '../../../layouts/Content.astro';
+import { RESOURCE_TYPES } from '../../../data/resourceTypes';
+import { liveResources, slugOf, type Resource } from '../../../lib/content';
+export async function getStaticPaths() {
+  return (await liveResources()).map((r) => ({ params: { type: r.data.type, slug: slugOf(r) }, props: { r } }));
+}
+const { r } = Astro.props as { r: Resource };
+const { Content: Body, headings } = await render(r);
+const f = r.data.file;
+---
+<Content data={r.data} type="Resource" headings={headings} crumbs={[['Resources', '/resources/'], [RESOURCE_TYPES[r.data.type], `/resources/#${r.data.type}`], [r.data.title]]} chips={[{ label: RESOURCE_TYPES[r.data.type], cls: 'chip-navy' }]}>
+  {f && (
+    <div slot="top" class="card" style="padding:18px;margin-top:20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap" data-pagefind-ignore>
+      <span class="muted" style="flex:1 1 240px;font-size:15px">{f.format}{f.pages ? ` · ${f.pages} pages` : ''} · {f.sizeKb >= 1024 ? `${(f.sizeKb / 1024).toFixed(1)} MB` : `${f.sizeKb} KB`}</span>
+      <a class="btn btn-primary" href={f.href} download>Download</a>
+    </div>
+  )}
+  <Body />
+</Content>

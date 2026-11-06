@@ -1,20 +1,104 @@
 ---
-// Holding page until launch (Phase 6). Replaced by the real homepage in Phase 3.
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ItemCard from '../components/ItemCard.astro';
+import DisciplineCard from '../components/DisciplineCard.astro';
 import { SITE } from '../data/site';
-import { DISCIPLINES } from '../data/disciplines';
+import { DISCIPLINES, FAMILIES, getDiscipline } from '../data/disciplines';
+import { liveArticles, liveLessons, liveInterview, liveProjects, liveResources, articleUrl, interviewUrl, projectUrl, resourceUrl, ARTICLE_FORMATS } from '../lib/content';
+
+const articles = await liveArticles();
+const pillars = articles.filter((a) => a.data.pillar).slice(0, 6);
+const latest = articles.slice(0, 6);
+const updated = articles.filter((a) => a.data.updatedDate).sort((a, b) => b.data.updatedDate!.valueOf() - a.data.updatedDate!.valueOf()).slice(0, 5);
+const lessons = await liveLessons();
+const seriesSlugs = [...new Set(lessons.map((l) => l.data.series))];
+const interview = (await liveInterview()).slice(0, 3);
+const projects = (await liveProjects()).slice(0, 3);
+const resources = (await liveResources()).slice(0, 4);
+const fam = (slug: string) => getDiscipline(slug)!;
+const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 ---
-<Base title={`${SITE.name}: coming soon`}>
-  <main class="hold">
-    <img src="/favicon.svg" width="72" height="72" alt="" />
-    <h1>{SITE.name}</h1>
-    <p class="tag">{SITE.tagline}</p>
-    <p>Articles, tutorials, interview preparation and projects across {DISCIPLINES.length} engineering disciplines. Launching soon.</p>
-  </main>
+<Base title={`${SITE.name}: Engineering Articles, Tutorials and Interview Questions`} description={SITE.description}>
+  <section class="page-head" style="border-bottom:1px solid var(--ze-line)">
+    <div class="wrap" style="padding-top:64px;padding-bottom:64px;flex-direction:row;align-items:center;gap:48px;flex-wrap:wrap">
+      <div style="flex:1 1 520px;display:flex;flex-direction:column;gap:18px">
+        <h1 style="font-size:clamp(2rem,1.4rem + 2.4vw,2.9rem);line-height:1.15">Engineering explained clearly, from first principles to the plant floor.</h1>
+        <p class="lead">Articles, tutorials, interview preparation and projects across {DISCIPLINES.length} engineering disciplines, for students and working engineers.</p>
+        <form class="search-form" role="search" action="/search/" method="get">
+          <label for="q" class="sr-only">Search Zenta Engineering</label>
+          <input id="q" name="q" type="search" placeholder="Search transformer, PLC timer, NPSH..." />
+          <button type="submit" class="btn btn-primary"><Icon name="search" size={20} stroke={2} /> Search</button>
+        </form>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px"><span class="muted">Popular:</span>{SITE.popularTopics.slice(0, 4).map(([l, h]) => <a class="chip chip-teal" href={h}>{l}</a>)}</div>
+      </div>
+      <div style="flex:0 1 340px;display:flex;justify-content:center" aria-hidden="true">
+        <svg width="340" height="284" viewBox="0 0 360 300" fill="none" stroke-linejoin="round">
+          <g stroke="#dde2e8"><path d="M0 60H360M0 120H360M0 180H360M0 240H360M60 0V300M120 0V300M180 0V300M240 0V300M300 0V300" /></g>
+          <path d="M60 60H300L60 240H300" stroke="#0b2545" stroke-width="10" />
+          <circle cx="60" cy="60" r="22" fill="#13a89e" /><circle cx="300" cy="240" r="22" fill="#13a89e" />
+          <circle cx="300" cy="60" r="18" fill="#fff" stroke="#0b2545" stroke-width="8" /><circle cx="60" cy="240" r="18" fill="#fff" stroke="#0b2545" stroke-width="8" />
+        </svg>
+      </div>
+    </div>
+  </section>
+  <div class="wrap">
+    <section class="section">
+      <div class="section-head"><h2 class="h2">Browse by discipline</h2><a class="more" href="/engineering-categories/">All {DISCIPLINES.length} disciplines <Icon name="arrow" size={16} stroke={2} /></a></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">{FAMILIES.map((f) => <span class={`chip chip-fam fam-${f.slug}`}>{f.name}</span>)}</div>
+      <div class="grid" style="--min:250px">{DISCIPLINES.map((d) => <DisciplineCard d={d} />)}</div>
+    </section>
+    {pillars.length > 0 && (
+      <section class="section">
+        <h2 class="h2">Start with these guides</h2>
+        <div class="grid" style="--min:300px">{pillars.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} fam={fam(a.data.discipline).family} chips={[{ label: fam(a.data.discipline).short, cls: 'chip-fam' }, { label: ARTICLE_FORMATS[a.data.format] }]} />)}</div>
+      </section>
+    )}
+    {latest.length > 0 && (
+      <section class="section">
+        <h2 class="h2">Latest articles</h2>
+        <div class="grid" style="--min:300px">{latest.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} fam={fam(a.data.discipline).family} chips={[{ label: fam(a.data.discipline).short, cls: 'chip-fam' }]} />)}</div>
+      </section>
+    )}
+    {seriesSlugs.length > 0 && (
+      <section class="section">
+        <div class="section-head"><h2 class="h2">Tutorial series</h2><a class="more" href="/tutorials/">All tutorials <Icon name="arrow" size={16} stroke={2} /></a></div>
+        <div class="grid" style="--min:300px">{seriesSlugs.map((s) => <ItemCard href={`/tutorials/${s}/`} title={`${title(s)} Tutorial`} chips={[{ label: `${lessons.filter((l) => l.data.series === s).length} lessons`, cls: 'chip-navy' }]} />)}</div>
+      </section>
+    )}
+    {interview.length > 0 && (
+      <section class="section">
+        <div class="section-head"><h2 class="h2">Interview preparation</h2><a class="more" href="/interview-questions/">All interview questions <Icon name="arrow" size={16} stroke={2} /></a></div>
+        <div class="grid" style="--min:300px">{interview.map((s) => <ItemCard href={interviewUrl(s)} title={s.data.title} chips={[{ label: fam(s.data.discipline).short }]} />)}</div>
+      </section>
+    )}
+    {projects.length > 0 && (
+      <section class="section">
+        <div class="section-head"><h2 class="h2">Engineering projects</h2><a class="more" href="/projects/">All projects <Icon name="arrow" size={16} stroke={2} /></a></div>
+        <div class="grid" style="--min:300px">{projects.map((p) => <ItemCard href={projectUrl(p)} title={p.data.title} chips={[{ label: title(p.data.level), cls: 'chip-navy' }, { label: fam(p.data.discipline).short }]} />)}</div>
+      </section>
+    )}
+    {resources.length > 0 && (
+      <section class="section">
+        <div class="section-head"><h2 class="h2">Learning resources</h2><a class="more" href="/resources/">All resources <Icon name="arrow" size={16} stroke={2} /></a></div>
+        <div class="grid">{resources.map((r) => <ItemCard href={resourceUrl(r)} title={r.data.title} text={r.data.description} />)}</div>
+      </section>
+    )}
+    {updated.length >= 3 && (
+      <section class="section">
+        <h2 class="h2">Recently updated</h2>
+        <div class="grid" style="--min:300px">{updated.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} chips={[{ label: fam(a.data.discipline).short }]} />)}</div>
+      </section>
+    )}
+    {SITE.newsletterAction && <section class="section">
+      <div style="background:var(--ze-navy);border-radius:var(--ze-radius);padding:36px;display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1 1 380px"><h2 style="margin:0;color:#fff;font-size:24px">Get new articles in your discipline</h2><p style="margin:6px 0 0;color:#c9d3df">One email a week. Unsubscribe anytime.</p></div>
+        <form style="flex:1 1 380px;display:flex;gap:8px;flex-wrap:wrap" action={SITE.newsletterAction} method="post">
+          <label for="em" class="sr-only">Email address</label>
+          <input id="em" type="email" name="email" required placeholder="you@example.com" style="flex:1 1 220px;min-height:48px;border:0;border-radius:8px;padding:0 14px;font:16px var(--ze-font)" />
+          <button type="submit" class="btn" style="background:var(--ze-teal);color:var(--ze-navy)">Subscribe</button>
+        </form>
+      </div>
+    </section>}
+  </div>
 </Base>
-<style>
-  .hold { max-width: 640px; margin: 0 auto; padding: 18vh 24px 48px; text-align: center; }
-  h1 { font-size: var(--ze-h1); margin: 16px 0 8px; }
-  .tag { font-weight: 600; color: var(--ze-navy-700); }
-  p { color: var(--ze-ink-2); }
-</style>

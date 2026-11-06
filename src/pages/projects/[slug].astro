@@ -1,0 +1,21 @@
+---
+import { render } from 'astro:content';
+import Content from '../../layouts/Content.astro';
+import { liveProjects, slugOf, type Project } from '../../lib/content';
+export async function getStaticPaths() {
+  return (await liveProjects()).map((p) => ({ params: { slug: slugOf(p) }, props: { p } }));
+}
+const { p } = Astro.props as { p: Project };
+const { Content: Body, headings } = await render(p);
+const lvl = p.data.level[0].toUpperCase() + p.data.level.slice(1);
+---
+<Content data={p.data} type="Project" headings={headings} crumbs={[['Engineering Projects', '/projects/'], [p.data.title]]} chips={[{ label: `${lvl} project`, cls: 'chip-navy' }]}>
+  <Body />
+  {p.data.components.length > 0 && (
+    <section slot="after" class="prose" style="margin-top:12px">
+      <h2 id="components-required">Components required</h2>
+      <div class="table-wrap"><table><thead><tr><th>Component</th><th>Specification</th><th>Qty</th></tr></thead>
+        <tbody>{p.data.components.map((c) => <tr><td>{c.name}</td><td>{c.spec}</td><td>{c.qty}</td></tr>)}</tbody></table></div>
+    </section>
+  )}
+</Content>

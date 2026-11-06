@@ -1,0 +1,82 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { MAIN_NAV, SITE } from '../data/site';
+import { FAMILIES, byFamily, DISCIPLINES } from '../data/disciplines';
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const seg = path.split('/')[1] ?? '';
+const inCategories = seg === 'engineering-categories' || DISCIPLINES.some((d) => d.slug === seg);
+---
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Zenta Engineering home"><Logo size={36} /><span><b>Zenta</b> <span>Engineering</span></span></a>
+    <nav class="nav" aria-label="Main">
+      {MAIN_NAV.map((item) =>
+        item.mega ? (
+          <div class="mega-wrap">
+            <button type="button" aria-expanded="false" aria-controls="mega" id="mega-btn"
+              style={inCategories ? 'color:var(--ze-teal-700)' : undefined}>{item.label}<Icon name="chevron" size={14} stroke={2.2} /></button>
+          </div>
+        ) : (
+          <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+        ),
+      )}
+    </nav>
+    <div style="display:flex;gap:8px">
+      <a class="icon-btn" href="/search/" aria-label="Search"><Icon name="search" size={20} stroke={2} /></a>
+      <button type="button" class="icon-btn menu-btn" aria-expanded="false" aria-controls="drawer" aria-label="Menu" id="menu-btn"><Icon name="menu" size={22} stroke={2} /></button>
+    </div>
+  </div>
+  <div class="mega" id="mega">
+    <div class="wrap">
+      <div class="panel">
+        <div class="cols">
+          {FAMILIES.map((f) => (
+            <div class={`fam-${f.slug}`}>
+              <div class="fam-title">{f.name}</div>
+              {byFamily(f.slug).map((d) => <a href={`/${d.slug}/`}>{d.short}</a>)}
+            </div>
+          ))}
+        </div>
+        <div class="row">
+          <span class="muted" style="font-weight:600">Popular topics:</span>
+          {SITE.popularTopics.map(([l, h]) => <a class="chip chip-teal" href={h}>{l}</a>)}
+          <a class="more" href="/engineering-categories/" style="margin-left:auto">View all categories <Icon name="arrow" size={16} stroke={2} /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="drawer wrap" id="drawer">
+    <a href="/">Home</a>
+    <details>
+      <summary>Engineering Categories</summary>
+      {FAMILIES.map((f) => (
+        <details class="fam">
+          <summary>{f.name}</summary>
+          {byFamily(f.slug).map((d) => <a href={`/${d.slug}/`}>{d.name}</a>)}
+        </details>
+      ))}
+      <a href="/engineering-categories/">All categories</a>
+    </details>
+    {MAIN_NAV.filter((i) => !i.mega && i.href !== '/').map((i) => <a href={i.href}>{i.label}</a>)}
+  </div>
+</header>
+<script>
+  const btn = document.getElementById('mega-btn');
+  const mega = document.getElementById('mega');
+  const header = document.querySelector('.site-header');
+  let t: number | undefined;
+  const set = (open: boolean) => { btn?.setAttribute('aria-expanded', String(open)); mega?.classList.toggle('open', open); };
+  btn?.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+  const hover = window.matchMedia('(hover: hover) and (min-width: 1241px)');
+  btn?.parentElement?.addEventListener('mouseenter', () => { if (hover.matches) { clearTimeout(t); t = window.setTimeout(() => set(true), 120); } });
+  header?.addEventListener('mouseleave', () => { if (hover.matches) { clearTimeout(t); t = window.setTimeout(() => set(false), 200); } });
+  mega?.addEventListener('mouseenter', () => clearTimeout(t));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mega?.classList.contains('open')) { set(false); btn?.focus(); } });
+  document.addEventListener('click', (e) => { if (!header?.contains(e.target as Node)) set(false); });
+  const mb = document.getElementById('menu-btn');
+  const drawer = document.getElementById('drawer');
+  mb?.addEventListener('click', () => { const o = mb.getAttribute('aria-expanded') !== 'true'; mb.setAttribute('aria-expanded', String(o)); drawer?.classList.toggle('open', o); });
+</script>

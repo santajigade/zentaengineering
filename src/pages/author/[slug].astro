@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import Logo from '../../components/Logo.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, AUTHORS, authorFor, type Person } from '../../data/site';
+import { liveArticles, articleUrl } from '../../lib/content';
+export const getStaticPaths = () => Object.values(AUTHORS).map((a) => ({ params: { slug: a.slug }, props: { a } }));
+const { a } = Astro.props as { a: Person };
+const items = (await liveArticles()).filter((x) => authorFor(x.data).slug === a.slug);
+const schema = a.isPerson
+  ? { '@context': 'https://schema.org', '@type': 'ProfilePage', mainEntity: { '@type': 'Person', name: a.name, jobTitle: a.role, url: `${SITE.url}/author/${a.slug}/`, ...(a.linkedin ? { sameAs: [a.linkedin] } : {}), ...(a.photo ? { image: `${SITE.url}${a.photo}` } : {}) } }
+  : { '@context': 'https://schema.org', '@type': 'AboutPage', name: a.name, about: { '@id': `${SITE.url}/#org` } };
+---
+<Base title={`${a.name} | ${SITE.name}`} description={a.bio} jsonld={[schema]}>
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[[a.name]]} />
+    <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+      {a.photo ? <img src={a.photo} alt={a.name} width="120" height="120" style="border-radius:60px" /> : <Logo size={120} />}
+      <div style="flex:1 1 400px;display:flex;flex-direction:column;gap:8px">
+        <h1>{a.name}</h1>
+        <span class="muted">{[a.role, ...a.credentials].join(', ')}</span>
+        <p class="lead">{a.bio}</p>
+        {a.linkedin && <a href={a.linkedin} rel="me noopener" style="display:inline-flex;gap:6px;align-items:center"><Icon name="linkedin" size={18} /> LinkedIn profile</a>}
+      </div>
+    </div>
+  </div></div>
+  <div class="wrap section">
+    <h2 class="h2">Articles</h2>
+    {items.length > 0 ? <div class="grid" style="--min:300px">{items.map((x) => <ItemCard href={articleUrl(x)} title={x.data.title} />)}</div> : <p class="empty">Articles will appear here once published.</p>}
+  </div>
+</Base>

@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import { DISCIPLINE_ICON } from './icons';
+import type { Discipline } from '../data/disciplines';
+interface Props { d: Discipline; full?: boolean }
+const { d, full = false } = Astro.props;
+---
+<a class={`card fam-${d.family}`} href={`/${d.slug}/`} style="align-items:center;gap:14px;padding:16px">
+  <span class="icon-tile"><Icon name={DISCIPLINE_ICON[d.slug]} /></span>
+  <span style="display:flex;flex-direction:column;gap:2px">
+    <span style="font-weight:600;font-size:15px;line-height:1.3">{full ? d.name : d.short}</span>
+    {full && <span class="muted" style="font-size:14px;line-height:1.45">{d.description}</span>}
+  </span>
+</a>

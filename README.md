@@ -8,7 +8,8 @@ Static site for zentaengineering.com, built with [Astro](https://astro.build) an
 | --- | --- |
 | `npm install` | Install dependencies |
 | `npm run dev` | Local dev server at http://localhost:4321 |
-| `npm run build` | Build the live site into `dist/` |
+| `npm run build` | Build the live site into `dist/` (and the Pagefind search index) |
+| `SHOW_DRAFTS=1 npm run build` | Private review preview including unreviewed, draft and future items. Never deploy it. |
 
 ## Where things live
 

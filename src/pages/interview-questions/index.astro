@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import { SITE } from '../../data/site';
+import { DISCIPLINES } from '../../data/disciplines';
+import { liveInterview, interviewUrl } from '../../lib/content';
+const sets = await liveInterview();
+const groups = DISCIPLINES.map((d) => ({ d, sets: sets.filter((s) => s.data.discipline === d.slug) })).filter((g) => g.sets.length > 0);
+---
+<Base title={`Engineering Interview Questions and Answers | ${SITE.name}`} description="Engineering interview questions with full answers and practice MCQs, organised by discipline, subject and experience level." noindex={sets.length === 0}>
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[['Interview Questions']]} />
+    <h1>Interview Questions</h1>
+    <p class="lead">Questions asked in engineering interviews, with full answers and practice MCQs. Each answer links to the article that explains it in depth.</p>
+  </div></div>
+  <div class="wrap">
+    {groups.length > 0 ? groups.map((g) => (
+      <section class="section">
+        <div class="section-head"><h2 class="h2">{g.d.name}</h2><a class="more" href={`/interview-questions/${g.d.slug}/`}>All {g.d.short} sets</a></div>
+        <div class="grid" style="--min:300px">{g.sets.map((s) => <ItemCard href={interviewUrl(s)} title={s.data.title} text={s.data.description} chips={[{ label: `${s.data.questions.length} questions`, cls: 'chip-teal' }]} />)}</div>
+      </section>
+    )) : <p class="empty section">The first interview question sets are being written and reviewed.</p>}
+    <section class="section">
+      <h2 class="h2">Instrumentation interview questions</h2>
+      <p style="margin:0;max-width:760px">For instrumentation, measurement and process control interview preparation, see the detailed guides on <a href="https://www.instrumentationblog.in/">InstrumentationBlog.in</a>, our sister site dedicated to industrial instrumentation.</p>
+    </section>
+  </div>
+</Base>

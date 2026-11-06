@@ -1,0 +1,50 @@
+---
+import { render } from 'astro:content';
+import Content from '../../../layouts/Content.astro';
+import { getDiscipline } from '../../../data/disciplines';
+import { liveInterview, slugOf, type InterviewSet } from '../../../lib/content';
+export async function getStaticPaths() {
+  return (await liveInterview()).map((s) => ({ params: { discipline: s.data.discipline, set: slugOf(s) }, props: { s } }));
+}
+const { s } = Astro.props as { s: InterviewSet };
+const d = getDiscipline(s.data.discipline)!;
+const { Content: Body, headings } = await render(s);
+const qa = s.data.questions.filter((q) => q.type !== 'mcq');
+const mcq = s.data.questions.filter((q) => q.type === 'mcq' && q.options && q.correct !== undefined);
+const paras = (t: string) => t.split(/\n\s*\n/);
+const lvl = (x?: string) => (x ? x[0].toUpperCase() + x.slice(1) : '');
+---
+<Content data={s.data} type="Interview" headings={headings}
+  crumbs={[['Interview Questions', '/interview-questions/'], [d.name, `/interview-questions/${d.slug}/`], [s.data.title]]}
+  chips={[{ label: `${s.data.questions.length} questions`, cls: 'chip-teal' }, { label: lvl(s.data.difficulty) }]}>
+  <Body />
+  <div slot="after" class="qa">
+    {qa.length > 0 && <h2 id="questions-and-answers" style="font-size:var(--ze-h2);margin:40px 0 0">Questions and answers</h2>}
+    {qa.map((q, i) => (
+      <details class="card" open={i === 0}>
+        <summary><span style="color:var(--ze-teal-700)">Q{i + 1}.</span><span style="flex:1">{q.q}</span>{q.difficulty && <span class="chip">{lvl(q.difficulty)}</span>}</summary>
+        <div style="margin:10px 0 0 34px;font-size:17px;line-height:1.7">{paras(q.a).map((p) => <p style="margin:0 0 10px">{p}</p>)}{q.related && <a href={q.related} style="font-size:15px">Read the full explanation</a>}</div>
+      </details>
+    ))}
+    {mcq.length > 0 && <h2 id="practice-mcqs" style="font-size:var(--ze-h2);margin:40px 0 0">Practice MCQs</h2>}
+    {mcq.map((q, i) => (
+      <div class="card mcq" data-correct={q.correct}>
+        <b style="font-size:17px;color:var(--ze-navy)">Q{qa.length + i + 1}. {q.q}</b>
+        {q.options!.map((o, j) => <button type="button" data-i={j}><span class="num">{'ABCD'[j]}</span>{o}</button>)}
+        <p class="why" hidden><b>Answer: {'ABCD'[q.correct!]}.</b> {q.a}</p>
+      </div>
+    ))}
+  </div>
+</Content>
+<script>
+  document.querySelectorAll<HTMLElement>('.mcq').forEach((box) => {
+    const c = Number(box.dataset.correct);
+    box.querySelectorAll<HTMLButtonElement>('button').forEach((b) => b.addEventListener('click', () => {
+      if (box.dataset.done) return; box.dataset.done = '1';
+      const i = Number(b.dataset.i);
+      box.querySelectorAll<HTMLButtonElement>('button')[c].classList.add('right');
+      if (i !== c) b.classList.add('wrong');
+      (box.querySelector('.why') as HTMLElement).hidden = false;
+    }));
+  });
+</script>

@@ -1,0 +1,77 @@
+---
+// Shared layout for article-like pages: articles, lessons, interview sets, projects, resources.
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Toc from '../components/Toc.astro';
+import AuthorBox from '../components/AuthorBox.astro';
+import Faq from '../components/Faq.astro';
+import References from '../components/References.astro';
+import AdSlot from '../components/AdSlot.astro';
+import Logo from '../components/Logo.astro';
+import type { MarkdownHeading } from 'astro';
+import { SITE, authorFor, REVIEWER_DEFAULT } from '../data/site';
+import { getDiscipline } from '../data/disciplines';
+import { formatDate } from '../lib/content';
+
+interface Props {
+  data: any; // the entry's data (common fields)
+  crumbs: [string, string?][];
+  headings: MarkdownHeading[];
+  chips?: { label: string; cls?: string; href?: string }[];
+  type: string; // for search filters: Article, Tutorial, Interview, Project, Resource
+  schemaType?: string;
+}
+const { data, crumbs, headings, chips = [], type, schemaType = 'Article' } = Astro.props;
+const d = getDiscipline(data.discipline)!;
+const author = authorFor(data);
+const reviewer = data.reviewedDate ? data.reviewedBy ?? REVIEWER_DEFAULT : null;
+const url = new URL(Astro.url.pathname, SITE.url).href;
+const image = data.image ? new URL(data.image.src.replace(/\.webp$/, '.jpg'), SITE.url).href : undefined;
+const schema = {
+  '@context': 'https://schema.org', '@type': schemaType, headline: data.title, description: data.description,
+  datePublished: data.pubDate.toISOString(), dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+  mainEntityOfPage: url, ...(image ? { image } : {}),
+  author: author.isPerson
+    ? { '@type': 'Person', name: author.name, url: `${SITE.url}/author/${author.slug}/`, ...(author.linkedin ? { sameAs: [author.linkedin] } : {}) }
+    : { '@type': 'Organization', name: SITE.name, url: SITE.url },
+  publisher: { '@id': `${SITE.url}/#org` },
+};
+---
+<Base title={`${data.seoTitle ?? data.title} | ${SITE.name}`} description={data.description} ogType="article"
+  image={data.image?.src.replace(/\.webp$/, '.jpg')} jsonld={[schema]} math={data.math}>
+  <div class="wrap" style="padding-top:20px"><Breadcrumbs items={crumbs} /></div>
+  <div class="wrap layout">
+    <article class="main" data-pagefind-body data-pagefind-filter={`type:${type}`} data-pagefind-meta={`discipline:${d.short}`}>
+      <span data-pagefind-filter="discipline" hidden>{d.short}</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" data-pagefind-ignore>
+        <a class={`chip chip-fam fam-${d.family}`} href={`/${d.slug}/`}>{d.name}</a>
+        {chips.map((c) => (c.href ? <a class={`chip ${c.cls ?? ''}`} href={c.href}>{c.label}</a> : <span class={`chip ${c.cls ?? ''}`}>{c.label}</span>))}
+      </div>
+      <h1 style="margin:0;font-size:var(--ze-h1)">{data.title}</h1>
+      <div class="byline" style="margin-top:14px" data-pagefind-ignore>
+        {author.photo ? <img src={author.photo} alt="" width="40" height="40" /> : <Logo size={40} class="mark" />}
+        <span><a href={`/author/${author.slug}/`} style="font-weight:600">{author.name}</a></span>
+        {reviewer && <span>Reviewed by {reviewer}</span>}
+        <span>Published <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate)}</time></span>
+        {data.updatedDate && <span>Updated <time datetime={data.updatedDate.toISOString()}>{formatDate(data.updatedDate)}</time></span>}
+      </div>
+      {data.image && (
+        <figure style="margin:24px 0 0">
+          <img src={data.image.src} alt={data.image.alt} width="1200" height="630" style="width:100%;height:auto;border-radius:var(--ze-radius);display:block" fetchpriority="high" />
+        </figure>
+      )}
+      <slot name="top" />
+      <div class="prose" style="margin-top:20px"><slot /></div>
+      <slot name="after" />
+      <div class="prose" style="margin-top:12px"><Faq items={data.faq} /><References items={data.references} /></div>
+      <AdSlot slot="endOfArticle" />
+      <AuthorBox a={author} />
+    </article>
+    <aside class="side" data-pagefind-ignore>
+      <slot name="side" />
+      <Toc headings={headings} />
+      <AdSlot slot="sidebar" minHeight={600} />
+    </aside>
+  </div>
+  <slot name="below" />
+</Base>

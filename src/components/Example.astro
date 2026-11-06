@@ -1,0 +1,6 @@
+---
+// Worked example box for MDX. Children: <dl> with Given, Find, Assumptions, Solution, Answer, Limitations.
+interface Props { title?: string }
+const { title = 'Worked example' } = Astro.props;
+---
+<div class="example"><div class="label">{title}</div><slot /></div>

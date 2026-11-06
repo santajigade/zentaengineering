@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import { SITE } from '../../data/site';
+import { RESOURCE_TYPES } from '../../data/resourceTypes';
+import { getDiscipline } from '../../data/disciplines';
+import { liveResources, resourceUrl } from '../../lib/content';
+const res = await liveResources();
+const groups = Object.entries(RESOURCE_TYPES).map(([k, v]) => ({ k, v, xs: res.filter((r) => r.data.type === k) })).filter((g) => g.xs.length > 0);
+---
+<Base title={`Engineering Resources: Notes, Reference Guides and Standards | ${SITE.name}`} description="Engineering study notes, reference guides, terminology and standards references, each with a page describing what it covers." noindex={res.length === 0}>
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[['Resources']]} />
+    <h1>Engineering Resources</h1>
+    <p class="lead">Study notes, quick reference guides, terminology and standards references. Every resource has its own page describing what it covers before you download it.</p>
+  </div></div>
+  <div class="wrap">
+    {groups.length > 0 ? groups.map((g) => (
+      <section class="section" id={g.k}><h2 class="h2">{g.v}</h2>
+        <div class="grid" style="--min:300px">{g.xs.map((r) => <ItemCard href={resourceUrl(r)} title={r.data.title} text={r.data.description} chips={[{ label: getDiscipline(r.data.discipline)!.short, cls: 'chip-teal' }]} />)}</div>
+      </section>
+    )) : <p class="empty section">The first resources are being prepared.</p>}
+  </div>
+</Base>

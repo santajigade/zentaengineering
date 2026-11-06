@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import { SITE } from '../../data/site';
+import { getDiscipline } from '../../data/disciplines';
+import { liveProjects, projectUrl } from '../../lib/content';
+const projects = await liveProjects();
+const levels = ['diploma', 'undergraduate', 'postgraduate'] as const;
+const cap = (s: string) => s[0].toUpperCase() + s.slice(1);
+---
+<Base title={`Engineering Projects for Diploma and Degree Students | ${SITE.name}`} description="Engineering projects with objective, working principle, components, methodology and expected results, by discipline and academic level." noindex={projects.length === 0}>
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[['Engineering Projects']]} />
+    <h1>Engineering Projects</h1>
+    <p class="lead">Project write-ups with the objective, working principle, components, method and expected results, for diploma and degree students.</p>
+  </div></div>
+  <div class="wrap">
+    {projects.length === 0 && <p class="empty section">The first projects are being written and reviewed.</p>}
+    {levels.map((lv) => {
+      const xs = projects.filter((p) => p.data.level === lv);
+      return xs.length > 0 && (
+        <section class="section" id={lv}>
+          <h2 class="h2">{cap(lv)} projects</h2>
+          <div class="grid" style="--min:300px">{xs.map((p) => <ItemCard href={projectUrl(p)} title={p.data.title} text={p.data.description} chips={[{ label: getDiscipline(p.data.discipline)!.short, cls: 'chip-teal' }]} />)}</div>
+        </section>
+      );
+    })}
+  </div>
+</Base>

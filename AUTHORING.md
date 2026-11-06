@@ -13,10 +13,16 @@ Rules for every article, lesson, interview set, project and resource. The public
 2. Standards: cite number, title and edition year (for example `IEC 60076-1:2011 Power transformers, Part 1: General`). Never copy text from a standard; summarize and cite.
 3. No invented case studies, test data, survey results, quotes or "industry statistics".
 4. Worked examples always show Given, Find, Assumptions, Solution, Answer (with units) and Limitations.
-5. Do not add `reviewedBy` or `reviewedDate`. Those are added only after the human technical review.
+5. Do not add `reviewedDate` (or `reviewedBy`). Those are added only after the human technical review.
+
+## Authors and review (approved 6 Nov 2026)
+- Electronics Engineering articles: **Santaji Gadepatil** (set automatically for `discipline: electronics-engineering`).
+- All other disciplines: **Editorial Staff**.
+- Reviewer shown as **Technical Team** unless `reviewedBy` names someone else.
+- Leave `author` empty unless an article needs a different author from the rule above.
 
 ## File and slug
-- Articles: `src/content/articles/<discipline>/<slug>.md`. URL becomes `/<discipline>/<slug>/`.
+- Articles: `src/content/articles/<discipline>/<slug>.mdx` (MDX so components such as the calculator can be used). URL becomes `/<discipline>/<slug>/`.
 - Slug: lowercase, hyphens, 3 to 6 words, the main search phrase (`transformer-working-principle`). It must not equal a subcategory slug in the same discipline.
 - Tutorials: `src/content/tutorials/<series>/<lesson-slug>.md` with `series` and `order`.
 
@@ -56,10 +62,24 @@ Always:
 - Open with a 2 to 3 sentence direct answer.
 - `##` for main sections, `###` below them. One `#` only (the title, set by the layout).
 - Diagrams as SVG with a caption. Equations in LaTeX (`$$ ... $$`).
-- Length: as long as the topic needs; most articles 1,500 to 2,500 words.
+- Length: **1,000 to 1,500 words** of body text (FAQ not counted).
+
+## Components (MDX)
+```mdx
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer"> ... </Key>
+<Example> <dl><dt>Given</dt><dd>...</dd> ... </dl> </Example>
+<Calculator path="electrical/transformer-turns-ratio" title="Transformer Turns Ratio Calculator" />
+```
+- `Calculator` embeds a live calculator from zentacalculator.com. `path` is the calculator's `category/slug` there. Check the calculator exists before using it.
+- Equations: set `math: true` in front matter and write `$$ ... $$` blocks.
+- Diagrams: inline SVG inside `<figure>` with a `<figcaption>`. Check the rendered diagram: no text may overlap lines, shapes or other text.
 
 ## Links
-- 3 to 6 internal links to related Zenta Engineering articles, with descriptive anchor text. Pillar articles link to every article in their cluster.
-- ZentaCalculators.com: one or two links at most, only where the article performs or discusses that calculation.
+- 3 to 6 internal links to related Zenta Engineering articles, with descriptive anchor text. Link only to pages that are already live. Pillar articles link to every article in their cluster.
+- ZentaCalculator.com (zentacalculator.com): one or two links or embeds at most, only where the article performs or discusses that calculation.
 - InstrumentationBlog.in: link where the article touches sensors, transmitters, analyzers, control valves or loop control, instead of explaining them in depth here.
 - External references: link to the publisher or standards body page, not to pirated copies.

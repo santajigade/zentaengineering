@@ -1,0 +1,17 @@
+---
+// Visible breadcrumb + BreadcrumbList schema. Last item = current page (no link).
+import { SITE } from '../data/site';
+interface Props { items: [string, string?][] } // [label, href]
+const items: [string, string?][] = [['Home', '/'], ...Astro.props.items];
+const schema = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: items.map(([name, href], i) => ({
+    '@type': 'ListItem', position: i + 1, name,
+    ...(href ? { item: new URL(href, SITE.url).href } : { item: new URL(Astro.url.pathname, SITE.url).href }),
+  })),
+};
+---
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>{items.map(([l, h], i) => <li>{h && i < items.length - 1 ? <a href={h}>{l}</a> : <span aria-current="page">{l}</span>}</li>)}</ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

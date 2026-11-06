@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ItemCard from '../../components/ItemCard.astro';
+import { SITE } from '../../data/site';
+import { SERIES } from '../../data/series';
+import { getDiscipline } from '../../data/disciplines';
+import { liveLessons } from '../../lib/content';
+const lessons = await liveLessons();
+const live = SERIES.map((s) => ({ s, n: lessons.filter((l) => l.data.series === s.slug).length })).filter((x) => x.n > 0);
+---
+<Base title={`Engineering Tutorials and Guides | ${SITE.name}`} description="Step-by-step engineering tutorial series with lessons in order, practice questions and links to deeper articles." noindex={live.length === 0}>
+  <div class="page-head"><div class="wrap">
+    <Breadcrumbs items={[['Tutorials and Guides']]} />
+    <h1>Tutorials and Guides</h1>
+    <p class="lead">Structured series that take you through a subject lesson by lesson, with practice questions at the end of each.</p>
+  </div></div>
+  <div class="wrap section">
+    {live.length > 0 ? (
+      <div class="grid" style="--min:320px">
+        {live.map(({ s, n }) => <ItemCard href={`/tutorials/${s.slug}/`} title={s.title} text={s.description} chips={[{ label: `${n} lessons`, cls: 'chip-navy' }, { label: s.difficulty }, { label: getDiscipline(s.discipline)!.short }]} />)}
+      </div>
+    ) : <p class="empty">The first tutorial series is being written and reviewed.</p>}
+  </div>
+</Base>
