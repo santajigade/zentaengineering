@@ -1,0 +1,150 @@
+---
+title: "Froth Flotation Process Explained"
+description: "Froth flotation explained: hydrophobicity, collectors, frothers, modifiers, cells and columns, rougher and cleaner circuits, grade, recovery and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mining-engineering
+subcategory: mineral-processing
+focusKeyword: "froth flotation"
+image: { src: /images/featured/froth-flotation.webp, alt: "Froth Flotation Process Explained: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [froth-flotation, mineral-processing, concentrate, recovery, flotation-reagents]
+faq:
+  - q: "Which minerals are concentrated by froth flotation?"
+    a: "Flotation is the main method for sulphide ores of copper, lead, zinc, nickel and molybdenum, and is also used for gold bearing sulphides, platinum group metals, phosphate, potash, fluorite, iron ore (reverse flotation of silica), coal and graphite. It is even used outside mining, for example to de-ink recycled paper."
+  - q: "What is the difference between grade and recovery?"
+    a: "Grade is the concentration of the valuable mineral or metal in the concentrate, for example 28% copper. Recovery is the percentage of the valuable metal in the feed that reports to the concentrate, for example 90%. There is usually a trade-off: pushing for higher grade tends to lower recovery and vice versa."
+  - q: "Why must ore be ground before flotation?"
+    a: "Valuable minerals must be liberated, that is, separated from the waste gangue minerals, so that each particle's surface is mostly one mineral. Particles must also be small enough, typically about 10 to 150 µm, for air bubbles to lift them. Grinding is therefore essential but uses a lot of energy."
+references:
+  - text: "B. A. Wills and J. A. Finch, Wills' Mineral Processing Technology, 8th ed., Butterworth-Heinemann"
+  - text: "M. C. Fuerstenau, G. J. Jameson and R.-H. Yoon (eds.), Froth Flotation: A Century of Innovation, SME, 2007"
+  - text: "S. K. Kawatra, Fundamental principles of froth flotation, SME Mining Engineering Handbook, 3rd ed."
+  - text: "B. Gupta and D. S. Yan, Mineral Processing Design and Operations, 2nd ed., Elsevier"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Froth flotation** separates valuable minerals from waste rock by exploiting differences in surface **wettability**. Ore is ground fine and mixed with water to form a **slurry**. **Collector** chemicals make the target mineral surfaces **hydrophobic** (water repellent). Air is bubbled through the slurry in **flotation cells**; hydrophobic particles attach to the bubbles and rise into a **froth** stabilised by **frothers**, which overflows as **concentrate**. Hydrophilic gangue stays in the slurry and leaves as **tailings**. Circuits of **rougher, scavenger and cleaner** stages balance **grade** and **recovery**.
+
+</Key>
+
+Patented in the early 1900s, froth flotation transformed mining by making low grade, finely disseminated ores economic. Today it processes billions of tonnes of ore each year and is the main concentration method for copper, lead, zinc, nickel and many other minerals.
+
+## The principle: hydrophobic and hydrophilic surfaces
+
+Most minerals are naturally **hydrophilic**: water wets their surfaces. A few, such as talc, molybdenite and graphite, are naturally hydrophobic. Flotation chemistry selectively makes the target mineral hydrophobic, so that when an air bubble meets it, the water film thins and ruptures and the particle attaches to the bubble. The degree of hydrophobicity is described by the **contact angle** between the bubble, particle and water: the larger the angle, the stronger the attachment.
+
+For a particle to be recovered it must:
+
+1. **Collide** with a bubble.
+2. **Attach** by thinning and rupturing the water film.
+3. **Stay attached** while rising, despite turbulence.
+4. Remain in the **froth** and overflow rather than draining back.
+
+## Flotation reagents
+
+- **Collectors:** heteropolar molecules that adsorb onto the target mineral, with their hydrocarbon tail facing outward. **Xanthates** are the classic sulphide collectors; dithiophosphates, thionocarbamates and fatty acids (for oxide and salt minerals) are others.
+- **Frothers:** surfactants such as MIBC (methyl isobutyl carbinol) and polyglycols that create small, stable bubbles and a froth that holds particles but breaks down after overflowing.
+- **Modifiers:**
+  - **pH regulators** such as lime and soda ash.
+  - **Depressants** that keep unwanted minerals hydrophilic, for example lime or cyanide to depress pyrite, starch to depress iron oxides, or sodium silicate for silicates.
+  - **Activators** that help a mineral accept collector, such as copper sulphate for sphalerite (zinc).
+  - **Dispersants** to prevent slime coating.
+
+Reagent dosages are small, often grams per tonne of ore, but must be carefully controlled.
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Mechanical flotation cell: conditioned slurry feed enters the tank; a rotating impeller at the bottom disperses air drawn down a central shaft into fine bubbles; hydrophobic mineral particles attach to bubbles and rise into the froth layer, which overflows the lip into a launder as concentrate; tailings leave from the bottom side">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M150 60V250H450V60" fill="#e6f6f4" />
+<rect x="150" y="60" width="300" height="50" fill="#fff7e0" />
+<path d="M450 60L500 60V110H460" fill="#eef1f6" />
+<rect x="292" y="20" width="16" height="200" fill="#c9d2de" />
+<path d="M260 215H340L330 235H270Z" fill="#7b8794" />
+</g>
+<g fill="#ffffff" stroke="#13a89e" stroke-width="1.5"><circle cx="200" cy="200" r="6" /><circle cx="230" cy="170" r="7" /><circle cx="360" cy="180" r="6" /><circle cx="390" cy="150" r="7" /><circle cx="250" cy="135" r="7" /><circle cx="380" cy="125" r="6" /><circle cx="210" cy="140" r="6" /><circle cx="345" cy="140" r="6" /></g>
+<g fill="#0b2545"><circle cx="230" cy="163" r="3" /><circle cx="390" cy="143" r="3" /><circle cx="250" cy="128" r="3" /><circle cx="345" cy="133" r="3" /></g>
+<g fill="#8a6d3b"><circle cx="180" cy="230" r="3" /><circle cx="400" cy="230" r="3" /><circle cx="220" cy="225" r="3" /><circle cx="370" cy="238" r="3" /><circle cx="420" cy="215" r="3" /></g>
+<g fill="#f5b800" stroke="#0b2545" stroke-width="1"><circle cx="180" cy="80" r="8" /><circle cx="210" cy="90" r="8" /><circle cx="240" cy="78" r="8" /><circle cx="360" cy="85" r="8" /><circle cx="390" cy="78" r="8" /><circle cx="420" cy="90" r="8" /></g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M60 150H150M450 245H540M500 85H560" /></g>
+<g fill="#13a89e"><path d="M142 145l9 5-9 5z" /><path d="M532 240l9 5-9 5z" /><path d="M552 80l9 5-9 5z" /></g>
+<path d="M300 10V20" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="100" y="140">Slurry feed</text><text x="540" y="72">Concentrate</text><text x="520" y="268">Tailings</text>
+<text x="300" y="275">Impeller</text><text x="375" y="15">Air down shaft</text><text x="225" y="54" font-size="11">Froth layer</text>
+<text x="400" y="210" font-size="11" fill="#0b2545">Pulp zone</text>
+</g>
+</svg>
+<figcaption>A mechanical flotation cell: bubbles carry hydrophobic particles (dark) into the froth; gangue (brown) leaves with tailings.</figcaption>
+</figure>
+
+## Flotation equipment
+
+### Mechanical cells
+
+A rotating **impeller** inside a **stator** at the bottom of a tank disperses air into fine bubbles and keeps particles in suspension. Air is supplied by a blower (forced air) or drawn in by the impeller (self-aspirating). Modern tank cells exceed 300 m³ in volume.
+
+### Flotation columns
+
+Tall columns, often 10 to 14 m high, with air spargers at the bottom and **wash water** sprayed on the froth to rinse out entrained gangue. Columns produce cleaner concentrates and are common in cleaner stages.
+
+### Other designs
+
+Jameson cells and similar high intensity contactors mix air and slurry in a downcomer for fast kinetics; fluidised bed cells recover coarse particles.
+
+## Flotation circuits
+
+A single flotation stage cannot achieve both high grade and high recovery, so cells are arranged in banks and circuits:
+
+- **Roughers:** first stage, aim to recover most of the valuable mineral at moderate grade.
+- **Scavengers:** treat rougher tailings to recover remaining values.
+- **Cleaners and recleaners:** upgrade rougher concentrate to final grade, often after **regrinding** to improve liberation.
+- Middlings and cleaner tailings are recycled to earlier stages.
+
+Multi-metal ores use **sequential** or **differential flotation**, for example floating lead first while depressing zinc, then activating and floating zinc.
+
+## Grade and recovery
+
+With feed grade f, concentrate grade c and tailings grade t, the **two-product formula** gives recovery R without needing to measure mass flows:
+
+$$
+R = \frac{c\,(f - t)}{f\,(c - t)} \times 100\%
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A copper flotation plant treats 1000 t/h of ore assaying 0.80% Cu. The final concentrate assays 28% Cu and the tailings 0.08% Cu.</dd>
+<dt>Find</dt><dd>Copper recovery, concentrate mass flow and the concentration ratio.</dd>
+<dt>Assumptions</dt><dd>Steady state; assays representative.</dd>
+<dt>Solution</dt><dd>R = 28 × (0.80 − 0.08) ÷ [0.80 × (28 − 0.08)] = 28 × 0.72 ÷ (0.80 × 27.92) = 20.16 ÷ 22.34 = 0.902 = 90.2%<br />Concentrate mass = 1000 × (0.80 − 0.08) ÷ (28 − 0.08) = 1000 × 0.72 ÷ 27.92 = 25.8 t/h<br />Concentration ratio = 1000 ÷ 25.8 = 38.8</dd>
+<dt>Answer</dt><dd><strong>Recovery about 90%; about 25.8 t/h of concentrate, a 39 to 1 reduction in mass</strong></dd>
+<dt>Limitations</dt><dd>Assay errors strongly affect results at low grades; plants use mass balancing software to reconcile data, applying material balance principles.</dd>
+</dl>
+</Example>
+
+The two-product formula is simply a [material balance](/chemical-engineering/material-balance/) on total mass and on copper.
+
+## Factors affecting froth flotation performance
+
+- **Particle size and liberation:** coarse particles detach from bubbles and fine slimes float poorly or entrain; the target grind size is set by mineralogy.
+- **Reagent scheme and dosing points.**
+- **Pulp density** (percent solids), **pH**, **air rate**, **froth depth** and **residence time**.
+- **Water quality:** dissolved ions from recycled water can affect chemistry.
+- **Ore variability** from different parts of the mine.
+
+## Tailings and water
+
+Flotation tailings are mostly finely ground gangue with residual reagents and minor sulphides. They are thickened to recover water for reuse in the plant, then pumped to tailings storage facilities or filtered and dry stacked. Sulphide rich tailings can generate acid drainage if exposed to air and water, so they may be kept saturated, covered or separately managed. Water recycling also brings residual reagents and dissolved salts back to the circuit, so water chemistry is monitored as carefully as ore feed.
+
+## Process control
+
+Plants measure feed rate, slurry density, pH, levels in each cell, air flows and on-stream assays by X-ray fluorescence. Froth cameras analyse bubble size, colour and speed. Expert systems and advanced control adjust air, levels and reagents to stabilise grade and recovery. Reliable [level measurement](https://www.instrumentationblog.in/category/process-instrumentation/level-measurement/) of the pulp and froth interface and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) of slurry and air are central.
+
+## Where flotation fits
+
+Flotation follows crushing and grinding in [size reduction equipment](/chemical-engineering/size-reduction-equipment/) and is followed by thickening and filtering of concentrate. Tailings are thickened and stored in engineered facilities, a key environmental responsibility of any mine. Ore for flotation comes from methods described in [surface vs underground mining](/mining-engineering/surface-vs-underground-mining/), after deposits are found through [mineral exploration](/mining-engineering/mineral-exploration-methods/).

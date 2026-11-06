@@ -173,13 +173,13 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| mining-methods | Surface vs Underground Mining Methods | surface-vs-underground-mining | comparison | to write |
-| drilling-and-blasting | Drilling and Blasting in Mining: Basics | drilling-and-blasting-basics | fundamentals | to write |
-| mine-ventilation | Mine Ventilation Systems Explained | mine-ventilation-systems | explanation | to write |
-| rock-mechanics | Rock Mass Classification: RMR and Q-System | rock-mass-classification | fundamentals | to write |
-| mineral-processing | Froth Flotation Process Explained | froth-flotation | working-principle | to write |
-| exploration | Mineral Exploration Methods: From Survey to Drilling | mineral-exploration-methods | explanation | to write |
-| mine-safety | Common Mine Hazards and Control Measures | mine-hazards-and-controls | explanation | to write |
+| mining-methods | Surface vs Underground Mining Methods | surface-vs-underground-mining | comparison | draft |
+| drilling-and-blasting | Drilling and Blasting in Mining: Basics | drilling-and-blasting-basics | fundamentals | draft |
+| mine-ventilation | Mine Ventilation Systems Explained | mine-ventilation-systems | explanation | draft |
+| rock-mechanics | Rock Mass Classification: RMR and Q-System | rock-mass-classification | fundamentals | draft |
+| mineral-processing | Froth Flotation Process Explained | froth-flotation | working-principle | draft |
+| exploration | Mineral Exploration Methods: From Survey to Drilling | mineral-exploration-methods | explanation | draft |
+| mine-safety | Common Mine Hazards and Control Measures | mine-hazards-and-controls | explanation | draft |
 
 ## manufacturing-engineering
 

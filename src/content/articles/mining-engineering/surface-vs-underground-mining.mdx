@@ -1,0 +1,147 @@
+---
+title: "Surface vs Underground Mining Methods"
+description: "Surface vs underground mining compared: open pit, strip, quarrying, room and pillar, sublevel stoping, block caving, stripping ratio and selection factors."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mining-engineering
+subcategory: mining-methods
+focusKeyword: "surface vs underground mining"
+image: { src: /images/featured/surface-vs-underground-mining.webp, alt: "Surface vs Underground Mining Methods: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [mining-methods, open-pit, underground-mining, stripping-ratio, block-caving]
+faq:
+  - q: "When does a mine switch from open pit to underground?"
+    a: "When deepening the pit would require removing so much waste rock that the cost per tonne of ore exceeds the cost of mining the deeper ore underground. Engineers compare the incremental stripping ratio of each pushback with the break-even ratio. Many large mines, such as some copper and diamond operations, have made this transition, often to block caving."
+  - q: "Which mining method is the safest?"
+    a: "Surface mining generally has lower fatality and injury rates than underground mining, because there is no risk of roof falls in confined spaces, ventilation is natural and escape is easier. Modern underground mines have greatly improved safety through ground support, mechanisation, automation and gas monitoring."
+  - q: "What is the stripping ratio?"
+    a: "The stripping ratio is the amount of waste rock or overburden that must be removed for each unit of ore mined in a surface mine, for example 3 tonnes of waste per tonne of ore. Lower ratios are cheaper. The break-even stripping ratio is the highest ratio at which surface mining remains economic."
+references:
+  - text: "H. L. Hartman and J. M. Mutmansky, Introductory Mining Engineering, 2nd ed., Wiley"
+  - text: "P. Darling (ed.), SME Mining Engineering Handbook, 3rd ed., Society for Mining, Metallurgy and Exploration"
+  - text: "W. A. Hustrulid, M. Kuchta and R. K. Martin, Open Pit Mine Planning and Design, 3rd ed., CRC Press"
+  - text: "B. H. G. Brady and E. T. Brown, Rock Mechanics for Underground Mining, 3rd ed., Springer"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **surface vs underground mining**, the choice depends mainly on how deep the orebody is. **Surface mining** removes overburden to reach shallow deposits: **open pit**, **strip mining**, **quarrying** and **placer** methods. It offers high production, low cost per tonne and good safety, but disturbs large areas and becomes uneconomic as the **stripping ratio** rises with depth. **Underground mining** reaches deep or narrow deposits through **shafts, declines and adits**, using methods such as **room and pillar**, **cut and fill**, **sublevel stoping** and **block caving**. It has a smaller surface footprint but higher cost, slower production and more complex ventilation and ground control.
+
+</Key>
+
+Every mine plan begins with a basic question: should the deposit be mined from the surface or from underground? The answer shapes capital cost, production rate, recovery, safety, environmental impact and the life of the operation. Geology, depth, shape, grade and economics all play a part.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Cross section comparison. Left: open pit mine with stepped benches cut into the ground to reach a shallow orebody, waste dump beside it. Right: underground mine with a vertical shaft and headframe, horizontal levels and stopes reaching a deep orebody, with a small surface footprint">
+<path d="M10 70H590" stroke="#8a6d3b" stroke-width="2" />
+<rect x="10" y="70" width="580" height="220" fill="#f5e6c8" fill-opacity="0.35" />
+<path d="M40 70L60 90H80L100 110H120L140 130H200L220 110H240L260 90H280L300 70" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<path d="M140 130H200L190 170H150Z" fill="#f5b800" fill-opacity="0.7" stroke="#0b2545" stroke-width="1.5" />
+<path d="M150 70L170 40H230L250 70" fill="#c9d2de" stroke="#0b2545" stroke-width="1.5" transform="translate(-130 0)" />
+<g stroke="#0b2545" stroke-width="2"><path d="M420 30V250M436 30V250" /><path d="M412 30L428 5L444 30" fill="none" /><path d="M436 140H540M436 200H540M436 250H520" /></g>
+<path d="M480 150L540 150L560 240L490 260Z" fill="#f5b800" fill-opacity="0.7" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="1.5" fill="#ffffff"><rect x="495" y="160" width="20" height="35" /><rect x="525" y="205" width="20" height="35" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="170" y="24" font-weight="700">Surface (open pit)</text><text x="490" y="24" font-weight="700">Underground</text>
+<text x="70" y="34">Waste dump</text><text x="250" y="122">Benches</text><text x="170" y="190">Shallow ore</text>
+<text x="380" y="18">Headframe</text><text x="400" y="200">Shaft</text><text x="560" y="135">Level</text><text x="505" y="284">Deep ore with stopes</text>
+</g>
+</svg>
+<figcaption>Surface mining removes overburden to expose shallow ore; underground mining reaches deep ore through shafts and levels.</figcaption>
+</figure>
+
+## Surface mining methods
+
+### Open pit mining
+
+A large excavation is developed in a series of horizontal **benches**, typically 10 to 15 m high, using drilling and blasting, shovels or excavators and haul trucks. Ramps spiral down the pit walls for haulage. Used for large, near-surface, often massive deposits of copper, gold, iron ore and diamonds. Pit slope angles, set by geotechnical studies, strongly affect the amount of waste to be moved.
+
+### Strip mining
+
+Used for flat lying, layered deposits such as coal, lignite, phosphate and oil sands. Overburden is removed in long strips and placed in the mined-out strip behind, often by draglines or bucket wheel excavators. This allows progressive backfilling and reclamation.
+
+### Quarrying
+
+Extraction of building stone, aggregates and limestone from benches, sometimes as dimension stone cut in blocks.
+
+### Placer and dredging
+
+Recovery of heavy minerals such as gold, tin and mineral sands from loose sediments using water, dredges and gravity separation.
+
+### Stripping ratio
+
+The key economic measure of surface mining is the **stripping ratio**:
+
+$$
+SR = \frac{\text{waste removed}}{\text{ore mined}}
+$$
+
+The **break-even stripping ratio** is the ratio at which open pit mining costs as much as underground mining:
+
+$$
+SR_{be} = \frac{C_{ug} - C_{op}}{C_{w}}
+$$
+
+where C_ug and C_op are underground and open pit mining costs per tonne of ore, and C_w is the cost of moving a tonne of waste.
+
+## Underground mining methods
+
+Access is by vertical **shafts** with hoists, inclined **declines** for trucks, or horizontal **adits** into hillsides. Methods are grouped by how the ground is supported.
+
+### Naturally supported methods
+
+- **Room and pillar:** for flat lying coal, potash, salt and some metal deposits. Rooms are mined out, leaving pillars of ore to support the roof. Pillars may be partly recovered at the end.
+- **Sublevel and open stoping:** large open voids (stopes) are drilled and blasted from sublevels in strong rock; broken ore is drawn from the bottom. Highly productive for steep, regular orebodies.
+
+### Artificially supported methods
+
+- **Cut and fill:** ore is mined in horizontal slices, and each void is filled with waste rock, sand or cemented paste backfill, which forms the floor for the next slice. Suits irregular, high grade ores and weak rock; selective but costly.
+- **Longwall mining:** a shearer cuts along a long coal face under hydraulic roof supports that advance with the face; the roof caves behind. Very high production in coal.
+
+### Caving methods
+
+- **Block caving:** a large block of ore is undercut so it caves under its own weight; broken ore is drawn through drawpoints below. Very low cost per tonne for massive, low grade deposits at depth, but high upfront development and surface subsidence.
+- **Sublevel caving:** ore is blasted from sublevels while the hanging wall caves behind.
+
+## Surface vs underground mining: comparison
+
+| Factor | Surface mining | Underground mining |
+| --- | --- | --- |
+| Depth | Shallow, usually up to a few hundred metres | Deep, can exceed 3000 m |
+| Production rate | Very high | Lower, except block caving |
+| Cost per tonne of ore | Low | Higher |
+| Ore recovery | High, often above 90% | Variable, 50 to 90% depending on method |
+| Dilution | Low to moderate | Moderate to high in some methods |
+| Safety | Generally safer | Higher risk; needs ground control and ventilation |
+| Surface disturbance | Large pits and waste dumps | Smaller footprint; subsidence possible with caving |
+| Capital and development time | Lower, faster start | Higher, longer development |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Open pit mining cost is 4 per tonne of ore plus 2.5 per tonne of waste moved. Underground mining of the same ore would cost 30 per tonne of ore. A deeper pushback would yield 2 million tonnes of ore with 18 million tonnes of waste.</dd>
+<dt>Find</dt><dd>The break-even stripping ratio and whether the pushback should be mined by open pit.</dd>
+<dt>Assumptions</dt><dd>Same processing cost and recovery either way; costs in consistent currency units.</dd>
+<dt>Solution</dt><dd>SR_be = (30 − 4) ÷ 2.5 = 10.4<br />Pushback stripping ratio = 18 ÷ 2 = 9.0</dd>
+<dt>Answer</dt><dd><strong>The pushback ratio of 9.0 is below the break-even of 10.4, so open pit mining is still cheaper for this ore</strong></dd>
+<dt>Limitations</dt><dd>Real decisions use full discounted cash flow, slope stability, timing and different recoveries and dilution for each method.</dd>
+</dl>
+</Example>
+
+## Factors in choosing a method
+
+- **Depth and shape of the orebody:** shallow, wide deposits favour surface mining; deep, steep or narrow ones favour underground.
+- **Grade:** high grade ore can support costlier selective underground methods.
+- **Rock strength:** strong rock allows large open stopes; weak rock needs fill or caving. See [rock mass classification](/mining-engineering/rock-mass-classification/).
+- **Production rate and mine life** targets.
+- **Environmental and social constraints:** land availability, water, communities and closure plans, assessed through an [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/).
+- **Safety and workforce** considerations, including [mine ventilation](/mining-engineering/mine-ventilation-systems/) and [mine hazards](/mining-engineering/mine-hazards-and-controls/).
+
+## Trends in mining methods
+
+Modern mines increasingly use automation and remote operation: autonomous haul trucks in open pits, tele-remote loaders underground, and battery electric equipment that reduces diesel emissions and ventilation demand. Data from fleet management, drill monitoring and geotechnical sensors feeds digital mine plans updated in near real time. Deep, low grade orebodies are pushing more operations toward large scale caving, while environmental pressure encourages progressive rehabilitation of surface mines and paste backfill underground to reduce surface tailings.
+
+Both approaches rely on [drilling and blasting](/mining-engineering/drilling-and-blasting-basics/) to break rock and on [mineral processing](/mining-engineering/froth-flotation/) to turn ore into saleable concentrate. Choosing between surface vs underground mining is ultimately an engineering and economic optimisation over the whole life of the deposit.

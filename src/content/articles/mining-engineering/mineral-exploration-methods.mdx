@@ -1,0 +1,141 @@
+---
+title: "Mineral Exploration Methods: From Survey to Drilling"
+description: "Mineral exploration methods explained: geological mapping, geochemistry, geophysics, remote sensing, drilling, sampling, resource estimation and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mining-engineering
+subcategory: exploration
+focusKeyword: "mineral exploration methods"
+image: { src: /images/featured/mineral-exploration-methods.webp, alt: "Mineral Exploration Methods: From Survey to Drilling: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [mineral-exploration, geophysics, geochemistry, diamond-drilling, resource-estimation]
+faq:
+  - q: "How long does mineral exploration take?"
+    a: "From first target generation to a defined resource ready for feasibility studies usually takes several years, often 5 to 10 or more. Only a small fraction of exploration projects ever become mines, so exploration is a high risk, staged process where each step decides whether to spend more."
+  - q: "What is the difference between a mineral resource and a mineral reserve?"
+    a: "A mineral resource is a concentration of material with reasonable prospects for eventual economic extraction, classified as inferred, indicated or measured by confidence. A mineral reserve is the part of a measured or indicated resource that has been shown, through studies including mining, processing, economic and legal factors, to be economically mineable, classified as probable or proved."
+  - q: "What is the difference between RC and diamond drilling?"
+    a: "Reverse circulation (RC) drilling uses a hammer and returns crushed rock chips through the inner tube of a dual wall rod. It is fast and cheap for sampling. Diamond core drilling cuts a solid cylinder of rock with a diamond bit, preserving structure, contacts and texture for geological and geotechnical logging, but it is slower and more expensive."
+references:
+  - text: "W. L. Pohl, Economic Geology: Principles and Practice, Wiley-Blackwell"
+  - text: "M. Marjoribanks, Geological Methods in Mineral Exploration and Mining, 2nd ed., Springer"
+  - text: "JORC Code, Australasian Code for Reporting of Exploration Results, Mineral Resources and Ore Reserves, 2012 Edition"
+  - text: "CIM Definition Standards for Mineral Resources and Mineral Reserves, 2014"
+  - text: "W. M. Telford, L. P. Geldart and R. E. Sheriff, Applied Geophysics, 2nd ed., Cambridge University Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Mineral exploration methods** find and define ore deposits in stages. **Target generation** uses regional geology, **remote sensing** and existing data. **Geological mapping** and **geochemical sampling** of rocks, soils and stream sediments locate anomalies. **Geophysical surveys** (magnetic, gravity, electrical, electromagnetic, radiometric and seismic) detect buried bodies with contrasting physical properties. **Drilling** (RC and diamond core) tests targets and provides samples for assays. Results are combined in a **geological model** and **resource estimate**, reported under codes such as **JORC**, **NI 43-101** or the **CIM** standards.
+
+</Key>
+
+Ore deposits are rare. Exploration is a funnel: many prospective areas are screened cheaply, a smaller number receive more detailed and costly work, and very few become mines. Each stage reduces uncertainty and decides whether further spending is justified.
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Exploration funnel: wide top stage of regional target generation with remote sensing and data review, then reconnaissance mapping and geochemistry, then geophysics and detailed mapping, then drilling, then resource estimation; cost per area increases and the number of targets decreases down the funnel">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M60 20H540L500 70H100Z" fill="#eef1f6" />
+<path d="M100 70H500L460 120H140Z" fill="#e6f6f4" />
+<path d="M140 120H460L420 170H180Z" fill="#e6f6f4" />
+<path d="M180 170H420L380 220H220Z" fill="#fff7e0" />
+<path d="M220 220H380L350 260H250Z" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="300" y="50">1. Target generation: data, remote sensing</text>
+<text x="300" y="100">2. Mapping and geochemistry</text>
+<text x="300" y="150">3. Geophysics, trenching</text>
+<text x="300" y="200">4. Drilling and assays</text>
+<text x="300" y="246">5. Resource</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="508" y="100">Fewer targets,</text><text x="508" y="115">higher cost</text><text x="508" y="130">per target</text>
+</g>
+<path d="M545 140V230" stroke="#7b8794" stroke-width="2" /><path d="M540 222l5 9 5-9z" fill="#7b8794" />
+</svg>
+<figcaption>The exploration funnel: each stage narrows the targets and increases the investment in each.</figcaption>
+</figure>
+
+## 1. Target generation and desktop studies
+
+Exploration begins with knowledge of how deposit types form (porphyry copper, orogenic gold, volcanogenic massive sulphide, iron formations and so on) and where favourable geological settings occur. Geologists review published maps, government geophysical and geochemical datasets, old mine records and drill data.
+
+**Remote sensing** from satellites and aircraft maps rock types, structures and alteration minerals: multispectral and hyperspectral imagery can detect clay, iron oxide and other minerals associated with mineralisation. Digital elevation models reveal faults and lineaments.
+
+## 2. Geological mapping and geochemistry
+
+**Field mapping** records rock types, structures, alteration and mineralisation at outcrops, building a geological map. Prospecting and rock chip sampling identify mineralised zones.
+
+**Geochemical exploration** looks for unusual concentrations (anomalies) of target and pathfinder elements:
+
+- **Stream sediment sampling:** covers large catchments cheaply; anomalies point upstream.
+- **Soil sampling** on grids to pinpoint sources beneath thin cover.
+- **Rock sampling** of outcrops and trenches.
+- **Biogeochemistry and hydrogeochemistry** in special settings.
+
+Samples are analysed by methods such as ICP-MS, fire assay for gold, or portable XRF in the field. An anomaly is often defined statistically, for example values above the mean plus two standard deviations of the background.
+
+## 3. Geophysical exploration
+
+Geophysics measures physical property contrasts between ore and host rock, often from aircraft (airborne surveys) over large areas, then on the ground for detail.
+
+| Method | Property measured | Typical targets |
+| --- | --- | --- |
+| Magnetic | Magnetic susceptibility | Magnetite rich bodies, iron ore, structures, intrusions |
+| Gravity | Density | Dense massive sulphides, iron ore, basins |
+| Induced polarisation (IP) | Chargeability | Disseminated sulphides, porphyry copper |
+| Resistivity | Electrical resistivity | Conductive sulphides, clay alteration, groundwater |
+| Electromagnetic (EM) | Conductivity | Massive sulphides, graphite |
+| Radiometric | Natural gamma radiation (K, U, Th) | Uranium, potassic alteration, mapping |
+| Seismic | Acoustic impedance | Deep structures, coal seams, layered deposits |
+
+Interpretation combines data with geology and increasingly uses 3D inversion modelling and machine learning to rank targets. **Trenching and pitting** expose bedrock where cover is shallow.
+
+## 4. Drilling
+
+Drilling is the only way to confirm a deposit and measure grade at depth.
+
+- **Rotary air blast (RAB) and aircore:** cheap, shallow drilling through soft cover for geochemical sampling.
+- **Reverse circulation (RC):** a hammer bit with dual wall rods returns chips; fast and cost effective for grade sampling.
+- **Diamond core drilling:** recovers solid core for detailed logging of lithology, structure, alteration, mineralisation and geotechnical data such as RQD, used in [rock mass classification](/mining-engineering/rock-mass-classification/).
+
+Holes are surveyed for direction and depth. Core and chips are logged, split, sampled at regular intervals and assayed in accredited laboratories. **Quality assurance and quality control (QA/QC)** inserts certified standards, blanks and duplicates into sample streams to check accuracy, contamination and precision.
+
+## 5. Geological modelling and resource estimation
+
+Drill data are combined in 3D software to model lithology, structure and mineralised domains. Grades are interpolated into a **block model** using methods such as inverse distance weighting or **kriging**, a geostatistical method that uses the spatial correlation of grades described by the **variogram**. Each block receives a grade and a confidence level.
+
+Resources are classified as **inferred**, **indicated** or **measured** based on data density and geological confidence, and reported under codes such as JORC (Australia), NI 43-101 (Canada) and SAMREC (South Africa), signed off by a **competent or qualified person**.
+
+A simple tonnage estimate for a regular body is:
+
+$$
+T = V \times \rho
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Drilling outlines a tabular gold zone 400 m long, 250 m down dip and 5 m true thickness. The average density is 2.8 t/m³ and the composite grade is 3.2 g/t gold.</dd>
+<dt>Find</dt><dd>The tonnage and contained gold.</dd>
+<dt>Assumptions</dt><dd>Uniform thickness and grade for a first order estimate.</dd>
+<dt>Solution</dt><dd>Volume = 400 × 250 × 5 = 500 000 m³<br />Tonnage = 500 000 × 2.8 = 1.4 million t<br />Contained gold = 1 400 000 t × 3.2 g/t = 4.48 million g = 4480 kg<br />In troy ounces: 4 480 000 ÷ 31.1035 ≈ 144 000 oz</dd>
+<dt>Answer</dt><dd><strong>About 1.4 Mt at 3.2 g/t, containing roughly 4.5 t (144 000 oz) of gold</strong></dd>
+<dt>Limitations</dt><dd>A reportable resource needs proper geological modelling, grade estimation, cut-off grades and reasonable prospects for economic extraction.</dd>
+</dl>
+</Example>
+
+## Exploration budgets and decisions
+
+Exploration spending is staged so that each step is cheap relative to the information it provides. Regional surveys cost little per square kilometre, while a single diamond drill hole may cost tens of thousands of dollars. Clear criteria, such as anomaly size, geological fit and early drill intercepts, decide whether to advance, pause or drop a target.
+
+## From resource to mine
+
+A promising resource moves through **scoping (preliminary economic assessment)**, **pre-feasibility** and **feasibility studies**, which add metallurgical testwork such as [froth flotation](/mining-engineering/froth-flotation/) trials, mine design choosing between [surface vs underground mining](/mining-engineering/surface-vs-underground-mining/), infrastructure, environmental and social studies including [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/), permitting and economic analysis. Only after these can resources be converted to reserves and a mine built.
+
+## Modern trends in mineral exploration methods
+
+Most easy-to-find outcropping deposits have already been discovered, so explorers increasingly search under cover and at depth. Trends include airborne and drone geophysics, hyperspectral core scanning, portable assay tools for real time decisions in the field, integration of all datasets in 3D, and data science that learns patterns from known deposits. Responsible exploration also means early community engagement, land access agreements and minimal environmental disturbance, with drill pads rehabilitated after use.
