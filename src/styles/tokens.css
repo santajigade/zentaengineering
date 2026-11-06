@@ -1,4 +1,4 @@
-/* Zenta Engineering design tokens. Brand route 1: Blueprint (approved 6 Nov 2026). */
+/* Zenta Engineering design tokens. Brand route 1: Blueprint, Node Z logo, Open Sans (approved 6 Nov 2026). */
 :root {
   /* Brand */
   --ze-navy: #0b2545;        /* primary: header, headings accents, logo */
@@ -30,7 +30,7 @@
   --ze-fam-specialized: #be185d;
 
   /* Typography */
-  --ze-font: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ze-font: 'Open Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --ze-mono: 'JetBrains Mono Variable', ui-monospace, Consolas, monospace;
   --ze-text: 1.125rem;       /* 18px body */
   --ze-leading: 1.7;
