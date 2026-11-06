@@ -7,6 +7,7 @@
   --ze-teal: #13a89e;        /* accent: highlights, focus rings, icons */
   --ze-teal-700: #0e7f78;    /* accent for text and links on white (AA) */
   --ze-teal-100: #e3f5f3;
+  --ze-yellow: #f5b800;      /* logo ring and small highlights only, never text on white */
 
   /* Neutrals */
   --ze-ink: #1b1f24;         /* body text */

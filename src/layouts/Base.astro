@@ -21,7 +21,7 @@ const robots = !SITE.launched || noindex ? 'noindex, follow' : 'index, follow, m
 const ogImage = new URL(image ?? '/brand/og-default.png', SITE.url).href;
 const org = {
   '@context': 'https://schema.org', '@type': 'Organization', '@id': `${SITE.url}/#org`, name: SITE.name, url: SITE.url,
-  logo: `${SITE.url}/brand/zenta-engineering-mark.svg`, email: SITE.email,
+  logo: `${SITE.url}/icon-512.png`, email: SITE.email,
 };
 const site = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${SITE.url}/#website`, name: SITE.name, url: SITE.url, publisher: { '@id': `${SITE.url}/#org` } };
 const schemas = Astro.url.pathname === '/' ? [org, site, ...jsonld] : [org, ...jsonld];
@@ -35,7 +35,10 @@ const schemas = Astro.url.pathname === '/' ? [org, site, ...jsonld] : [org, ...j
     <meta name="description" content={description} />
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0b2545" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:type" content={ogType} />
