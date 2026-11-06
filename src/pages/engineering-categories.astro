@@ -5,11 +5,11 @@ import DisciplineCard from '../components/DisciplineCard.astro';
 import { SITE } from '../data/site';
 import { FAMILIES, byFamily, DISCIPLINES } from '../data/disciplines';
 ---
-<Base title={`Engineering Categories: ${DISCIPLINES.length} Disciplines | ${SITE.name}`} description={`Browse ${DISCIPLINES.length} engineering disciplines, from mechanical and electrical to aerospace and biomedical, grouped into five families.`}>
+<Base title={`Engineering Categories: All Disciplines | ${SITE.name}`} description={`Browse engineering disciplines, from mechanical and electrical to aerospace and biomedical, grouped into families.`}>
   <div class="page-head"><div class="wrap">
     <Breadcrumbs items={[['Engineering Categories']]} />
     <h1>Engineering Categories</h1>
-    <p class="lead">{DISCIPLINES.length} disciplines in five families. Each discipline page lists its subcategories, a starting reading order, tutorials, interview questions and projects.</p>
+    <p class="lead">Engineering disciplines grouped into families. Each discipline page lists its subcategories, a starting reading order, tutorials, interview questions and projects.</p>
   </div></div>
   <div class="wrap">
     {FAMILIES.map((f) => (

@@ -4,7 +4,7 @@ export const SITE = {
   url: 'https://zentaengineering.com',
   tagline: 'Engineering explained clearly, from first principles to the plant floor.',
   description:
-    'Articles, tutorials, interview preparation and projects across 20 engineering disciplines, for students and working engineers.',
+    'Articles, tutorials, interview preparation and projects across engineering disciplines, for students and working engineers.',
   email: 'contact@zentaengineering.com', // TODO: confirm contact email
   // Until launch: the whole site is noindex and robots.txt blocks crawlers.
   launched: false,

@@ -1,4 +1,4 @@
-// The Discipline taxonomy: 20 disciplines in 5 families (master plan, section B).
+// The Discipline taxonomy: disciplines grouped into families (master plan, section B). Add new disciplines here.
 // Slugs are permanent once a page is live. Change a display name freely, never a slug.
 
 export interface Subcategory { slug: string; name: string }
@@ -341,4 +341,3 @@ for (const d of DISCIPLINES) {
     subs.add(sc.slug);
   }
 }
-if (DISCIPLINES.length !== 20) throw new Error(`Expected 20 disciplines, found ${DISCIPLINES.length}`);
