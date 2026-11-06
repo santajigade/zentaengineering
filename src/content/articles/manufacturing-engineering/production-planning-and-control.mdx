@@ -1,0 +1,152 @@
+---
+title: "Production Planning and Control: Functions and Steps"
+description: "Production planning and control explained: forecasting, aggregate planning, MPS, MRP, routing, loading, scheduling, dispatching, follow-up and an MRP example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: manufacturing-engineering
+subcategory: production-planning
+focusKeyword: "production planning and control"
+image: { src: /images/featured/production-planning-and-control.webp, alt: "Production Planning and Control: Functions and Steps: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [production-planning, ppc, mrp, scheduling, erp]
+faq:
+  - q: "What is the difference between production planning and production control?"
+    a: "Production planning decides in advance what to make, how much, when, where and with which resources. Production control makes sure the plan is carried out: it releases work, tracks progress, compares actual output with the plan and takes corrective action when there are delays, breakdowns or shortages."
+  - q: "What is the difference between MPS and MRP?"
+    a: "The master production schedule (MPS) states how many finished products will be made in each period. Material requirements planning (MRP) explodes the MPS through the bill of materials and inventory data to calculate when and how many of each component and raw material must be ordered or made."
+  - q: "What is the difference between push and pull production?"
+    a: "In a push system, production is driven by forecasts and schedules, and work is released into the plant according to the plan, as in classic MRP. In a pull system, production is triggered by actual consumption downstream, for example by kanban cards, which limits work in progress and matches output to real demand."
+references:
+  - text: "W. J. Stevenson, Operations Management, 14th ed., McGraw-Hill"
+  - text: "J. Orlicky, Material Requirements Planning, McGraw-Hill, 1975"
+  - text: "F. R. Jacobs, W. Berry, D. Whybark and T. Vollmann, Manufacturing Planning and Control for Supply Chain Management, 6th ed., McGraw-Hill"
+  - text: "APICS (ASCM) Dictionary, 17th ed., Association for Supply Chain Management"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Production planning and control** (PPC) is the function that decides **what, how much, when, where and how** to produce, and then makes sure it happens. **Planning** covers **forecasting**, **aggregate planning**, the **master production schedule (MPS)**, **material requirements planning (MRP)**, **capacity planning**, **routing** and **scheduling**. **Control** covers **dispatching** (releasing work orders), **follow-up or expediting**, and **corrective action** when actual output differs from the plan. The goal is to meet customer demand on time at minimum cost, with balanced inventory and full use of capacity.
+
+</Key>
+
+A factory has limited machines, people and materials, and many orders competing for them. Without planning, some orders are late while others pile up as inventory, machines sit idle one week and are overloaded the next, and expensive overtime becomes routine. PPC coordinates sales, purchasing, production, quality and logistics so that the right products are made at the right time.
+
+## Objectives of production planning and control
+
+- Deliver orders on time to meet customer due dates.
+- Use machines and labour efficiently, avoiding both idle time and overload.
+- Keep raw material, work in progress and finished goods inventory at economic levels.
+- Reduce lead times and manufacturing cost.
+- Respond quickly to changes in demand, breakdowns and supply problems.
+
+## The PPC hierarchy
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Planning hierarchy from long term to short term: demand forecast and orders feed aggregate planning, then master production schedule, then MRP using bill of materials and inventory records, then capacity planning, then scheduling and dispatching on the shop floor, with feedback from shop floor control back to planning">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="200" y="15" width="200" height="34" rx="6" fill="#eef1f6" /><rect x="200" y="65" width="200" height="34" rx="6" fill="#e6f6f4" /><rect x="200" y="115" width="200" height="34" rx="6" fill="#e6f6f4" /><rect x="200" y="165" width="200" height="34" rx="6" fill="#fff7e0" /><rect x="200" y="215" width="200" height="34" rx="6" fill="#fff7e0" /><rect x="200" y="260" width="200" height="34" rx="6" fill="#ffe9e7" />
+<rect x="20" y="160" width="140" height="44" rx="6" fill="#ffffff" /><rect x="440" y="160" width="140" height="44" rx="6" fill="#ffffff" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M300 49v12M300 99v12M300 149v12M300 199v12M300 249v7M160 182h36M440 182h-36" /></g>
+<g fill="#13a89e"><path d="M295 60l5 6 5-6z" /><path d="M295 110l5 6 5-6z" /><path d="M295 160l5 6 5-6z" /><path d="M295 210l5 6 5-6z" /><path d="M295 255l5 6 5-6z" /><path d="M194 177l6 5-6 5z" /><path d="M406 177l-6 5 6 5z" /></g>
+<path d="M400 277H560V95H404" stroke="#b42318" stroke-width="2" stroke-dasharray="5 4" fill="none" /><path d="M412 90l-9 5 9 5z" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="300" y="37">Forecast and customer orders</text><text x="300" y="87">Aggregate (sales and ops) plan</text><text x="300" y="137">Master production schedule</text><text x="300" y="187">MRP</text><text x="300" y="237">Capacity check, scheduling</text><text x="300" y="282">Dispatch and shop floor control</text>
+<text x="90" y="179">Bill of materials</text><text x="90" y="195">(BOM)</text><text x="510" y="179">Inventory</text><text x="510" y="195">records</text>
+<text x="575" y="60" font-size="11" fill="#b42318">Feedback</text>
+</g>
+</svg>
+<figcaption>The production planning and control hierarchy from long term plans to daily shop floor control.</figcaption>
+</figure>
+
+## Planning functions
+
+### 1. Forecasting
+
+Estimates future demand using past sales, market information and customer orders. Methods range from moving averages and exponential smoothing to regression and machine learning.
+
+### 2. Aggregate planning (sales and operations planning)
+
+Sets overall production rates, workforce levels, overtime, subcontracting and inventory for product families over 6 to 18 months, balancing demand with capacity at minimum cost. Strategies include **level** production (steady output, inventory absorbs swings), **chase** (output follows demand) and **mixed**.
+
+### 3. Master production schedule (MPS)
+
+Breaks the aggregate plan into specific end products and quantities per week. It is the main link between sales commitments and production.
+
+### 4. Material requirements planning (MRP)
+
+MRP calculates the components and materials needed, and when, by exploding the MPS through the **bill of materials (BOM)** and netting against inventory and scheduled receipts, then offsetting by **lead times**:
+
+$$
+\text{Net requirement} = \text{Gross requirement} - \text{On hand} - \text{Scheduled receipts} + \text{Safety stock}
+$$
+
+MRP II and modern **ERP** systems extend MRP to capacity, finance and the whole business.
+
+### 5. Process planning and routing
+
+Defines the sequence of operations, machines, tools, setup and run times for each part: the **route sheet**.
+
+### 6. Capacity planning and loading
+
+Compares the load from planned orders with available capacity at each work centre (rough cut capacity planning for the MPS, capacity requirements planning for MRP) and adjusts plans or capacity with overtime, extra shifts or subcontracting.
+
+### 7. Scheduling
+
+Assigns start and finish times to jobs on each machine. Rules include **first come first served**, **earliest due date (EDD)**, **shortest processing time (SPT)** and **critical ratio**. Gantt charts and advanced planning and scheduling (APS) software visualise and optimise schedules.
+
+## Control functions
+
+### 8. Dispatching
+
+Releasing work orders, material requisitions, tool orders and drawings to the shop floor so work can start as scheduled.
+
+### 9. Follow-up and expediting
+
+Tracking progress against the schedule, identifying delays from breakdowns, absenteeism, material shortages or quality problems, and chasing critical jobs.
+
+### 10. Evaluation and corrective action
+
+Comparing actual output, lead times and costs with plans, and feeding results back to improve future planning.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A gearbox needs 2 shafts each. The MPS calls for 300 gearboxes in week 6. Shaft inventory on hand is 150, with a scheduled receipt of 100 shafts in week 5. Safety stock is 50 shafts. Shaft machining lead time is 2 weeks.</dd>
+<dt>Find</dt><dd>The net shaft requirement and when the work order must be released.</dd>
+<dt>Assumptions</dt><dd>Lot for lot ordering; no other demand for shafts.</dd>
+<dt>Solution</dt><dd>Gross requirement = 300 × 2 = 600 shafts in week 6<br />Net requirement = 600 − 150 − 100 + 50 = 400 shafts<br />Release = week 6 − 2 weeks = week 4</dd>
+<dt>Answer</dt><dd><strong>Release a work order for 400 shafts in week 4 so they are ready for assembly in week 6</strong></dd>
+<dt>Limitations</dt><dd>MRP assumes fixed lead times and infinite capacity; capacity checks and lot sizing rules such as EOQ may change the order.</dd>
+</dl>
+</Example>
+
+Lot sizing in MRP can use lot for lot, fixed order quantities or the [EOQ model](/manufacturing-engineering/eoq-inventory-model/), trading setup cost against inventory carrying cost.
+
+## Production planning and control by type of production
+
+| Production type | Example | PPC focus |
+| --- | --- | --- |
+| Job shop | Tool room, custom machinery | Detailed scheduling of varied routes, due dates |
+| Batch production | Machined components, garments | Lot sizing, changeovers, MRP |
+| Mass / line production | Car assembly | Line balancing, takt time, material flow |
+| Continuous process | Refinery, cement | Throughput, maintenance planning, inventory of feedstock |
+
+## Key performance indicators
+
+Planners measure how well the system works with indicators such as on time delivery to customers, schedule adherence (the share of work orders completed as planned), manufacturing lead time, inventory turns, capacity utilisation and the number of expedited orders. A rising number of urgent changes usually means the plan is unrealistic, either because capacity was overestimated or because demand forecasts were poor. Regular sales and operations planning meetings align commercial, production and purchasing teams on one plan.
+
+## Common problems in production planning and control
+
+- Inaccurate bills of materials or inventory records, which make MRP order the wrong parts.
+- Unrealistic lead times or standard times, giving schedules that cannot be met.
+- Frequent schedule changes that cause setups, confusion and excess work in progress.
+- Poor communication between sales, planning and production.
+- Ignoring maintenance windows, so planned work collides with production peaks.
+
+## Modern trends
+
+ERP and manufacturing execution systems (MES) connect planning with real time shop floor data from machines and operators. Lean pull systems with kanban complement MRP by controlling work in progress and exposing the [seven wastes](/manufacturing-engineering/seven-wastes-lean/). Demand driven MRP, finite capacity scheduling, digital twins and AI based forecasting help plants react quickly. Accurate standard times from [time and motion study](/manufacturing-engineering/time-and-motion-study/) and reliable equipment through planned [maintenance](/manufacturing-engineering/types-of-maintenance/) remain the foundation of good production planning and control.

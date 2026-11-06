@@ -1,0 +1,129 @@
+---
+title: "Heat Treatment of Steel: Annealing to Tempering"
+description: "Heat treatment of steel explained: annealing, normalizing, hardening, quenching, tempering, case hardening, TTT diagrams, hardenability and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: materials-engineering
+subcategory: heat-treatment
+focusKeyword: "heat treatment of steel"
+image: { src: /images/featured/heat-treatment-of-steel.webp, alt: "Heat Treatment of Steel: Annealing to Tempering: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [heat-treatment, annealing, hardening, tempering, martensite]
+faq:
+  - q: "Why must hardened steel be tempered?"
+    a: "As-quenched martensite is very hard but brittle and full of internal stresses, so it can crack in service or even while sitting on the shelf. Tempering reheats it to a temperature below the lower critical temperature, allowing some carbon to precipitate as fine carbides and stresses to relax. This trades a little hardness for a large gain in toughness."
+  - q: "What is the difference between annealing and normalizing?"
+    a: "Both heat steel into the austenite range. Annealing then cools it slowly in the furnace, giving coarse pearlite, maximum softness and ductility. Normalizing cools it in still air, which is faster, giving finer pearlite, a more uniform grain structure and somewhat higher strength and hardness."
+  - q: "What is hardenability?"
+    a: "Hardenability is a steel's ability to form martensite to a certain depth when quenched. It is not the same as maximum hardness, which depends mainly on carbon content. Alloying elements such as chromium, molybdenum, nickel and manganese increase hardenability, allowing thicker sections to harden or slower quenches to be used. It is measured with the Jominy end quench test."
+references:
+  - text: "G. Krauss, Steels: Processing, Structure, and Performance, 2nd ed., ASM International"
+  - text: "ASM Handbook, Vol. 4: Heat Treating, ASM International"
+  - text: "G. E. Totten (ed.), Steel Heat Treatment: Metallurgy and Technologies, 2nd ed., CRC Press"
+  - text: "ASTM A255, Standard Test Methods for Determining Hardenability of Steel (Jominy test)"
+  - text: "W. D. Callister Jr. and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Heat treatment of steel** changes its microstructure, and therefore its properties, by controlled heating and cooling. **Annealing** (heating into the austenite range and cooling slowly in the furnace) softens steel and relieves stress. **Normalizing** (heating and cooling in air) refines grains and gives moderate strength. **Hardening** (heating to austenite and **quenching** rapidly in water, oil or polymer) forms hard, brittle **martensite**. **Tempering** (reheating hardened steel to 150 to 650 °C) restores toughness at the cost of some hardness. **Case hardening** processes such as carburising and nitriding harden only the surface.
+
+</Key>
+
+The same steel can be soft enough to bend into shape, or hard enough to cut other metals, depending on how it is heat treated. Heat treatment lets engineers machine parts in a soft condition, then harden them for wear resistance, or relieve stresses after welding. Understanding it starts with the [iron-carbon phase diagram](/materials-engineering/iron-carbon-phase-diagram/) and continues with how cooling rate controls the transformation of austenite.
+
+## Why cooling rate matters: TTT and CCT diagrams
+
+Above the critical temperature, steel is austenite. On cooling, austenite transforms, and the product depends on how fast carbon atoms can diffuse:
+
+- **Slow cooling:** coarse pearlite (soft).
+- **Moderate cooling:** fine pearlite (stronger).
+- **Faster cooling or isothermal holding around 250 to 550 °C:** bainite (strong and tough).
+- **Very rapid cooling (quenching):** carbon is trapped, and austenite shears into **martensite**, a body-centred tetragonal structure that is very hard.
+
+**Time-temperature-transformation (TTT)** diagrams show these transformations at constant temperature, and **continuous cooling transformation (CCT)** diagrams show them for real cooling paths. The **critical cooling rate** is the minimum rate that just avoids the pearlite "nose" and produces fully martensitic steel.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Temperature versus time schematic of heat treatments: steel heated above the critical temperature into austenite; annealing cools slowly in the furnace, normalizing cools in air, hardening quenches rapidly to room temperature forming martensite, then tempering reheats to a moderate temperature below the critical line and cools; dashed horizontal line marks the A1 critical temperature at 727 degrees Celsius">
+<path d="M50 20V260H580" stroke="#0b2545" stroke-width="2" />
+<path d="M50 105H580" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="6 4" />
+<path d="M50 245L110 70H170" stroke="#0b2545" stroke-width="2.5" fill="none" />
+<path d="M170 70Q330 90 560 240" stroke="#13a89e" stroke-width="2.5" fill="none" />
+<path d="M170 70Q230 150 330 240" stroke="#f5b800" stroke-width="2.5" fill="none" />
+<path d="M170 70L190 245H330L360 170H430L460 245H560" stroke="#b42318" stroke-width="2.5" fill="none" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="230" y="290" text-anchor="middle">Time</text><text x="22" y="140" text-anchor="middle" transform="rotate(-90 22 140)">Temperature</text>
+<text x="575" y="120" font-size="11" fill="#7b8794" text-anchor="end">A1 (727 °C)</text><text x="120" y="60">Austenitise</text>
+<text x="420" y="95" fill="#13a89e">Annealing (furnace cool)</text><text x="250" y="140" fill="#b8860b">Normalizing (air cool)</text>
+<text x="195" y="236" fill="#b42318">Quench</text><text x="345" y="160" fill="#b42318">Temper</text>
+</g>
+</svg>
+<figcaption>Schematic temperature and time paths for the main heat treatments (not to scale).</figcaption>
+</figure>
+
+## 1. Annealing
+
+**Full annealing:** heat about 30 to 50 °C above the upper critical temperature (A3) for hypoeutectoid steels, soak until uniform, then cool slowly in the furnace. Produces coarse pearlite and ferrite: maximum softness and ductility, good machinability and relief of internal stresses.
+
+Other types:
+
+- **Process (subcritical) annealing:** heating below A1 to restore ductility in cold worked low carbon steel between drawing operations.
+- **Spheroidise annealing:** long holding just below A1 turns cementite into small spheres, giving the softest condition for high carbon steels before machining or forming.
+- **Stress relief annealing:** heating to about 550 to 650 °C after welding, machining or cold work, then slow cooling, to reduce residual stresses without major structural change.
+
+## 2. Normalizing
+
+Heat about 50 °C above A3 (or Acm for hypereutectoid steels) and cool in still air. The faster cooling gives a finer, more uniform pearlite and grain size than annealing, improving strength and toughness. Normalizing is used to refine coarse structures in castings and forgings and to give a consistent starting structure before hardening.
+
+## 3. Hardening and quenching
+
+Heat into the austenite region (austenitising), hold long enough for uniform temperature and carbon distribution, then **quench** fast enough to form martensite.
+
+- **Quenchants** in order of severity: brine, water, polymer solutions, oil, molten salt, air (for highly alloyed air hardening steels).
+- **Maximum hardness** depends mainly on carbon content: about 0.6% C or more gives around 60 to 65 HRC.
+- **Hardenability** determines the depth of hardening and depends on alloying elements and grain size, measured by the Jominy end quench test.
+- **Risks:** distortion and quench cracking from thermal and transformation stresses. Milder quenchants, proper part design and **martempering** (quench into a hot salt bath, equalise, then air cool) reduce them.
+
+## 4. Tempering
+
+Hardened steel is reheated to a temperature below A1, held (often 1 to 2 hours) and cooled. Carbon precipitates as fine carbides and stresses relax.
+
+| Tempering temperature | Typical result | Typical use |
+| --- | --- | --- |
+| 150 to 250 °C | High hardness, slight toughness gain | Cutting tools, gauges, bearings |
+| 350 to 500 °C | Medium hardness, good toughness and elasticity | Springs, chisels |
+| 500 to 650 °C | Lower hardness, high toughness (sorbite) | Shafts, gears, bolts, axles |
+
+Hardening plus high temperature tempering is called **quenching and tempering (Q&T)**, the standard route for high strength structural and machine parts. Some steels show **temper embrittlement** in certain temperature ranges, which is avoided by alloy choice and tempering practice.
+
+## 5. Surface (case) hardening
+
+Many parts need a hard, wear resistant surface with a tough core.
+
+- **Carburising:** low carbon steel is heated in a carbon rich atmosphere at about 900 to 950 °C to raise surface carbon, then quenched and tempered. Case depths typically 0.5 to 2 mm. Used for gears and camshafts.
+- **Carbonitriding:** adds nitrogen as well as carbon, at lower temperatures.
+- **Nitriding:** nitrogen diffuses into alloy steel at about 500 to 550 °C, forming hard nitrides with no quench needed and minimal distortion.
+- **Induction and flame hardening:** only the surface of a medium carbon steel is rapidly heated and quenched; common for shafts, gear teeth and rails.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 0.40% C steel shaft (similar to AISI 1040) needs a tensile strength of about 800 MPa with good toughness. Its upper critical temperature (A3) is about 790 °C.</dd>
+<dt>Find</dt><dd>A suitable heat treatment route with temperatures.</dd>
+<dt>Assumptions</dt><dd>Section small enough to harden in water or polymer quench; typical published tempering response.</dd>
+<dt>Solution</dt><dd>Austenitise at A3 + about 40 °C ≈ 830 to 850 °C, holding about 1 hour per 25 mm of section<br />Quench in water or polymer to form martensite (as-quenched hardness about 50 to 55 HRC)<br />Temper at about 540 to 600 °C for 1 to 2 hours, giving a tempered structure with strength around 750 to 850 MPa and good toughness</dd>
+<dt>Answer</dt><dd><strong>Harden from about 840 °C with a water or polymer quench, then temper around 550 to 600 °C</strong></dd>
+<dt>Limitations</dt><dd>Exact temperatures and resulting properties depend on composition and section size; supplier tempering charts and hardness checks confirm the result.</dd>
+</dl>
+</Example>
+
+## Quality control in heat treatment
+
+Results are checked with **hardness tests** (Rockwell, Brinell, Vickers), microstructure examination, case depth measurements and, for critical parts, [tensile tests](/materials-engineering/tensile-test/) and impact tests. Furnace temperature uniformity and accurate [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) with calibrated thermocouples are essential; aerospace standards such as AMS 2750 specify furnace surveys and instrument accuracy. Atmosphere control prevents decarburisation and scaling of the surface.
+
+## Summary of heat treatment of steel
+
+Heat treatment of steel is a powerful tool: with the right cycle, one grade of steel can serve as a soft blank for machining and then as a hard, tough, fatigue resistant component. Choosing the process requires knowing the steel composition, section size and required properties, and controlling temperatures, times and cooling rates carefully. Proper heat treatment also improves resistance to [fatigue failure](/materials-engineering/fatigue-failure/) and wear in service.

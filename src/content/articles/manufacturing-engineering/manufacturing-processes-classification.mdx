@@ -1,0 +1,150 @@
+---
+title: "Classification of Manufacturing Processes"
+description: "Classification of manufacturing processes: casting, forming, machining, joining, additive, finishing and heat treatment, with selection factors and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: manufacturing-engineering
+subcategory: manufacturing-processes
+focusKeyword: "manufacturing processes"
+image: { src: /images/featured/manufacturing-processes-classification.webp, alt: "Classification of Manufacturing Processes: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [manufacturing-processes, casting, forming, machining, joining]
+faq:
+  - q: "What are the main types of manufacturing processes?"
+    a: "The main groups are primary shaping (casting, moulding and powder metallurgy), deformation or forming (forging, rolling, extrusion, sheet metal work), material removal (machining and non-traditional methods), joining (welding, brazing, fastening, adhesives), additive manufacturing, and property changing and finishing processes such as heat treatment, coating and polishing."
+  - q: "What is the difference between net shape and near net shape?"
+    a: "A net shape process produces a part at its final dimensions with no further machining, such as many injection moulded plastic parts. A near net shape process produces a part very close to final size, such as precision forging or investment casting, needing only light finishing. Both save material and machining time."
+  - q: "Why are most parts made by more than one process?"
+    a: "Each process has strengths and limits in shape, tolerance, surface finish, material properties and cost. A crankshaft, for example, may be forged for strength, machined for accuracy, heat treated for wear resistance and ground for finish. Combining processes gives the required quality at the lowest overall cost."
+references:
+  - text: "M. P. Groover, Fundamentals of Modern Manufacturing: Materials, Processes, and Systems, 7th ed., Wiley"
+  - text: "S. Kalpakjian and S. R. Schmid, Manufacturing Engineering and Technology, 8th ed., Pearson"
+  - text: "DIN 8580:2022, Manufacturing processes: Terms and definitions, division"
+  - text: "M. F. Ashby, Materials Selection in Mechanical Design, 5th ed., Butterworth-Heinemann"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Manufacturing processes** are usually classified by how they change the shape or properties of material. The main groups are: **primary shaping** (casting, moulding, powder metallurgy) from liquid or powder; **forming** (forging, rolling, extrusion, drawing, sheet metal working) by plastic deformation; **material removal** (turning, milling, drilling, grinding and non-traditional methods like EDM and laser cutting); **joining** (welding, brazing, soldering, fastening, adhesive bonding); **additive manufacturing** (3D printing); and **property changing and surface finishing** (heat treatment, coating, plating, polishing). Standards such as **DIN 8580** formalise this grouping.
+
+</Key>
+
+Every manufactured product, from a bolt to an aircraft engine, is made by a chain of processes. Classifying them helps engineers compare options, choose the most economical route and understand how process choice affects strength, accuracy, surface finish and cost. The classification below follows the logic of DIN 8580 and common textbooks such as Groover and Kalpakjian.
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Tree diagram: manufacturing processes branch into six groups: primary shaping, forming, material removal, joining, additive manufacturing, and property change and finishing, each with example processes listed below">
+<rect x="210" y="15" width="180" height="40" rx="6" fill="#0b2545" />
+<text x="300" y="40" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Manufacturing processes</text>
+<path d="M300 55V75M50 75H550M50 75V95M150 75V95M250 75V95M350 75V95M450 75V95M550 75V95" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="5" y="95" width="90" height="44" rx="5" fill="#e6f6f4" /><rect x="105" y="95" width="90" height="44" rx="5" fill="#e6f6f4" /><rect x="205" y="95" width="90" height="44" rx="5" fill="#fff7e0" /><rect x="305" y="95" width="90" height="44" rx="5" fill="#fff7e0" /><rect x="405" y="95" width="90" height="44" rx="5" fill="#eef1f6" /><rect x="505" y="95" width="90" height="44" rx="5" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="50" y="114">Primary</text><text x="50" y="130">shaping</text><text x="150" y="122">Forming</text><text x="250" y="114">Material</text><text x="250" y="130">removal</text><text x="350" y="122">Joining</text><text x="450" y="114">Additive</text><text x="450" y="130">mfg</text><text x="550" y="114">Property</text><text x="550" y="130">and finish</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="50" y="160">Sand casting</text><text x="50" y="176">Die casting</text><text x="50" y="192">Investment</text><text x="50" y="208">Inj. moulding</text><text x="50" y="224">Powder met.</text>
+<text x="150" y="160">Forging</text><text x="150" y="176">Rolling</text><text x="150" y="192">Extrusion</text><text x="150" y="208">Drawing</text><text x="150" y="224">Sheet metal</text>
+<text x="250" y="160">Turning</text><text x="250" y="176">Milling</text><text x="250" y="192">Drilling</text><text x="250" y="208">Grinding</text><text x="250" y="224">EDM, laser</text>
+<text x="350" y="160">Welding</text><text x="350" y="176">Brazing</text><text x="350" y="192">Soldering</text><text x="350" y="208">Fasteners</text><text x="350" y="224">Adhesives</text>
+<text x="450" y="160">FDM</text><text x="450" y="176">SLA</text><text x="450" y="192">SLS</text><text x="450" y="208">Metal PBF</text><text x="450" y="224">DED</text>
+<text x="550" y="160">Heat treat</text><text x="550" y="176">Coating</text><text x="550" y="192">Plating</text><text x="550" y="208">Polishing</text><text x="550" y="224">Shot peening</text>
+</g>
+<text x="300" y="265" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">Most parts pass through several groups before they are finished</text>
+</svg>
+<figcaption>A practical classification of manufacturing processes with examples.</figcaption>
+</figure>
+
+## 1. Primary shaping processes
+
+These create an initial shape from a shapeless material such as liquid metal, molten plastic or powder.
+
+- **Casting:** molten metal is poured or injected into a mould and solidifies. **Sand casting** suits large, complex parts in small numbers (engine blocks, pump casings). **Die casting** forces molten aluminium or zinc into steel dies at high pressure for high volume, thin walled parts. **Investment casting** gives excellent detail for turbine blades and medical implants.
+- **Moulding of polymers:** **injection moulding**, blow moulding, compression moulding and thermoforming shape plastics, discussed further in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/).
+- **Powder metallurgy:** metal powders are pressed and **sintered** to make gears, bushes and filters with little waste.
+
+Casting allows complex internal shapes but may contain porosity and has lower strength than wrought material.
+
+## 2. Forming (deformation) processes
+
+Solid metal is plastically deformed without removing material. Grain structure flows with the shape, often improving strength.
+
+- **Bulk forming:** **forging** (open die, closed die), **rolling** of plates and sections, **extrusion** of profiles, **wire and bar drawing**.
+- **Sheet metal forming:** shearing, blanking, punching, bending, deep drawing and stretch forming, used for car bodies, enclosures and appliances.
+- **Hot working** above the recrystallisation temperature needs lower forces; **cold working** gives better accuracy and surface finish and strain hardens the metal.
+
+Forming suits medium to high volumes because dies are expensive.
+
+## 3. Material removal processes
+
+Material is cut away from a workpiece to achieve accurate shapes and fine finishes.
+
+- **Conventional machining:** turning on lathes, milling, drilling, boring, shaping, broaching and sawing. Increasingly done on a [CNC machine](/manufacturing-engineering/cnc-machine-working-principle/).
+- **Abrasive processes:** grinding, honing, lapping and superfinishing for very tight tolerances.
+- **Non-traditional (advanced) machining:** electrical discharge machining (EDM), electrochemical machining, laser and waterjet cutting, ultrasonic machining. These cut hard or delicate materials and complex shapes.
+
+Machining wastes material as chips but gives the best accuracy, often within a few micrometres.
+
+## 4. Joining processes
+
+Parts are joined permanently or temporarily.
+
+- **Fusion welding** (arc, gas, laser, electron beam) and **solid state welding** (friction, friction stir, resistance). See [types of welding processes](/materials-engineering/types-of-welding-processes/).
+- **Brazing and soldering:** a filler metal with a lower melting point than the base metals.
+- **Mechanical fastening:** bolts, rivets, screws, clinching.
+- **Adhesive bonding:** structural adhesives for metals, composites and plastics.
+
+## 5. Additive manufacturing
+
+Parts are built layer by layer from digital models, enabling complex geometries without tooling. Main families are compared in [3D printing technologies](/manufacturing-engineering/3d-printing-technologies/).
+
+## 6. Property changing and finishing processes
+
+- **Heat treatment:** annealing, normalising, hardening and tempering change microstructure and properties, explained in [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+- **Surface treatment:** case hardening, nitriding, shot peening.
+- **Coating and plating:** painting, powder coating, galvanising, electroplating, anodising, thermal spraying for corrosion and wear protection.
+- **Cleaning and polishing.**
+
+## Comparing manufacturing processes
+
+| Group | Typical tolerance | Material use | Tooling cost | Best volume |
+| --- | --- | --- | --- | --- |
+| Sand casting | ±0.5 to 2 mm | Good | Low | Low to medium |
+| Die casting | ±0.05 to 0.2 mm | Very good | High | High |
+| Forging | ±0.2 to 1 mm | Good | High | Medium to high |
+| Machining | ±0.005 to 0.05 mm | Poor (chips) | Low | Low to medium |
+| Sheet metal stamping | ±0.1 to 0.5 mm | Good | High | High |
+| Additive | ±0.05 to 0.3 mm | Very good | None | Low |
+
+## Selecting a process
+
+Selection considers the material, part geometry and size, required tolerance and surface finish, mechanical properties, production volume, lead time and cost. Cost per part is often modelled as:
+
+$$
+C = C_m + \frac{C_t}{N} + C_p
+$$
+
+where C_m is material cost per part, C_t total tooling cost, N the number of parts and C_p processing cost per part.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An aluminium bracket can be machined from bar (material 6, processing 14 per part, no tooling) or die cast (material 3, processing 2 per part, die cost 40 000), in consistent currency units.</dd>
+<dt>Find</dt><dd>The break-even quantity and the better process for 2000 and 10 000 parts.</dd>
+<dt>Assumptions</dt><dd>Die cast parts need no extra machining; quality is acceptable for both.</dd>
+<dt>Solution</dt><dd>Machining cost per part = 6 + 14 = 20<br />Die casting cost per part = 3 + 2 + 40 000 ÷ N<br />Break-even: 20 = 5 + 40 000 ÷ N, so N = 40 000 ÷ 15 ≈ 2667<br />At 2000 parts: die casting = 5 + 20 = 25, machining = 20<br />At 10 000 parts: die casting = 5 + 4 = 9, machining = 20</dd>
+<dt>Answer</dt><dd><strong>Break-even is about 2670 parts: machine for 2000 parts, die cast for 10 000</strong></dd>
+<dt>Limitations</dt><dd>Lead time for the die, quality requirements and design changes can shift the decision.</dd>
+</dl>
+</Example>
+
+## Process chains in practice
+
+A car engine connecting rod is a good example of a process chain: a steel billet is hot forged to near net shape, trimmed, heat treated, shot peened to improve fatigue life, then machined on the bores and faces and finally inspected. Each step adds value that the others cannot provide efficiently.
+
+## Manufacturing processes and sustainability
+
+Process choice also affects energy use, scrap and emissions. Net shape and near net shape processes, such as precision forging, die casting and additive manufacturing, save material compared with machining from solid. Recycling of chips and scrap, efficient furnaces and dry or minimum quantity lubrication machining reduce environmental impact. Combining process knowledge with [lean manufacturing](/manufacturing-engineering/seven-wastes-lean/) thinking and [life cycle assessment](/environmental-engineering/life-cycle-assessment/) helps engineers choose routes that are economical and sustainable.

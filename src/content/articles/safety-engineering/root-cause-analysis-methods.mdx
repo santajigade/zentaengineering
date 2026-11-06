@@ -1,0 +1,131 @@
+---
+title: "Root Cause Analysis Methods: 5 Whys and Fishbone Diagram"
+description: "Root cause analysis methods explained: 5 Whys, fishbone diagram, fault tree, Pareto, causal factor charting, steps, pitfalls and a pump failure example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: safety-engineering
+subcategory: root-cause-analysis
+focusKeyword: "root cause analysis"
+image: { src: /images/featured/root-cause-analysis-methods.webp, alt: "Root Cause Analysis Methods: 5 Whys and Fishbone Diagram: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [root-cause-analysis, 5-whys, fishbone-diagram, incident-investigation, problem-solving]
+faq:
+  - q: "What is the difference between a root cause and a contributing cause?"
+    a: "A root cause is a fundamental, controllable reason that, if removed, would prevent the problem or greatly reduce its recurrence. Contributing causes make the event more likely or worse but would not alone have caused it. Most incidents have several causes, and good analyses address all significant ones."
+  - q: "How many whys should I ask?"
+    a: "Five is a rule of thumb, not a fixed number. Keep asking why until you reach a cause that the organisation can control and that, if fixed, would prevent recurrence, usually a weakness in a system, process or design rather than an individual's action. Sometimes three whys are enough; complex problems may need more or several branches."
+  - q: "Is human error a root cause?"
+    a: "Rarely on its own. Human error is usually a symptom of deeper causes such as unclear procedures, poor design, inadequate training, fatigue, time pressure or missing safeguards. Effective root cause analysis asks why the error was possible and why it was not caught, then fixes the system."
+references:
+  - text: "IEC 62740:2015, Root cause analysis (RCA)"
+  - text: "K. Ishikawa, Guide to Quality Control, Asian Productivity Organization, 1976"
+  - text: "T. Ohno, Toyota Production System: Beyond Large-Scale Production, Productivity Press, 1988"
+  - text: "CCPS, Guidelines for Investigating Process Safety Incidents, 3rd ed., Wiley/AIChE"
+  - text: "J. Reason, Human Error, Cambridge University Press, 1990"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Root cause analysis** (RCA) is a structured way to find the underlying reasons a problem, failure or incident happened, so that corrective actions prevent it from recurring rather than just fixing symptoms. The two most widely used methods are the **5 Whys**, which asks "why?" repeatedly to trace a chain of cause and effect, and the **fishbone (Ishikawa) diagram**, which groups possible causes into categories such as **man, machine, method, material, measurement and environment**. Other methods include **fault tree analysis**, **Pareto analysis**, **causal factor charting**, **change analysis** and **barrier analysis**. Standards such as **IEC 62740** describe RCA principles.
+
+</Key>
+
+When something goes wrong, the quick fix is tempting: replace the failed part, retrain the operator, and move on. But if the real cause remains, the problem returns, often at a worse time. Root cause analysis takes a little longer up front and saves far more by making fixes stick. It is used for equipment failures, quality defects, safety incidents, customer complaints and process upsets.
+
+## The root cause analysis process
+
+1. **Define the problem** precisely: what happened, where, when, how much, and what the impact was. Avoid assigning blame in the problem statement.
+2. **Contain the problem** to protect people, customers and equipment while the investigation proceeds.
+3. **Collect data and evidence:** physical evidence such as failed parts, records, alarm logs, photos, maintenance history, interviews and procedures. Preserve evidence early.
+4. **Identify possible causes** with tools such as fishbone diagrams, timelines and brainstorming.
+5. **Determine root causes** by testing each possible cause against the evidence, using the 5 Whys, fault trees or experiments.
+6. **Develop corrective and preventive actions** that address each root cause, prioritising strong actions such as design changes over weak ones such as reminders.
+7. **Implement, verify effectiveness** and share lessons learned across the organisation.
+
+## Method 1: the 5 Whys
+
+Developed at Toyota and promoted by Taiichi Ohno, the 5 Whys asks "why?" repeatedly, each answer forming the basis of the next question, until a fundamental, controllable cause is reached. It is simple, fast and needs no special tools, so it suits everyday problems and shop floor teams.
+
+**Tips:**
+
+- Base each answer on facts and evidence, not assumptions.
+- Follow multiple branches when several causes exist.
+- Stop at a cause the organisation can fix, typically in a system, process or design.
+- Check the logic backwards: "because of X, Y happened" should read correctly.
+
+**Limitations:** it can follow a single path and miss other causes, results depend on the team's knowledge, and it can stop too early at "operator error".
+
+## Method 2: fishbone (Ishikawa) diagram
+
+Kaoru Ishikawa introduced the cause and effect diagram in the 1960s. The problem is written at the **head** of the fish; major cause categories form the **bones**, and specific causes are added as smaller branches. Common categories for manufacturing are the **6 Ms**:
+
+- **Man (people):** skills, training, fatigue, communication.
+- **Machine:** equipment condition, settings, wear, capability.
+- **Method:** procedures, work instructions, sequence.
+- **Material:** raw material quality, specifications, suppliers.
+- **Measurement:** gauges, calibration, inspection methods.
+- **Mother nature (environment):** temperature, humidity, dust, vibration.
+
+Service processes often use the **8 Ps** (product, price, place, promotion, people, process, physical evidence, productivity) or similar categories.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Fishbone diagram: a horizontal spine leads to the problem box at the right labelled pump bearing failure; six angled bones labelled man, machine and method above, and material, measurement and environment below, each with example causes">
+<path d="M40 150H470" stroke="#0b2545" stroke-width="3" />
+<rect x="470" y="125" width="120" height="50" rx="6" fill="#ffe9e7" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2"><path d="M100 40L150 150M240 40L290 150M380 40L430 150M100 260L150 150M240 260L290 150M380 260L430 150" /></g>
+<g stroke="#7b8794" stroke-width="1.5"><path d="M112 68H160M124 95H175M252 68H300M264 95H315M392 68H440M404 95H455M112 232H160M124 205H175M252 232H300M264 205H315M392 232H440M404 205H455" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="100" y="32">Man</text><text x="240" y="32">Machine</text><text x="380" y="32">Method</text><text x="100" y="280">Material</text><text x="240" y="280">Measurement</text><text x="380" y="280">Environment</text>
+<text x="530" y="146">Pump bearing</text><text x="530" y="163">failure</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545">
+<text x="162" y="66">Untrained</text><text x="177" y="93">Wrong grease</text><text x="302" y="66">Misalignment</text><text x="317" y="93">Vibration</text><text x="442" y="66">No PM task</text><text x="457" y="93">Over-greasing</text>
+<text x="162" y="236">Bearing spec</text><text x="177" y="209">Supplier</text><text x="302" y="236">No vibration</text><text x="317" y="209">Temp check</text><text x="442" y="236">Heat</text><text x="457" y="209">Water ingress</text>
+</g>
+</svg>
+<figcaption>Fishbone diagram for a pump bearing failure, using the 6M categories.</figcaption>
+</figure>
+
+## Other root cause analysis methods
+
+- **Pareto analysis:** ranks problems or causes by frequency or cost, showing the vital few that cause most of the impact (the 80/20 principle).
+- **Fault tree analysis (FTA):** a top-down logic diagram with AND and OR gates showing how combinations of basic events lead to a top event; it can be quantified with failure probabilities.
+- **Causal factor charting and timelines:** sequence of events and conditions leading to an incident, used in safety investigations.
+- **Change analysis:** compares the problem situation with a similar situation without the problem to find what changed.
+- **Barrier analysis:** identifies which safeguards failed or were missing.
+- **Tap Root, Apollo and other proprietary methods** combine several of these.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A cooling water pump has suffered three bearing failures in six months. The maintenance team replaced the bearings each time.</dd>
+<dt>Find</dt><dd>A 5 Whys chain to the root cause and appropriate corrective actions.</dd>
+<dt>Assumptions</dt><dd>Evidence from failed bearings, alignment checks and records supports each answer.</dd>
+<dt>Solution</dt><dd>Why did the bearing fail? It overheated and the grease degraded.<br />Why did it overheat? Vibration and misalignment loaded the bearing heavily.<br />Why was the pump misaligned? The motor was not realigned after the last motor replacement.<br />Why was it not realigned? The work procedure for motor replacement has no alignment step and no laser alignment tool was available.<br />Why was the procedure missing the step? Procedures were written without review by a rotating equipment specialist, and there is no check of maintenance procedures against equipment requirements.</dd>
+<dt>Answer</dt><dd><strong>Root cause: inadequate maintenance procedure control. Actions: add precision alignment with tolerances to the procedure, provide laser alignment tools and training, start vibration monitoring, and review other rotating equipment procedures</strong></dd>
+<dt>Limitations</dt><dd>Other branches, such as lubrication practice, should also be checked with evidence, possibly using a fishbone diagram.</dd>
+</dl>
+</Example>
+
+## Strong and weak corrective actions
+
+| Strength | Examples |
+| --- | --- |
+| Strong | Eliminate the hazard, redesign, physical interlocks, automation, standardised equipment |
+| Medium | Checklists, redundancy, improved procedures with verification, software alerts |
+| Weak | Training alone, warnings, memos, reminders to be careful, disciplinary action |
+
+Strong actions change the system so the same error cannot easily occur again, in line with the hierarchy of controls used in [mine hazards and controls](/mining-engineering/mine-hazards-and-controls/).
+
+## Making root cause analysis effective
+
+- Investigate promptly, with a trained facilitator and a cross functional team.
+- Focus on systems, not blame, so people share information openly.
+- Verify causes with evidence and, where possible, tests.
+- Track actions to completion and confirm they worked, for example by monitoring [MTBF](/safety-engineering/mtbf-mttr-availability/) or defect rates.
+- Share lessons learned across sites.
+
+Root cause analysis connects with many other tools: it feeds updates to [FMEA](/safety-engineering/fmea-explained/) and [HAZOP studies](/safety-engineering/hazop-study/), forms the Analyse phase of [Six Sigma DMAIC](/manufacturing-engineering/six-sigma-dmaic/), and helps remove defects, one of the [seven wastes](/manufacturing-engineering/seven-wastes-lean/) in lean manufacturing.

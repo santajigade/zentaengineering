@@ -1,0 +1,160 @@
+---
+title: "Risk Matrix: Likelihood, Severity and Risk Ranking"
+description: "Risk matrix explained: likelihood and severity scales, 5x5 matrix, risk scores and bands, ALARP, how to use it, common pitfalls and a worked ranking example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: safety-engineering
+subcategory: risk-assessment
+focusKeyword: "risk matrix"
+image: { src: /images/featured/risk-matrix.webp, alt: "Risk Matrix: Likelihood, Severity and Risk Ranking: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [risk-assessment, risk-matrix, alarp, likelihood, severity]
+faq:
+  - q: "What is a 5x5 risk matrix?"
+    a: "A 5x5 risk matrix has five likelihood levels, for example rare, unlikely, possible, likely and almost certain, and five severity levels, for example insignificant, minor, moderate, major and catastrophic. Each of the 25 cells is assigned a risk level, often colour coded from low (green) to extreme (red)."
+  - q: "What does ALARP mean?"
+    a: "ALARP stands for As Low As Reasonably Practicable. It means that risk must be reduced until the cost, time and effort of further reduction would be grossly disproportionate to the benefit gained. In many risk matrices, the middle band is the ALARP region where further measures must be considered and justified."
+  - q: "Should risk be scored before or after controls?"
+    a: "Both. The inherent (or initial) risk is assessed assuming no or only basic controls, to show how serious the hazard is. The residual risk is assessed with the proposed or existing controls in place, to check that it is acceptable. The difference shows how much the controls are relied on."
+references:
+  - text: "ISO 31000:2018, Risk management: Guidelines"
+  - text: "IEC 31010:2019, Risk management: Risk assessment techniques"
+  - text: "UK HSE, Reducing Risks, Protecting People (R2P2), 2001"
+  - text: "L. A. Cox Jr., What's Wrong with Risk Matrices?, Risk Analysis, 28(2), 2008"
+  - text: "ISO 45001:2018, Occupational health and safety management systems"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **risk matrix** is a grid that ranks risks by combining **likelihood** (how often an event could occur) and **severity** or consequence (how bad the outcome would be). Each axis has defined levels, commonly five each in a **5 × 5 matrix**. Multiplying or combining the two gives a **risk score** that falls into colour coded bands such as **low**, **medium**, **high** and **extreme**. The band decides the response: accept, reduce risk to **ALARP**, or stop the activity until controls are added. Risk matrices are simple and widely used in workplace risk assessment, HAZOP, FMEA and project risk registers.
+
+</Key>
+
+Every organisation faces more risks than it can address at once. A risk matrix gives a quick, consistent way to compare risks, decide which need urgent action, and communicate them to managers and workers. It is a semi-quantitative tool: more structured than gut feeling, less precise than full quantitative risk assessment. Standards such as ISO 31000 and IEC 31010 describe it as one of many risk assessment techniques.
+
+## Risk = likelihood × consequence
+
+Risk combines how likely an event is and how severe its consequences would be:
+
+$$
+R = L \times C
+$$
+
+In a matrix, L and C are usually scored on ordinal scales, such as 1 to 5, rather than true probabilities and losses.
+
+## Building a risk matrix
+
+### Likelihood scale
+
+| Level | Descriptor | Example definition |
+| --- | --- | --- |
+| 1 | Rare | May occur only in exceptional circumstances; less than once in 100 years |
+| 2 | Unlikely | Could occur in the industry; once in 10 to 100 years |
+| 3 | Possible | Could occur at this site; once in 1 to 10 years |
+| 4 | Likely | Will probably occur; about once a year |
+| 5 | Almost certain | Expected to occur several times a year |
+
+### Severity scale
+
+Severity is defined for each type of consequence: people, environment, asset damage and production loss, reputation and legal.
+
+| Level | Descriptor | People | Asset / production |
+| --- | --- | --- | --- |
+| 1 | Insignificant | First aid | Negligible |
+| 2 | Minor | Medical treatment | Small loss |
+| 3 | Moderate | Lost time injury | Moderate loss, short shutdown |
+| 4 | Major | Permanent disability or single fatality | Major damage, long shutdown |
+| 5 | Catastrophic | Multiple fatalities | Loss of facility |
+
+The highest severity across all consequence types is normally used.
+
+<figure>
+<svg width="600" height="320" viewBox="0 0 600 320" fill="none" role="img" aria-label="5 by 5 risk matrix: likelihood 1 to 5 on the vertical axis, severity 1 to 5 on the horizontal axis, cells contain the product score from 1 to 25 and are coloured green for low, yellow for medium, orange for high and red for extreme">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="340" y="312">Severity (consequence)</text><text x="28" y="160" transform="rotate(-90 28 160)">Likelihood</text>
+</g>
+<g id="cells" stroke="#ffffff" stroke-width="2"></g>
+<g stroke="#ffffff" stroke-width="2">
+<rect x="90" y="30" width="96" height="48" fill="#f5b800" /><rect x="186" y="30" width="96" height="48" fill="#e8822a" /><rect x="282" y="30" width="96" height="48" fill="#b42318" /><rect x="378" y="30" width="96" height="48" fill="#b42318" /><rect x="474" y="30" width="96" height="48" fill="#b42318" />
+<rect x="90" y="78" width="96" height="48" fill="#13a89e" /><rect x="186" y="78" width="96" height="48" fill="#f5b800" /><rect x="282" y="78" width="96" height="48" fill="#e8822a" /><rect x="378" y="78" width="96" height="48" fill="#b42318" /><rect x="474" y="78" width="96" height="48" fill="#b42318" />
+<rect x="90" y="126" width="96" height="48" fill="#13a89e" /><rect x="186" y="126" width="96" height="48" fill="#f5b800" /><rect x="282" y="126" width="96" height="48" fill="#f5b800" /><rect x="378" y="126" width="96" height="48" fill="#e8822a" /><rect x="474" y="126" width="96" height="48" fill="#b42318" />
+<rect x="90" y="174" width="96" height="48" fill="#13a89e" /><rect x="186" y="174" width="96" height="48" fill="#13a89e" /><rect x="282" y="174" width="96" height="48" fill="#f5b800" /><rect x="378" y="174" width="96" height="48" fill="#f5b800" /><rect x="474" y="174" width="96" height="48" fill="#e8822a" />
+<rect x="90" y="222" width="96" height="48" fill="#13a89e" /><rect x="186" y="222" width="96" height="48" fill="#13a89e" /><rect x="282" y="222" width="96" height="48" fill="#13a89e" /><rect x="378" y="222" width="96" height="48" fill="#13a89e" /><rect x="474" y="222" width="96" height="48" fill="#f5b800" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">
+<text x="138" y="59" fill="#0b2545">5</text><text x="234" y="59">10</text><text x="330" y="59">15</text><text x="426" y="59">20</text><text x="522" y="59">25</text>
+<text x="138" y="107">4</text><text x="234" y="107" fill="#0b2545">8</text><text x="330" y="107">12</text><text x="426" y="107">16</text><text x="522" y="107">20</text>
+<text x="138" y="155">3</text><text x="234" y="155" fill="#0b2545">6</text><text x="330" y="155" fill="#0b2545">9</text><text x="426" y="155">12</text><text x="522" y="155">15</text>
+<text x="138" y="203">2</text><text x="234" y="203">4</text><text x="330" y="203" fill="#0b2545">6</text><text x="426" y="203" fill="#0b2545">8</text><text x="522" y="203">10</text>
+<text x="138" y="251">1</text><text x="234" y="251">2</text><text x="330" y="251">3</text><text x="426" y="251">4</text><text x="522" y="251" fill="#0b2545">5</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="75" y="59">5</text><text x="75" y="107">4</text><text x="75" y="155">3</text><text x="75" y="203">2</text><text x="75" y="251">1</text>
+<text x="138" y="290">1</text><text x="234" y="290">2</text><text x="330" y="290">3</text><text x="426" y="290">4</text><text x="522" y="290">5</text>
+</g>
+</svg>
+<figcaption>A typical 5 × 5 risk matrix: green low, yellow medium, orange high, red extreme. Band boundaries vary between organisations.</figcaption>
+</figure>
+
+### Risk bands and responses
+
+| Score | Band | Typical response |
+| --- | --- | --- |
+| 1 to 4 | Low | Acceptable; manage with routine procedures |
+| 5 to 9 | Medium | Tolerable if ALARP; consider further controls, monitor |
+| 10 to 14 | High | Reduce risk; senior management attention; controls needed before or soon after starting |
+| 15 to 25 | Extreme | Unacceptable; stop or do not start until risk is reduced |
+
+Many matrices are asymmetric, weighting severity more heavily, so a rare catastrophic event is never treated the same as a frequent trivial one.
+
+## ALARP and tolerability
+
+The UK HSE's tolerability framework divides risk into three regions: **unacceptable** (must be reduced regardless of cost), **tolerable if ALARP** (reduce until further reduction is grossly disproportionate) and **broadly acceptable** (no further action normally needed). Risk matrix bands are often mapped to these regions.
+
+## How to use a risk matrix
+
+1. **Identify the hazard** and the credible worst outcome, for example through a [HAZOP study](/safety-engineering/hazop-study/) or job safety analysis.
+2. **Score severity** using the defined scale.
+3. **Score likelihood** of that outcome, considering existing controls if assessing residual risk.
+4. **Read the risk level** from the matrix.
+5. **Decide on actions** according to the band, using the hierarchy of controls.
+6. **Re-score** with the new controls to confirm residual risk is acceptable.
+7. **Record and review** in a risk register.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Three hazards in a workshop: (A) a forklift striking a pedestrian in a shared aisle, judged likelihood 3 and severity 4; (B) a minor cut from handling sheet metal, likelihood 4 and severity 2; (C) a dust explosion in an extraction system, likelihood 1 and severity 5.</dd>
+<dt>Find</dt><dd>Risk scores, bands and priority order, and the effect of segregating forklift and pedestrian routes, which reduces likelihood of A to 1.</dd>
+<dt>Assumptions</dt><dd>Score = L × C; bands as in the table above.</dd>
+<dt>Solution</dt><dd>A: 3 × 4 = 12, high<br />B: 4 × 2 = 8, medium<br />C: 1 × 5 = 5, medium (but catastrophic severity)<br />A after segregation: 1 × 4 = 4, low</dd>
+<dt>Answer</dt><dd><strong>Priority: A (12, high), then B (8) and C (5); segregation lowers A to 4, but C still deserves attention because its severity is catastrophic</strong></dd>
+<dt>Limitations</dt><dd>Multiplying ordinal scores can understate high severity, low likelihood risks, so many companies require specific review of any severity 5 hazard.</dd>
+</dl>
+</Example>
+
+## Calibrating the risk matrix
+
+A matrix only works if its scales match the organisation's risk tolerance. Calibration links each likelihood level to a frequency range, each severity level to concrete outcomes in several categories, and each colour band to required actions and approval levels. Teams then test the matrix against known incidents and scenarios to make sure results feel sensible, and adjust boundaries if, for example, all fatality scenarios end up green. Documenting these definitions in the management system keeps different sites and teams consistent.
+
+## Pitfalls of the risk matrix
+
+Research such as Cox (2008) highlights weaknesses:
+
+- **Subjectivity:** different people score the same hazard differently.
+- **Range compression:** very different risks can fall into the same cell.
+- **Ordinal arithmetic:** multiplying category numbers implies precision that does not exist.
+- **Ignoring rare catastrophes:** low likelihood, high severity events can appear medium.
+- **Gaming:** pressure to score risks low to avoid action.
+
+Good practice reduces these problems: clear definitions with numerical frequency ranges, calibrated examples, team scoring, special rules for high severity events, and using quantitative methods such as LOPA or [safety integrity level](/safety-engineering/safety-integrity-level/) assessment for critical hazards.
+
+## Risk matrix in other tools
+
+The matrix should be reviewed whenever the business, its activities or its risk appetite change.
+
+
+Risk matrices appear inside many methods: HAZOP worksheets, [FMEA](/safety-engineering/fmea-explained/) (which uses a similar RPN concept), [mine hazard](/mining-engineering/mine-hazards-and-controls/) assessments, construction risk assessments and project risk registers. Whatever the context, the value comes from the discussion and the actions that follow, not the number itself.

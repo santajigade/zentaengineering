@@ -1,0 +1,135 @@
+---
+title: "Control Charts in Statistical Process Control"
+description: "Control charts in SPC explained: common and special causes, X-bar and R charts, p and c charts, control limits, Western Electric rules and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: manufacturing-engineering
+subcategory: spc
+focusKeyword: "control charts"
+image: { src: /images/featured/control-charts-spc.webp, alt: "Control Charts in Statistical Process Control: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [spc, control-charts, x-bar-r-chart, quality-control, process-variation]
+faq:
+  - q: "What is the difference between control limits and specification limits?"
+    a: "Control limits are calculated from process data and show the natural variation of a stable process, typically ±3 standard deviations of the plotted statistic. Specification limits come from the customer or design and say what is acceptable. A process can be in control but still produce out of specification parts if its variation is too wide or poorly centred."
+  - q: "Why are control limits set at 3 sigma?"
+    a: "Walter Shewhart chose ±3 sigma as an economic balance. For a normally distributed statistic, only about 0.27% of points fall outside by chance, so false alarms are rare, while real shifts of meaningful size are still detected reasonably quickly."
+  - q: "How many samples are needed to set up a control chart?"
+    a: "A common guideline is at least 20 to 25 subgroups, for example 25 samples of 5 parts each, collected while the process is believed to be stable. Limits are then calculated, points outside are investigated and removed if a cause is found, and limits recalculated."
+references:
+  - text: "W. A. Shewhart, Economic Control of Quality of Manufactured Product, Van Nostrand, 1931"
+  - text: "D. C. Montgomery, Introduction to Statistical Quality Control, 8th ed., Wiley"
+  - text: "ISO 7870-2:2023, Control charts, Part 2: Shewhart control charts"
+  - text: "AIAG, Statistical Process Control (SPC) Reference Manual, 2nd ed."
+  - text: "Western Electric Company, Statistical Quality Control Handbook, 1956"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Control charts** are the main tool of **statistical process control (SPC)**. They plot a process measurement over time with a **centre line** and **upper and lower control limits**, usually at **±3 standard deviations** of the plotted statistic. Points within the limits with no unusual patterns indicate **common cause** variation: the process is **in control**. Points outside the limits or non-random patterns signal **special causes** that should be investigated. **Variables charts** (X-bar and R, X-bar and S, individuals and moving range) track measurements; **attributes charts** (p, np, c, u) track defectives or defects.
+
+</Key>
+
+Every process varies: no two parts are exactly the same. The question is whether the variation is the normal, predictable noise of a stable process, or a sign that something has changed: a worn tool, a new batch of material, a different operator or a drifting sensor. Control charts, developed by Walter Shewhart at Bell Laboratories in the 1920s, answer that question in real time, so problems are caught before many bad parts are made.
+
+## Common causes and special causes
+
+- **Common cause variation** is inherent in the process: many small, random influences such as minor temperature fluctuations, material variation and machine vibration. Reducing it requires changing the process itself, usually a management or engineering decision.
+- **Special (assignable) cause variation** comes from specific events: a broken tool, a wrong setting, a contaminated batch. It should be found and removed by the people running the process.
+
+Reacting to common cause noise as if it were a special cause (tampering) actually increases variation, while ignoring special causes lets defects pile up. Control charts help tell the two apart.
+
+## Anatomy of a control chart
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="X-bar control chart: horizontal axis is sample number from 1 to 20, vertical axis is sample mean; centre line in the middle with upper and lower control limits; most points vary randomly between the limits, but point 16 lies above the upper control limit and is circled as an out of control signal">
+<path d="M60 20V230H580" stroke="#0b2545" stroke-width="2" />
+<g stroke-width="1.5" stroke-dasharray="6 4"><path d="M60 50H570" stroke="#b42318" /><path d="M60 200H570" stroke="#b42318" /></g>
+<path d="M60 125H570" stroke="#13a89e" stroke-width="2" />
+<polyline points="80,120 105,140 130,110 155,150 180,128 205,100 230,135 255,118 280,160 305,125 330,105 355,145 380,130 405,95 430,138 455,38 480,120 505,142 530,112 555,130" fill="none" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#0b2545"><circle cx="80" cy="120" r="3.5" /><circle cx="105" cy="140" r="3.5" /><circle cx="130" cy="110" r="3.5" /><circle cx="155" cy="150" r="3.5" /><circle cx="180" cy="128" r="3.5" /><circle cx="205" cy="100" r="3.5" /><circle cx="230" cy="135" r="3.5" /><circle cx="255" cy="118" r="3.5" /><circle cx="280" cy="160" r="3.5" /><circle cx="305" cy="125" r="3.5" /><circle cx="330" cy="105" r="3.5" /><circle cx="355" cy="145" r="3.5" /><circle cx="380" cy="130" r="3.5" /><circle cx="405" cy="95" r="3.5" /><circle cx="430" cy="138" r="3.5" /><circle cx="480" cy="120" r="3.5" /><circle cx="505" cy="142" r="3.5" /><circle cx="530" cy="112" r="3.5" /><circle cx="555" cy="130" r="3.5" /></g>
+<circle cx="455" cy="38" r="4" fill="#b42318" /><circle cx="455" cy="38" r="10" stroke="#b42318" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="10" y="54" fill="#b42318">UCL</text><text x="10" y="129" fill="#13a89e">CL</text><text x="10" y="204" fill="#b42318">LCL</text>
+<text x="300" y="255" text-anchor="middle">Sample number</text><text x="470" y="28" fill="#b42318">Out of control</text>
+</g>
+</svg>
+<figcaption>An X-bar chart with one point above the upper control limit, signalling a special cause.</figcaption>
+</figure>
+
+## Types of control charts
+
+### Variables charts (measurements)
+
+- **X-bar and R chart:** small subgroups (typically n = 2 to 10, often 5) are taken at regular intervals. The X-bar chart tracks subgroup means (process centring); the R chart tracks subgroup ranges (process spread).
+- **X-bar and S chart:** uses standard deviation instead of range, better for larger subgroups (n above about 10).
+- **Individuals and moving range (I-MR):** for one measurement at a time, such as batch processes or slow production.
+- **CUSUM and EWMA charts:** sensitive to small, gradual shifts.
+
+### Attributes charts (counts)
+
+- **p chart:** proportion defective in samples of varying size.
+- **np chart:** number defective in samples of constant size.
+- **c chart:** number of defects per unit of constant size, for example scratches per panel.
+- **u chart:** defects per unit when the inspection area varies.
+
+## Control limit formulas for X-bar and R charts
+
+With k subgroups of size n, the grand mean X̿ and average range R̄:
+
+$$
+UCL_{\bar{X}} = \bar{\bar{X}} + A_2\bar{R} \qquad LCL_{\bar{X}} = \bar{\bar{X}} - A_2\bar{R}
+$$
+
+$$
+UCL_R = D_4\bar{R} \qquad LCL_R = D_3\bar{R}
+$$
+
+For n = 5, the constants are A₂ = 0.577, D₃ = 0 and D₄ = 2.114 (from standard SPC tables).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A shaft diameter is checked in 25 subgroups of 5 parts. The grand mean is 25.012 mm and the average range is 0.020 mm. Specification is 25.00 ± 0.05 mm.</dd>
+<dt>Find</dt><dd>Control limits for the X-bar and R charts, and estimate process capability Cpk.</dd>
+<dt>Assumptions</dt><dd>Process stable during data collection; normal distribution; d₂ = 2.326 for n = 5 so σ = R̄ ÷ d₂.</dd>
+<dt>Solution</dt><dd>X-bar UCL = 25.012 + 0.577 × 0.020 = 25.0235 mm; LCL = 25.012 − 0.0115 = 25.0005 mm<br />R chart UCL = 2.114 × 0.020 = 0.0423 mm; LCL = 0<br />σ = 0.020 ÷ 2.326 = 0.0086 mm<br />Cpk = min[(25.05 − 25.012), (25.012 − 24.95)] ÷ (3 × 0.0086) = 0.038 ÷ 0.0258 = 1.47</dd>
+<dt>Answer</dt><dd><strong>X-bar limits 25.0005 to 25.0235 mm, R chart UCL 0.042 mm; Cpk about 1.47, capable though slightly off centre</strong></dd>
+<dt>Limitations</dt><dd>Capability is only meaningful when the process is in statistical control; recentring to 25.000 mm would raise Cpk further.</dd>
+</dl>
+</Example>
+
+## Rules for detecting out of control signals
+
+Besides points outside the limits, the **Western Electric** and **Nelson rules** look for non-random patterns, for example:
+
+1. One point beyond 3σ.
+2. Two of three consecutive points beyond 2σ on the same side.
+3. Four of five consecutive points beyond 1σ on the same side.
+4. Eight consecutive points on one side of the centre line (a shift).
+5. Six points in a row steadily increasing or decreasing (a trend), such as tool wear.
+
+More rules catch smaller shifts sooner but also raise false alarms, so organisations choose a sensible set.
+
+## Implementing control charts
+
+1. Choose critical characteristics linked to customer requirements.
+2. Make sure the measurement system is capable (gauge R&R), since measurement error appears as process variation.
+3. Decide subgroup size and frequency to capture variation between, not within, subgroups.
+4. Collect initial data, calculate trial limits, investigate and remove special causes, and recalculate.
+5. Train operators to plot points and follow a **reaction plan** when a signal appears.
+6. Review charts regularly and recalculate limits after deliberate process changes.
+
+## Choosing the right chart
+
+The choice depends on the data type and how samples are taken. If the characteristic is measured on a continuous scale, such as length, weight or temperature, and parts can be grouped into rational subgroups, use X-bar and R or X-bar and S charts. If only one measurement is available at a time, use an individuals and moving range chart. If parts are simply judged good or bad, use p or np charts, and if defects are counted on each unit, use c or u charts. When small, slow drifts matter, such as tool wear or catalyst ageing, consider EWMA or CUSUM charts.
+
+## Control charts in modern manufacturing
+
+The value of a chart lies in the reaction to it, so every chart needs a named owner and a clear response when a signal appears.
+
+
+Today, SPC software collects data directly from gauges, CMMs and machine sensors, plots charts in real time on shop floor screens and alerts engineers automatically. Control charts are also the core tool of the **Control** phase of [Six Sigma DMAIC](/manufacturing-engineering/six-sigma-dmaic/), and they help eliminate defects, one of the [seven wastes](/manufacturing-engineering/seven-wastes-lean/) of lean manufacturing. The same ideas apply to process plants, where variables such as temperature, pressure and flow from [process instruments](https://www.instrumentationblog.in/category/process-instrumentation/) are monitored with control charts for consistent quality.

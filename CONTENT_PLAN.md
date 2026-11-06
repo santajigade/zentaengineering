@@ -185,43 +185,43 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| manufacturing-processes | Classification of Manufacturing Processes | manufacturing-processes-classification | fundamentals | to write |
-| cnc | CNC Machine Working Principle and Main Parts | cnc-machine-working-principle | working-principle | to write |
-| additive-manufacturing | 3D Printing Technologies: FDM, SLA and SLS Compared | 3d-printing-technologies | comparison | to write |
-| lean-manufacturing | The Seven Wastes in Lean Manufacturing | seven-wastes-lean | fundamentals | to write |
-| quality | Six Sigma DMAIC Methodology Explained | six-sigma-dmaic | explanation | to write |
-| spc | Control Charts in Statistical Process Control | control-charts-spc | fundamentals | to write |
-| production-planning | Production Planning and Control: Functions and Steps | production-planning-and-control | fundamentals | to write |
-| industrial-engineering | Time Study and Motion Study Explained | time-and-motion-study | explanation | to write |
-| supply-chain | Inventory Control: EOQ Model with Worked Example | eoq-inventory-model | fundamentals | to write |
-| maintenance-engineering | Types of Maintenance: Breakdown, Preventive and Predictive | types-of-maintenance | comparison | to write |
+| manufacturing-processes | Classification of Manufacturing Processes | manufacturing-processes-classification | fundamentals | draft |
+| cnc | CNC Machine Working Principle and Main Parts | cnc-machine-working-principle | working-principle | draft |
+| additive-manufacturing | 3D Printing Technologies: FDM, SLA and SLS Compared | 3d-printing-technologies | comparison | draft |
+| lean-manufacturing | The Seven Wastes in Lean Manufacturing | seven-wastes-lean | fundamentals | draft |
+| quality | Six Sigma DMAIC Methodology Explained | six-sigma-dmaic | explanation | draft |
+| spc | Control Charts in Statistical Process Control | control-charts-spc | fundamentals | draft |
+| production-planning | Production Planning and Control: Functions and Steps | production-planning-and-control | fundamentals | draft |
+| industrial-engineering | Time Study and Motion Study Explained | time-and-motion-study | explanation | draft |
+| supply-chain | Inventory Control: EOQ Model with Worked Example | eoq-inventory-model | fundamentals | draft |
+| maintenance-engineering | Types of Maintenance: Breakdown, Preventive and Predictive | types-of-maintenance | comparison | draft |
 
 ## materials-engineering
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| engineering-materials | Classification of Engineering Materials | engineering-materials-classification | fundamentals | to write |
-| metallurgy | Iron-Carbon Phase Diagram Explained | iron-carbon-phase-diagram | fundamentals | to write |
-| heat-treatment | Heat Treatment of Steel: Annealing, Normalizing, Hardening and Tempering | heat-treatment-of-steel | explanation | to write |
-| welding | Types of Welding Processes: SMAW, GMAW, GTAW and SAW | types-of-welding-processes | comparison | to write |
-| corrosion | Types of Corrosion and How to Prevent Them | types-of-corrosion | explanation | to write |
-| polymers-and-composites | Thermoplastics vs Thermosets: Differences and Uses | thermoplastics-vs-thermosets | comparison | to write |
-| mechanical-testing | Tensile Test: Procedure and Stress-Strain Curve | tensile-test | explanation | to write |
-| ndt | Non-Destructive Testing Methods Compared | ndt-methods | comparison | to write |
-| failure-analysis | Fatigue Failure: Causes, S-N Curve and Prevention | fatigue-failure | fundamentals | to write |
+| engineering-materials | Classification of Engineering Materials | engineering-materials-classification | fundamentals | draft |
+| metallurgy | Iron-Carbon Phase Diagram Explained | iron-carbon-phase-diagram | fundamentals | draft |
+| heat-treatment | Heat Treatment of Steel: Annealing, Normalizing, Hardening and Tempering | heat-treatment-of-steel | explanation | draft |
+| welding | Types of Welding Processes: SMAW, GMAW, GTAW and SAW | types-of-welding-processes | comparison | draft |
+| corrosion | Types of Corrosion and How to Prevent Them | types-of-corrosion | explanation | draft |
+| polymers-and-composites | Thermoplastics vs Thermosets: Differences and Uses | thermoplastics-vs-thermosets | comparison | draft |
+| mechanical-testing | Tensile Test: Procedure and Stress-Strain Curve | tensile-test | explanation | draft |
+| ndt | Non-Destructive Testing Methods Compared | ndt-methods | comparison | draft |
+| failure-analysis | Fatigue Failure: Causes, S-N Curve and Prevention | fatigue-failure | fundamentals | draft |
 
 ## safety-engineering
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| hazard-identification | HAZOP Study: Method, Guide Words and Team | hazop-study | explanation | to write |
-| risk-assessment | Risk Matrix: Likelihood, Severity and Risk Ranking | risk-matrix | fundamentals | to write |
-| fmea | FMEA Explained: Steps and RPN Calculation | fmea-explained | explanation | to write |
-| functional-safety | Safety Integrity Level (SIL) Explained | safety-integrity-level | fundamentals | to write |
-| fire-detection | Types of Fire Detectors and Where to Use Them | types-of-fire-detectors | explanation | to write |
-| fire-suppression | Fire Classes and Suitable Extinguishing Agents | fire-classes-and-extinguishers | fundamentals | to write |
-| reliability-engineering | MTBF, MTTR and Availability Explained | mtbf-mttr-availability | fundamentals | to write |
-| root-cause-analysis | Root Cause Analysis Methods: 5 Whys and Fishbone Diagram | root-cause-analysis-methods | explanation | to write |
+| hazard-identification | HAZOP Study: Method, Guide Words and Team | hazop-study | explanation | draft |
+| risk-assessment | Risk Matrix: Likelihood, Severity and Risk Ranking | risk-matrix | fundamentals | draft |
+| fmea | FMEA Explained: Steps and RPN Calculation | fmea-explained | explanation | draft |
+| functional-safety | Safety Integrity Level (SIL) Explained | safety-integrity-level | fundamentals | draft |
+| fire-detection | Types of Fire Detectors and Where to Use Them | types-of-fire-detectors | explanation | draft |
+| fire-suppression | Fire Classes and Suitable Extinguishing Agents | fire-classes-and-extinguishers | fundamentals | draft |
+| reliability-engineering | MTBF, MTTR and Availability Explained | mtbf-mttr-availability | fundamentals | draft |
+| root-cause-analysis | Root Cause Analysis Methods: 5 Whys and Fishbone Diagram | root-cause-analysis-methods | explanation | draft |
 
 ## agricultural-engineering
 

@@ -1,0 +1,142 @@
+---
+title: "The Seven Wastes in Lean Manufacturing"
+description: "The seven wastes in lean manufacturing explained: transport, inventory, motion, waiting, overproduction, overprocessing and defects, with tools and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: manufacturing-engineering
+subcategory: lean-manufacturing
+focusKeyword: "seven wastes"
+image: { src: /images/featured/seven-wastes-lean.webp, alt: "The Seven Wastes in Lean Manufacturing: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [lean-manufacturing, muda, toyota-production-system, value-stream-mapping, continuous-improvement]
+faq:
+  - q: "What does TIMWOOD stand for?"
+    a: "TIMWOOD is a memory aid for the seven wastes: Transport, Inventory, Motion, Waiting, Overproduction, Overprocessing and Defects. Adding Skills (unused talent) gives TIMWOODS, often called the eighth waste."
+  - q: "Which of the seven wastes is the worst?"
+    a: "Taiichi Ohno considered overproduction the worst, because making too much or too early creates and hides the other wastes: it causes excess inventory, extra transport and handling, storage, waiting for space, and delays the discovery of defects."
+  - q: "Are the seven wastes only for factories?"
+    a: "No. The same wastes appear in offices, hospitals, software development and services: waiting for approvals, unnecessary reports (overprocessing), searching for files (motion), backlogs (inventory), handoffs between departments (transport) and errors needing rework (defects)."
+references:
+  - text: "T. Ohno, Toyota Production System: Beyond Large-Scale Production, Productivity Press, 1988"
+  - text: "J. P. Womack and D. T. Jones, Lean Thinking: Banish Waste and Create Wealth in Your Corporation, Simon and Schuster, 1996"
+  - text: "M. Rother and J. Shook, Learning to See: Value Stream Mapping to Add Value and Eliminate Muda, Lean Enterprise Institute"
+  - text: "J. K. Liker, The Toyota Way, 2nd ed., McGraw-Hill, 2020"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **seven wastes** (Japanese: **muda**) in lean manufacturing are activities that consume time, effort or resources without adding value for the customer. Identified by Taiichi Ohno in the Toyota Production System, they are often remembered as **TIMWOOD**: **Transport**, **Inventory**, **Motion**, **Waiting**, **Overproduction**, **Overprocessing** and **Defects**. Many add an eighth, **unused skills** or talent. Lean tools such as **value stream mapping**, **5S**, **SMED**, **kanban**, **poka-yoke** and **standard work** help find and remove these wastes.
+
+</Key>
+
+Lean thinking starts from the customer's view of value. Only steps that change the product in a way the customer is willing to pay for add value. Everything else is waste. Studies of typical processes often find that value adding time is a small fraction, sometimes under 5%, of the total lead time. Removing waste shortens lead time, frees space and capacity, improves quality and lowers cost.
+
+## Value added and non-value added activities
+
+- **Value added (VA):** transforms the product as the customer wants, done right first time, for example machining a feature or assembling a part.
+- **Necessary non-value added (NNVA):** does not add value but is currently required, such as some inspection or regulatory paperwork. Minimise it.
+- **Non-value added (NVA):** pure waste. Eliminate it.
+
+## The seven wastes explained
+
+<figure>
+<svg width="600" height="292" viewBox="0 0 600 292" fill="none" role="img" aria-label="Seven circles arranged around a central circle labelled muda, the seven wastes; the outer circles are labelled transport, inventory, motion, waiting, overproduction, overprocessing and defects, with short examples beneath each">
+<circle cx="300" cy="140" r="52" fill="#0b2545" />
+<text x="300" y="136" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Muda</text>
+<text x="300" y="154" font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle">7 wastes</text>
+<g stroke="#c9d2de" stroke-width="2"><path d="M300 88V60M345 114L415 80M350 155L440 170M325 186L370 225M275 186L230 225M250 155L160 170M255 114L185 80" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<circle cx="300" cy="35" r="30" fill="#e6f6f4" /><circle cx="450" cy="65" r="30" fill="#fff7e0" /><circle cx="490" cy="180" r="30" fill="#e6f6f4" />
+<circle cx="390" cy="245" r="30" fill="#fff7e0" /><circle cx="210" cy="250" r="38" fill="#e6f6f4" /><circle cx="105" cy="180" r="38" fill="#fff7e0" /><circle cx="150" cy="65" r="30" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="300" y="39">Transport</text><text x="450" y="69">Inventory</text><text x="490" y="184">Motion</text><text x="390" y="249">Waiting</text><text x="210" y="247" font-size="10">Over-</text><text x="210" y="260" font-size="10">production</text><text x="105" y="177" font-size="10">Over-</text><text x="105" y="190" font-size="10">processing</text><text x="150" y="69">Defects</text>
+</g>
+</svg>
+<figcaption>The seven wastes of lean manufacturing (TIMWOOD).</figcaption>
+</figure>
+
+### 1. Transport
+
+Moving materials, parts or products between processes or locations without adding value. Examples: forklifts carrying parts between distant departments, multiple storage moves, shipping between plants. Each move costs time, handling effort and risk of damage. **Remedies:** cellular layouts, placing processes close together, point of use storage, conveyors only where justified.
+
+### 2. Inventory
+
+Raw materials, work in progress (WIP) and finished goods beyond what is needed now. Inventory ties up cash and space, hides problems such as machine breakdowns and quality issues, and risks obsolescence. **Remedies:** pull systems with kanban, smaller batches, one piece flow, quick changeovers (SMED), and economic ordering such as the [EOQ model](/manufacturing-engineering/eoq-inventory-model/) where demand is steady.
+
+### 3. Motion
+
+Unnecessary movement of people: walking to fetch tools, reaching, bending, searching for items. It wastes time and causes fatigue and injuries. **Remedies:** 5S workplace organisation, ergonomic workstation design, tools at point of use, and [time and motion study](/manufacturing-engineering/time-and-motion-study/).
+
+### 4. Waiting
+
+People or machines idle while waiting for materials, information, approvals, machine cycles, maintenance or the previous process. **Remedies:** line balancing, reliable equipment through [preventive and predictive maintenance](/manufacturing-engineering/types-of-maintenance/), synchronised flow, and multi-skilled operators.
+
+### 5. Overproduction
+
+Making more than the customer needs, or making it earlier. Ohno called this the worst waste because it generates the others: extra inventory, transport, storage and hidden defects. **Remedies:** produce to takt time, pull scheduling, level loading (heijunka).
+
+### 6. Overprocessing
+
+Doing more work than the customer requires: tighter tolerances than needed, extra polishing, redundant inspections, duplicate data entry, overly complex machines. **Remedies:** understand true customer requirements, simplify designs and processes, value engineering.
+
+### 7. Defects
+
+Scrap, rework, returns and warranty claims, plus the inspection and paperwork they cause. **Remedies:** mistake proofing (poka-yoke), standard work, root cause analysis, [statistical process control](/manufacturing-engineering/control-charts-spc/) and [Six Sigma DMAIC](/manufacturing-engineering/six-sigma-dmaic/) projects.
+
+### The eighth waste: unused talent
+
+Not using people's knowledge, ideas and skills. Engaging operators in kaizen (continuous improvement) is one of the most powerful ways to find and remove the other wastes.
+
+## Takt time and lead time
+
+**Takt time** sets the pace of production to customer demand:
+
+$$
+T_\text{takt} = \frac{\text{available working time}}{\text{customer demand}}
+$$
+
+**Process cycle efficiency** shows how much of the lead time adds value:
+
+$$
+PCE = \frac{\text{value added time}}{\text{total lead time}}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A machining cell works one shift of 8 hours with 60 minutes of breaks; customer demand is 420 parts per day. A value stream map shows value added time of 6 minutes per part, but total lead time from raw material to dispatch is 4 days of 7 working hours.</dd>
+<dt>Find</dt><dd>Takt time and process cycle efficiency.</dd>
+<dt>Assumptions</dt><dd>Lead time measured in working time only.</dd>
+<dt>Solution</dt><dd>Available time = 7 h × 3600 = 25 200 s<br />Takt = 25 200 ÷ 420 = 60 s per part<br />Lead time = 4 × 7 × 60 = 1680 min<br />PCE = 6 ÷ 1680 = 0.0036 = 0.36%</dd>
+<dt>Answer</dt><dd><strong>Takt time is 60 s; only 0.36% of lead time adds value, so most of the time is waiting and inventory between steps</strong></dd>
+<dt>Limitations</dt><dd>Lead time often varies widely; measuring several products over time gives a better picture.</dd>
+</dl>
+</Example>
+
+## Lean tools for removing waste
+
+| Tool | Main wastes addressed |
+| --- | --- |
+| Value stream mapping | All, by making flow and waits visible |
+| 5S (sort, set in order, shine, standardise, sustain) | Motion, defects, waiting |
+| Kanban and pull systems | Overproduction, inventory |
+| SMED (quick changeover) | Inventory, waiting, overproduction |
+| Poka-yoke (mistake proofing) | Defects |
+| Standard work | Motion, defects, variation |
+| Cellular layout and one piece flow | Transport, inventory, waiting |
+| Total productive maintenance (TPM) | Waiting, defects |
+
+## The seven wastes outside the factory
+
+The same seven wastes appear in offices and services. In an engineering department, **transport** is passing drawings between departments for approvals; **inventory** is a queue of unreviewed change requests; **motion** is searching for the latest file version; **waiting** is a design blocked for a test result; **overproduction** is reports nobody reads; **overprocessing** is detail beyond what the customer needs; and **defects** are drawing errors found on the shop floor. Hospitals, banks and software teams use the same lens to cut delays and errors.
+
+## Applying the seven wastes on the shop floor
+
+Start small and visible: pick one product family, map its value stream from order to delivery, and mark every place where material or information waits, and measure how long it waits there.
+
+
+A practical approach is a **gemba walk**: go to where the work is done, observe, ask why, and note each waste with the people doing the work. Then prioritise, run small experiments (PDCA cycles), standardise what works and repeat. Measures such as lead time, WIP, first pass yield, OEE and floor space show progress. Over time, focusing on the seven wastes builds a culture of continuous improvement that keeps finding smaller wastes to remove, supported by sound [production planning and control](/manufacturing-engineering/production-planning-and-control/).

@@ -1,0 +1,150 @@
+---
+title: "Classification of Engineering Materials"
+description: "Classification of engineering materials: metals, ceramics, polymers, composites and advanced materials, with properties, bonding, uses and a selection example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: materials-engineering
+subcategory: engineering-materials
+focusKeyword: "engineering materials"
+image: { src: /images/featured/engineering-materials-classification.webp, alt: "Classification of Engineering Materials: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [engineering-materials, metals, ceramics, polymers, composites]
+faq:
+  - q: "What are the four main classes of engineering materials?"
+    a: "Metals, ceramics (including glasses), polymers and composites. Some texts add semiconductors, biomaterials and advanced or smart materials as further groups. The classes differ mainly in atomic bonding and structure, which explains their typical properties."
+  - q: "Why are metals ductile while ceramics are brittle?"
+    a: "Metallic bonding is non-directional, so planes of atoms can slip past each other by dislocation movement without breaking the material. Ceramics have ionic and covalent bonds that are strong and directional, so dislocations hardly move, and cracks grow from small flaws instead, causing brittle fracture."
+  - q: "How do engineers choose between material classes?"
+    a: "They list the functional requirements (loads, stiffness, temperature, environment, weight, cost, manufacturing route) and compare candidate materials using property data and selection charts, such as Ashby charts of strength or stiffness against density, often combined with performance indices that capture the design goal."
+references:
+  - text: "W. D. Callister Jr. and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley"
+  - text: "M. F. Ashby, Materials Selection in Mechanical Design, 5th ed., Butterworth-Heinemann"
+  - text: "M. F. Ashby and D. R. H. Jones, Engineering Materials 1: An Introduction to Properties, Applications and Design, 5th ed."
+  - text: "ASM Handbook, Vol. 20: Materials Selection and Design, ASM International"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Engineering materials** are classified into four main groups. **Metals** (steels, cast irons, aluminium, copper, titanium and their alloys) are strong, tough, ductile and good conductors. **Ceramics and glasses** (alumina, silicon carbide, concrete, glass) are hard, heat and corrosion resistant but brittle. **Polymers** (thermoplastics, thermosets, elastomers) are light, easy to form and corrosion resistant but have low stiffness and temperature limits. **Composites** (glass or carbon fibre reinforced polymers, reinforced concrete) combine materials to get the best of each. **Advanced materials** such as semiconductors, biomaterials, smart materials and nanomaterials form further groups.
+
+</Key>
+
+Choosing the right material is one of the most important decisions in engineering design. It affects strength, weight, durability, safety, manufacturability, cost and environmental impact. Classifying materials into families with similar structures and properties gives engineers a starting point for that choice.
+
+## Why materials behave differently: atomic bonding
+
+- **Metallic bonding:** positive ions in a sea of free electrons. Explains electrical and thermal conductivity, ductility and opacity.
+- **Ionic and covalent bonding:** strong, directional bonds in ceramics. Explain high hardness, high melting points, chemical stability and brittleness.
+- **Covalent chains with weak secondary bonds:** in polymers, long carbon based chains are held to each other by weak van der Waals forces or occasional cross-links. Explains low density, low stiffness and softening on heating.
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Classification tree: engineering materials divide into metals (ferrous and non-ferrous), ceramics and glasses, polymers (thermoplastics, thermosets, elastomers), composites (polymer, metal and ceramic matrix), and advanced materials (semiconductors, biomaterials, smart, nanomaterials)">
+<rect x="210" y="15" width="180" height="40" rx="6" fill="#0b2545" />
+<text x="300" y="40" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Engineering materials</text>
+<path d="M300 55V75M60 75H540M60 75V95M180 75V95M300 75V95M420 75V95M540 75V95" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="10" y="95" width="100" height="40" rx="5" fill="#eef1f6" /><rect x="130" y="95" width="100" height="40" rx="5" fill="#fff7e0" /><rect x="250" y="95" width="100" height="40" rx="5" fill="#e6f6f4" /><rect x="370" y="95" width="100" height="40" rx="5" fill="#ffe9e7" /><rect x="490" y="95" width="100" height="40" rx="5" fill="#ffffff" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="60" y="120">Metals</text><text x="180" y="112">Ceramics</text><text x="180" y="127">and glasses</text><text x="300" y="120">Polymers</text><text x="420" y="120">Composites</text><text x="540" y="120">Advanced</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="60" y="158">Ferrous:</text><text x="60" y="172">steel, cast iron</text><text x="60" y="192">Non-ferrous:</text><text x="60" y="206">Al, Cu, Ti, Ni</text>
+<text x="180" y="158">Alumina, SiC</text><text x="180" y="172">Concrete, brick</text><text x="180" y="186">Glass</text><text x="180" y="200">Cermets</text>
+<text x="300" y="158">Thermoplastics</text><text x="300" y="172">Thermosets</text><text x="300" y="186">Elastomers</text>
+<text x="420" y="158">Polymer matrix</text><text x="420" y="172">(GFRP, CFRP)</text><text x="420" y="186">Metal matrix</text><text x="420" y="200">Ceramic matrix</text><text x="420" y="214">RC concrete</text>
+<text x="540" y="158">Semiconductors</text><text x="540" y="172">Biomaterials</text><text x="540" y="186">Smart materials</text><text x="540" y="200">Nanomaterials</text>
+</g>
+<text x="300" y="270" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">Bonding and structure explain the typical properties of each class</text>
+</svg>
+<figcaption>Main classes of engineering materials with examples.</figcaption>
+</figure>
+
+## Metals and alloys
+
+**Ferrous metals** are based on iron: carbon steels, alloy steels, stainless steels, tool steels and cast irons. They dominate structural and machine applications because they are strong, tough, weldable and relatively cheap. Their properties can be tailored by composition and heat treatment, as described in the [iron-carbon phase diagram](/materials-engineering/iron-carbon-phase-diagram/) and [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+
+**Non-ferrous metals** include aluminium (light, corrosion resistant, for aircraft and transport), copper (excellent conductor, for wiring and heat exchangers), titanium (high strength to weight and biocompatible), nickel superalloys (high temperature strength for turbines), zinc, magnesium and precious metals.
+
+**Typical properties:** high stiffness (Young's modulus about 45 to 210 GPa), good strength and toughness, ductile, conductive, dense (about 2.7 to 8.9 g/cm³ for common alloys), and prone to [corrosion](/materials-engineering/types-of-corrosion/) unless protected.
+
+## Ceramics and glasses
+
+Inorganic, non-metallic materials, usually compounds of metals with oxygen, nitrogen or carbon.
+
+- **Traditional ceramics:** brick, tile, porcelain, cement and concrete, discussed in [types of cement](/civil-engineering/types-of-cement/).
+- **Technical ceramics:** alumina, zirconia, silicon carbide, silicon nitride for cutting tools, bearings, wear parts, insulators and armour.
+- **Glasses:** amorphous silica based materials for windows, containers and optical fibres.
+
+**Typical properties:** very hard, stiff, high melting point, low thermal and electrical conductivity, excellent chemical resistance, but brittle with low fracture toughness and sensitive to flaws. Strong in compression, weak in tension.
+
+## Polymers
+
+Long chain molecules based mainly on carbon and hydrogen.
+
+- **Thermoplastics** soften on heating and can be remelted: polyethylene, polypropylene, PVC, nylon, PET, polycarbonate.
+- **Thermosets** cure into a cross-linked network and do not melt: epoxy, phenolic, polyester resins.
+- **Elastomers** stretch to large strains and recover: natural rubber, silicone, EPDM, nitrile.
+
+These groups are compared in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/).
+
+**Typical properties:** low density (about 0.9 to 1.5 g/cm³), low stiffness, good corrosion resistance and electrical insulation, easy to mould, but limited service temperature and they may creep, swell or degrade in sunlight.
+
+## Composites
+
+Composites combine a **matrix** with a **reinforcement** to achieve properties neither has alone.
+
+- **Polymer matrix composites:** glass fibre (GFRP) and carbon fibre (CFRP) reinforced plastics for aircraft, wind turbine blades, boats, sporting goods and pressure vessels.
+- **Metal matrix composites:** aluminium reinforced with silicon carbide for brake discs and electronics.
+- **Ceramic matrix composites:** silicon carbide fibres in silicon carbide for jet engine hot sections.
+- **Natural and civil composites:** wood, and reinforced concrete, where steel bars carry tension and concrete carries compression.
+
+A simple **rule of mixtures** estimates the stiffness of a unidirectional composite along the fibres:
+
+$$
+E_c = V_f E_f + (1 - V_f) E_m
+$$
+
+where V_f is fibre volume fraction and E_f, E_m are fibre and matrix moduli.
+
+## Advanced materials
+
+- **Semiconductors:** silicon, gallium arsenide and gallium nitride for electronics and power devices.
+- **Biomaterials:** titanium alloys, cobalt chromium, bioceramics and polymers used in implants.
+- **Smart materials:** shape memory alloys, piezoelectrics and magnetostrictive materials that respond to temperature, voltage or magnetic fields.
+- **Nanomaterials:** carbon nanotubes, graphene and nanoparticles with unusual properties at very small scales.
+
+## Comparison of the main classes
+
+| Property | Metals | Ceramics | Polymers | Composites (CFRP) |
+| --- | --- | --- | --- | --- |
+| Density | High | Medium | Low | Low |
+| Stiffness | High | Very high | Low | High along fibres |
+| Strength | High | High in compression | Low to medium | Very high along fibres |
+| Ductility / toughness | High | Very low | Variable | Medium, anisotropic |
+| Max service temperature | Medium to high | Very high | Low | Limited by matrix |
+| Electrical conductivity | Good | Poor | Poor | Varies |
+| Corrosion resistance | Often poor | Excellent | Good | Good |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A unidirectional CFRP strip has 60% carbon fibre by volume (E_f = 230 GPa, density 1.8 g/cm³) in epoxy (E_m = 3.5 GPa, density 1.2 g/cm³). Compare its specific stiffness E/ρ with steel (E = 210 GPa, ρ = 7.85 g/cm³) and aluminium (E = 70 GPa, ρ = 2.7 g/cm³).</dd>
+<dt>Find</dt><dd>The composite modulus and density, and specific stiffness of each material.</dd>
+<dt>Assumptions</dt><dd>Rule of mixtures along the fibre direction; perfect bonding.</dd>
+<dt>Solution</dt><dd>E_c = 0.6 × 230 + 0.4 × 3.5 = 138 + 1.4 = 139.4 GPa<br />ρ_c = 0.6 × 1.8 + 0.4 × 1.2 = 1.56 g/cm³<br />E/ρ: CFRP = 139.4 ÷ 1.56 = 89.4; steel = 210 ÷ 7.85 = 26.8; aluminium = 70 ÷ 2.7 = 25.9 (GPa per g/cm³)</dd>
+<dt>Answer</dt><dd><strong>The CFRP is about 3.3 times stiffer per unit weight than steel or aluminium along the fibres</strong></dd>
+<dt>Limitations</dt><dd>Across the fibres the composite is much less stiff; real laminates use several fibre directions, lowering the advantage.</dd>
+</dl>
+</Example>
+
+## Selecting engineering materials
+
+Material selection balances function, shape, material and process. Engineers define requirements (loads, stiffness, temperature, environment, life, cost), screen out materials that fail any hard limit, rank the rest with **performance indices** such as E/ρ for light stiff ties or E^(1/2)/ρ for light stiff beams, and then check manufacturability, availability, sustainability and cost. Mechanical properties used in these decisions come from tests such as the [tensile test](/materials-engineering/tensile-test/), and design checks link to [stress and strain](/mechanical-engineering/stress-and-strain/) analysis and an appropriate [factor of safety](/mechanical-engineering/factor-of-safety/).
+
+## Engineering materials and sustainability
+
+Materials also carry environmental costs: producing steel, aluminium and cement emits large amounts of CO₂, while many polymers are made from fossil feedstocks. Engineers increasingly consider embodied energy and carbon, recycled content and end of life recovery when choosing materials, using tools such as [life cycle assessment](/environmental-engineering/life-cycle-assessment/). Lightweight materials can also save energy over a product's life, for example in vehicles and aircraft, so the full life cycle must be considered.

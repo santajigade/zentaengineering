@@ -1,0 +1,137 @@
+---
+title: "NDT Methods Compared: UT, RT, MT, PT and ET"
+description: "NDT methods compared: visual, penetrant, magnetic particle, eddy current, ultrasonic and radiographic testing, how each works, what it finds and a UT example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: materials-engineering
+subcategory: ndt
+focusKeyword: "ndt methods"
+image: { src: /images/featured/ndt-methods.webp, alt: "NDT Methods Compared: UT, RT, MT, PT and ET: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [ndt, ultrasonic-testing, radiography, magnetic-particle, dye-penetrant]
+faq:
+  - q: "Which NDT method is best for finding internal defects in welds?"
+    a: "Ultrasonic testing and radiographic testing are the main methods for internal weld defects. Radiography gives a permanent image and is good for volumetric flaws such as porosity and slag; ultrasonic testing, especially phased array and TOFD, is better at planar flaws such as cracks and lack of fusion and needs no radiation safety zone."
+  - q: "Can magnetic particle testing be used on stainless steel?"
+    a: "Not on austenitic stainless steels such as 304 and 316, because they are non-magnetic. Dye penetrant testing is used instead for surface cracks. Ferritic and martensitic stainless steels are magnetic and can be tested with magnetic particles."
+  - q: "What are NDT levels 1, 2 and 3?"
+    a: "Under ISO 9712 and similar schemes such as ASNT SNT-TC-1A, Level 1 personnel perform tests under supervision following written instructions, Level 2 set up and calibrate equipment, perform and interpret tests to standards and write instructions, and Level 3 develop procedures, choose methods and techniques, and take technical responsibility."
+references:
+  - text: "ISO 9712:2021, Non-destructive testing: Qualification and certification of NDT personnel"
+  - text: "ASME Boiler and Pressure Vessel Code, Section V: Nondestructive Examination"
+  - text: "ASNT, Nondestructive Testing Handbook, 4th ed., American Society for Nondestructive Testing"
+  - text: "ISO 17640, Non-destructive testing of welds: Ultrasonic testing, Techniques, testing levels and assessment"
+  - text: "C. J. Hellier, Handbook of Nondestructive Evaluation, 3rd ed., McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**NDT methods** (non-destructive testing) inspect materials, welds and components for defects without damaging them. The six most common are: **visual testing (VT)**; **liquid penetrant testing (PT)** for surface breaking cracks in any non-porous material; **magnetic particle testing (MT)** for surface and near surface flaws in ferromagnetic steels; **eddy current testing (ET)** for surface flaws, coatings and conductivity in conductive metals; **ultrasonic testing (UT)** for internal flaws and wall thickness using sound waves; and **radiographic testing (RT)** for internal flaws using X-rays or gamma rays. Choice depends on material, defect type and location, access and cost.
+
+</Key>
+
+NDT keeps aircraft, pipelines, pressure vessels, bridges, power plants and rail systems safe by finding cracks, corrosion and manufacturing defects before they cause failure. Unlike destructive tests such as the [tensile test](/materials-engineering/tensile-test/), NDT leaves the part fit for service, so it can be used on every weld or at regular intervals throughout a component's life.
+
+## Visual testing (VT)
+
+The first and most widely used method. Inspectors examine surfaces directly or with magnifiers, borescopes, videoscopes and drones, checking weld profiles, surface cracks, corrosion, misalignment and damage. Good lighting, access and trained eyes are essential. VT is usually done before any other method.
+
+## Liquid penetrant testing (PT)
+
+1. Clean the surface thoroughly.
+2. Apply a coloured (red) or fluorescent **penetrant** that seeps into surface breaking defects by capillary action.
+3. After a dwell time, remove excess penetrant.
+4. Apply a **developer** that draws penetrant out of defects, forming visible indications.
+5. Inspect under white light or UV light, then clean.
+
+**Finds:** surface breaking cracks, porosity, laps and seams. **Works on:** any non-porous material, including austenitic stainless steel, aluminium, titanium, ceramics and plastics. **Limits:** only open surface defects; rough or porous surfaces give false indications.
+
+## Magnetic particle testing (MT)
+
+The part is magnetised with a yoke, coil or current. A defect at or near the surface disturbs the magnetic field, creating **flux leakage** that attracts fine iron particles (dry powder or a wet suspension, visible or fluorescent), forming an indication over the flaw.
+
+**Finds:** surface and slightly subsurface cracks, especially those across the field direction, so two perpendicular magnetisations are used. **Works on:** ferromagnetic materials only (carbon and low alloy steels, ferritic stainless steels). **Strengths:** fast, sensitive, cheap; widely used on welds, forgings and castings.
+
+## Eddy current testing (ET)
+
+A coil carrying alternating current induces **eddy currents** in a conductive part. Cracks, thickness changes or conductivity variations alter the eddy currents, changing the coil's impedance, which the instrument displays.
+
+**Finds:** surface and near surface cracks, corrosion in thin sections, coating thickness, material sorting by conductivity, heat exchanger tube defects. **Strengths:** fast, no couplant or consumables, can be automated, works through paint. **Limits:** shallow penetration due to the skin effect, conductive materials only, needs reference standards.
+
+## Ultrasonic testing (UT)
+
+A probe sends high frequency sound pulses (typically 1 to 15 MHz) into the material through a couplant gel. Sound reflects from the back wall and from internal flaws. The instrument measures the time of flight, giving the reflector's depth.
+
+- **Thickness gauging:** measures remaining wall thickness for [corrosion](/materials-engineering/types-of-corrosion/) monitoring.
+- **Flaw detection:** angle beam probes inspect welds for cracks, lack of fusion and slag.
+- **Phased array UT (PAUT):** many elements steer and focus the beam electronically, producing images.
+- **Time of flight diffraction (TOFD):** uses diffracted signals from crack tips for accurate sizing.
+
+**Strengths:** deep penetration, accurate depth and sizing, portable, no radiation hazard. **Limits:** needs skilled operators, couplant and access, difficult on coarse grained, thin or complex parts.
+
+## Radiographic testing (RT)
+
+X-rays or gamma rays (from iridium-192 or cobalt-60 sources) pass through the part onto film or a digital detector. Thinner or less dense regions, such as voids, let more radiation through and appear darker.
+
+**Finds:** internal volumetric defects such as porosity, slag inclusions, incomplete penetration, and cracks aligned with the beam. **Strengths:** permanent record, good for welds and castings. **Limits:** radiation safety requires exclusion zones and licensed staff; access to both sides; planar cracks at angles may be missed. **Digital radiography and computed tomography (CT)** add speed and 3D imaging.
+
+<figure>
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Pulse echo ultrasonic testing: a probe on the top surface of a steel plate sends a sound pulse down; part reflects from an internal flaw and the rest from the back wall; an A-scan display shows the initial pulse, a flaw echo at a shorter time and a back wall echo at a longer time">
+<rect x="40" y="70" width="240" height="120" fill="#c9d2de" stroke="#0b2545" stroke-width="2" />
+<rect x="120" y="40" width="40" height="30" rx="3" fill="#13a89e" stroke="#0b2545" stroke-width="1.5" />
+<path d="M140 70V180M150 70V120" stroke="#b42318" stroke-width="2" stroke-dasharray="5 3" />
+<ellipse cx="160" cy="125" rx="22" ry="5" fill="#0b2545" />
+<path d="M330 200H580M330 200V50" stroke="#0b2545" stroke-width="2" />
+<path d="M330 200L338 70L346 200H420L426 140L432 200H520L526 90L532 200H575" stroke="#13a89e" stroke-width="2" fill="none" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="140" y="32">Probe</text><text x="215" y="120" font-size="11">Flaw</text><text x="160" y="210">Steel plate, back wall</text>
+<text x="455" y="225">Time (depth)</text><text x="385" y="62" font-size="11">Initial pulse</text><text x="430" y="130" font-size="11">Flaw echo</text><text x="530" y="82" font-size="11">Back wall</text>
+<text x="455" y="40" font-weight="700">A-scan display</text>
+</g>
+</svg>
+<figcaption>Pulse echo ultrasonic testing: echo times reveal the depth of a flaw and of the back wall.</figcaption>
+</figure>
+
+## NDT methods compared
+
+| Method | Detects | Materials | Depth | Main limitation |
+| --- | --- | --- | --- | --- |
+| VT | Visible surface defects | All | Surface | Only what can be seen |
+| PT | Surface breaking cracks | Non-porous | Surface | Defect must be open to surface |
+| MT | Surface, near surface cracks | Ferromagnetic | Up to a few mm | Magnetic materials only |
+| ET | Surface cracks, thickness, conductivity | Conductive | Shallow | Skin depth, reference standards |
+| UT | Internal flaws, thickness | Most | Deep | Operator skill, couplant, geometry |
+| RT | Internal volumetric flaws | Most | Through thickness | Radiation safety, crack orientation |
+
+## Ultrasonic depth calculation
+
+In pulse echo UT, the reflector depth d is:
+
+$$
+d = \frac{v \times t}{2}
+$$
+
+where v is the sound velocity in the material and t the round trip time.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A straight beam probe on a steel plate shows a back wall echo at 8.1 µs and a flaw echo at 4.2 µs. Longitudinal wave velocity in steel is 5920 m/s.</dd>
+<dt>Find</dt><dd>The plate thickness and the flaw depth.</dd>
+<dt>Assumptions</dt><dd>Times measured from entry into the steel; uniform velocity.</dd>
+<dt>Solution</dt><dd>Thickness = 5920 × 8.1 × 10⁻⁶ ÷ 2 = 0.0240 m = 24.0 mm<br />Flaw depth = 5920 × 4.2 × 10⁻⁶ ÷ 2 = 0.0124 m = 12.4 mm</dd>
+<dt>Answer</dt><dd><strong>The plate is about 24.0 mm thick and the flaw lies about 12.4 mm below the surface, near mid-thickness, typical of a lamination</strong></dd>
+<dt>Limitations</dt><dd>Calibration on a reference block of the same material is needed; flaw size requires further scanning and sizing techniques.</dd>
+</dl>
+</Example>
+
+## Choosing NDT methods
+
+Consider the material, the expected defect type and orientation (for example fatigue cracks at weld toes, porosity in castings, corrosion wall loss), access to one or both sides, surface condition, required sensitivity, code requirements and cost. Often several methods are combined: VT and MT or PT for surface cracks, and UT or RT for the full volume of welds made by the [welding processes](/materials-engineering/types-of-welding-processes/). Personnel qualification to ISO 9712 or ASNT schemes and written procedures ensure reliable results.
+
+## NDT methods in asset integrity
+
+In service, NDT supports risk based inspection programmes that decide what to inspect, where, how and how often. Detecting a crack early allows repair long before [fatigue failure](/materials-engineering/fatigue-failure/) or leakage, and wall thickness data feed remaining life calculations for pipes and vessels.

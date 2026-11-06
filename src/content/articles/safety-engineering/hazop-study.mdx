@@ -1,0 +1,133 @@
+---
+title: "HAZOP Study: Method, Guide Words and Team"
+description: "HAZOP study explained: nodes, design intent, parameters, guide words, deviations, causes, consequences, safeguards, team roles, worksheet and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: safety-engineering
+subcategory: hazard-identification
+focusKeyword: "hazop study"
+image: { src: /images/featured/hazop-study.webp, alt: "HAZOP Study: Method, Guide Words and Team: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [hazop, process-safety, hazard-identification, iec-61882, guide-words]
+faq:
+  - q: "When should a HAZOP study be done?"
+    a: "The main HAZOP is done when the P&IDs are reasonably complete and stable, typically at the end of basic or front end engineering design, so changes are still affordable. Further HAZOPs are done at detailed design, before major modifications, and periodically for operating plants, often every five years, as part of process safety management."
+  - q: "How long does a HAZOP take?"
+    a: "It depends on plant size and complexity. A small skid may take a day or two, while a large process unit can take several weeks of sessions. A rough rule is several hours per node, and sessions are usually limited to about six hours per day to keep the team effective."
+  - q: "What is the difference between HAZOP and HAZID?"
+    a: "HAZID (hazard identification) is a broader, earlier brainstorming study of major hazards at concept stage, covering external events, site layout, toxic releases and similar. HAZOP is a detailed, systematic study of process deviations using guide words on the P&IDs, done once the design is more developed."
+references:
+  - text: "IEC 61882:2016, Hazard and operability studies (HAZOP studies): Application guide"
+  - text: "F. Crawley and B. Tyler, HAZOP: Guide to Best Practice, 3rd ed., Elsevier/IChemE"
+  - text: "CCPS, Guidelines for Hazard Evaluation Procedures, 3rd ed., Wiley/AIChE"
+  - text: "T. A. Kletz, HAZOP and HAZAN: Identifying and Assessing Process Industry Hazards, 4th ed., IChemE"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **HAZOP study** (hazard and operability study) is a structured team review that finds hazards and operability problems in a process design. The **P&IDs** are divided into **nodes**. For each node, the team states the **design intent**, then combines **parameters** (flow, pressure, temperature, level, composition) with **guide words** (**no, more, less, reverse, as well as, part of, other than**) to generate **deviations** such as "no flow" or "more pressure". For each credible deviation, the team records **causes**, **consequences**, existing **safeguards** and **recommendations**. The method is described in **IEC 61882**.
+
+</Key>
+
+HAZOP was developed at ICI in the UK in the 1960s and is now the standard hazard identification method for chemical plants, refineries, oil and gas facilities, pharmaceutical plants and many other process industries. Its strength is that a multidisciplinary team, guided by simple words, systematically asks "what if the process does not behave as intended?" for every part of the design.
+
+## The HAZOP team
+
+A typical team of five to eight people includes:
+
+- **HAZOP leader (chair or facilitator):** independent, experienced in the method; guides discussion and keeps it systematic.
+- **Scribe (recorder):** documents the discussion in the worksheet, often with HAZOP software.
+- **Process engineer:** explains the design intent and process behaviour.
+- **Instrument and control engineer:** knows the control loops, alarms and trips.
+- **Operations representative:** brings practical operating experience.
+- **Mechanical, safety, maintenance and vendor specialists** as needed.
+
+The leader needs to keep the team focused on identifying problems, not designing solutions in the meeting.
+
+## The HAZOP procedure
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="HAZOP loop: select node, describe design intent, select parameter, apply guide word to form a deviation, identify causes, consequences and safeguards, record recommendations; repeat for all guide words, all parameters and all nodes">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="20" width="160" height="40" rx="6" fill="#eef1f6" /><rect x="20" y="80" width="160" height="40" rx="6" fill="#eef1f6" /><rect x="20" y="140" width="160" height="40" rx="6" fill="#e6f6f4" /><rect x="20" y="200" width="160" height="40" rx="6" fill="#e6f6f4" />
+<rect x="240" y="200" width="200" height="40" rx="6" fill="#fff7e0" /><rect x="240" y="140" width="200" height="40" rx="6" fill="#fff7e0" /><rect x="240" y="80" width="200" height="40" rx="6" fill="#ffe9e7" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M100 60v14M100 120v14M100 180v14M180 220h54M340 200v-14M340 140v-14" /></g>
+<g fill="#13a89e"><path d="M95 74l5 7 5-7z" /><path d="M95 134l5 7 5-7z" /><path d="M95 194l5 7 5-7z" /><path d="M234 215l7 5-7 5z" /><path d="M335 186l5-7 5 7z" /><path d="M335 126l5-7 5 7z" /></g>
+<g stroke="#b42318" stroke-width="2" stroke-dasharray="5 4" fill="none"><path d="M440 100H500V40H186" /></g><path d="M188 35l-8 5 8 5z" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="100" y="45">1. Select node</text><text x="100" y="105">2. Design intent</text><text x="100" y="165">3. Select parameter</text><text x="100" y="225">4. Apply guide word</text>
+<text x="340" y="225">5. Causes</text><text x="340" y="165">6. Consequences, safeguards</text><text x="340" y="105">7. Recommendations</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#b42318">
+<text x="455" y="160">Repeat for next</text><text x="455" y="175">guide word, parameter</text><text x="455" y="190">and node</text>
+</g>
+<text x="300" y="285" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">The loop repeats until every node, parameter and guide word is covered</text>
+</svg>
+<figcaption>The systematic HAZOP loop for each node.</figcaption>
+</figure>
+
+1. **Prepare:** define scope and objectives, collect up to date P&IDs, process flow diagrams, heat and material balances, cause and effect charts, equipment data sheets and operating procedures. The relationship between these drawings is explained in [PFD vs P&ID](/chemical-engineering/pfd-vs-pid/).
+2. **Divide into nodes:** sections of the process with a clear design intent, such as a feed line, a reactor, a column or a heat exchanger train.
+3. **Describe the design intent** of the node: what it should do, with what conditions.
+4. **Generate deviations** by combining parameters with guide words.
+5. **Identify causes** that could realistically produce each deviation.
+6. **Evaluate consequences**, assuming safeguards fail, to understand the worst credible outcome.
+7. **List safeguards** already in the design: control loops, alarms, trips, relief valves, procedures.
+8. **Make recommendations** where safeguards are judged inadequate, often after ranking risk with a [risk matrix](/safety-engineering/risk-matrix/).
+9. **Follow up** to ensure every action is closed.
+
+## Guide words and deviations
+
+| Guide word | Meaning | Example deviation |
+| --- | --- | --- |
+| No (not, none) | Complete negation of intent | No flow |
+| More | Quantitative increase | More pressure, more temperature |
+| Less | Quantitative decrease | Less flow, less level |
+| As well as | Qualitative addition | Contamination, extra phase (water in oil) |
+| Part of | Qualitative decrease | Wrong concentration, missing component |
+| Reverse | Logical opposite | Reverse flow |
+| Other than | Complete substitution | Wrong material, other operating mode |
+
+Additional guide words such as **early, late, before and after** are useful for batch and sequence operations. Teams also review **other operating modes**: start-up, shutdown, maintenance, sampling, utility failure and emergency.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Node: transfer line from a storage tank to a reactor, pumped by a centrifugal pump with a flow control valve. Design intent: transfer 10 m³/h of solvent at ambient temperature to the reactor at 3 barg.</dd>
+<dt>Find</dt><dd>Worksheet entries for the deviation "no flow".</dd>
+<dt>Assumptions</dt><dd>Reactor reaction is exothermic and needs the solvent for temperature control.</dd>
+<dt>Solution</dt><dd>Causes: pump trip or failure; control valve fails closed; blocked suction strainer; tank empty; manual valve left closed<br />Consequences: pump runs dry or dead headed and overheats, seal damage and leak; loss of solvent to reactor allows temperature rise and possible runaway<br />Safeguards: low flow alarm on the flow controller; low level alarm and trip on the tank; reactor high temperature alarm and trip<br />Recommendations: add pump low flow trip or minimum flow recycle; confirm reactor high temperature trip is independent of the basic control system and assess its required SIL</dd>
+<dt>Answer</dt><dd><strong>Five credible causes, two significant consequences and two recommended actions are recorded for "no flow"</strong></dd>
+<dt>Limitations</dt><dd>The worksheet is only as good as the team's knowledge and the accuracy of the drawings.</dd>
+</dl>
+</Example>
+
+The independent trip in this example would be assessed with the methods in [safety integrity level](/safety-engineering/safety-integrity-level/).
+
+## The HAZOP worksheet
+
+Each row typically includes: node, parameter, guide word, deviation, causes, consequences, safeguards, risk ranking (optional), recommendation, responsible party and action number. Software tools manage worksheets, action tracking and reports.
+
+## Strengths and limitations of a HAZOP study
+
+**Strengths:** systematic and thorough; draws on the knowledge of many disciplines; finds both safety and operability problems; creates a record that supports design changes, operator training and later reviews.
+
+**Limitations:** time consuming; depends on team experience and good leadership; focuses on process deviations and may miss hazards such as dropped objects or external events unless specifically addressed; relies on up to date drawings. It identifies hazards but does not quantify risk; methods such as LOPA, [FMEA](/safety-engineering/fmea-explained/) and quantitative risk assessment complement it.
+
+## HAZOP for batch and procedural operations
+
+Continuous processes are studied line by line, but batch processes and procedures are studied step by step. For each step of a batch recipe or operating procedure, the team applies guide words such as **no** (step omitted), **more** or **less** (wrong quantity), **early** or **late**, **before** or **after** (wrong sequence) and **other than** (wrong action). This procedural HAZOP finds hazards in charging, heating, sampling, transferring and cleaning operations that a line by line study may miss.
+
+## Making HAZOP effective
+
+- Use accurate, frozen drawings and give the team time to review them first.
+- Choose node sizes that keep discussions focused.
+- Limit session length to keep concentration high.
+- Record actions clearly and specifically, and track them to closure.
+- Revisit the HAZOP when modifications are made, under management of change procedures.
+
+Good HAZOPs prevent accidents long before a plant is built. Combined with sound [root cause analysis](/safety-engineering/root-cause-analysis-methods/) of incidents during operation, they form the backbone of process safety management.

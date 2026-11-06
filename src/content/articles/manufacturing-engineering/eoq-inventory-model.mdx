@@ -1,0 +1,143 @@
+---
+title: "Inventory Control: EOQ Model with Worked Example"
+description: "EOQ inventory model explained: ordering and holding costs, the economic order quantity formula, reorder point, safety stock, assumptions and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: manufacturing-engineering
+subcategory: supply-chain
+focusKeyword: "eoq"
+image: { src: /images/featured/eoq-inventory-model.webp, alt: "Inventory Control: EOQ Model with Worked Example: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [inventory-control, eoq, reorder-point, safety-stock, supply-chain]
+faq:
+  - q: "What does EOQ stand for?"
+    a: "EOQ stands for economic order quantity: the order size that minimises the total annual cost of ordering and holding inventory, given steady demand. The classic formula was published by Ford W. Harris in 1913 and popularised by R. H. Wilson."
+  - q: "Is the EOQ model still useful when demand varies?"
+    a: "The basic model assumes constant demand, but the total cost curve is flat near the optimum, so moderate errors in demand or cost estimates change total cost only slightly. EOQ is therefore a robust starting point. For variable demand, it is combined with safety stock and reorder points, or replaced by dynamic lot sizing in MRP."
+  - q: "How does EOQ relate to lean and just in time?"
+    a: "Lean aims to make small batches economical by cutting setup and ordering costs, for example with quick changeover (SMED) and supplier partnerships. In the EOQ formula, a lower ordering or setup cost directly lowers the optimal order quantity, so lean and EOQ point in the same direction."
+references:
+  - text: "F. W. Harris, How Many Parts to Make at Once, Factory, The Magazine of Management, 10(2), 1913"
+  - text: "E. A. Silver, D. F. Pyke and D. J. Thomas, Inventory and Production Management in Supply Chains, 4th ed., CRC Press"
+  - text: "W. J. Stevenson, Operations Management, 14th ed., McGraw-Hill"
+  - text: "S. Chopra and P. Meindl, Supply Chain Management: Strategy, Planning, and Operation, 7th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **EOQ** (economic order quantity) model finds the order size that minimises the total cost of **ordering** and **holding** inventory. Ordering more at once reduces the number of orders but raises average stock and holding cost; ordering less does the opposite. The optimum is **EOQ = √(2DS/H)**, where D is annual demand, S the cost per order (or setup) and H the annual holding cost per unit. At the EOQ, annual ordering cost equals annual holding cost. A **reorder point**, demand during lead time plus **safety stock**, tells when to order.
+
+</Key>
+
+Inventory protects production and customers against delays, but it ties up cash, takes space and risks damage and obsolescence. Ordering too often is also costly, because each order or production setup has fixed administrative, transport or changeover costs. The EOQ model, one of the oldest results in operations management (Harris, 1913), balances these opposing costs.
+
+## Assumptions of the basic EOQ model
+
+- Demand is known and constant over time.
+- Lead time is known and constant.
+- The whole order arrives at once.
+- Ordering (or setup) cost per order is fixed regardless of quantity.
+- Holding cost is proportional to average inventory.
+- No quantity discounts; no stockouts allowed.
+
+These assumptions are simplifications, but the model is robust: total cost changes little for order sizes near the EOQ.
+
+## Inventory pattern and costs
+
+With order quantity Q, inventory drops steadily from Q to zero, then a new order arrives. Average inventory is Q/2.
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Two charts. Left: sawtooth inventory level over time, rising instantly to Q at each order arrival and falling linearly to zero, with average inventory Q over 2 shown as a dashed line and reorder point marked. Right: annual cost versus order quantity, with ordering cost falling, holding cost rising linearly, and total cost a U shaped curve with its minimum at EOQ where the two cost curves cross">
+<g stroke="#0b2545" stroke-width="2"><path d="M30 20V230H280" /><path d="M330 20V230H580" /></g>
+<path d="M30 60L100 230V60L170 230V60L240 230V60" stroke="#13a89e" stroke-width="2.5" fill="none" />
+<path d="M30 145H270" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="5 4" />
+<path d="M30 196H270" stroke="#b42318" stroke-width="1.5" stroke-dasharray="3 3" />
+<path d="M345 40Q380 180 575 215" stroke="#f5b800" stroke-width="2.5" fill="none" />
+<path d="M335 225L575 95" stroke="#13a89e" stroke-width="2.5" />
+<path d="M350 40Q420 175 460 165Q520 150 575 85" stroke="#0b2545" stroke-width="2.5" fill="none" />
+<path d="M455 160V230" stroke="#b42318" stroke-width="1.5" stroke-dasharray="4 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" stroke="#ffffff" stroke-width="4" paint-order="stroke">
+<text x="12" y="64">Q</text><text x="150" y="250" text-anchor="middle">Time</text><text x="200" y="140">Average Q/2</text><text x="190" y="211" fill="#b42318" font-size="11">Reorder point</text>
+<text x="455" y="250" text-anchor="middle">Order quantity Q</text><text x="455" y="268" text-anchor="middle" fill="#b42318" font-weight="700">EOQ</text>
+<text x="480" y="80">Total cost</text><text x="535" y="140" fill="#13a89e" font-size="11">Holding</text><text x="500" y="188" fill="#b8860b" font-size="11">Ordering</text>
+<text x="150" y="16" text-anchor="middle" font-weight="700">Inventory level</text><text x="455" y="16" text-anchor="middle" font-weight="700">Annual cost</text>
+</g>
+</svg>
+<figcaption>Left: the sawtooth inventory pattern. Right: total cost is lowest at the EOQ, where ordering and holding costs are equal.</figcaption>
+</figure>
+
+Annual costs as a function of Q:
+
+$$
+\text{Ordering cost} = \frac{D}{Q}S \qquad \text{Holding cost} = \frac{Q}{2}H
+$$
+
+$$
+TC(Q) = \frac{D}{Q}S + \frac{Q}{2}H
+$$
+
+where D is annual demand (units per year), S the cost per order or setup, and H the holding cost per unit per year. H is often expressed as a percentage i of unit cost C, so H = iC; typical carrying rates are 15 to 30% per year, covering capital, storage, insurance, obsolescence and handling.
+
+## Deriving the EOQ
+
+Setting the derivative of TC with respect to Q to zero:
+
+$$
+-\frac{DS}{Q^2} + \frac{H}{2} = 0 \quad\Rightarrow\quad EOQ = \sqrt{\frac{2DS}{H}}
+$$
+
+At this quantity, ordering cost equals holding cost, and total cost is TC* = √(2DSH).
+
+## Reorder point and safety stock
+
+With daily demand d and lead time L days, the **reorder point** is:
+
+$$
+ROP = d \times L + SS
+$$
+
+**Safety stock** SS protects against variation in demand and lead time. A common formula for variable demand is SS = z σ_d √L, where z is the service level factor (1.65 for about 95%) and σ_d the standard deviation of daily demand.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant uses 12 000 bearings per year (240 working days). Each order costs 1500 to place and receive. Each bearing costs 400, and the annual holding rate is 20%. Supplier lead time is 10 days. Daily demand has a standard deviation of 12 units; target service level 95% (z = 1.65).</dd>
+<dt>Find</dt><dd>EOQ, number of orders per year, total annual ordering and holding cost, safety stock and reorder point.</dd>
+<dt>Assumptions</dt><dd>Basic EOQ assumptions; costs in consistent currency units.</dd>
+<dt>Solution</dt><dd>H = 0.20 × 400 = 80 per unit per year<br />EOQ = √(2 × 12 000 × 1500 ÷ 80) = √450 000 = 671 units<br />Orders per year = 12 000 ÷ 671 ≈ 17.9<br />Ordering cost = 17.9 × 1500 = 26 830; holding cost = (671 ÷ 2) × 80 = 26 840; total ≈ 53 670<br />d = 12 000 ÷ 240 = 50 per day; SS = 1.65 × 12 × √10 = 63 units<br />ROP = 50 × 10 + 63 = 563 units</dd>
+<dt>Answer</dt><dd><strong>Order about 670 bearings each time, about 18 times a year, when stock falls to about 563 units; annual cost about 53 700</strong></dd>
+<dt>Limitations</dt><dd>Real orders may be rounded to pack sizes or adjusted for quantity discounts; demand changes require recalculation.</dd>
+</dl>
+</Example>
+
+## Extensions of the EOQ model
+
+- **Economic production quantity (EPQ):** when items are produced gradually at rate p rather than arriving all at once, EPQ = √(2DS ÷ (H(1 − d/p))). S is the machine setup cost.
+- **Quantity discounts:** compare total cost including purchase price at each price break.
+- **Planned backorders:** allow shortages at a cost when customers will wait.
+- **Periodic review systems:** order up to a target level at fixed intervals.
+- **ABC analysis:** apply tight control and EOQ calculations to high value A items, simpler rules to low value C items.
+
+## Where EOQ is used
+
+EOQ calculations are common for purchased parts and materials with steady usage, such as fasteners, bearings, packaging, chemicals and spare parts for maintenance stores. In manufacturing, the EPQ version sets batch sizes for parts made on shared machines, where each changeover has a setup cost. Distribution centres use EOQ logic to decide how often to replenish fast moving items from suppliers. ERP systems often include EOQ as one of several lot sizing rules, alongside lot for lot and fixed period ordering.
+
+## Steps to apply the EOQ model
+
+1. Estimate annual demand from sales forecasts or consumption history.
+2. Estimate ordering or setup cost: purchasing staff time, transport, receiving, inspection or machine changeover.
+3. Estimate holding cost: cost of capital plus storage, insurance, handling, obsolescence and damage, usually as a percentage of unit cost.
+4. Calculate EOQ, then round to practical pack, pallet or container sizes.
+5. Set safety stock and reorder point based on lead time and demand variation.
+6. Review parameters regularly, at least yearly or when demand or costs change.
+
+## A note on units
+
+Keep units consistent: if demand is annual, holding cost must be per unit per year. If demand is monthly, use a monthly holding cost. Mixing periods is the most common mistake in EOQ calculations and gives answers that are wrong by a factor of √12 or more.
+
+## Sensitivity and practical use
+
+Because the total cost curve is flat near its minimum, ordering 20% more or less than the EOQ raises cost by only about 2%. This makes the model useful even with rough estimates. More important is the insight it gives: **reducing ordering or setup cost reduces the optimal batch size**, which is the logic behind quick changeover and small lot production in lean manufacturing, where excess stock is one of the [seven wastes](/manufacturing-engineering/seven-wastes-lean/). In MRP systems, EOQ is one of the lot sizing options used in [production planning and control](/manufacturing-engineering/production-planning-and-control/).

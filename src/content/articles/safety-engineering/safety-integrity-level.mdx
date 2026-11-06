@@ -1,0 +1,142 @@
+---
+title: "Safety Integrity Level (SIL) Explained"
+description: "Safety integrity level explained: IEC 61508 and 61511, SIL 1 to 4, PFDavg and risk reduction, SIL determination with LOPA, SIF design and a PFDavg example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: safety-engineering
+subcategory: functional-safety
+focusKeyword: "safety integrity level"
+image: { src: /images/featured/safety-integrity-level.webp, alt: "Safety Integrity Level (SIL) Explained: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [functional-safety, sil, iec-61511, sis, pfd]
+faq:
+  - q: "Is a SIL rating given to a device or a function?"
+    a: "Strictly, a SIL applies to a safety instrumented function, the complete loop of sensor, logic solver and final element that performs one safety action. Devices are described as SIL capable or certified for use up to a certain SIL, meaning they meet the hardware and systematic requirements for use in a function of that level, but the function must still be verified as a whole."
+  - q: "What is the difference between IEC 61508 and IEC 61511?"
+    a: "IEC 61508 is the basic functional safety standard for electrical, electronic and programmable electronic safety systems, used mainly by equipment manufacturers. IEC 61511 is the process industry application of it, used by end users, engineering contractors and integrators to specify, design, operate and maintain safety instrumented systems in process plants."
+  - q: "Why are SIL 4 functions rare in the process industry?"
+    a: "SIL 4 demands a risk reduction of 10 000 to 100 000 times and is very difficult and expensive to achieve and prove with instrumented systems. IEC 61511 recommends that if SIL 4 seems necessary, the process should be redesigned or other protection layers added so that the requirement falls to SIL 3 or below."
+references:
+  - text: "IEC 61508:2010, Functional safety of electrical/electronic/programmable electronic safety-related systems, Parts 1 to 7"
+  - text: "IEC 61511:2016+A1:2017, Functional safety: Safety instrumented systems for the process industry sector"
+  - text: "CCPS, Layer of Protection Analysis: Simplified Process Risk Assessment, AIChE, 2001"
+  - text: "ISA-TR84.00.02, Safety Integrity Level (SIL) Verification of Safety Instrumented Functions"
+  - text: "P. Gruhn and H. Cheddie, Safety Instrumented Systems: Design, Analysis, and Justification, 2nd ed., ISA"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+A **safety integrity level** (SIL) is a measure of the reliability required from a **safety instrumented function (SIF)**, defined in **IEC 61508** and, for process plants, **IEC 61511**. There are four levels, **SIL 1 to SIL 4**. For low demand functions, each level corresponds to a range of **average probability of failure on demand (PFDavg)** and **risk reduction factor (RRF)**: SIL 1 gives a risk reduction of 10 to 100, SIL 2 100 to 1000, SIL 3 1000 to 10 000 and SIL 4 10 000 to 100 000. The required SIL is set by risk assessment, often **LOPA**, and achieved through device selection, redundancy, testing and disciplined lifecycle management.
+
+</Key>
+
+Process plants rely on several layers of protection against hazards such as overpressure, overfilling, runaway reactions and toxic releases. One of the most important is the **safety instrumented system (SIS)**: sensors, a safety PLC and final elements such as valves that automatically bring the process to a safe state when a dangerous condition is detected. SIL tells engineers how dependable each of those functions must be.
+
+## Safety instrumented functions
+
+A SIF has three parts:
+
+- **Sensor(s):** pressure, level, temperature or flow transmitters, switches or analysers that detect the hazardous condition. Reliable [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) and [level measurement](https://www.instrumentationblog.in/category/process-instrumentation/level-measurement/) are common SIF inputs.
+- **Logic solver:** a certified safety PLC that evaluates inputs and decides to trip.
+- **Final element(s):** shutdown valves, motor contactors or breakers that act on the process.
+
+Example: "On high-high pressure in the separator (PT-101 above 18 barg), close the inlet shutdown valve XV-101 within 5 seconds."
+
+<figure>
+<svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Safety instrumented function: a pressure transmitter on a vessel sends a signal to a safety PLC logic solver, which commands a solenoid and shutdown valve on the inlet line to close; the SIL of the function depends on the reliability of all three parts combined">
+<rect x="60" y="80" width="90" height="140" rx="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<circle cx="105" cy="45" r="20" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<path d="M105 65V80" stroke="#0b2545" stroke-width="2" />
+<rect x="250" y="25" width="120" height="50" rx="6" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<path d="M480 150H560M150 150H400" stroke="#0b2545" stroke-width="3" />
+<g stroke="#0b2545" stroke-width="2" fill="#ffe9e7"><path d="M400 135L440 150L400 165Z" /><path d="M480 135L440 150L480 165Z" /></g>
+<path d="M440 150V110" stroke="#0b2545" stroke-width="2" /><rect x="425" y="90" width="30" height="20" fill="#ffe9e7" stroke="#0b2545" stroke-width="2" />
+<g stroke="#b42318" stroke-width="2" stroke-dasharray="5 3"><path d="M125 45H250" /><path d="M370 50H440V90" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="105" y="49" font-weight="700">PT</text><text x="105" y="155">Separator</text><text x="310" y="47" font-weight="700">Safety PLC</text><text x="310" y="63">logic solver</text>
+<text x="440" y="182">Shutdown valve</text><text x="490" y="104">Solenoid</text><text x="520" y="140">Inlet</text>
+<text x="180" y="38" font-size="11">Sensor</text><text x="505" y="80" font-size="11">Final element</text>
+<text x="300" y="240">PFDavg(SIF) ≈ PFD(sensor) + PFD(logic) + PFD(final element)</text>
+</g>
+</svg>
+<figcaption>The three subsystems of a safety instrumented function.</figcaption>
+</figure>
+
+## Safety integrity level bands
+
+For **low demand mode** (the SIF is called on less than once a year, typical in process plants):
+
+| SIL | PFDavg | Risk reduction factor (RRF) |
+| --- | --- | --- |
+| SIL 4 | 10⁻⁵ to below 10⁻⁴ | 10 000 to 100 000 |
+| SIL 3 | 10⁻⁴ to below 10⁻³ | 1000 to 10 000 |
+| SIL 2 | 10⁻³ to below 10⁻² | 100 to 1000 |
+| SIL 1 | 10⁻² to below 10⁻¹ | 10 to 100 |
+
+For **high demand or continuous mode**, such as machinery safety, SIL is defined by the average frequency of dangerous failure per hour (PFH), for example SIL 2 is 10⁻⁷ to below 10⁻⁶ per hour.
+
+$$
+RRF = \frac{1}{PFD_{avg}}
+$$
+
+## SIL determination
+
+The required SIL comes from hazard and risk analysis, usually after a [HAZOP study](/safety-engineering/hazop-study/):
+
+- **Layer of protection analysis (LOPA):** estimates the frequency of an initiating event, multiplies by the PFD of each independent protection layer (basic control, alarms with operator response, relief valves) and compares the result with a tolerable frequency. The gap is the risk reduction the SIF must provide.
+- **Risk graphs:** qualitative charts using consequence, occupancy, possibility of avoidance and demand rate.
+- **Risk matrices** calibrated for the purpose, as in [risk matrix](/safety-engineering/risk-matrix/).
+
+$$
+RRF_\text{required} = \frac{f_\text{unmitigated}}{f_\text{tolerable}}
+$$
+
+## SIL verification
+
+The designed SIF must meet three groups of requirements for the target SIL:
+
+1. **Probability of failure:** PFDavg calculated from dangerous undetected failure rates (λ_DU), proof test interval and architecture.
+2. **Architectural constraints (hardware fault tolerance):** minimum redundancy depending on SIL and device type, for example a 1oo2 (one out of two) arrangement of transmitters.
+3. **Systematic capability:** design, software and management processes that prevent systematic errors, shown by certification to IEC 61508 or proven in use data.
+
+For a single (1oo1) device tested every T_I hours, a simplified formula is:
+
+$$
+PFD_{avg} \approx \frac{\lambda_{DU} \times T_I}{2}
+$$
+
+<Calculator path="engineering/pfd-avg" title="PFDavg Calculator" />
+
+<Example>
+<dl>
+<dt>Given</dt><dd>LOPA shows an overpressure scenario with an unmitigated frequency (after other layers) of 0.05 per year and a tolerable frequency of 10⁻⁴ per year. The proposed SIF has a transmitter with λ_DU = 3 × 10⁻⁷ per hour, a safety PLC with PFDavg = 5 × 10⁻⁵, and a shutdown valve with solenoid with λ_DU = 2 × 10⁻⁶ per hour. Proof test interval is one year (8760 h).</dd>
+<dt>Find</dt><dd>The required SIL and whether the 1oo1 design meets it.</dd>
+<dt>Assumptions</dt><dd>Simplified formula; perfect proof tests; architectural and systematic requirements met separately.</dd>
+<dt>Solution</dt><dd>Required RRF = 0.05 ÷ 10⁻⁴ = 500, so SIL 2 (RRF 100 to 1000)<br />Transmitter PFD = 3 × 10⁻⁷ × 8760 ÷ 2 = 1.31 × 10⁻³<br />Valve PFD = 2 × 10⁻⁶ × 8760 ÷ 2 = 8.76 × 10⁻³<br />Total PFDavg = 1.31 × 10⁻³ + 5 × 10⁻⁵ + 8.76 × 10⁻³ = 1.01 × 10⁻²; RRF ≈ 99</dd>
+<dt>Answer</dt><dd><strong>SIL 2 with RRF 500 is required, but the design gives only about 99, so it fails; testing the valve every 6 months or adding a second valve (1oo2) would bring it within SIL 2</strong></dd>
+<dt>Limitations</dt><dd>Real calculations include common cause failures, diagnostic coverage, partial stroke testing, test effectiveness and repair times.</dd>
+</dl>
+</Example>
+
+## The safety lifecycle
+
+IEC 61511 defines a lifecycle: hazard and risk assessment, allocation of safety functions to protection layers, **safety requirements specification (SRS)**, design and engineering, installation and commissioning, **validation**, operation and maintenance including **proof testing**, management of change and decommissioning. **Functional safety assessments** at key stages and competent personnel are required throughout. Many SIL failures come not from hardware but from poor specifications, bypasses left active and missed proof tests.
+
+## Proof testing and operation
+
+During operation, many dangerous failures stay hidden until the SIF is called on. **Proof tests** at planned intervals reveal these hidden failures so they can be repaired. A good proof test exercises the whole function from sensor to final element, for example applying a test pressure to the transmitter and confirming that the valve closes fully within the required time. Partial stroke testing of valves between full tests improves PFD. Records of every test, demand, failure and bypass show whether the assumed failure rates are realistic.
+
+## Practical tips
+
+- Keep SIFs as simple as possible and independent from the basic process control system.
+- Use devices with certified failure data and suitable for the process conditions.
+- Plan proof test procedures at design stage and make them practical.
+- Track demands, failures and bypasses in operation to confirm assumptions.
+- Use [MTBF and availability](/safety-engineering/mtbf-mttr-availability/) data carefully: functional safety relies on dangerous undetected failure rates, not total failure rates.
+
+A correctly specified and maintained safety integrity level gives a plant a quantified, auditable level of protection, closing the gap between the risk that exists and the risk that is tolerable.

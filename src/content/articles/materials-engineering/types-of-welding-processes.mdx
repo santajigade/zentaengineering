@@ -1,0 +1,137 @@
+---
+title: "Types of Welding Processes: SMAW, GMAW, GTAW and SAW"
+description: "Types of welding processes compared: SMAW, GMAW (MIG/MAG), FCAW, GTAW (TIG) and SAW, how they work, shielding, uses, pros and cons and a heat input example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: materials-engineering
+subcategory: welding
+focusKeyword: "welding processes"
+image: { src: /images/featured/types-of-welding-processes.webp, alt: "Types of Welding Processes: SMAW, GMAW, GTAW and SAW: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [welding, smaw, gmaw, gtaw, saw]
+faq:
+  - q: "Which welding process is best for beginners?"
+    a: "GMAW (MIG) is usually the easiest to learn because the wire feeds automatically and the arc is stable, so beginners can produce acceptable welds quickly on steel. SMAW (stick) is simple equipment but harder to master, and GTAW (TIG) needs the most skill and coordination."
+  - q: "What is the difference between MIG and MAG welding?"
+    a: "Both are GMAW. MIG (metal inert gas) uses inert shielding gas such as argon or helium, typical for aluminium and other non-ferrous metals. MAG (metal active gas) uses mixtures containing active gases such as CO₂ or oxygen, typical for carbon and low alloy steels."
+  - q: "Why is preheat used in welding?"
+    a: "Preheating the base metal slows the cooling rate of the weld and heat affected zone. This reduces the risk of hard, brittle microstructures and hydrogen induced cold cracking, especially in thick sections and higher carbon or alloy steels. Required preheat depends on carbon equivalent, thickness and hydrogen level."
+references:
+  - text: "AWS, Welding Handbook, 9th ed., Vol. 2: Welding Processes, American Welding Society"
+  - text: "ISO 4063:2023, Welding, brazing, soldering and cutting: Nomenclature of processes and reference numbers"
+  - text: "J. F. Lancaster, Metallurgy of Welding, 6th ed., Woodhead Publishing"
+  - text: "EN 1011-1, Welding: Recommendations for welding of metallic materials, Part 1: General guidance for arc welding"
+  - text: "ASME Boiler and Pressure Vessel Code, Section IX: Welding, Brazing and Fusing Qualifications"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The main arc **welding processes** are: **SMAW** (shielded metal arc, or stick), using a flux coated electrode, simple and portable; **GMAW** (gas metal arc, MIG/MAG), feeding a continuous wire with shielding gas, fast and easy; **FCAW** (flux cored arc), a wire with flux inside, productive outdoors; **GTAW** (gas tungsten arc, TIG), using a non-consumable tungsten electrode and inert gas, giving the highest quality on thin and non-ferrous metals; and **SAW** (submerged arc), with the arc buried under granular flux, for very high deposition on thick plate. The choice depends on material, thickness, position, quality, productivity and site conditions.
+
+</Key>
+
+Welding joins metals by melting them together, usually with added filler metal, to form a continuous joint as strong as the base metal. It is essential to steel structures, pipelines, [pressure vessels](/chemical-engineering/pressure-vessels-basics/), ships, vehicles and machinery. Among the many joining [manufacturing processes](/manufacturing-engineering/manufacturing-processes-classification/), arc welding processes are by far the most widely used.
+
+## How arc welding works
+
+An electric arc between an electrode and the workpiece produces temperatures of several thousand degrees, melting the base metal and filler to form a **weld pool**. As the arc moves on, the pool solidifies into the **weld bead**. The molten metal must be **shielded** from air, because oxygen and nitrogen cause porosity and brittleness. Shielding comes from flux, gas or both. The base metal next to the weld, heated but not melted, forms the **heat affected zone (HAZ)**, where microstructure and properties may change.
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Four simplified process sketches: SMAW with flux coated electrode and gas shield from burning flux plus slag; GMAW with a wire fed through a gas nozzle; GTAW with a tungsten electrode in a gas cup and separate filler rod; SAW with wire feeding into a blanket of granular flux covering the arc">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="75" y="20">SMAW</text><text x="225" y="20">GMAW</text><text x="375" y="20">GTAW</text><text x="525" y="20">SAW</text></g>
+<g fill="#c9d2de" stroke="#0b2545" stroke-width="1.5"><rect x="10" y="190" width="130" height="30" /><rect x="160" y="190" width="130" height="30" /><rect x="310" y="190" width="130" height="30" /><rect x="460" y="190" width="130" height="30" /></g>
+<rect x="66" y="40" width="18" height="120" fill="#f5e6c8" stroke="#0b2545" stroke-width="1.5" /><rect x="72" y="40" width="6" height="125" fill="#7b8794" />
+<path d="M200 50H250L245 150H205Z" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" /><path d="M225 30V172" stroke="#b42318" stroke-width="2.5" />
+<path d="M350 50H400L392 150H358Z" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" /><path d="M375 40V165" stroke="#0b2545" stroke-width="3" />
+<path d="M420 90L392 178" stroke="#b42318" stroke-width="2.5" />
+<path d="M525 30V178" stroke="#b42318" stroke-width="2.5" />
+<path d="M470 190Q490 150 525 150Q560 150 580 190Z" fill="#f5b800" fill-opacity="0.6" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#f5b800"><path d="M68 165L75 186L82 165Z" /><path d="M218 172L225 188L232 172Z" /><path d="M368 165L375 188L382 165Z" /></g>
+<g fill="#13a89e" fill-opacity="0.25"><path d="M45 160Q75 140 105 160V188H45Z" /><path d="M195 150Q225 140 255 150V188H195Z" /><path d="M345 150Q375 140 405 150V188H345Z" /></g>
+<g fill="#8a6d3b"><path d="M100 188H130V195H100Z" /><path d="M10 188H40V194H10Z" opacity="0" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545" text-anchor="middle">
+<text x="75" y="240">Flux coated</text><text x="75" y="252">electrode</text><text x="225" y="240">Wire + gas</text><text x="225" y="252">nozzle</text><text x="375" y="240">Tungsten + gas,</text><text x="375" y="252">separate filler</text><text x="525" y="240">Wire under</text><text x="525" y="252">granular flux</text>
+<text x="118" y="182">Slag</text><text x="430" y="85">Filler rod</text><text x="560" y="145">Flux</text>
+</g>
+</svg>
+<figcaption>Simplified views of four common arc welding processes.</figcaption>
+</figure>
+
+## SMAW: shielded metal arc welding (stick)
+
+A consumable electrode coated with flux is clamped in a holder. The arc melts the core wire, which becomes filler, and the coating, which produces shielding gas and a **slag** layer that protects the cooling weld.
+
+- **Advantages:** simple, cheap, portable equipment; works outdoors in wind; all positions; wide range of electrodes for steels, stainless steels, cast iron and hardfacing.
+- **Limitations:** low deposition rate, frequent electrode changes, slag removal, spatter, and skill dependent quality.
+- **Uses:** structural steel erection, pipelines, maintenance and repair, shipyards.
+
+## GMAW: gas metal arc welding (MIG/MAG)
+
+A continuous solid wire is fed automatically through a gun, where shielding gas flows around it. Metal transfer modes include short circuit (low heat, thin sheet, all positions), globular, spray (high deposition, flat position) and pulsed spray.
+
+- **Advantages:** high productivity, no slag, easy to learn and automate, clean welds.
+- **Limitations:** gas is blown away by wind, so it suits workshops; equipment less portable; risk of lack of fusion in short circuit mode on thick sections.
+- **Uses:** automotive, fabrication shops, robotic welding, aluminium and stainless steel work.
+
+## FCAW: flux cored arc welding
+
+Similar to GMAW, but the tubular wire contains flux. Self-shielded wires need no gas and work outdoors; gas shielded wires give excellent all position welds at high deposition rates.
+
+## GTAW: gas tungsten arc welding (TIG)
+
+A non-consumable tungsten electrode creates the arc inside a cup of inert gas, usually argon. Filler rod is added separately by hand or by a wire feeder, or welds can be autogenous (no filler).
+
+- **Advantages:** highest quality, precise control, no spatter or slag, welds almost all metals including aluminium, titanium, stainless steel and thin sections.
+- **Limitations:** slow, high operator skill, sensitive to contamination and draughts.
+- **Uses:** root passes in pipes, aerospace, food and pharmaceutical stainless piping, thin sheet.
+
+## SAW: submerged arc welding
+
+A continuous wire feeds into a joint covered with granular flux. The arc burns beneath the flux, invisible, with no spatter or arc glare. Unfused flux is recovered.
+
+- **Advantages:** very high deposition rates and deep penetration, excellent quality, highly automated, comfortable for operators.
+- **Limitations:** mainly flat and horizontal positions, long straight or circular seams, heavy equipment.
+- **Uses:** thick plate fabrication, pressure vessels, ship panels, spiral and longitudinal pipe mills, wind tower sections.
+
+## Welding processes compared
+
+| Process | ISO 4063 no. | Shielding | Deposition rate | Positions | Typical use |
+| --- | --- | --- | --- | --- | --- |
+| SMAW | 111 | Flux coating | Low | All | Site work, repair |
+| GMAW | 131 / 135 | Gas | Medium to high | All (mode dependent) | Shop fabrication, robots |
+| FCAW | 114 / 136 | Flux core (± gas) | High | All | Heavy fabrication, outdoor |
+| GTAW | 141 | Inert gas | Low | All | High quality, thin, non-ferrous |
+| SAW | 121 | Granular flux | Very high | Flat, horizontal | Thick plate, long seams |
+
+## Heat input
+
+Heat input affects penetration, HAZ size, microstructure, distortion and toughness:
+
+$$
+Q = \eta \times \frac{V \times I \times 60}{1000 \times v}
+$$
+
+where Q is heat input in kJ/mm, V arc voltage, I current in amperes, v travel speed in mm/min and η thermal efficiency (about 0.8 for SMAW, GMAW and FCAW, 0.6 for GTAW, 1.0 for SAW in EN 1011-1).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A GMAW pass on carbon steel uses 28 V and 250 A at a travel speed of 350 mm/min. The welding procedure limits heat input to 1.5 kJ/mm for toughness. Thermal efficiency is 0.8.</dd>
+<dt>Find</dt><dd>The heat input and whether it meets the limit.</dd>
+<dt>Assumptions</dt><dd>Steady parameters along the pass.</dd>
+<dt>Solution</dt><dd>Arc energy = 28 × 250 × 60 ÷ (1000 × 350) = 420 000 ÷ 350 000 = 1.20 kJ/mm<br />Heat input = 0.8 × 1.20 = 0.96 kJ/mm</dd>
+<dt>Answer</dt><dd><strong>Heat input is about 0.96 kJ/mm, within the 1.5 kJ/mm limit</strong></dd>
+<dt>Limitations</dt><dd>Waveform controlled pulsed processes need instantaneous power measurement; interpass temperature also affects properties.</dd>
+</dl>
+</Example>
+
+## Weld quality and qualification
+
+Welding procedures are qualified by testing welded coupons (tensile, bend, impact, macro) to standards such as ASME Section IX or ISO 15614, and welders are certified for the processes and positions they use. Common defects include porosity, slag inclusions, lack of fusion, incomplete penetration, undercut and cracks. They are found with visual inspection and [NDT methods](/materials-engineering/ndt-methods/) such as radiography and ultrasonic testing. Good practice also includes controlling hydrogen with dry consumables, preheat for thick or high carbon steels, and post weld heat treatment where codes require it, as discussed in [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+
+## Choosing among welding processes
+
+Consider the base metal and thickness, joint type and position, required quality and code, production volume and automation, site conditions such as wind and access, and cost of equipment and consumables. A pipeline might use GTAW for the root, then SMAW or FCAW for fill and cap passes; a shop fabricating heavy beams might use SAW for long seams and GMAW for attachments. Weld design must also consider [fatigue failure](/materials-engineering/fatigue-failure/), since weld toes are common crack starting points.

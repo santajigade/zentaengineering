@@ -1,0 +1,147 @@
+---
+title: "3D Printing Technologies: FDM, SLA and SLS Compared"
+description: "3D printing technologies compared: FDM, SLA and SLS working principles, materials, accuracy, strength, cost, post-processing and a build time example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: manufacturing-engineering
+subcategory: additive-manufacturing
+focusKeyword: "3d printing technologies"
+image: { src: /images/featured/3d-printing-technologies.webp, alt: "3D Printing Technologies: FDM, SLA and SLS Compared: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [3d-printing, additive-manufacturing, fdm, sla, sls]
+faq:
+  - q: "Which 3D printing technology is best for beginners?"
+    a: "FDM is usually best for beginners and general prototyping. Printers and filament are cheap, materials such as PLA are easy to print, and parts need little post-processing. SLA is better when fine detail and smooth surfaces matter, and SLS when strong functional nylon parts without supports are needed."
+  - q: "Are 3D printed parts as strong as moulded parts?"
+    a: "It depends on the process. FDM parts are weaker between layers than along them, often 30 to 60% of moulded strength in the build direction. SLS nylon parts are more isotropic and approach moulded properties. Metal powder bed fusion parts can match or exceed cast and sometimes wrought properties after heat treatment."
+  - q: "What are the seven ISO/ASTM additive manufacturing categories?"
+    a: "ISO/ASTM 52900 defines material extrusion (FDM), vat photopolymerisation (SLA, DLP), powder bed fusion (SLS, SLM, EBM), material jetting, binder jetting, directed energy deposition and sheet lamination."
+references:
+  - text: "ISO/ASTM 52900:2021, Additive manufacturing: General principles, Fundamentals and vocabulary"
+  - text: "I. Gibson, D. Rosen, B. Stucker and M. Khorasani, Additive Manufacturing Technologies, 3rd ed., Springer"
+  - text: "ISO/ASTM 52910:2018, Additive manufacturing: Design, Requirements, guidelines and recommendations"
+  - text: "Wohlers Associates, Wohlers Report 2024, ASTM International"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The three most common **3D printing technologies** for polymers build parts layer by layer in different ways. **FDM** (fused deposition modelling) extrudes melted thermoplastic filament through a heated nozzle; it is cheap and simple but shows visible layers and weaker bonding between them. **SLA** (stereolithography) cures liquid photopolymer resin with a UV laser or light source, giving very fine detail and smooth surfaces. **SLS** (selective laser sintering) fuses nylon powder with a laser; unsintered powder supports the part, so no support structures are needed and parts are strong and functional.
+
+</Key>
+
+Additive manufacturing (AM) builds parts directly from 3D CAD data by adding material layer by layer, instead of removing it as in machining or forming it in moulds. It is used for rapid prototyping, jigs and fixtures, medical devices, aerospace components and low volume production. Among the [manufacturing processes](/manufacturing-engineering/manufacturing-processes-classification/), it offers unique design freedom and needs no tooling.
+
+## The common workflow
+
+1. **Design** the part in CAD and export it as STL, 3MF or STEP.
+2. **Slice** the model in software into layers, generating tool paths or laser scan paths, supports and infill.
+3. **Print** the part layer by layer.
+4. **Post-process:** remove supports, clean, cure, sand, machine or heat treat as needed.
+
+## FDM: fused deposition modelling
+
+A spool of thermoplastic **filament** feeds into a heated **extruder**, which melts it and deposits a thin bead through a nozzle (typically 0.4 mm) onto a build plate. The nozzle traces each layer's outline and infill, then the plate moves down (or the head moves up) by one layer height, typically 0.1 to 0.3 mm. **Support structures** are printed under overhangs.
+
+- **Materials:** PLA, ABS, PETG, TPU, nylon, polycarbonate, and engineering polymers such as PEEK and ULTEM on industrial machines; fibre reinforced filaments.
+- **Strengths:** low cost, easy to use, large choice of materials, good for prototypes and fixtures.
+- **Limitations:** visible layer lines, anisotropic strength (weak between layers), lower dimensional accuracy, supports leave marks.
+
+## SLA: stereolithography
+
+A vat of liquid **photopolymer resin** is cured layer by layer by a UV laser tracing the cross section (SLA), or by a projector or LCD masking a UV light source (DLP and MSLA). The build platform lifts the part out of the vat step by step. After printing, parts are washed in solvent and **post-cured** under UV light.
+
+- **Materials:** standard, tough, flexible, high temperature, castable, dental and biocompatible resins.
+- **Strengths:** excellent detail (features down to about 0.05 to 0.1 mm), smooth surfaces, good accuracy; ideal for visual prototypes, dental models, jewellery patterns and microfluidics.
+- **Limitations:** resins can be brittle and degrade in sunlight, supports are needed, and resin handling needs gloves and ventilation.
+
+## SLS: selective laser sintering
+
+A thin layer of polymer **powder**, usually nylon (PA12 or PA11), is spread across a heated bed. A CO₂ laser scans the cross section, fusing the particles. The bed lowers, a new powder layer is spread, and the process repeats. The surrounding loose powder **supports** the part, so complex internal channels and nested parts can be printed without supports. After cooling, parts are removed from the powder cake and bead blasted.
+
+- **Materials:** PA12, PA11, glass or carbon filled nylon, TPU, polypropylene.
+- **Strengths:** strong, durable, nearly isotropic parts; no supports; many parts nested in one build; good for functional prototypes and end use parts.
+- **Limitations:** higher machine cost, grainy surface, powder handling, and longer cooling time. Similar technologies include multi jet fusion (MJF).
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Three schematics: FDM with filament feeding a heated nozzle depositing a bead onto a build plate; SLA with a UV laser beam curing resin in a vat while the platform lifts the part; SLS with a laser fusing a layer of powder in a powder bed with a recoater roller spreading new powder">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="100" y="20">FDM</text><text x="300" y="20">SLA</text><text x="500" y="20">SLS</text></g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M100 35V75" stroke="#13a89e" stroke-width="3" />
+<rect x="80" y="75" width="40" height="40" rx="3" fill="#ffe9e7" />
+<path d="M93 115L100 130L107 115Z" fill="#0b2545" />
+<rect x="40" y="200" width="120" height="10" fill="#c9d2de" />
+<rect x="70" y="170" width="60" height="30" fill="#13a89e" fill-opacity="0.6" />
+<rect x="215" y="140" width="170" height="80" fill="#f5b800" fill-opacity="0.25" />
+<path d="M300 35V75" stroke="none" />
+<rect x="250" y="60" width="100" height="10" fill="#c9d2de" /><path d="M300 40V60" />
+<rect x="270" y="70" width="60" height="70" fill="#13a89e" fill-opacity="0.6" />
+<rect x="420" y="130" width="160" height="90" fill="#f5e6c8" />
+<rect x="470" y="160" width="60" height="40" fill="#13a89e" fill-opacity="0.6" />
+<circle cx="440" cy="120" r="10" fill="#c9d2de" />
+<rect x="470" y="30" width="60" height="25" rx="3" fill="#eef1f6" />
+</g>
+<path d="M95 130Q100 160 85 168H130" stroke="#13a89e" stroke-width="3" fill="none" />
+<g stroke="#b42318" stroke-width="2"><path d="M300 230L300 225" /><path d="M260 250L295 222" /><path d="M500 55L505 130" /></g>
+<rect x="245" y="240" width="30" height="20" rx="3" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="135" y="45">Filament</text><text x="150" y="98">Hot end</text><text x="100" y="230">Build plate</text><text x="100" y="190" font-size="10">Part</text>
+<text x="300" y="185">Resin vat</text><text x="300" y="108" font-size="10">Part</text><text x="355" y="52">Platform</text><text x="320" y="258">UV laser</text>
+<text x="500" y="47">Laser</text><text x="440" y="104">Roller</text><text x="500" y="215" font-size="10">Powder bed</text><text x="500" y="184" font-size="10">Part</text>
+</g>
+</svg>
+<figcaption>Simplified principles of FDM, SLA (bottom-up variant) and SLS.</figcaption>
+</figure>
+
+## 3D printing technologies compared
+
+| Feature | FDM | SLA | SLS |
+| --- | --- | --- | --- |
+| Feedstock | Thermoplastic filament | Liquid photopolymer resin | Polymer powder (nylon) |
+| Energy source | Heated nozzle | UV laser or light | CO₂ or fibre laser |
+| Typical layer height | 0.1 to 0.3 mm | 0.025 to 0.1 mm | 0.08 to 0.12 mm |
+| Detail and surface | Moderate, visible layers | Excellent, smooth | Good, slightly grainy |
+| Strength | Anisotropic | Good, can be brittle | Strong, near isotropic |
+| Supports | Yes | Yes | No |
+| Machine cost | Low to high | Low to medium | High |
+| Typical use | Prototypes, fixtures | Detailed models, dental, casting patterns | Functional parts, small batches |
+
+## Metal 3D printing
+
+Metal parts are printed mainly by **powder bed fusion** (laser or electron beam melting of metal powder, such as titanium, aluminium, stainless steel and nickel alloys), **directed energy deposition** (wire or powder melted by laser, arc or electron beam, used for large parts and repair) and **binder jetting** followed by sintering. Aerospace fuel nozzles, medical implants and lightweight brackets are typical applications.
+
+## Build time estimate
+
+For FDM, a rough build time estimate is:
+
+$$
+t \approx \frac{V}{Q}
+$$
+
+where V is the deposited volume (part volume times infill fraction, plus walls and supports) and Q the volumetric deposition rate, roughly nozzle width × layer height × print speed.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An FDM bracket of 80 cm³ solid volume is printed with 30% infill; walls and supports add 15 cm³. Nozzle 0.4 mm, layer height 0.2 mm, average print speed 60 mm/s.</dd>
+<dt>Find</dt><dd>Approximate deposited volume and print time.</dd>
+<dt>Assumptions</dt><dd>Travel moves and layer changes ignored; average speed sustained.</dd>
+<dt>Solution</dt><dd>Deposited volume = 0.30 × 80 + 15 = 39 cm³ = 39 000 mm³<br />Q = 0.4 × 0.2 × 60 = 4.8 mm³/s<br />t = 39 000 ÷ 4.8 = 8125 s ≈ 2.3 h</dd>
+<dt>Answer</dt><dd><strong>About 39 cm³ of plastic and roughly 2.3 hours of printing; real time is often 20 to 40% longer</strong></dd>
+<dt>Limitations</dt><dd>Slicer software gives better estimates including accelerations and travel.</dd>
+</dl>
+</Example>
+
+## Design tips for additive manufacturing
+
+- Orient parts so critical loads run along layers, especially for FDM.
+- Avoid unsupported overhangs beyond about 45° for FDM and SLA; add fillets and chamfers.
+- Respect minimum wall thickness, typically about 0.8 to 1 mm.
+- Add escape holes for trapped powder or resin in hollow parts.
+- Use lattice and topology optimised shapes to save weight, a key advantage of AM.
+
+## Choosing among 3D printing technologies
+
+Pick FDM for low cost prototypes, jigs and fixtures; SLA for fine detail, smooth surfaces and casting patterns; SLS for durable functional parts and small production runs without supports; and metal AM for high value, complex metal components. Consider volume and cost per part too: for large quantities, injection moulding or [CNC machining](/manufacturing-engineering/cnc-machine-working-principle/) usually becomes cheaper. Polymers used in each process are discussed in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/).

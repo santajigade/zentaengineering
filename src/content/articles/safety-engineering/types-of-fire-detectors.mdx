@@ -1,0 +1,129 @@
+---
+title: "Types of Fire Detectors and Where to Use Them"
+description: "Types of fire detectors explained: smoke (optical, ionisation, beam, aspirating), heat, flame, gas and multi-sensor detectors, siting and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: safety-engineering
+subcategory: fire-detection
+focusKeyword: "fire detectors"
+image: { src: /images/featured/types-of-fire-detectors.webp, alt: "Types of Fire Detectors and Where to Use Them: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [fire-detection, smoke-detector, heat-detector, flame-detector, fire-alarm]
+faq:
+  - q: "Which type of smoke detector is best?"
+    a: "Optical (photoelectric) detectors respond faster to slow smouldering fires with large smoke particles, which are common in homes and offices, and give fewer nuisance alarms from cooking. Ionisation detectors respond faster to fast flaming fires with small particles but are being phased out in many regions due to their radioactive source. Multi-sensor detectors combine optical and heat sensing for a good balance."
+  - q: "Where should heat detectors be used instead of smoke detectors?"
+    a: "In areas where smoke, steam, dust or fumes would cause false alarms with smoke detectors, such as kitchens, boiler rooms, garages, laundries and dusty workshops. Heat detectors respond later than smoke detectors, so they are used where life safety is less dependent on very early warning or as part of a combined system."
+  - q: "How do flame detectors work?"
+    a: "Flame detectors sense the radiation emitted by flames. UV detectors respond to ultraviolet radiation, IR detectors to infrared, often at the 4.3 µm carbon dioxide emission band and with flicker analysis, and multi-spectrum IR or UV/IR detectors compare several bands to reject false sources such as sunlight, welding and hot surfaces."
+references:
+  - text: "NFPA 72, National Fire Alarm and Signaling Code, 2022 ed."
+  - text: "EN 54 series, Fire detection and fire alarm systems"
+  - text: "BS 5839-1:2017, Fire detection and fire alarm systems for buildings, Code of practice for design, installation, commissioning and maintenance"
+  - text: "IS 2189:2008, Selection, Installation and Maintenance of Automatic Fire Detection and Alarm System, Code of Practice, BIS"
+  - text: "SFPE Handbook of Fire Protection Engineering, 5th ed., Springer"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The main types of **fire detectors** are: **smoke detectors** (optical or photoelectric, ionisation, beam and aspirating), which give the earliest warning in most buildings; **heat detectors** (fixed temperature and rate of rise, including linear heat cable), for areas where smoke detectors would false alarm; **flame detectors** (UV, IR, UV/IR and multi-spectrum IR), for fast flaming fires in large or outdoor spaces such as process plants and hangars; **gas detectors** for carbon monoxide or flammable gases; and **multi-sensor detectors** that combine signals to reduce false alarms. Choice depends on the expected fire type, environment, ceiling height and required response speed.
+
+</Key>
+
+Early detection is the foundation of fire safety. It gives people time to escape, alerts the fire brigade and can trigger automatic systems such as sprinklers, gas suppression, smoke control and plant shutdown. No single detector suits every place, so engineers match detector types to the fire risk and environment, following codes such as NFPA 72, EN 54, BS 5839 and IS 2189.
+
+## How fires develop
+
+A fire typically passes through stages: **incipient** (invisible combustion products and fine particles), **smouldering** (visible smoke), **flaming** (flames and heat) and **intense heat**. Different detectors respond at different stages. Smoke detectors usually react first, heat detectors later, and flame detectors respond instantly once flames are visible to them.
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Fire development curve over time from incipient to smouldering to flaming to intense heat stages, with markers showing that aspirating smoke detectors respond earliest, then point smoke detectors, then flame detectors when flames appear, and heat detectors last">
+<path d="M50 20V230H570" stroke="#0b2545" stroke-width="2" />
+<path d="M50 225Q200 222 270 200Q330 170 380 110Q430 50 560 30" stroke="#b42318" stroke-width="3" fill="none" />
+<g stroke="#c9d2de" stroke-width="1.5" stroke-dasharray="4 4"><path d="M170 30V230M300 30V230M420 30V230" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="110" y="250">Incipient</text><text x="235" y="250">Smouldering</text><text x="360" y="250">Flaming</text><text x="495" y="250">Intense heat</text>
+<text x="310" y="266" font-size="11">Time</text><text x="28" y="125" transform="rotate(-90 28 125)" font-size="11">Fire size / hazard</text>
+</g>
+<g fill="#13a89e"><circle cx="120" cy="222" r="6" /><circle cx="240" cy="210" r="6" /></g>
+<circle cx="345" cy="150" r="6" fill="#f5b800" /><circle cx="460" cy="58" r="6" fill="#0b2545" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="80" y="200">Aspirating smoke</text><text x="200" y="188">Point smoke</text><text x="352" y="170">Flame</text><text x="470" y="78">Heat</text>
+</g>
+</svg>
+<figcaption>Typical order of detector response as a fire develops (schematic).</figcaption>
+</figure>
+
+## Smoke detectors
+
+### Optical (photoelectric) point detectors
+
+An LED shines into a dark chamber. In clean air the light misses the photodiode; smoke particles scatter light onto it, triggering an alarm. Optical detectors are most sensitive to the larger, visible particles of **smouldering fires** (upholstery, cables, paper) and are the standard choice for offices, hotels, homes, corridors and escape routes.
+
+### Ionisation point detectors
+
+A small radioactive source (americium-241) ionises air between two electrodes, producing a tiny current. Smoke particles attach to ions and reduce the current. Very sensitive to small particles from **fast flaming fires**, but prone to false alarms from cooking and draughts. Their use is declining because of environmental rules on radioactive sources.
+
+### Optical beam detectors
+
+A transmitter sends an infrared beam across a large open space, such as a warehouse, atrium or hall, to a receiver or reflector up to about 100 m away. Smoke reduces the received signal. Suitable for high ceilings where point detectors are hard to reach and smoke spreads out.
+
+### Aspirating smoke detection (ASD)
+
+A fan draws air continuously through a network of pipes with sampling holes to a very sensitive laser detector. ASD gives **very early warning** and is used in data centres, clean rooms, telecom rooms, heritage buildings, cold stores and places where detectors must be hidden or are hard to maintain.
+
+## Heat detectors
+
+- **Fixed temperature:** alarm when the temperature reaches a set point, typically about 57 to 90 °C, using bimetal, fusible elements or thermistors.
+- **Rate of rise:** alarm when temperature rises faster than a set rate, such as about 8 to 10 °C per minute, giving earlier response to fast fires; usually combined with a fixed temperature element.
+- **Linear heat detection cable:** detects heat anywhere along its length; used in cable trays, conveyors, tunnels, car parks and tank roofs.
+
+Heat detectors are robust and rarely false alarm, so they suit kitchens, boiler rooms, garages and dusty or steamy areas, but they respond later than smoke detectors.
+
+## Flame detectors
+
+Flame detectors look for radiation emitted by flames:
+
+- **UV detectors:** very fast, but can be triggered by welding arcs and lightning, and blinded by smoke or oil films.
+- **IR detectors:** respond to the CO₂ emission band near 4.3 µm and the flicker frequency of flames.
+- **UV/IR and multi-spectrum IR (IR3):** compare several bands to reject false sources, with long detection ranges.
+
+They protect oil and gas facilities, refineries, fuel loading stations, turbine enclosures, aircraft hangars and warehouses with flammable liquids, where fires grow very quickly.
+
+## Gas and multi-sensor detectors
+
+- **Carbon monoxide fire detectors** sense CO from smouldering fires, useful in bedrooms and some hotel rooms where smoke detectors false alarm.
+- **Flammable gas detectors** (catalytic, infrared, open path) detect leaks before ignition in plants handling hydrocarbons; they are often part of safety systems designed to a [safety integrity level](/safety-engineering/safety-integrity-level/).
+- **Multi-sensor detectors** combine optical, heat and sometimes CO signals with algorithms, improving sensitivity to real fires and immunity to nuisance sources.
+
+## Types of fire detectors compared
+
+| Detector | Best for | Response | False alarm sources | Typical locations |
+| --- | --- | --- | --- | --- |
+| Optical smoke | Smouldering fires | Early | Dust, steam | Offices, rooms, corridors |
+| Ionisation smoke | Fast flaming fires | Early | Cooking, draughts | Declining use |
+| Beam smoke | Large open spaces | Early to medium | Building movement, obstructions | Warehouses, atria |
+| Aspirating | Very early warning | Very early | Requires good design | Data centres, clean rooms |
+| Heat | Fires in dirty areas | Later | Very few | Kitchens, boiler rooms |
+| Flame (IR3, UV/IR) | Fast flammable liquid fires | Very fast once flames visible | Sunlight, hot objects (reduced in IR3) | Process plants, hangars |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A facility includes: (A) an open plan office with 3 m ceilings, (B) a staff kitchen, (C) a server room, (D) a warehouse with 12 m high ceilings, (E) an outdoor fuel loading bay.</dd>
+<dt>Find</dt><dd>Suitable detector types for each area.</dd>
+<dt>Assumptions</dt><dd>Life safety and property protection required; local code permits these choices.</dd>
+<dt>Solution</dt><dd>A: optical or multi-sensor point smoke detectors<br />B: heat detectors (rate of rise with fixed temperature) to avoid cooking alarms<br />C: aspirating smoke detection for very early warning, possibly linked to gas suppression<br />D: optical beam detectors or aspirating system, since point detectors at 12 m are slow and hard to maintain<br />E: multi-spectrum IR flame detectors with clear views of the loading area</dd>
+<dt>Answer</dt><dd><strong>Optical or multi-sensor (A), heat (B), aspirating (C), beam or aspirating (D) and IR3 flame detectors (E)</strong></dd>
+<dt>Limitations</dt><dd>Final spacing, mounting heights and zoning must follow the applicable code and a fire risk assessment.</dd>
+</dl>
+</Example>
+
+## Siting, zoning and maintenance
+
+Codes specify maximum coverage per detector and spacing, typically around 7.5 m radius for point smoke detectors and 5.3 m for heat detectors under BS 5839 for flat ceilings, with adjustments for ceiling height, beams and airflow. Detectors connect to a fire alarm control panel in **conventional zones** or **addressable loops**, which identify each device. Regular testing, cleaning and replacement keep detectors reliable, and alarm causes are reviewed to reduce false alarms.
+
+Detection is the first link in the fire safety chain; the next is choosing the right extinguishing agent, explained in [fire classes and extinguishers](/safety-engineering/fire-classes-and-extinguishers/). Detector selection is often informed by a [risk matrix](/safety-engineering/risk-matrix/) and plant hazard studies.

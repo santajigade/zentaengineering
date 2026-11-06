@@ -1,0 +1,161 @@
+---
+title: "Six Sigma DMAIC Methodology Explained"
+description: "Six Sigma DMAIC explained: Define, Measure, Analyse, Improve, Control phases, tools, sigma levels, DPMO, belts and roles, with a worked sigma level example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: manufacturing-engineering
+subcategory: quality
+focusKeyword: "six sigma dmaic"
+image: { src: /images/featured/six-sigma-dmaic.webp, alt: "Six Sigma DMAIC Methodology Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [six-sigma, dmaic, quality-improvement, dpmo, process-capability]
+faq:
+  - q: "What does six sigma quality mean?"
+    a: "A six sigma process produces no more than about 3.4 defects per million opportunities. This figure assumes the process mean can drift by 1.5 standard deviations over the long term, so the nearest specification limit is 4.5 sigma from the shifted mean. Without that shift, six sigma would mean about 2 defects per billion."
+  - q: "What is the difference between DMAIC and DMADV?"
+    a: "DMAIC improves an existing process that is not meeting requirements. DMADV (Define, Measure, Analyse, Design, Verify), also called Design for Six Sigma, is used to create a new product or process, or to redesign one so completely that improving the old one is not worthwhile."
+  - q: "How does Six Sigma relate to Lean?"
+    a: "Lean focuses on removing waste and improving flow and speed; Six Sigma focuses on reducing variation and defects using data and statistics. Many organisations combine them as Lean Six Sigma, using lean tools for flow and DMAIC for complex quality problems."
+references:
+  - text: "ISO 13053-1:2011, Quantitative methods in process improvement: Six Sigma, Part 1: DMAIC methodology"
+  - text: "F. W. Breyfogle III, Implementing Six Sigma, 2nd ed., Wiley"
+  - text: "T. Pyzdek and P. Keller, The Six Sigma Handbook, 5th ed., McGraw-Hill"
+  - text: "D. C. Montgomery, Introduction to Statistical Quality Control, 8th ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Six Sigma DMAIC** is a structured, data driven method for improving existing processes by reducing variation and defects. Its five phases are: **Define** the problem, customer requirements and project scope; **Measure** current performance and validate the measurement system; **Analyse** data to find root causes; **Improve** the process by testing and implementing solutions; and **Control** the gains with monitoring and standardisation. A **six sigma** process produces about **3.4 defects per million opportunities (DPMO)**. Projects are led by trained **Green Belts** and **Black Belts**.
+
+</Key>
+
+Six Sigma was developed at Motorola in the 1980s and made famous by General Electric in the 1990s. It treats quality problems as statistical problems: if the causes of variation in a process are understood and controlled, defects fall. DMAIC is its core problem solving roadmap, and ISO 13053 standardises it.
+
+## Sigma level and DPMO
+
+Sigma (σ) is the standard deviation of a process. The **sigma level** expresses how many standard deviations fit between the process mean and the nearest specification limit, after allowing for long term drift. Performance is often measured as **defects per million opportunities**:
+
+$$
+DPMO = \frac{\text{defects}}{\text{units} \times \text{opportunities per unit}} \times 10^6
+$$
+
+| Sigma level | DPMO (with 1.5σ shift) | Yield |
+| --- | --- | --- |
+| 2 | 308 537 | 69.1% |
+| 3 | 66 807 | 93.3% |
+| 4 | 6 210 | 99.38% |
+| 5 | 233 | 99.977% |
+| 6 | 3.4 | 99.99966% |
+
+<Calculator path="statistics/six-sigma" title="Six Sigma Calculator" />
+
+## The DMAIC phases
+
+<figure>
+<svg width="600" height="200" viewBox="0 0 600 200" fill="none" role="img" aria-label="Five connected chevrons labelled Define, Measure, Analyse, Improve and Control, with key questions under each: what is the problem, how big is it, what causes it, how do we fix it, how do we sustain it">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M10 40H110L130 75L110 110H10L30 75Z" fill="#eef1f6" />
+<path d="M125 40H225L245 75L225 110H125L145 75Z" fill="#e6f6f4" />
+<path d="M240 40H340L360 75L340 110H240L260 75Z" fill="#e6f6f4" />
+<path d="M355 40H455L475 75L455 110H355L375 75Z" fill="#fff7e0" />
+<path d="M470 40H570L590 75L570 110H470L490 75Z" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="72" y="80">Define</text><text x="187" y="80">Measure</text><text x="302" y="80">Analyse</text><text x="417" y="80">Improve</text><text x="532" y="80">Control</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="70" y="135">What is the</text><text x="70" y="150">problem?</text><text x="185" y="135">How big is</text><text x="185" y="150">it now?</text><text x="300" y="135">What causes</text><text x="300" y="150">it?</text><text x="415" y="135">How do we</text><text x="415" y="150">fix it?</text><text x="530" y="135">How do we</text><text x="530" y="150">sustain it?</text>
+<text x="300" y="185" font-size="12">Each phase ends with a tollgate review before moving on</text>
+</g>
+</svg>
+<figcaption>The five phases of Six Sigma DMAIC.</figcaption>
+</figure>
+
+### Define
+
+- Write a clear **problem statement** and **project charter**: scope, goals, business case, team, timeline.
+- Identify customers and their **critical to quality (CTQ)** requirements through the **voice of the customer**.
+- Map the process at high level with a **SIPOC** (suppliers, inputs, process, outputs, customers).
+
+### Measure
+
+- Define the output metric (Y) and how it will be measured.
+- Validate the measurement system with **gauge R&R** (repeatability and reproducibility) studies; a poor measurement system can hide or invent problems.
+- Collect baseline data and calculate current performance: yield, DPMO, sigma level and **process capability** indices Cp and Cpk.
+
+### Analyse
+
+- Identify potential causes (Xs) with **cause and effect (fishbone) diagrams**, process maps and 5 Whys, as in [root cause analysis methods](/safety-engineering/root-cause-analysis-methods/).
+- Test which causes really matter using data: Pareto charts, scatter plots, **hypothesis tests**, regression and ANOVA.
+- Express the relationship as Y = f(X₁, X₂, …).
+
+### Improve
+
+- Generate solutions that address verified root causes.
+- Use **design of experiments (DOE)** to find optimal settings of key factors.
+- Pilot solutions, check results statistically, assess risks with tools such as [FMEA](/safety-engineering/fmea-explained/), and implement.
+
+### Control
+
+- Standardise the new method with procedures, training and mistake proofing.
+- Monitor key inputs and outputs with [control charts](/manufacturing-engineering/control-charts-spc/).
+- Write a **control plan** with reaction rules, hand over to the process owner and close the project with documented savings.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An assembly line produced 5000 units last month. Each unit has 8 opportunities for a defect (critical features). Inspection found 120 defects. After a DMAIC project, the next month had 12 defects in 5000 units.</dd>
+<dt>Find</dt><dd>DPMO and approximate sigma level before and after.</dd>
+<dt>Assumptions</dt><dd>Sigma levels read from the standard table including the 1.5σ shift.</dd>
+<dt>Solution</dt><dd>Before: DPMO = 120 ÷ (5000 × 8) × 10⁶ = 3000, between 4σ (6210) and 5σ (233), about 4.2σ<br />After: DPMO = 12 ÷ 40 000 × 10⁶ = 300, close to 5σ (about 4.9σ)</dd>
+<dt>Answer</dt><dd><strong>DPMO fell from 3000 (about 4.2σ) to 300 (about 4.9σ), a 90% reduction in defects</strong></dd>
+<dt>Limitations</dt><dd>One month may not be representative; control charts should confirm the improvement is stable.</dd>
+</dl>
+</Example>
+
+## A worked DMAIC story
+
+Consider a plant where 4% of moulded housings are rejected for short shots, parts not completely filled with plastic.
+
+- **Define:** the team writes a charter to cut short shot rejects from 4% to below 1% within four months, worth a known annual saving in scrap and rework. The customer CTQ is a fully formed housing with no visible defects.
+- **Measure:** they confirm that inspectors agree on what counts as a short shot through an attribute agreement study, then collect a month of data by machine, mould cavity, shift and material lot.
+- **Analyse:** a Pareto chart shows most rejects come from two cavities of one mould. A fishbone session lists possible causes, and data show rejects rise when barrel temperature drops and when one material supplier is used. A hypothesis test confirms the supplier difference is significant.
+- **Improve:** a designed experiment varies melt temperature, injection speed and hold pressure. The best settings plus cleaning a partly blocked vent in the two cavities bring rejects to 0.6% in a pilot run.
+- **Control:** new settings go into the machine recipe with locked parameters, vent cleaning is added to the preventive maintenance plan, and a p chart of reject rate is posted at the machine with a reaction plan.
+
+The result is documented, savings are confirmed by finance, and the process owner takes over monitoring.
+
+## Common pitfalls
+
+- Choosing projects that are too large or vague to finish in a few months.
+- Jumping to solutions in the Define phase before data confirm the causes.
+- Skipping measurement system analysis and chasing noise.
+- Declaring success without a control plan, so the process drifts back.
+- Treating Six Sigma as a statistics exercise rather than a team effort with the people who run the process.
+
+## Roles in Six Sigma
+
+- **Champion or sponsor:** senior manager who selects projects and removes barriers.
+- **Master Black Belt:** expert coach and trainer.
+- **Black Belt:** full time project leader skilled in advanced statistics.
+- **Green Belt:** part time project leader or team member.
+- **Yellow Belt:** team member with basic training.
+- **Process owner:** responsible for sustaining results.
+
+## Common tools by phase
+
+| Phase | Typical tools |
+| --- | --- |
+| Define | Project charter, SIPOC, voice of customer, CTQ tree |
+| Measure | Process map, data collection plan, gauge R&R, capability analysis |
+| Analyse | Fishbone, Pareto, 5 Whys, hypothesis tests, regression |
+| Improve | Brainstorming, DOE, pilot runs, FMEA, poka-yoke |
+| Control | Control charts, control plan, standard work, audits |
+
+## Making Six Sigma DMAIC work
+
+Success depends on choosing projects linked to business goals and customer needs, leadership support, good data and disciplined tollgate reviews. Projects typically take three to six months. Combined with lean tools that remove the [seven wastes](/manufacturing-engineering/seven-wastes-lean/), DMAIC gives organisations a powerful, repeatable way to improve quality and reduce cost.

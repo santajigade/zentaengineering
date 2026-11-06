@@ -1,0 +1,124 @@
+---
+title: "FMEA Explained: Steps and RPN Calculation"
+description: "FMEA explained: design and process FMEA, failure modes, effects, causes, severity, occurrence, detection ratings, RPN, action priority and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: safety-engineering
+subcategory: fmea
+focusKeyword: "fmea"
+image: { src: /images/featured/fmea-explained.webp, alt: "FMEA Explained: Steps and RPN Calculation: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [fmea, rpn, reliability, quality, risk-analysis]
+faq:
+  - q: "What is the difference between DFMEA and PFMEA?"
+    a: "Design FMEA (DFMEA) analyses how a product design could fail to meet its function, focusing on design choices such as materials, tolerances and geometry. Process FMEA (PFMEA) analyses how a manufacturing or assembly process could fail to produce the product correctly, focusing on process steps, equipment, people and methods."
+  - q: "What is a good RPN value?"
+    a: "There is no universal threshold. Many organisations historically used limits such as 100 or 120, but RPN alone can mislead, because a high severity failure with low occurrence and detection may have a modest RPN. The AIAG-VDA FMEA handbook replaced RPN thresholds with an Action Priority table that gives most weight to severity."
+  - q: "What is FMECA?"
+    a: "FMECA (failure modes, effects and criticality analysis) extends FMEA by ranking failure modes by criticality, often using quantitative failure rates and the probability that a failure mode leads to a given effect. It is common in aerospace, defence and nuclear industries, following standards such as MIL-STD-1629A and IEC 60812."
+references:
+  - text: "IEC 60812:2018, Failure modes and effects analysis (FMEA and FMECA)"
+  - text: "AIAG and VDA, FMEA Handbook, 1st ed., 2019"
+  - text: "SAE J1739, Potential Failure Mode and Effects Analysis (FMEA) including Design FMEA, Supplemental FMEA-MSR, and Process FMEA"
+  - text: "D. H. Stamatis, Failure Mode and Effect Analysis: FMEA from Theory to Execution, 2nd ed., ASQ Quality Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**FMEA** (failure modes and effects analysis) is a structured, bottom-up method to find how a product or process could fail, what the effects would be, why it could happen and how to prevent or detect it. For each **failure mode**, the team rates **severity (S)** of the effect, **occurrence (O)** of the cause and **detection (D)** of the current controls, each typically from 1 to 10. Their product is the **risk priority number**, **RPN = S × O × D**, used to prioritise actions. The **AIAG-VDA** method now uses an **Action Priority** table that emphasises severity. Main types are **design FMEA** and **process FMEA**.
+
+</Key>
+
+FMEA was developed by the US military in the late 1940s, adopted by NASA for the Apollo programme and spread through the automotive, aerospace, medical device and process industries. It is a proactive tool: it looks for failures before they happen, while the design or process can still be changed cheaply.
+
+## Types of FMEA
+
+- **Design FMEA (DFMEA):** analyses product designs: components, interfaces, materials, tolerances and functions.
+- **Process FMEA (PFMEA):** analyses manufacturing and assembly processes, step by step.
+- **System FMEA:** analyses systems and subsystems and their interactions.
+- **FMEA-MSR (monitoring and system response):** for diagnostics in mechatronic systems.
+- **FMECA:** adds criticality analysis with quantitative failure rates.
+
+## The FMEA team
+
+A cross functional team of design, manufacturing, quality, maintenance and, where useful, supplier and customer representatives, led by a facilitator. FMEA relies on collective knowledge; an FMEA done by one person at a desk misses most of its value.
+
+## FMEA steps
+
+<figure>
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="FMEA flow from left to right: function or process step, failure mode, effect rated by severity, cause rated by occurrence, current controls rated by detection, RPN or action priority, recommended actions, then re-rating after actions">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="10" y="40" width="100" height="56" rx="6" fill="#eef1f6" /><rect x="125" y="40" width="100" height="56" rx="6" fill="#e6f6f4" /><rect x="240" y="40" width="100" height="56" rx="6" fill="#ffe9e7" /><rect x="355" y="40" width="100" height="56" rx="6" fill="#fff7e0" /><rect x="470" y="40" width="120" height="56" rx="6" fill="#e6f6f4" />
+<rect x="470" y="150" width="120" height="50" rx="6" fill="#ffe9e7" /><rect x="300" y="150" width="140" height="50" rx="6" fill="#fff7e0" /><rect x="125" y="150" width="140" height="50" rx="6" fill="#e6f6f4" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M110 68h9M225 68h9M340 68h9M455 68h9M530 96v48M470 175h-24M300 175h-29" /></g>
+<g fill="#13a89e"><path d="M118 63l7 5-7 5z" /><path d="M233 63l7 5-7 5z" /><path d="M348 63l7 5-7 5z" /><path d="M463 63l7 5-7 5z" /><path d="M525 144l5 7 5-7z" /><path d="M447 170l-7 5 7 5z" /><path d="M272 170l-7 5 7 5z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="60" y="64">Function or</text><text x="60" y="80">process step</text>
+<text x="175" y="64">Failure</text><text x="175" y="80">mode</text>
+<text x="290" y="64">Effect</text><text x="290" y="80" font-weight="700">Severity S</text>
+<text x="405" y="64">Cause</text><text x="405" y="80" font-weight="700">Occurrence O</text>
+<text x="530" y="64">Current controls</text><text x="530" y="80" font-weight="700">Detection D</text>
+<text x="530" y="172" font-weight="700">RPN = S×O×D</text><text x="530" y="188">or action priority</text>
+<text x="370" y="172">Recommended</text><text x="370" y="188">actions, owners</text>
+<text x="195" y="172">Re-rate S, O, D</text><text x="195" y="188">after actions</text>
+</g>
+</svg>
+<figcaption>The FMEA analysis chain from function to re-rated risk.</figcaption>
+</figure>
+
+1. **Define scope:** the system, subsystem, component or process, with block diagrams or process flow charts.
+2. **List functions or process steps** and their requirements.
+3. **Identify failure modes:** the ways each function could fail, such as cracked, leaking, wrong dimension, missing part, no output.
+4. **Determine effects** of each failure mode on the next level, the end user, safety and regulations. Rate **severity** (1 = no effect, 10 = hazardous without warning).
+5. **Identify causes** (design weaknesses or process errors) and rate **occurrence** (1 = extremely unlikely, 10 = very high).
+6. **List current controls:** prevention controls that reduce occurrence and detection controls such as tests and inspections. Rate **detection** (1 = almost certain to be detected, 10 = cannot be detected).
+7. **Calculate RPN** or determine action priority.
+8. **Recommend actions,** assign owners and target dates.
+9. **Implement and re-rate** S, O and D to confirm risk reduction.
+10. **Keep the FMEA as a living document,** updated with design changes, field failures and lessons learned.
+
+## RPN calculation
+
+$$
+RPN = S \times O \times D
+$$
+
+RPN ranges from 1 to 1000. Severity can usually only be reduced by changing the design; occurrence by preventing causes; detection by better inspection or testing. Prevention is preferred to detection.
+
+## Action priority (AIAG-VDA)
+
+The 2019 AIAG-VDA handbook replaced RPN thresholds with an **Action Priority (AP)** table that rates each combination of S, O and D as **high**, **medium** or **low** priority. High severity (9 to 10) failure modes get high priority unless occurrence and detection are both very low. This avoids the problem where, for example, S = 10, O = 2, D = 2 (RPN 40) ranks below a nuisance failure with S = 4, O = 5, D = 5 (RPN 100).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A PFMEA for a brake hose crimping operation lists two failure modes. (1) Crimp too loose: hose can detach under pressure, loss of braking (S = 10); cause: worn crimp die (O = 3); control: periodic visual check (D = 6). (2) Label misprinted: traceability lost (S = 4); cause: printer ribbon fault (O = 5); control: operator glance (D = 5).</dd>
+<dt>Find</dt><dd>RPNs, priorities and the effect of adding 100% automatic crimp diameter measurement (D = 2) and die life monitoring (O = 2) to failure mode 1.</dd>
+<dt>Assumptions</dt><dd>Ratings from the organisation's scales.</dd>
+<dt>Solution</dt><dd>Mode 1: RPN = 10 × 3 × 6 = 180<br />Mode 2: RPN = 4 × 5 × 5 = 100<br />After actions, mode 1: RPN = 10 × 2 × 2 = 40</dd>
+<dt>Answer</dt><dd><strong>Mode 1 (RPN 180, safety critical) is the top priority; with automatic measurement and die monitoring its RPN falls to 40, while severity stays 10, so the controls must be maintained and verified</strong></dd>
+<dt>Limitations</dt><dd>Ratings are judgements; the team should use defined scales and evidence such as process capability data.</dd>
+</dl>
+</Example>
+
+## Rating scales
+
+Each organisation should use defined rating scales so that teams score consistently. Severity scales describe effects on safety, regulatory compliance, function and customer satisfaction; a 9 or 10 is reserved for safety or legal non-compliance. Occurrence scales link ratings to evidence such as failure rates, process capability (Cpk) or field data. Detection scales describe how likely the current controls are to catch the failure before it reaches the customer, from error proofing (very likely) to no control (cannot detect). Using examples from past products helps calibrate the team.
+
+## Linking FMEA to the control plan
+
+Every high priority failure mode should lead to a control in the control plan: an error proofing device, an inspection with a defined frequency and reaction plan, or a statistical process control chart. The control plan lists each characteristic, the measurement method, sample size and frequency, and what to do when results are out of limits. This link turns the FMEA from a document into real protection on the shop floor.
+
+## Benefits and limitations of FMEA
+
+**Benefits:** finds failure modes early, improves design and process robustness, prioritises resources, documents knowledge, supports control plans and meets customer and regulatory requirements (such as IATF 16949 in automotive and ISO 14971 risk management for medical devices).
+
+**Limitations:** time consuming for complex systems; considers single failures and may miss combinations and human or software interactions; subjective ratings; can become a paperwork exercise if not used to drive action. Combining FMEA with fault tree analysis, [HAZOP](/safety-engineering/hazop-study/) for process plants, and data from [reliability measures](/safety-engineering/mtbf-mttr-availability/) addresses some of these gaps.
+
+## FMEA in practice
+
+FMEA is most effective when started early, reviewed at design and process changes, linked to the control plan and [control charts](/manufacturing-engineering/control-charts-spc/) for critical characteristics, and updated with field failure data from [root cause analysis](/safety-engineering/root-cause-analysis-methods/). It is also a core tool in the Improve phase of [Six Sigma DMAIC](/manufacturing-engineering/six-sigma-dmaic/) and in reliability centred maintenance.

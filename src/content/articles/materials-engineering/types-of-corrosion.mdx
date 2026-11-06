@@ -1,0 +1,143 @@
+---
+title: "Types of Corrosion and How to Prevent Them"
+description: "Types of corrosion explained: uniform, galvanic, pitting, crevice, intergranular, SCC, erosion and MIC, with prevention methods and a worked life example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: materials-engineering
+subcategory: corrosion
+focusKeyword: "types of corrosion"
+image: { src: /images/featured/types-of-corrosion.webp, alt: "Types of Corrosion and How to Prevent Them: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [corrosion, galvanic-corrosion, pitting, cathodic-protection, coatings]
+faq:
+  - q: "What is the most dangerous type of corrosion?"
+    a: "Localised forms such as pitting and stress corrosion cracking are often the most dangerous, because they can cause leaks or sudden fracture with little overall metal loss and little visible warning. Uniform corrosion is easier to predict and manage with a corrosion allowance."
+  - q: "Why does stainless steel corrode in seawater?"
+    a: "Stainless steels rely on a thin chromium oxide passive film. Chloride ions in seawater can break this film locally, especially in crevices, under deposits or at low flow, causing pitting and crevice corrosion. Higher alloyed grades with more chromium, molybdenum and nitrogen, such as duplex and super austenitic steels, resist chlorides better."
+  - q: "How does cathodic protection work?"
+    a: "Cathodic protection makes the protected structure the cathode of an electrochemical cell, so it receives electrons and does not dissolve. This is done either with sacrificial anodes of a more active metal such as zinc, aluminium or magnesium, or with impressed current from a DC power source through inert anodes."
+references:
+  - text: "M. G. Fontana, Corrosion Engineering, 3rd ed., McGraw-Hill"
+  - text: "R. W. Revie and H. H. Uhlig, Corrosion and Corrosion Control, 4th ed., Wiley"
+  - text: "ISO 8044:2020, Corrosion of metals and alloys: Vocabulary"
+  - text: "ISO 9223:2012, Corrosion of metals and alloys: Corrosivity of atmospheres, Classification"
+  - text: "NACE (AMPP) International, Corrosion Basics: An Introduction, 2nd ed."
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+Corrosion is the deterioration of a metal by chemical or electrochemical reaction with its environment. The main **types of corrosion** are **uniform (general) corrosion**, **galvanic corrosion** between dissimilar metals, **pitting**, **crevice corrosion**, **intergranular corrosion**, **stress corrosion cracking (SCC)**, **erosion corrosion**, **selective leaching**, **corrosion fatigue** and **microbiologically influenced corrosion (MIC)**. Prevention uses **material selection**, **good design**, **protective coatings**, **cathodic protection**, **corrosion inhibitors** and **environmental control**, supported by inspection.
+
+</Key>
+
+Corrosion costs industrialised economies an estimated 3 to 4% of GDP each year, through replacement, maintenance, lost production and failures. It weakens bridges, pipelines, tanks, ships and plant equipment, and can cause leaks, fires and collapses. Recognising each type of corrosion is the first step to preventing it.
+
+## The electrochemistry of corrosion
+
+Aqueous corrosion is an electrochemical cell with four parts:
+
+- **Anode:** metal oxidises and dissolves, for iron Fe → Fe²⁺ + 2e⁻.
+- **Cathode:** electrons are consumed, typically by oxygen reduction O₂ + 2H₂O + 4e⁻ → 4OH⁻ in neutral water, or hydrogen evolution in acids.
+- **Electrolyte:** water or moisture that carries ions.
+- **Metallic path:** the metal itself carries electrons from anode to cathode.
+
+Removing any one of these stops corrosion, which is the logic behind all prevention methods.
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Galvanic corrosion cell: a steel plate and a copper plate joined electrically and immersed in seawater; steel is the anode and dissolves releasing iron ions, copper is the cathode where oxygen is reduced; electrons flow through the metallic connection from steel to copper, ions move through the electrolyte">
+<rect x="80" y="90" width="440" height="150" rx="6" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<rect x="150" y="60" width="40" height="150" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<rect x="410" y="60" width="40" height="150" fill="#d08a4b" stroke="#0b2545" stroke-width="1.5" />
+<path d="M170 60V30H430V60" stroke="#0b2545" stroke-width="2" fill="none" />
+<path d="M330 30H380" stroke="#b42318" stroke-width="2" /><path d="M380 25l9 5-9 5z" fill="#b42318" />
+<g fill="#7b8794"><circle cx="210" cy="140" r="4" /><circle cx="225" cy="165" r="4" /><circle cx="208" cy="185" r="4" /></g>
+<g stroke="#13a89e" stroke-width="2"><path d="M240 170H360" stroke-dasharray="6 4" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="170" y="228" font-weight="700">Steel: anode</text><text x="430" y="228" font-weight="700">Copper: cathode</text>
+<text x="300" y="20" fill="#b42318">Electrons flow</text><text x="300" y="120">Seawater (electrolyte)</text>
+<text x="245" y="135" font-size="11">Fe → Fe²⁺ + 2e⁻</text><text x="355" y="200" font-size="11">O₂ + 2H₂O + 4e⁻ → 4OH⁻</text>
+<text x="300" y="160" font-size="11" fill="#13a89e">Ion current</text>
+<text x="300" y="262" font-size="12">Steel corrodes faster when coupled to the more noble copper</text>
+</g>
+</svg>
+<figcaption>A galvanic cell: the less noble metal becomes the anode and corrodes.</figcaption>
+</figure>
+
+## The main types of corrosion
+
+### 1. Uniform (general) corrosion
+
+Metal is lost fairly evenly over the exposed surface, as in rusting steel in the atmosphere or acid attack. It is predictable, measured as a **corrosion rate** in mm per year, and usually managed by a **corrosion allowance**, coatings or material choice.
+
+### 2. Galvanic corrosion
+
+When two dissimilar metals are electrically connected in an electrolyte, the more active (less noble) metal in the **galvanic series** corrodes faster, while the nobler one is protected. Examples: steel bolts in a copper alloy plate, aluminium in contact with stainless steel in seawater. Risk increases with a large cathode to small anode area ratio. Prevention: choose compatible metals, insulate them, coat the cathode, or make the anode large.
+
+### 3. Pitting corrosion
+
+Highly localised attack forming small, deep pits, typical of passive metals such as stainless steel and aluminium in chloride environments. Pits can perforate a wall while the surface looks almost untouched. Resistance of stainless steels is ranked by the **pitting resistance equivalent number**, PREN = %Cr + 3.3 × %Mo + 16 × %N.
+
+### 4. Crevice corrosion
+
+Localised attack inside narrow gaps, such as under gaskets, washers, deposits and lap joints, where stagnant solution becomes depleted in oxygen and enriched in chlorides and acidity. Prevention: avoid crevices in design, use welded rather than bolted joints, seal gaps, keep surfaces clean.
+
+### 5. Intergranular corrosion
+
+Attack along grain boundaries, for example in austenitic stainless steels **sensitised** by heating in the range of about 450 to 850 °C during welding, which forms chromium carbides and depletes chromium near the boundaries. Prevention: low carbon grades (304L, 316L), stabilised grades (321, 347) or solution annealing.
+
+### 6. Stress corrosion cracking (SCC)
+
+Cracking caused by the combined action of tensile stress (applied or residual) and a specific corrosive environment, such as chlorides with austenitic stainless steel, caustic with carbon steel, or ammonia with brass. Cracks can grow with very little metal loss and cause sudden failure. Prevention: resistant materials (duplex steels), stress relief, reducing temperature or chlorides, and compressive surface stresses by shot peening. Closely related is **hydrogen embrittlement**, especially in high strength steels and sour (H₂S) service.
+
+### 7. Erosion corrosion and cavitation
+
+Fast or turbulent flow removes protective films and accelerates attack, typically at pipe bends, pump impellers and valve trims. **Cavitation** damage from collapsing vapour bubbles in [centrifugal pumps](/mechanical-engineering/centrifugal-pump-working-principle/) is a related mechanical and corrosive attack. Prevention: lower velocities, larger radius bends, harder or more resistant alloys.
+
+### 8. Selective leaching (dealloying)
+
+One element is removed from an alloy, such as zinc from brass (dezincification) or iron from grey cast iron (graphitic corrosion), leaving a weak, porous structure.
+
+### 9. Corrosion fatigue
+
+Cyclic stress in a corrosive environment shortens fatigue life and removes the fatigue limit of steels. See [fatigue failure](/materials-engineering/fatigue-failure/).
+
+### 10. Microbiologically influenced corrosion (MIC)
+
+Bacteria such as sulphate reducing bacteria create local corrosive conditions under biofilms in water systems, tanks and pipelines. Prevention: biocides, flow and cleaning, pigging, and material selection.
+
+## Preventing the types of corrosion
+
+- **Material selection:** stainless steels, duplex steels, nickel alloys, titanium, copper alloys or polymers and composites for aggressive environments.
+- **Design:** avoid crevices and water traps, allow drainage and ventilation, avoid galvanic couples, provide access for inspection and maintenance.
+- **Protective coatings:** paints and coating systems, hot dip galvanising, metallic and ceramic coatings, linings. Surface preparation is the most important factor in coating life.
+- **Cathodic protection:** sacrificial anodes or impressed current systems for buried pipelines, ship hulls, offshore structures and tank bottoms.
+- **Inhibitors:** chemicals added to cooling water, oil and gas streams or closed systems that slow corrosion reactions.
+- **Environmental control:** dehumidification, deaeration of boiler water, pH control, removing chlorides.
+- **Inspection and monitoring:** thickness measurement with ultrasonic [NDT methods](/materials-engineering/ndt-methods/), corrosion coupons and probes, and intelligent [pipeline pigging](/petroleum-engineering/pipeline-pigging/).
+
+## Estimating remaining life
+
+For uniform corrosion, remaining life is:
+
+$$
+t_\text{remaining} = \frac{t_\text{actual} - t_\text{minimum}}{\text{corrosion rate}}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A carbon steel pipe had a nominal wall of 9.5 mm when installed 8 years ago. Ultrasonic testing now measures 7.9 mm at the thinnest point. The minimum required thickness for pressure is 5.2 mm.</dd>
+<dt>Find</dt><dd>The corrosion rate and remaining life.</dd>
+<dt>Assumptions</dt><dd>Uniform corrosion at a constant rate; nominal thickness was the actual initial thickness.</dd>
+<dt>Solution</dt><dd>Corrosion rate = (9.5 − 7.9) ÷ 8 = 0.20 mm/year<br />Remaining life = (7.9 − 5.2) ÷ 0.20 = 13.5 years</dd>
+<dt>Answer</dt><dd><strong>Corrosion rate 0.2 mm per year and about 13.5 years of remaining life; the next inspection is often set at half this, about 6 to 7 years</strong></dd>
+<dt>Limitations</dt><dd>Localised pitting or changing process conditions can make real life much shorter; API 570 and similar codes guide inspection intervals.</dd>
+</dl>
+</Example>
+
+## Corrosion in engineering practice
+
+Corrosion engineering combines chemistry, metallurgy and design. Most failures are not caused by unknown mechanisms but by known types of corrosion that were not considered: an unexpected galvanic couple, a crevice under a gasket, a sensitised weld or chlorides on hot stainless steel. Checking each type of corrosion during design and selecting [engineering materials](/materials-engineering/engineering-materials-classification/) suited to the environment prevents most problems.

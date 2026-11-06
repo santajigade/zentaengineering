@@ -1,0 +1,134 @@
+---
+title: "Fatigue Failure: Causes, S-N Curve and Prevention"
+description: "Fatigue failure explained: cyclic stress, crack initiation and growth, the S-N curve, endurance limit, Goodman line, stress concentrations and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: materials-engineering
+subcategory: failure-analysis
+focusKeyword: "fatigue failure"
+image: { src: /images/featured/fatigue-failure.webp, alt: "Fatigue Failure: Causes, S-N Curve and Prevention: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [fatigue, s-n-curve, endurance-limit, goodman, failure-analysis]
+faq:
+  - q: "Why is fatigue failure dangerous?"
+    a: "Fatigue cracks grow slowly at stresses well below the yield strength, often without visible deformation or warning, and then the remaining section fractures suddenly. Many failures of shafts, axles, aircraft parts, welded structures and springs are fatigue failures, so fatigue design and inspection are critical."
+  - q: "What are beach marks on a fracture surface?"
+    a: "Beach marks are curved bands visible to the eye on many fatigue fracture surfaces. They form when crack growth stops and starts or the loading changes, leaving marks that point back to the crack origin. Microscopic striations, one per load cycle, can also be seen with an electron microscope."
+  - q: "Do aluminium alloys have an endurance limit?"
+    a: "No clear one. Steels and titanium alloys typically show a near horizontal S-N curve beyond about 10⁶ to 10⁷ cycles, called the endurance or fatigue limit. Aluminium and copper alloys keep losing strength with more cycles, so designers quote fatigue strength at a stated number of cycles, such as 5 × 10⁸."
+references:
+  - text: "R. G. Budynas and J. K. Nisbett, Shigley's Mechanical Engineering Design, 11th ed., McGraw-Hill"
+  - text: "N. E. Dowling, Mechanical Behavior of Materials, 4th ed., Pearson"
+  - text: "J. A. Bannantine, J. J. Comer and J. L. Handrock, Fundamentals of Metal Fatigue Analysis, Prentice Hall"
+  - text: "ASTM E466, Standard Practice for Conducting Force Controlled Constant Amplitude Axial Fatigue Tests of Metallic Materials"
+  - text: "IIW, Recommendations for Fatigue Design of Welded Joints and Components, 2nd ed., Springer"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Fatigue failure** is the progressive cracking and eventual fracture of a material under **repeated or fluctuating stresses**, often far below its yield strength. It happens in three stages: **crack initiation** at a stress concentration or surface flaw, **crack propagation** with each load cycle, and **final fast fracture** when the remaining section can no longer carry the load. Fatigue life is described by the **S-N curve** (stress amplitude versus cycles to failure); steels show an **endurance limit** below which life is practically infinite. Prevention focuses on lowering stress ranges, removing **stress concentrations**, improving **surface finish**, introducing **compressive residual stress** and inspecting for cracks.
+
+</Key>
+
+Most mechanical failures in service are caused by fatigue. Rotating shafts, axles, crankshafts, springs, aircraft wings, bridges, offshore structures, pressure vessels under cyclic pressure and welded frames all experience fluctuating stresses. A part that is perfectly safe under a single static load can crack after millions of smaller cycles.
+
+## Cyclic stress parameters
+
+For a stress cycling between σ_max and σ_min:
+
+$$
+\sigma_a = \frac{\sigma_{max} - \sigma_{min}}{2} \qquad \sigma_m = \frac{\sigma_{max} + \sigma_{min}}{2} \qquad R = \frac{\sigma_{min}}{\sigma_{max}}
+$$
+
+where σ_a is the stress amplitude, σ_m the mean stress and R the stress ratio. A rotating shaft under bending sees **fully reversed** stress (R = −1, σ_m = 0). Mean tensile stress reduces fatigue life.
+
+## Stages of fatigue failure
+
+1. **Crack initiation:** cyclic slip in favourably oriented grains forms tiny intrusions and extrusions at the surface, or a crack starts at an existing defect: a notch, scratch, inclusion, weld toe or corrosion pit.
+2. **Crack propagation:** the crack grows a small distance with each cycle, perpendicular to the main tensile stress. Growth rate follows the **Paris law**, da/dN = C(ΔK)^m, where ΔK is the stress intensity factor range.
+3. **Final fracture:** when the crack reaches a critical size, the remaining ligament fails suddenly by ductile overload or brittle fracture.
+
+The fracture surface typically shows a smooth region with **beach marks** radiating from the origin, and a rougher final fracture zone. The relative size of the zones indicates the stress level: a small final zone means low nominal stress.
+
+## The S-N curve
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="S-N curves on log scale: stress amplitude versus number of cycles from 10 to the 3 to 10 to the 9; a steel curve falls and then becomes horizontal at the endurance limit around 10 to the 6 cycles; an aluminium curve keeps falling without a clear limit">
+<path d="M70 20V240H570" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="70" y="256">10³</text><text x="153" y="256">10⁴</text><text x="237" y="256">10⁵</text><text x="320" y="256">10⁶</text><text x="403" y="256">10⁷</text><text x="487" y="256">10⁸</text><text x="570" y="256">10⁹</text>
+<text x="320" y="280" font-size="12">Number of cycles to failure N (log scale)</text>
+</g>
+<text x="28" y="130" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle" transform="rotate(-90 28 130)">Stress amplitude S</text>
+<path d="M70 45L320 135H570" stroke="#13a89e" stroke-width="3" fill="none" />
+<path d="M70 85L320 165L570 205" stroke="#f5b800" stroke-width="3" fill="none" />
+<path d="M320 135V240" stroke="#7b8794" stroke-width="1" stroke-dasharray="4 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="140" y="55" fill="#13a89e" font-weight="700">Steel</text><text x="400" y="127" fill="#13a89e">Endurance limit</text>
+<text x="150" y="150" fill="#b8860b" font-weight="700">Aluminium alloy</text><text x="440" y="208" fill="#b8860b">No clear limit</text>
+</g>
+</svg>
+<figcaption>Schematic S-N curves: steels typically show an endurance limit; aluminium alloys do not.</figcaption>
+</figure>
+
+Fatigue tests apply constant amplitude cycles to specimens at several stress levels and record cycles to failure. The resulting **S-N (Wöhler) curve** is usually plotted on log scales.
+
+- **Low cycle fatigue** (below about 10³ to 10⁴ cycles) involves plastic strain and is analysed with strain based methods.
+- **High cycle fatigue** (above about 10⁴ cycles) is mostly elastic and analysed with stress based S-N methods.
+- For many steels, the **endurance limit** S_e′ for polished specimens is roughly half the ultimate tensile strength, up to about 700 MPa for UTS up to 1400 MPa.
+
+The polished specimen limit is reduced for real parts by **Marin factors** for surface finish, size, loading type, temperature and reliability:
+
+$$
+S_e = k_a k_b k_c k_d k_e \, S_e'
+$$
+
+## Effect of mean stress: the Goodman line
+
+When mean stress is present, the modified Goodman criterion gives a safety factor n:
+
+$$
+\frac{\sigma_a}{S_e} + \frac{\sigma_m}{S_{ut}} = \frac{1}{n}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A steel shaft has UTS 600 MPa. Its corrected endurance limit, after surface, size and reliability factors, is 190 MPa. At a fillet, the bending stress cycles between 40 MPa and 160 MPa after applying the fatigue stress concentration factor.</dd>
+<dt>Find</dt><dd>Stress amplitude, mean stress and the Goodman safety factor.</dd>
+<dt>Assumptions</dt><dd>Infinite life design; modified Goodman criterion.</dd>
+<dt>Solution</dt><dd>σ_a = (160 − 40) ÷ 2 = 60 MPa<br />σ_m = (160 + 40) ÷ 2 = 100 MPa<br />1 ÷ n = 60 ÷ 190 + 100 ÷ 600 = 0.316 + 0.167 = 0.483<br />n = 2.07</dd>
+<dt>Answer</dt><dd><strong>Stress amplitude 60 MPa, mean 100 MPa, and a fatigue safety factor of about 2.1 for infinite life</strong></dd>
+<dt>Limitations</dt><dd>Real loading often varies in amplitude; cumulative damage methods such as Miner's rule and rainflow counting are then needed.</dd>
+</dl>
+</Example>
+
+## Factors that reduce fatigue life
+
+- **Stress concentrations:** holes, keyways, fillets, threads and abrupt changes in section raise local stress by the factor K_t.
+- **Surface condition:** rough machining, scratches, decarburisation and corrosion pits act as crack starters.
+- **Size:** larger parts contain more potential flaws.
+- **Welds:** weld toes have sharp geometry and tensile residual stresses; welded joints are designed with dedicated detail categories from codes such as IIW and Eurocode 3.
+- **Environment:** corrosion fatigue removes the endurance limit of steels; high temperature reduces strength.
+- **Tensile residual stress** from welding or grinding.
+
+## Variable amplitude loading and Miner's rule
+
+Real components rarely see constant amplitude cycles. Wind, waves, traffic, machine start-ups and road roughness produce a spectrum of stress ranges. Engineers count cycles with **rainflow counting** and combine damage with the **Palmgren-Miner rule**: each block of n_i cycles at a stress level with life N_i uses a fraction n_i/N_i of the life, and failure is predicted when the fractions add up to 1. The rule is simple and widely used in codes, although load sequence effects mean real damage sums at failure can range from well below to above 1, so design codes include safety margins.
+
+## Preventing fatigue failure
+
+- **Design:** generous fillet radii, gradual section changes, avoid notches in high stress areas, place holes and welds in low stress zones.
+- **Lower stress ranges:** stiffen the structure, reduce vibration and dynamic loads, add damping.
+- **Surface improvements:** polishing, grinding weld toes, avoiding sharp machining marks.
+- **Compressive residual stress:** shot peening, rolling of fillets and threads, nitriding and induction hardening, discussed in [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+- **Materials:** clean steels with few inclusions, higher strength materials where stress concentrations are controlled.
+- **Corrosion protection** to avoid pits, as in [types of corrosion](/materials-engineering/types-of-corrosion/).
+- **Inspection:** periodic [NDT methods](/materials-engineering/ndt-methods/) to find cracks before they reach critical size, the basis of **damage tolerant** design in aircraft.
+
+## Fatigue failure in practice
+
+Famous fatigue failures, from early railway axles in the 1840s to the de Havilland Comet aircraft in the 1950s, shaped modern engineering. Today, fatigue design combines S-N data, finite element stress analysis such as [FEA](/mechanical-engineering/finite-element-analysis-basics/), and realistic load spectra, applying an appropriate [factor of safety](/mechanical-engineering/factor-of-safety/). Good detailing and inspection remain the most effective defences against fatigue failure in real structures and machines.

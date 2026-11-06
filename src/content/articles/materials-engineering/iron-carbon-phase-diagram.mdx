@@ -1,0 +1,148 @@
+---
+title: "Iron-Carbon Phase Diagram Explained"
+description: "Iron-carbon phase diagram explained: phases, ferrite, austenite, cementite, pearlite, eutectoid and eutectic points, critical lines and a lever rule example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: materials-engineering
+subcategory: metallurgy
+focusKeyword: "iron-carbon phase diagram"
+image: { src: /images/featured/iron-carbon-phase-diagram.webp, alt: "Iron-Carbon Phase Diagram Explained: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [metallurgy, iron-carbon-diagram, steel, pearlite, austenite]
+faq:
+  - q: "Why is it called the iron-iron carbide diagram?"
+    a: "In normal steels, carbon above the solubility limit forms iron carbide (Fe₃C, cementite) rather than graphite, even though graphite is the more stable form. Cementite is metastable but persists for practical times, so the diagram used in steel metallurgy is the metastable Fe-Fe₃C diagram, plotted up to 6.67% carbon, the carbon content of Fe₃C."
+  - q: "Does martensite appear on the iron-carbon phase diagram?"
+    a: "No. The phase diagram shows equilibrium phases formed by slow cooling. Martensite forms only when austenite is cooled so quickly that carbon cannot diffuse out, so it is shown on time-temperature-transformation (TTT) and continuous cooling transformation (CCT) diagrams, not on the equilibrium diagram."
+  - q: "What is the difference between steel and cast iron?"
+    a: "Steels contain up to about 2.14% carbon and can be fully austenitised, so they are hot workable and can be heat treated. Cast irons contain more than about 2.14% carbon, usually 2.5 to 4%, have lower melting points and excellent castability, but are more brittle in their common forms."
+references:
+  - text: "W. D. Callister Jr. and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley"
+  - text: "G. Krauss, Steels: Processing, Structure, and Performance, 2nd ed., ASM International"
+  - text: "ASM Handbook, Vol. 3: Alloy Phase Diagrams, ASM International"
+  - text: "S. H. Avner, Introduction to Physical Metallurgy, 2nd ed., McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **iron-carbon phase diagram** (strictly the Fe-Fe₃C diagram) shows which phases are stable in iron-carbon alloys at each temperature and carbon content under slow, near-equilibrium cooling. Key phases are **ferrite (α)**, soft and with very low carbon solubility; **austenite (γ)**, the face-centred cubic phase stable at high temperature; **cementite (Fe₃C)**, hard and brittle; and **pearlite**, a lamellar mixture of ferrite and cementite. Key points are the **eutectoid** at **0.76% C and 727 °C** (austenite → pearlite) and the **eutectic** at **4.3% C and 1147 °C** (liquid → austenite + cementite). Steels lie below about **2.14% C**, cast irons above.
+
+</Key>
+
+Steel is the most important engineering metal, and its properties can range from soft and ductile to extremely hard, depending on carbon content and heat treatment. The iron-carbon diagram is the map that explains why. It tells metallurgists which phases form when steel is heated or cooled, and it underpins casting, forging, welding and [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+
+## Allotropy of iron
+
+Pure iron changes crystal structure with temperature:
+
+- **α-iron (ferrite):** body-centred cubic (BCC), stable up to 912 °C; magnetic below 770 °C (the Curie point).
+- **γ-iron (austenite):** face-centred cubic (FCC), stable from 912 to 1394 °C.
+- **δ-iron (delta ferrite):** BCC again, from 1394 °C to the melting point of 1538 °C.
+
+FCC austenite has larger interstitial spaces and dissolves much more carbon (up to 2.14%) than BCC ferrite (at most 0.022%). This difference drives most steel heat treatment.
+
+<figure>
+<svg width="600" height="360" viewBox="0 0 600 360" fill="none" role="img" aria-label="Simplified iron-iron carbide phase diagram: temperature from 600 to 1600 degrees Celsius on the vertical axis, carbon content 0 to 6.67 percent on the horizontal axis; regions labelled liquid, austenite gamma, ferrite alpha plus austenite, ferrite plus cementite (pearlite), austenite plus cementite, and liquid plus austenite; eutectoid point at 0.76 percent carbon and 727 degrees, eutectic point at 4.3 percent carbon and 1147 degrees; vertical dashed line at 2.14 percent separates steels and cast irons">
+<path d="M60 20V320H560" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="end">
+<text x="54" y="324">600</text><text x="54" y="264">800</text><text x="54" y="204">1000</text><text x="54" y="144">1200</text><text x="54" y="84">1400</text><text x="54" y="24">1600</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="60" y="336">0</text><text x="116" y="336">0.76</text><text x="219" y="336">2.14</text><text x="379" y="336">4.3</text><text x="555" y="336">6.67</text>
+<text x="310" y="354">Carbon (wt %)</text>
+</g>
+<text x="18" y="170" font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle" transform="rotate(-90 18 170)">Temperature (°C)</text>
+<g stroke="#0b2545" stroke-width="2" fill="none">
+<path d="M60 39L379 156L555 132" />
+<path d="M60 39L219 156" />
+<path d="M60 226L116 282" />
+<path d="M219 156L116 282" />
+<path d="M62 282H555" />
+<path d="M219 156H555" />
+<path d="M60 226L62 282" />
+</g>
+<path d="M219 20V320" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="5 4" />
+<g fill="#b42318"><circle cx="116" cy="282" r="5" /><circle cx="379" cy="156" r="5" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="340" y="90" font-weight="700">Liquid</text>
+<text x="140" y="195" font-weight="700">Austenite (γ)</text>
+<text x="275" y="142">L + γ</text><text x="505" y="148" font-size="10">L + Fe₃C</text>
+<text x="370" y="225">γ + Fe₃C</text>
+<text x="330" y="306">α + Fe₃C (pearlite + cementite)</text>
+<text x="80" y="268" font-size="9">α + γ</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#b42318" stroke="#ffffff" stroke-width="4" paint-order="stroke">
+<text x="128" y="274">Eutectoid 0.76% C, 727 °C</text><text x="370" y="176">Eutectic 4.3% C, 1147 °C</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#7b8794" text-anchor="middle"><text x="140" y="36">Steels</text><text x="300" y="36">Cast irons</text></g>
+</svg>
+<figcaption>Simplified Fe-Fe₃C phase diagram (the delta ferrite region at top left is omitted for clarity).</figcaption>
+</figure>
+
+## Phases and microconstituents
+
+- **Ferrite (α):** BCC iron with up to 0.022% C at 727 °C. Soft, ductile, magnetic.
+- **Austenite (γ):** FCC iron with up to 2.14% C at 1147 °C. Ductile, non-magnetic; not stable at room temperature in plain carbon steels.
+- **Cementite (Fe₃C):** iron carbide with 6.67% C. Very hard and brittle.
+- **Pearlite:** not a phase but a microconstituent: alternating thin plates (lamellae) of ferrite and cementite formed from austenite at the eutectoid. Strong and moderately ductile.
+- **Ledeburite:** the eutectic mixture of austenite and cementite in cast irons.
+
+## Key points and lines
+
+| Point or line | Composition | Temperature | Reaction or meaning |
+| --- | --- | --- | --- |
+| Eutectoid point | 0.76% C | 727 °C | γ → α + Fe₃C (pearlite) |
+| Eutectic point | 4.3% C | 1147 °C | Liquid → γ + Fe₃C (ledeburite) |
+| Peritectic point | 0.17% C | 1493 °C | Liquid + δ → γ |
+| Maximum C in austenite | 2.14% C | 1147 °C | Boundary between steels and cast irons |
+| A1 line | | 727 °C | Lower critical temperature |
+| A3 line | Below 0.76% C | 912 to 727 °C | Ferrite starts forming on cooling |
+| Acm line | Above 0.76% C | 1147 to 727 °C | Cementite starts forming on cooling |
+
+## Slow cooling of steels
+
+- **Eutectoid steel (0.76% C):** austenite transforms entirely to pearlite at 727 °C.
+- **Hypoeutectoid steel (below 0.76% C):** on cooling below the A3 line, **proeutectoid ferrite** forms at austenite grain boundaries; at 727 °C the remaining austenite, now at 0.76% C, transforms to pearlite. Structure: ferrite plus pearlite. Most structural steels are hypoeutectoid.
+- **Hypereutectoid steel (0.76 to 2.14% C):** below the Acm line, **proeutectoid cementite** forms along grain boundaries; the rest becomes pearlite at 727 °C. Structure: pearlite plus cementite network, hard but less tough. Used in tool steels.
+
+## The lever rule
+
+In a two-phase region, the fraction of each phase is found with the **lever rule**. For an alloy of composition C₀ between phase compositions C_α and C_β:
+
+$$
+W_\alpha = \frac{C_\beta - C_0}{C_\beta - C_\alpha} \qquad W_\beta = \frac{C_0 - C_\alpha}{C_\beta - C_\alpha}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 0.40% C plain carbon steel is slowly cooled to just below 727 °C.</dd>
+<dt>Find</dt><dd>The fractions of proeutectoid ferrite and pearlite, and the total fractions of ferrite and cementite.</dd>
+<dt>Assumptions</dt><dd>Equilibrium cooling; ferrite contains 0.022% C; cementite 6.67% C; eutectoid 0.76% C.</dd>
+<dt>Solution</dt><dd>Pearlite fraction = (0.40 − 0.022) ÷ (0.76 − 0.022) = 0.378 ÷ 0.738 = 0.51<br />Proeutectoid ferrite = 1 − 0.51 = 0.49<br />Total cementite = (0.40 − 0.022) ÷ (6.67 − 0.022) = 0.378 ÷ 6.648 = 0.057<br />Total ferrite = 1 − 0.057 = 0.943</dd>
+<dt>Answer</dt><dd><strong>About 49% proeutectoid ferrite and 51% pearlite; overall about 94% ferrite and 6% cementite</strong></dd>
+<dt>Limitations</dt><dd>Real cooling is faster than equilibrium and alloying elements shift the lines, so actual microstructures differ.</dd>
+</dl>
+</Example>
+
+## Cast irons
+
+Alloys above 2.14% C are cast irons. Their low melting point and good fluidity make them easy to cast. Depending on composition and cooling rate, carbon appears as cementite (**white cast iron**, hard and brittle) or as graphite: flakes in **grey cast iron** (good damping and machinability), spheres in **ductile (nodular) iron** (good toughness), or compact clusters in **malleable iron**.
+
+## Effect of alloying elements and cooling rate
+
+Alloying elements shift the diagram: nickel and manganese stabilise austenite (enough nickel gives austenitic stainless steels at room temperature), while chromium, molybdenum and silicon stabilise ferrite. Faster cooling than equilibrium suppresses diffusion, producing finer pearlite, bainite or martensite. These non-equilibrium products are described by TTT and CCT diagrams and are the basis of hardening.
+
+## Reading the diagram step by step
+
+To use the diagram for a given steel, draw a vertical line at its carbon content. Follow it down from the liquid region: where it crosses a boundary, a new phase begins to form. In a two phase region, draw a horizontal tie line at the temperature of interest; its ends give the compositions of the two phases, and the lever rule gives their amounts. At the eutectoid temperature, any remaining austenite transforms to pearlite. This simple procedure predicts the slow cooled microstructure and therefore the approximate strength and ductility.
+
+## Using the iron-carbon phase diagram in practice
+
+Keep in mind that the diagram describes equilibrium; real heat treatment cycles are faster, so it is a guide rather than an exact prediction.
+
+
+Engineers use the diagram to choose heat treatment temperatures (for example, austenitising 30 to 50 °C above A3 for hypoeutectoid steels), hot working ranges, and to understand weld heat affected zones. Combined with mechanical tests such as the [tensile test](/materials-engineering/tensile-test/), it explains why a 0.2% C structural steel used in [steel sections](/civil-engineering/steel-sections-types/) is ductile and weldable, while a 1.0% C tool steel is hard and wear resistant. It is the foundation of understanding the [classification of engineering materials](/materials-engineering/engineering-materials-classification/) within the steel family.
