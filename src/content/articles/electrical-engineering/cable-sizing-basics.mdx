@@ -1,0 +1,142 @@
+---
+title: "Cable Sizing Basics: Current Rating and Voltage Drop"
+description: "How to size a low voltage cable: design current, protection, derating, current rating, voltage drop and short-circuit withstand, with examples."
+pubDate: 2026-12-01
+discipline: electrical-engineering
+subcategory: wiring-installation
+format: fundamentals
+pillar: true
+math: true
+tags: [cable-sizing, voltage-drop, derating, current-carrying-capacity, wiring]
+faq:
+  - q: "Which is more important in cable sizing, current rating or voltage drop?"
+    a: "Both must be met. Short cables are usually limited by current rating, while long cables are often limited by voltage drop, so they end up larger than the current rating alone would require."
+  - q: "What are derating factors?"
+    a: "They are multipliers from the standard or manufacturer tables that reduce the tabulated current rating when the installation is hotter, grouped with other cables, buried, or surrounded by thermal insulation, so the conductor does not exceed its maximum temperature."
+  - q: "Why does a cable need a short-circuit check?"
+    a: "During a fault, a very large current flows until the protective device trips. The conductor must not overheat and damage its insulation in that time. The adiabatic equation checks that the cross-section is large enough for the fault energy."
+references:
+  - text: "IEC 60364-5-52, Low-voltage electrical installations, Part 5-52: Selection and erection of electrical equipment, Wiring systems"
+  - text: "IEC 60364-4-43, Low-voltage electrical installations, Part 4-43: Protection against overcurrent"
+  - text: "BS 7671, Requirements for Electrical Installations (IET Wiring Regulations), Appendix 4"
+  - text: "IEC 60228, Conductors of insulated cables"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+A cable is sized so that it:
+
+1. **carries the load current** without exceeding its insulation temperature, after derating for the way it is installed,
+2. is **protected** by a fuse or breaker whose rating sits between the load current and the cable rating,
+3. keeps the **voltage drop** within limits at the load,
+4. can **withstand the short-circuit current** until the protective device trips.
+
+The smallest standard size that meets all four checks is chosen.
+
+</Key>
+
+## Step 1: Design current
+
+The design current Ib is the current the circuit will carry in normal service. For a three-phase load:
+
+$$
+I_b = \frac{P}{\sqrt{3}\; V \cos\varphi \;\eta}
+$$
+
+Here P is the output power in watts, V the line voltage, cos φ the power factor and η the efficiency, which applies to motors where P is the shaft output. For resistive loads, cos φ and η are both 1.
+
+## Step 2: Protective device
+
+Choose a protective device with rated current In not less than Ib. IEC 60364-4-43 requires the coordination:
+
+$$
+I_b \le I_n \le I_z \qquad \text{and} \qquad I_2 \le 1.45\, I_z
+$$
+
+where Iz is the cable's current-carrying capacity after derating, and I2 is the current that ensures the device operates within its conventional time. Most modern breakers that comply with IEC 60898-1 or IEC 60947-2 meet the second condition when the first is satisfied.
+
+## Step 3: Current-carrying capacity and derating
+
+Standards and manufacturers publish tables of tabulated current rating It for each cable type, conductor size and installation method, such as clipped direct, in conduit, on a tray or buried. The tabulated value assumes reference conditions. When the real conditions differ, correction factors are applied:
+
+| Factor | Accounts for |
+| --- | --- |
+| Ca | Ambient temperature above or below the reference |
+| Cg | Grouping with other loaded circuits, which share heat |
+| Ci | Thermal insulation around the cable |
+| Soil factors | Soil thermal resistivity and burial depth for buried cables |
+
+The required tabulated rating is:
+
+$$
+I_t \ge \frac{I_n}{C_a \times C_g \times C_i}
+$$
+
+The cable size is the smallest one in the table whose It meets this value for the chosen installation method.
+
+<Example title="Worked example: derating">
+<dl>
+<dt>Given</dt><dd>Protective device In = 100 A. PVC insulated cable in an ambient of 35 °C, bunched with one other loaded circuit.</dd>
+<dt>Find</dt><dd>Minimum tabulated current rating It.</dd>
+<dt>Assumptions</dt><dd>Correction factors taken from IEC 60364-5-52: Ca = 0.94 for PVC at 35 °C (reference 30 °C), Cg = 0.80 for two bunched circuits; no thermal insulation, so Ci = 1.</dd>
+<dt>Solution</dt><dd>It ≥ 100 / (0.94 × 0.80 × 1) = 133 A</dd>
+<dt>Answer</dt><dd><strong>Select the smallest cable whose tabulated rating for this installation method is at least 133 A</strong></dd>
+<dt>Limitations</dt><dd>Factors differ between standards and cable types. Use the tables that apply to your installation and country.</dd>
+</dl>
+</Example>
+
+## Step 4: Voltage drop
+
+Current through the resistance and reactance of a cable causes a voltage drop, so the load receives less than the supply voltage. IEC 60364-5-52 recommends limits of 3 percent for lighting and 5 percent for other uses when the installation is supplied directly from a public low voltage network, with higher values allowed for installations with their own transformer. Local rules and project specifications may set different limits.
+
+Manufacturers usually give voltage drop as millivolts per ampere per metre (mV/A/m), which already includes the effect of resistance and reactance:
+
+$$
+V_d = \frac{(\text{mV/A/m}) \times I_b \times L}{1000}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Three-phase 415 V circuit, design current Ib = 100 A, route length L = 80 m, copper multicore PVC cable clipped direct. From the manufacturer's table, a 35 mm² cable has a three-phase voltage drop of 1.1 mV/A/m and a sufficient current rating for this installation.</dd>
+<dt>Find</dt><dd>Voltage drop and whether it is within a 5 percent limit.</dd>
+<dt>Assumptions</dt><dd>Table voltage drop value applies at the cable's operating temperature; balanced load.</dd>
+<dt>Solution</dt><dd>Vd = 1.1 × 100 × 80 / 1000 = 8.8 V<br />Percentage = 8.8 / 415 × 100 = 2.1 percent</dd>
+<dt>Answer</dt><dd><strong>8.8 V, about 2.1 percent, which is within the 5 percent limit, leaving margin for upstream voltage drop</strong></dd>
+<dt>Limitations</dt><dd>The mV/A/m value depends on the exact cable construction, so always use the table for the cable actually being installed. Add the drop in upstream circuits to get the total at the load.</dd>
+</dl>
+</Example>
+
+<Calculator path="electrical/cable-voltage-drop" title="Cable Voltage Drop Calculator" />
+
+## Step 5: Short-circuit withstand
+
+During a fault, the conductor heats up so quickly that the heat has no time to escape. The **adiabatic equation** gives the minimum cross-section S in mm² for a fault current I in amperes cleared in time t in seconds:
+
+$$
+S \ge \frac{\sqrt{I^2\, t}}{k}
+$$
+
+The factor k depends on the conductor material and insulation. Typical values are 115 for copper with PVC insulation and 143 for copper with XLPE insulation. For fast-acting devices, the manufacturer's let-through energy I²t is used instead of I² × t.
+
+For example, a copper PVC cable that must carry a fault current of 10 kA for 0.1 s needs S ≥ √(10,000² × 0.1) / 115 = 3162 / 115 = 27.5 mm². A 35 mm² cable passes this check, while a 25 mm² cable does not.
+
+## Other checks
+
+- **Earth fault loop impedance:** the cable and its protective conductor must be short and large enough for the protective device to disconnect within the required time.
+- **Motor starting:** voltage drop during starting can be several times the running drop and may cause the motor to stall or contactors to drop out.
+- **Harmonics:** in four-wire circuits feeding many non-linear loads, the neutral can carry high third harmonic current and may need to be sized larger.
+- **Mechanical protection:** armour, conduit or trunking where the cable could be damaged.
+
+## Copper or aluminium?
+
+Both are used for power cables. Aluminium has a higher resistivity than copper, so an aluminium conductor must be larger, roughly one or two standard sizes up, to carry the same current. It is lighter and cheaper, which makes it attractive for large feeders and overhead lines. Copper is preferred for smaller sizes, for flexible cables and where space is limited. Aluminium terminations need lugs and connectors rated for aluminium, correct torque and oxide-inhibiting compound to avoid overheating joints.
+
+## Common mistakes
+
+- Using the tabulated rating without derating for grouping in crowded cable trays.
+- Forgetting voltage drop on long runs to pumps, lighting columns and outbuildings.
+- Choosing a breaker larger than the cable's derated capacity.
+- Using a single-phase voltage drop value for a three-phase circuit, or the reverse.

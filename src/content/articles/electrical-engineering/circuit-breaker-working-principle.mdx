@@ -1,0 +1,140 @@
+---
+title: "Circuit Breaker Working Principle and Types"
+description: "How a circuit breaker interrupts current, how the arc is extinguished, the main types (MCB, MCCB, ACB, VCB, SF6) and how breaking capacity is selected."
+pubDate: 2026-12-01
+discipline: electrical-engineering
+subcategory: switchgear
+format: working-principle
+pillar: true
+math: true
+tags: [circuit-breaker, switchgear, arc-quenching, mcb, breaking-capacity]
+faq:
+  - q: "What is the difference between a circuit breaker and a fuse?"
+    a: "Both interrupt fault current. A fuse melts and must be replaced after it operates, while a circuit breaker opens mechanically and can be reset or reclosed. Breakers can also be operated by protection relays and used as switches."
+  - q: "What is the difference between an isolator and a circuit breaker?"
+    a: "An isolator is an off-load device that provides a visible break for safe maintenance. A circuit breaker can make and break load and fault currents. Isolators must only be operated after the breaker has opened the circuit."
+  - q: "Why is it harder to interrupt DC than AC?"
+    a: "AC current passes through zero twice every cycle, which gives the arc a natural point to go out. DC current has no zero, so the breaker must force the current down by building up a high arc voltage, which needs special designs and ratings."
+references:
+  - text: "IEC 60947-2, Low-voltage switchgear and controlgear, Part 2: Circuit-breakers"
+  - text: "IEC 60898-1, Circuit-breakers for overcurrent protection for household and similar installations"
+  - text: "IEC 62271-100, High-voltage switchgear and controlgear, Part 100: Alternating-current circuit-breakers"
+  - text: "C. H. Flurscheim (ed.), Power Circuit Breaker Theory and Design, IET"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+A circuit breaker is a switch that can carry normal current and **automatically interrupt fault current**. When it trips, its contacts separate and an arc forms between them. The breaker cools and stretches the arc in a quenching medium such as air, vacuum or SF6 gas, so that the arc goes out at a current zero and does not restrike.
+
+</Key>
+
+## What a circuit breaker does
+
+A circuit breaker has four duties:
+
+- **Carry** its rated current continuously without overheating.
+- **Make** (close onto) a circuit, including one that already has a fault on it.
+- **Break** normal load current when switched off.
+- **Interrupt** short-circuit current quickly enough to limit damage, when commanded by its own trip unit or by an external protection relay.
+
+## How a circuit breaker interrupts current
+
+### 1. Detection and tripping
+
+Low voltage breakers usually have a built-in trip unit. A **thermal** element (a bimetal strip) bends with sustained overload current and releases the latch after a delay. A **magnetic** element (a coil) responds almost instantly to high short-circuit currents. Electronic trip units do the same job using current sensors and a microprocessor.
+
+Medium and high voltage breakers are tripped by external **protection relays**, which measure current and voltage through instrument transformers and energise the breaker trip coil.
+
+### 2. Contact separation and the arc
+
+The trip mechanism releases stored energy, usually in springs, to drive the contacts apart. Current does not stop when the contacts part. The voltage across the small gap ionises the medium, and current continues to flow as an **arc**, a column of very hot conducting plasma.
+
+### 3. Arc extinction
+
+In an AC circuit the current passes through zero twice in each cycle. At a current zero the arc briefly loses its energy supply. Interruption succeeds if the gap regains its insulating strength faster than the **transient recovery voltage** (TRV) rises across it. If it does not, the arc restrikes and the breaker tries again at the next current zero.
+
+Breakers help the gap recover by:
+
+- **Lengthening** the arc, for example by driving it into arc chutes with splitter plates.
+- **Cooling** it with gas flow or by contact with cold surfaces.
+- **Removing** the ionised particles, which happens very quickly in a vacuum.
+
+## Types of circuit breaker
+
+### By voltage and construction
+
+| Type | Typical voltage range | Arc quenching | Typical use |
+| --- | --- | --- | --- |
+| MCB (miniature circuit breaker) | Low voltage, small currents | Arc chute in air | Final circuits in buildings |
+| MCCB (moulded case circuit breaker) | Low voltage, up to a few thousand amperes | Arc chute in air | Feeders, motor and panel protection |
+| ACB (air circuit breaker) | Low voltage main incomers | Arc chutes in open air | Main switchboards |
+| VCB (vacuum circuit breaker) | Medium voltage, commonly up to about 36 kV | Vacuum interrupter | MV switchgear and motor feeders |
+| SF6 circuit breaker | Medium and high voltage, up to the highest transmission levels | Sulphur hexafluoride gas | HV substations, gas insulated switchgear |
+| Oil circuit breaker | Medium and high voltage | Mineral oil | Older installations, largely replaced |
+
+SF6 is an excellent insulating and arc quenching gas, but it is a very strong greenhouse gas. Manufacturers are therefore developing vacuum and alternative gas designs for higher voltages.
+
+### MCB trip curves
+
+IEC 60898-1 defines the instantaneous (magnetic) trip range of MCBs as a multiple of rated current In:
+
+| Curve | Instantaneous trip range | Typical loads |
+| --- | --- | --- |
+| B | 3 to 5 × In | Resistive loads, lighting, long cables |
+| C | 5 to 10 × In | General commercial and small motor loads |
+| D | 10 to 20 × In | High inrush loads such as transformers and large motors |
+
+## Key ratings
+
+- **Rated voltage and current:** the system voltage and continuous current the breaker is designed for.
+- **Breaking capacity:** the highest fault current it can safely interrupt. For LV breakers IEC 60947-2 defines the ultimate breaking capacity Icu and the service breaking capacity Ics.
+- **Making capacity:** the peak current it can close onto without damage.
+- **Short-time withstand current Icw:** the current it can carry for a stated time, which allows selective (time-graded) tripping.
+
+## Selecting breaking capacity
+
+The breaking capacity must be at least the **prospective short-circuit current** at the point of installation. Close to a distribution transformer, a simple estimate assumes an infinite source behind the transformer:
+
+$$
+I_{FL} = \frac{S}{\sqrt{3}\,V}, \qquad I_{sc} \approx \frac{I_{FL}}{Z_{pu}}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>1000 kVA transformer, 415 V secondary, impedance 5 percent.</dd>
+<dt>Find</dt><dd>Approximate fault current at the transformer LV terminals.</dd>
+<dt>Assumptions</dt><dd>Infinite upstream source (no source impedance); bolted three-phase fault; cable impedance ignored.</dd>
+<dt>Solution</dt><dd>IFL = 1,000,000 / (1.732 × 415) = 1391 A<br />Isc ≈ 1391 / 0.05 = 27,820 A</dd>
+<dt>Answer</dt><dd><strong>About 27.8 kA, so the main incomer needs a breaking capacity above this, for example a standard 36 kA or higher rating</strong></dd>
+<dt>Limitations</dt><dd>This estimate is on the safe side because it ignores source impedance. A full calculation to IEC 60909 includes the network, cables and motor contributions.</dd>
+</dl>
+</Example>
+
+<Calculator path="electrical/transformer-short-circuit" title="Transformer Short Circuit Calculator" />
+
+## Selectivity between breakers
+
+In a radial low voltage system, breakers are installed in series: a main incomer, feeder breakers and final circuit breakers. For a fault on a final circuit, only the breaker closest to the fault should trip, so that the rest of the installation stays in service. This is called **selectivity** or discrimination.
+
+- **Current selectivity** relies on the downstream breaker tripping at a lower current than the upstream one. It is often only partial, because large fault currents can exceed both instantaneous settings.
+- **Time selectivity** delays the upstream breaker's short-circuit trip, which requires it to withstand the fault current for that time (its Icw rating).
+- **Energy selectivity** uses current-limiting downstream breakers that clear the fault so fast that the upstream breaker does not see enough energy to trip.
+
+Manufacturers publish selectivity tables that show which combinations of their breakers are selective, and up to which fault current.
+
+## Circuit breaker or fuse?
+
+| Feature | Circuit breaker | Fuse |
+| --- | --- | --- |
+| After operation | Reset or reclose | Replace the fuse link |
+| Remote operation and relay tripping | Yes | No |
+| Adjustable settings | Yes, on many MCCBs and ACBs | No |
+| Current limiting | Some designs | Excellent, very fast for high faults |
+| Cost for high breaking capacity | Higher | Lower |
+
+## Maintenance and testing
+
+Breakers are inspected and tested at intervals set by the manufacturer. Typical checks include contact resistance measurement, operating time tests, insulation resistance tests, trip unit testing by secondary or primary injection, and inspection of the operating mechanism and arc chutes. For vacuum interrupters, vacuum integrity is checked with a high voltage test.

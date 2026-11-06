@@ -1,0 +1,134 @@
+---
+title: "Three-Phase Induction Motor Working Principle"
+description: "How a three-phase induction motor works: rotating magnetic field, synchronous speed, slip, torque production, construction and types, with a worked example."
+pubDate: 2026-12-01
+discipline: electrical-engineering
+subcategory: electrical-machines
+format: working-principle
+pillar: true
+math: true
+tags: [induction-motor, slip, synchronous-speed, rotating-magnetic-field, squirrel-cage]
+faq:
+  - q: "Why can an induction motor never run at synchronous speed?"
+    a: "Torque is produced only when the rotor cuts the rotating field and has current induced in it. At synchronous speed there is no relative motion, so no EMF, no rotor current and no torque. The rotor therefore always runs slightly slower than the field."
+  - q: "How do you reverse a three-phase induction motor?"
+    a: "Swap any two of the three supply connections. This reverses the phase sequence, so the magnetic field rotates the other way and the rotor follows it."
+  - q: "Why does an induction motor draw a high starting current?"
+    a: "At standstill the slip is 1, so the rotor sees the full rotating field and acts like the shorted secondary of a transformer. The stator draws a large current, often around six to eight times the full-load current when started direct on line."
+  - q: "How is the speed of an induction motor controlled?"
+    a: "The most common method is a variable frequency drive (VFD), which changes the supply frequency and therefore the synchronous speed. Older methods include changing the number of poles and, for slip ring motors, adding rotor resistance."
+references:
+  - text: "S. J. Chapman, Electric Machinery Fundamentals, McGraw-Hill"
+  - text: "IEC 60034-1, Rotating electrical machines, Part 1: Rating and performance"
+  - text: "A. E. Fitzgerald, C. Kingsley and S. D. Umans, Electric Machinery, McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+A three-phase induction motor works because the stator winding creates a **rotating magnetic field**. This field cuts the rotor conductors and **induces** currents in them. The interaction between the rotor currents and the field produces torque, so the rotor turns in the same direction as the field, always slightly slower than it. The difference in speed is called **slip**.
+
+</Key>
+
+## Why the induction motor is so widely used
+
+The three-phase induction motor is the most common electric motor in industry. It drives pumps, fans, compressors, conveyors and machine tools. Its popularity comes from a simple, rugged design: the squirrel cage rotor has no brushes, no commutator and no electrical connection to the supply. It needs little maintenance and runs directly from a three-phase supply or from a variable frequency drive.
+
+## Construction
+
+An induction motor has two main parts separated by a small air gap.
+
+| Part | Construction | Function |
+| --- | --- | --- |
+| Stator | Laminated steel core with slots holding a three-phase winding | Produces the rotating magnetic field |
+| Rotor (squirrel cage) | Laminated core with aluminium or copper bars shorted by end rings | Carries induced currents and produces torque |
+| Rotor (slip ring or wound) | Three-phase winding brought out to slip rings and brushes | Allows external resistance for starting and speed control |
+| Frame, bearings, fan | Cast iron or aluminium frame, rolling bearings, shaft-mounted fan | Support, alignment and cooling |
+
+The stator and rotor cores are laminated to reduce eddy current losses, for the same reason as a transformer core.
+
+## Working principle step by step
+
+1. **Rotating magnetic field.** The three stator windings are placed 120 electrical degrees apart and carry currents that are 120 degrees apart in time. Their combined flux has a constant magnitude and rotates around the air gap at synchronous speed.
+2. **Induced EMF.** The rotating field cuts the stationary rotor bars. By Faraday's law, an EMF is induced in each bar.
+3. **Rotor current.** Because the bars are shorted by the end rings, the induced EMF drives current through them.
+4. **Torque.** A current-carrying conductor in a magnetic field experiences a force. The forces on all the bars add up to a torque that turns the rotor in the direction of the field.
+5. **Slip.** As the rotor speeds up, the relative speed between field and rotor falls, so less EMF is induced. The rotor settles at a speed where the torque it produces equals the load torque. This speed is always below synchronous speed.
+
+This is why the motor is called an **induction** motor: the rotor receives its energy by induction, much like the secondary winding of a transformer, and it is also called an **asynchronous** motor because it never runs exactly in step with the field.
+
+## Synchronous speed and slip
+
+The speed of the rotating field, the synchronous speed Ns in revolutions per minute, depends on the supply frequency f in hertz and the number of poles P:
+
+$$
+N_s = \frac{120\, f}{P}
+$$
+
+On a 50 Hz supply, a 2-pole motor has a synchronous speed of 3000 rpm, a 4-pole motor 1500 rpm and a 6-pole motor 1000 rpm. On 60 Hz these become 3600, 1800 and 1200 rpm.
+
+Slip s is the difference between synchronous speed and rotor speed N, as a fraction of synchronous speed:
+
+$$
+s = \frac{N_s - N}{N_s}
+$$
+
+At standstill s = 1. At no load the slip is very small, and at full load it is typically a few percent for standard motors. The frequency of the currents in the rotor is also set by slip: fr = s × f.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 4-pole, 50 Hz induction motor running at 1440 rpm at full load.</dd>
+<dt>Find</dt><dd>Synchronous speed, slip and rotor current frequency.</dd>
+<dt>Assumptions</dt><dd>Supply frequency is exactly 50 Hz.</dd>
+<dt>Solution</dt><dd>Ns = 120 × 50 / 4 = 1500 rpm<br />s = (1500 − 1440) / 1500 = 0.04<br />fr = 0.04 × 50 = 2 Hz</dd>
+<dt>Answer</dt><dd><strong>Ns = 1500 rpm, slip = 0.04 (4 percent), rotor frequency = 2 Hz</strong></dd>
+<dt>Limitations</dt><dd>Slip changes with load and supply voltage, so the result applies only at the stated operating point.</dd>
+</dl>
+</Example>
+
+<Calculator path="electrical/induction-motor-slip" title="Induction Motor Slip Calculator" />
+
+## Power flow and losses
+
+The power that crosses the air gap from stator to rotor is the air gap power Pag. It splits between rotor copper loss and mechanical power in a fixed ratio set by slip:
+
+$$
+P_{\text{rotor cu}} = s\,P_{ag}, \qquad P_{\text{mech}} = (1 - s)\,P_{ag}
+$$
+
+This shows why running at high slip is inefficient: at 10 percent slip, a tenth of the air gap power is turned into heat in the rotor. Other losses are stator copper loss, core loss, friction and windage, and stray load loss.
+
+## Torque and speed characteristic
+
+As the motor accelerates from rest, its torque changes with speed:
+
+- **Starting (locked rotor) torque** is the torque at standstill.
+- **Breakdown (pull-out) torque** is the maximum torque the motor can produce. If the load exceeds it, the motor stalls.
+- In the normal **operating region**, close to synchronous speed, torque rises almost linearly as slip increases, so speed drops only slightly as load increases.
+
+## Types of induction motor
+
+| Feature | Squirrel cage rotor | Slip ring (wound) rotor |
+| --- | --- | --- |
+| Rotor winding | Bars shorted by end rings | Three-phase winding to slip rings |
+| Maintenance | Very low | Brushes and slip rings need care |
+| Starting | High current, moderate torque | External resistance gives high torque with lower current |
+| Typical use | Pumps, fans, compressors, conveyors | Cranes, hoists, mills with heavy starting loads |
+
+Today most applications that once needed slip ring motors use squirrel cage motors with variable frequency drives.
+
+## Starting methods
+
+Starting directly on line is simple but draws a high current. Common alternatives are star-delta starters, autotransformer starters, soft starters and variable frequency drives. Each reduces the starting current at the cost of reduced starting torque, except the VFD, which can provide full torque at low speed.
+
+## Reading the nameplate
+
+The motor nameplate gives the data needed to select cables, starters and protection: rated output power in kW, rated voltage and connection (star or delta), rated current, rated speed, frequency, power factor, efficiency class (such as IE3 under IEC 60034-30-1), insulation class, duty type and enclosure protection (IP rating). The rated speed on the nameplate, together with the frequency and number of poles, gives the full-load slip.
+
+## Applications
+
+- **Pumps and fans:** the most common loads, often fitted with VFDs to save energy at part load.
+- **Compressors and conveyors:** constant-speed duty where the rugged design suits continuous running.
+- **Machine tools and process plant:** where speed control by VFD replaced older DC drives.

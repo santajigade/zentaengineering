@@ -107,8 +107,9 @@ a.card:hover { border-color: var(--ze-navy); }
 .prose figure { margin: 1.5em 0; }
 .prose figcaption { font-size: 14px; color: var(--ze-ink-2); margin-top: 8px; }
 .prose figure svg { display: block; margin: 0 auto; }
-.prose table { border-collapse: collapse; width: 100%; font-size: 16px; display: block; overflow-x: auto; }
-.prose table thead, .prose table tbody { display: table; width: 100%; table-layout: auto; }
+.prose table { border-collapse: collapse; width: 100%; font-size: 16px; }
+.prose .table-scroll { overflow-x: auto; }
+.prose .table-scroll table { min-width: 520px; }
 .prose th, .prose td { padding: 10px 12px; border-top: 1px solid var(--ze-line); text-align: left; vertical-align: top; }
 .prose thead th { background: var(--ze-paper); border-top: 0; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--ze-line); border-radius: var(--ze-radius); background: #fff; }

@@ -1,0 +1,152 @@
+---
+title: "Ohm's Law and Kirchhoff's Laws with Worked Examples"
+description: "Ohm's law, Kirchhoff's current law and Kirchhoff's voltage law explained with series and parallel circuits and a fully checked worked example."
+pubDate: 2026-12-01
+discipline: electrical-engineering
+subcategory: circuit-fundamentals
+format: fundamentals
+pillar: true
+math: true
+tags: [ohms-law, kirchhoff, kcl, kvl, series-parallel]
+faq:
+  - q: "Does Ohm's law apply to every component?"
+    a: "No. Ohm's law applies to linear (ohmic) components whose resistance stays constant, such as metal film resistors at a steady temperature. Diodes, transistors and lamp filaments are non-linear, so their voltage is not proportional to current."
+  - q: "What is the difference between KCL and KVL?"
+    a: "KCL deals with currents at a node: the currents entering equal the currents leaving. KVL deals with voltages around a closed loop: the sum of the voltage rises equals the sum of the voltage drops."
+  - q: "Why is the total resistance of parallel resistors smaller than the smallest one?"
+    a: "Each parallel branch gives the current another path. Adding paths always lets more current flow for the same voltage, so the equivalent resistance falls below that of any single branch."
+references:
+  - text: "C. K. Alexander and M. N. O. Sadiku, Fundamentals of Electric Circuits, McGraw-Hill"
+  - text: "W. H. Hayt, J. E. Kemmerly and S. M. Durbin, Engineering Circuit Analysis, McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+- **Ohm's law:** the voltage across a resistor equals the current through it times its resistance, V = I × R.
+- **Kirchhoff's current law (KCL):** the total current entering a node equals the total current leaving it.
+- **Kirchhoff's voltage law (KVL):** the voltages around any closed loop add up to zero.
+
+Together these three laws let you solve any circuit made of sources and resistors.
+
+</Key>
+
+## Ohm's law
+
+Ohm's law states that the current through a conductor is directly proportional to the voltage across it, provided its temperature and other physical conditions stay the same. The constant of proportionality is the resistance R:
+
+$$
+V = I\,R
+$$
+
+Here V is the voltage in volts (V), I is the current in amperes (A) and R is the resistance in ohms (Ω). The same law can be rearranged to find any one quantity from the other two: I = V / R and R = V / I.
+
+Combining Ohm's law with the power equation P = V × I gives three useful forms for the power dissipated in a resistor:
+
+$$
+P = V\,I = I^2 R = \frac{V^2}{R}
+$$
+
+Power is in watts (W). The form I²R is the basis of the term "I²R losses" used for heating in cables, windings and busbars.
+
+### Where Ohm's law applies
+
+Ohm's law describes **linear** or ohmic components. A metal film resistor at a steady temperature follows it closely. Many devices do not:
+
+- A diode conducts very little current until its forward voltage is reached, then conducts heavily.
+- The resistance of a tungsten lamp filament rises sharply as it heats up.
+- Transistors and gas discharge lamps have strongly non-linear characteristics.
+
+For these devices, V = I × R can still be used at a single operating point, but R is not a constant.
+
+<Calculator path="physics/ohms-law" title="Ohm's Law Calculator" />
+
+## Kirchhoff's current law (KCL)
+
+A **node** is a point where two or more circuit elements meet. KCL states that the algebraic sum of the currents at a node is zero:
+
+$$
+\sum I_{\text{in}} = \sum I_{\text{out}}
+$$
+
+KCL follows from the conservation of electric charge. Charge cannot build up at a node, so whatever flows in must flow out. If currents of 3 A and 2 A enter a node and one other branch leaves it, that branch must carry 5 A.
+
+## Kirchhoff's voltage law (KVL)
+
+A **loop** is any closed path through a circuit. KVL states that the algebraic sum of all the voltages around a loop is zero:
+
+$$
+\sum V = 0
+$$
+
+KVL follows from the conservation of energy. A charge that travels around a closed loop returns to its starting potential, so the energy it gains from sources must equal the energy it gives up in the loads. In practice, the supply voltage equals the sum of the voltage drops around the loop.
+
+### Sign convention
+
+Choose a direction to travel around the loop. Count a voltage as positive when you pass from the negative to the positive terminal of a source (a rise), and negative when you pass through a resistor in the direction of the assumed current (a drop). If a solved current comes out negative, the real current simply flows the other way.
+
+## Series and parallel resistors
+
+| Arrangement | Equivalent resistance | What is shared | Divider rule |
+| --- | --- | --- | --- |
+| Series | R = R1 + R2 + R3 + ... | Same current through all | Voltage divides in proportion to resistance |
+| Parallel | 1/R = 1/R1 + 1/R2 + 1/R3 + ... | Same voltage across all | Current divides in inverse proportion to resistance |
+
+For two resistors in parallel, the shortcut R = (R1 × R2) / (R1 + R2) is often quicker. Both rules come directly from KVL (series) and KCL (parallel) combined with Ohm's law.
+
+<figure>
+<svg width="560" height="250" viewBox="0 0 560 250" fill="none" role="img" aria-label="Circuit: 12 V source in series with R1 of 4 ohms, feeding R2 of 6 ohms and R3 of 12 ohms in parallel">
+<path d="M80 40H180M260 40H460V95M460 155V210H80V160M80 90V40M340 40V95M340 155V210" stroke="#0b2545" stroke-width="2.5" />
+<rect x="180" y="28" width="80" height="24" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
+<rect x="328" y="95" width="24" height="60" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
+<rect x="448" y="95" width="24" height="60" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
+<path d="M60 112H100M68 138H92" stroke="#0b2545" stroke-width="3" />
+<path d="M80 90V112M80 138V160" stroke="#0b2545" stroke-width="2.5" />
+<circle cx="340" cy="40" r="4" fill="#0b2545" /><circle cx="340" cy="210" r="4" fill="#0b2545" />
+<text x="110" y="120" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">12 V</text>
+<text x="44" y="108" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">+</text>
+<text x="220" y="22" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">R1 = 4 Ω</text>
+<text x="362" y="130" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">R2 = 6 Ω</text>
+<text x="482" y="130" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">R3 = 12 Ω</text>
+<text x="340" y="236" text-anchor="middle" font-size="13" fill="#4a5360" font-family="Open Sans Variable, Arial, sans-serif">node B</text>
+<text x="340" y="26" text-anchor="middle" font-size="13" fill="#4a5360" font-family="Open Sans Variable, Arial, sans-serif">node A</text>
+</svg>
+<figcaption>A 12 V source feeding R1 in series with R2 and R3 in parallel.</figcaption>
+</figure>
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 12 V DC source, R1 = 4 Ω in series with a parallel pair R2 = 6 Ω and R3 = 12 Ω, as in the figure.</dd>
+<dt>Find</dt><dd>The source current, the current in each resistor and the power in each resistor.</dd>
+<dt>Assumptions</dt><dd>Ideal source with no internal resistance; connecting wires have zero resistance.</dd>
+<dt>Solution</dt><dd>R2 ∥ R3 = (6 × 12) / (6 + 12) = 4 Ω<br />Total R = 4 + 4 = 8 Ω, so I = 12 / 8 = 1.5 A<br />V(R1) = 1.5 × 4 = 6 V, so V(A to B) = 12 − 6 = 6 V<br />I2 = 6 / 6 = 1.0 A, I3 = 6 / 12 = 0.5 A</dd>
+<dt>Checks</dt><dd>KCL at node A: 1.5 A in = 1.0 A + 0.5 A out. KVL: 12 − 6 − 6 = 0. Power: P1 = 1.5² × 4 = 9 W, P2 = 6 W, P3 = 3 W; total 18 W = 12 V × 1.5 A.</dd>
+<dt>Answer</dt><dd><strong>I = 1.5 A; I2 = 1.0 A; I3 = 0.5 A; P1 = 9 W, P2 = 6 W, P3 = 3 W</strong></dd>
+<dt>Limitations</dt><dd>A real source has internal resistance, which lowers the terminal voltage as current rises. Resistor values also change slightly with temperature.</dd>
+</dl>
+</Example>
+
+## Solving larger circuits
+
+For circuits that cannot be reduced to simple series and parallel groups, KCL and KVL are applied systematically:
+
+1. **Nodal analysis:** choose a reference node, write KCL at every other node using Ohm's law for each branch current, and solve for the node voltages.
+2. **Mesh analysis:** assign a current to each independent loop, write KVL for each loop, and solve for the mesh currents.
+
+Both methods give a set of simultaneous linear equations. Circuit simulators such as SPICE solve the same equations numerically for circuits with thousands of nodes.
+
+## Practical applications
+
+These laws are used every day in electrical work, not only in exams:
+
+- **Fault finding:** measuring the voltage across each element of a circuit and checking that the drops add up to the supply (KVL) quickly shows where a connection is open or a component has failed.
+- **Cable and busbar heating:** the I²R form of the power equation gives the heat produced in a conductor, which sets its current rating.
+- **Shunt resistors:** a known low resistance in series with a load turns current into a small measurable voltage, I = V / R.
+- **Sensor circuits:** voltage dividers built from a fixed resistor and a resistive sensor, such as a thermistor, convert a change in resistance into a change in voltage.
+- **Checking measurements:** in a DC panel, the outgoing branch currents should add up to the incoming current (KCL). A large mismatch points to a meter error or an unrecorded load. In AC circuits KCL still holds, but the currents must be added as phasors because they may not be in phase.
+
+## Limits of Kirchhoff's laws
+
+KCL and KVL assume a **lumped** circuit, where the physical size of the circuit is small compared with the wavelength of the signals in it. This holds for power circuits at 50 Hz or 60 Hz and for most electronics. At radio and microwave frequencies, or on very long transmission lines, voltages and currents vary along the conductors and transmission line theory is needed instead.

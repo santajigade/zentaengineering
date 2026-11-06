@@ -11,7 +11,7 @@ export const SITE = {
   // Items go live only when they have a reviewedDate (technical review before publishing).
   requireReview: true,
   // A discipline page is indexable from this many live items; a subcategory archive from subcategoryMinItems.
-  disciplineMinItems: 10,
+  disciplineMinItems: 6,
   subcategoryMinItems: 8,
   // AdSense publisher ID, e.g. 'ca-pub-1234567890123456'. Leave empty until approved.
   adsenseClient: '',

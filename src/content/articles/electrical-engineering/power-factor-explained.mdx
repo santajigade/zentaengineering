@@ -1,0 +1,146 @@
+---
+title: "Power Factor Explained: Causes, Effects and Correction"
+description: "What power factor is, the power triangle, why low power factor costs money, and how to size capacitors for power factor correction with a worked example."
+pubDate: 2026-12-01
+discipline: electrical-engineering
+subcategory: power-quality
+format: fundamentals
+pillar: true
+math: true
+tags: [power-factor, reactive-power, capacitor-bank, kvar, apfc]
+faq:
+  - q: "What is a good power factor?"
+    a: "Many utilities expect an average power factor of about 0.9 or higher and may charge penalties below their threshold. Industrial plants often correct to between 0.95 and 0.99 lagging. Correcting to exactly 1.0 is rarely worthwhile and risks a leading power factor at light load."
+  - q: "Can power factor be leading?"
+    a: "Yes. If the load is capacitive, current leads voltage. This happens with lightly loaded cables, over-corrected capacitor banks and some electronic loads. A leading power factor can cause voltage rise and is also penalised by some utilities."
+  - q: "Does power factor correction reduce my kWh bill?"
+    a: "It does not reduce the real energy the loads need. It reduces current, which lowers I²R losses in cables and transformers, and it avoids kVA demand charges and reactive power penalties, which is where most savings come from."
+references:
+  - text: "IEEE 1459, IEEE Standard Definitions for the Measurement of Electric Power Quantities Under Sinusoidal, Nonsinusoidal, Balanced, or Unbalanced Conditions"
+  - text: "IEC 60831-1, Shunt power capacitors of the self-healing type for AC systems up to and including 1000 V"
+  - text: "J. D. Glover, M. S. Sarma and T. J. Overbye, Power System Analysis and Design, Cengage"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+Power factor is the ratio of **real power** (kW), which does useful work, to **apparent power** (kVA), which the supply must deliver. For sinusoidal voltage and current it equals cos φ, where φ is the phase angle between them. A low power factor means more current for the same useful power, which increases losses and costs. It is usually corrected by adding **capacitors** close to inductive loads.
+
+</Key>
+
+## Real, reactive and apparent power
+
+In an AC circuit with inductance or capacitance, current and voltage are not in phase. The power drawn has three parts:
+
+| Quantity | Symbol | Unit | Meaning |
+| --- | --- | --- | --- |
+| Real (active) power | P | W, kW | Power converted into work, heat or light |
+| Reactive power | Q | var, kvar | Power that flows back and forth to build magnetic and electric fields |
+| Apparent power | S | VA, kVA | The product of RMS voltage and current |
+
+They form the **power triangle**:
+
+<figure>
+<svg width="460" height="230" viewBox="0 0 460 230" fill="none" role="img" aria-label="Power triangle: real power P horizontal, reactive power Q vertical, apparent power S as the hypotenuse, with angle phi between P and S">
+<path d="M60 190H360V50Z" stroke="#0b2545" stroke-width="3" stroke-linejoin="round" />
+<path d="M344 190V174H360" stroke="#0b2545" stroke-width="1.5" />
+<path d="M120 190A60 60 0 0 0 114.4 164.8" stroke="#13a89e" stroke-width="2.5" />
+<text x="210" y="215" text-anchor="middle" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">P (kW)</text>
+<text x="372" y="125" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Q (kvar)</text>
+<text x="182" y="100" text-anchor="middle" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">S (kVA)</text>
+<text x="130" y="182" font-size="15" fill="#0e7f78" font-family="Georgia, serif">φ</text>
+</svg>
+<figcaption>The power triangle for a lagging (inductive) load.</figcaption>
+</figure>
+
+$$
+S^2 = P^2 + Q^2, \qquad \text{PF} = \frac{P}{S} = \cos\varphi
+$$
+
+In a three-phase system, S = √3 × V × I, where V is the line voltage and I the line current.
+
+When the load current contains harmonics, as with drives and rectifiers, the **true power factor** is lower than cos φ of the fundamental. It equals the displacement power factor multiplied by a distortion factor. Capacitors correct only the displacement part.
+
+## Causes of low power factor
+
+- **Induction motors,** which need magnetising current. Their power factor is lowest at light load.
+- **Transformers,** which draw magnetising current even at no load.
+- **Inductive loads** such as induction furnaces, welding transformers and older magnetic lamp ballasts.
+- **Non-linear loads** such as rectifiers and drives, which lower the true power factor through harmonic distortion.
+
+## Effects of low power factor
+
+For the same real power, a lower power factor means a higher current, because I is proportional to 1 / PF. This causes:
+
+- **Higher I²R losses** in cables, transformers and switchgear.
+- **Larger voltage drop,** which can affect equipment performance.
+- **Reduced capacity:** transformers, generators and cables are rated in kVA or amperes, so less real power can be supplied.
+- **Higher bills:** many tariffs include kVA maximum demand charges or penalties for low power factor or excess reactive energy.
+
+## Power factor correction
+
+Capacitors draw leading reactive current that cancels part of the lagging reactive current drawn by inductive loads. The supply then delivers only the remaining reactive power. The capacitor rating needed to raise the power factor from cos φ1 to cos φ2 at real power P is:
+
+$$
+Q_c = P\left(\tan\varphi_1 - \tan\varphi_2\right)
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Three-phase plant load of 500 kW at 415 V with power factor 0.75 lagging. Target power factor 0.95 lagging.</dd>
+<dt>Find</dt><dd>Capacitor rating needed and the change in line current.</dd>
+<dt>Assumptions</dt><dd>Balanced sinusoidal load; real power unchanged by the correction; harmonics ignored.</dd>
+<dt>Solution</dt><dd>tan φ1 = tan(cos⁻¹ 0.75) = 0.882; tan φ2 = tan(cos⁻¹ 0.95) = 0.329<br />Qc = 500 × (0.882 − 0.329) = 277 kvar<br />Before: S = 500 / 0.75 = 667 kVA, I = 667,000 / (1.732 × 415) = 928 A<br />After: S = 500 / 0.95 = 526 kVA, I = 526,000 / (1.732 × 415) = 732 A</dd>
+<dt>Answer</dt><dd><strong>About 277 kvar of capacitors; current falls from 928 A to 732 A, and I²R losses in the supply cables fall by about 38 percent</strong></dd>
+<dt>Limitations</dt><dd>Choose the nearest standard bank size and split it into steps. Where harmonics are present, capacitors need detuning reactors to avoid resonance.</dd>
+</dl>
+</Example>
+
+<Calculator path="electrical/power-factor-correction" title="Power Factor Correction Calculator" />
+
+## How power factor is measured
+
+Power factor can be found in several ways:
+
+- **Power analysers and multifunction meters** measure voltage and current waveforms and calculate P, Q, S and power factor directly. Good instruments report both displacement and true power factor.
+- **Energy bills** often show active energy (kWh) and reactive energy (kvarh) for the billing period. The average power factor is kWh / √(kWh² + kvarh²).
+- **Motor nameplates** give the power factor at rated load. It is lower at part load, so measured values are more reliable for sizing correction.
+
+A load survey over at least one typical working week shows how much the power factor and reactive demand vary, which decides whether fixed or automatic correction is needed.
+
+## Where to install capacitors
+
+| Location | Advantages | Disadvantages |
+| --- | --- | --- |
+| At individual motors | Reduces current in the whole supply path, including the motor cable | Many small units; capacitor idle when motor is off |
+| At sub-distribution boards | Corrects groups of loads with fewer units | Feeder cables to the loads are not relieved |
+| At the main switchboard (central APFC) | Lowest cost per kvar, easy to monitor and control | Internal cables and transformers downstream still carry reactive current |
+
+When correcting at a motor, the capacitor must not exceed the motor's no-load magnetising reactive power. A larger capacitor can cause self-excitation when the motor is switched off while still turning, producing dangerous overvoltages.
+
+## Methods of correction
+
+| Method | How it works | Typical use |
+| --- | --- | --- |
+| Fixed capacitors at the load | Capacitor connected with each motor or transformer | Large motors running at steady load |
+| Automatic power factor correction (APFC) panel | Controller switches capacitor steps in and out to follow the load | Main LV switchboards of plants and buildings |
+| Detuned capacitor banks | Capacitors with series reactors tuned below the 5th harmonic | Sites with drives, rectifiers and UPS systems |
+| Active harmonic filters or static var compensators | Power electronics inject reactive and harmonic currents | Rapidly varying loads, high harmonic sites |
+| Synchronous condensers | Over-excited synchronous machines supply reactive power | Transmission networks and very large plants |
+
+## Power factor of common loads
+
+Typical power factor values help when estimating correction, but measured values should always be used for final sizing:
+
+- **Induction motors** at full load usually have a power factor of roughly 0.8 to 0.9, falling sharply at light load.
+- **Resistive heaters and incandescent lamps** have a power factor close to 1.
+- **Drives and switch mode power supplies** may show a high displacement power factor but a lower true power factor because of harmonics, unless they have power factor correction stages.
+
+## Practical cautions
+
+- **Avoid over-correction.** Fixed capacitors sized for full load can make the power factor leading at light load.
+- **Watch for resonance.** Capacitors and the supply inductance form a resonant circuit. If it is tuned near a harmonic produced by the plant, voltages and currents can rise sharply and damage capacitors.
+- **Discharge before work.** Capacitors hold charge after disconnection. They are fitted with discharge resistors, and the discharge time must elapse before anyone touches them.
+- **Switching transients.** Use capacitor-duty contactors with pre-insertion resistors or thyristor switching for frequently switched steps.
