@@ -1,0 +1,146 @@
+---
+title: "ETL vs ELT: Data Pipeline Approaches Compared"
+description: "ETL vs ELT compared: extract, transform and load order, data warehouses and lakes, tools, cost, speed, governance, worked example and how to choose a pipeline."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: data-pipelines
+focusKeyword: "etl vs elt"
+image: { src: /images/featured/etl-vs-elt.webp, alt: "ETL vs ELT: Data Pipeline Approaches Compared: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [data-pipelines, etl, elt, data-warehouse, data-engineering]
+faq:
+  - q: "Is ELT replacing ETL?"
+    a: "ELT has become the default for cloud analytics because cloud warehouses can transform data cheaply at scale. ETL is still widely used where data must be cleaned, masked or reduced before it reaches the destination, for example for privacy rules, limited target storage, or operational systems that need ready to use data. Many organisations run both."
+  - q: "What is a data lakehouse?"
+    a: "A data lakehouse stores data in open file formats on low cost object storage, like a data lake, but adds table features such as transactions, schemas and fast SQL queries, like a data warehouse. It supports ELT style pipelines and both analytics and machine learning on the same data."
+  - q: "What is the difference between batch and streaming pipelines?"
+    a: "Batch pipelines move and process data in scheduled chunks, for example every hour or every night. Streaming pipelines process each event within seconds of it happening, using tools such as Apache Kafka and Apache Flink. Both ETL and ELT patterns can be applied in batch or streaming form."
+references:
+  - text: "R. Kimball and M. Ross, The Data Warehouse Toolkit, 3rd ed., Wiley, 2013"
+  - text: "J. Reis and M. Housley, Fundamentals of Data Engineering, O'Reilly, 2022"
+  - text: "M. Kleppmann, Designing Data-Intensive Applications, O'Reilly, 2017"
+  - text: "M. Armbrust et al., Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics, CIDR, 2021"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **ETL vs ELT**, the difference is where and when data is transformed. **ETL (extract, transform, load)** cleans and reshapes data on a separate processing server **before** loading it into the target warehouse. **ELT (extract, load, transform)** loads raw data into the target first and transforms it **inside** the warehouse using its own compute. ETL suits strict data quality and privacy needs and limited targets; ELT suits cloud warehouses, large volumes and flexible analytics.
+
+</Key>
+
+Every analytics dashboard, machine learning model and report depends on data that has been moved from where it is created to where it is analysed. That movement is a **data pipeline**. ETL and ELT are the two main patterns for building one, and the choice affects cost, speed, flexibility and governance.
+
+## The three steps
+
+- **Extract:** read data from source systems such as ERP, CRM, plant historians, SCADA databases, IoT platforms, files and APIs. Extraction can be a full copy or incremental, taking only new or changed records.
+- **Transform:** clean, standardise, join, aggregate and reshape data. Examples: convert units, fix timestamps, remove duplicates, map codes to names, mask personal data, compute daily totals.
+- **Load:** write the data to the target, usually a data warehouse, data lake or lakehouse.
+
+The order of the last two steps is the whole difference between the patterns.
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Top row ETL: sources, then extract to a separate transform server, then load into the data warehouse. Bottom row ELT: sources, then extract and load raw data directly into the warehouse, where transformation happens inside the warehouse">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545" font-weight="700"><text x="20" y="30">ETL</text><text x="20" y="160">ELT</text></g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="45" width="110" height="60" rx="6" fill="#eef1f6" /><rect x="225" y="45" width="140" height="60" rx="6" fill="#fff7e0" /><rect x="460" y="45" width="120" height="60" rx="6" fill="#e6f6f4" />
+<rect x="20" y="175" width="110" height="60" rx="6" fill="#eef1f6" /><rect x="400" y="165" width="180" height="80" rx="6" fill="#e6f6f4" />
+</g>
+<rect x="420" y="205" width="140" height="30" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="75" y="72">Sources</text><text x="75" y="90">ERP, SCADA, IoT</text>
+<text x="295" y="72">Transform</text><text x="295" y="90">(separate server)</text>
+<text x="520" y="72">Warehouse</text><text x="520" y="90">clean data</text>
+<text x="75" y="202">Sources</text><text x="75" y="220">ERP, SCADA, IoT</text>
+<text x="490" y="188">Warehouse / lakehouse</text><text x="490" y="225">Transform in SQL</text>
+<text x="178" y="68" font-size="12">Extract</text><text x="412" y="68" font-size="12">Load</text>
+<text x="265" y="198" font-size="12">Extract and load raw</text>
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M130 75h89M365 75h89M130 205h264" /></g>
+<g fill="#13a89e"><path d="M219 70l8 5-8 5z" /><path d="M454 70l8 5-8 5z" /><path d="M394 200l8 5-8 5z" /></g>
+</svg>
+<figcaption>ETL transforms before loading; ELT loads raw data and transforms inside the warehouse.</figcaption>
+</figure>
+
+## ETL: extract, transform, load
+
+ETL is the traditional approach, dating from the early days of data warehousing when warehouse storage and compute were expensive. A dedicated integration engine extracts data, applies transformations in its own memory or staging area, and loads only the finished, structured result.
+
+**Advantages:**
+
+- Only clean, approved data reaches the warehouse.
+- Sensitive fields can be masked or removed before they leave the processing layer, which helps with privacy rules.
+- Less storage is needed in the target.
+- Works well when the target is an operational system that expects a fixed format.
+
+**Disadvantages:**
+
+- Transformations must be designed up front; new questions may need the pipeline rebuilt.
+- The raw data is often not kept, so it cannot be reprocessed later.
+- The transform server can become a bottleneck at high volumes.
+
+Classic ETL tools include Informatica PowerCenter, IBM DataStage, Microsoft SSIS and Talend.
+
+## ELT: extract, load, transform
+
+ELT became popular with cloud data warehouses such as Snowflake, Google BigQuery, Amazon Redshift and Databricks, which separate storage from compute and scale on demand. Raw data is loaded quickly, often by managed connectors, and transformation is written as SQL that runs inside the warehouse. Tools such as dbt manage these SQL models with version control and testing.
+
+**Advantages:**
+
+- Faster ingestion; data is available as soon as it lands.
+- Raw data is kept, so transformations can be changed and rerun at any time.
+- Scales with the warehouse's compute.
+- Analysts who know SQL can build and own transformations.
+
+**Disadvantages:**
+
+- Raw, possibly sensitive data sits in the warehouse and needs strong access control.
+- Compute costs can grow if transformations are inefficient or rerun too often.
+- Without discipline the warehouse can fill with messy, poorly documented tables.
+
+## ETL vs ELT: comparison
+
+| Feature | ETL | ELT |
+| --- | --- | --- |
+| Order | Extract, transform, load | Extract, load, transform |
+| Where transformation runs | Separate integration server | Inside the warehouse or lakehouse |
+| Raw data kept | Usually not | Yes |
+| Time to load | Slower; waits for transformation | Faster; load first |
+| Flexibility for new questions | Lower; pipeline changes needed | Higher; rerun SQL on raw data |
+| Privacy handling | Mask before loading | Must control access inside target |
+| Best fit | On premises, strict compliance, fixed reports | Cloud analytics, large and varied data, ML |
+| Typical tools | Informatica, DataStage, SSIS, Talend | Fivetran, Airbyte, dbt, Snowflake, BigQuery |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A manufacturer wants a dashboard of daily energy use per production line. Data: 1 second power readings from 200 meters in a plant historian, plus a production schedule in the ERP system. Analysts expect to ask new questions about the data over time.</dd>
+<dt>Find</dt><dd>Whether ETL or ELT fits better, and an outline of the pipeline.</dd>
+<dt>Assumptions</dt><dd>A cloud warehouse is available; the data has no personal information.</dd>
+<dt>Solution</dt><dd>Raw volume is 200 × 86 400 = 17.28 million readings per day, which a cloud warehouse handles easily<br />Analysts want flexibility, so keeping raw data is valuable: choose ELT<br />Pipeline: extract historian and ERP data hourly, load into raw tables, then use SQL models to convert power to energy (kWh), join with the schedule and aggregate per line per day</dd>
+<dt>Answer</dt><dd><strong>ELT: load raw meter and ERP data, transform in the warehouse; new questions only need new SQL models</strong></dd>
+<dt>Limitations</dt><dd>If network bandwidth from the plant is limited, aggregate to 1 minute averages at the edge first, which is a small ETL step before loading.</dd>
+</dl>
+</Example>
+
+## Hybrid pipelines
+
+In practice many organisations use both patterns. A common design applies light ETL at the edge or in the ingestion layer, such as filtering, compression, unit conversion and masking of personal data, and then uses ELT inside the warehouse for business logic. Streaming platforms also blur the line: events can be enriched in flight and then transformed again after loading. The useful question is not which label applies, but where each transformation is cheapest, safest and easiest to change.
+
+## Good pipeline practice
+
+Whichever pattern you choose:
+
+- **Make loads idempotent:** rerunning a job should not create duplicates.
+- **Load incrementally** using timestamps or change data capture rather than full copies.
+- **Test data quality:** check for nulls, duplicates, ranges and row counts at each stage.
+- **Orchestrate and monitor** jobs with a scheduler such as Apache Airflow, with alerts on failure.
+- **Document lineage** so users know where each number came from.
+- **Separate layers:** raw, cleaned and business ready (often called bronze, silver and gold).
+
+For industrial sources, reliable extraction starts at the field: see how plants move data through [industrial communication networks](https://www.instrumentationblog.in/category/automation/communication/) and [SCADA system architecture](/automation-robotics/scada-system-architecture/).
+
+Pipelines are the foundation of the [data science workflow](/ai-data-engineering/data-science-workflow/) and of [big data platforms](/ai-data-engineering/big-data-five-vs/). Today most new analytics platforms default to ELT, with targeted ETL steps where data must be reduced or protected before it moves.

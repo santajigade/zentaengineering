@@ -107,15 +107,15 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| machine-learning | Supervised vs Unsupervised Learning Explained | supervised-vs-unsupervised-learning | comparison | to write |
-| deep-learning | How Neural Networks Work: Neurons, Layers and Training | how-neural-networks-work | fundamentals | to write |
-| computer-vision | Image Classification vs Object Detection vs Segmentation | classification-vs-detection-vs-segmentation | comparison | to write |
-| nlp | Tokenization and Word Embeddings in NLP Explained | tokenization-and-embeddings | fundamentals | to write |
-| generative-ai | How Large Language Models Work: A Plain Explanation | how-large-language-models-work | explanation | to write |
-| data-science | The Data Science Workflow from Data to Decision | data-science-workflow | explanation | to write |
-| data-pipelines | ETL vs ELT: Data Pipeline Approaches Compared | etl-vs-elt | comparison | to write |
-| big-data | The Five Vs of Big Data and Common Platforms | big-data-five-vs | fundamentals | to write |
-| industrial-ai | Predictive Maintenance with Machine Learning | predictive-maintenance-machine-learning | application | to write |
+| machine-learning | Supervised vs Unsupervised Learning Explained | supervised-vs-unsupervised-learning | comparison | draft |
+| deep-learning | How Neural Networks Work: Neurons, Layers and Training | how-neural-networks-work | fundamentals | draft |
+| computer-vision | Image Classification vs Object Detection vs Segmentation | classification-vs-detection-vs-segmentation | comparison | draft |
+| nlp | Tokenization and Word Embeddings in NLP Explained | tokenization-and-embeddings | fundamentals | draft |
+| generative-ai | How Large Language Models Work: A Plain Explanation | how-large-language-models-work | explanation | draft |
+| data-science | The Data Science Workflow from Data to Decision | data-science-workflow | explanation | draft |
+| data-pipelines | ETL vs ELT: Data Pipeline Approaches Compared | etl-vs-elt | comparison | draft |
+| big-data | The Five Vs of Big Data and Common Platforms | big-data-five-vs | fundamentals | draft |
+| industrial-ai | Predictive Maintenance with Machine Learning | predictive-maintenance-machine-learning | application | draft |
 
 ## telecommunication-engineering
 

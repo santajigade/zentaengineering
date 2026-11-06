@@ -1,0 +1,142 @@
+---
+title: "Classification vs Detection vs Segmentation in Vision"
+description: "Classification vs detection vs segmentation in computer vision: outputs, labels, models such as ResNet, YOLO and U-Net, metrics like IoU and mAP, and use cases."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: computer-vision
+focusKeyword: "classification vs detection vs segmentation"
+image: { src: /images/featured/classification-vs-detection-vs-segmentation.webp, alt: "Classification vs Detection vs Segmentation in Vision: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [computer-vision, image-classification, object-detection, image-segmentation, deep-learning]
+faq:
+  - q: "Which computer vision task should I use for defect inspection?"
+    a: "If you only need a pass or fail decision per part, image classification is enough. If you need to know where each defect is, or count defects, use object detection. If you need the exact shape or area of a defect, for example to measure a scratch length or a corrosion area, use segmentation."
+  - q: "What is the difference between semantic and instance segmentation?"
+    a: "Semantic segmentation assigns a class to every pixel but does not separate objects of the same class, so two touching cars become one car region. Instance segmentation also separates individual objects, giving each car its own mask. Panoptic segmentation combines both for the whole image."
+  - q: "Why is segmentation data more expensive to label?"
+    a: "Classification needs one label per image and detection needs a box per object, which takes seconds. Segmentation needs a precise outline or pixel mask for every object, which can take minutes per image. Tools with assisted labelling reduce the effort but it remains the most costly of the three."
+references:
+  - text: "K. He, X. Zhang, S. Ren and J. Sun, Deep Residual Learning for Image Recognition, CVPR, 2016"
+  - text: "J. Redmon et al., You Only Look Once: Unified, Real-Time Object Detection, CVPR, 2016"
+  - text: "O. Ronneberger, P. Fischer and T. Brox, U-Net: Convolutional Networks for Biomedical Image Segmentation, MICCAI, 2015"
+  - text: "K. He, G. Gkioxari, P. Dollár and R. Girshick, Mask R-CNN, ICCV, 2017"
+  - text: "T.-Y. Lin et al., Microsoft COCO: Common Objects in Context, ECCV, 2014"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **classification vs detection vs segmentation**, the difference is how much the model tells you about an image. **Image classification** gives one label for the whole image ("this is a cat"). **Object detection** finds each object and draws a **bounding box** with a label and confidence score. **Segmentation** labels every **pixel**, giving the exact shape of each object or region. Each step adds detail but also needs more labelling effort and more compute.
+
+</Key>
+
+Computer vision teaches machines to understand images and video. Almost every practical vision system, from a phone camera to a factory inspection line, is built on one of three core tasks. Choosing the right one is the first design decision and drives the data you need, the model you train and how you measure success.
+
+<figure>
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Three panels of the same scene with a car and a person. Panel one, classification, shows a single label for the whole image. Panel two, detection, shows a bounding box around the car and another around the person. Panel three, segmentation, shows the car and person filled with coloured pixel masks">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="100" y="24" font-weight="700">Classification</text><text x="300" y="24" font-weight="700">Detection</text><text x="500" y="24" font-weight="700">Segmentation</text>
+<text x="100" y="230">One label: "street scene"</text><text x="300" y="230">Box + label per object</text><text x="500" y="230">Class for every pixel</text>
+</g>
+<g stroke="#0b2545" stroke-width="2"><rect x="20" y="40" width="160" height="160" fill="#eef1f6" /><rect x="220" y="40" width="160" height="160" fill="#eef1f6" /><rect x="420" y="40" width="160" height="160" fill="#eef1f6" /></g>
+<g stroke="#7b8794" stroke-width="2" fill="none">
+<path d="M35 170h80v-22l-14-18h-46l-12 18h-8z" /><circle cx="52" cy="172" r="9" /><circle cx="100" cy="172" r="9" /><circle cx="145" cy="98" r="9" /><path d="M145 107v40M145 120l-12 14M145 120l12 14M145 147l-10 25M145 147l10 25" />
+<path d="M235 170h80v-22l-14-18h-46l-12 18h-8z" /><circle cx="252" cy="172" r="9" /><circle cx="300" cy="172" r="9" /><circle cx="345" cy="98" r="9" /><path d="M345 107v40M345 120l-12 14M345 120l12 14M345 147l-10 25M345 147l10 25" />
+</g>
+<g stroke-width="2.5" fill="none"><rect x="228" y="124" width="94" height="60" stroke="#13a89e" /><rect x="328" y="84" width="34" height="92" stroke="#f5b800" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" font-weight="700"><text x="230" y="118" fill="#13a89e">car 0.94</text><text x="377" y="78" fill="#b8860b" text-anchor="end">person 0.91</text></g>
+<g stroke="#0b2545" stroke-width="1.5">
+<path d="M435 170h80v-22l-14-18h-46l-12 18h-8z" fill="#13a89e" fill-opacity="0.6" /><circle cx="452" cy="172" r="9" fill="#13a89e" fill-opacity="0.6" /><circle cx="500" cy="172" r="9" fill="#13a89e" fill-opacity="0.6" />
+<circle cx="545" cy="98" r="9" fill="#f5b800" fill-opacity="0.7" /><path d="M541 107h8v40l8 25h-6l-7-20-7 20h-6l8-25z" fill="#f5b800" fill-opacity="0.7" />
+</g>
+</svg>
+<figcaption>The same image as seen by the three tasks: more detail at each step.</figcaption>
+</figure>
+
+## Image classification
+
+Classification answers the question "what is in this image?" The model outputs a probability for each class, and the highest is the prediction. Variants include **binary** (good or defective), **multi-class** (one of 1000 categories) and **multi-label** (an image can contain both "rust" and "crack").
+
+Models are usually convolutional neural networks (CNNs) such as ResNet and EfficientNet, or vision transformers (ViT). They learn filters that detect edges, then textures, then parts and whole objects, as explained in [how neural networks work](/ai-data-engineering/how-neural-networks-work/).
+
+- **Labels needed:** one class per image.
+- **Metrics:** accuracy, precision, recall, F1 score and confusion matrix.
+- **Uses:** sorting products, medical image screening, pass or fail inspection, plant disease identification.
+
+## Object detection
+
+Detection answers "what objects are here, and where?" For each object it predicts a class, a confidence score and a bounding box (x, y, width, height). A single image can contain many objects of many classes.
+
+Two families dominate:
+
+- **Two stage detectors** such as Faster R-CNN first propose candidate regions, then classify and refine each one. They are accurate but slower.
+- **One stage detectors** such as YOLO, SSD and RetinaNet predict boxes and classes in a single pass, fast enough for real time video. Transformer based detectors such as DETR are also widely used.
+
+Box quality is measured by **intersection over union (IoU)**:
+
+$$
+\text{IoU} = \frac{\text{Area of overlap}}{\text{Area of union}}
+$$
+
+A prediction usually counts as correct when IoU is at least 0.5 and the class matches. Overall performance is reported as **mean average precision (mAP)**, averaging precision over classes and, in the COCO benchmark, over IoU thresholds from 0.5 to 0.95.
+
+- **Labels needed:** a box and class for each object.
+- **Uses:** counting parts on a conveyor, pedestrian detection in vehicles, PPE compliance checks, retail shelf monitoring.
+
+## Image segmentation
+
+Segmentation answers "which pixels belong to what?" The output is a mask the same size as the image.
+
+- **Semantic segmentation** gives each pixel a class (road, car, sky) without separating individual objects. U-Net and DeepLab are classic models.
+- **Instance segmentation** separates each object of the same class with its own mask. Mask R-CNN extends Faster R-CNN with a mask branch.
+- **Panoptic segmentation** combines both: every pixel gets a class, and countable objects also get an instance identity.
+
+Metrics include pixel accuracy, mean IoU across classes and the Dice coefficient, which is popular in medical imaging.
+
+- **Labels needed:** pixel masks or polygon outlines.
+- **Uses:** tumour boundaries in medical scans, drivable area for autonomous vehicles, measuring crack or corrosion area, satellite land use mapping.
+
+## Classification vs detection vs segmentation: comparison
+
+| Feature | Classification | Object detection | Segmentation |
+| --- | --- | --- | --- |
+| Question answered | What is in the image? | What and where (box)? | What and exactly where (pixels)? |
+| Output | Class label and probability | Boxes, classes, scores | Pixel mask per class or instance |
+| Labelling effort | Lowest | Medium | Highest |
+| Compute cost | Lowest | Medium | Highest |
+| Typical models | ResNet, EfficientNet, ViT | YOLO, Faster R-CNN, DETR | U-Net, DeepLab, Mask R-CNN |
+| Main metric | Accuracy, F1 | mAP at IoU thresholds | Mean IoU, Dice |
+| Industrial example | Good or reject part | Count and locate defects | Measure defect area |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A detector predicts a box from (40, 30) to (140, 110) pixels for a defect. The labelled ground truth box is from (60, 40) to (160, 120).</dd>
+<dt>Find</dt><dd>The IoU, and whether the detection counts as correct at an IoU threshold of 0.5.</dd>
+<dt>Assumptions</dt><dd>Boxes are axis aligned; coordinates are (x, y) of the top left and bottom right corners.</dd>
+<dt>Solution</dt><dd>Predicted area = 100 × 80 = 8000 px²; true area = 100 × 80 = 8000 px²<br />Overlap: x from 60 to 140 (80 px), y from 40 to 110 (70 px), area = 5600 px²<br />Union = 8000 + 8000 − 5600 = 10 400 px²<br />IoU = 5600 ÷ 10 400 = 0.54</dd>
+<dt>Answer</dt><dd><strong>IoU is about 0.54, above 0.5, so the detection counts as a true positive</strong></dd>
+<dt>Limitations</dt><dd>At stricter thresholds such as 0.75, used in COCO style evaluation, the same box would count as a miss.</dd>
+</dl>
+</Example>
+
+## How to choose
+
+1. **Start with the business question.** Do you need a decision, a location and count, or an exact shape and size?
+2. **Pick the simplest task that answers it.** Classification is cheaper to label and runs on modest hardware.
+3. **Consider the deployment hardware.** Real time detection on an edge camera may need a small YOLO style model; segmentation at high resolution needs a GPU.
+4. **Plan the labelling budget.** Segmentation labels can cost ten times more than classification labels.
+
+Tasks can also be chained: a detector finds each part, then a classifier grades it, or a detector crops a region that a segmentation model measures.
+
+## Practical tips
+
+- Use **transfer learning**: start from a model pre-trained on ImageNet or COCO and fine tune on your images. It needs far less data.
+- **Augment** data with flips, rotations, brightness changes and crops so the model copes with real conditions.
+- Control the **lighting and optics** in industrial setups; good images beat clever models. See [machine vision components](/automation-robotics/machine-vision-components/) for cameras, lenses and lighting.
+- Validate on images from the real production line, not only lab samples.
+
+All three tasks are [supervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) problems, so label quality limits model quality. A small, carefully labelled dataset often beats a large, noisy one.

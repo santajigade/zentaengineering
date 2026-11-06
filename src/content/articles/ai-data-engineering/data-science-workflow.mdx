@@ -1,0 +1,143 @@
+---
+title: "The Data Science Workflow from Data to Decision"
+description: "The data science workflow step by step: problem definition, data collection, cleaning, exploration, features, modelling, evaluation and deployment."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: data-science
+focusKeyword: "data science workflow"
+image: { src: /images/featured/data-science-workflow.webp, alt: "The Data Science Workflow from Data to Decision: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [data-science, crisp-dm, data-cleaning, feature-engineering, model-evaluation]
+faq:
+  - q: "Which step of the data science workflow takes the most time?"
+    a: "Data collection and cleaning usually take the largest share, often more than half of the project time. Real data has missing values, wrong units, duplicates, inconsistent names and time zone problems, and fixing these carefully matters more to the result than the choice of algorithm."
+  - q: "What is CRISP-DM?"
+    a: "CRISP-DM, the Cross-Industry Standard Process for Data Mining, is a widely used framework that divides a project into six phases: business understanding, data understanding, data preparation, modelling, evaluation and deployment. It stresses that the phases are iterative, with frequent loops back to earlier steps."
+  - q: "What is the difference between a data scientist and a data engineer?"
+    a: "A data engineer builds and maintains the pipelines, storage and platforms that collect and deliver reliable data. A data scientist uses that data to analyse problems, build models and communicate insights. In small teams one person often does both."
+references:
+  - text: "P. Chapman et al., CRISP-DM 1.0 Step-by-step data mining guide, SPSS, 2000"
+  - text: "H. Wickham, M. Çetinkaya-Rundel and G. Grolemund, R for Data Science, 2nd ed., O'Reilly, 2023"
+  - text: "W. McKinney, Python for Data Analysis, 3rd ed., O'Reilly, 2022"
+  - text: "F. Provost and T. Fawcett, Data Science for Business, O'Reilly, 2013"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The **data science workflow** turns raw data into decisions in repeatable steps: **define the problem**, **collect data**, **clean and prepare it**, **explore** it to understand patterns, **engineer features**, **build models**, **evaluate** them against the business goal, then **deploy and monitor** the result. The process is iterative: findings at any stage often send you back to an earlier one. Frameworks such as **CRISP-DM** formalise these phases.
+
+</Key>
+
+Data science combines statistics, programming and domain knowledge to answer questions with data. Projects fail far more often from a poorly defined question or bad data than from the wrong algorithm. A clear workflow keeps the work focused on the decision it is meant to support.
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Data science workflow as eight connected steps in a loop: define problem, collect data, clean and prepare, explore, feature engineering, model, evaluate, deploy and monitor, with a feedback arrow back to define problem">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="50" width="125" height="50" rx="6" fill="#eef1f6" /><rect x="165" y="50" width="125" height="50" rx="6" fill="#eef1f6" /><rect x="310" y="50" width="125" height="50" rx="6" fill="#e6f6f4" /><rect x="455" y="50" width="125" height="50" rx="6" fill="#e6f6f4" />
+<rect x="455" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect x="310" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect x="165" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect x="20" y="170" width="125" height="50" rx="6" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="82" y="72">1. Define</text><text x="82" y="90">problem</text>
+<text x="227" y="72">2. Collect</text><text x="227" y="90">data</text>
+<text x="372" y="72">3. Clean and</text><text x="372" y="90">prepare</text>
+<text x="517" y="72">4. Explore</text><text x="517" y="90">(EDA)</text>
+<text x="517" y="192">5. Feature</text><text x="517" y="210">engineering</text>
+<text x="372" y="192">6. Build</text><text x="372" y="210">model</text>
+<text x="227" y="192">7. Evaluate</text><text x="227" y="210">vs goal</text>
+<text x="82" y="192">8. Deploy and</text><text x="82" y="210">monitor</text>
+<text x="300" y="268">Iterate: results and monitoring feed back into the problem definition</text>
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M145 75h14M290 75h14M435 75h14M517 100v64M455 195h-14M310 195h-14M165 195h-14" /></g>
+<g fill="#13a89e"><path d="M159 70l8 5-8 5z" /><path d="M304 70l8 5-8 5z" /><path d="M449 70l8 5-8 5z" /><path d="M512 164l5 8 5-8z" /><path d="M441 190l-8 5 8 5z" /><path d="M296 190l-8 5 8 5z" /><path d="M151 190l-8 5 8 5z" /></g>
+<path d="M50 170V108" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" /><path d="M45 110l5-9 5 9z" fill="#b42318" />
+</svg>
+<figcaption>The eight steps of a typical data science workflow, with feedback from deployment back to the problem.</figcaption>
+</figure>
+
+## 1. Define the problem
+
+Start with the decision, not the data. What will someone do differently because of the result? Turn a vague goal ("use our sensor data") into a measurable question ("predict which compressors will need unplanned repair in the next 30 days, so maintenance can be scheduled").
+
+It also helps to ask whether data science is needed at all. Some questions are answered by a simple query, a better report or an engineering calculation. Others need a model because the pattern is too complex or the data too large to inspect by hand.
+
+Agree on success criteria early: the metric, the target value, the cost of false alarms versus missed events, and who will use the output.
+
+## 2. Collect data
+
+Identify the sources: databases, historians, ERP and maintenance systems, spreadsheets, APIs, sensors or surveys. Data usually arrives through [data pipelines](/ai-data-engineering/etl-vs-elt/) built by data engineers. Check:
+
+- Is there enough history and enough examples of the events of interest?
+- Is the data representative of the conditions where the model will be used?
+- Are there legal, privacy or access restrictions?
+
+## 3. Clean and prepare
+
+Real data is messy. Typical work:
+
+- **Missing values:** remove, fill with a sensible value, or flag them.
+- **Outliers:** investigate before removing; some are sensor faults, others are the events you care about.
+- **Units and scaling:** convert to consistent units and handle mixed formats.
+- **Duplicates and inconsistent labels:** "Pump-01", "PUMP 1" and "P01" may be the same asset.
+- **Time alignment:** match time zones and sampling rates when joining sources.
+
+This step often takes more than half of the project time, and it has the biggest effect on the result.
+
+## 4. Exploratory data analysis
+
+Exploratory data analysis (EDA) builds understanding before modelling. Calculate summary statistics such as mean, median and standard deviation, plot distributions, look at trends over time, and check correlations between variables. EDA often reveals data problems and sometimes answers the question without any model.
+
+A common screening tool is the **z-score**, which measures how many standard deviations a value is from the mean:
+
+$$
+z = \frac{x - \mu}{\sigma}
+$$
+
+<Calculator path="statistics/z-score" title="Z-Score Calculator" />
+
+## 5. Feature engineering
+
+Features are the inputs a model learns from. Good features carry domain knowledge: rolling averages, rates of change, time since last service, ratios such as power per unit flow, and day of week or shift. Categorical values are encoded as numbers, and numeric features may be scaled. Well chosen features often improve results more than a more complex algorithm.
+
+## 6. Build models
+
+Choose the approach to fit the question: [supervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) for predicting a known target, unsupervised learning for finding groups or anomalies. Begin with a simple **baseline**, such as always predicting the average or a linear model, then try stronger methods like gradient boosted trees or [neural networks](/ai-data-engineering/how-neural-networks-work/). Split data into training, validation and test sets, and for time series always test on later data than you train on.
+
+## 7. Evaluate against the goal
+
+Technical metrics (accuracy, precision, recall, mean absolute error) must be translated into business value. A model with 95% accuracy can be useless if the event of interest is only 2% of cases.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A compressor failure model is tested on 1000 machine months. There were 20 real failures. The model raised 50 alerts, of which 15 were real failures.</dd>
+<dt>Find</dt><dd>Precision, recall and accuracy.</dd>
+<dt>Assumptions</dt><dd>Each machine month is one prediction; an alert counts as a prediction of failure.</dd>
+<dt>Solution</dt><dd>True positives TP = 15; false positives FP = 50 − 15 = 35; false negatives FN = 20 − 15 = 5<br />True negatives TN = 1000 − 15 − 35 − 5 = 945<br />Precision = TP ÷ (TP + FP) = 15 ÷ 50 = 0.30<br />Recall = TP ÷ (TP + FN) = 15 ÷ 20 = 0.75<br />Accuracy = (TP + TN) ÷ 1000 = 960 ÷ 1000 = 0.96</dd>
+<dt>Answer</dt><dd><strong>Precision 30%, recall 75%, accuracy 96%: the model catches most failures but 7 of 10 alerts are false alarms</strong></dd>
+<dt>Limitations</dt><dd>Whether this is good enough depends on the cost of an inspection compared with an unplanned failure, which is a business decision.</dd>
+</dl>
+</Example>
+
+## 8. Deploy and monitor
+
+A model only creates value when it is used. Deployment can mean a dashboard, a scheduled report, an alert in a maintenance system or a real time API. After deployment:
+
+- **Monitor performance**, because data drifts as processes, equipment and behaviour change.
+- **Retrain** on new data at a planned interval or when performance drops.
+- **Document** the data, assumptions and limitations so others can trust and maintain the model.
+- **Collect feedback** from users to refine the problem definition, closing the loop.
+
+## Tools for the data science workflow
+
+- **Languages:** Python (pandas, scikit-learn, matplotlib) and R are the most common; SQL is essential for data access.
+- **Notebooks** such as Jupyter for exploration; scripts and version control (Git) for anything that will be reused.
+- **Reproducibility:** fix random seeds, record data versions and keep code in a repository.
+- **Collaborate:** review analysis and code with colleagues, and involve domain experts at every stage, not only at the end.
+- **Communicate:** a clear chart and a one paragraph conclusion usually matter more than the model details.
+
+The data science workflow is not a straight line but a cycle. Teams that keep the decision in view, invest in clean data and monitor results after deployment get far more value than those that focus only on algorithms. For large data volumes, see [the five Vs of big data](/ai-data-engineering/big-data-five-vs/).

@@ -1,0 +1,142 @@
+---
+title: "How Neural Networks Work: Neurons, Layers and Training"
+description: "How neural networks work: artificial neurons, weights and biases, activation functions, layers, forward pass, loss, backpropagation and gradient descent."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: deep-learning
+focusKeyword: "how neural networks work"
+image: { src: /images/featured/how-neural-networks-work.webp, alt: "How Neural Networks Work: Neurons, Layers and Training: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [neural-networks, deep-learning, backpropagation, activation-function, gradient-descent]
+faq:
+  - q: "Why do neural networks need activation functions?"
+    a: "Without a non-linear activation, any stack of layers collapses into a single linear transformation, so the network could only learn straight line relationships. Non-linear activations such as ReLU let networks approximate complex, curved relationships between inputs and outputs."
+  - q: "What is the difference between a neural network and deep learning?"
+    a: "Deep learning refers to neural networks with many layers. Depth lets the network build features step by step, from simple patterns in early layers to complex concepts in later ones. Modern image, speech and language models are deep networks with many millions or billions of parameters."
+  - q: "What is overfitting and how is it prevented?"
+    a: "Overfitting is when a network memorises the training data, including its noise, and performs poorly on new data. It is reduced by using more data, data augmentation, simpler models, regularisation such as weight decay and dropout, and early stopping based on validation performance."
+references:
+  - text: "I. Goodfellow, Y. Bengio and A. Courville, Deep Learning, MIT Press, 2016"
+  - text: "D. E. Rumelhart, G. E. Hinton and R. J. Williams, Learning representations by back-propagating errors, Nature, 1986"
+  - text: "M. A. Nielsen, Neural Networks and Deep Learning, Determination Press, 2015"
+  - text: "C. M. Bishop and H. Bishop, Deep Learning: Foundations and Concepts, Springer, 2024"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**How neural networks work:** an artificial neural network is made of layers of simple units called neurons. Each neuron multiplies its inputs by **weights**, adds a **bias** and passes the sum through a non-linear **activation function**. Data flows forward from the input layer through hidden layers to the output layer. During **training**, a **loss function** measures how wrong the output is, **backpropagation** works out how each weight contributed to the error, and **gradient descent** adjusts the weights a little to reduce it. Repeating this over many examples teaches the network.
+
+</Key>
+
+Neural networks power image recognition, speech assistants, translation, recommendation systems and large language models. Despite their reputation, the core ideas are simple: weighted sums, non-linear functions and a method for adjusting weights to reduce error. This article explains each piece step by step.
+
+## The artificial neuron
+
+A neuron receives inputs x₁ to xₙ, each multiplied by a weight. It adds them with a bias b, then applies an activation function f:
+
+$$
+z = \sum_{i=1}^{n} w_i x_i + b \qquad a = f(z)
+$$
+
+The weights decide how much each input matters and in which direction; the bias shifts the threshold. The output a is passed to neurons in the next layer.
+
+### Activation functions
+
+- **ReLU (rectified linear unit):** f(z) = max(0, z). Simple, fast and the default for hidden layers.
+- **Sigmoid:** squashes values to between 0 and 1; used for binary probabilities.
+- **Tanh:** squashes to between −1 and 1.
+- **Softmax:** turns a vector of scores into probabilities that sum to 1; used for multi-class outputs.
+
+Non-linear activations are essential: without them, many layers would behave like one linear layer. ReLU became the default because its gradient does not shrink for positive inputs, which helps deep networks train. Sigmoid and tanh saturate for large inputs, so their gradients become tiny and learning slows in early layers, a problem known as the **vanishing gradient**.
+
+## Layers and architecture
+
+<figure>
+<svg width="580" height="290" viewBox="0 0 580 290" fill="none" role="img" aria-label="Feedforward neural network with an input layer of three neurons, two hidden layers of four neurons each, and an output layer of two neurons; every neuron connects to every neuron in the next layer">
+<g stroke="#c9d2de" stroke-width="1">
+<path d="M80 80L230 60M80 80L230 120M80 80L230 180M80 80L230 240M80 150L230 60M80 150L230 120M80 150L230 180M80 150L230 240M80 220L230 60M80 220L230 120M80 220L230 180M80 220L230 240" />
+<path d="M230 60L380 60M230 60L380 120M230 60L380 180M230 60L380 240M230 120L380 60M230 120L380 120M230 120L380 180M230 120L380 240M230 180L380 60M230 180L380 120M230 180L380 180M230 180L380 240M230 240L380 60M230 240L380 120M230 240L380 180M230 240L380 240" />
+<path d="M380 60L520 110M380 60L520 190M380 120L520 110M380 120L520 190M380 180L520 110M380 180L520 190M380 240L520 110M380 240L520 190" />
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<circle cx="80" cy="80" r="16" fill="#eef1f6" /><circle cx="80" cy="150" r="16" fill="#eef1f6" /><circle cx="80" cy="220" r="16" fill="#eef1f6" />
+<circle cx="230" cy="60" r="16" fill="#e6f6f4" /><circle cx="230" cy="120" r="16" fill="#e6f6f4" /><circle cx="230" cy="180" r="16" fill="#e6f6f4" /><circle cx="230" cy="240" r="16" fill="#e6f6f4" />
+<circle cx="380" cy="60" r="16" fill="#e6f6f4" /><circle cx="380" cy="120" r="16" fill="#e6f6f4" /><circle cx="380" cy="180" r="16" fill="#e6f6f4" /><circle cx="380" cy="240" r="16" fill="#e6f6f4" />
+<circle cx="520" cy="110" r="16" fill="#fff7e0" /><circle cx="520" cy="190" r="16" fill="#fff7e0" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="80" y="275">Input layer</text><text x="305" y="282">Hidden layers</text><text x="520" y="240">Output layer</text>
+</g>
+</svg>
+<figcaption>A fully connected feedforward network: 3 inputs, two hidden layers of 4 neurons and 2 outputs.</figcaption>
+</figure>
+
+- **Input layer:** one neuron per feature, such as pixel values or sensor readings. It does no computation.
+- **Hidden layers:** transform the data step by step into more useful representations.
+- **Output layer:** produces the prediction, for example one value for regression or one probability per class.
+
+The network in the figure has 3 × 4 + 4 × 4 + 4 × 2 = 36 weights plus 4 + 4 + 2 = 10 biases, so 46 trainable parameters. Real networks have millions or billions.
+
+Specialised architectures exist for different data: **convolutional neural networks (CNNs)** for images, **recurrent networks** for sequences, and **transformers**, which use attention and now dominate language and increasingly vision tasks.
+
+## Forward pass
+
+Think of the forward pass as a chain of simple calculations. The first hidden layer might learn to respond to basic patterns, such as edges in an image or a rising trend in a sensor signal. The next layer combines those into larger patterns, and the output layer turns them into a decision.
+
+
+To make a prediction, input values flow layer by layer: each neuron computes its weighted sum and activation, and passes the result on. The output layer's values are the prediction. In matrix form, a whole layer is computed as a = f(Wx + b), which is why neural networks run so well on GPUs, processors built for large matrix operations.
+
+## How neural networks work during training
+
+1. **Loss function:** measures the error between the prediction and the true label. Mean squared error is typical for regression; cross-entropy for classification.
+2. **Backpropagation:** applies the chain rule of calculus backwards through the network to compute the gradient of the loss with respect to every weight, that is, how much the loss would change if each weight changed slightly. Rumelhart, Hinton and Williams popularised the method in 1986.
+3. **Gradient descent:** updates each weight a small step in the direction that reduces the loss:
+
+$$
+w \leftarrow w - \eta \,\frac{\partial L}{\partial w}
+$$
+
+where η is the **learning rate**. Training uses small random batches of examples (**stochastic or mini-batch gradient descent**), and optimisers such as Adam adapt the step size for each weight. One pass over the whole training set is an **epoch**; training usually takes many epochs.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A single neuron with inputs x₁ = 2 and x₂ = 3, weights w₁ = 0.5 and w₂ = −0.25, bias b = 0.1 and ReLU activation. The target output is 1.0 and the loss is squared error L = (a − y)². Learning rate 0.1.</dd>
+<dt>Find</dt><dd>The output, the loss and the updated weight w₁ after one gradient descent step.</dd>
+<dt>Assumptions</dt><dd>z is positive, so the ReLU derivative is 1.</dd>
+<dt>Solution</dt><dd>z = 0.5 × 2 + (−0.25) × 3 + 0.1 = 1.0 − 0.75 + 0.1 = 0.35; a = ReLU(0.35) = 0.35<br />L = (0.35 − 1.0)² = 0.4225<br />∂L/∂w₁ = 2(a − y) × 1 × x₁ = 2 × (−0.65) × 2 = −2.6<br />w₁ new = 0.5 − 0.1 × (−2.6) = 0.76</dd>
+<dt>Answer</dt><dd><strong>Output 0.35, loss 0.4225; w₁ increases to 0.76, which raises the next output towards the target</strong></dd>
+<dt>Limitations</dt><dd>Real training updates all weights together over batches of many examples; a learning rate that is too large can make training unstable.</dd>
+</dl>
+</Example>
+
+## Common training problems
+
+- **Learning rate too high:** the loss jumps around or grows instead of falling.
+- **Learning rate too low:** training is very slow and can stall.
+- **Underfitting:** the model is too simple or trained too briefly, so both training and validation error stay high.
+- **Overfitting:** training error keeps falling while validation error starts to rise.
+
+Plotting training and validation loss after each epoch is the simplest way to spot these problems.
+
+## Making networks generalise
+
+The goal is good performance on new data, not just the training set. Engineers:
+
+- Hold out **validation and test sets** to measure generalisation.
+- Use **regularisation**: weight decay, dropout and early stopping.
+- Apply **data augmentation**, such as flipping or cropping images.
+- Normalise inputs and use batch or layer normalisation inside the network.
+- Tune hyperparameters: learning rate, number of layers and neurons, batch size.
+
+## Where neural networks are used
+
+- **Computer vision:** [image classification, object detection and segmentation](/ai-data-engineering/classification-vs-detection-vs-segmentation/).
+- **Language:** [tokenization and embeddings](/ai-data-engineering/tokenization-and-embeddings/) feed transformer networks that power [large language models](/ai-data-engineering/how-large-language-models-work/).
+- **Industry:** soft sensors, quality prediction and [predictive maintenance](/ai-data-engineering/predictive-maintenance-machine-learning/).
+
+Neural networks are one family of [supervised and unsupervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) methods. For small tabular datasets, simpler models such as gradient boosted trees often perform as well or better, so it is worth comparing before choosing a deep network.

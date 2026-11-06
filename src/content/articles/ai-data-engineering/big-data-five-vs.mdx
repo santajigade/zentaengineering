@@ -1,0 +1,143 @@
+---
+title: "The Five Vs of Big Data and Common Platforms"
+description: "The five Vs of big data explained: volume, velocity, variety, veracity and value, with Hadoop, Spark, Kafka, data lakes and a worked sizing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: big-data
+focusKeyword: "big data"
+image: { src: /images/featured/big-data-five-vs.webp, alt: "The Five Vs of Big Data and Common Platforms: featured diagram" }
+format: fundamentals
+pillar: true
+math: false
+tags: [big-data, hadoop, spark, kafka, data-lake]
+faq:
+  - q: "How big does data have to be to count as big data?"
+    a: "There is no fixed size. Data becomes big data when its volume, speed or variety is too much for a single conventional database or server to store and process in the time needed. For one company that might be a few terabytes of streaming sensor data; for another it is petabytes of logs."
+  - q: "Is Hadoop still used?"
+    a: "The Hadoop Distributed File System and related tools are still running in many organisations, but new projects mostly use Apache Spark for processing and cloud object storage such as Amazon S3, Azure Data Lake Storage or Google Cloud Storage instead of HDFS. The ideas Hadoop introduced, distributed storage and moving compute to the data, remain central."
+  - q: "Why was MapReduce replaced by Spark?"
+    a: "MapReduce writes intermediate results to disk between every step, which is slow for multi-step jobs and iterative algorithms such as machine learning. Spark keeps working data in memory across steps where possible and offers a richer API including SQL, streaming and machine learning libraries, so it is often many times faster."
+references:
+  - text: "J. Dean and S. Ghemawat, MapReduce: Simplified Data Processing on Large Clusters, OSDI, 2004"
+  - text: "M. Zaharia et al., Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing, NSDI, 2012"
+  - text: "D. Laney, 3D Data Management: Controlling Data Volume, Velocity and Variety, META Group, 2001"
+  - text: "M. Kleppmann, Designing Data-Intensive Applications, O'Reilly, 2017"
+  - text: "J. Reis and M. Housley, Fundamentals of Data Engineering, O'Reilly, 2022"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **five Vs of big data** describe what makes data "big": **Volume** (how much data), **Velocity** (how fast it arrives), **Variety** (how many types and formats), **Veracity** (how trustworthy it is) and **Value** (what useful insight it gives). When data stretches one or more of these beyond what a single server can handle, distributed platforms such as **Apache Spark**, **Kafka**, **data lakes** and **cloud warehouses** are used to store and process it across many machines.
+
+</Key>
+
+Organisations now collect data from websites, apps, machines, sensors, transactions and documents at a scale that traditional databases were never designed for. The term big data describes this challenge. Analyst Doug Laney described the first three Vs in 2001, and veracity and value were added later to capture data quality and purpose.
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Big data shown as a central circle surrounded by five circles: volume (scale of data), velocity (speed of arrival), variety (formats and sources), veracity (quality and trust) and value (business insight)">
+<g stroke="#c9d2de" stroke-width="2"><path d="M300 140L300 55M300 140L455 105M300 140L410 225M300 140L190 225M300 140L145 105" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<circle cx="300" cy="140" r="50" fill="#0b2545" />
+<circle cx="300" cy="50" r="40" fill="#e6f6f4" /><circle cx="470" cy="100" r="40" fill="#fff7e0" /><circle cx="420" cy="230" r="40" fill="#eef1f6" /><circle cx="180" cy="230" r="40" fill="#ffe9e7" /><circle cx="130" cy="100" r="40" fill="#e6f6f4" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" text-anchor="middle">
+<text x="300" y="136" fill="#ffffff" font-weight="700">Big data</text><text x="300" y="154" fill="#ffffff">five Vs</text>
+<g fill="#0b2545"><text x="300" y="47" font-weight="700">Volume</text><text x="300" y="64" font-size="11">scale</text>
+<text x="470" y="97" font-weight="700">Velocity</text><text x="470" y="114" font-size="11">speed</text>
+<text x="420" y="227" font-weight="700">Variety</text><text x="420" y="244" font-size="11">formats</text>
+<text x="180" y="227" font-weight="700">Veracity</text><text x="180" y="244" font-size="11">trust</text>
+<text x="130" y="97" font-weight="700">Value</text><text x="130" y="114" font-size="11">insight</text></g>
+</g>
+</svg>
+<figcaption>The five Vs of big data.</figcaption>
+</figure>
+
+## The five Vs explained
+
+### 1. Volume
+
+The amount of data, measured in terabytes (TB), petabytes (PB) or more. Large volumes come from web logs, video, high frequency sensors, scientific instruments and transaction records. Storing and scanning this much data requires spreading it across many disks and servers.
+
+### 2. Velocity
+
+The speed at which data is created and must be processed. Some data arrives in daily batches; other data streams continuously, such as card payments that must be checked for fraud within milliseconds, or vibration sensors sampling thousands of times a second. High velocity calls for **stream processing**.
+
+### 3. Variety
+
+The range of data types:
+
+- **Structured:** rows and columns in databases, such as orders and sensor tables.
+- **Semi-structured:** JSON, XML and log files with flexible fields.
+- **Unstructured:** text documents, emails, images, audio and video.
+
+Combining these requires flexible storage and processing tools, and often machine learning to extract meaning from unstructured data, for example through [computer vision](/ai-data-engineering/classification-vs-detection-vs-segmentation/) or [NLP embeddings](/ai-data-engineering/tokenization-and-embeddings/).
+
+### 4. Veracity
+
+The quality, accuracy and trustworthiness of the data. Sensor drift, missing values, duplicates, biased samples and conflicting sources all reduce veracity. At large scale, small error rates still mean millions of bad records, so automated validation and data lineage are essential.
+
+### 5. Value
+
+The reason to collect data at all. Data has value only if it leads to better decisions: lower costs, higher quality, less downtime or better customer service. Storing everything "just in case" without a use for it costs money and adds risk.
+
+Some authors add more Vs, such as variability (changing meaning or flow rate) and visualisation, but these five are the most widely used.
+
+## Big data platforms and tools
+
+The key idea behind big data platforms is **horizontal scaling**: instead of buying one ever larger server, spread data and work across many ordinary machines, and move the computation to where the data is stored.
+
+### Hadoop
+
+Apache Hadoop, based on Google's papers on its file system and MapReduce (2003 and 2004), made this approach widely available. It has:
+
+- **HDFS:** a distributed file system that splits files into blocks and stores copies on several machines for fault tolerance.
+- **MapReduce:** a programming model that processes data in parallel (map) and combines the results (reduce).
+- **YARN:** a resource manager that schedules jobs on the cluster.
+
+### Apache Spark
+
+Spark processes data in memory across a cluster and is much faster than MapReduce for multi-step and iterative jobs. It offers SQL, DataFrames, streaming and a machine learning library in one engine, and is the most common big data processing tool today.
+
+### Streaming: Kafka and Flink
+
+**Apache Kafka** is a distributed event log that collects and delivers high velocity data streams reliably between systems. **Apache Flink** and Spark Structured Streaming process those streams in near real time, for example to compute rolling averages or detect anomalies as data arrives.
+
+### Data lakes, warehouses and lakehouses
+
+- **Data lake:** low cost object storage (such as Amazon S3 or Azure Data Lake Storage) holding raw data of any type.
+- **Data warehouse:** structured, optimised storage for fast SQL analytics, such as Snowflake, BigQuery or Redshift.
+- **Lakehouse:** open table formats such as Delta Lake, Apache Iceberg and Apache Hudi add warehouse features to lake storage.
+
+Data moves into these platforms through [ETL or ELT pipelines](/ai-data-engineering/etl-vs-elt/).
+
+| Need | Typical tools |
+| --- | --- |
+| Distributed storage | HDFS, Amazon S3, Azure Data Lake Storage, Google Cloud Storage |
+| Batch processing | Apache Spark, Hadoop MapReduce |
+| Stream ingestion | Apache Kafka, Amazon Kinesis, Azure Event Hubs |
+| Stream processing | Apache Flink, Spark Structured Streaming |
+| SQL analytics | Snowflake, BigQuery, Redshift, Databricks SQL, Trino |
+| Time series and IoT | InfluxDB, TimescaleDB, plant historians |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant has 2000 sensors, each sampled 10 times per second. Each stored reading (timestamp, tag ID, value, quality) takes 16 bytes.</dd>
+<dt>Find</dt><dd>The raw data volume per day and per year, and which Vs are significant.</dd>
+<dt>Assumptions</dt><dd>No compression; continuous operation all year.</dd>
+<dt>Solution</dt><dd>Readings per second = 2000 × 10 = 20 000<br />Bytes per second = 20 000 × 16 = 320 000 B = 0.32 MB/s<br />Per day = 0.32 MB/s × 86 400 s = 27 648 MB ≈ 27.6 GB<br />Per year = 27.6 GB × 365 ≈ 10 TB</dd>
+<dt>Answer</dt><dd><strong>About 27.6 GB per day and 10 TB per year: velocity (20 000 readings per second) and volume both need a time series or big data platform</strong></dd>
+<dt>Limitations</dt><dd>Time series compression often reduces this by a factor of 5 to 10 or more, and many plants store changes only (deadband), which cuts volume further.</dd>
+</dl>
+</Example>
+
+## Big data in industry
+
+Industrial data has its own character. Signals are mostly time series, sampled at fixed rates, tagged by instrument and often stored for decades for regulatory and engineering reasons. Context matters as much as the values: a reading means little without knowing the unit, the operating mode and whether the instrument was in calibration.
+
+
+In manufacturing and process plants, big data comes from historians, SCADA systems, quality labs and maintenance records. Common uses include [predictive maintenance](/ai-data-engineering/predictive-maintenance-machine-learning/), energy optimisation, yield improvement and [digital twins](/automation-robotics/digital-twin-explained/). For more on industrial applications, see the [industrial AI articles on Instrumentation Blog](https://www.instrumentationblog.in/category/automation/industrial-ai/).
+
+The five Vs are a useful checklist when planning any data project: estimate the volume and velocity, list the varieties, plan for veracity, and above all define the value before building the platform.

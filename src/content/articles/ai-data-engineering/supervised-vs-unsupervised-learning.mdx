@@ -1,0 +1,135 @@
+---
+title: "Supervised vs Unsupervised Learning Explained"
+description: "Supervised vs unsupervised learning explained: labelled and unlabelled data, classification, regression, clustering, dimensionality reduction and examples."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: machine-learning
+focusKeyword: "supervised vs unsupervised learning"
+image: { src: /images/featured/supervised-vs-unsupervised-learning.webp, alt: "Supervised vs Unsupervised Learning Explained: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [machine-learning, supervised-learning, unsupervised-learning, clustering, classification]
+faq:
+  - q: "Which is better, supervised or unsupervised learning?"
+    a: "Neither is better in general; they answer different questions. Supervised learning predicts a known target, such as a price or a fault class, and needs labelled examples. Unsupervised learning finds structure in data without labels, such as groups of similar customers or unusual readings. The available data and the business question decide which to use."
+  - q: "What is semi-supervised learning?"
+    a: "A mix of both: a small labelled dataset is combined with a large unlabelled one. The model learns structure from all the data and uses the labelled part to attach meaning to it. It is useful when labelling is expensive, for example in medical images or defect inspection."
+  - q: "Is reinforcement learning supervised or unsupervised?"
+    a: "Neither. In reinforcement learning an agent learns by acting in an environment and receiving rewards or penalties, rather than from labelled examples or from finding structure in a fixed dataset. It is usually treated as a third main category of machine learning."
+references:
+  - text: "T. Hastie, R. Tibshirani and J. Friedman, The Elements of Statistical Learning, 2nd ed., Springer"
+  - text: "C. M. Bishop, Pattern Recognition and Machine Learning, Springer"
+  - text: "A. Géron, Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow, 3rd ed., O'Reilly"
+  - text: "scikit-learn User Guide, scikit-learn developers"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **supervised vs unsupervised learning**, the difference is the data. **Supervised learning** trains on labelled examples, where each input has a known correct output, and learns to predict that output for new inputs: classification (spam or not) and regression (price, temperature). **Unsupervised learning** works on unlabelled data and finds hidden structure on its own: clustering similar items, reducing dimensions and detecting anomalies.
+
+</Key>
+
+Machine learning lets computers learn patterns from data instead of following hand written rules. The first question in any machine learning project is what kind of learning the problem calls for, and that depends mainly on whether you have examples of the right answer. This article compares the two most common approaches with algorithms, examples and practical tips.
+
+## Supervised learning
+
+In supervised learning, every training example has an input x (features) and a target y (label). The algorithm learns a function f that maps x to y as accurately as possible, then applies f to new, unseen inputs.
+
+There are two main tasks:
+
+- **Classification:** the target is a category. Is this email spam? Which of five fault types is this motor showing? Is the part good or defective?
+- **Regression:** the target is a number. What will this house sell for? What is the remaining useful life of this bearing? What will tomorrow's energy demand be?
+
+A simple linear regression model, for example, predicts:
+
+$$
+\hat{y} = w_1 x_1 + w_2 x_2 + \dots + w_n x_n + b
+$$
+
+and training chooses the weights w and bias b that minimise the error between predictions and true labels, often the mean squared error.
+
+Common supervised algorithms include linear and logistic regression, decision trees, random forests, gradient boosted trees, support vector machines, k-nearest neighbours and neural networks.
+
+Performance is measured on data the model has not seen: accuracy, precision, recall and F1 score for classification; mean absolute error and root mean squared error for regression.
+
+## Unsupervised learning
+
+In unsupervised learning, there is only x. The algorithm looks for structure such as groups, directions of variation or unusual points.
+
+- **Clustering:** group similar items, for example customer segments, document topics or operating modes of a machine. Algorithms include k-means, hierarchical clustering, DBSCAN and Gaussian mixture models.
+- **Dimensionality reduction:** compress many features into a few that keep most of the information, for visualisation or as input to other models. Principal component analysis (PCA), t-SNE and UMAP are common.
+- **Anomaly detection:** find points that do not fit the normal pattern, such as fraudulent transactions or abnormal sensor readings. Isolation forests and autoencoders are widely used.
+- **Association rules:** find items that occur together, such as products bought in the same basket.
+
+Evaluation is harder because there is no correct answer to compare with. Engineers use internal measures, such as how compact and separated clusters are, and, most importantly, whether the result is useful to domain experts.
+
+<figure>
+<svg width="580" height="270" viewBox="0 0 580 270" fill="none" role="img" aria-label="Left: supervised learning plot with labelled points of two classes, circles and triangles, separated by a learned decision boundary. Right: unsupervised learning plot with unlabelled points forming three clusters found by the algorithm">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="140" y="24" font-weight="700">Supervised: labelled data</text>
+<text x="430" y="24" font-weight="700">Unsupervised: no labels</text>
+<text x="140" y="262">Learns a decision boundary</text><text x="430" y="262">Finds clusters</text>
+</g>
+<path d="M30 230H260M30 230V40M320 230H550M320 230V40" stroke="#0b2545" stroke-width="2" />
+<path d="M60 70L240 210" stroke="#b42318" stroke-width="2.5" stroke-dasharray="7 5" />
+<g fill="#13a89e"><circle cx="60" cy="110" r="6" /><circle cx="80" cy="140" r="6" /><circle cx="70" cy="170" r="6" /><circle cx="100" cy="190" r="6" /><circle cx="110" cy="160" r="6" /><circle cx="130" cy="200" r="6" /><circle cx="95" cy="210" r="6" /></g>
+<g fill="#f5b800"><path d="M150 70l7 12h-14z" /><path d="M180 90l7 12h-14z" /><path d="M200 120l7 12h-14z" /><path d="M230 140l7 12h-14z" /><path d="M170 60l7 12h-14z" /><path d="M210 80l7 12h-14z" /><path d="M240 110l7 12h-14z" /></g>
+<g fill="#7b8794"><circle cx="360" cy="80" r="6" /><circle cx="380" cy="95" r="6" /><circle cx="370" cy="110" r="6" /><circle cx="390" cy="75" r="6" /><circle cx="490" cy="90" r="6" /><circle cx="510" cy="110" r="6" /><circle cx="500" cy="70" r="6" /><circle cx="520" cy="85" r="6" /><circle cx="420" cy="190" r="6" /><circle cx="440" cy="205" r="6" /><circle cx="455" cy="185" r="6" /><circle cx="430" cy="170" r="6" /></g>
+<g stroke-width="2" stroke-dasharray="5 4"><circle cx="376" cy="92" r="32" stroke="#13a89e" /><circle cx="505" cy="89" r="32" stroke="#f5b800" /><circle cx="437" cy="188" r="32" stroke="#b42318" /></g>
+</svg>
+<figcaption>Supervised learning separates known classes; unsupervised learning discovers groups on its own.</figcaption>
+</figure>
+
+## Supervised vs unsupervised learning: comparison
+
+| Feature | Supervised learning | Unsupervised learning |
+| --- | --- | --- |
+| Training data | Labelled (input and correct output) | Unlabelled (input only) |
+| Goal | Predict a known target | Discover structure or patterns |
+| Main tasks | Classification, regression | Clustering, dimensionality reduction, anomaly detection |
+| Evaluation | Compare predictions with true labels | Indirect measures and expert judgement |
+| Data preparation cost | High if labels must be created | Lower; no labelling needed |
+| Typical algorithms | Linear and logistic regression, random forest, gradient boosting, neural networks | k-means, DBSCAN, PCA, isolation forest, autoencoders |
+| Example | Predict whether a pump will fail within 30 days | Find unusual operating patterns in pump data |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant has two years of vibration and temperature data from 40 motors. Maintenance records show 12 bearing failures with dates.</dd>
+<dt>Find</dt><dd>How supervised and unsupervised learning could each be used.</dd>
+<dt>Assumptions</dt><dd>Sensor data is time stamped and can be aligned with maintenance records.</dd>
+<dt>Solution</dt><dd>Supervised: label data windows before each recorded failure as "failing" and others as "healthy", then train a classifier to predict upcoming failure. With only 12 failures, the classes are very unbalanced, so careful validation is needed<br />Unsupervised: model the normal behaviour of healthy motors, then flag any motor whose readings move away from that normal pattern, including fault types never seen before</dd>
+<dt>Answer</dt><dd><strong>Start with unsupervised anomaly detection, which needs no failure labels, and add a supervised model as more labelled failures accumulate</strong></dd>
+<dt>Limitations</dt><dd>Both approaches depend on good sensor data and need expert review of alarms before they drive maintenance decisions.</dd>
+</dl>
+</Example>
+
+This approach is developed further in [predictive maintenance with machine learning](/ai-data-engineering/predictive-maintenance-machine-learning/).
+
+## Other learning paradigms
+
+- **Semi-supervised learning:** a little labelled data plus a lot of unlabelled data.
+- **Self-supervised learning:** the data provides its own labels, for example predicting a hidden word from its context. It is how [large language models](/ai-data-engineering/how-large-language-models-work/) are pre-trained.
+- **Reinforcement learning:** an agent learns from rewards by interacting with an environment, used in robotics, games and control.
+
+## How to choose
+
+1. **Do you have a clear target and labelled examples?** Use supervised learning.
+2. **Is labelling too expensive or is the question exploratory?** Start with unsupervised learning to understand the data.
+3. **Do you need to find rare, unknown events?** Unsupervised anomaly detection is often the first step.
+4. **Do you have little labelled data but much unlabelled?** Consider semi-supervised or self-supervised methods.
+
+Many real systems combine both: clustering to define groups, then supervised models within each group, or PCA to reduce features before a classifier.
+
+## Practical tips
+
+- Split data into training, validation and test sets, and keep the test set untouched until the end.
+- Avoid data leakage: never let information from the future or from the target sneak into the features.
+- Scale features for distance based methods such as k-means and k-nearest neighbours.
+- Start with simple models as baselines before trying complex ones such as [neural networks](/ai-data-engineering/how-neural-networks-work/).
+- Follow a disciplined [data science workflow](/ai-data-engineering/data-science-workflow/) from problem definition to deployment.
+
+Supervised and unsupervised learning are the foundation of nearly all practical machine learning, from image recognition in [computer vision](/ai-data-engineering/classification-vs-detection-vs-segmentation/) to monitoring industrial equipment.

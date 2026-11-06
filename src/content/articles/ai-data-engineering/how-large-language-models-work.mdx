@@ -1,0 +1,139 @@
+---
+title: "How Large Language Models Work: A Plain Explanation"
+description: "How large language models work: tokens, embeddings, transformer attention, next token prediction, pre-training, fine-tuning, RLHF, sampling and limitations."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: generative-ai
+focusKeyword: "how large language models work"
+image: { src: /images/featured/how-large-language-models-work.webp, alt: "How Large Language Models Work: A Plain Explanation: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [large-language-models, generative-ai, transformers, attention, llm]
+faq:
+  - q: "Do large language models understand what they say?"
+    a: "They build rich internal representations of language and concepts that let them reason, summarise and answer questions well, but they are trained to predict likely text, not to check facts. Whether this counts as understanding is debated. In practice, outputs should be verified for important uses, because models can state wrong information confidently."
+  - q: "What is a context window?"
+    a: "The context window is the maximum number of tokens the model can consider at once, including the prompt and the generated reply. Anything outside it is not seen. Modern models range from a few thousand to hundreds of thousands of tokens or more."
+  - q: "Why do LLMs hallucinate?"
+    a: "Because they generate the most plausible continuation of the text, not a looked up fact. When the training data is thin, conflicting or missing on a topic, a plausible but false answer can still be the most likely continuation. Grounding answers in retrieved documents, asking for sources and human review reduce the problem."
+references:
+  - text: "A. Vaswani et al., Attention Is All You Need, NeurIPS, 2017"
+  - text: "T. Brown et al., Language Models are Few-Shot Learners, NeurIPS, 2020"
+  - text: "L. Ouyang et al., Training language models to follow instructions with human feedback, NeurIPS, 2022"
+  - text: "J. Kaplan et al., Scaling Laws for Neural Language Models, 2020"
+  - text: "D. Jurafsky and J. H. Martin, Speech and Language Processing, 3rd ed. draft"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**How large language models work:** a large language model (LLM) is a very large **transformer** neural network trained to predict the **next token** in a piece of text. Text is split into tokens, converted to vectors, and passed through many layers of **attention**, which lets every token draw information from the others. The model outputs a probability for every possible next token, one is chosen, added to the text, and the process repeats. **Pre-training** on huge amounts of text teaches language and knowledge; **fine-tuning** and **human feedback** teach it to follow instructions helpfully.
+
+</Key>
+
+Large language models write text, answer questions, summarise documents, translate languages and generate code. They can seem mysterious, but the core loop is simple: read the text so far, predict what comes next, repeat. This article explains each stage in plain terms.
+
+## How large language models work, step 1: tokens
+
+The model does not see letters or words directly. A tokenizer splits text into **tokens**, usually subword pieces, and each token is mapped to an ID and then to an **embedding** vector. Position information is added so the model knows the order of tokens. This is covered in detail in [tokenization and embeddings](/ai-data-engineering/tokenization-and-embeddings/).
+
+## Step 2: the transformer and attention
+
+The transformer architecture, introduced by Vaswani and colleagues in 2017, is a stack of identical layers. Each layer has two main parts:
+
+- **Self-attention:** for every token, the model computes how relevant every earlier token is and mixes their information accordingly. In "The valve on the pump was leaking, so the technician replaced it", attention helps "it" connect to "valve".
+- **Feedforward network:** a small [neural network](/ai-data-engineering/how-neural-networks-work/) applied to each token, which transforms and stores much of the model's learned knowledge.
+
+Inside attention, each token produces three vectors: a **query** (what am I looking for?), a **key** (what do I contain?) and a **value** (what information do I pass on?). The scores are:
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+$$
+
+Many attention "heads" run in parallel, each free to track different relationships such as grammar, references or topic. Stacking dozens of layers lets the model build very abstract representations.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="LLM generation loop: input tokens go to embeddings, then through a stack of transformer layers with attention and feedforward blocks, then to output probabilities over the vocabulary; the chosen next token is appended to the input and the loop repeats">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="30" y="120" width="110" height="60" rx="6" fill="#eef1f6" />
+<rect x="170" y="120" width="100" height="60" rx="6" fill="#e6f6f4" />
+<rect x="300" y="50" width="130" height="200" rx="6" fill="#ffffff" />
+<rect x="460" y="120" width="120" height="60" rx="6" fill="#fff7e0" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#e6f6f4"><rect x="315" y="68" width="100" height="34" rx="4" /><rect x="315" y="112" width="100" height="34" rx="4" /><rect x="315" y="200" width="100" height="34" rx="4" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="85" y="146">Input tokens</text><text x="85" y="164">"The pump"</text>
+<text x="220" y="146">Embeddings</text><text x="220" y="164">+ position</text>
+<text x="365" y="40" font-weight="700">Transformer layers</text>
+<text x="365" y="90">Layer 1</text><text x="365" y="134">Layer 2</text><text x="365" y="176" font-size="18">⋮</text><text x="365" y="222">Layer N</text>
+<text x="520" y="146">Next token</text><text x="520" y="164">probabilities</text>
+<text x="300" y="290">Chosen token ("failed") is appended and the loop repeats</text>
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M140 150h24M270 150h24M430 150h24" /></g>
+<g fill="#13a89e"><path d="M164 145l8 5-8 5z" /><path d="M294 145l8 5-8 5z" /><path d="M454 145l8 5-8 5z" /></g>
+<path d="M520 180v80H85v-74" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" />
+<path d="M80 188l5-9 5 9z" fill="#b42318" />
+</svg>
+<figcaption>Autoregressive generation: predict one token, append it, predict again.</figcaption>
+</figure>
+
+## Step 3: predicting the next token
+
+After the last layer, the model produces a score for every token in its vocabulary, often 50 000 to over 200 000 entries. A **softmax** turns these scores into probabilities. One token is chosen, appended to the text, and the whole sequence goes through the model again to predict the following token. This one token at a time process is called **autoregressive generation**.
+
+How the token is chosen is controlled by **sampling settings**:
+
+- **Greedy:** always pick the most likely token. Predictable but can be repetitive.
+- **Temperature:** divides the scores before softmax. Low temperature sharpens the distribution (focused output); high temperature flattens it (more varied, more creative, more error prone).
+- **Top-k and top-p (nucleus) sampling:** only sample from the most likely tokens, cutting off the long tail of unlikely ones.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>After "The pump", a model's raw scores (logits) for three candidate tokens are: "failed" 2.0, "started" 1.0, "banana" −1.0.</dd>
+<dt>Find</dt><dd>The softmax probabilities at temperature 1.0 and at temperature 0.5.</dd>
+<dt>Assumptions</dt><dd>Only these three tokens are considered, for illustration.</dd>
+<dt>Solution</dt><dd>T = 1: e^2.0 = 7.389, e^1.0 = 2.718, e^−1.0 = 0.368; sum = 10.475<br />P = 0.705, 0.259, 0.035<br />T = 0.5: logits become 4.0, 2.0, −2.0; e^4 = 54.60, e^2 = 7.389, e^−2 = 0.135; sum = 62.12<br />P = 0.879, 0.119, 0.002</dd>
+<dt>Answer</dt><dd><strong>At T = 1: "failed" 70.5%, "started" 25.9%, "banana" 3.5%. At T = 0.5: 87.9%, 11.9%, 0.2%</strong></dd>
+<dt>Limitations</dt><dd>Real models choose among the whole vocabulary, and the probabilities reflect training data patterns, not truth.</dd>
+</dl>
+</Example>
+
+## Step 4: training
+
+### Pre-training
+
+The model starts with random weights and reads a huge corpus of text: web pages, books, code and articles, often trillions of tokens. For each position it predicts the next token, the error is measured with cross-entropy loss, and backpropagation adjusts billions of weights. This is **self-supervised learning**: the text provides its own labels, so no manual labelling is needed. Research on scaling laws found that performance improves predictably with more parameters, data and compute.
+
+Through this simple task, the model learns grammar, facts, reasoning patterns and styles, because predicting text well requires them.
+
+### Fine-tuning and alignment
+
+A pre-trained model continues text, but does not reliably follow instructions. Further training shapes it into an assistant:
+
+- **Supervised fine-tuning:** train on examples of good instruction and response pairs.
+- **Reinforcement learning from human feedback (RLHF):** people rank alternative responses; a reward model learns their preferences, and the LLM is optimised to produce preferred answers. Related methods use AI feedback or direct preference optimisation.
+- **Safety training:** teaches the model to decline harmful requests and to be honest about uncertainty.
+
+## What LLMs can and cannot do
+
+**Strengths:** drafting and editing text, summarising, translation, answering questions, explaining concepts, writing and reviewing code, extracting structured data from documents.
+
+**Limitations:**
+
+- **Hallucination:** confident but false statements, because the model predicts plausible text rather than looking up facts.
+- **Knowledge cutoff:** the model knows only what was in its training data unless given tools or documents.
+- **Context limits:** text beyond the context window is not seen.
+- **Arithmetic and exact logic** can be unreliable without tools such as a calculator or code execution.
+- **Bias** from the training data can appear in outputs.
+
+## Using LLMs in engineering work
+
+- **Retrieval augmented generation (RAG):** search a document store with embeddings and give the relevant passages to the model, so answers are grounded in your manuals, standards and procedures.
+- **Tool use:** let the model call calculators, databases or APIs for exact results.
+- **Prompting:** state the task, context, format and constraints clearly; give examples.
+- **Human review:** always check outputs used for safety, design or compliance decisions.
+
+LLMs are a powerful layer on top of the [machine learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) fundamentals. Knowing that they are next token predictors, trained on text and shaped by feedback, explains both their impressive abilities and their characteristic mistakes.

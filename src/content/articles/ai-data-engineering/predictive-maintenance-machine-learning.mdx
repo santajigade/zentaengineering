@@ -1,0 +1,139 @@
+---
+title: "Predictive Maintenance with Machine Learning"
+description: "Predictive maintenance with machine learning: sensor data, vibration features, anomaly detection, failure classification, remaining useful life and ROI."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: ai-data-engineering
+subcategory: industrial-ai
+focusKeyword: "predictive maintenance"
+image: { src: /images/featured/predictive-maintenance-machine-learning.webp, alt: "Predictive Maintenance with Machine Learning: featured diagram" }
+format: application
+pillar: true
+math: true
+tags: [predictive-maintenance, industrial-ai, condition-monitoring, anomaly-detection, remaining-useful-life]
+faq:
+  - q: "What is the difference between preventive and predictive maintenance?"
+    a: "Preventive maintenance is done at fixed intervals, such as every 3000 running hours, whether the equipment needs it or not. Predictive maintenance uses the measured condition of the equipment to estimate when it will fail, so work is done only when needed, just before failure. This reduces both unplanned breakdowns and unnecessary servicing."
+  - q: "How much data is needed to start predictive maintenance?"
+    a: "Anomaly detection can start with a few weeks of data from normal operation. Failure classification and remaining useful life models need recorded examples of failures, ideally many of each type, which can take years to collect. Most programmes start with condition monitoring and anomaly detection, then add supervised models as failure history builds."
+  - q: "Which equipment is best suited to predictive maintenance?"
+    a: "Critical rotating equipment with clear failure modes and measurable signals is the usual starting point: pumps, motors, fans, compressors, gearboxes and turbines. Good candidates have high downtime cost, a failure that develops over days or weeks, and sensors such as vibration, temperature or current that show the degradation."
+references:
+  - text: "ISO 13374-1, Condition monitoring and diagnostics of machines: Data processing, communication and presentation"
+  - text: "ISO 17359, Condition monitoring and diagnostics of machines: General guidelines"
+  - text: "R. K. Mobley, An Introduction to Predictive Maintenance, 2nd ed., Butterworth-Heinemann, 2002"
+  - text: "A. Saxena et al., Damage propagation modeling for aircraft engine run-to-failure simulation (C-MAPSS), PHM Conference, 2008"
+  - text: "Y. Lei et al., Machinery health prognostics: A systematic review from data acquisition to RUL prediction, Mechanical Systems and Signal Processing, 2018"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Predictive maintenance with machine learning** uses sensor data such as vibration, temperature, current and pressure to detect early signs of equipment degradation and forecast failures before they happen. Three model types are common: **anomaly detection** (flag behaviour that differs from normal), **failure classification** (predict whether, or which, failure will occur within a time window) and **remaining useful life (RUL) regression** (estimate how long until failure). The goal is to schedule maintenance just in time, cutting unplanned downtime and unnecessary servicing.
+
+</Key>
+
+Maintenance strategies have evolved from fixing machines after they break (**reactive**), to servicing them on a fixed schedule (**preventive**), to servicing them based on measured condition (**predictive**). Machine learning makes predictive maintenance scalable, because it can watch thousands of signals across hundreds of assets and learn patterns that are hard to capture with fixed alarm limits.
+
+## The predictive maintenance pipeline
+
+<figure>
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Predictive maintenance pipeline: sensors on a motor and pump send data to data collection, then feature extraction, then machine learning models, then maintenance action in the CMMS, with feedback from maintenance records to the models">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="15" y="80" width="100" height="70" rx="6" fill="#eef1f6" /><rect x="135" y="80" width="100" height="70" rx="6" fill="#e6f6f4" /><rect x="255" y="80" width="100" height="70" rx="6" fill="#e6f6f4" /><rect x="375" y="80" width="100" height="70" rx="6" fill="#fff7e0" /><rect x="495" y="80" width="95" height="70" rx="6" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="65" y="106" font-weight="700">Sensors</text><text x="65" y="124" font-size="11">vibration, temp,</text><text x="65" y="139" font-size="11">current, pressure</text>
+<text x="185" y="106" font-weight="700">Collect</text><text x="185" y="124" font-size="11">edge, historian,</text><text x="185" y="139" font-size="11">IoT platform</text>
+<text x="305" y="106" font-weight="700">Features</text><text x="305" y="124" font-size="11">RMS, kurtosis,</text><text x="305" y="139" font-size="11">FFT bands</text>
+<text x="425" y="106" font-weight="700">ML models</text><text x="425" y="124" font-size="11">anomaly, class,</text><text x="425" y="139" font-size="11">RUL</text>
+<text x="542" y="106" font-weight="700">Action</text><text x="542" y="124" font-size="11">work order</text><text x="542" y="139" font-size="11">in CMMS</text>
+<text x="300" y="238">Maintenance records label failures and improve the models</text>
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M115 115h14M235 115h14M355 115h14M475 115h14" /></g>
+<g fill="#13a89e"><path d="M129 110l8 5-8 5z" /><path d="M249 110l8 5-8 5z" /><path d="M369 110l8 5-8 5z" /><path d="M489 110l8 5-8 5z" /></g>
+<path d="M542 150v70H425v-62" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" /><path d="M420 160l5-9 5 9z" fill="#b42318" />
+<text x="300" y="40" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle">From sensor signal to maintenance decision</text>
+</svg>
+<figcaption>A typical predictive maintenance pipeline with feedback from maintenance records.</figcaption>
+</figure>
+
+### 1. Sensors and data
+
+The most useful signals for rotating equipment are:
+
+- **Vibration:** accelerometers reveal imbalance, misalignment, looseness and bearing defects, often weeks before failure.
+- **Temperature:** bearing, winding and process temperatures show friction, overload and cooling problems.
+- **Motor current:** current signature analysis detects broken rotor bars, load changes and some mechanical faults.
+- **Process variables:** pressure, flow and level, measured by plant [process instruments](https://www.instrumentationblog.in/category/process-instrumentation/), show pump wear and fouling.
+- **Oil analysis and acoustic emission** for gearboxes and slow speed bearings.
+
+Data also comes from the control system, historians and the maintenance management system (CMMS), which records failures and repairs. These records are the labels for supervised models.
+
+### 2. Feature extraction
+
+Raw high frequency signals are summarised into features over windows of time:
+
+- **Time domain:** root mean square (RMS), peak, crest factor, kurtosis and skewness.
+- **Frequency domain:** a fast Fourier transform (FFT) shows energy at shaft speed and its harmonics, at gear mesh frequencies and at bearing defect frequencies.
+- **Trends:** rate of change, rolling means and deviation from a baseline.
+- **Context:** load, speed and ambient temperature, so the model does not mistake a load change for a fault.
+
+The RMS of a vibration signal with N samples is:
+
+$$
+x_\text{RMS} = \sqrt{\frac{1}{N}\sum_{i=1}^{N} x_i^2}
+$$
+
+Kurtosis is particularly sensitive to the sharp impacts of early bearing damage: a healthy signal has kurtosis near 3, and values well above that suggest impulsive faults.
+
+## Machine learning approaches
+
+### Anomaly detection
+
+An [unsupervised](/ai-data-engineering/supervised-vs-unsupervised-learning/) model learns what normal looks like and flags deviations. Methods include statistical limits on features, isolation forests, one class SVMs and autoencoders, which are [neural networks](/ai-data-engineering/how-neural-networks-work/) that reconstruct normal data well and abnormal data poorly. Anomaly detection needs no failure history, which makes it the usual starting point.
+
+### Failure classification
+
+A supervised classifier predicts whether a failure will occur within a horizon, such as 7 or 30 days, or which failure mode is developing. Gradient boosted trees and random forests work well on engineered features. The challenge is **class imbalance**: failures are rare, so careful labelling, resampling or class weighting, and precision and recall based evaluation are needed.
+
+### Remaining useful life (RUL)
+
+A regression model estimates the time or cycles left before failure. Approaches range from fitting degradation curves to a health indicator, to deep learning on sequences of sensor data. The NASA C-MAPSS turbofan dataset is a widely used benchmark for RUL research.
+
+| Approach | Question answered | Data needed | Typical methods |
+| --- | --- | --- | --- |
+| Anomaly detection | Is this behaviour abnormal? | Normal operating data | Isolation forest, autoencoder, statistical limits |
+| Failure classification | Will it fail within N days? Which fault? | Labelled failure history | Random forest, gradient boosting |
+| RUL regression | How long until failure? | Run to failure histories | Degradation models, LSTM, CNN |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A critical pump has about 2 unplanned failures per year. Each unplanned failure costs 18 hours of lost production at 2500 per hour plus 8000 in emergency repair. A planned repair costs 3000 and causes 2 hours of downtime. A predictive system is expected to catch 75% of failures early; monitoring costs 6000 per year.</dd>
+<dt>Find</dt><dd>The expected annual saving for this pump.</dd>
+<dt>Assumptions</dt><dd>Every caught failure becomes a planned repair; costs in the same currency; false alarm costs are included in the monitoring cost.</dd>
+<dt>Solution</dt><dd>Cost per unplanned failure = 18 × 2500 + 8000 = 53 000<br />Cost per planned repair = 2 × 2500 + 3000 = 8000<br />Without the system: 2 × 53 000 = 106 000 per year<br />With the system: caught 1.5 × 8000 = 12 000; missed 0.5 × 53 000 = 26 500; monitoring 6000; total = 44 500<br />Saving = 106 000 − 44 500 = 61 500 per year</dd>
+<dt>Answer</dt><dd><strong>About 61 500 per year saved, so this pump is a strong candidate for predictive maintenance</strong></dd>
+<dt>Limitations</dt><dd>The detection rate must be confirmed in a pilot; savings are lower for non-critical assets with cheap, quick repairs.</dd>
+</dl>
+</Example>
+
+## Implementing predictive maintenance
+
+1. **Select assets** by criticality and downtime cost, using a failure mode and effects analysis.
+2. **Check the instrumentation:** add sensors where key failure modes are not measured.
+3. **Build the data pipeline** from edge devices and historians to an analytics platform, as described in [ETL vs ELT](/ai-data-engineering/etl-vs-elt/).
+4. **Start with condition monitoring and anomaly detection**, reviewed with maintenance experts.
+5. **Record failures carefully** in the CMMS: date, asset, failure mode and cause. Good labels unlock supervised models.
+6. **Integrate alerts into work processes** so a warning becomes a planned work order, not an ignored email.
+7. **Measure results:** unplanned downtime, maintenance cost, false alarm rate and mean time between failures.
+
+## Common pitfalls
+
+- **Too many false alarms** make technicians ignore the system; tune thresholds with their feedback.
+- **Ignoring operating context** such as load and speed changes.
+- **Poor failure records** make it impossible to train or validate supervised models.
+- **Pilot purgatory:** a successful pilot that never scales because the pipeline and work process were not designed for it.
+
+Predictive maintenance is one of the most proven uses of [industrial AI](https://www.instrumentationblog.in/category/automation/industrial-ai/). Combined with physics knowledge in a [digital twin](/automation-robotics/digital-twin-explained/) and the large data volumes described in [the five Vs of big data](/ai-data-engineering/big-data-five-vs/), it turns sensor data into fewer breakdowns and lower maintenance cost.
