@@ -1,0 +1,20 @@
+---
+// Holding page until launch (Phase 6). Replaced by the real homepage in Phase 3.
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+import { DISCIPLINES } from '../data/disciplines';
+---
+<Base title={`${SITE.name}: coming soon`}>
+  <main class="hold">
+    <img src="/favicon.svg" width="72" height="72" alt="" />
+    <h1>{SITE.name}</h1>
+    <p class="tag">{SITE.tagline}</p>
+    <p>Articles, tutorials, interview preparation and projects across {DISCIPLINES.length} engineering disciplines. Launching soon.</p>
+  </main>
+</Base>
+<style>
+  .hold { max-width: 640px; margin: 0 auto; padding: 18vh 24px 48px; text-align: center; }
+  h1 { font-size: var(--ze-h1); margin: 16px 0 8px; }
+  .tag { font-weight: 600; color: var(--ze-navy-700); }
+  p { color: var(--ze-ink-2); }
+</style>

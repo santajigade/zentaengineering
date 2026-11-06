@@ -1,0 +1,6 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; font-family: var(--ze-font); font-size: var(--ze-text); line-height: var(--ze-leading); color: var(--ze-ink); background: var(--ze-paper); }
+a { color: var(--ze-teal-700); }
+:focus-visible { outline: 3px solid var(--ze-teal); outline-offset: 2px; }
+h1, h2, h3 { color: var(--ze-navy); line-height: 1.25; }
