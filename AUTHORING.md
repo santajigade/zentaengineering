@@ -95,6 +95,6 @@ import Calculator from '../../../components/Calculator.astro';
 
 ## Links
 - 3 to 6 internal links to related Zenta Engineering articles, with descriptive anchor text. Link only to pages that are already live. Pillar articles link to every article in their cluster.
-- ZentaCalculator.com (zentacalculator.com): one or two links or embeds at most, only where the article performs or discusses that calculation.
+- ZentaCalculator.com: embed a calculator ONLY when it directly matches the article topic (owner rule, 6 Nov 2026). If no topic calculator exists, embed none. Never embed a loosely related one just to have one.
 - InstrumentationBlog.in: link where the article touches sensors, transmitters, analyzers, control valves or loop control, instead of explaining them in depth here.
 - External references: link to the publisher or standards body page, not to pirated copies.
