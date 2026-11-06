@@ -14,6 +14,8 @@ concurrency: deploy
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      HAS_SSH: ${{ secrets.SSH_HOST != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -22,7 +24,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Upload live site to Hostinger
+      # SSH (rsync) is used when SSH_HOST is set; otherwise FTP.
+      # SSH secrets: SSH_HOST, SSH_PORT (Hostinger: 65002), SSH_USER, SSH_KEY (private key), SSH_PATH (e.g. domains/zentaengineering.com/public_html)
+      - name: Upload live site over SSH
+        if: env.HAS_SSH == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_deploy && chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+          rsync -az --delete --exclude '.well-known' -e "ssh -i ~/.ssh/id_deploy -p ${{ secrets.SSH_PORT }}" dist/ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}/"
+      - name: Upload live site over FTP
+        if: env.HAS_SSH != 'true'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
