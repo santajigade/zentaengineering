@@ -1,0 +1,134 @@
+---
+title: "Four Forces of Flight and Aircraft Axes"
+description: "Four forces of flight explained: lift, weight, thrust and drag, steady flight, climbs and turns, the three aircraft axes, control surfaces and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: aerospace-engineering
+subcategory: flight-mechanics
+focusKeyword: "forces of flight"
+image: { src: /images/featured/forces-of-flight-and-axes.webp, alt: "Four Forces of Flight and Aircraft Axes: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [flight-mechanics, lift, drag, thrust, aircraft-axes]
+faq:
+  - q: "In steady level flight, is lift greater than weight?"
+    a: "No. In steady, unaccelerated level flight, lift equals weight and thrust equals drag. Lift greater than weight would cause the aircraft to accelerate upward. Extra lift is needed only to change the flight path, for example to start a climb or to turn."
+  - q: "What are the two types of drag?"
+    a: "Parasite drag comes from the aircraft moving through air: skin friction, form (pressure) drag and interference drag; it increases with the square of speed. Induced drag is a by-product of producing lift, linked to wingtip vortices; it is highest at low speed and high angle of attack. Total drag is lowest at the speed where the two are equal."
+  - q: "Which control surface controls which axis?"
+    a: "Ailerons control roll about the longitudinal axis, the elevator (or stabilator) controls pitch about the lateral axis, and the rudder controls yaw about the vertical axis. All three axes pass through the aircraft's centre of gravity."
+references:
+  - text: "J. D. Anderson Jr., Introduction to Flight, 9th ed., McGraw-Hill"
+  - text: "FAA, Pilot's Handbook of Aeronautical Knowledge, FAA-H-8083-25C, Chapters 5 and 6"
+  - text: "B. W. McCormick, Aerodynamics, Aeronautics, and Flight Mechanics, 2nd ed., Wiley"
+  - text: "NASA Glenn Research Center, Beginner's Guide to Aeronautics: Four Forces on an Airplane"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The four **forces of flight** are **lift** (produced by the wings, acting perpendicular to the flight path), **weight** (gravity acting on the aircraft's mass, through the centre of gravity), **thrust** (produced by engines or propellers, along the flight path) and **drag** (air resistance, opposing motion). In steady level flight, **lift equals weight** and **thrust equals drag**. An aircraft rotates about three **axes** through its centre of gravity: the **longitudinal** axis (**roll**, controlled by **ailerons**), the **lateral** axis (**pitch**, controlled by the **elevator**) and the **vertical** axis (**yaw**, controlled by the **rudder**).
+
+</Key>
+
+Understanding the four forces and three axes is the foundation of flight mechanics, aircraft performance and pilot training. Every manoeuvre, from takeoff to landing, is a matter of changing the balance between these forces and rotating the aircraft about its axes.
+
+## The four forces of flight
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Side view of an aircraft in level flight with four force arrows: lift pointing up from the wing, weight pointing down from the centre of gravity, thrust pointing forward from the engine and drag pointing backward">
+<path d="M150 140Q160 120 200 118H420L480 128L490 140L480 152L420 162H200Q160 160 150 140Z" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<path d="M260 140L300 132H360L330 145Z" fill="#e6f6f4" stroke="#0b2545" stroke-width="1.5" />
+<path d="M430 118L465 80H485L470 120Z" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="310" cy="140" r="6" fill="#ffffff" stroke="#0b2545" stroke-width="2" /><path d="M310 134V146M304 140H316" stroke="#0b2545" stroke-width="1.5" />
+<g stroke-width="4"><path d="M310 125V35" stroke="#13a89e" /><path d="M310 155V245" stroke="#b42318" /><path d="M150 140H50" stroke="#0b2545" /><path d="M490 140H580" stroke="#f5b800" /></g>
+<g><path d="M302 42l8-14 8 14z" fill="#13a89e" /><path d="M302 238l8 14 8-14z" fill="#b42318" /><path d="M57 132l-14 8 14 8z" fill="#0b2545" /><path d="M573 132l14 8-14 8z" fill="#f5b800" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">
+<text x="350" y="40" fill="#13a89e">Lift</text><text x="355" y="250" fill="#b42318">Weight</text><text x="60" y="125" fill="#0b2545">Thrust</text><text x="560" y="125" fill="#b8860b">Drag</text>
+</g>
+<text x="310" y="275" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">Steady level flight: lift = weight, thrust = drag (aircraft flying to the left)</text>
+</svg>
+<figcaption>The four forces acting on an aircraft in steady level flight.</figcaption>
+</figure>
+
+### Lift
+
+Produced mainly by the wings as they turn the airflow downward, as explained in [how wings generate lift](/aerospace-engineering/how-wings-generate-lift/). Lift acts perpendicular to the relative wind, through the **centre of pressure**:
+
+$$
+L = \tfrac{1}{2}\rho v^2 S C_L
+$$
+
+### Weight
+
+The force of gravity on the aircraft's mass, W = mg, acting vertically downward through the **centre of gravity (CG)**. Weight decreases during flight as fuel burns. CG position must stay within limits for stability and control.
+
+### Thrust
+
+The forward force from engines or propellers, produced by accelerating air or exhaust gas rearward. Engine types are compared in [turbojet vs turbofan vs turboprop](/aerospace-engineering/turbojet-vs-turbofan-vs-turboprop/).
+
+### Drag
+
+The aerodynamic force opposing motion through the air:
+
+$$
+D = \tfrac{1}{2}\rho v^2 S C_D \qquad C_D = C_{D0} + \frac{C_L^2}{\pi\,e\,AR}
+$$
+
+- **Parasite drag** (C_D0 term): skin friction, form drag and interference drag; grows with speed squared.
+- **Induced drag** (second term): caused by producing lift and wingtip vortices; falls as speed rises because less C_L is needed. AR is wing aspect ratio and e the span efficiency factor.
+
+The speed for **minimum total drag** is where parasite and induced drag are equal; it gives the best **lift to drag ratio** (L/D) and the best glide range.
+
+## Forces in different flight conditions
+
+- **Steady level flight:** L = W, T = D.
+- **Steady climb at angle γ:** a component of weight acts backward along the flight path, so thrust must exceed drag: T = D + W sin γ, and L = W cos γ.
+- **Gliding descent:** no thrust; a component of weight provides the forward force. The glide angle satisfies tan γ = D/L, so a glider with L/D = 40 travels 40 km for every 1 km of height lost.
+- **Level turn with bank angle φ:** lift is tilted; its vertical component balances weight and its horizontal component provides centripetal force. Lift must increase: **load factor** n = L/W = 1/cos φ.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An aircraft of mass 5000 kg cruises level with lift to drag ratio 12. It then performs a level turn at 60° bank.</dd>
+<dt>Find</dt><dd>Lift, drag and thrust required in level cruise, and the lift and load factor in the turn.</dd>
+<dt>Assumptions</dt><dd>g = 9.81 m/s²; L/D unchanged for the cruise calculation.</dd>
+<dt>Solution</dt><dd>W = 5000 × 9.81 = 49 050 N<br />Cruise: L = W = 49 050 N; D = L ÷ 12 = 4088 N; thrust T = D = 4088 N<br />Turn: n = 1 ÷ cos 60° = 2.0; L = 2.0 × 49 050 = 98 100 N</dd>
+<dt>Answer</dt><dd><strong>In cruise, lift is about 49 kN and thrust equals drag at about 4.1 kN; in a 60° banked level turn, lift doubles to about 98 kN (load factor 2), and drag and stall speed both increase</strong></dd>
+<dt>Limitations</dt><dd>Induced drag rises sharply in the turn, so more thrust is needed; stall speed rises by √n ≈ 1.41.</dd>
+</dl>
+</Example>
+
+## The three aircraft axes
+
+All three axes pass through the centre of gravity and are perpendicular to each other.
+
+| Axis | Runs | Motion | Primary control | Stability provided by |
+| --- | --- | --- | --- | --- |
+| Longitudinal | Nose to tail | Roll | Ailerons (and spoilers) | Dihedral, wing sweep |
+| Lateral | Wingtip to wingtip | Pitch | Elevator or stabilator | Horizontal stabiliser, CG ahead of neutral point |
+| Vertical (normal) | Top to bottom | Yaw | Rudder | Vertical stabiliser (fin) |
+
+- **Ailerons** move in opposite directions: one up, one down, changing lift on each wing to roll the aircraft. **Adverse yaw** from the down-going aileron's extra drag is corrected with rudder.
+- **Elevator** changes the tail's lift, pitching the nose up or down and changing the wing's angle of attack.
+- **Rudder** swings the tail left or right to yaw, used for coordinated turns and crosswind landings.
+- **Trim tabs** relieve control forces for steady flight.
+
+Fly by wire aircraft use computers between the pilot's controls and the surfaces, applying control laws and protections; avionics are covered in [aircraft avionics systems overview](/aerospace-engineering/avionics-systems-overview/).
+
+## Takeoff and landing
+
+During the takeoff roll, thrust exceeds drag and rolling friction, so the aircraft accelerates. At rotation speed, the pilot raises the nose with the elevator, increasing angle of attack until lift exceeds weight and the aircraft lifts off. On approach, the pilot reduces thrust and uses flaps to increase lift and drag, allowing a slower, steeper descent. In the flare just before touchdown, the nose is raised to reduce the descent rate. Both phases are where the balance of the four forces changes fastest and where most training focuses.
+
+## Stability
+
+An aircraft is **statically stable** if it tends to return to its original attitude after a disturbance. Longitudinal stability requires the CG to be ahead of the **neutral point**; a horizontal tail provides the restoring moment. Directional stability comes from the fin, like the feathers on an arrow. Lateral stability comes from dihedral and sweep. Designers balance stability against manoeuvrability.
+
+## Centre of gravity and balance
+
+Pilots calculate weight and balance before every flight to keep the centre of gravity within approved limits. A CG too far forward makes the aircraft heavy in pitch and raises stall speed; too far aft reduces stability and can make recovery from a stall difficult or impossible.
+
+## The four forces of flight in other vehicles
+
+The same forces act on helicopters, where the rotor provides both lift and thrust by tilting, and on multirotor drones, described in [how a quadcopter flies](/aerospace-engineering/how-a-quadcopter-flies/). Even cars and sails can be understood with lift and drag. The structure that carries these forces is described in [aircraft structural components](/aerospace-engineering/aircraft-structural-components/).

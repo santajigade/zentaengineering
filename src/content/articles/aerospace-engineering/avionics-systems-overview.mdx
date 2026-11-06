@@ -1,0 +1,141 @@
+---
+title: "Aircraft Avionics Systems Overview"
+description: "Avionics systems overview: flight displays, glass cockpit, navigation, communication, surveillance, autopilot, fly by wire, data buses and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: aerospace-engineering
+subcategory: avionics
+focusKeyword: "avionics systems"
+image: { src: /images/featured/avionics-systems-overview.webp, alt: "Aircraft Avionics Systems Overview: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [avionics, glass-cockpit, navigation, autopilot, arinc-429]
+faq:
+  - q: "What does avionics mean?"
+    a: "Avionics is short for aviation electronics: the electronic systems used on aircraft, satellites and spacecraft. On aircraft it includes displays, communication radios, navigation, surveillance, flight control computers, autopilot, engine monitoring and the data networks that connect them."
+  - q: "What is a glass cockpit?"
+    a: "A glass cockpit replaces individual mechanical gauges with electronic displays. A primary flight display shows attitude, airspeed, altitude, heading and vertical speed in one screen, and a multifunction display shows navigation maps, weather, terrain, traffic and system pages. Glass cockpits reduce workload and improve situational awareness."
+  - q: "Why are avionics systems redundant?"
+    a: "Loss of critical functions such as attitude information, flight controls or navigation could be catastrophic. Certification rules require that catastrophic failure conditions be extremely improbable, typically less than 1 in 10⁹ per flight hour, which is achieved with redundant, independent and dissimilar systems, careful design assurance and monitoring."
+references:
+  - text: "R. P. G. Collinson, Introduction to Avionics Systems, 3rd ed., Springer"
+  - text: "C. R. Spitzer (ed.), Digital Avionics Handbook, 3rd ed., CRC Press"
+  - text: "RTCA DO-178C, Software Considerations in Airborne Systems and Equipment Certification"
+  - text: "RTCA DO-254, Design Assurance Guidance for Airborne Electronic Hardware"
+  - text: "ARINC 429 and ARINC 664 Part 7 (AFDX) specifications, Aeronautical Radio Inc."
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Avionics systems** are the electronic systems of an aircraft. They are grouped into **flight instruments and displays** (primary flight display, multifunction display, engine indication), **communication** (VHF and HF radios, SATCOM, data link), **navigation** (inertial reference, GNSS, VOR, DME, ILS, flight management system), **surveillance** (transponder, ADS-B, TCAS, weather radar, terrain awareness), **flight control and automation** (autopilot, autothrottle, fly by wire), and **monitoring and maintenance** systems, linked by data buses such as **ARINC 429** and **AFDX**. Development follows strict standards such as **DO-178C** for software and **DO-254** for hardware.
+
+</Key>
+
+Avionics have transformed flying. Where early pilots navigated by compass, map and landmarks, modern aircraft can fly precise satellite based approaches in poor weather, avoid collisions automatically, and land themselves. Avionics can account for a large share of an aircraft's value and are essential for safety, efficiency and airspace capacity.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Avionics architecture: sensors such as air data computer, inertial reference unit, GNSS receiver, radio navigation and radar feed a data network; flight management and flight control computers process the data; cockpit displays and controls show information to the crew; communication and surveillance radios connect to air traffic control and other aircraft; actuators move control surfaces">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="30" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="74" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="118" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="162" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="206" width="120" height="34" rx="5" fill="#eef1f6" />
+<rect x="200" y="30" width="30" height="210" fill="#fff7e0" />
+<rect x="280" y="50" width="140" height="50" rx="6" fill="#e6f6f4" /><rect x="280" y="130" width="140" height="50" rx="6" fill="#e6f6f4" />
+<rect x="460" y="30" width="125" height="50" rx="6" fill="#ffe9e7" /><rect x="460" y="110" width="125" height="50" rx="6" fill="#ffffff" /><rect x="460" y="190" width="125" height="50" rx="6" fill="#ffe9e7" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M140 47h60M140 91h60M140 135h60M140 179h60M140 223h60M230 75h50M230 155h50M420 75h40M420 140h40M420 165H440V215h20" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="80" y="51">Air data computer</text><text x="80" y="95">Inertial reference</text><text x="80" y="139">GNSS receiver</text><text x="80" y="183">VOR, DME, ILS</text><text x="80" y="227">Weather radar</text>
+<text x="215" y="260" font-size="10">Data bus</text><text x="215" y="272" font-size="10">(ARINC 429, AFDX)</text>
+<text x="350" y="72" font-weight="700">Flight management</text><text x="350" y="87">system (FMS)</text>
+<text x="350" y="152" font-weight="700">Flight control</text><text x="350" y="167">computers, autopilot</text>
+<text x="522" y="52">Cockpit displays</text><text x="522" y="67">PFD, MFD, EICAS</text>
+<text x="522" y="132">Comms, ADS-B,</text><text x="522" y="147">TCAS, transponder</text>
+<text x="522" y="212">Actuators: control</text><text x="522" y="227">surfaces, engines</text>
+</g>
+</svg>
+<figcaption>Simplified avionics architecture: sensors, data networks, computers, displays and actuators.</figcaption>
+</figure>
+
+## Flight instruments and displays
+
+The basic flight instruments show **attitude**, **airspeed**, **altitude**, **heading**, **vertical speed** and **turn coordination**. In a **glass cockpit**:
+
+- **Primary flight display (PFD):** attitude, speed and altitude tapes, flight director, flight mode annunciations.
+- **Navigation or multifunction display (ND or MFD):** moving map, route, weather radar, terrain and traffic.
+- **Engine indicating and crew alerting system (EICAS or ECAM):** engine parameters, system synoptics, warnings and checklists.
+- **Head up displays (HUD)** project key information onto a transparent screen in the pilot's view.
+
+Data comes from the **air data computer**, which uses pitot and static pressure probes and temperature sensors to compute airspeed, altitude and Mach number, and from **attitude and heading reference** or inertial systems. Pitot and static measurements apply the same principles as [differential pressure flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) in industry.
+
+## Communication
+
+- **VHF radio** (118 to 137 MHz) for voice with air traffic control over line of sight.
+- **HF radio** for long range oceanic communication.
+- **SATCOM** for voice and data anywhere via satellites, discussed in [GEO vs MEO vs LEO satellites](/telecommunication-engineering/geo-meo-leo-satellites/).
+- **Data link (ACARS, CPDLC)** for text messages, clearances and operational data.
+- **Cockpit voice and flight data recorders** capture audio and parameters for investigation.
+
+## Navigation
+
+- **Inertial reference system (IRS):** ring laser or fibre optic gyros and accelerometers compute position, velocity and attitude without external signals.
+- **GNSS:** GPS and other constellations provide accurate position worldwide, augmented by SBAS for approaches.
+- **Radio navigation:** VOR (bearing), DME (distance), NDB and **ILS** (instrument landing system) giving lateral and vertical guidance to the runway.
+- **Flight management system (FMS):** combines sensors, stores routes and performance data, computes the optimal flight path and guides the autopilot. It enables **performance based navigation (PBN)** procedures.
+
+## Electrical power for avionics
+
+Avionics depend on clean, reliable power. Airliners generate 115 V AC at 400 Hz from engine driven generators, and convert it to 28 V DC through transformer rectifier units for many avionics loads. Batteries, a ram air turbine and an auxiliary power unit provide backup. Essential and emergency buses keep the most critical instruments, radios and flight controls powered after major failures, so the crew can always fly and navigate.
+
+## Surveillance and collision avoidance
+
+- **Transponder (Mode S)** replies to secondary radar with identity and altitude.
+- **ADS-B** broadcasts GNSS position and velocity, used by controllers and other aircraft.
+- **TCAS (traffic collision avoidance system)** interrogates nearby transponders and issues resolution advisories such as "climb" or "descend".
+- **Weather radar** detects precipitation and turbulence.
+- **TAWS / EGPWS** warns of terrain conflicts using a terrain database and position.
+
+## Flight controls and automation
+
+- **Autopilot** holds attitude, heading, altitude, speed or follows FMS lateral and vertical guidance; **autothrottle** manages thrust.
+- **Autoland** flies ILS approaches to touchdown in very low visibility.
+- **Fly by wire:** pilot inputs go to flight control computers, which command actuators through control laws that provide stability, envelope protection and load alleviation. Systems use multiple redundant computers, often with dissimilar hardware and software.
+
+The flight controls move the surfaces described in [four forces of flight and aircraft axes](/aerospace-engineering/forces-of-flight-and-axes/).
+
+## Data buses and architecture
+
+- **ARINC 429:** a one way, point to point serial bus at 12.5 or 100 kbit/s, widely used in older and current aircraft.
+- **MIL-STD-1553:** a command response bus used in military aircraft.
+- **ARINC 664 Part 7 (AFDX):** deterministic, redundant switched Ethernet used on modern airliners.
+- **Integrated modular avionics (IMA):** many functions share common computing modules with partitioning, reducing weight and wiring.
+
+These networks follow the layered principles in [OSI vs TCP/IP model](/telecommunication-engineering/osi-vs-tcp-ip-model/), with extra determinism and redundancy.
+
+## Reliability and certification
+
+Avionics functions are classified by the severity of their failure effects. Catastrophic failure conditions must be **extremely improbable**, often quantified as less than 10⁻⁹ per flight hour. For independent redundant channels, the probability that all fail during a flight is approximately the product of their individual probabilities:
+
+$$
+P_\text{system} \approx \prod_{i=1}^{n} P_i
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An attitude source has a failure rate of 1 × 10⁻⁴ per flight hour. A flight lasts 5 hours. The aircraft carries three independent attitude sources.</dd>
+<dt>Find</dt><dd>The probability that one source fails during a flight, and that all three fail in the same flight.</dd>
+<dt>Assumptions</dt><dd>Independent failures with constant rates; no common cause; small probability approximation P ≈ λt.</dd>
+<dt>Solution</dt><dd>One source: P = 1 × 10⁻⁴ × 5 = 5 × 10⁻⁴<br />All three: P = (5 × 10⁻⁴)³ = 1.25 × 10⁻¹⁰ per flight, or about 2.5 × 10⁻¹¹ per flight hour</dd>
+<dt>Answer</dt><dd><strong>A single source fails in about 1 in 2000 flights, but loss of all three is about 1.25 × 10⁻¹⁰ per flight, meeting the extremely improbable target</strong></dd>
+<dt>Limitations</dt><dd>Common cause failures such as shared power, software errors or icing of all probes can dominate; design must ensure real independence, and failure rate data must be realistic.</dd>
+</dl>
+</Example>
+
+Reliability figures such as [MTBF and availability](/safety-engineering/mtbf-mttr-availability/) feed these safety assessments.
+
+Software is developed to **DO-178C** and hardware to **DO-254**, with assurance levels A (most critical) to E, and environmental qualification follows **DO-160** for temperature, vibration, electromagnetic compatibility and lightning.
+
+## The future of avionics systems
+
+Trends include more integrated and software defined avionics, synthetic and enhanced vision, satellite based air traffic management, increased automation including single pilot and autonomous operations research, cybersecurity for connected aircraft, and lighter, lower power electronics for electric aircraft and drones such as those described in [how a quadcopter flies](/aerospace-engineering/how-a-quadcopter-flies/).

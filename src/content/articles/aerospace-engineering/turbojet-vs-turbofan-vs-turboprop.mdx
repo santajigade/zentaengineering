@@ -1,0 +1,149 @@
+---
+title: "Turbojet vs Turbofan vs Turboprop Engines"
+description: "Turbojet vs turbofan vs turboprop compared: Brayton cycle, components, bypass ratio, propulsive efficiency, speed range, fuel use, noise and a thrust example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: aerospace-engineering
+subcategory: propulsion
+focusKeyword: "turbojet vs turbofan vs turboprop"
+image: { src: /images/featured/turbojet-vs-turbofan-vs-turboprop.webp, alt: "Turbojet vs Turbofan vs Turboprop Engines: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [jet-engines, turbofan, turboprop, turbojet, propulsion]
+faq:
+  - q: "Why do airliners use turbofans instead of turbojets?"
+    a: "A turbofan accelerates a large mass of air by a small amount, while a turbojet accelerates a small mass of air by a large amount. For the same thrust, the turbofan wastes less kinetic energy in the exhaust, so it has higher propulsive efficiency, lower fuel burn and much less noise at subsonic airliner speeds."
+  - q: "What is bypass ratio?"
+    a: "Bypass ratio is the mass of air flowing through the fan duct around the core divided by the mass flowing through the core. Military low bypass turbofans have ratios below about 1, older airliner engines about 5 to 6, and modern high bypass engines about 9 to 12 or more."
+  - q: "Why are turboprops used on regional aircraft?"
+    a: "At speeds below about 650 to 700 km/h and on short routes, a propeller is very efficient because it accelerates a large mass of air gently. Turboprops therefore burn significantly less fuel than jets on short sectors, operate well from short runways, and suit regional airlines, cargo and military transport roles."
+references:
+  - text: "P. P. Walsh and P. Fletcher, Gas Turbine Performance, 2nd ed., Blackwell Science"
+  - text: "Rolls-Royce, The Jet Engine, 5th ed., Rolls-Royce plc"
+  - text: "J. D. Mattingly, Elements of Propulsion: Gas Turbines and Rockets, 2nd ed., AIAA"
+  - text: "N. Cumpsty and A. Heyes, Jet Propulsion, 3rd ed., Cambridge University Press"
+  - text: "FAA, Aviation Maintenance Technician Handbook: Powerplant, FAA-H-8083-32B"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **turbojet vs turbofan vs turboprop** comparisons, all three are gas turbines working on the **Brayton cycle**: compress air, burn fuel, expand hot gas through turbines. A **turbojet** produces all its thrust from a fast exhaust jet: simple and good at high supersonic speed but thirsty and loud. A **turbofan** adds a large **fan** whose **bypass air** flows around the core, giving most of the thrust at lower jet velocity: efficient and quieter for airliners at about Mach 0.8. A **turboprop** uses the turbine to drive a **propeller** through a gearbox: most efficient at low speeds and altitudes, typical for regional aircraft below about 650 km/h.
+
+</Key>
+
+Jet propulsion transformed aviation in the mid 20th century. Today, almost all large aircraft use gas turbine engines, but in different forms suited to different speeds and missions. The key to understanding the differences is how each engine produces thrust and how efficiently it does so.
+
+## The gas turbine core
+
+Every type shares a **gas generator** (core):
+
+1. **Intake:** delivers air smoothly to the compressor.
+2. **Compressor:** axial and sometimes centrifugal stages raise pressure, with overall pressure ratios from about 10 in older engines to over 50 in modern ones.
+3. **Combustor:** fuel burns continuously at nearly constant pressure, raising temperature to around 1500 to 2000 K at the turbine inlet.
+4. **Turbine:** extracts energy from hot gas to drive the compressor (and fan or propeller).
+5. **Exhaust nozzle:** remaining energy accelerates gas to produce thrust.
+
+This is the **Brayton cycle**: isentropic compression, constant pressure heat addition, isentropic expansion and constant pressure heat rejection, closely related to the [laws of thermodynamics](/mechanical-engineering/laws-of-thermodynamics/). Higher pressure ratio and turbine temperature raise thermal efficiency.
+
+## How thrust is produced
+
+Thrust comes from accelerating air rearward. For a simple jet:
+
+$$
+F = \dot{m}\,(v_e - v_0)
+$$
+
+where ṁ is mass flow, v_e exhaust velocity and v₀ flight speed (neglecting fuel mass and pressure thrust). **Propulsive efficiency** is:
+
+$$
+\eta_p = \frac{2}{1 + v_e/v_0}
+$$
+
+It is highest when exhaust velocity is only slightly above flight speed. Accelerating a **large mass a little** is more efficient than a **small mass a lot**: this is the fundamental reason for turbofans and propellers.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Three engine schematics stacked: turbojet with compressor, combustor, turbine and narrow hot jet; turbofan with large front fan, bypass duct around the core and two exhaust streams; turboprop with propeller driven through a reduction gearbox by the core turbine and a small exhaust">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545"><text x="10" y="45">Turbojet</text><text x="10" y="145">Turbofan</text><text x="10" y="222">Turboprop</text></g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M110 30H420L460 40V60L420 70H110Z" fill="#eef1f6" />
+<rect x="140" y="35" width="90" height="30" fill="#e6f6f4" /><rect x="230" y="35" width="60" height="30" fill="#ffe9e7" /><rect x="290" y="35" width="50" height="30" fill="#fff7e0" />
+<path d="M110 100H460L470 110V180L460 190H110Z" fill="#ffffff" />
+<rect x="120" y="105" width="25" height="80" fill="#13a89e" fill-opacity="0.5" />
+<path d="M160 125H420L450 135V155L420 165H160Z" fill="#eef1f6" />
+<rect x="170" y="130" width="80" height="30" fill="#e6f6f4" /><rect x="250" y="130" width="50" height="30" fill="#ffe9e7" /><rect x="300" y="130" width="50" height="30" fill="#fff7e0" />
+<path d="M170 225H420L450 235V255L420 265H170Z" fill="#eef1f6" />
+<rect x="140" y="235" width="30" height="20" fill="#c9d2de" />
+<path d="M120 200V290" stroke-width="5" stroke="#0b2545" />
+<rect x="190" y="230" width="80" height="30" fill="#e6f6f4" /><rect x="270" y="230" width="50" height="30" fill="#ffe9e7" /><rect x="320" y="230" width="60" height="30" fill="#fff7e0" />
+</g>
+<g stroke="#b42318" stroke-width="3"><path d="M465 50H580" /><path d="M455 145H560" /></g>
+<g stroke="#13a89e" stroke-width="3"><path d="M470 115H540M470 175H540" /><path d="M60 245H110" /></g>
+<path d="M455 245H500" stroke="#b42318" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545" text-anchor="middle">
+<text x="185" y="54">Compressor</text><text x="260" y="54">Burner</text><text x="315" y="54">Turbine</text>
+<text x="132" y="98">Fan</text><text x="300" y="117">Bypass air</text>
+<text x="155" y="276">Gearbox</text><text x="105" y="214">Prop</text>
+<text x="520" y="40" fill="#b42318">Fast hot jet</text><text x="510" y="200">Slow cool bypass</text><text x="62" y="270" fill="#13a89e">Large slow</text><text x="62" y="282" fill="#13a89e">airflow</text>
+</g>
+</svg>
+<figcaption>Simplified comparison: turbojet (all core flow), turbofan (fan bypass plus core) and turboprop (propeller via gearbox).</figcaption>
+</figure>
+
+## Turbojet
+
+All air passes through the core, and thrust comes entirely from the high velocity exhaust. Many turbojets add an **afterburner**, injecting fuel into the exhaust for extra thrust.
+
+- **Strengths:** simple, compact, high specific thrust, good at supersonic speeds.
+- **Weaknesses:** low propulsive efficiency at subsonic speeds, high fuel consumption, very noisy.
+- **Uses:** early jet airliners and fighters, Concorde (with afterburners), missiles and some small drones.
+
+## Turbofan
+
+A large **fan** at the front is driven by a low pressure turbine. Part of the air goes through the core; the rest, often most of it, bypasses the core through a **bypass duct**. Bypass air produces most of the thrust in high bypass engines.
+
+- **Low bypass turbofans** (ratio below about 1), often with afterburners, power modern fighters.
+- **High bypass turbofans** (ratio about 5 to 12) power airliners and business jets. **Geared turbofans** use a gearbox so the fan can turn slowly while the turbine spins fast, enabling even larger fans.
+- **Strengths:** high propulsive efficiency at Mach 0.75 to 0.85, low fuel burn, much lower noise.
+- **Weaknesses:** large diameter fan increases drag and weight; less suited to supersonic flight.
+
+## Turboprop
+
+The core turbine drives a **propeller** through a **reduction gearbox**, because propellers must turn much slower than turbines. Most of the energy goes to the propeller; the exhaust provides a small extra thrust. A **turboshaft** is similar but delivers all power to a shaft, as in helicopters, ships, gas compressors and power generation.
+
+- **Strengths:** highest propulsive efficiency at low speeds, short field performance, low fuel burn on short routes.
+- **Weaknesses:** propeller tip speed limits cruising speed to about Mach 0.6 to 0.65; cabin noise and vibration; lower altitude.
+- **Uses:** regional airliners such as the ATR 72 and Dash 8, military transports and maritime patrol aircraft.
+
+## Turbojet vs turbofan vs turboprop: comparison
+
+| Feature | Turbojet | Turbofan (high bypass) | Turboprop |
+| --- | --- | --- | --- |
+| Thrust source | Core jet | Mostly fan bypass air | Mostly propeller |
+| Typical cruise speed | Supersonic or high subsonic | Mach 0.75 to 0.85 | Up to about Mach 0.6 |
+| Propulsive efficiency at airliner speeds | Low | High | Very high at low speed |
+| Specific fuel consumption | Highest | Low | Lowest at low speed |
+| Noise | Very high | Moderate to low | Moderate, propeller tones |
+| Frontal area | Small | Large fan | Propeller disc |
+| Typical uses | Missiles, supersonic jets | Airliners, business jets | Regional and military transport |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Two engines each produce 100 kN of thrust at a flight speed of 250 m/s. Engine A (turbojet type) accelerates 167 kg/s of air to 850 m/s. Engine B (high bypass turbofan type) accelerates 1000 kg/s to 350 m/s.</dd>
+<dt>Find</dt><dd>Check the thrust of each and compare propulsive efficiencies.</dd>
+<dt>Assumptions</dt><dd>Fuel mass and pressure thrust neglected; single equivalent exhaust velocity.</dd>
+<dt>Solution</dt><dd>A: F = 167 × (850 − 250) = 100 200 N; η_p = 2 ÷ (1 + 850 ÷ 250) = 2 ÷ 4.4 = 0.45<br />B: F = 1000 × (350 − 250) = 100 000 N; η_p = 2 ÷ (1 + 350 ÷ 250) = 2 ÷ 2.4 = 0.83</dd>
+<dt>Answer</dt><dd><strong>Both give about 100 kN, but the high mass flow, low velocity engine B has propulsive efficiency of about 83% versus 45% for engine A, so it needs far less fuel</strong></dd>
+<dt>Limitations</dt><dd>Overall efficiency also depends on thermal efficiency, installation drag and component losses.</dd>
+</dl>
+</Example>
+
+## Engine monitoring
+
+Modern engines are monitored continuously for exhaust gas temperature, spool speeds, vibration, oil pressure and fuel flow, with data sent to the ground so maintenance can be planned before faults develop.
+
+## Trends in aircraft propulsion
+
+Engine makers are pushing to ever higher bypass ratios, geared fans, higher pressure ratios and turbine temperatures using advanced materials and cooling, and exploring **open rotor** designs that combine turbofan speed with propeller efficiency. Sustainable aviation fuels, hybrid electric propulsion for small aircraft and hydrogen are being developed to cut emissions. Whatever the future, the same physics applies: produce thrust by moving air, and do it efficiently by moving more air more gently, as explained alongside lift in [how wings generate lift](/aerospace-engineering/how-wings-generate-lift/). The engines attach to the airframe through pylons described in [aircraft structural components](/aerospace-engineering/aircraft-structural-components/).

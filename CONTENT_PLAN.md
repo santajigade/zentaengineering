@@ -240,13 +240,13 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| aerodynamics | How Wings Generate Lift: Pressure, Angle of Attack and Lift Equation | how-wings-generate-lift | fundamentals | to write |
-| aircraft-structures | Aircraft Structural Components and Load Paths | aircraft-structural-components | explanation | to write |
-| propulsion | Turbojet vs Turbofan vs Turboprop Engines | turbojet-vs-turbofan-vs-turboprop | comparison | to write |
-| flight-mechanics | Four Forces of Flight and Aircraft Axes | forces-of-flight-and-axes | fundamentals | to write |
-| avionics | Aircraft Avionics Systems Overview | avionics-systems-overview | explanation | to write |
-| spacecraft | Satellite Subsystems Explained | satellite-subsystems | explanation | to write |
-| uav | Drone (UAV) Components and How a Quadcopter Flies | how-a-quadcopter-flies | working-principle | to write |
+| aerodynamics | How Wings Generate Lift: Pressure, Angle of Attack and Lift Equation | how-wings-generate-lift | fundamentals | draft |
+| aircraft-structures | Aircraft Structural Components and Load Paths | aircraft-structural-components | explanation | draft |
+| propulsion | Turbojet vs Turbofan vs Turboprop Engines | turbojet-vs-turbofan-vs-turboprop | comparison | draft |
+| flight-mechanics | Four Forces of Flight and Aircraft Axes | forces-of-flight-and-axes | fundamentals | draft |
+| avionics | Aircraft Avionics Systems Overview | avionics-systems-overview | explanation | draft |
+| spacecraft | Satellite Subsystems Explained | satellite-subsystems | explanation | draft |
+| uav | Drone (UAV) Components and How a Quadcopter Flies | how-a-quadcopter-flies | working-principle | draft |
 
 ## biomedical-engineering
 

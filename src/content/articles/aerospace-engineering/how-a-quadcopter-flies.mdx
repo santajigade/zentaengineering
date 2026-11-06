@@ -1,0 +1,126 @@
+---
+title: "Drone (UAV) Components and How a Quadcopter Flies"
+description: "How a quadcopter flies: frame, motors, ESCs, propellers, flight controller, IMU, battery, GPS, thrust, roll, pitch, yaw control and a hover thrust example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: aerospace-engineering
+subcategory: uav
+focusKeyword: "how a quadcopter flies"
+image: { src: /images/featured/how-a-quadcopter-flies.webp, alt: "Drone (UAV) Components and How a Quadcopter Flies: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [drone, uav, quadcopter, flight-controller, bldc-motor]
+faq:
+  - q: "Why do quadcopter propellers spin in opposite directions?"
+    a: "Each spinning propeller creates a reaction torque on the frame. With two propellers clockwise and two counterclockwise, the torques cancel in hover, so the drone does not spin. Yaw control works by deliberately unbalancing these torques: speeding up one pair and slowing the other."
+  - q: "How long can a quadcopter fly?"
+    a: "Typical consumer and survey quadcopters fly about 20 to 45 minutes on lithium polymer or lithium-ion batteries. Flight time depends on battery energy, total weight, propeller efficiency, wind and speed. Heavy lift and spraying drones carrying payloads often fly 10 to 20 minutes per battery."
+  - q: "What does the flight controller do?"
+    a: "The flight controller is the drone's onboard computer. It reads the IMU (gyroscopes and accelerometers), barometer, magnetometer and GPS, estimates the drone's attitude and position, compares them with the pilot's or autopilot's commands, and calculates motor speed commands hundreds or thousands of times per second using control loops such as PID."
+references:
+  - text: "R. Mahony, V. Kumar and P. Corke, Multirotor Aerial Vehicles: Modeling, Estimation, and Control of Quadrotor, IEEE Robotics and Automation Magazine, 2012"
+  - text: "R. W. Beard and T. W. McLain, Small Unmanned Aircraft: Theory and Practice, Princeton University Press"
+  - text: "J. G. Leishman, Principles of Helicopter Aerodynamics, 2nd ed., Cambridge University Press"
+  - text: "PX4 Autopilot User Guide and ArduPilot Copter Documentation, open source flight stacks"
+  - text: "Directorate General of Civil Aviation, Drone Rules 2021, Government of India"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**How a quadcopter flies:** four **propellers** on **brushless motors** produce thrust upward. Two spin clockwise and two counterclockwise so their reaction torques cancel. A **flight controller** reads an **IMU** (gyroscopes and accelerometers), barometer, magnetometer and **GPS**, and adjusts each motor's speed through **electronic speed controllers (ESCs)** hundreds of times a second. Raising all four speeds climbs; changing speeds of front versus rear motors **pitches**, left versus right **rolls**, and clockwise versus counterclockwise pairs **yaws**. Tilting the thrust vector moves the drone horizontally. A **LiPo or Li-ion battery** powers everything.
+
+</Key>
+
+Multirotor drones are used for photography, mapping, inspection of power lines and wind turbines, agriculture spraying, search and rescue and delivery. Unlike aeroplanes, quadcopters have no control surfaces: all control comes from varying the speed of fixed pitch propellers. This makes them mechanically simple but completely dependent on fast electronics and control software.
+
+## Main drone (UAV) components
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Top view of an X configuration quadcopter: four arms with motors and propellers at the corners, front left and rear right spinning counterclockwise, front right and rear left spinning clockwise; central body contains flight controller, battery, ESCs and GPS; arrow indicates front">
+<g stroke="#0b2545" stroke-width="6" stroke-linecap="round"><path d="M200 70L400 230M400 70L200 230" /></g>
+<rect x="250" y="110" width="100" height="80" rx="10" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<g fill="#13a89e" fill-opacity="0.15" stroke="#13a89e" stroke-width="2"><circle cx="200" cy="70" r="50" /><circle cx="400" cy="230" r="50" /></g>
+<g fill="#f5b800" fill-opacity="0.15" stroke="#f5b800" stroke-width="2"><circle cx="400" cy="70" r="50" /><circle cx="200" cy="230" r="50" /></g>
+<g fill="#0b2545"><circle cx="200" cy="70" r="12" /><circle cx="400" cy="70" r="12" /><circle cx="200" cy="230" r="12" /><circle cx="400" cy="230" r="12" /></g>
+<g fill="none" stroke-width="2"><path d="M168 46A40 40 0 0 0 176 104" stroke="#13a89e" /><path d="M432 46A40 40 0 0 1 424 104" stroke="#f5b800" /><path d="M168 254A40 40 0 0 1 176 196" stroke="#f5b800" /><path d="M432 254A40 40 0 0 0 424 196" stroke="#13a89e" /></g>
+<path d="M300 100V40" stroke="#b42318" stroke-width="2.5" /><path d="M293 48l7-12 7 12z" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="300" y="30" fill="#b42318" font-weight="700">Front</text>
+<text x="300" y="135">Flight controller</text><text x="300" y="150">IMU, GPS</text><text x="300" y="170">Battery, ESCs</text>
+<text x="90" y="70">M1 CCW</text><text x="510" y="70">M2 CW</text><text x="90" y="230">M3 CW</text><text x="510" y="230">M4 CCW</text>
+<text x="300" y="290">Diagonal pairs spin the same way so torques cancel in hover</text>
+</g>
+</svg>
+<figcaption>X configuration quadcopter: opposite diagonal motors share the same spin direction.</figcaption>
+</figure>
+
+- **Frame:** carbon fibre, glass fibre or plastic arms and body; X, H or plus layouts. Stiffness reduces vibration reaching the sensors.
+- **Brushless DC (BLDC) motors:** rated by **kV** (rpm per volt) and size; low kV motors swing large propellers efficiently, high kV motors spin small racing propellers. Motor principles relate to [servo vs stepper motor](/automation-robotics/servo-vs-stepper-motor/) and other electronically commutated motors.
+- **Electronic speed controllers (ESCs):** drive each motor's three phases with fast MOSFET switching, receiving speed commands from the flight controller via PWM, Oneshot or digital protocols such as DShot.
+- **Propellers:** fixed pitch, specified by diameter and pitch (for example 10 × 4.5 inches); two clockwise and two counterclockwise.
+- **Flight controller:** a microcontroller board, as in [microcontroller vs microprocessor](/electronics-engineering/microcontroller-vs-microprocessor/), running firmware such as PX4, ArduPilot or Betaflight.
+- **Sensors:** **IMU** (3 axis gyroscope and accelerometer), **barometer** (altitude), **magnetometer** (heading), **GNSS receiver** (position), and optional optical flow, rangefinders, LiDAR and obstacle avoidance cameras.
+- **Battery:** lithium polymer (LiPo) or lithium-ion packs, described by cell count (for example 4S = 14.8 V nominal), capacity (mAh) and discharge rating (C). A **power distribution board** and voltage regulators feed the electronics.
+- **Radio control and telemetry:** receiver for pilot commands, telemetry link to a ground station, and video transmitter for first person view.
+- **Payload:** camera on a stabilised gimbal, multispectral sensor, LiDAR, sprayer tank or delivery mechanism.
+
+## Thrust and hover
+
+Each propeller produces thrust roughly proportional to the square of its rotational speed:
+
+$$
+T = k\,\omega^2
+$$
+
+To hover, total thrust equals weight: 4T = mg. Good designs have a **thrust to weight ratio** of about 2:1 at full throttle, so hover needs about 50% throttle, leaving margin for control, wind and climbing.
+
+From momentum theory, the ideal power to hover for a rotor of disc area A is:
+
+$$
+P_\text{ideal} = \sqrt{\frac{T^3}{2\rho A}}
+$$
+
+Real power is higher, divided by a **figure of merit** (about 0.5 to 0.7 for small propellers) and motor and ESC efficiencies. Larger, slower propellers need less power for the same thrust, which is why long endurance drones use large propellers.
+
+## How a quadcopter flies: roll, pitch, yaw and throttle
+
+- **Throttle (climb and descend):** increase or decrease all four motors equally.
+- **Pitch (forward and back):** speed up the rear motors and slow the front ones to tilt nose down; the tilted thrust vector pushes the drone forward.
+- **Roll (left and right):** speed up one side and slow the other to tilt and move sideways.
+- **Yaw (rotate):** speed up the clockwise pair and slow the counterclockwise pair (or vice versa); the unbalanced reaction torque turns the drone, while total thrust stays constant.
+
+These rotations are about the same three axes described for aircraft in [four forces of flight and aircraft axes](/aerospace-engineering/forces-of-flight-and-axes/).
+
+## The flight control loop
+
+The flight controller runs **cascaded control loops**:
+
+1. **State estimation:** fuses gyro, accelerometer, magnetometer, barometer and GPS data, often with an extended Kalman filter, to estimate attitude, velocity and position.
+2. **Rate loop:** the fastest loop (often 1 to 8 kHz) controls angular rates with PID controllers.
+3. **Attitude loop:** controls roll, pitch and yaw angles by setting rate targets.
+4. **Velocity and position loops:** in GPS modes, compute attitude targets to hold position, follow waypoints or return home.
+5. **Mixer:** converts desired thrust and torques into four individual motor commands.
+
+Flight modes range from **manual (acro)** to **stabilised**, **altitude hold**, **position hold** and fully **autonomous missions**. Tuning PID gains is similar to process loop tuning in industry.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A mapping quadcopter has a total mass of 2.0 kg with 10 inch (0.254 m diameter) propellers. Air density is 1.225 kg/m³. Figure of merit 0.6; motor and ESC efficiency 0.8. Battery: 4S Li-ion, 14.8 V, 5000 mAh, usable 80%.</dd>
+<dt>Find</dt><dd>Thrust per motor in hover, ideal and electrical hover power, and approximate hover time.</dd>
+<dt>Assumptions</dt><dd>Steady hover; avionics power neglected; momentum theory estimate.</dd>
+<dt>Solution</dt><dd>Weight = 2.0 × 9.81 = 19.6 N; thrust per motor = 4.9 N<br />A = π × 0.127² = 0.0507 m²<br />P_ideal per rotor = √(4.9³ ÷ (2 × 1.225 × 0.0507)) = √(117.6 ÷ 0.1242) = √947 = 30.8 W<br />Electrical per motor = 30.8 ÷ (0.6 × 0.8) = 64 W; total ≈ 257 W<br />Battery energy usable = 14.8 × 5.0 × 0.8 = 59.2 Wh<br />Hover time = 59.2 ÷ 257 = 0.23 h ≈ 14 min</dd>
+<dt>Answer</dt><dd><strong>About 4.9 N per motor and 257 W electrical in hover, giving roughly 14 minutes of hover time</strong></dd>
+<dt>Limitations</dt><dd>Forward flight can be slightly more efficient; wind, payload, cold batteries and avionics shorten real flight time.</dd>
+</dl>
+</Example>
+
+## Safety and regulations
+
+Drones must be flown within national rules covering registration, pilot certification, maximum altitude, no fly zones near airports and sensitive areas, visual line of sight and operations over people. In India, the Drone Rules 2021 and the Digital Sky platform govern registration and permissions. Engineering safety features include geofencing, return to home on signal loss or low battery, redundant sensors and motors on larger drones, and parachutes for operations over people.
+
+## Beyond the quadcopter
+
+Hexacopters and octocopters add redundancy and payload capacity. **Fixed wing** drones fly longer and faster using wing lift, as in [how wings generate lift](/aerospace-engineering/how-wings-generate-lift/), and **VTOL hybrids** combine vertical takeoff with efficient wing borne cruise. Applications in farming are covered in [precision agriculture technologies](/agricultural-engineering/precision-agriculture-technologies/). Understanding how a quadcopter flies, through thrust, torque balance and fast feedback control, is the foundation for all of these designs.

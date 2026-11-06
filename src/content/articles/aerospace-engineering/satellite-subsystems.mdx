@@ -1,0 +1,140 @@
+---
+title: "Satellite Subsystems Explained"
+description: "Satellite subsystems explained: payload, structure, power, thermal control, ADCS, propulsion, communications, onboard computer and a power budget example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: aerospace-engineering
+subcategory: spacecraft
+focusKeyword: "satellite subsystems"
+image: { src: /images/featured/satellite-subsystems.webp, alt: "Satellite Subsystems Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [spacecraft, satellite, adcs, power-subsystem, thermal-control]
+faq:
+  - q: "What is the difference between the payload and the bus?"
+    a: "The payload is the equipment that performs the mission, such as cameras, communication transponders or scientific instruments. The bus (platform) is everything that supports the payload: structure, power, thermal control, attitude control, propulsion, communications for command and telemetry, and onboard computers."
+  - q: "Why do satellites need batteries if they have solar panels?"
+    a: "Satellites in low Earth orbit spend up to about a third of each orbit in Earth's shadow (eclipse), when solar arrays produce no power. Batteries store energy during sunlight and supply the satellite during eclipse. GEO satellites face eclipses of up to about 72 minutes near the equinoxes."
+  - q: "What is a CubeSat?"
+    a: "A CubeSat is a standardised small satellite built from 10 cm cubic units (1U), commonly 1U, 3U, 6U or 12U. Standard sizes and deployers lower launch costs, and commercial off the shelf subsystems make CubeSats popular for universities, technology demonstrations and Earth observation constellations."
+references:
+  - text: "J. R. Wertz, D. F. Everett and J. J. Puschell (eds.), Space Mission Engineering: The New SMAD, Microcosm Press, 2011"
+  - text: "P. Fortescue, G. Swinerd and J. Stark (eds.), Spacecraft Systems Engineering, 4th ed., Wiley"
+  - text: "ECSS-E-ST-10C, Space engineering: System engineering general requirements, European Cooperation for Space Standardization"
+  - text: "CubeSat Design Specification Rev. 14, California Polytechnic State University"
+  - text: "NASA, State of the Art Small Spacecraft Technology, NASA Ames, 2024"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Satellite subsystems** are the functional building blocks of a spacecraft. The **payload** performs the mission (cameras, transponders, instruments). The **bus** supports it with: **structure and mechanisms**; **electrical power** (solar arrays, batteries, power conditioning); **thermal control** (insulation, radiators, heaters); **attitude determination and control (ADCS)** (sensors, reaction wheels, magnetorquers, thrusters); **propulsion** for orbit changes and station keeping; **telemetry, tracking and command (TT&C)** communications; and **command and data handling** (onboard computer and software). Each must survive launch loads, vacuum, radiation and extreme temperatures without repair.
+
+</Key>
+
+A satellite is a small, self contained world that must provide its own power, temperature control, pointing and communications for years in an environment where no repair is possible. Designing it means balancing mass, power, volume, cost and reliability across all subsystems, guided by the mission and orbit, as discussed in [GEO vs MEO vs LEO satellites](/telecommunication-engineering/geo-meo-leo-satellites/).
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Satellite block diagram: central bus box containing onboard computer connected to power, thermal, ADCS, propulsion and TT&C subsystems, plus the payload; solar arrays on both sides, antenna on top, star tracker and thrusters indicated">
+<rect x="210" y="60" width="180" height="170" rx="6" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="1.5" fill="#0b2545" fill-opacity="0.85"><rect x="30" y="110" width="160" height="70" /><rect x="410" y="110" width="160" height="70" /></g>
+<g stroke="#7b8794" stroke-width="1"><path d="M70 110V180M110 110V180M150 110V180M450 110V180M490 110V180M530 110V180M30 145H190M410 145H570" /></g>
+<path d="M190 145H210M390 145H410" stroke="#0b2545" stroke-width="3" />
+<path d="M270 60V40M250 20Q270 50 290 20" stroke="#0b2545" stroke-width="2" fill="none" />
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="250" y="125" width="100" height="40" rx="4" fill="#fff7e0" />
+<rect x="220" y="75" width="70" height="30" rx="4" fill="#e6f6f4" /><rect x="310" y="75" width="70" height="30" rx="4" fill="#e6f6f4" />
+<rect x="220" y="185" width="70" height="30" rx="4" fill="#e6f6f4" /><rect x="310" y="185" width="70" height="30" rx="4" fill="#e6f6f4" />
+<rect x="250" y="235" width="100" height="40" rx="4" fill="#ffe9e7" />
+</g>
+<g stroke="#13a89e" stroke-width="1.5"><path d="M255 105V125M345 105V125M255 165V185M345 165V185M300 165V235" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="300" y="142" font-weight="700">Onboard</text><text x="300" y="156">computer (C&amp;DH)</text>
+<text x="255" y="94">Power</text><text x="345" y="94">TT&amp;C</text><text x="255" y="204">ADCS</text><text x="345" y="204">Thermal</text>
+<text x="300" y="260" font-weight="700">Payload</text>
+<text x="110" y="200">Solar array</text><text x="490" y="200">Solar array</text><text x="320" y="30">Antenna</text>
+<text x="490" y="236">Propulsion and</text><text x="490" y="250">structure (bus)</text>
+</g>
+</svg>
+<figcaption>Main satellite subsystems around the onboard computer (schematic).</figcaption>
+</figure>
+
+## Payload
+
+The reason the satellite exists: optical or radar imagers for Earth observation, communication transponders and antennas, navigation signal generators, or scientific instruments. Payload requirements drive pointing accuracy, power, data rate and thermal stability.
+
+## Structure and mechanisms
+
+The structure holds everything together and survives launch, where loads reach several g with intense vibration and acoustic noise. Common materials are aluminium honeycomb panels, carbon fibre composites and titanium fittings. **Mechanisms** deploy solar arrays, antennas and booms, and include hinges, release devices and drive motors. Design is verified by analysis such as [finite element analysis](/mechanical-engineering/finite-element-analysis-basics/) and by vibration and shock testing.
+
+## Electrical power subsystem (EPS)
+
+- **Solar arrays:** multi-junction gallium arsenide cells with efficiencies around 30% convert sunlight (about 1361 W/m² near Earth) into electricity.
+- **Batteries:** lithium-ion cells store energy for eclipses.
+- **Power conditioning and distribution:** regulators, converters and switches deliver protected power to each subsystem, using techniques similar to the [buck converter](/electronics-engineering/buck-converter/).
+
+Some deep space missions use **radioisotope thermoelectric generators** where sunlight is too weak.
+
+## Thermal control
+
+In space, sunlit surfaces can exceed 100 °C while shaded ones fall below −100 °C. Electronics typically need about −20 to +50 °C and batteries a narrower range. Thermal control uses:
+
+- **Passive methods:** multi-layer insulation (MLI) blankets, surface coatings and paints with chosen absorptivity and emissivity, radiators, heat pipes.
+- **Active methods:** electrical heaters with thermostats, loop heat pipes, and pumped fluid loops on large spacecraft.
+
+All heat must finally be **radiated** to space, following the Stefan-Boltzmann law, since there is no air for convection, as described in [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/).
+
+## Attitude determination and control (ADCS)
+
+The satellite must point its payload, antennas and solar arrays in the right directions.
+
+- **Sensors:** sun sensors, Earth horizon sensors, magnetometers, gyroscopes and **star trackers** (most accurate, arcsecond level).
+- **Actuators:** **reaction wheels** and control moment gyros exchange momentum with the spacecraft; **magnetorquers** use Earth's magnetic field to dump momentum in LEO; **thrusters** provide large torques.
+- **Control software** combines sensor data (for example with Kalman filters) and commands actuators.
+
+## Propulsion
+
+Propulsion raises orbits after launch, maintains position (station keeping), avoids collisions and deorbits at end of life.
+
+- **Chemical:** monopropellant hydrazine or green propellants, and bipropellant systems for large orbit changes.
+- **Electric:** Hall effect thrusters and gridded ion engines with very high specific impulse but low thrust, widely used for GEO station keeping and LEO constellations.
+- **Cold gas** for small satellites.
+
+## Telemetry, tracking and command (TT&C)
+
+Radio links to ground stations, typically in S band or X band, receive commands, send housekeeping telemetry and allow ranging to determine orbit. Payload data often uses a separate high rate downlink. Link design uses [modulation techniques](/telecommunication-engineering/modulation-techniques/) and error correction suited to the long, noisy space channel.
+
+## Command and data handling (C&DH)
+
+The **onboard computer** runs flight software that schedules operations, processes commands, monitors health, stores data, manages fault detection and recovery (switching to **safe mode** when something goes wrong), and controls the other subsystems through data buses such as SpaceWire, CAN or MIL-STD-1553. Radiation tolerant electronics and error correcting memory protect against single event upsets.
+
+## Power budget
+
+Solar arrays must supply the satellite in sunlight and recharge batteries for eclipse:
+
+$$
+P_{sa} = \frac{\dfrac{P_e T_e}{X_e} + \dfrac{P_d T_d}{X_d}}{T_d}
+$$
+
+where P_e and P_d are loads in eclipse and daylight, T_e and T_d their durations, and X_e, X_d path efficiencies (typically about 0.6 to 0.65 and 0.8 to 0.85).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A LEO satellite with a 95 minute orbit spends 35 minutes in eclipse. It needs 120 W in daylight and 100 W in eclipse. Path efficiencies are X_d = 0.85 and X_e = 0.65. Battery depth of discharge limit is 25% with a bus voltage of 28 V.</dd>
+<dt>Find</dt><dd>Required solar array output at end of life and battery capacity.</dd>
+<dt>Assumptions</dt><dd>Constant loads; simplified SMAD method; battery discharge efficiency included in X_e.</dd>
+<dt>Solution</dt><dd>T_d = 95 − 35 = 60 min<br />P_sa = [(100 × 35 ÷ 0.65) + (120 × 60 ÷ 0.85)] ÷ 60 = (5385 + 8471) ÷ 60 = 231 W<br />Eclipse energy = 100 W × 35 ÷ 60 h = 58.3 Wh<br />Battery capacity = 58.3 ÷ 0.25 = 233 Wh, or 233 ÷ 28 ≈ 8.3 Ah</dd>
+<dt>Answer</dt><dd><strong>Solar arrays must deliver about 231 W at end of life, with a battery of about 233 Wh (8.3 Ah at 28 V)</strong></dd>
+<dt>Limitations</dt><dd>Array degradation from radiation, sun angle, temperature and margins increase the beginning of life array size.</dd>
+</dl>
+</Example>
+
+## Redundancy and reliability
+
+Because repair in orbit is almost never possible, critical units are duplicated or cross strapped so that a backup can take over. Typical examples are redundant onboard computers, two receivers and transmitters for TT&C, extra reaction wheels in a skewed arrangement, and redundant thruster branches. Components are selected for radiation tolerance, and fault detection, isolation and recovery software decides automatically how to respond to failures.
+
+## Integration and testing of satellite subsystems
+
+Subsystems are integrated and tested together through functional tests, vibration and acoustic tests that simulate launch, thermal vacuum cycling, electromagnetic compatibility checks and end to end communication tests with ground stations. Systems engineering, following standards such as ECSS, manages interfaces, budgets for mass, power and data, and risks across all satellite subsystems, so that the spacecraft works first time in orbit.

@@ -1,0 +1,146 @@
+---
+title: "How Wings Generate Lift: Angle of Attack and Lift Equation"
+description: "How wings generate lift: airfoil shape, pressure difference, flow turning, angle of attack, lift coefficient, stall, the lift equation and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: aerospace-engineering
+subcategory: aerodynamics
+focusKeyword: "how wings generate lift"
+image: { src: /images/featured/how-wings-generate-lift.webp, alt: "How Wings Generate Lift: Angle of Attack and Lift Equation: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [aerodynamics, lift, airfoil, angle-of-attack, stall]
+faq:
+  - q: "Is the equal transit time explanation of lift correct?"
+    a: "No. The popular claim that air over the top must meet air under the bottom at the trailing edge at the same time is false; in reality air over the top arrives earlier. Lift is explained correctly by the pressure difference that results from the wing turning the airflow downward, consistent with both Newton's laws and Bernoulli's principle."
+  - q: "Why can aircraft fly upside down?"
+    a: "Lift depends mainly on angle of attack, not only on wing camber. An aerobatic aircraft flying inverted holds its nose up relative to the flight path so the wing meets the air at a positive angle of attack and still pushes air downward relative to the aircraft. Symmetric airfoils are common on aerobatic aircraft for this reason."
+  - q: "What happens when a wing stalls?"
+    a: "Beyond the critical angle of attack, typically around 15 to 18 degrees for many airfoils, the airflow can no longer follow the curved upper surface and separates. Lift drops sharply and drag rises. A stall is recovered by reducing the angle of attack, regardless of airspeed or attitude."
+references:
+  - text: "J. D. Anderson Jr., Fundamentals of Aerodynamics, 6th ed., McGraw-Hill"
+  - text: "J. D. Anderson Jr., Introduction to Flight, 9th ed., McGraw-Hill"
+  - text: "I. H. Abbott and A. E. von Doenhoff, Theory of Wing Sections, Dover"
+  - text: "FAA, Pilot's Handbook of Aeronautical Knowledge, FAA-H-8083-25C, Chapter 5 Aerodynamics of Flight"
+  - text: "NASA Glenn Research Center, Beginner's Guide to Aeronautics: Lift"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**How wings generate lift:** a wing is shaped and angled so that it **turns the oncoming airflow downward**. Doing so creates **lower pressure above the wing and higher pressure below it**; the pressure difference acting over the wing area is **lift**. Newton's third law (the wing pushes air down, the air pushes the wing up) and **Bernoulli's principle** (faster flow over the top means lower pressure) are two consistent views of the same flow. Lift depends on **air density, airspeed squared, wing area** and the **lift coefficient**, which rises with **angle of attack** until the wing **stalls**: L = ½ ρ v² S C_L.
+
+</Key>
+
+Every aircraft, from a glider to an airliner, and every helicopter rotor, wind turbine blade and racing car wing, relies on the same principle. Understanding lift helps explain takeoff speeds, stalls, high lift devices and why aircraft fly differently at high altitude.
+
+## The airfoil
+
+A wing's cross-section is an **airfoil**. Key terms:
+
+- **Leading edge** and **trailing edge.**
+- **Chord line:** straight line from leading to trailing edge; **chord** is its length.
+- **Camber:** curvature of the mean line between upper and lower surfaces. Cambered airfoils produce lift even at zero angle of attack.
+- **Thickness:** maximum thickness, usually as a percentage of chord.
+- **Angle of attack (α):** angle between the chord line and the oncoming airflow (relative wind).
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Airfoil at a positive angle of attack in airflow: streamlines approach from the left, curve over the upper surface and leave the trailing edge deflected downward; low pressure region above the airfoil marked with minus signs, higher pressure below marked with plus signs; lift arrow perpendicular to the relative wind and drag arrow parallel to it; chord line and angle of attack shown">
+<g stroke="#7b8794" stroke-width="1.5" fill="none">
+<path d="M20 70Q200 60 300 70Q420 90 580 140" /><path d="M20 105Q180 95 290 100Q420 120 580 175" /><path d="M20 190Q200 200 300 180Q420 175 580 210" /><path d="M20 225Q200 230 320 220Q430 215 580 240" />
+</g>
+<path d="M150 160Q190 105 290 112Q390 122 460 170Q380 160 290 158Q200 160 150 160Z" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<path d="M140 165L470 175" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" />
+<path d="M100 162H240" stroke="#7b8794" stroke-width="1" stroke-dasharray="2 3" />
+<path d="M200 162A40 40 0 0 0 200 164" stroke="#b42318" stroke-width="1.5" />
+<g fill="#13a89e" font-family="Open Sans Variable, Arial, sans-serif" font-size="18" font-weight="700"><text x="240" y="95">−</text><text x="290" y="92">−</text><text x="340" y="98">−</text></g>
+<g fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif" font-size="18" font-weight="700"><text x="240" y="190">+</text><text x="300" y="190">+</text><text x="360" y="190">+</text></g>
+<path d="M300 135V35" stroke="#0b2545" stroke-width="3" /><path d="M293 42l7-12 7 12z" fill="#0b2545" />
+<path d="M310 140H400" stroke="#f5b800" stroke-width="3" /><path d="M396 134l10 6-10 6z" fill="#f5b800" />
+<path d="M20 30H90" stroke="#13a89e" stroke-width="2" /><path d="M86 25l9 5-9 5z" fill="#13a89e" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="310" y="40" font-weight="700">Lift</text><text x="410" y="138" font-weight="700">Drag</text><text x="20" y="22">Relative wind</text>
+<text x="390" y="90" fill="#13a89e">Lower pressure</text><text x="400" y="205" fill="#b42318">Higher pressure</text>
+<text x="470" y="190" fill="#b42318" font-size="11">Chord line</text><text x="490" y="132" font-size="11">Downwash</text>
+</g>
+</svg>
+<figcaption>An airfoil at positive angle of attack turns the flow downward, creating low pressure above and higher pressure below.</figcaption>
+</figure>
+
+## How wings generate lift: the pressure difference
+
+Air flowing around the wing must follow its shape. Over the curved upper surface, the flow is accelerated and bent; to follow a curved path, there must be lower pressure on the inside of the curve, so pressure above the wing drops below ambient. Below the wing, the flow is slowed and pressure rises slightly. The net result is that the wing deflects a large mass of air downward (**downwash**). By Newton's third law, the air exerts an equal and opposite upward force on the wing.
+
+**Bernoulli's principle** states that along a streamline, higher speed means lower pressure:
+
+$$
+p + \tfrac{1}{2}\rho v^2 = \text{constant}
+$$
+
+so the faster flow above the wing corresponds to lower pressure, as described in [Bernoulli's equation](/mechanical-engineering/bernoulli-equation/). Bernoulli and Newton describe the same physics; neither alone tells the whole story without the other.
+
+## The lift equation
+
+$$
+L = \tfrac{1}{2}\,\rho\,v^2\,S\,C_L
+$$
+
+- **ρ** air density (1.225 kg/m³ at sea level, standard conditions).
+- **v** true airspeed.
+- **S** wing planform area.
+- **C_L** lift coefficient, which depends on airfoil shape, angle of attack, Reynolds number and Mach number.
+
+The term ½ρv² is the **dynamic pressure**. Lift grows with the square of speed: doubling speed quadruples lift at the same angle of attack.
+
+<Calculator path="physics/lift-force" title="Lift Force Calculator" />
+
+## Angle of attack and stall
+
+For a typical airfoil, C_L increases roughly linearly with angle of attack, by about 0.1 per degree (2π per radian in thin airfoil theory), until near the **critical angle of attack**, often about 15 to 18°. Beyond this, the boundary layer separates from the upper surface, lift falls sharply and drag rises: the wing **stalls**. Maximum lift coefficient C_L,max is typically about 1.2 to 1.6 for a clean wing.
+
+The **stall speed** in level flight, when lift equals weight W at C_L,max, is:
+
+$$
+V_s = \sqrt{\frac{2W}{\rho\,S\,C_{L,max}}}
+$$
+
+Stall occurs at the critical angle of attack, not at a fixed speed: in turns or pull-ups, the wing must carry more than the aircraft's weight, so stall speed rises.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A light aircraft has a mass of 1100 kg and wing area 16.2 m². Clean C_L,max = 1.5; with flaps, C_L,max = 2.1. Sea level density 1.225 kg/m³.</dd>
+<dt>Find</dt><dd>Stall speed clean and with flaps, and the lift coefficient needed to cruise at 55 m/s.</dd>
+<dt>Assumptions</dt><dd>Level flight, lift equals weight, g = 9.81 m/s².</dd>
+<dt>Solution</dt><dd>W = 1100 × 9.81 = 10 791 N<br />Clean: V_s = √(2 × 10 791 ÷ (1.225 × 16.2 × 1.5)) = √(21 582 ÷ 29.77) = √725 = 26.9 m/s (about 52 knots)<br />Flaps: V_s = √(21 582 ÷ (1.225 × 16.2 × 2.1)) = √(21 582 ÷ 41.67) = √518 = 22.8 m/s (about 44 knots)<br />Cruise C_L = 2W ÷ (ρ v² S) = 21 582 ÷ (1.225 × 3025 × 16.2) = 21 582 ÷ 60 031 = 0.36</dd>
+<dt>Answer</dt><dd><strong>Stall speed about 27 m/s clean and 23 m/s with flaps; cruise at 55 m/s needs only C_L ≈ 0.36, a small angle of attack</strong></dd>
+<dt>Limitations</dt><dd>Real stall speeds depend on centre of gravity, power, wing condition and certification test methods.</dd>
+</dl>
+</Example>
+
+## High lift devices
+
+To fly slowly for takeoff and landing, aircraft temporarily increase C_L,max and wing area:
+
+- **Trailing edge flaps** (plain, split, slotted, Fowler) increase camber and often area.
+- **Leading edge slats and slots** energise the upper surface flow and delay stall to higher angles.
+- **Vortex generators** mix energetic air into the boundary layer.
+
+Airliners can reach C_L,max of around 2.5 to 3 with full high lift systems.
+
+## Factors that affect lift
+
+- **Altitude:** lower air density reduces lift at a given true airspeed, so aircraft need higher true speed and longer runways at high altitude airports and on hot days (high density altitude).
+- **Wing contamination:** ice, frost or dirt disrupt the flow and can dramatically reduce C_L,max; aircraft must be de-iced before takeoff.
+- **Aspect ratio:** long, slender wings produce less **induced drag** for a given lift, which is why gliders and efficient airliners have high aspect ratio wings.
+- **Wingtip vortices:** high pressure air below the wing curls around the tips to the low pressure top, creating vortices and induced drag. Winglets reduce this effect.
+
+## Measuring lift
+
+Engineers measure lift and drag in wind tunnels using force balances and pressure taps on model surfaces, and calculate them with computational fluid dynamics. Flight tests then confirm stall speeds and handling before certification.
+
+## Lift in the bigger picture
+
+Lift is one of the [four forces of flight](/aerospace-engineering/forces-of-flight-and-axes/), balanced against weight, thrust and drag. The same physics explains propeller and rotor thrust in [quadcopters](/aerospace-engineering/how-a-quadcopter-flies/), turbine and compressor blades in [jet engines](/aerospace-engineering/turbojet-vs-turbofan-vs-turboprop/), and the blades of [wind turbines](/renewable-energy/how-wind-turbines-work/). Understanding how wings generate lift is the starting point for aerodynamics and aircraft design.
