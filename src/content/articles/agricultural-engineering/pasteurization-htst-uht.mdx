@@ -1,0 +1,131 @@
+---
+title: "Pasteurization: HTST and UHT Processes Explained"
+description: "Pasteurization explained: batch, HTST and UHT processes, time and temperature, plate heat exchangers, holding tube, flow diversion, D and z values."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: agricultural-engineering
+subcategory: food-processing
+focusKeyword: "pasteurization"
+image: { src: /images/featured/pasteurization-htst-uht.webp, alt: "Pasteurization: HTST and UHT Processes Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [pasteurization, htst, uht, dairy-processing, food-safety]
+faq:
+  - q: "What is the difference between pasteurized and UHT milk?"
+    a: "HTST pasteurized milk is heated to about 72 °C for 15 seconds, killing pathogens but not all spoilage organisms, so it must be refrigerated and keeps for about 1 to 3 weeks. UHT milk is heated to about 135 to 150 °C for a few seconds and filled aseptically into sterile cartons, so it is commercially sterile and keeps for months at room temperature until opened."
+  - q: "What does the flow diversion valve do?"
+    a: "In an HTST pasteuriser, the flow diversion valve after the holding tube checks the product temperature. If it is below the legal minimum, the valve automatically sends the product back to the balance tank instead of forward to packaging, so under-processed milk never leaves the system. It is a critical control point."
+  - q: "Does pasteurization destroy nutrients?"
+    a: "Pasteurization causes only small losses of heat sensitive vitamins such as vitamin C and some B vitamins; protein, calcium and most nutrients are essentially unchanged. UHT treatment causes slightly greater changes, including a cooked flavour, but the nutritional value of milk remains high."
+references:
+  - text: "Codex Alimentarius, Code of Hygienic Practice for Milk and Milk Products, CXC 57-2004"
+  - text: "U.S. FDA, Grade A Pasteurized Milk Ordinance, 2023 Revision"
+  - text: "Tetra Pak, Dairy Processing Handbook, Tetra Pak Processing Systems AB"
+  - text: "P. Walstra, J. T. M. Wouters and T. J. Geurts, Dairy Science and Technology, 2nd ed., CRC Press"
+  - text: "FSSAI, Food Safety and Standards (Food Products Standards and Food Additives) Regulations, 2011, India"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Pasteurization** is a mild heat treatment that kills pathogenic microorganisms and reduces spoilage organisms in milk, juices and other liquid foods, while keeping flavour and nutrients. The main processes are **batch (LTLT)** pasteurization at **63 °C for 30 minutes**; **HTST (high temperature short time)** at **72 °C for 15 seconds**, done continuously in a **plate heat exchanger** with a **holding tube** and **flow diversion valve**; and **UHT (ultra high temperature)** at about **135 to 150 °C for 2 to 10 seconds**, followed by **aseptic packaging**, giving shelf stable products. Exact conditions are set by regulations.
+
+</Key>
+
+Louis Pasteur showed in the 1860s that gentle heating prevents wine and beer from spoiling. Applied to milk from the late 19th century, pasteurization dramatically reduced diseases such as tuberculosis, brucellosis and typhoid that were spread by raw milk. Today it is one of the most important food safety processes, legally required for most milk sold in many countries.
+
+## How heat kills microorganisms
+
+Microbial death during heating is approximately logarithmic. The **D value** is the time at a given temperature needed to reduce a population by 90% (one log):
+
+$$
+\log \frac{N_0}{N} = \frac{t}{D_T}
+$$
+
+The **z value** is the temperature increase that reduces D by a factor of 10. For many vegetative pathogens z is about 5 to 8 °C, while for quality changes such as browning and vitamin loss z is larger, about 20 to 40 °C. This difference is why **high temperature, short time** processes kill microbes effectively while causing less quality damage.
+
+Pasteurization targets heat resistant pathogens such as *Coxiella burnetii* and *Mycobacterium tuberculosis* in milk. Enzyme tests, especially **alkaline phosphatase**, verify adequate pasteurization because the enzyme is destroyed at similar conditions.
+
+## Pasteurization methods
+
+| Method | Typical conditions (milk) | Equipment | Shelf life | Storage |
+| --- | --- | --- | --- | --- |
+| Batch (LTLT, vat) | 63 °C for 30 min | Jacketed vat | About 1 to 2 weeks | Refrigerated |
+| HTST | 72 °C for 15 s | Plate heat exchanger, holding tube | About 2 to 3 weeks | Refrigerated |
+| Higher heat shorter time / ESL | About 125 to 138 °C for 2 to 4 s, or filtration | PHE or direct heating | Several weeks | Refrigerated |
+| UHT | About 135 to 150 °C for 2 to 10 s | Direct steam injection or indirect tubular/plate | Several months | Ambient until opened |
+
+## The HTST pasteurization system
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="HTST pasteurizer flow: raw milk at 4 degrees from the balance tank passes through the regeneration section (raw side) where it is preheated, then the heating section to 72 degrees, then the holding tube for 15 seconds, then the flow diversion valve; correctly heated milk flows back through the regeneration section (pasteurized side) where it gives up heat, then the cooling section to 4 degrees and to the filler; under-temperature milk is diverted back to the balance tank">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="15" y="40" width="90" height="50" rx="6" fill="#eef1f6" /><rect x="135" y="40" width="110" height="50" rx="6" fill="#e6f6f4" /><rect x="275" y="40" width="90" height="50" rx="6" fill="#ffe9e7" /><rect x="395" y="40" width="90" height="50" rx="6" fill="#fff7e0" /><rect x="510" y="40" width="75" height="50" rx="6" fill="#ffffff" />
+<rect x="135" y="170" width="110" height="50" rx="6" fill="#ffffff" /><rect x="275" y="170" width="90" height="50" rx="6" fill="#eef1f6" /><rect x="385" y="170" width="105" height="50" rx="6" fill="#e6f6f4" />
+</g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M105 65h24M245 65h24M365 65h24M485 65h19M547 90V195H496M385 195h-14M275 195h-24" /></g>
+<g fill="#13a89e"><path d="M129 60l7 5-7 5z" /><path d="M269 60l7 5-7 5z" /><path d="M389 60l7 5-7 5z" /><path d="M504 60l7 5-7 5z" /><path d="M493 190l-7 5 7 5z" /><path d="M373 190l-7 5 7 5z" /><path d="M253 190l-7 5 7 5z" /></g>
+<path d="M135 195H120" stroke="none" />
+<path d="M547 40V20H60V40" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" fill="none" /><path d="M55 32l5 8 5-8z" fill="#b42318" />
+<path d="M200 90L430 170" stroke="#7b8794" stroke-width="2" stroke-dasharray="3 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="60" y="62">Balance</text><text x="60" y="77">tank</text>
+<text x="190" y="62">Regeneration</text><text x="190" y="77" font-size="10">raw side 4 to 60 °C</text>
+<text x="320" y="62">Heating</text><text x="320" y="77" font-size="10">to 72 °C</text>
+<text x="440" y="62">Holding tube</text><text x="440" y="77" font-size="10">15 s</text>
+<text x="547" y="70" font-weight="700">FDV</text>
+<text x="440" y="192">Regeneration</text><text x="440" y="207" font-size="10">pasteurized side</text>
+<text x="320" y="192">Cooling</text><text x="320" y="207" font-size="10">to 4 °C</text>
+<text x="190" y="192">Filler</text><text x="190" y="207" font-size="10">packaging at 4 °C</text>
+<text x="300" y="14" font-size="11" fill="#b42318">Diverted back if below 72 °C</text>
+<text x="345" y="106" font-size="10" fill="#7b8794">Heat exchange across plates</text>
+<text x="300" y="265" font-size="11">Regeneration recovers up to about 90 to 95% of the heat</text>
+</g>
+</svg>
+<figcaption>Simplified HTST pasteurizer with regeneration, heating, holding, flow diversion and cooling.</figcaption>
+</figure>
+
+1. **Balance tank:** keeps a constant supply and level, preventing air entry.
+2. **Regeneration section:** cold raw milk (about 4 °C) is preheated by hot pasteurized milk flowing on the other side of the plates, recovering up to about 90 to 95% of the heat.
+3. **Heating section:** hot water or steam raises milk to at least 72 °C. Plate design follows the principles in [heat exchanger types](/chemical-engineering/heat-exchanger-types/).
+4. **Holding tube:** a pipe sized so that the fastest particle spends at least 15 seconds at temperature. Length depends on flow rate and pipe diameter.
+5. **Flow diversion valve (FDV):** a temperature recorder controller checks product temperature at the end of the holding tube; if it is below the legal limit, the valve diverts milk back to the balance tank.
+6. **Regeneration (pasteurized side) and cooling section:** pasteurized milk gives up heat to incoming raw milk, then chilled water or glycol cools it to about 4 °C for filling.
+
+Pressure on the pasteurized side is kept higher than on the raw side, often with a booster pump, so that any plate leak flows from pasteurized to raw milk, never the reverse. Accurate [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/), calibrated recorders and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) are legal requirements.
+
+## Holding tube sizing
+
+$$
+L = v_\text{max} \times t_\text{hold} \qquad v_\text{avg} = \frac{Q}{A}
+$$
+
+For laminar flow in a tube, the fastest particle moves at about twice the average velocity; for turbulent flow, about 1.2 times.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An HTST unit pasteurizes 10 000 L/h of milk at 72 °C for 15 s in a holding tube of 51 mm internal diameter. Flow is turbulent; assume the fastest particle moves at 1.2 times the average velocity.</dd>
+<dt>Find</dt><dd>Average velocity and the minimum holding tube length.</dd>
+<dt>Assumptions</dt><dd>Constant flow rate guaranteed by a timing pump; no allowance for fittings.</dd>
+<dt>Solution</dt><dd>Q = 10 000 ÷ 3600 ÷ 1000 = 0.00278 m³/s<br />A = π × 0.051² ÷ 4 = 0.002043 m²<br />v_avg = 0.00278 ÷ 0.002043 = 1.36 m/s<br />v_max = 1.2 × 1.36 = 1.63 m/s<br />L = 1.63 × 15 = 24.5 m</dd>
+<dt>Answer</dt><dd><strong>Average velocity about 1.36 m/s; the holding tube must be at least about 24.5 m long</strong></dd>
+<dt>Limitations</dt><dd>Regulators require verification by a salt conductivity or dye test that the fastest particle holding time meets the minimum.</dd>
+</dl>
+</Example>
+
+## Pasteurization of other foods
+
+The same principles apply beyond milk. Fruit juices are often flash pasteurized at about 85 to 95 °C for 15 to 30 seconds, because their acidity limits the hazards that can grow. Liquid egg, beer, ice cream mix and some sauces are also pasteurized, each with conditions set for the target organisms and product quality. Non-thermal methods such as high pressure processing and pulsed electric fields are used for some premium juices to preserve fresh flavour.
+
+## UHT processing
+
+UHT products must be handled with even stricter hygiene, since any contamination after sterilisation can grow during months of ambient storage before the pack is opened.
+
+
+UHT systems heat product to 135 to 150 °C either **directly** (steam injection or infusion, then flash cooling in a vacuum vessel to remove the added water) or **indirectly** in tubular or plate heat exchangers. Product is then cooled and filled under **aseptic** conditions into pre-sterilised packages such as multilayer cartons. The result is commercially sterile: no microorganisms capable of growing under normal storage conditions.
+
+## Pasteurization and food safety systems
+
+Pasteurization is a classic **critical control point** in a [HACCP](/agricultural-engineering/haccp-principles/) plan, with critical limits for temperature and time, continuous monitoring and recording, automatic diversion as corrective action, and regular verification by phosphatase tests, calibration and record review. Hygienic design, **CIP (clean in place)** cleaning and prevention of post-pasteurization contamination are equally important. Pasteurized milk must then be kept cold through the chain, as discussed in [cold storage design basics](/agricultural-engineering/cold-storage-design-basics/).

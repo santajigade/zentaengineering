@@ -1,0 +1,141 @@
+---
+title: "Cold Storage Refrigeration Design Basics"
+description: "Cold storage design basics: storage conditions, insulation, heat load calculation, refrigeration systems, humidity control and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: agricultural-engineering
+subcategory: cold-chain
+focusKeyword: "cold storage"
+image: { src: /images/featured/cold-storage-design-basics.webp, alt: "Cold Storage Refrigeration Design Basics: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [cold-storage, refrigeration, cold-chain, heat-load, insulation]
+faq:
+  - q: "What temperature should a cold store be kept at?"
+    a: "It depends on the product. Chilled stores for many fruits and vegetables run at about 0 to 4 °C, but chilling sensitive crops such as bananas, mangoes and tomatoes need about 10 to 13 °C. Potatoes are stored at about 2 to 4 °C for seed or 8 to 12 °C for processing. Frozen foods are typically held at −18 °C or colder."
+  - q: "Why is humidity important in cold storage?"
+    a: "Fresh produce is mostly water and loses weight and quality by transpiration if the air is too dry. Most fruits and vegetables keep best at about 85 to 95% relative humidity. Evaporators with large surface areas and small temperature differences help maintain high humidity by reducing moisture removed as frost."
+  - q: "What is controlled atmosphere storage?"
+    a: "Controlled atmosphere (CA) storage lowers oxygen and raises carbon dioxide in gas tight rooms, slowing respiration and ripening. Apples, for example, can be stored for many months in CA at around 1 to 3% oxygen. It requires gas tight construction, nitrogen generators or scrubbers and continuous gas monitoring."
+references:
+  - text: "ASHRAE Handbook: Refrigeration, Chapters on Refrigerated Facilities and Commodity Storage Requirements, 2022"
+  - text: "USDA Agriculture Handbook 66, The Commercial Storage of Fruits, Vegetables, and Florist and Nursery Stocks, 2016"
+  - text: "W. F. Stoecker, Industrial Refrigeration Handbook, McGraw-Hill"
+  - text: "National Centre for Cold-chain Development (NCCD), Technical Standards and Protocol for the Cold-chain in India"
+  - text: "ISO 5149-1:2014, Refrigerating systems and heat pumps: Safety and environmental requirements"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Cold storage** keeps perishable products such as fruits, vegetables, dairy, meat, fish and pharmaceuticals at controlled low temperature and humidity to slow respiration, microbial growth and deterioration. Design starts with the **product's storage conditions**, then sizes the **insulated enclosure** and calculates the **refrigeration load**: **transmission** through walls, **product** cooling and **respiration** heat, **air infiltration**, and **internal loads** from lights, people, fans, forklifts and defrost. A **vapour compression refrigeration system** with compressors, condensers, expansion valves and **evaporators** removes this heat, with controls for temperature, humidity, defrost and sometimes **controlled atmosphere**.
+
+</Key>
+
+Post-harvest losses of fruits and vegetables can be very large where cold chains are weak. Cold storage extends shelf life from days to weeks or months, stabilises prices and lets farmers sell when markets are favourable. It is also essential for frozen foods, dairy and vaccines. Good engineering design keeps product quality high while controlling energy use, which is the largest operating cost.
+
+## Storage conditions
+
+| Product | Temperature | Relative humidity | Typical storage life |
+| --- | --- | --- | --- |
+| Apples | −1 to 4 °C | 90 to 95% | 3 to 8 months (longer in CA) |
+| Potatoes (table) | 4 to 7 °C | 95 to 98% | 5 to 10 months |
+| Onions | 0 °C | 65 to 70% | 6 to 8 months |
+| Mangoes | 13 °C | 85 to 90% | 2 to 3 weeks |
+| Bananas (green) | 13 to 14 °C | 90 to 95% | 1 to 4 weeks |
+| Milk | 0 to 4 °C | n/a | 1 to 2 weeks |
+| Frozen foods | −18 to −25 °C | n/a | Months |
+
+Data from the USDA Agriculture Handbook 66 and ASHRAE. Chilling sensitive produce is damaged below its safe temperature even though it is above freezing. Ethylene producing products should not be stored with ethylene sensitive ones.
+
+## The insulated enclosure
+
+Modern cold rooms use **insulated sandwich panels** with polyurethane (PUF) or PIR cores, typically 80 to 150 mm for chillers and 150 to 200 mm for freezers, with steel facings. Key details:
+
+- **Vapour barrier** on the warm side to prevent moisture entering insulation and freezing.
+- **Floor insulation and underfloor heating** in freezers to prevent ground frost heave.
+- **Insulated doors** with strip curtains, air curtains or rapid roll doors, and **anterooms** to reduce infiltration.
+- **Pressure relief valves** in freezers to prevent panel damage from pressure changes.
+
+## Refrigeration load calculation
+
+The total load is the sum of several components:
+
+$$
+Q_\text{total} = Q_\text{trans} + Q_\text{product} + Q_\text{resp} + Q_\text{infil} + Q_\text{internal}
+$$
+
+**Transmission** through each surface:
+
+$$
+Q_\text{trans} = U \times A \times \Delta T
+$$
+
+**Product cooling** (sensible heat above freezing):
+
+$$
+Q_\text{product} = \frac{m \times c_p \times \Delta T}{t}
+$$
+
+plus latent heat of freezing and sensible heat below freezing for frozen products. **Respiration heat** from live produce is taken from tables, often 10 to 100 W per tonne depending on product and temperature. **Infiltration** depends on door openings and air exchanges. **Internal loads** include lights, people, forklifts, evaporator fan motors and defrost heat. A safety factor of about 10% is commonly added, and the refrigeration plant is sized to remove the daily load in about 16 to 20 hours of running.
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Cold room cross section showing heat gains: transmission through insulated walls, roof and floor; infiltration through the door; product heat and respiration from stacked produce; internal loads from lights, people and evaporator fans; the evaporator unit cooler inside removes heat and the condensing unit outside rejects it">
+<rect x="100" y="50" width="340" height="180" fill="#e6f6f4" stroke="#0b2545" stroke-width="10" stroke-opacity="0.25" />
+<rect x="100" y="50" width="340" height="180" fill="none" stroke="#0b2545" stroke-width="2" />
+<rect x="320" y="65" width="100" height="30" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#f5e6c8" stroke="#8a6d3b" stroke-width="1.5"><rect x="140" y="170" width="50" height="55" /><rect x="200" y="170" width="50" height="55" /><rect x="260" y="170" width="50" height="55" /></g>
+<rect x="440" y="160" width="10" height="70" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect x="480" y="40" width="100" height="50" rx="6" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<g stroke="#b42318" stroke-width="2.5"><path d="M50 140H95M270 15V45M465 195H452" /></g>
+<g fill="#b42318"><path d="M88 135l9 5-9 5z" /><path d="M265 38l5 9 5-9z" /><path d="M459 190l-9 5 9 5z" /></g>
+<g stroke="#13a89e" stroke-width="2"><path d="M420 80H480M420 90H470V75H480" /></g>
+<g stroke="#b42318" stroke-width="1.5" stroke-dasharray="3 3"><path d="M165 165V140M225 165V140M285 165V140" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="50" y="130">Transmission</text><text x="270" y="12">Roof gain</text><text x="515" y="205">Infiltration</text><text x="515" y="219">(door)</text>
+<text x="370" y="84">Evaporator</text><text x="530" y="62" font-weight="700">Condensing</text><text x="530" y="76">unit</text>
+<text x="225" y="135">Product and respiration heat</text><text x="270" y="260">Insulated panels, vapour barrier, heated floor (freezers)</text>
+<text x="215" y="110">Lights, people, fans, forklifts</text>
+</g>
+</svg>
+<figcaption>Main heat gains in a cold store, removed by the evaporator and rejected outside by the condensing unit.</figcaption>
+</figure>
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A potato cold room holds 100 t of potatoes. Wall, roof and floor area is 600 m² with U = 0.25 W/m²K; outside 35 °C, inside 4 °C. Daily intake is 10 t of potatoes cooled from 25 °C to 4 °C within 24 hours (c_p = 3.6 kJ/kgK). Respiration heat is about 20 W per tonne at storage temperature. Infiltration and internal loads are estimated at 6 kW.</dd>
+<dt>Find</dt><dd>The total refrigeration load and the plant capacity with a 10% safety factor and 20 hours of running per day.</dd>
+<dt>Assumptions</dt><dd>Steady conditions; respiration of the daily intake included in the 100 t.</dd>
+<dt>Solution</dt><dd>Transmission = 0.25 × 600 × 31 = 4650 W = 4.65 kW<br />Product = 10 000 × 3.6 × 21 ÷ 86 400 = 8.75 kW<br />Respiration = 100 × 20 = 2000 W = 2.0 kW<br />Infiltration and internal = 6.0 kW<br />Total = 21.4 kW; with 10% factor = 23.5 kW<br />Plant capacity = 23.5 × 24 ÷ 20 = 28.2 kW</dd>
+<dt>Answer</dt><dd><strong>Average load about 23.5 kW; select refrigeration equipment of about 28 kW (about 8 TR)</strong></dd>
+<dt>Limitations</dt><dd>Detailed design uses hourly weather, door usage and product loading schedules; pull-down at initial loading may need more capacity.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/chiller-tonnage" title="Refrigeration Tonnage Calculator" />
+
+## Refrigeration system
+
+Most cold stores use **vapour compression refrigeration**, explained in the [vapour compression refrigeration cycle](/mechanical-engineering/vapour-compression-refrigeration-cycle/):
+
+- **Compressors:** reciprocating, scroll or screw types.
+- **Condensers:** air cooled, water cooled or evaporative.
+- **Expansion devices:** thermostatic or electronic expansion valves.
+- **Evaporators (unit coolers):** fans blow room air over finned coils. A small temperature difference between air and refrigerant (about 4 to 6 K for produce) keeps humidity high.
+- **Refrigerants:** ammonia for large industrial plants, CO₂ in transcritical or cascade systems, and HFC or low GWP HFO blends in smaller units, chosen with safety standards such as ISO 5149.
+- **Defrost:** electric, hot gas or water defrost removes ice from coils in rooms below about 2 °C.
+
+## Layout and product handling
+
+A well planned cold store has a receiving area with weighbridge or scales, sorting and grading, pre-cooling, storage chambers sized for different products and temperatures, and a dispatch area, ideally with insulated loading docks and seals so trucks can load without exposing the room to outside air. Racking or crates stacked on pallets must leave gaps along walls and between stacks so air can circulate. Product temperature should be checked at receiving and before dispatch, and stock rotated on a first in, first out basis.
+
+## Controls and monitoring
+
+Controllers maintain temperature with thermostats and pressure controls, schedule defrosts, and log data. **Temperature and humidity sensors** spread through the room, alarms for high temperature or power failure, and remote monitoring protect stock. Good [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) and calibrated data loggers are required for food safety audits under [HACCP principles](/agricultural-engineering/haccp-principles/).
+
+## Energy efficiency in cold storage
+
+Insulation quality, door management, efficient compressors with variable speed drives, floating head pressure control, evaporative condensers, LED lighting, and heat recovery can cut energy use significantly. In rural areas, solar powered cold rooms with thermal storage (ice or phase change materials) support farmers without reliable grid power. Proper stacking with air gaps ensures cold air reaches all produce, and pre-cooling produce soon after harvest, for example in forced air pre-coolers, greatly improves storage life.

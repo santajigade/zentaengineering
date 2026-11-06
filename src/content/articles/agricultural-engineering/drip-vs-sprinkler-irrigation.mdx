@@ -1,0 +1,144 @@
+---
+title: "Drip vs Sprinkler Irrigation Systems Compared"
+description: "Drip vs sprinkler irrigation compared: components, how each works, efficiency, crops, soils, cost, maintenance, fertigation and a water requirement example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: agricultural-engineering
+subcategory: irrigation-systems
+focusKeyword: "drip vs sprinkler irrigation"
+image: { src: /images/featured/drip-vs-sprinkler-irrigation.webp, alt: "Drip vs Sprinkler Irrigation Systems Compared: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [irrigation, drip-irrigation, sprinkler-irrigation, water-management, fertigation]
+faq:
+  - q: "Which is more water efficient, drip or sprinkler irrigation?"
+    a: "Drip irrigation is usually more efficient, with application efficiencies of about 85 to 95%, because water goes directly to the root zone with little evaporation, wind drift or runoff. Sprinkler systems typically achieve about 65 to 85%, depending on design, wind, pressure and system type, with centre pivots using low pressure drops at the higher end."
+  - q: "Can drip irrigation be used for field crops like wheat?"
+    a: "It can, but it is usually uneconomic for closely spaced, low value crops because many laterals are needed per hectare. Drip suits row crops, vegetables, orchards, vineyards, sugarcane and cotton. Close growing crops such as wheat, rice, pasture and fodder are more commonly irrigated with sprinklers, pivots or surface methods."
+  - q: "What is fertigation?"
+    a: "Fertigation is applying water soluble fertilisers through the irrigation system. Drip systems are ideal for it, delivering nutrients directly to the roots in small, frequent doses, which improves uptake and reduces losses. Fertigation needs proper injectors, backflow prevention and compatible fertilisers that do not clog emitters."
+references:
+  - text: "FAO Irrigation and Drainage Paper 56, Crop Evapotranspiration: Guidelines for Computing Crop Water Requirements, 1998"
+  - text: "F. R. Lamm, J. E. Ayars and F. S. Nakayama (eds.), Microirrigation for Crop Production, Elsevier, 2007"
+  - text: "R. L. Elliott and J. R. Hoffman (eds.), Design and Operation of Farm Irrigation Systems, 2nd ed., ASABE"
+  - text: "ISO 9261:2004, Agricultural irrigation equipment: Emitters and emitting pipe, Specification and test methods"
+  - text: "Ministry of Agriculture and Farmers Welfare, Operational Guidelines for Per Drop More Crop, Government of India"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+In **drip vs sprinkler irrigation**, the difference is how water reaches the crop. **Drip (trickle) irrigation** delivers water slowly through **emitters** on pipes laid along crop rows, wetting only the root zone, with **application efficiency of about 85 to 95%**. **Sprinkler irrigation** sprays water through the air over the whole area like rainfall, using impact sprinklers, rain guns or centre pivots, with efficiency of about **65 to 85%**. Drip saves water and suits row crops, orchards and saline or sloping land; sprinklers cost less per hectare for close growing crops such as cereals and pasture, and can provide frost protection and cooling.
+
+</Key>
+
+Agriculture uses about 70% of global freshwater withdrawals. As water becomes scarcer, efficient irrigation is one of the most effective ways to grow more food with less water. Drip and sprinkler systems are the two main pressurised alternatives to traditional flood and furrow irrigation, which often waste half the water applied.
+
+## How drip irrigation works
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Two layouts compared. Left: drip system with pump, screen or disc filter, fertiliser injector, main line, sub-main and laterals with emitters beside each plant, wetting only small bulbs of soil around the roots. Right: sprinkler system with pump, main line, lateral and risers with sprinklers spraying overlapping circles covering the whole field">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="150" y="22">Drip</text><text x="450" y="22">Sprinkler</text></g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="10" y="40" width="40" height="30" rx="4" fill="#eef1f6" /><rect x="60" y="40" width="40" height="30" rx="4" fill="#e6f6f4" /><rect x="110" y="40" width="40" height="30" rx="4" fill="#fff7e0" />
+<rect x="320" y="40" width="40" height="30" rx="4" fill="#eef1f6" />
+</g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M50 55h10M100 55h10M150 55H280M170 55V250M170 100H280M170 160H280M170 220H280M360 55H580M380 55V260M380 100H580M380 180H580" /></g>
+<g fill="#8a6d3b" fill-opacity="0.35"><ellipse cx="200" cy="108" rx="12" ry="8" /><ellipse cx="240" cy="108" rx="12" ry="8" /><ellipse cx="200" cy="168" rx="12" ry="8" /><ellipse cx="240" cy="168" rx="12" ry="8" /><ellipse cx="200" cy="228" rx="12" ry="8" /><ellipse cx="240" cy="228" rx="12" ry="8" /></g>
+<g fill="#0b2545"><circle cx="200" cy="100" r="3" /><circle cx="240" cy="100" r="3" /><circle cx="200" cy="160" r="3" /><circle cx="240" cy="160" r="3" /><circle cx="200" cy="220" r="3" /><circle cx="240" cy="220" r="3" /></g>
+<g fill="#13a89e" fill-opacity="0.15" stroke="#13a89e" stroke-width="1" stroke-dasharray="3 3"><circle cx="430" cy="100" r="40" /><circle cx="500" cy="100" r="40" /><circle cx="430" cy="180" r="40" /><circle cx="500" cy="180" r="40" /></g>
+<g fill="#0b2545"><circle cx="430" cy="100" r="4" /><circle cx="500" cy="100" r="4" /><circle cx="430" cy="180" r="4" /><circle cx="500" cy="180" r="4" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545" text-anchor="middle">
+<text x="30" y="84">Pump</text><text x="80" y="84">Filter</text><text x="130" y="84">Ferti-</text><text x="130" y="95">gation</text>
+<text x="300" y="104">Lateral</text><text x="220" y="262">Wetted bulbs at roots</text>
+<text x="340" y="84">Pump</text><text x="470" y="250">Overlapping wetted circles</text>
+</g>
+</svg>
+<figcaption>Simplified layouts: drip wets only the root zone; sprinklers wet the whole area with overlapping patterns.</figcaption>
+</figure>
+
+A drip system has a **head unit** and a **distribution network**:
+
+- **Pump** or pressurised supply at about 1 to 2 bar for emitters.
+- **Filtration:** sand media, screen or disc filters remove particles that would clog emitters. Filtration is the most critical part of a drip system.
+- **Fertigation unit:** venturi injector, fertiliser tank or dosing pump.
+- **Valves, pressure regulators and air release valves.**
+- **Main and sub-main lines** (PVC or HDPE).
+- **Laterals:** 12 to 20 mm polyethylene pipes along crop rows, with **emitters (drippers)** that discharge typically 1 to 8 L/h each. **Pressure compensating** emitters give uniform flow on slopes and long runs.
+- **Subsurface drip** buries laterals below the surface, reducing evaporation further.
+
+Water infiltrates and spreads in a **wetted bulb**, whose shape depends on soil: narrow and deep in sand, wide and shallow in clay.
+
+## How sprinkler irrigation works
+
+Water under pressure (typically 2 to 4 bar for conventional systems) is sprayed through nozzles to fall like rain.
+
+- **Portable or semi-permanent set systems:** aluminium or HDPE laterals with impact sprinklers on risers, moved between positions.
+- **Solid set** systems with permanent laterals for orchards, nurseries and frost protection.
+- **Rain guns:** large high pressure sprinklers for sugarcane and fodder.
+- **Centre pivot and linear move systems:** long spans on wheeled towers rotate around a pivot or move across the field, often with low pressure drop nozzles near the crop. They irrigate large areas with little labour.
+- **Micro-sprinklers** in orchards combine features of both methods.
+
+Sprinklers must be spaced so patterns overlap (often 50 to 60% of wetted diameter) to achieve uniform application, measured by the Christiansen **uniformity coefficient**.
+
+## Drip vs sprinkler irrigation: comparison
+
+| Factor | Drip | Sprinkler |
+| --- | --- | --- |
+| Application efficiency | About 85 to 95% | About 65 to 85% |
+| Area wetted | Root zone only | Whole field |
+| Operating pressure | About 1 to 2 bar | About 2 to 4 bar (low pressure pivots less) |
+| Suitable crops | Row crops, vegetables, orchards, vineyards, sugarcane | Cereals, pulses, pasture, fodder, vegetables, lawns |
+| Weed growth | Low (dry inter-row) | Higher |
+| Foliar disease risk | Low | Higher (wet leaves) |
+| Wind effect | None | Drift and poor uniformity in wind |
+| Saline water | Better (keeps root zone moist) | Leaf burn risk |
+| Fertigation | Excellent | Possible |
+| Capital cost per hectare | Higher for close spaced crops | Lower for field crops |
+| Clogging risk | High without good filtration | Low |
+| Other uses | Precise nutrient delivery | Frost protection, cooling, dust control |
+
+## Crop water requirement
+
+Irrigation design starts with how much water the crop needs. Using the FAO-56 approach:
+
+$$
+ET_c = K_c \times ET_0
+$$
+
+where ET₀ is reference evapotranspiration and K_c the crop coefficient. The gross depth to apply allows for efficiency:
+
+$$
+d_\text{gross} = \frac{ET_c - P_\text{eff}}{E_a}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 2 ha tomato field in mid season has ET₀ = 6 mm/day and K_c = 1.15. No effective rain. Compare daily gross water needs with drip (efficiency 90%) and sprinkler (efficiency 75%).</dd>
+<dt>Find</dt><dd>Daily crop water use and gross water needed for each system.</dd>
+<dt>Assumptions</dt><dd>1 mm over 1 ha = 10 m³; full canopy cover so no reduction for drip wetted area.</dd>
+<dt>Solution</dt><dd>ET_c = 1.15 × 6 = 6.9 mm/day<br />Net volume = 6.9 × 10 × 2 = 138 m³/day<br />Drip gross = 138 ÷ 0.90 = 153 m³/day<br />Sprinkler gross = 138 ÷ 0.75 = 184 m³/day</dd>
+<dt>Answer</dt><dd><strong>The crop uses about 138 m³/day; drip needs about 153 m³/day and sprinklers about 184 m³/day, so drip saves around 31 m³ (17%) per day</strong></dd>
+<dt>Limitations</dt><dd>Real savings depend on design, management, wind and soil; early season drip savings are larger because only part of the area needs wetting.</dd>
+</dl>
+</Example>
+
+<Calculator path="ecology/garden-irrigation" title="Irrigation Water Calculator" />
+
+## Energy and cost considerations
+
+Pumping energy depends on flow and pressure. Drip systems need less water and lower pressure than conventional sprinklers, so they usually need less energy per hectare, although filters add some pressure loss. Low pressure centre pivots have narrowed the gap. Capital cost per hectare is typically higher for drip in widely spaced field crops and lower for orchards, while labour needs are low for both once automated. Many governments, including India's Per Drop More Crop programme, subsidise micro-irrigation to encourage water saving.
+
+## Maintenance considerations
+
+Both systems lose efficiency quickly when neglected, so maintenance should be planned at the start of every season and checked weekly.
+
+
+**Drip:** clean filters daily or automatically, flush laterals regularly, inject acid or chlorine to dissolve mineral deposits and biological slime, check emitter flow, and protect laterals from rodents and machinery. **Sprinkler:** check nozzle wear, which increases flow and spoils uniformity, keep pressure within range, repair leaks and maintain pivot gearboxes and tyres. Both benefit from [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) to detect blockages and leaks early.
+
+## Choosing between drip vs sprinkler irrigation
+
+Consider crop type and spacing, soil infiltration rate, field shape and slope, water quality and quantity, wind, energy cost, labour, capital and subsidies. Many farms use both: drip for orchards and vegetables, sprinklers or pivots for cereals and fodder. Adding sensors and controllers, as described in [automated irrigation control](/agricultural-engineering/automated-irrigation-control/) and [precision agriculture technologies](/agricultural-engineering/precision-agriculture-technologies/), further improves water productivity for either system.

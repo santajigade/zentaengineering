@@ -1,0 +1,135 @@
+---
+title: "HACCP Principles for Food Processing Plants"
+description: "HACCP principles explained: the 7 principles, 12 steps, prerequisite programmes, hazard analysis, CCPs, critical limits, monitoring and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: agricultural-engineering
+subcategory: food-safety
+focusKeyword: "haccp principles"
+image: { src: /images/featured/haccp-principles.webp, alt: "HACCP Principles for Food Processing Plants: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [haccp, food-safety, ccp, food-processing, iso-22000]
+faq:
+  - q: "What is the difference between a CCP and a prerequisite programme?"
+    a: "Prerequisite programmes (PRPs), such as cleaning, pest control, personal hygiene and maintenance, create the basic hygienic conditions for all food production. A critical control point (CCP) is a specific step where control is essential to prevent, eliminate or reduce a significant hazard to an acceptable level, such as pasteurization or metal detection, and is monitored against critical limits."
+  - q: "Is HACCP mandatory?"
+    a: "In many countries, yes, for food businesses. The EU requires HACCP based procedures under Regulation 852/2004, the USA requires HACCP for meat, poultry, seafood and juice and risk based preventive controls under FSMA, and India's FSSAI requires food safety management systems based on HACCP for many licensed businesses. Global retailers also demand it through GFSI recognised standards."
+  - q: "How does HACCP relate to ISO 22000?"
+    a: "ISO 22000 is a food safety management system standard that incorporates the Codex HACCP principles together with management system elements such as policy, objectives, document control, internal audits, management review and continual improvement. FSSC 22000 adds further requirements and is recognised by GFSI."
+references:
+  - text: "Codex Alimentarius, General Principles of Food Hygiene, CXC 1-1969, Rev. 2022 (includes HACCP Annex)"
+  - text: "ISO 22000:2018, Food safety management systems: Requirements for any organization in the food chain"
+  - text: "U.S. FDA, HACCP Principles and Application Guidelines, National Advisory Committee on Microbiological Criteria for Foods, 1997"
+  - text: "Regulation (EC) No 852/2004 on the hygiene of foodstuffs"
+  - text: "FSSAI, Food Safety Management System (FSMS) Guidance Documents, India"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**HACCP principles** (Hazard Analysis and Critical Control Points) form a preventive system for food safety. The **seven principles** are: (1) **conduct a hazard analysis** of biological, chemical, physical and allergen hazards; (2) **determine critical control points (CCPs)**; (3) **establish critical limits** for each CCP; (4) **establish monitoring** procedures; (5) **establish corrective actions** when limits are not met; (6) **establish verification** procedures; and (7) **establish documentation and record keeping**. HACCP is applied through **12 steps** defined by Codex Alimentarius and rests on strong **prerequisite programmes** such as hygiene, cleaning and pest control.
+
+</Key>
+
+HACCP was developed in the 1960s by the Pillsbury Company with NASA and the US Army to make food for astronauts as safe as possible. Instead of relying on end product testing, which can never test every unit, HACCP controls hazards at the points in the process where they can be prevented or eliminated. It is now the international basis for food safety in processing plants, farms, kitchens and logistics.
+
+## Types of food safety hazards
+
+- **Biological:** pathogenic bacteria (Salmonella, Listeria, E. coli O157, Clostridium botulinum), viruses and parasites.
+- **Chemical:** cleaning chemical residues, pesticide residues, mycotoxins, veterinary drug residues, toxic metals, unapproved additives.
+- **Physical:** metal fragments, glass, hard plastic, stones, bone.
+- **Allergens:** undeclared milk, egg, peanut, tree nuts, wheat, soy, fish, shellfish, sesame and others.
+
+## Prerequisite programmes
+
+HACCP only works on a foundation of good manufacturing and hygiene practices:
+
+- Hygienic plant design, layout and equipment.
+- Cleaning and sanitation, including CIP systems.
+- Pest control.
+- Personal hygiene and health of staff.
+- Water and air quality.
+- Supplier approval and raw material specifications.
+- Preventive maintenance and calibration.
+- Waste management, storage, transport and traceability.
+- Training.
+
+## The 12 steps to apply HACCP
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Twelve HACCP steps in two columns: five preliminary steps (assemble team, describe product, identify intended use, construct flow diagram, verify flow diagram on site) followed by the seven principles (hazard analysis, determine CCPs, critical limits, monitoring, corrective actions, verification, records)">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="150" y="20">Preliminary steps</text><text x="440" y="20">The seven principles</text></g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#eef1f6">
+<rect x="30" y="32" width="240" height="32" rx="5" /><rect x="30" y="72" width="240" height="32" rx="5" /><rect x="30" y="112" width="240" height="32" rx="5" /><rect x="30" y="152" width="240" height="32" rx="5" /><rect x="30" y="192" width="240" height="32" rx="5" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#e6f6f4">
+<rect x="320" y="32" width="240" height="32" rx="5" /><rect x="320" y="68" width="240" height="32" rx="5" fill="#ffe9e7" /><rect x="320" y="104" width="240" height="32" rx="5" /><rect x="320" y="140" width="240" height="32" rx="5" /><rect x="320" y="176" width="240" height="32" rx="5" /><rect x="320" y="212" width="240" height="32" rx="5" /><rect x="320" y="248" width="240" height="32" rx="5" />
+</g>
+<path d="M150 224V255H295V48H320" stroke="#13a89e" stroke-width="2" fill="none" /><path d="M312 43l8 5-8 5z" fill="#13a89e" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="150" y="53">1. Assemble HACCP team</text><text x="150" y="93">2. Describe product</text><text x="150" y="133">3. Identify intended use</text><text x="150" y="173">4. Construct flow diagram</text><text x="150" y="213">5. Verify flow diagram on site</text>
+<text x="440" y="53">6. Hazard analysis (P1)</text><text x="440" y="89">7. Determine CCPs (P2)</text><text x="440" y="125">8. Critical limits (P3)</text><text x="440" y="161">9. Monitoring (P4)</text><text x="440" y="197">10. Corrective actions (P5)</text><text x="440" y="233">11. Verification (P6)</text><text x="440" y="269">12. Records (P7)</text>
+</g>
+</svg>
+<figcaption>The 12 Codex steps: five preliminary steps followed by the seven HACCP principles.</figcaption>
+</figure>
+
+## The seven HACCP principles in detail
+
+### Principle 1: hazard analysis
+
+For each process step on the verified flow diagram, list potential hazards, assess their likelihood and severity, and identify control measures. Only significant hazards are carried forward. A [risk matrix](/safety-engineering/risk-matrix/) is often used to judge significance.
+
+### Principle 2: determine critical control points
+
+A **CCP** is a step where control can be applied and is essential to prevent, eliminate or reduce a hazard to an acceptable level, and where loss of control is not corrected by a later step. A **decision tree** of questions helps decide. Typical CCPs: cooking, [pasteurization](/agricultural-engineering/pasteurization-htst-uht/), retort sterilisation, chilling and [cold storage](/agricultural-engineering/cold-storage-design-basics/) temperatures, acidification, metal detection and allergen label checks.
+
+### Principle 3: establish critical limits
+
+Measurable values that separate safe from unsafe: for example, milk at 72 °C for at least 15 seconds, product core temperature at least 75 °C, pH below 4.6, metal detector rejecting 2.0 mm ferrous test pieces. Limits must be based on scientific evidence or regulation. Operating limits slightly tighter than critical limits allow adjustment before a deviation.
+
+### Principle 4: establish monitoring
+
+Planned observations or measurements that show whether a CCP is under control: what, how, when (frequency) and who. Continuous monitoring with recorders and alarms is preferred, such as temperature charts on a pasteurizer. Reliable sensors and [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) are essential.
+
+### Principle 5: establish corrective actions
+
+Predefined actions when monitoring shows a deviation: restore control, identify and hold affected product, evaluate its safety, rework or destroy it, find the cause and prevent recurrence, often with [root cause analysis](/safety-engineering/root-cause-analysis-methods/).
+
+### Principle 6: establish verification
+
+Activities that confirm the HACCP system works: reviewing records, calibrating instruments, testing products and environment, validating critical limits, internal audits and annual HACCP review.
+
+### Principle 7: documentation and record keeping
+
+The HACCP plan, hazard analysis, CCP determination, monitoring records, deviations and corrective actions, verification results and training records. Records are evidence for inspectors, auditors and customers.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant produces ready to eat cooked chicken pieces. Process: receive raw chicken (chilled), store at 0 to 4 °C, marinate, cook in a continuous oven, chill, metal detect, pack, store frozen.</dd>
+<dt>Find</dt><dd>Two likely CCPs and their critical limits, monitoring and corrective actions.</dd>
+<dt>Assumptions</dt><dd>Hazard analysis has identified Salmonella and Listeria survival (biological) and metal fragments (physical) as significant.</dd>
+<dt>Solution</dt><dd>CCP 1, cooking: critical limit core temperature at least 75 °C (or equivalent time and temperature); monitoring: core probe on sample pieces every 30 minutes plus continuous oven temperature and belt speed recording; corrective action: hold product since last good check, recook or reject, adjust oven<br />CCP 2, metal detection: critical limit detection and rejection of 2.0 mm ferrous, 2.5 mm non-ferrous and 3.0 mm stainless test pieces; monitoring: test pieces passed hourly and at start up; corrective action: if test fails, stop line, recheck all product since last successful test, repair detector</dd>
+<dt>Answer</dt><dd><strong>Cooking and metal detection are CCPs with clear measurable limits, monitoring frequencies and predefined corrective actions</strong></dd>
+<dt>Limitations</dt><dd>Exact limits must be validated for this product and line, and other steps such as chilling may also be CCPs depending on the hazard analysis.</dd>
+</dl>
+</Example>
+
+## Common HACCP mistakes
+
+- Copying a generic plan instead of analysing the actual process, products and plant.
+- Too many CCPs, which spreads attention thin, or too few, missing real hazards.
+- Critical limits that are not measurable or not validated.
+- Monitoring done but records not reviewed, so deviations go unnoticed.
+- Weak prerequisite programmes, such as poor cleaning, which undermine every CCP.
+
+## HACCP and food safety management standards
+
+HACCP is the core of food safety management systems such as **ISO 22000**, **FSSC 22000**, **BRCGS** and **SQF**, which add management commitment, document control, internal audits and continual improvement. In many countries regulations, including FSSAI requirements in India, require HACCP based food safety plans.
+
+## Making HACCP principles work in practice
+
+Successful HACCP depends on a multidisciplinary team, an accurate flow diagram verified on the factory floor, simple and practical monitoring, trained operators who understand why limits matter, and regular review whenever products, equipment or suppliers change. Combined with good engineering such as hygienic design, reliable [grain drying](/agricultural-engineering/grain-drying-methods/) and storage of raw materials, and accurate process control, HACCP principles keep food safe from farm to fork.

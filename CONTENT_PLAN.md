@@ -227,14 +227,14 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| irrigation-systems | Drip vs Sprinkler Irrigation Systems Compared | drip-vs-sprinkler-irrigation | comparison | to write |
-| farm-machinery | Tractor Power Transmission System Explained | tractor-power-transmission | working-principle | to write |
-| precision-agriculture | Precision Agriculture Technologies Explained | precision-agriculture-technologies | explanation | to write |
-| agricultural-automation | Automated Irrigation Control with Soil Moisture Feedback | automated-irrigation-control | application | to write |
-| post-harvest | Grain Drying Methods and Dryer Types | grain-drying-methods | explanation | to write |
-| food-processing | Pasteurization: HTST and UHT Processes Explained | pasteurization-htst-uht | explanation | to write |
-| cold-chain | Cold Storage Refrigeration Design Basics | cold-storage-design-basics | fundamentals | to write |
-| food-safety | HACCP Principles for Food Processing Plants | haccp-principles | explanation | to write |
+| irrigation-systems | Drip vs Sprinkler Irrigation Systems Compared | drip-vs-sprinkler-irrigation | comparison | draft |
+| farm-machinery | Tractor Power Transmission System Explained | tractor-power-transmission | working-principle | draft |
+| precision-agriculture | Precision Agriculture Technologies Explained | precision-agriculture-technologies | explanation | draft |
+| agricultural-automation | Automated Irrigation Control with Soil Moisture Feedback | automated-irrigation-control | application | draft |
+| post-harvest | Grain Drying Methods and Dryer Types | grain-drying-methods | explanation | draft |
+| food-processing | Pasteurization: HTST and UHT Processes Explained | pasteurization-htst-uht | explanation | draft |
+| cold-chain | Cold Storage Refrigeration Design Basics | cold-storage-design-basics | fundamentals | draft |
+| food-safety | HACCP Principles for Food Processing Plants | haccp-principles | explanation | draft |
 
 ## aerospace-engineering
 

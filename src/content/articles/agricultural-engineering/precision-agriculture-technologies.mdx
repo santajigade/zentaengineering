@@ -1,0 +1,127 @@
+---
+title: "Precision Agriculture Technologies Explained"
+description: "Precision agriculture technologies explained: GNSS guidance, RTK, yield mapping, soil sampling, NDVI, variable rate application, drones and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: agricultural-engineering
+subcategory: precision-agriculture
+focusKeyword: "precision agriculture"
+image: { src: /images/featured/precision-agriculture-technologies.webp, alt: "Precision Agriculture Technologies Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [precision-agriculture, gnss, variable-rate, ndvi, remote-sensing]
+faq:
+  - q: "What is the main benefit of precision agriculture?"
+    a: "It lets farmers manage variation within fields instead of treating every part the same. Applying seed, fertiliser, water and chemicals where and when they are needed improves yields in strong zones, saves inputs in weak zones, reduces overlap and environmental losses, and gives data for better decisions."
+  - q: "What is RTK and why is it important?"
+    a: "Real time kinematic positioning corrects satellite signals using a nearby base station or network, improving tractor position accuracy from about a metre with standard GNSS to about 2 cm. This accuracy allows repeatable rows, controlled traffic farming, precise planting and mechanical weeding close to crops."
+  - q: "Is precision agriculture only for large farms?"
+    a: "No, although large farms adopted it first. Smartphone apps, satellite imagery services, low cost guidance kits, drone spraying services and custom hiring of equipment make precision tools accessible to smallholders. In many regions, farmer producer organisations and service providers share the cost."
+references:
+  - text: "International Society of Precision Agriculture (ISPA), Definition of Precision Agriculture, 2019"
+  - text: "J. V. Stafford (ed.), Precision Agriculture for Sustainability, Burleigh Dodds Science Publishing, 2019"
+  - text: "Q. Zhang (ed.), Precision Agriculture Technology for Crop Farming, CRC Press, 2016"
+  - text: "J. W. Rouse et al., Monitoring vegetation systems in the Great Plains with ERTS, NASA SP-351, 1974"
+  - text: "ISO 11783 (ISOBUS), Tractors and machinery for agriculture and forestry: Serial control and communications data network"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Precision agriculture** uses data and technology to manage crops and soils according to the variation within each field. Core technologies are **GNSS positioning** (GPS with **RTK** corrections) for **auto-steering** and accurate mapping; **yield monitors** and **soil sampling** to map variability; **remote sensing** from satellites and **drones**, using indices such as **NDVI** to assess crop health; **variable rate technology (VRT)** to apply seed, fertiliser, lime, water and chemicals at different rates across a field; **sensors and IoT** for soil moisture and weather; and **farm management software** to combine data and make decisions.
+
+</Key>
+
+No field is uniform. Soil texture, organic matter, nutrients, drainage, slope and pest pressure vary from place to place, so crop yield varies too. Conventional farming applies the same inputs everywhere, over-supplying some areas and under-supplying others. Precision agriculture, defined by the International Society of Precision Agriculture as a management strategy that uses data to support decisions according to estimated variability, aims to do the right thing, in the right place, at the right time and in the right amount.
+
+## The precision agriculture cycle
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Precision agriculture cycle with four stages in a loop: collect data (GNSS, yield monitor, soil samples, satellites, drones, sensors), analyse and map (GIS, zones, prescriptions), apply variably (auto-steer, variable rate seeding, fertiliser, spraying, irrigation), evaluate results (yield maps, records), then back to collect">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="210" y="15" width="180" height="60" rx="8" fill="#e6f6f4" /><rect x="420" y="115" width="170" height="60" rx="8" fill="#fff7e0" /><rect x="210" y="215" width="180" height="60" rx="8" fill="#ffe9e7" /><rect x="10" y="115" width="170" height="60" rx="8" fill="#eef1f6" />
+</g>
+<g stroke="#13a89e" stroke-width="2.5" fill="none"><path d="M390 45Q480 50 500 108" /><path d="M500 175Q480 240 396 245" /><path d="M210 245Q120 240 100 182" /><path d="M100 115Q120 50 204 45" /></g>
+<g fill="#13a89e"><path d="M495 104l5 10 5-10z" /><path d="M400 240l-9 5 9 5z" /><path d="M95 186l5-10 5 10z" /><path d="M200 40l9 5-9 5z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="300" y="40">1. Collect data</text><text x="505" y="140">2. Analyse and map</text><text x="300" y="240">3. Apply variably</text><text x="95" y="140">4. Evaluate</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545" text-anchor="middle">
+<text x="300" y="58">GNSS, yield, soil, satellite,</text><text x="300" y="70">drone, sensors</text>
+<text x="505" y="158">GIS, zones,</text><text x="505" y="170">prescription maps</text>
+<text x="300" y="258">Auto-steer, VRT seed,</text><text x="300" y="270">fertiliser, spray, water</text>
+<text x="95" y="158">Yield maps, costs,</text><text x="95" y="170">records</text>
+</g>
+</svg>
+<figcaption>The precision agriculture cycle of data, decisions and targeted action.</figcaption>
+</figure>
+
+## 1. Positioning and guidance
+
+**Global navigation satellite systems (GNSS)**, including GPS, GLONASS, Galileo, BeiDou and India's NavIC, give machine positions. Accuracy levels:
+
+- **Standalone GNSS:** about 1 to 3 m, adequate for mapping and scouting.
+- **SBAS corrections** (such as GAGAN in India, WAAS, EGNOS): about 0.5 to 1 m.
+- **RTK (real time kinematic):** about 2 cm, using a local base station or network.
+
+Uses include **auto-steering** (reduces overlap and gaps, operator fatigue and night work errors), **section control** that switches sprayer or planter sections off over already treated areas or headlands, and **controlled traffic farming**, where machines always use the same wheel tracks to limit soil compaction.
+
+## 2. Mapping variability
+
+- **Yield monitoring:** sensors on combine harvesters measure grain flow and moisture, linked to GNSS position, producing **yield maps** that show which zones perform well or poorly year after year.
+- **Soil sampling:** grid or zone sampling with laboratory analysis of pH, nutrients and organic matter.
+- **Soil sensors:** electrical conductivity (EC) sensors, gamma radiometrics and optical sensors map texture and properties continuously.
+- **Topography** from RTK or LiDAR identifies wet hollows and slopes.
+
+## 3. Remote sensing and vegetation indices
+
+Healthy vegetation reflects strongly in near infrared (NIR) and absorbs red light for photosynthesis. The **normalised difference vegetation index** combines the two:
+
+$$
+NDVI = \frac{NIR - Red}{NIR + Red}
+$$
+
+NDVI ranges from −1 to +1; dense, healthy crops are typically 0.6 to 0.9, stressed or sparse crops lower, and bare soil about 0.1 to 0.2. Satellites such as Sentinel-2 provide free 10 m imagery every few days; **drones** with multispectral cameras give centimetre resolution on demand. Other indices such as NDRE (red edge) are more sensitive in dense canopies. Thermal cameras detect water stress.
+
+## 4. Variable rate technology (VRT)
+
+Controllers on ISOBUS (ISO 11783) compatible tractors read **prescription maps** and adjust rates in real time:
+
+- **Variable rate seeding:** higher density on productive soils, lower on poor ones.
+- **Variable rate fertiliser and lime:** based on soil tests, yield potential or crop sensors that measure canopy greenness on the go.
+- **Targeted spraying:** camera based "see and spray" systems detect weeds and spray only them, cutting herbicide use dramatically.
+- **Variable rate irrigation:** centre pivots adjust nozzles by zone, linked to [automated irrigation control](/agricultural-engineering/automated-irrigation-control/).
+
+## 5. Sensors, IoT and data platforms
+
+Wireless soil moisture probes, weather stations, crop and livestock sensors and machine telematics send data to cloud platforms. Farm management information systems combine maps, operations records, costs and agronomic models. Machine learning, discussed in [supervised vs unsupervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/), helps predict yields, detect diseases from images and recommend actions.
+
+## 6. Drones and robotics
+
+Drones scout fields, map crops and increasingly spray pesticides and fertilisers on small plots and difficult terrain, subject to aviation and pesticide rules. Field robots weed mechanically or with lasers, and autonomous tractors are being trialled. Robotics overlaps with [types of industrial robots](/automation-robotics/types-of-industrial-robots/) and [machine vision components](/automation-robotics/machine-vision-components/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A drone multispectral image of a wheat field gives reflectance values in two zones: zone A, NIR = 0.48 and Red = 0.06; zone B, NIR = 0.32 and Red = 0.12. A nitrogen prescription uses 40 kg N/ha where NDVI is above 0.7 and 60 kg N/ha where it is between 0.4 and 0.7. Each zone covers 5 ha. The uniform rate would be 60 kg N/ha everywhere.</dd>
+<dt>Find</dt><dd>NDVI of each zone, the variable rate total nitrogen, and the saving compared with the uniform rate.</dd>
+<dt>Assumptions</dt><dd>Simplified two-zone rule; agronomist has validated thresholds for this crop stage.</dd>
+<dt>Solution</dt><dd>Zone A: NDVI = (0.48 − 0.06) ÷ (0.48 + 0.06) = 0.42 ÷ 0.54 = 0.78<br />Zone B: NDVI = (0.32 − 0.12) ÷ (0.32 + 0.12) = 0.20 ÷ 0.44 = 0.45<br />Variable rate: 5 × 40 + 5 × 60 = 500 kg N<br />Uniform: 10 × 60 = 600 kg N; saving = 100 kg N (17%)</dd>
+<dt>Answer</dt><dd><strong>Zone A NDVI 0.78 (healthy), zone B 0.45 (weaker); variable rate uses 500 kg N instead of 600 kg, a 17% saving</strong></dd>
+<dt>Limitations</dt><dd>Low NDVI can be caused by water stress, disease or soil problems rather than nitrogen shortage; ground truthing is essential.</dd>
+</dl>
+</Example>
+
+## Benefits and challenges of precision agriculture
+
+**Benefits:** higher input efficiency, lower costs, better yields in responsive zones, reduced nutrient and pesticide losses to water and air, less soil compaction, better records for traceability and certification, and reduced operator fatigue.
+
+**Challenges:** equipment and subscription costs, connectivity in rural areas, data compatibility between brands, skills to interpret data, data ownership questions and small, fragmented fields in many countries. Services offered by cooperatives, start-ups and machinery hire centres help overcome these barriers.
+
+## Getting started
+
+The key is to start with a clear question, such as where yields are lowest and why.
+
+
+Begin with guidance and section control, which pay back quickly through input savings, then add yield mapping and soil sampling to understand variability, and move to variable rate application once zones are reliable. Water management through efficient methods such as those in [drip vs sprinkler irrigation](/agricultural-engineering/drip-vs-sprinkler-irrigation/) is another high value area for precision agriculture.

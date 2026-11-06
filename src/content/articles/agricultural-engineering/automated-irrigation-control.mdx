@@ -1,0 +1,146 @@
+---
+title: "Automated Irrigation Control with Soil Moisture Feedback"
+description: "Automated irrigation control with soil moisture sensors: sensor types, field capacity, thresholds, controller logic, valves, IoT and a scheduling example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: agricultural-engineering
+subcategory: agricultural-automation
+focusKeyword: "automated irrigation control"
+image: { src: /images/featured/automated-irrigation-control.webp, alt: "Automated Irrigation Control with Soil Moisture Feedback: featured diagram" }
+format: application
+pillar: true
+math: true
+tags: [irrigation-automation, soil-moisture-sensor, iot, plc, agricultural-automation]
+faq:
+  - q: "Where should soil moisture sensors be installed?"
+    a: "In the active root zone of a representative part of the field, typically at two or more depths, for example one in the upper root zone and one near the bottom of the roots. For drip systems, place sensors within the wetted bulb near an emitter. Avoid unusual spots such as low wet areas, compacted tracks or field edges unless they are the area being managed."
+  - q: "What is management allowed depletion?"
+    a: "Management allowed depletion (MAD) is the fraction of the plant available water that the grower allows to be used before irrigating. It is often 30 to 50% depending on crop sensitivity and growth stage. When soil moisture falls to the MAD threshold, irrigation starts, refilling the root zone towards field capacity."
+  - q: "Can I use a simple timer instead of sensors?"
+    a: "Timers are cheap but water on a fixed schedule regardless of weather, rain or crop stage, which often leads to over or under irrigation. Sensor based or weather based controllers adapt to actual conditions, typically saving 20 to 50% of water in studies, while maintaining or improving yields."
+references:
+  - text: "FAO Irrigation and Drainage Paper 56, Crop Evapotranspiration: Guidelines for Computing Crop Water Requirements, 1998"
+  - text: "S. Irmak et al., Irrigation Water Management Using Soil Moisture Sensors, ASABE and University of Nebraska Extension"
+  - text: "ASABE S526.4, Soil and Water Terminology"
+  - text: "R. G. Evans and E. J. Sadler, Methods and technologies to improve efficiency of water use, Water Resources Research, 2008"
+  - text: "IEC 61131-3, Programmable controllers: Programming languages"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Automated irrigation control** with soil moisture feedback measures the water available to the crop and switches irrigation on and off automatically. **Soil moisture sensors** (capacitance, TDR, tensiometer or resistance types) in the root zone send readings to a **controller** (a PLC, dedicated irrigation controller or IoT node). When moisture falls to a set **lower threshold**, often based on **management allowed depletion**, the controller opens **solenoid valves** and starts the **pump**; when moisture reaches the **upper threshold** near **field capacity**, or a set volume is applied, it stops. Adding weather data, flow meters and remote monitoring makes the system smarter and safer.
+
+</Key>
+
+Irrigation is often scheduled by habit or a fixed timer. But crop water use changes daily with weather and growth stage, and rainfall or soil differences make fixed schedules wasteful. Closed loop control based on soil moisture applies water only when the crop needs it, saving water, energy and fertiliser, and preventing waterlogging and leaching.
+
+## Soil water basics
+
+- **Saturation:** all pores full of water; drains quickly.
+- **Field capacity (FC):** water held after free drainage stops, usually a day or two after heavy irrigation.
+- **Permanent wilting point (PWP):** plants can no longer extract water.
+- **Total available water (TAW):** the difference between FC and PWP in the root zone.
+
+$$
+TAW = (\theta_{FC} - \theta_{PWP}) \times Z_r
+$$
+
+where θ is volumetric water content and Z_r the root depth. Irrigation is triggered when depletion reaches the **management allowed depletion (MAD)**, a fraction p of TAW:
+
+$$
+RAW = p \times TAW
+$$
+
+## System architecture
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Closed loop irrigation control: soil moisture sensors at two depths in the root zone send signals to a controller; the controller also receives rain and weather data and flow meter feedback; it commands the pump and solenoid valve which supply the drip lines; a cloud dashboard allows remote monitoring">
+<path d="M20 200H580" stroke="#8a6d3b" stroke-width="2" />
+<rect x="20" y="200" width="560" height="80" fill="#f5e6c8" fill-opacity="0.4" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="230" y="30" width="140" height="55" rx="6" fill="#e6f6f4" />
+<rect x="440" y="30" width="130" height="45" rx="6" fill="#eef1f6" />
+<rect x="30" y="110" width="70" height="40" rx="4" fill="#fff7e0" />
+<rect x="140" y="110" width="60" height="40" rx="4" fill="#ffe9e7" />
+</g>
+<g fill="#7b8794" stroke="#0b2545" stroke-width="1.5"><rect x="395" y="225" width="10" height="24" /><rect x="425" y="250" width="10" height="24" /></g>
+<path d="M330 150V200M330 170L310 150M330 165L350 145" stroke="#13a89e" stroke-width="3" fill="none" />
+<path d="M100 130H140M200 130H520" stroke="#13a89e" stroke-width="3" />
+<g fill="#13a89e"><circle cx="270" cy="134" r="3" /><circle cx="330" cy="134" r="3" /><circle cx="390" cy="134" r="3" /><circle cx="450" cy="134" r="3" /></g>
+<g fill="#8a6d3b" fill-opacity="0.3"><ellipse cx="330" cy="230" rx="45" ry="28" /></g>
+<g stroke="#b42318" stroke-width="1.8" stroke-dasharray="5 3" fill="none"><path d="M400 225V100H350V85" /><path d="M430 250V95H360V85" /><path d="M260 85V100H170V110" /><path d="M240 85V95H65V110" /><path d="M370 55H440" /></g>
+<rect x="475" y="100" width="50" height="22" rx="3" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="300" y="54" font-weight="700">Controller</text><text x="300" y="70" font-size="10">PLC / IoT node</text>
+<text x="505" y="50">Cloud, weather,</text><text x="505" y="64">rain sensor</text>
+<text x="65" y="135">Pump</text><text x="170" y="135">Valve</text><text x="500" y="115" font-size="10">Flow</text>
+<text x="440" y="222" font-size="10" text-anchor="start">Sensor 15 cm</text><text x="440" y="270" font-size="10" text-anchor="start">Sensor 40 cm</text>
+<text x="370" y="172" font-size="10">Crop</text><text x="235" y="150" font-size="10">Drip line</text><text x="260" y="268" font-size="10">Root zone</text>
+</g>
+</svg>
+<figcaption>Closed loop irrigation: root zone sensors feed the controller, which drives the pump and valves.</figcaption>
+</figure>
+
+### Soil moisture sensors
+
+| Sensor | Measures | Notes |
+| --- | --- | --- |
+| Capacitance (FDR) | Volumetric water content via dielectric constant | Low cost, popular; needs soil specific calibration and good soil contact |
+| TDR | Volumetric water content via pulse travel time | Accurate, less sensitive to salinity; higher cost |
+| Tensiometer | Soil water tension (kPa) | Direct measure of how hard roots must pull; needs refilling; best in wetter range |
+| Granular matrix / gypsum block | Tension via electrical resistance | Cheap, durable; slower response |
+
+Sensors output analogue signals such as 4 to 20 mA or 0 to 10 V, or digital protocols such as SDI-12 and Modbus RS-485. Scaling these signals follows the same principles as other [instrumentation signals](https://www.instrumentationblog.in/signals-in-instrumentation-ai-ao-di-do/).
+
+### Controller and logic
+
+The controller compares measured moisture with setpoints and decides when to irrigate. Typical logic:
+
+1. Read sensors every few minutes; average multiple sensors and reject faulty readings.
+2. If moisture at the shallow sensor falls below the **start threshold** and no rain is forecast, open the zone valve and start the pump.
+3. Irrigate until the **stop threshold** is reached, a target volume has passed the flow meter, or a maximum run time expires.
+4. Use the deeper sensor to check that water is not draining below the roots; if it rises sharply, shorten future cycles.
+5. Lock out irrigation during rain, high wind (for sprinklers) or low tank level, and raise alarms for low pressure, no flow or high flow.
+
+Simple systems use **on-off control with hysteresis**; advanced systems combine soil data with evapotranspiration forecasts and crop models. The control approach is the same as level control in industry, described in [PLC hardware selection](/automation-robotics/plc-hardware-selection/) and [SCADA system architecture](/automation-robotics/scada-system-architecture/).
+
+### Actuators and hydraulics
+
+**Solenoid valves** (often 24 V AC latching types for battery operation) open zones; **pump starters or VFDs** run the pump; **pressure switches and transmitters** protect the system; **fertigation injectors** can be dosed in proportion to flow.
+
+### Communication and IoT
+
+Wireless links (LoRaWAN, NB-IoT, cellular or Wi-Fi) connect sensors and valves across fields, and dashboards let farmers check moisture graphs and override schedules from a phone.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A loam soil has θ_FC = 0.30 and θ_PWP = 0.14 (m³/m³). Tomato root depth is 0.5 m and p = 0.4. The drip system applies water with 90% efficiency. Daily crop water use is 6 mm.</dd>
+<dt>Find</dt><dd>TAW, the start threshold moisture, the gross depth per irrigation and the approximate interval between irrigations.</dd>
+<dt>Assumptions</dt><dd>Uniform root zone; no rain; irrigation refills to field capacity.</dd>
+<dt>Solution</dt><dd>TAW = (0.30 − 0.14) × 500 mm = 80 mm<br />RAW = 0.4 × 80 = 32 mm<br />Start threshold θ = 0.30 − 32 ÷ 500 = 0.30 − 0.064 = 0.236<br />Gross depth = 32 ÷ 0.90 = 35.6 mm<br />Interval = 32 ÷ 6 ≈ 5.3 days</dd>
+<dt>Answer</dt><dd><strong>Start irrigation when moisture falls to about 0.24 m³/m³, apply about 36 mm gross, roughly every 5 days in these conditions</strong></dd>
+<dt>Limitations</dt><dd>Drip often uses smaller, more frequent pulses to keep moisture steady; sensor calibration and spatial variability must be checked.</dd>
+</dl>
+</Example>
+
+## Weather based control
+
+Soil sensors measure the result of crop water use; weather based controllers estimate it directly. They calculate reference evapotranspiration from temperature, humidity, wind and solar radiation, using the FAO Penman-Monteith method, multiply by the crop coefficient and subtract effective rain to keep a running soil water balance. Combining both approaches is most robust: the weather model predicts demand, and soil sensors correct the model and catch problems such as blocked emitters or unexpected drainage.
+
+## Installation and maintenance tips
+
+A well installed sensor network is worth more than an expensive controller on its own, because control can only be as good as the measurements it receives.
+
+
+- Calibrate sensors for the field soil or use manufacturer soil type settings, and check against gravimetric samples.
+- Install sensors with good soil contact and no air gaps; protect cables from machinery and rodents.
+- Use at least two sensor locations per irrigation zone and two depths per location.
+- Check readings after each irrigation to confirm sensors respond.
+- Record every change to thresholds so results can be compared between seasons.
+- Keep spare batteries, valves and fuses, and test alarms at the start of each season.
+
+## Benefits of automated irrigation control
+
+Field studies commonly report water savings of 20 to 50%, energy savings from shorter pumping times, better yields and quality from steadier moisture, less nutrient leaching and reduced labour. Automated irrigation control is a building block of [precision agriculture](/agricultural-engineering/precision-agriculture-technologies/) and works with both systems compared in [drip vs sprinkler irrigation](/agricultural-engineering/drip-vs-sprinkler-irrigation/).
