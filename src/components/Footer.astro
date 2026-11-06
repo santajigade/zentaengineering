@@ -20,5 +20,11 @@ const about = [['About Us', '/about/'], ['Editorial Policy', '/editorial-policy/
     <div><h2>Learn</h2><ul>{learn.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul></div>
     <div><h2>About</h2><ul>{about.map(([l, h]) => <li><a href={h}>{l}</a></li>)}</ul></div>
   </div>
-  <div class="wrap legal">© {new Date().getFullYear()} Zenta Engineering</div>
+  <div class="wrap legal" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+    <span>© {new Date().getFullYear()} Zenta Engineering</span>
+    <span style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">Our other sites:
+      <a href="https://zentacalculator.com/">ZentaCalculator</a>
+      <a href="https://zentapdf.com/">ZentaPDF</a>
+    </span>
+  </div>
 </footer>
