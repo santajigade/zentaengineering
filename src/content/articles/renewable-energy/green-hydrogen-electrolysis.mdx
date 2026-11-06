@@ -1,0 +1,151 @@
+---
+title: "Green Hydrogen Production by Electrolysis"
+description: "Green hydrogen by electrolysis explained: water splitting, alkaline, PEM and solid oxide electrolysers, efficiency, energy use, uses and a production example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: renewable-energy
+subcategory: hydrogen-fuel-cells
+focusKeyword: "green hydrogen"
+image: { src: /images/featured/green-hydrogen-electrolysis.webp, alt: "Green Hydrogen Production by Electrolysis: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [green-hydrogen, electrolysis, pem-electrolyser, fuel-cells, energy-transition]
+faq:
+  - q: "What is the difference between green, blue and grey hydrogen?"
+    a: "Grey hydrogen is made from natural gas by steam methane reforming without capturing the CO₂, and is the most common today. Blue hydrogen uses the same process but captures and stores most of the CO₂. Green hydrogen is made by electrolysis of water using renewable electricity, with no direct carbon emissions."
+  - q: "How much electricity does it take to make 1 kg of hydrogen?"
+    a: "The theoretical minimum, based on hydrogen's higher heating value, is about 39.4 kWh per kg. Commercial electrolyser systems use roughly 50 to 55 kWh per kg including auxiliaries, which corresponds to about 70 to 80% efficiency on an HHV basis."
+  - q: "How much water does electrolysis need?"
+    a: "Stoichiometrically, about 9 litres of water make 1 kg of hydrogen. In practice, water treatment losses raise this to roughly 10 to 15 litres of raw water per kg, plus cooling water if evaporative cooling is used. Water must be purified to very low conductivity before entering the electrolyser."
+references:
+  - text: "IRENA, Green Hydrogen Cost Reduction: Scaling up Electrolysers to Meet the 1.5 °C Climate Goal, 2020"
+  - text: "IEA, Global Hydrogen Review 2024, International Energy Agency"
+  - text: "ISO 22734, Hydrogen generators using water electrolysis: Industrial, commercial and residential applications"
+  - text: "A. Godula-Jopek (ed.), Hydrogen Production by Electrolysis, Wiley-VCH, 2015"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Green hydrogen** is hydrogen produced by **electrolysis** of water using **renewable electricity**. An **electrolyser** passes direct current between two electrodes separated by an electrolyte or membrane: water splits into **hydrogen at the cathode** and **oxygen at the anode** (2H₂O → 2H₂ + O₂). The three main technologies are **alkaline**, **proton exchange membrane (PEM)** and **solid oxide** electrolysers. Systems use about **50 to 55 kWh of electricity per kg** of hydrogen. Green hydrogen can decarbonise steel, ammonia, refining, heavy transport and long duration energy storage.
+
+</Key>
+
+Hydrogen is already a major industrial chemical, used mainly to make ammonia and in oil refining, but almost all of it is made from fossil fuels, releasing around 10 kg of CO₂ per kg of hydrogen. Producing it from water and renewable power removes those emissions and opens new uses for hydrogen as a clean fuel and feedstock.
+
+## The colours of hydrogen
+
+- **Grey:** from natural gas by steam methane reforming, CO₂ released.
+- **Blue:** as grey, with carbon capture and storage.
+- **Green:** electrolysis with renewable electricity.
+- Other terms include **pink** (nuclear powered electrolysis) and **turquoise** (methane pyrolysis producing solid carbon).
+
+Many regulations now define hydrogen by its measured carbon intensity per kg rather than by colour.
+
+## How electrolysis works
+
+Electrolysis uses electrical energy to drive a reaction that would not happen on its own. The overall reaction is:
+
+$$
+2\,\mathrm{H_2O} \rightarrow 2\,\mathrm{H_2} + \mathrm{O_2}
+$$
+
+The minimum (reversible) cell voltage at 25 °C is 1.23 V, and the **thermoneutral voltage**, at which no heat is needed from outside, is 1.48 V. Practical cells run at about 1.7 to 2.0 V because of losses at the electrodes and resistance in the electrolyte and membrane. Higher current density produces more hydrogen from the same stack but raises voltage and lowers efficiency.
+
+**Faraday's law** links the current to the hydrogen produced: each molecule of H₂ needs two electrons.
+
+$$
+\dot{n}_{H_2} = \frac{I}{2F}
+$$
+
+where I is current and F = 96 485 C/mol is the Faraday constant.
+
+<Calculator path="chemistry/faraday-electrolysis" title="Faraday Electrolysis Calculator" />
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="PEM electrolyser cell: a DC power supply connects to an anode on the left and a cathode on the right separated by a proton exchange membrane; water enters at the anode, oxygen leaves the anode, protons cross the membrane, electrons flow through the external circuit, and hydrogen leaves the cathode">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="150" y="70" width="110" height="160" fill="#e6f6f4" />
+<rect x="260" y="70" width="40" height="160" fill="#fff7e0" />
+<rect x="300" y="70" width="110" height="160" fill="#eef1f6" />
+<rect x="140" y="70" width="10" height="160" fill="#7b8794" /><rect x="410" y="70" width="10" height="160" fill="#7b8794" />
+<rect x="245" y="12" width="70" height="30" rx="4" fill="#ffffff" />
+</g>
+<g stroke="#0b2545" stroke-width="2" fill="none"><path d="M145 70V27H245M315 27H415V70" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="280" y="32" font-weight="700">DC supply</text><text x="210" y="22">+</text><text x="350" y="22">−</text>
+<text x="205" y="95" font-weight="700">Anode (+)</text><text x="355" y="95" font-weight="700">Cathode (−)</text>
+<text x="280" y="250">Membrane</text>
+<text x="205" y="150">2H₂O →</text><text x="205" y="166">O₂ + 4H⁺ + 4e⁻</text>
+<text x="355" y="150">4H⁺ + 4e⁻</text><text x="355" y="166">→ 2H₂</text>
+<text x="70" y="214">Water in</text><text x="70" y="104">O₂ out</text><text x="500" y="104">H₂ out</text>
+<text x="280" y="200" fill="#b42318">H⁺</text><text x="190" y="54" fill="#13a89e">e⁻</text>
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M100 210H140" /><path d="M140 100H100" /><path d="M420 100H460" /></g>
+<g fill="#13a89e"><path d="M132 205l9 5-9 5z" /><path d="M108 95l-9 5 9 5z" /><path d="M452 95l9 5-9 5z" /></g>
+<path d="M250 185H310" stroke="#b42318" stroke-width="2" /><path d="M310 180l9 5-9 5z" fill="#b42318" />
+</svg>
+<figcaption>PEM electrolyser cell: protons cross the membrane and combine with electrons at the cathode to form hydrogen.</figcaption>
+</figure>
+
+## Types of electrolysers
+
+### Alkaline electrolysers (AEL)
+
+The oldest, most mature technology. Nickel based electrodes sit in a liquid potassium hydroxide solution, separated by a porous diaphragm. Hydroxide ions (OH⁻) carry charge. Alkaline units use no precious metals and have long stack life, but respond more slowly to changing power and operate at lower current density, so they are larger.
+
+### Proton exchange membrane (PEM) electrolysers
+
+A thin solid polymer membrane conducts protons (H⁺) from anode to cathode. PEM units are compact, produce very pure hydrogen at elevated pressure, and respond within seconds to power changes, which suits variable solar and wind. They need platinum and iridium catalysts and titanium components, which raises cost.
+
+### Solid oxide electrolysers (SOEC)
+
+Ceramic cells operate at about 700 to 850 °C, conducting oxide ions (O²⁻). High temperature reduces the electrical energy needed, so efficiency is highest, especially when waste heat or steam is available from industry. The technology is less mature and ceramics are sensitive to thermal cycling.
+
+### Anion exchange membrane (AEM)
+
+An emerging design combining a solid membrane with alkaline chemistry, aiming for PEM like flexibility without precious metals.
+
+| Feature | Alkaline | PEM | Solid oxide |
+| --- | --- | --- | --- |
+| Electrolyte | Liquid KOH | Polymer membrane | Ceramic |
+| Charge carrier | OH⁻ | H⁺ | O²⁻ |
+| Operating temperature | 60 to 90 °C | 50 to 80 °C | 700 to 850 °C |
+| System energy use | About 50 to 55 kWh/kg | About 50 to 55 kWh/kg | About 40 to 45 kWh/kg electricity plus heat |
+| Response to variable power | Moderate | Fast | Slow |
+| Precious metals | No | Yes (Pt, Ir) | No |
+| Maturity | Mature | Commercial | Early commercial |
+
+## A complete green hydrogen plant
+
+Besides the stacks, a plant includes rectifiers and transformers to supply DC, **water treatment** (reverse osmosis and deionisation), gas separators, hydrogen **purification and drying**, cooling, compression, and storage in tanks, tubes or underground caverns. Safety measures include gas detection, ventilation, hazardous area classification and flame detection, because hydrogen is flammable over a wide range of concentrations in air (about 4 to 75%).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 10 MW electrolyser plant runs on a solar and wind supply with a 50% capacity factor. System energy use is 53 kWh per kg of hydrogen.</dd>
+<dt>Find</dt><dd>Daily and annual hydrogen production, and the efficiency on a higher heating value (HHV) basis.</dd>
+<dt>Assumptions</dt><dd>HHV of hydrogen 39.4 kWh/kg; plant runs at full output whenever power is available.</dd>
+<dt>Solution</dt><dd>Annual energy = 10 000 kW × 8760 h × 0.50 = 43.8 million kWh<br />Annual hydrogen = 43 800 000 ÷ 53 = 826 400 kg ≈ 826 t<br />Daily average = 826 400 ÷ 365 ≈ 2264 kg<br />Efficiency (HHV) = 39.4 ÷ 53 = 74%</dd>
+<dt>Answer</dt><dd><strong>About 826 tonnes of hydrogen per year (about 2.3 t per day) at 74% HHV efficiency</strong></dd>
+<dt>Limitations</dt><dd>Part load efficiency, stack degradation and downtime reduce output; storage may be needed to supply customers steadily.</dd>
+</dl>
+</Example>
+
+## Uses of green hydrogen
+
+- **Ammonia and fertiliser:** replacing grey hydrogen in the [Haber-Bosch process](/chemical-engineering/haber-bosch-ammonia-process/).
+- **Steel:** direct reduction of iron ore with hydrogen instead of coke.
+- **Refining and chemicals:** hydrotreating, methanol and synthetic fuels.
+- **Heavy transport:** fuel cell trucks, buses, trains and ships, and e-fuels for aviation.
+- **Energy storage:** converting surplus renewable power to hydrogen for seasonal storage and later power generation.
+
+## Measuring and controlling the process
+
+Electrolyser plants need accurate instrumentation: stack voltage and current, cell temperatures, pressure in the hydrogen and oxygen separators, level in the gas separators, hydrogen purity analysers (oxygen in hydrogen and hydrogen in oxygen must stay far below flammable limits), water conductivity, and mass [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) of the hydrogen product. The control system ramps production up and down with available renewable power while keeping the stacks within safe limits.
+
+## Challenges
+
+Green hydrogen still costs more than grey hydrogen in most places, mainly because of electricity price and electrolyser capital cost. Round trip efficiency from power to hydrogen and back to power is only about 30 to 40%, so direct electrification is usually better where possible. Transport and storage are difficult because hydrogen is light, diffuses easily and can embrittle some steels. Cheaper renewables from [solar PV systems](/renewable-energy/how-solar-pv-systems-work/) and [wind turbines](/renewable-energy/how-wind-turbines-work/), larger factories for electrolysers and supportive policies are steadily narrowing the cost gap.

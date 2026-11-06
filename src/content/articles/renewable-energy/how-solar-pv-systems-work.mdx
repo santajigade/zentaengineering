@@ -1,0 +1,156 @@
+---
+title: "How Solar PV Systems Work: Components and Types"
+description: "How solar PV systems work: the photovoltaic effect, panels, inverters, mounting, batteries, grid-tied, off-grid and hybrid types, and a sizing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: renewable-energy
+subcategory: solar-pv
+focusKeyword: "solar pv systems"
+image: { src: /images/featured/how-solar-pv-systems-work.webp, alt: "How Solar PV Systems Work: Components and Types: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [solar-pv, photovoltaic, solar-panels, grid-tied, off-grid]
+faq:
+  - q: "Do solar panels work on cloudy days?"
+    a: "Yes, but output drops. Panels respond to diffuse light as well as direct sunlight, so on a bright overcast day they may produce 10 to 25% of their clear sky output, and less under heavy cloud. Annual yield estimates already account for typical local cloud cover."
+  - q: "How long do solar panels last?"
+    a: "Quality crystalline silicon panels typically carry 25 to 30 year performance warranties and degrade by roughly 0.3 to 0.8% per year. Many continue working well beyond 30 years. Inverters usually last 10 to 15 years and are often replaced once during the system life."
+  - q: "What is the difference between kW and kWh in solar?"
+    a: "kW (or kWp, kilowatt peak) is the rated power of the panels under standard test conditions. kWh is the energy produced over time. A 5 kWp system in a sunny location might produce around 7000 to 8000 kWh per year, depending on climate, orientation and losses."
+references:
+  - text: "IEC 61215, Terrestrial photovoltaic (PV) modules: Design qualification and type approval"
+  - text: "IEC 62548, Photovoltaic (PV) arrays: Design requirements"
+  - text: "A. Luque and S. Hegedus (eds.), Handbook of Photovoltaic Science and Engineering, 2nd ed., Wiley"
+  - text: "NREL, PVWatts Calculator documentation, National Renewable Energy Laboratory"
+  - text: "IEA PVPS, Trends in Photovoltaic Applications, International Energy Agency"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Solar PV systems** turn sunlight directly into electricity. **Solar cells** made of semiconductor material (mostly silicon) release electrons when struck by light, the **photovoltaic effect**, producing **DC** current. Cells are wired into **panels (modules)**, panels into **strings** and **arrays**. An **inverter** converts DC to **AC** for use in buildings or export to the grid. Other components include **mounting structures**, **DC and AC protection**, **meters** and optionally **batteries**. Systems are **grid-tied**, **off-grid** or **hybrid**.
+
+</Key>
+
+Solar photovoltaic power has become one of the cheapest sources of new electricity in much of the world. It runs on rooftops, in deserts, on floating platforms and on remote telecom towers. Understanding how a PV system works, from the cell to the grid, helps in designing, buying and maintaining one.
+
+## The photovoltaic effect
+
+A solar cell is a large area **p-n junction**, similar in principle to a [diode](/electronics-engineering/what-is-a-diode/). Silicon is doped to form an n-type layer (excess electrons) on top of a p-type layer (excess holes). At the junction, an internal electric field forms.
+
+When a photon with enough energy (above the silicon band gap of about 1.1 eV) is absorbed, it creates an electron and hole pair. The junction field pushes electrons towards the n side and holes towards the p side. Metal contacts on the front and back collect them, and if an external circuit is connected, current flows.
+
+A single crystalline silicon cell produces about 0.5 to 0.7 V at open circuit. Its current is proportional to sunlight intensity and cell area.
+
+## From cell to array
+
+- **Cells:** typically 156 to 210 mm squares, often cut into half cells to reduce resistive losses.
+- **Modules (panels):** 60, 72 or more cells (or 120 to 144 half cells) in series, laminated between glass and a backsheet with an aluminium frame. Typical ratings today are about 400 to 700 W.
+- **Strings:** modules connected in series to raise voltage, commonly to 600 to 1500 V DC.
+- **Arrays:** several strings in parallel to raise current and power.
+
+Main cell technologies:
+
+- **Monocrystalline silicon:** highest market share, efficiency about 20 to 23% for modules. PERC, TOPCon and heterojunction designs push efficiency higher.
+- **Polycrystalline silicon:** cheaper, slightly lower efficiency; now largely replaced by mono.
+- **Thin film (CdTe, CIGS):** lower efficiency but good in heat and diffuse light, used in large utility plants.
+
+## Key components of solar PV systems
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Grid-tied solar PV system: sunlight falls on PV panels producing DC, which passes through a DC isolator to an inverter producing AC, then through an AC distribution board to building loads and a bidirectional meter connected to the utility grid; an optional battery connects to the inverter">
+<circle cx="45" cy="40" r="20" fill="#f5b800" />
+<g stroke="#f5b800" stroke-width="2"><path d="M70 50L110 80M60 65L95 100" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M100 120L180 80H230L150 120Z" fill="#0b2545" fill-opacity="0.85" />
+<rect x="215" y="140" width="60" height="40" rx="4" fill="#eef1f6" />
+<rect x="310" y="130" width="80" height="60" rx="6" fill="#e6f6f4" />
+<rect x="425" y="130" width="70" height="60" rx="6" fill="#eef1f6" />
+<rect x="525" y="70" width="60" height="40" rx="4" fill="#fff7e0" />
+<rect x="525" y="200" width="60" height="40" rx="4" fill="#ffe9e7" />
+<rect x="320" y="215" width="60" height="40" rx="4" fill="#fff7e0" />
+</g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M165 120V160H215M275 160H310" /></g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M390 160H425M495 150H510V90H525M510 170V220H525" /></g>
+<path d="M350 190V215" stroke="#7b8794" stroke-width="2" stroke-dasharray="4 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="165" y="70">PV array</text><text x="245" y="157">DC</text><text x="245" y="172">isolator</text>
+<text x="350" y="157" font-weight="700">Inverter</text><text x="350" y="173">DC to AC</text>
+<text x="460" y="157">AC</text><text x="460" y="172">board</text>
+<text x="555" y="94">Loads</text><text x="555" y="217">Meter</text><text x="555" y="232">to grid</text>
+<text x="350" y="240">Battery</text><text x="350" y="268" font-size="11">(optional)</text>
+<text x="190" y="196" fill="#b42318">DC side</text><text x="440" y="120" fill="#13a89e">AC side</text>
+</g>
+</svg>
+<figcaption>Main components of a grid-tied PV system, with optional battery storage.</figcaption>
+</figure>
+
+- **PV modules:** generate DC power.
+- **Mounting structures:** fixed tilt racks, roof rails, or **single axis trackers** that follow the sun from east to west and raise yield by about 15 to 25%.
+- **Inverter:** converts DC to grid synchronised AC, performs **maximum power point tracking (MPPT)** and provides grid protection. Types are compared in [solar inverter types](/renewable-energy/solar-inverter-types/).
+- **DC and AC protection:** fuses, isolators, surge protection devices and circuit breakers, plus proper [earthing](/electrical-engineering/electrical-earthing/).
+- **Cables:** UV resistant DC solar cable and AC cables sized for current and voltage drop, as in [cable sizing](/electrical-engineering/cable-sizing/).
+- **Metering and monitoring:** bidirectional or net meters and online monitoring of energy and faults.
+- **Batteries (optional):** store daytime energy for evening use or backup, covered in [battery energy storage systems](/renewable-energy/battery-energy-storage-systems/).
+
+## Types of solar PV systems
+
+### Grid-tied (on-grid)
+
+Connected to the utility network with no batteries. Solar power supplies local loads first; surplus is exported, and the grid supplies any shortfall. Simple and lowest cost per kWh, but shuts down during a grid outage for safety (anti-islanding).
+
+### Off-grid (stand-alone)
+
+Not connected to the grid. A battery bank stores energy for night and cloudy days, managed by a charge controller and an off-grid inverter, often with a backup generator. Used for remote homes, telecom sites and water pumping.
+
+### Hybrid
+
+Grid connected with batteries. A hybrid inverter manages solar, battery and grid, providing backup power during outages and shifting solar energy into the evening.
+
+| Feature | Grid-tied | Off-grid | Hybrid |
+| --- | --- | --- | --- |
+| Grid connection | Yes | No | Yes |
+| Batteries | No | Yes, essential | Yes |
+| Works in grid outage | No | Yes | Yes |
+| Cost | Lowest | Highest | Medium to high |
+| Typical use | Homes, businesses, utility plants | Remote sites | Homes and businesses wanting backup |
+
+## Factors affecting output
+
+- **Irradiance:** power is roughly proportional to sunlight; standard test conditions (STC) use 1000 W/m² at 25 °C.
+- **Temperature:** output falls about 0.3 to 0.4% per °C of cell temperature above 25 °C.
+- **Orientation and tilt:** face the equator at a tilt close to the latitude for maximum annual yield, or east and west for a flatter daily profile.
+- **Shading:** even partial shading of a few cells can cut string output sharply; bypass diodes and module level electronics reduce the impact.
+- **Soiling, mismatch, wiring and inverter losses:** together often 10 to 20%.
+
+The energy produced each year can be estimated as:
+
+$$
+E = P_\text{peak} \times H \times PR
+$$
+
+where P_peak is array rating in kWp, H the annual peak sun hours (kWh/m² per year divided by 1 kW/m²) and PR the **performance ratio**, typically 0.75 to 0.85.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A rooftop system of 12 modules rated 450 W each in a location with 1800 kWh/m² per year of irradiation on the panel plane. Performance ratio 0.80.</dd>
+<dt>Find</dt><dd>The array rating and expected annual energy.</dd>
+<dt>Assumptions</dt><dd>No significant shading; typical losses included in PR.</dd>
+<dt>Solution</dt><dd>P_peak = 12 × 450 W = 5.4 kWp<br />H = 1800 kWh/m² ÷ 1 kW/m² = 1800 h<br />E = 5.4 × 1800 × 0.80 = 7776 kWh per year</dd>
+<dt>Answer</dt><dd><strong>A 5.4 kWp system producing about 7800 kWh per year, around 21 kWh per day on average</strong></dd>
+<dt>Limitations</dt><dd>Monthly output varies with season and weather; detailed tools such as PVWatts give more accurate local estimates.</dd>
+</dl>
+</Example>
+
+<Calculator path="ecology/solar-system-size" title="Solar System Size Calculator" />
+
+## Installation and maintenance
+
+Good practice includes a structural check of the roof, correct string sizing within the inverter voltage limits at the coldest temperature, secure cable management, labelled isolators, and commissioning tests of insulation resistance and string voltages. PV systems need little maintenance: periodic cleaning where dust is heavy, visual inspection, checking connections and monitoring data for drops in output. Thermal imaging finds hot spots from faulty cells or connectors.
+
+## Solar PV systems in the wider energy system
+
+Solar output peaks at midday and falls to zero at night, so as solar grows, grids need flexibility: storage, demand response, other renewables such as [wind turbines](/renewable-energy/how-wind-turbines-work/), and smarter networks like [microgrids](/renewable-energy/microgrid-explained/). Large solar parks connect at medium or high voltage through step up transformers into the [power grid](/electrical-engineering/generation-transmission-distribution/).

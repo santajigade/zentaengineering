@@ -147,14 +147,14 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| solar-pv | How Solar PV Systems Work: Components and Types | how-solar-pv-systems-work | working-principle | to write |
-| wind-energy | How Wind Turbines Generate Electricity | how-wind-turbines-work | working-principle | to write |
-| energy-storage | Battery Energy Storage Systems Explained | battery-energy-storage-systems | fundamentals | to write |
-| hydrogen-fuel-cells | Green Hydrogen Production by Electrolysis | green-hydrogen-electrolysis | explanation | to write |
-| inverters | Solar Inverter Types: String, Central and Microinverters | solar-inverter-types | comparison | to write |
-| ev-charging | EV Charging Levels and Connector Types Explained | ev-charging-levels-and-connectors | explanation | to write |
-| microgrids | What Is a Microgrid? Components and Operating Modes | microgrid-explained | fundamentals | to write |
-| energy-management | Energy Audit: Types and Steps | energy-audit-steps | explanation | to write |
+| solar-pv | How Solar PV Systems Work: Components and Types | how-solar-pv-systems-work | working-principle | draft |
+| wind-energy | How Wind Turbines Generate Electricity | how-wind-turbines-work | working-principle | draft |
+| energy-storage | Battery Energy Storage Systems Explained | battery-energy-storage-systems | fundamentals | draft |
+| hydrogen-fuel-cells | Green Hydrogen Production by Electrolysis | green-hydrogen-electrolysis | explanation | draft |
+| inverters | Solar Inverter Types: String, Central and Microinverters | solar-inverter-types | comparison | draft |
+| ev-charging | EV Charging Levels and Connector Types Explained | ev-charging-levels-and-connectors | explanation | draft |
+| microgrids | What Is a Microgrid? Components and Operating Modes | microgrid-explained | fundamentals | draft |
+| energy-management | Energy Audit: Types and Steps | energy-audit-steps | explanation | draft |
 
 ## environmental-engineering
 

@@ -1,0 +1,135 @@
+---
+title: "How Wind Turbines Generate Electricity"
+description: "How wind turbines generate electricity: blades and lift, rotor, gearbox, generator, yaw and pitch control, Betz limit, power curve and a power example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: renewable-energy
+subcategory: wind-energy
+focusKeyword: "wind turbines"
+image: { src: /images/featured/how-wind-turbines-work.webp, alt: "How Wind Turbines Generate Electricity: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [wind-energy, wind-turbine, betz-limit, power-curve, renewable-energy]
+faq:
+  - q: "Why do wind turbines have three blades?"
+    a: "Three blades give a good balance of efficiency, cost and smooth operation. Two blade rotors are cheaper but suffer uneven loads as the blades pass the tower and when the turbine yaws, and they look visually less smooth. More than three blades adds cost and weight for very little extra energy."
+  - q: "What is capacity factor?"
+    a: "Capacity factor is the actual energy a turbine produces in a year divided by the energy it would produce running at full rated power all year. Onshore wind farms typically achieve about 25 to 40%, and modern offshore farms about 40 to 50%, because winds vary."
+  - q: "Why do turbines stop in very strong winds?"
+    a: "Above the cut-out speed, typically around 25 m/s, loads on the blades, drivetrain and tower could cause damage. The control system pitches the blades to feather and applies the brake, stopping or idling the rotor until the wind drops."
+references:
+  - text: "IEC 61400-1, Wind energy generation systems: Design requirements"
+  - text: "IEC 61400-12-1, Power performance measurements of electricity producing wind turbines"
+  - text: "T. Burton, N. Jenkins, D. Sharpe and E. Bossanyi, Wind Energy Handbook, 3rd ed., Wiley"
+  - text: "J. F. Manwell, J. G. McGowan and A. L. Rogers, Wind Energy Explained, 2nd ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Wind turbines** convert the kinetic energy of moving air into electricity. Wind flowing over the aerofoil shaped **blades** creates **lift**, which turns the **rotor**. The rotor drives a **generator**, often through a **gearbox** that raises the speed, housed in the **nacelle** on top of a tall **tower**. **Pitch control** adjusts blade angle to limit power in strong winds, and **yaw control** keeps the rotor facing the wind. Power rises with the **cube of wind speed**, but no turbine can capture more than **59.3%** of the wind's energy, the **Betz limit**.
+
+</Key>
+
+Wind power is one of the largest sources of renewable electricity. Modern turbines are huge: onshore machines commonly have rotors over 150 m in diameter and ratings of 4 to 7 MW, while offshore turbines exceed 14 MW with rotors over 220 m. Yet the working principle is straightforward aerodynamics and electrical engineering.
+
+## Power in the wind
+
+The power carried by wind through the area swept by the rotor is:
+
+$$
+P_\text{wind} = \tfrac{1}{2}\,\rho\,A\,v^3
+$$
+
+where ρ is air density (about 1.225 kg/m³ at sea level), A the swept area (πR²) and v the wind speed. Two consequences dominate turbine design:
+
+- **Cube of speed:** doubling the wind speed gives eight times the power, so sites with higher average winds are far more valuable, and towers are tall to reach stronger winds.
+- **Area:** doubling rotor diameter quadruples the area and the power, which is why rotors keep growing.
+
+A turbine extracts only part of this power:
+
+$$
+P = \tfrac{1}{2}\,\rho\,A\,v^3\,C_p
+$$
+
+The **power coefficient** C_p cannot exceed the **Betz limit** of 16/27, or 59.3%, because the air must keep moving to leave the rotor. Modern turbines reach C_p of about 0.45 to 0.50 at their best operating point.
+
+<Calculator path="ecology/wind-turbine-power" title="Wind Turbine Power Calculator" />
+
+## How the blades work
+
+Blades are long aerofoils, like aircraft wings. The wind seen by the blade combines the real wind and the blade's own motion. Air flows faster over the curved suction side, lowering pressure there, and the pressure difference produces **lift** roughly perpendicular to that relative flow. The component of lift in the direction of rotation produces **torque**. Blades are twisted along their length because the tip moves much faster than the root; the **tip speed ratio**, tip speed divided by wind speed, is typically around 7 to 9 for three blade turbines. Blades are made from glass or carbon fibre composites for strength and low weight.
+
+## Main components of wind turbines
+
+<figure>
+<svg width="600" height="320" viewBox="0 0 600 320" fill="none" role="img" aria-label="Wind turbine cutaway: three blades attached to a hub, the low speed shaft enters the nacelle to a gearbox, then a high speed shaft drives the generator; a controller, yaw drive and anemometer are on the nacelle; the tower carries power cables down to a transformer at the base">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M120 130L105 20L130 125Z" fill="#eef1f6" /><path d="M118 142L20 200L122 150Z" fill="#eef1f6" /><path d="M132 145L210 230L125 152Z" fill="#eef1f6" />
+<circle cx="125" cy="140" r="14" fill="#fff7e0" />
+<rect x="140" y="110" width="300" height="70" rx="12" fill="#ffffff" />
+<rect x="190" y="130" width="70" height="34" rx="4" fill="#e6f6f4" />
+<rect x="300" y="128" width="80" height="38" rx="4" fill="#fff7e0" />
+<rect x="395" y="128" width="35" height="30" rx="3" fill="#eef1f6" />
+<path d="M280 180L270 300H320L310 180" fill="#eef1f6" />
+<rect x="340" y="270" width="60" height="30" rx="3" fill="#ffe9e7" />
+</g>
+<g stroke="#0b2545" stroke-width="3"><path d="M139 147H190M260 147H300" /></g>
+<path d="M410 110V90M400 90H420" stroke="#0b2545" stroke-width="2" />
+<path d="M295 190V285H340" stroke="#b42318" stroke-width="2" stroke-dasharray="5 3" />
+<path d="M270 180H320" stroke="#7b8794" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="140" y="25">Blade</text><text x="58" y="138">Hub</text>
+<text x="190" y="124">Gearbox</text><text x="320" y="122">Generator</text><text x="430" y="90">Anemometer</text><text x="440" y="150">Controller</text>
+<text x="150" y="200">Low speed shaft</text>
+<text x="330" y="196">Yaw drive</text><text x="410" y="290">Transformer</text><text x="225" y="260">Tower</text><text x="160" y="104">Nacelle</text>
+</g>
+</svg>
+<figcaption>Main parts of a geared horizontal axis wind turbine (simplified).</figcaption>
+</figure>
+
+- **Rotor:** blades plus hub. The hub contains pitch bearings and pitch drives.
+- **Main shaft and bearings:** carry the rotor loads at low speed, around 5 to 15 rpm on large turbines.
+- **Gearbox:** a multistage planetary and parallel gearbox raises speed to about 1000 to 1800 rpm for a conventional generator.
+- **Generator:** commonly a **doubly fed induction generator (DFIG)** with a partial power converter, or a **permanent magnet synchronous generator** with a full power converter. **Direct drive** turbines omit the gearbox and use a large, slow, multipole generator, reducing maintenance.
+- **Power converter and transformer:** convert variable frequency output to grid frequency and step up voltage to the collection network.
+- **Yaw system:** motors turn the nacelle to face the wind, guided by a wind vane.
+- **Brakes:** aerodynamic braking by pitching blades, plus a mechanical disc brake for parking.
+- **Controller:** monitors wind, speed, temperatures and vibration and controls pitch, yaw and generator torque.
+- **Tower and foundation:** steel tubular or hybrid concrete towers, often over 100 m tall, on concrete foundations onshore or monopiles, jackets or floating platforms offshore.
+
+## The power curve
+
+A turbine's **power curve** shows electrical output against wind speed:
+
+- **Cut-in speed** (about 3 m/s): the rotor starts producing power.
+- **Region 2**: output rises roughly with the cube of wind speed; the controller varies rotor speed to keep the tip speed ratio, and C_p, at their best.
+- **Rated speed** (about 11 to 13 m/s): rated power is reached.
+- **Region 3**: pitch control sheds excess energy to hold output at rated power.
+- **Cut-out speed** (about 25 m/s): the turbine stops for protection.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A turbine has a rotor diameter of 120 m and C_p = 0.45. Air density is 1.225 kg/m³.</dd>
+<dt>Find</dt><dd>Power output at wind speeds of 6 m/s and 9 m/s.</dd>
+<dt>Assumptions</dt><dd>Below rated speed; drivetrain and electrical losses ignored.</dd>
+<dt>Solution</dt><dd>A = π × 60² = 11 310 m²<br />At 6 m/s: P = 0.5 × 1.225 × 11 310 × 216 × 0.45 = 673 kW<br />At 9 m/s: v³ = 729; P = 0.5 × 1.225 × 11 310 × 729 × 0.45 = 2273 kW</dd>
+<dt>Answer</dt><dd><strong>About 0.67 MW at 6 m/s and 2.27 MW at 9 m/s: a 50% rise in wind speed gives about 3.4 times the power</strong></dd>
+<dt>Limitations</dt><dd>C_p varies with wind speed; above rated speed output is capped by pitch control.</dd>
+</dl>
+</Example>
+
+## Wind resource and siting
+
+Because power depends on the cube of wind speed, careful site assessment is essential. Developers measure wind with met masts or lidar for at least a year, correlate with long term reference data, and model the **Weibull distribution** of wind speeds. Wind speed rises with height, often following a power law, so taller towers reach stronger, steadier winds. Turbines in a wind farm are spaced several rotor diameters apart, because each turbine leaves a slower, turbulent **wake** that reduces the output of turbines downwind. Terrain, obstacles, noise limits, bird and bat habitats, grid access and transport routes for blades also shape the layout.
+
+## Onshore and offshore wind
+
+Onshore wind is the cheaper and more established option, limited by land use, transport of large blades and local acceptance. Offshore wind benefits from stronger, steadier winds and room for larger turbines, at the cost of complex foundations, subsea cables and marine operations. Floating foundations, similar in concept to [offshore platforms](/petroleum-engineering/offshore-platform-types/), open up deep water sites.
+
+## Wind turbines and the grid
+
+Because wind varies, wind farms are combined with other generation, storage such as [battery energy storage systems](/renewable-energy/battery-energy-storage-systems/), and forecasting. Modern turbine converters provide grid support functions such as voltage control, fault ride through and fast frequency response. Like [solar PV systems](/renewable-energy/how-solar-pv-systems-work/), wind farms feed the [transmission and distribution network](/electrical-engineering/generation-transmission-distribution/) through step up [transformers](/electrical-engineering/transformer-working-principle/).

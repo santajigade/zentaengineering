@@ -1,0 +1,145 @@
+---
+title: "What Is a Microgrid? Components and Operating Modes"
+description: "What is a microgrid: components, grid-connected and islanded modes, controllers, grid forming inverters, protection, uses and a worked sizing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: renewable-energy
+subcategory: microgrids
+focusKeyword: "microgrid"
+image: { src: /images/featured/microgrid-explained.webp, alt: "What Is a Microgrid? Components and Operating Modes: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [microgrid, distributed-energy, islanding, energy-storage, grid-forming]
+faq:
+  - q: "What is the difference between a microgrid and backup generators?"
+    a: "Backup generators simply start when the grid fails and supply a building. A microgrid is a coordinated system of generation, storage and loads with its own controller. It can run connected to the grid every day to cut costs and emissions, then island smoothly in an outage, managing several sources and prioritising loads."
+  - q: "Can a solar system alone form a microgrid?"
+    a: "Standard grid-tied solar inverters shut down when the grid fails because they follow, rather than set, the grid voltage. To form a microgrid, at least one grid forming source is needed, such as a battery inverter in grid forming mode or a generator, plus a controller and an isolation switch."
+  - q: "What is islanding?"
+    a: "Islanding is when part of the network keeps running on local generation while disconnected from the main grid. Unintentional islanding is dangerous for line workers, which is why ordinary solar inverters disconnect. Intentional islanding is a designed feature of a microgrid, with a switch that separates it cleanly from the utility."
+references:
+  - text: "IEEE 2030.7-2017, Standard for the Specification of Microgrid Controllers"
+  - text: "IEEE 2030.8-2018, Standard for the Testing of Microgrid Controllers"
+  - text: "IEEE 1547.4, Guide for Design, Operation, and Integration of Distributed Resource Island Systems with Electric Power Systems"
+  - text: "N. Hatziargyriou (ed.), Microgrids: Architectures and Control, Wiley-IEEE Press, 2014"
+  - text: "U.S. Department of Energy, Microgrid Program Strategy, Office of Electricity"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **microgrid** is a local group of electricity sources, storage and loads that operates as a single controllable system. It normally runs **grid-connected**, and can disconnect at a **point of common coupling** to run independently in **islanded mode** when the main grid fails or when it is economical. Typical components are **solar PV, wind, generators or CHP**, **battery storage**, **controllable loads**, **grid forming inverters**, **protection** and a **microgrid controller**. Microgrids improve resilience, cut energy costs and help integrate renewables.
+
+</Key>
+
+Large power systems are reliable, but storms, faults and overloads still cause outages. Hospitals, military bases, data centres, campuses, factories, islands and remote villages increasingly rely on microgrids to keep power on, use more local renewable energy and control costs.
+
+## Defining a microgrid
+
+The US Department of Energy describes a microgrid as a group of interconnected loads and distributed energy resources within clearly defined electrical boundaries that acts as a single controllable entity with respect to the grid, and can connect and disconnect from the grid to operate in either grid-connected or island mode. Key ideas are **local**, **coordinated** and **able to island**.
+
+## Microgrid components
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Microgrid single line: utility grid connects through a point of common coupling switch to a microgrid AC bus; connected to the bus are solar PV with inverter, battery storage with grid forming inverter, a diesel or gas generator, critical loads and non-critical loads; a microgrid controller communicates with all components">
+<g stroke="#0b2545" stroke-width="2">
+<ellipse cx="80" cy="60" rx="55" ry="25" fill="#eef1f6" />
+<rect x="60" y="110" width="40" height="30" fill="#ffe9e7" />
+<path d="M80 85V110M80 140V160M60 160H560" stroke-width="3" />
+<rect x="110" y="200" width="80" height="50" rx="4" fill="#fff7e0" /><rect x="210" y="200" width="80" height="50" rx="4" fill="#e6f6f4" /><rect x="310" y="200" width="80" height="50" rx="4" fill="#eef1f6" /><rect x="410" y="200" width="70" height="50" rx="4" fill="#ffe9e7" /><rect x="495" y="200" width="70" height="50" rx="4" fill="#ffffff" />
+<path d="M150 160V200M250 160V200M350 160V200M445 160V200M530 160V200" />
+<rect x="370" y="40" width="160" height="40" rx="6" fill="#e6f6f4" />
+</g>
+<g stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3"><path d="M450 80V110H150V150M250 110V150M350 110V150M445 110V150M530 110V150M370 60H135V125H100" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="80" y="65">Utility grid</text><text x="135" y="130" font-size="11">PCC switch</text>
+<text x="150" y="222">Solar PV</text><text x="150" y="238">+ inverter</text>
+<text x="250" y="222">Battery</text><text x="250" y="238">grid forming</text>
+<text x="350" y="222">Generator</text><text x="350" y="238">or CHP</text>
+<text x="445" y="222">Critical</text><text x="445" y="238">loads</text>
+<text x="530" y="222">Other</text><text x="530" y="238">loads</text>
+<text x="450" y="65" font-weight="700">Microgrid controller</text>
+<text x="320" y="180" font-size="11">Microgrid AC bus</text>
+<text x="300" y="285">Dashed lines: control and communication</text>
+</g>
+</svg>
+<figcaption>A typical AC microgrid with its point of common coupling (PCC) to the utility.</figcaption>
+</figure>
+
+- **Distributed generation:** [solar PV systems](/renewable-energy/how-solar-pv-systems-work/), small [wind turbines](/renewable-energy/how-wind-turbines-work/), diesel or gas gensets, combined heat and power (CHP), fuel cells or small hydro.
+- **Energy storage:** usually [battery energy storage systems](/renewable-energy/battery-energy-storage-systems/), sometimes flywheels, thermal storage or hydrogen.
+- **Loads:** split into **critical** loads that must stay on and **non-critical** or flexible loads that can be shed or shifted, such as EV chargers, HVAC and water heaters.
+- **Point of common coupling (PCC):** a switch or breaker, with protection relays, that connects and disconnects the microgrid from the utility.
+- **Power electronics:** inverters for PV and batteries. **Grid forming** inverters create voltage and frequency like a generator; **grid following** inverters inject power into an existing voltage.
+- **Microgrid controller:** software and hardware that monitors all assets, dispatches generation and storage, manages transitions and communicates with the utility.
+- **Protection and metering:** relays, breakers and meters adapted to both modes.
+
+## Microgrid operating modes
+
+### Grid-connected mode
+
+The utility sets voltage and frequency. The controller optimises economics: using solar first, charging batteries from cheap or surplus power, discharging at peak tariff times, reducing demand charges, and providing services to the grid operator such as demand response or frequency support.
+
+### Islanded mode
+
+When the PCC opens, the microgrid must set its own voltage and frequency and match generation to load at every instant. A grid forming battery inverter or a generator takes that role. The controller sheds non-critical loads if needed, limits solar output if storage is full, and starts generators when battery charge falls.
+
+### Transitions
+
+- **Planned islanding:** the controller balances flows to near zero across the PCC, then opens it for a seamless transition.
+- **Unplanned islanding:** a grid fault trips the PCC; the microgrid either rides through with fast grid forming inverters or briefly blacks out and restarts (black start).
+- **Resynchronisation:** when the grid returns and is stable, the controller matches voltage, frequency and phase and closes the PCC.
+
+## Types of microgrids
+
+- **Campus and institutional:** universities, hospitals, military bases.
+- **Commercial and industrial:** factories and data centres seeking resilience and lower costs.
+- **Community microgrids:** serving a neighbourhood or critical facilities on a utility feeder.
+- **Remote and island microgrids:** permanently islanded systems replacing diesel with solar, wind and batteries.
+- **DC microgrids:** distribute DC directly, efficient for solar, batteries, LED lighting, EV charging and data centres.
+
+## Sizing an islanded microgrid
+
+For islanded operation, storage must cover critical load when renewables are unavailable:
+
+$$
+E_\text{battery} = \frac{P_\text{critical} \times t_\text{autonomy}}{DoD \times \eta}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A hospital wing has 200 kW of critical load. The microgrid must supply it for 8 hours overnight from batteries, with a generator as last resort. Battery usable depth of discharge 90%, discharge efficiency 94%.</dd>
+<dt>Find</dt><dd>The battery energy and the minimum inverter rating.</dd>
+<dt>Assumptions</dt><dd>Constant load; no solar at night; inverter must also handle motor starting surges, so add 50% power margin.</dd>
+<dt>Solution</dt><dd>Energy = 200 × 8 = 1600 kWh<br />E_battery = 1600 ÷ (0.90 × 0.94) = 1891 kWh<br />Inverter rating = 200 × 1.5 = 300 kW, grid forming</dd>
+<dt>Answer</dt><dd><strong>About 1.9 MWh of battery storage with a 300 kW grid forming inverter</strong></dd>
+<dt>Limitations</dt><dd>Real designs model daily load and solar profiles, battery ageing and generator dispatch with simulation tools.</dd>
+</dl>
+</Example>
+
+## Control layers
+
+Microgrid control is usually organised in three layers:
+
+1. **Primary control:** fast, local control in each inverter or generator, often using **droop control**, where frequency and voltage fall slightly as output rises, so that sources share load without communication.
+2. **Secondary control:** the controller restores frequency and voltage to nominal and coordinates sources.
+3. **Tertiary control:** economic optimisation, forecasting and interaction with the utility and markets.
+
+## Protection challenges
+
+Inverter based sources supply limited fault current, often only about 1.1 to 2 times rated current, compared with many times rated current from the grid. Overcurrent devices set for grid faults, such as a typical [overcurrent relay](/electrical-engineering/overcurrent-relay/), may not trip in island mode. Microgrids therefore use adaptive protection settings, differential or directional schemes and communication based protection, and careful [earthing](/electrical-engineering/electrical-earthing/) design for both modes.
+
+## Microgrid design steps
+
+1. Define goals: resilience, cost savings, emissions or all three, and which loads are critical.
+2. Collect load profiles and site data, such as solar resource and existing generators.
+3. Model options with simulation tools to size PV, storage and generators for both modes.
+4. Design protection, switching, earthing and communication for safe islanding.
+5. Select a controller and specify use cases and tests, guided by IEEE 2030.7 and 2030.8.
+6. Commission with real islanding and resynchronisation tests, and train operators.
+
+## Benefits of a microgrid
+
+A well designed microgrid keeps critical services running through outages, lowers energy bills through optimisation, increases the share of local renewable energy, and supports the wider grid. As costs of solar, batteries and [EV charging](/renewable-energy/ev-charging-levels-and-connectors/) fall and controls mature, microgrids are moving from special projects to standard practice.

@@ -1,0 +1,143 @@
+---
+title: "Solar Inverter Types: String, Central and Microinverters"
+description: "Solar inverter types compared: string, central, microinverters, power optimisers and hybrid inverters, MPPT, efficiency, shading and a string sizing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: renewable-energy
+subcategory: inverters
+focusKeyword: "solar inverter types"
+image: { src: /images/featured/solar-inverter-types.webp, alt: "Solar Inverter Types: String, Central and Microinverters: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [solar-inverter, microinverter, string-inverter, mppt, solar-pv]
+faq:
+  - q: "Which solar inverter type is best for a home?"
+    a: "For an unshaded roof facing one direction, a string inverter is usually the most cost effective. For roofs with partial shading, several orientations or a need for module level monitoring and rapid shutdown, microinverters or a string inverter with power optimisers are better. If battery backup is wanted, choose a hybrid inverter."
+  - q: "What is MPPT in a solar inverter?"
+    a: "Maximum power point tracking continuously adjusts the voltage at which the PV array operates to find the point where voltage times current is highest. The best point changes with sunlight and temperature, so MPPT algorithms such as perturb and observe check and adjust many times per second."
+  - q: "Can I oversize the PV array compared with the inverter?"
+    a: "Yes. A DC to AC ratio of about 1.1 to 1.3 is common, because panels rarely produce full rated power. The inverter clips output on the sunniest hours, but the extra array increases energy in the mornings, evenings and cloudy periods, often improving overall economics. The array voltage and current must stay within inverter limits."
+references:
+  - text: "IEC 62109-1 and -2, Safety of power converters for use in photovoltaic power systems"
+  - text: "IEEE 1547-2018, Standard for Interconnection and Interoperability of Distributed Energy Resources with Associated Electric Power Systems Interfaces"
+  - text: "IEC 61683, Photovoltaic systems: Power conditioners: Procedure for measuring efficiency"
+  - text: "NEC Article 690.12, Rapid Shutdown of PV Systems on Buildings, NFPA 70"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The main **solar inverter types** are: **string inverters**, which convert power from one or more series strings of panels and are the most common choice for homes and businesses; **central inverters**, large units of hundreds of kW to several MW for utility solar plants; **microinverters**, small inverters mounted behind each panel; **string inverters with power optimisers**, which add DC electronics at each panel; and **hybrid inverters**, which also manage batteries. The choice depends on system size, shading, roof layout, monitoring needs, safety rules and budget.
+
+</Key>
+
+Solar panels produce DC electricity, but homes, factories and the grid use AC. The inverter is the heart of every grid connected [solar PV system](/renewable-energy/how-solar-pv-systems-work/): it converts DC to AC, extracts maximum power from the array, synchronises with the grid and provides protection and monitoring.
+
+## What every PV inverter does
+
+- **DC to AC conversion:** power semiconductors (IGBTs or MOSFETs) switch rapidly in a bridge to create an AC waveform, filtered to a clean sine wave with low [harmonic distortion](/electrical-engineering/power-factor/).
+- **Maximum power point tracking (MPPT):** adjusts the operating voltage to extract maximum power as sunlight and temperature change.
+- **Grid synchronisation:** matches grid voltage, frequency and phase.
+- **Protection:** anti-islanding (disconnects in a grid outage), ground fault and insulation monitoring, over and undervoltage and frequency limits, and arc fault detection in some markets.
+- **Grid support:** modern inverters can control reactive power, ride through faults and reduce output if frequency rises, as required by grid codes such as IEEE 1547.
+- **Monitoring and communication:** energy logging and remote diagnostics.
+
+## The PV operating point
+
+A PV array's current falls sharply as voltage approaches open circuit. Power, the product P = V × I, peaks at the **maximum power point** (V_mp, I_mp). MPPT algorithms keep the array there. One MPPT input works well only if all panels on it see similar conditions; a shaded panel in a string drags the whole string down, which is why inverter architecture matters.
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Three architectures: string inverter with panels in series feeding one inverter; microinverters with a small inverter behind each panel feeding an AC bus; central inverter with many strings combined in a combiner box feeding one large inverter">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="100" y="20">String inverter</text><text x="300" y="20">Microinverters</text><text x="500" y="20">Central inverter</text></g>
+<g fill="#0b2545" fill-opacity="0.85">
+<rect x="40" y="35" width="40" height="28" /><rect x="40" y="73" width="40" height="28" /><rect x="40" y="111" width="40" height="28" /><rect x="40" y="149" width="40" height="28" />
+<rect x="240" y="35" width="40" height="28" /><rect x="240" y="80" width="40" height="28" /><rect x="240" y="125" width="40" height="28" /><rect x="240" y="170" width="40" height="28" />
+<rect x="430" y="35" width="26" height="20" /><rect x="430" y="60" width="26" height="20" /><rect x="430" y="85" width="26" height="20" /><rect x="462" y="35" width="26" height="20" /><rect x="462" y="60" width="26" height="20" /><rect x="462" y="85" width="26" height="20" /><rect x="494" y="35" width="26" height="20" /><rect x="494" y="60" width="26" height="20" /><rect x="494" y="85" width="26" height="20" /><rect x="526" y="35" width="26" height="20" /><rect x="526" y="60" width="26" height="20" /><rect x="526" y="85" width="26" height="20" />
+</g>
+<g stroke="#b42318" stroke-width="2" fill="none"><path d="M80 49H95V87H80M80 125H95V163H80M60 63V73M60 139V149M60 177V215H100" /><path d="M443 105V125M475 105V125M507 105V125M539 105V125M443 125H539M490 125V150" /></g>
+<g stroke="#0b2545" stroke-width="2"><rect x="80" y="215" width="60" height="40" rx="4" fill="#e6f6f4" /><rect x="285" y="40" width="20" height="18" fill="#e6f6f4" /><rect x="285" y="85" width="20" height="18" fill="#e6f6f4" /><rect x="285" y="130" width="20" height="18" fill="#e6f6f4" /><rect x="285" y="175" width="20" height="18" fill="#e6f6f4" /><rect x="465" y="150" width="50" height="24" fill="#eef1f6" /><rect x="455" y="195" width="70" height="50" rx="4" fill="#e6f6f4" /></g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M110 255V275M305 49H330V230M305 94H330M305 139H330M305 184H330M490 245V275" /></g>
+<path d="M490 174V195" stroke="#b42318" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="110" y="240">Inverter</text><text x="125" y="290">AC out</text><text x="350" y="250">AC bus</text><text x="330" y="270">Inverter per panel</text>
+<text x="490" y="166" font-size="10">Combiner</text><text x="490" y="224">Inverter</text><text x="490" y="238" font-size="10">MW scale</text><text x="540" y="290">AC out</text>
+</g>
+</svg>
+<figcaption>Simplified layouts: one inverter per string, one per panel, or one large inverter for many strings. Red lines are DC, teal lines are AC.</figcaption>
+</figure>
+
+## Solar inverter types in detail
+
+### String inverters
+
+Panels are wired in series into strings of perhaps 8 to 25 modules, giving a few hundred to 1000 V or more DC. One string inverter, typically 2 to 350 kW, handles one or several strings, often with two or more MPPT inputs so that strings facing different directions can be tracked separately.
+
+- **Pros:** low cost per watt, high efficiency (about 97 to 99%), easy to service at ground level, proven.
+- **Cons:** shading or mismatch on one panel affects the string; high DC voltage on the roof; monitoring only at string level.
+
+### Central inverters
+
+Large inverters from several hundred kW to over 5 MW, fed by many strings through **combiner boxes**, usually in a container with a medium voltage transformer.
+
+- **Pros:** lowest cost per watt for large plants, few units to maintain, strong grid support capability.
+- **Cons:** a fault takes a large block offline; long DC cable runs; limited MPPT granularity. Many utility plants now use large string inverters instead for redundancy.
+
+### Microinverters
+
+A small inverter, typically 300 to 800 W, under each panel (or pair of panels) converts DC to AC on the roof, so only AC cabling runs to the switchboard.
+
+- **Pros:** independent MPPT for every panel, so shading on one panel does not affect others; panel level monitoring; low DC voltage improves fire safety and simplifies rapid shutdown rules; easy to expand.
+- **Cons:** higher cost per watt; more electronics on the roof exposed to heat; replacements require roof access.
+
+### Power optimisers
+
+DC to DC converters fitted to each panel perform module level MPPT and pass conditioned DC to a central string inverter.
+
+- **Pros:** most of the shading and monitoring benefits of microinverters, with a single inverter; supports rapid shutdown.
+- **Cons:** more components than a plain string system; still needs the central inverter.
+
+### Hybrid inverters
+
+A hybrid (multimode) inverter combines PV MPPT inputs with a battery charger and inverter. It can store solar energy, supply backup power in outages, and manage grid import and export. See [battery energy storage systems](/renewable-energy/battery-energy-storage-systems/).
+
+## Solar inverter types compared
+
+| Feature | String | Central | Microinverter | Optimiser + string | Hybrid |
+| --- | --- | --- | --- | --- | --- |
+| Typical size | 2 to 350 kW | 0.5 to 5+ MW | 0.3 to 0.8 kW per unit | Per panel + string | 3 to 100 kW |
+| MPPT level | String | Array blocks | Panel | Panel | String |
+| Shading tolerance | Low to medium | Low | High | High | Low to medium |
+| Cost per watt | Low | Lowest | High | Medium | Medium to high |
+| Monitoring | String | Inverter | Panel | Panel | String and battery |
+| Typical use | Homes, C&I | Utility plants | Complex roofs | Shaded roofs | Homes with storage |
+
+## Efficiency
+
+Peak efficiency figures can reach 99%, but the **weighted efficiency** (European or CEC efficiency), which averages performance over typical loading, is more meaningful. Inverter heat raises losses, so they should be installed in shaded, ventilated places.
+
+## String sizing
+
+String voltage must stay below the inverter's maximum DC input at the coldest expected temperature, because panel voltage rises in the cold:
+
+$$
+V_{oc,\text{cold}} = V_{oc,\text{STC}}\,\big[1 + \beta\,(T_\text{min} - 25)\big]
+$$
+
+where β is the voltage temperature coefficient (negative, per °C).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Panels with V_oc = 49.5 V at STC and β = −0.27%/°C. Minimum site temperature 0 °C. Inverter maximum DC input 1000 V.</dd>
+<dt>Find</dt><dd>The maximum number of panels per string.</dd>
+<dt>Assumptions</dt><dd>Cell temperature equals ambient at sunrise on the coldest day.</dd>
+<dt>Solution</dt><dd>V_oc,cold = 49.5 × [1 + (−0.0027)(0 − 25)] = 49.5 × 1.0675 = 52.8 V<br />Max panels = 1000 ÷ 52.8 = 18.9, round down to 18</dd>
+<dt>Answer</dt><dd><strong>Up to 18 panels per string (about 951 V at the coldest condition)</strong></dd>
+<dt>Limitations</dt><dd>Also check that the string's operating voltage at high temperature stays above the inverter's minimum MPPT voltage.</dd>
+</dl>
+</Example>
+
+## Choosing among solar inverter types
+
+Consider system size, shading and roof complexity, local safety codes such as rapid shutdown requirements, need for batteries or backup, warranty length (often 10 to 12 years for string inverters and 20 to 25 years for microinverters), service access and total cost over the system life. Good design and correct [cable sizing](/electrical-engineering/cable-sizing/) on both DC and AC sides matter as much as the inverter itself.
