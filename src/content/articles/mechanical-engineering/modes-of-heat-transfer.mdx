@@ -1,0 +1,140 @@
+---
+title: "Modes of Heat Transfer: Conduction, Convection and Radiation"
+description: "The three modes of heat transfer explained: conduction with Fourier's law, convection with Newton's law of cooling and radiation, with a worked wall example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mechanical-engineering
+subcategory: heat-transfer
+focusKeyword: "modes of heat transfer"
+format: fundamentals
+pillar: true
+math: true
+tags: [heat-transfer, conduction, convection, radiation, thermal-resistance]
+faq:
+  - q: "What are the three modes of heat transfer?"
+    a: "Conduction, through a solid or a still fluid by molecular contact; convection, between a surface and a moving fluid; and radiation, by electromagnetic waves, which needs no medium. Most real problems involve two or all three at once."
+  - q: "Which mode of heat transfer works in a vacuum?"
+    a: "Only radiation. Conduction and convection need matter to carry the energy. This is why vacuum flasks and spacecraft insulation rely on low emissivity surfaces to cut radiation."
+  - q: "What is the difference between heat transfer and thermodynamics?"
+    a: "Thermodynamics tells how much energy is transferred between states. Heat transfer tells how fast it moves, based on temperature differences, materials and geometry. Heat exchanger sizing needs both."
+  - q: "What is a typical convection coefficient?"
+    a: "Textbook ranges are roughly 2 to 25 W/m²K for free convection in gases, 25 to 250 for forced convection in gases, 50 to 20,000 for forced convection in liquids, and much higher for boiling and condensation."
+references:
+  - text: "F. P. Incropera, D. P. DeWitt, T. L. Bergman and A. S. Lavine, Fundamentals of Heat and Mass Transfer, 7th ed., Wiley"
+  - text: "Y. A. Cengel and A. J. Ghajar, Heat and Mass Transfer: Fundamentals and Applications, 6th ed., McGraw-Hill"
+  - text: "J. P. Holman, Heat Transfer, 10th ed., McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+There are three **modes of heat transfer**. **Conduction** moves heat through a material by molecular contact (Fourier's law, q = k A ΔT / L). **Convection** carries heat between a surface and a moving fluid (Newton's law of cooling, q = h A ΔT). **Radiation** transfers heat as electromagnetic waves and needs no medium (q = ε σ A (T₁⁴ minus T₂⁴)). Heat always flows from higher to lower temperature.
+
+</Key>
+
+Heat moves whenever there is a temperature difference. Engineers need to know how fast it moves: to size a boiler or [refrigeration](/mechanical-engineering/vapour-compression-refrigeration-cycle/) coil, to choose insulation thickness, to keep electronics cool or to predict how quickly a part heats in a furnace. The modes of heat transfer give three rate laws that together answer these questions.
+
+## The three modes of heat transfer at a glance
+
+<figure>
+<svg width="560" height="250" viewBox="0 0 560 250" fill="none" role="img" aria-label="Three panels showing conduction through a solid wall from hot to cold side, convection from a hot plate to moving air, and radiation from a hot body to a cold body as waves">
+<rect x="20" y="40" width="160" height="150" rx="6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="75" y="60" width="50" height="110" fill="#d8dee8" stroke="#0b2545" stroke-width="1.5" />
+<path d="M40 115H160" stroke="#b42318" stroke-width="2.5" />
+<path d="M152 108L162 115L152 122" stroke="#b42318" stroke-width="2.5" />
+<text x="45" y="82" font-size="12" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Hot</text>
+<text x="132" y="82" font-size="12" fill="#1d4ed8" font-family="Open Sans Variable, Arial, sans-serif">Cold</text>
+<text x="100" y="220" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Conduction</text>
+<rect x="200" y="40" width="160" height="150" rx="6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="215" y="160" width="130" height="16" fill="#b42318" />
+<text x="280" y="155" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Hot surface</text>
+<path d="M225 120H330M225 95H330M225 70H330" stroke="#13a89e" stroke-width="2" />
+<path d="M322 64L332 70L322 76M322 89L332 95L322 101M322 114L332 120L322 126" stroke="#13a89e" stroke-width="2" />
+<text x="280" y="220" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Convection</text>
+<rect x="380" y="40" width="160" height="150" rx="6" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="415" cy="115" r="20" fill="#b42318" />
+<rect x="500" y="85" width="20" height="60" fill="#1d4ed8" />
+<path d="M440 115Q446 105 452 115T464 115T476 115T488 115" stroke="#f5b800" stroke-width="2.5" fill="none" />
+<path d="M440 95Q446 85 452 95T464 95T476 95T488 95" stroke="#f5b800" stroke-width="2.5" fill="none" />
+<path d="M440 135Q446 125 452 135T464 135T476 135T488 135" stroke="#f5b800" stroke-width="2.5" fill="none" />
+<text x="460" y="220" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Radiation</text>
+</svg>
+<figcaption>Conduction through a solid, convection to a moving fluid, and radiation across space.</figcaption>
+</figure>
+
+## Conduction
+
+Conduction is energy transfer from more energetic particles to neighbouring less energetic ones, by lattice vibrations in solids and molecular collisions in fluids. Free electrons make metals especially good conductors. The rate is given by **Fourier's law**; for a plane wall of thickness L:
+
+$$
+q = k A \frac{T_1 - T_2}{L}
+$$
+
+q is heat rate (W), k is thermal conductivity (W/m·K), A is area (m²) and T₁ minus T₂ is the temperature difference across the wall. Thermal conductivity is about 400 W/m·K for copper, roughly 15 to 60 for steels, about 1 for brick and glass, and around 0.03 to 0.04 for mineral wool and polymer foam insulation.
+
+A useful idea is **thermal resistance**, R = L / (kA), so q = ΔT / R, like Ohm's law with temperature in place of voltage. Layers in series add their resistances, which makes composite walls easy to solve.
+
+## Convection
+
+Convection combines conduction at the surface with bulk fluid motion that carries the energy away. It is **forced** when a pump or fan drives the flow and **natural** (free) when buoyancy from density differences drives it. Boiling and condensation are special convection cases with very high rates. The rate is written with **Newton's law of cooling**:
+
+$$
+q = h A \left(T_s - T_\infty\right)
+$$
+
+h is the convection heat transfer coefficient (W/m²K), Ts is surface temperature and T∞ is the fluid temperature away from the surface. Unlike k, h is not a material property. It depends on fluid properties, velocity, geometry and flow regime, and is found from correlations in terms of the Reynolds, Prandtl and Nusselt numbers. Typical values range from a few W/m²K for still air to many thousands for boiling water. Fluid flow principles such as the [Bernoulli equation](/mechanical-engineering/bernoulli-equation/) and pressure drop set the velocities that drive forced convection. The convection resistance is R = 1 / (hA).
+
+## Radiation
+
+All surfaces above absolute zero emit electromagnetic radiation, mainly in the infrared at ordinary temperatures. Radiation needs no medium and works best in a vacuum. An ideal emitter (black body) emits according to the **Stefan-Boltzmann law**, and a real gray surface exchanging with large surroundings transfers:
+
+$$
+q = \varepsilon \sigma A \left(T_s^4 - T_{\text{sur}}^4\right)
+$$
+
+σ = 5.67 × 10⁻⁸ W/m²K⁴ and ε is emissivity, from near 0 for polished metals to above 0.9 for most paints and oxidised surfaces. Temperatures must be in kelvin. Because of the fourth power, radiation dominates at high temperatures in furnaces and boilers, and it is the principle behind infrared thermometers and thermal cameras.
+
+## Combined heat transfer through a wall
+
+In practice the modes act in series and parallel. Heat leaving a hot pipe passes by convection from the fluid to the pipe wall, conduction through the wall and insulation, then convection and radiation to the room. The total thermal resistance gives the overall heat transfer coefficient U used in heat exchanger design (q = U A ΔT).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A furnace wall 0.2 m thick, area 10 m², made of firebrick with k = 1.2 W/m·K. Inner face 800 °C, outer face 100 °C. The outer face loses heat to room air at 30 °C.</dd>
+<dt>Find</dt><dd>The heat loss through the wall and the convection coefficient this implies at the outer face (ignoring radiation).</dd>
+<dt>Assumptions</dt><dd>Steady one dimensional conduction, constant k, uniform face temperatures.</dd>
+<dt>Solution</dt><dd>q = k A (T₁ − T₂) / L = 1.2 × 10 × (800 − 100) / 0.2 = 42,000 W<br />Convection at outer face: h = q / (A (Ts − T∞)) = 42,000 / (10 × (100 − 30)) = 60 W/m²K</dd>
+<dt>Answer</dt><dd><strong>Heat loss about 42 kW; an outside coefficient of 60 W/m²K would be needed to carry it by convection alone</strong></dd>
+<dt>Limitations</dt><dd>60 W/m²K is high for still air, so in reality radiation carries a large share and the outer face would run hotter. Insulation on the outside would cut the loss sharply.</dd>
+</dl>
+</Example>
+
+<Calculator path="physics/heat-conduction" title="Heat Conduction Calculator" />
+
+## Comparing the three modes
+
+| Feature | Conduction | Convection | Radiation |
+| --- | --- | --- | --- |
+| Needs a medium | Yes, solid or still fluid | Yes, moving fluid | No |
+| Rate law | Fourier: q = k A ΔT / L | Newton: q = h A ΔT | Stefan-Boltzmann: q = ε σ A (T₁⁴ − T₂⁴) |
+| Key property | Thermal conductivity k | Convection coefficient h | Emissivity ε |
+| Depends on ΔT | Linearly | Roughly linearly | On the difference of fourth powers |
+| Typical example | Heat through a furnace wall | Radiator cooling an engine | Sun heating the earth |
+
+A quick way to judge which mode matters most is to compare the thermal resistances. At room temperature, radiation from a painted surface is equivalent to a coefficient of roughly 5 to 6 W/m²K, similar to natural convection in air, so both must be counted for a hot pipe in still air. In forced convection with liquids, radiation is usually negligible. In a vacuum or a furnace, radiation dominates.
+
+## Where the modes of heat transfer matter
+
+- **Heat exchangers, boilers and condensers:** convection on both sides with conduction through the tube wall.
+- **Refrigeration and air conditioning:** evaporator and condenser coils rely on boiling and condensation convection.
+- **Electronics cooling:** conduction into a heat sink, then convection and radiation to air; see [heat sink calculation](https://www.instrumentationblog.in/heat-sink-calculation/).
+- **Machine design:** bearings and gears must shed frictional heat; the [lubrication regime](/mechanical-engineering/types-of-lubrication/) affects how much is generated.
+- **Temperature measurement:** sensors read correctly only when heat transfer between sensor and process dominates other paths. See [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) articles.
+- **Thermal stress:** uneven heating produces stress in restrained parts, linking heat transfer to [stress and strain](/mechanical-engineering/stress-and-strain/).
+
+## Related reading
+
+- [Laws of Thermodynamics Explained for Engineers](/mechanical-engineering/laws-of-thermodynamics/)
+- [Finite Element Analysis (FEA): Basic Steps Explained](/mechanical-engineering/finite-element-analysis-basics/)

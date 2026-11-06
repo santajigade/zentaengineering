@@ -6,15 +6,15 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| strength-of-materials | Stress and Strain: Definitions, Types and Hooke's Law | stress-and-strain | fundamentals | to write |
-| machine-design | Factor of Safety in Machine Design Explained | factor-of-safety | fundamentals | to write |
-| thermodynamics | Laws of Thermodynamics Explained for Engineers | laws-of-thermodynamics | fundamentals | to write |
-| fluid-mechanics | Bernoulli's Equation: Derivation, Assumptions and Applications | bernoulli-equation | fundamentals | to write |
-| heat-transfer | Modes of Heat Transfer: Conduction, Convection and Radiation | modes-of-heat-transfer | fundamentals | to write |
-| pumps-compressors-turbines | Centrifugal Pump Working Principle and Parts | centrifugal-pump-working-principle | working-principle | to write |
-| hvac-refrigeration | Vapour Compression Refrigeration Cycle Explained | vapour-compression-refrigeration-cycle | working-principle | to write |
-| tribology | Types of Lubrication: Hydrodynamic, Boundary and Mixed | types-of-lubrication | explanation | to write |
-| cad-cae-fea | Finite Element Analysis (FEA): Basic Steps Explained | finite-element-analysis-basics | fundamentals | to write |
+| strength-of-materials | Stress and Strain: Definitions, Types and Hooke's Law | stress-and-strain | fundamentals | draft |
+| machine-design | Factor of Safety in Machine Design Explained | factor-of-safety | fundamentals | draft |
+| thermodynamics | Laws of Thermodynamics Explained for Engineers | laws-of-thermodynamics | fundamentals | draft |
+| fluid-mechanics | Bernoulli's Equation: Derivation, Assumptions and Applications | bernoulli-equation | fundamentals | draft |
+| heat-transfer | Modes of Heat Transfer: Conduction, Convection and Radiation | modes-of-heat-transfer | fundamentals | draft |
+| pumps-compressors-turbines | Centrifugal Pump Working Principle and Parts | centrifugal-pump-working-principle | working-principle | draft |
+| hvac-refrigeration | Vapour Compression Refrigeration Cycle Explained | vapour-compression-refrigeration-cycle | working-principle | draft |
+| tribology | Types of Lubrication: Hydrodynamic, Boundary and Mixed | types-of-lubrication | explanation | draft |
+| cad-cae-fea | Finite Element Analysis (FEA): Basic Steps Explained | finite-element-analysis-basics | fundamentals | draft |
 
 ## electrical-engineering
 

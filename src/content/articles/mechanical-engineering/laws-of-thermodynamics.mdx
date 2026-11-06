@@ -1,0 +1,148 @@
+---
+title: "Laws of Thermodynamics Explained for Engineers"
+description: "The zeroth, first, second and third laws of thermodynamics explained for engineers, with energy balances, entropy, heat engine efficiency and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mechanical-engineering
+subcategory: thermodynamics
+focusKeyword: "laws of thermodynamics"
+format: fundamentals
+pillar: true
+math: true
+tags: [thermodynamics, first-law, second-law, entropy, carnot-efficiency]
+faq:
+  - q: "What are the four laws of thermodynamics in simple words?"
+    a: "Zeroth: two bodies each in thermal equilibrium with a third are in equilibrium with each other, which makes thermometers possible. First: energy is conserved. Second: heat flows naturally from hot to cold, and no engine can turn all heat into work. Third: the entropy of a perfect crystal approaches zero as temperature approaches absolute zero."
+  - q: "Why can no heat engine be 100 percent efficient?"
+    a: "The second law requires every heat engine to reject some heat to a colder reservoir. The best possible efficiency, the Carnot efficiency, is 1 minus Tc/Th with temperatures in kelvin, which is always less than 1 unless the cold reservoir is at absolute zero."
+  - q: "What is the sign convention for heat and work?"
+    a: "Most engineering texts take heat added to the system as positive and work done by the system as positive, giving Q minus W equals change in energy. Some physics and chemistry texts take work done on the system as positive. Always check which convention a book or software uses."
+references:
+  - text: "Y. A. Cengel and M. A. Boles, Thermodynamics: An Engineering Approach, 9th ed., McGraw-Hill"
+  - text: "C. Borgnakke and R. E. Sonntag, Fundamentals of Thermodynamics, 10th ed., Wiley"
+  - text: "P. K. Nag, Engineering Thermodynamics, 6th ed., McGraw-Hill Education"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The **laws of thermodynamics** govern how energy behaves. The **zeroth law** defines temperature. The **first law** says energy is conserved: heat added equals the change in internal energy plus work done. The **second law** says heat flows from hot to cold on its own and no engine can convert all heat into work, which introduces entropy. The **third law** says entropy approaches a minimum as temperature approaches absolute zero.
+
+</Key>
+
+Thermodynamics is the science of energy and its conversion between heat and work. Every power plant, engine, compressor, refrigerator and boiler is analysed with the same four laws. This article explains each law as an engineer uses it, with the key equations and a worked example on heat engine efficiency.
+
+## Basic terms
+
+- **System:** the part of the world being studied, such as the gas in a cylinder or the water in a boiler.
+- **Surroundings:** everything outside the system. The boundary separates them.
+- **Closed system:** mass cannot cross the boundary, energy can (a piston and cylinder).
+- **Open system (control volume):** mass flows in and out (a pump, turbine or heat exchanger).
+- **Property:** a measurable characteristic such as pressure, temperature, volume, internal energy or entropy.
+- **Process and cycle:** a process changes the state; a cycle returns the system to its starting state.
+- **Heat (Q) and work (W):** energy in transit across the boundary. They are not properties of the system.
+
+## The zeroth law of thermodynamics
+
+If body A is in thermal equilibrium with body C, and body B is also in equilibrium with C, then A and B are in equilibrium with each other. This sounds obvious, but it is what makes a thermometer meaningful: body C can be a thermometer that compares A and B without them touching. It establishes temperature as a property that every system has. Industrial [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) with RTDs and thermocouples relies on it.
+
+## The first law of thermodynamics
+
+The first law is conservation of energy. For a closed system:
+
+$$
+Q - W = \Delta U
+$$
+
+with heat added to the system and work done by the system both taken as positive. Over a complete cycle the system returns to its original state, ΔU = 0, so the net heat added equals the net work done.
+
+For an open system with steady flow, the energy carried by the flowing mass is included through enthalpy h = u + p v. Neglecting kinetic and potential energy changes:
+
+$$
+\dot{Q} - \dot{W} = \dot{m}\,(h_2 - h_1)
+$$
+
+This steady flow energy equation is used for turbines, compressors, pumps, nozzles, boilers and condensers. For example, the power absorbed by an adiabatic compressor is the mass flow times its enthalpy rise. The same energy balance, written for an incompressible fluid with no heat transfer, leads to the [Bernoulli equation](/mechanical-engineering/bernoulli-equation/).
+
+The first law tells us energy cannot be created or destroyed, so a machine that produces work without an energy input (a perpetual motion machine of the first kind) is impossible.
+
+## The second law of thermodynamics
+
+The first law allows any energy conversion as long as the books balance. The second law says which direction processes actually go. It has two classical statements:
+
+- **Kelvin and Planck:** no cyclic device can receive heat from a single reservoir and convert all of it into work. A heat engine must reject some heat to a colder reservoir.
+- **Clausius:** heat cannot flow from a colder body to a hotter body without external work. A refrigerator or heat pump needs a work input.
+
+The two statements are equivalent; violating one would violate the other.
+
+<figure>
+<svg width="520" height="300" viewBox="0 0 520 300" fill="none" role="img" aria-label="Heat engine diagram: heat Qh flows from a hot reservoir at Th into the engine, the engine delivers work W, and rejects heat Qc to a cold reservoir at Tc">
+<rect x="160" y="20" width="200" height="44" rx="6" fill="#fde2e2" stroke="#b42318" stroke-width="2" />
+<text x="260" y="47" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Hot reservoir, Th</text>
+<circle cx="260" cy="150" r="42" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" />
+<text x="260" y="155" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Engine</text>
+<rect x="160" y="236" width="200" height="44" rx="6" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" />
+<text x="260" y="263" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Cold reservoir, Tc</text>
+<path d="M260 64V104" stroke="#0b2545" stroke-width="2.5" />
+<path d="M253 96L260 106L267 96" stroke="#0b2545" stroke-width="2.5" />
+<text x="272" y="90" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Qh</text>
+<path d="M260 192V232" stroke="#0b2545" stroke-width="2.5" />
+<path d="M253 224L260 234L267 224" stroke="#0b2545" stroke-width="2.5" />
+<text x="272" y="218" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Qc</text>
+<path d="M302 150H420" stroke="#f5b800" stroke-width="3" />
+<path d="M412 143L422 150L412 157" stroke="#f5b800" stroke-width="3" />
+<text x="430" y="155" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Work W</text>
+</svg>
+<figcaption>A heat engine: W = Qh minus Qc, and some heat must always be rejected to the cold reservoir.</figcaption>
+</figure>
+
+### Efficiency and the Carnot limit
+
+The thermal efficiency of a heat engine is η = W / Qh = 1 minus Qc / Qh. The second law sets the best possible value, achieved by a reversible (Carnot) engine working between the same two temperatures:
+
+$$
+\eta_{\text{Carnot}} = 1 - \frac{T_c}{T_h}
+$$
+
+Temperatures must be absolute (kelvin). Real engines fall short because of friction, finite temperature differences in [heat transfer](/mechanical-engineering/modes-of-heat-transfer/), pressure losses and mixing. For refrigerators the equivalent idea is the coefficient of performance, which is limited in the same way; see the [vapour compression refrigeration cycle](/mechanical-engineering/vapour-compression-refrigeration-cycle/).
+
+### Entropy
+
+The second law is expressed quantitatively with entropy, S. For a reversible process dS = δQ / T. For any process in an isolated system, entropy never decreases:
+
+$$
+\Delta S_{\text{isolated}} \ge 0
+$$
+
+Equality holds only for ideal reversible processes. Entropy generation measures lost work potential, which is why engineers aim to reduce friction, throttling and large temperature differences.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A steam power plant receives heat at an average temperature of 550 °C and rejects heat to a condenser at 40 °C. The actual plant efficiency is 38 percent and the heat supplied is 1000 MW.</dd>
+<dt>Find</dt><dd>The Carnot efficiency, the net power output and the heat rejected.</dd>
+<dt>Assumptions</dt><dd>Steady operation; the two temperatures are treated as constant reservoir temperatures.</dd>
+<dt>Solution</dt><dd>Th = 550 + 273.15 = 823.15 K; Tc = 40 + 273.15 = 313.15 K<br />ηCarnot = 1 − 313.15 / 823.15 = 0.62 (62 percent)<br />W = 0.38 × 1000 = 380 MW<br />Qc = Qh − W = 1000 − 380 = 620 MW</dd>
+<dt>Answer</dt><dd><strong>Carnot limit 62 percent; the plant delivers 380 MW and rejects 620 MW to the condenser</strong></dd>
+<dt>Limitations</dt><dd>Real heat addition happens over a range of temperatures, so the Carnot value based on peak or average temperature is only an upper bound for comparison.</dd>
+</dl>
+</Example>
+
+<Calculator path="physics/carnot-efficiency" title="Carnot Efficiency Calculator" />
+
+## The third law of thermodynamics
+
+The entropy of a pure, perfect crystalline substance approaches zero as its temperature approaches absolute zero (0 K). The law gives a reference point for absolute entropy values in property tables. A practical consequence is that absolute zero cannot be reached in a finite number of steps. It matters mainly in cryogenics and chemical thermodynamics, and rarely enters everyday machine calculations.
+
+## Where engineers use the laws of thermodynamics
+
+- **Power plants and engines:** Rankine, Brayton, Otto and Diesel cycles are analysed with the first and second laws.
+- **Pumps, fans and compressors:** the steady flow energy equation gives power input; the [centrifugal pump working principle](/mechanical-engineering/centrifugal-pump-working-principle/) shows how that energy is added to the fluid.
+- **Refrigeration and air conditioning:** the Clausius statement explains why a compressor is needed.
+- **Heat exchangers and boilers:** energy balances size the heat duty and flow rates.
+
+## Related reading
+
+- [Stress and Strain: Definitions, Types and Hooke's Law](/mechanical-engineering/stress-and-strain/)
+- [Heat sink calculation](https://www.instrumentationblog.in/heat-sink-calculation/) on InstrumentationBlog.in

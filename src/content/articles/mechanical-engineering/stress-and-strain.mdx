@@ -1,0 +1,160 @@
+---
+title: "Stress and Strain: Definitions, Types and Hooke's Law"
+description: "Stress and strain explained: normal, shear and bearing stress, strain types, Hooke's law, Young's modulus and the stress-strain curve with a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mechanical-engineering
+subcategory: strength-of-materials
+focusKeyword: "stress and strain"
+format: fundamentals
+pillar: true
+math: true
+tags: [stress, strain, hookes-law, youngs-modulus, stress-strain-curve]
+faq:
+  - q: "What is the difference between stress and strain?"
+    a: "Stress is the internal force per unit area in a loaded material, measured in pascals (usually MPa). Strain is the deformation per unit length that the load produces, and it has no unit. Stress is the cause, strain is the response."
+  - q: "Is Hooke's law valid up to the ultimate strength?"
+    a: "No. Hooke's law, stress proportional to strain, holds only up to the proportional limit. Beyond that point the curve bends, the material yields and permanent deformation begins well before the ultimate tensile strength is reached."
+  - q: "Why is engineering stress used instead of true stress?"
+    a: "Engineering stress divides the load by the original area, which is known and easy to measure. Designs keep stresses in the elastic range where the area barely changes, so the difference from true stress is negligible there."
+  - q: "What is a typical Young's modulus for steel?"
+    a: "Carbon and alloy steels have a Young's modulus of about 200 to 210 GPa. Aluminium alloys are about 70 GPa, so an aluminium part stretches about three times as much as an identical steel part under the same stress."
+references:
+  - text: "R. C. Hibbeler, Mechanics of Materials, 10th ed., Pearson"
+  - text: "J. M. Gere and B. J. Goodno, Mechanics of Materials, 9th ed., Cengage"
+  - text: "ISO 6892-1:2019 Metallic materials, Tensile testing, Part 1: Method of test at room temperature"
+  - text: "ASTM E8/E8M Standard Test Methods for Tension Testing of Metallic Materials"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Stress** is the internal force per unit area that a material carries when it is loaded (σ = F / A, in pascals). **Strain** is the change in length divided by the original length (ε = ΔL / L, no unit). In the elastic range the two are proportional, which is **Hooke's law**: σ = E ε, where E is Young's modulus.
+
+</Key>
+
+Stress and strain are the first ideas in strength of materials and the basis of every shaft, beam, bolt and pressure vessel calculation. A designer uses them to check that a part will not yield, break or stretch too much. This guide defines the quantities, explains Hooke's law and walks through the stress-strain curve from a tensile test.
+
+## What is stress?
+
+When an external load acts on a body, the material inside pushes back. The intensity of that internal resistance, force per unit area, is stress. It is written with the Greek letter σ (sigma) for normal stress and τ (tau) for shear stress. The SI unit is the pascal (1 Pa = 1 N/m²). Engineering values are large, so MPa (N/mm²) and GPa are used.
+
+### Types of stress
+
+- **Tensile stress:** the load pulls the material apart, as in a lifting rope or a tie bar. Taken as positive.
+- **Compressive stress:** the load pushes the material together, as in a column or a machine foot. Taken as negative.
+- **Shear stress:** the load acts parallel to the area and tries to slide one layer over another, as in a pin, rivet or key. For direct shear τ = F / A.
+- **Bearing stress:** the contact pressure between two parts, such as a bolt on the side of its hole. It is the load divided by the projected area (diameter × thickness).
+- **Bending and torsional stress:** combinations of tension, compression and shear produced by bending moments and twisting moments. They are covered by their own formulas (σ = M y / I and τ = T r / J).
+
+Normal stress from an axial load is:
+
+$$
+\sigma = \frac{F}{A}
+$$
+
+This simple formula assumes the load passes through the centroid of the section and the section is far from holes, shoulders and grooves. Near such features the local stress is higher, which is described by a stress concentration factor.
+
+## What is strain?
+
+Strain measures how much a body deforms relative to its size. A 1 m bar that stretches 1 mm and a 10 m bar that stretches 10 mm have the same strain, 0.001.
+
+- **Normal (linear) strain:** ε = ΔL / L. It is dimensionless and often quoted in microstrain (με, 10⁻⁶).
+- **Shear strain:** the change in angle between two lines that were originally at right angles, γ, in radians.
+- **Volumetric strain:** the change in volume divided by the original volume.
+
+A bar that stretches also gets thinner. The ratio of lateral strain to axial strain is **Poisson's ratio**, ν. It is about 0.3 for steel and about 0.33 for aluminium.
+
+## Hooke's law and the elastic constants
+
+For most metals, stress and strain are proportional up to the proportional limit:
+
+$$
+\sigma = E\,\varepsilon \qquad \tau = G\,\gamma
+$$
+
+E is Young's modulus (the modulus of elasticity) and G is the shear modulus. For an isotropic material they are linked by Poisson's ratio:
+
+$$
+G = \frac{E}{2(1+\nu)}
+$$
+
+Combining σ = F / A with Hooke's law gives the elongation of a bar under axial load: ΔL = F L / (A E). This is how bolt stretch, tie rod extension and the stiffness of a structure are calculated.
+
+| Material | Young's modulus E | Poisson's ratio ν |
+| --- | --- | --- |
+| Carbon steel | about 200 to 210 GPa | about 0.29 |
+| Aluminium alloy | about 69 to 72 GPa | about 0.33 |
+| Copper | about 110 to 130 GPa | about 0.34 |
+| Grey cast iron | about 80 to 140 GPa | about 0.26 |
+
+Values are typical; use the material standard or supplier data for design.
+
+## The stress and strain curve
+
+The relationship between stress and strain is measured in a tensile test (ISO 6892-1 or ASTM E8). A standard specimen is pulled at a controlled rate while the load and extension are recorded. Plotting engineering stress against engineering strain gives the curve below for a ductile steel.
+
+<figure>
+<svg width="560" height="330" viewBox="0 0 560 330" fill="none" role="img" aria-label="Stress strain curve for ductile steel showing the linear elastic region, yield point, strain hardening up to ultimate tensile strength, necking and fracture">
+<path d="M70 280H520" stroke="#0b2545" stroke-width="2" />
+<path d="M70 280V40" stroke="#0b2545" stroke-width="2" />
+<path d="M70 280L120 140" stroke="#13a89e" stroke-width="3" />
+<path d="M120 140L128 128L136 146L170 146C230 110 300 88 360 86C400 86 430 100 460 140" stroke="#0b2545" stroke-width="3" fill="none" />
+<circle cx="128" cy="128" r="4" fill="#f5b800" />
+<circle cx="360" cy="86" r="4" fill="#f5b800" />
+<path d="M460 140L452 132M460 140L468 132" stroke="#0b2545" stroke-width="2" />
+<text x="295" y="312" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Strain ε</text>
+<text x="30" y="160" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif" transform="rotate(-90 30 160)">Stress σ (MPa)</text>
+<text x="104" y="232" font-size="13" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Elastic (σ = E ε)</text>
+<text x="96" y="112" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Yield point</text>
+<text x="330" y="68" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Ultimate strength</text>
+<text x="220" y="160" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Strain hardening</text>
+<text x="400" y="160" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Necking</text>
+<text x="474" y="136" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Fracture</text>
+</svg>
+<figcaption>Engineering stress and strain curve for a ductile steel (not to scale).</figcaption>
+</figure>
+
+1. **Elastic region:** a straight line whose slope is E. Removing the load returns the specimen to its original length.
+2. **Yield:** the material starts to deform permanently. Mild steel shows a distinct yield point; many alloys do not, so the **0.2 percent offset yield strength** (Rp0.2) is used instead.
+3. **Strain hardening:** stress must keep rising to produce more strain, because the metal's crystal structure is hardening.
+4. **Ultimate tensile strength (UTS):** the maximum engineering stress (Rm).
+5. **Necking and fracture:** deformation concentrates in one region, the cross section shrinks and the specimen breaks. Engineering stress appears to fall because it is still based on the original area.
+
+Brittle materials such as grey cast iron show little or no yield and break close to the end of the elastic region, so they are designed against ultimate strength rather than yield. The margin between working stress and failure stress is set by the [factor of safety](/mechanical-engineering/factor-of-safety/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A steel tie rod of 20 mm diameter and 2 m length carries an axial tensile load of 40 kN. E = 200 GPa.</dd>
+<dt>Find</dt><dd>The tensile stress, the strain and the elongation.</dd>
+<dt>Assumptions</dt><dd>Load applied through the centroid, uniform section, stress within the elastic range.</dd>
+<dt>Solution</dt><dd>A = π × 20² / 4 = 314.2 mm²<br />σ = F / A = 40,000 / 314.2 = 127.3 MPa<br />ε = σ / E = 127.3 / 200,000 = 0.000637 (637 με)<br />ΔL = ε × L = 0.000637 × 2000 = 1.27 mm</dd>
+<dt>Answer</dt><dd><strong>Stress 127 MPa, strain 637 microstrain, elongation about 1.3 mm</strong></dd>
+<dt>Limitations</dt><dd>Threads at the rod ends reduce the area and raise local stress. Check the stress at the thread root area as well as the plain shank.</dd>
+</dl>
+</Example>
+
+<Calculator path="physics/youngs-modulus" title="Young's Modulus Calculator" />
+
+## Where stress and strain are used
+
+- **Machine design:** shafts, keys, bolts and springs are sized so that working stress stays below allowable stress.
+- **Structures:** beam deflection and column buckling depend on E and the second moment of area.
+- **Measurement:** strain gauges bonded to a part measure strain directly; stress is then found from Hooke's law. The same principle is used inside load cells and many pressure sensors.
+- **Simulation:** [finite element analysis](/mechanical-engineering/finite-element-analysis-basics/) solves for strain everywhere in a part and converts it to stress using the elastic constants.
+- **Thermal effects:** a restrained part that is heated develops thermal stress, σ = E α ΔT, even with no external load. [Heat transfer](/mechanical-engineering/modes-of-heat-transfer/) calculations give the temperature field that drives it.
+
+## Common mistakes
+
+- Mixing units: keep force in N and area in mm² to get stress directly in MPa.
+- Using gross area at a hole or thread instead of the net area.
+- Applying Hooke's law beyond yield, where it no longer holds.
+- Forgetting that compressive members can fail by buckling at stresses far below yield.
+
+## Related reading
+
+- [Pressure measurement articles](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) on InstrumentationBlog.in
+- [Laws of Thermodynamics Explained for Engineers](/mechanical-engineering/laws-of-thermodynamics/)
+- [Types of Lubrication: Hydrodynamic, Boundary and Mixed](/mechanical-engineering/types-of-lubrication/)

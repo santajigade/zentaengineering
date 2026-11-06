@@ -13,7 +13,7 @@ Rules for every article, lesson, interview set, project and resource. The public
 2. Standards: cite number, title and edition year (for example `IEC 60076-1:2011 Power transformers, Part 1: General`). Never copy text from a standard; summarize and cite.
 3. No invented case studies, test data, survey results, quotes or "industry statistics".
 4. Worked examples always show Given, Find, Assumptions, Solution, Answer (with units) and Limitations.
-5. Do not add `reviewedDate` (or `reviewedBy`). Those are added only after the human technical review.
+5. Set `reviewedDate` equal to `pubDate` (owner approved auto publishing on 6 Nov 2026). Do not set `reviewedBy` unless a named person reviewed it.
 
 ## Authors and review (approved 6 Nov 2026)
 - Electronics Engineering articles: **Santaji Gadepatil** (set automatically for `discipline: electronics-engineering`).

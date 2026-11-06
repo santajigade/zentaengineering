@@ -1,0 +1,145 @@
+---
+title: "Vapour Compression Refrigeration Cycle Explained"
+description: "How the vapour compression refrigeration cycle works: compressor, condenser, expansion valve and evaporator, the p-h diagram, COP and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mechanical-engineering
+subcategory: hvac-refrigeration
+focusKeyword: "vapour compression refrigeration cycle"
+format: working-principle
+pillar: true
+math: true
+tags: [refrigeration, vapour-compression, cop, refrigerant, hvac]
+faq:
+  - q: "What are the four main components of a vapour compression refrigeration system?"
+    a: "The compressor, the condenser, the expansion device (a capillary tube, thermostatic expansion valve or electronic expansion valve) and the evaporator. They are connected in a closed loop through which the refrigerant circulates."
+  - q: "Why is the expansion process treated as constant enthalpy?"
+    a: "The refrigerant passes through a small restriction quickly, with negligible heat transfer and no work. The steady flow energy equation then gives equal enthalpy before and after, even though pressure and temperature drop sharply."
+  - q: "What is one ton of refrigeration?"
+    a: "One ton of refrigeration (TR) is a cooling rate of 12,000 Btu/h, about 3.517 kW. It comes from the heat needed to melt one short ton of ice in 24 hours."
+  - q: "Why does the refrigerant leave the evaporator superheated?"
+    a: "A few kelvin of superheat makes sure only vapour reaches the compressor. Liquid droplets entering a compressor can damage valves and other parts, so expansion valves are set to control superheat."
+references:
+  - text: "Y. A. Cengel and M. A. Boles, Thermodynamics: An Engineering Approach, 9th ed., McGraw-Hill, chapter on refrigeration cycles"
+  - text: "W. F. Stoecker and J. W. Jones, Refrigeration and Air Conditioning, 2nd ed., McGraw-Hill"
+  - text: "C. P. Arora, Refrigeration and Air Conditioning, 3rd ed., McGraw-Hill Education"
+  - text: "ASHRAE Handbook, Refrigeration, ASHRAE"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+In the **vapour compression refrigeration cycle**, a refrigerant absorbs heat by evaporating at low pressure in the evaporator, is compressed to high pressure and temperature, rejects heat by condensing in the condenser, then drops back to low pressure through an expansion valve. The cycle repeats continuously. Its performance is measured by the coefficient of performance, COP = cooling effect / compressor work.
+
+</Key>
+
+Almost every refrigerator, air conditioner, chiller and heat pump uses the vapour compression refrigeration cycle. It moves heat from a cold space to a warmer one, which the [second law of thermodynamics](/mechanical-engineering/laws-of-thermodynamics/) says can only happen with a work input. The trick is to make the refrigerant boil at a temperature below the space being cooled and condense at a temperature above the surroundings, by changing its pressure.
+
+## Components of the vapour compression refrigeration cycle
+
+<figure>
+<svg width="540" height="330" viewBox="0 0 540 330" fill="none" role="img" aria-label="Vapour compression refrigeration cycle loop: compressor on the right raises pressure, condenser at the top rejects heat to surroundings, expansion valve on the left drops pressure, evaporator at the bottom absorbs heat from the cold space; states 1 to 4 are marked">
+<rect x="170" y="30" width="200" height="50" rx="6" fill="#fde2e2" stroke="#b42318" stroke-width="2" />
+<text x="270" y="60" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Condenser</text>
+<rect x="170" y="250" width="200" height="50" rx="6" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" />
+<text x="270" y="280" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Evaporator</text>
+<circle cx="440" cy="165" r="36" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" />
+<text x="396" y="170" text-anchor="end" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Compressor</text>
+<path d="M90 150L110 165L90 180L70 165Z" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<text x="118" y="170" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Expansion valve</text>
+<path d="M370 275H440V201" stroke="#0b2545" stroke-width="2" />
+<path d="M433 209L440 199L447 209" stroke="#0b2545" stroke-width="2" />
+<path d="M440 129V55H370" stroke="#0b2545" stroke-width="2" />
+<path d="M378 48L368 55L378 62" stroke="#0b2545" stroke-width="2" />
+<path d="M170 55H90V150" stroke="#0b2545" stroke-width="2" />
+<path d="M83 142L90 152L97 142" stroke="#0b2545" stroke-width="2" />
+<path d="M90 180V275H170" stroke="#0b2545" stroke-width="2" />
+<path d="M162 268L172 275L162 282" stroke="#0b2545" stroke-width="2" />
+<circle cx="440" cy="250" r="11" fill="#0b2545" /><text x="440" y="254" text-anchor="middle" font-size="11" fill="#ffffff" font-family="Open Sans Variable, Arial, sans-serif">1</text>
+<circle cx="440" cy="90" r="11" fill="#0b2545" /><text x="440" y="94" text-anchor="middle" font-size="11" fill="#ffffff" font-family="Open Sans Variable, Arial, sans-serif">2</text>
+<circle cx="90" cy="100" r="11" fill="#0b2545" /><text x="90" y="104" text-anchor="middle" font-size="11" fill="#ffffff" font-family="Open Sans Variable, Arial, sans-serif">3</text>
+<circle cx="90" cy="230" r="11" fill="#0b2545" /><text x="90" y="234" text-anchor="middle" font-size="11" fill="#ffffff" font-family="Open Sans Variable, Arial, sans-serif">4</text>
+<path d="M270 30V8" stroke="#b42318" stroke-width="2" /><path d="M264 15L270 6L276 15" stroke="#b42318" stroke-width="2" />
+<text x="282" y="18" font-size="12" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Heat out, Qc</text>
+<path d="M270 322V302" stroke="#1d4ed8" stroke-width="2" /><path d="M264 309L270 300L276 309" stroke="#1d4ed8" stroke-width="2" />
+<text x="282" y="320" font-size="12" fill="#1d4ed8" font-family="Open Sans Variable, Arial, sans-serif">Heat in from cold space, Qe</text>
+<path d="M500 165H478" stroke="#f5b800" stroke-width="2.5" /><path d="M486 158L476 165L486 172" stroke="#f5b800" stroke-width="2.5" />
+<text x="490" y="190" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Work W</text>
+<text x="200" y="130" font-size="12" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">High pressure side</text>
+<text x="200" y="210" font-size="12" fill="#1d4ed8" font-family="Open Sans Variable, Arial, sans-serif">Low pressure side</text>
+</svg>
+<figcaption>The four components of the vapour compression refrigeration cycle and the four state points.</figcaption>
+</figure>
+
+The refrigerant passes through four processes:
+
+1. **Compression (1 to 2):** low pressure vapour, slightly superheated, enters the compressor. The compressor raises its pressure and temperature. Ideally this is isentropic (constant entropy).
+2. **Condensation (2 to 3):** hot high pressure vapour enters the condenser. It first cools to the saturation temperature, then condenses to liquid, rejecting heat to outdoor air or cooling water. The liquid usually leaves slightly subcooled.
+3. **Expansion (3 to 4):** high pressure liquid passes through the expansion device. Pressure falls sharply and part of the liquid flashes to vapour, which cools the mixture to the evaporating temperature. No work is done and heat transfer is negligible, so enthalpy is constant (h₄ = h₃).
+4. **Evaporation (4 to 1):** the cold liquid and vapour mixture enters the evaporator, absorbs heat from the space or the fluid being cooled and boils to vapour. This is the useful refrigeration effect.
+
+The condenser must be warmer than the surroundings and the evaporator colder than the space, so heat can flow by the normal [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/). Pressure sets each saturation temperature, which is why the system has a high pressure side and a low pressure side.
+
+## Analysing the cycle on the p-h diagram
+
+Refrigeration engineers plot the cycle on a pressure enthalpy (p-h) chart. Each process becomes a simple line: two horizontal lines at constant pressure (evaporation and condensation), a vertical line for expansion (constant enthalpy) and a steep line for compression. Applying the steady flow energy equation to each component gives:
+
+$$
+q_e = h_1 - h_4 \qquad w = h_2 - h_1 \qquad q_c = h_2 - h_3
+$$
+
+per kilogram of refrigerant. The **refrigeration effect** is qe and the compressor work is w. Energy balance gives qc = qe + w: the condenser rejects the heat absorbed plus the work input.
+
+The **coefficient of performance** of a refrigerator is:
+
+$$
+\text{COP}_R = \frac{q_e}{w} = \frac{h_1 - h_4}{h_2 - h_1}
+$$
+
+The upper limit, set by the reversed Carnot cycle, is COP = Te / (Tc minus Te) with absolute temperatures. A smaller temperature lift between evaporator and condenser gives a higher COP, which is why dirty condensers and low evaporator settings waste energy. For a heat pump, the useful output is qc, so COP_HP = COP_R + 1.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A simple cycle evaporates at minus 10 °C and condenses at 40 °C. Enthalpies (illustrative, rounded values for a common HFC refrigerant): h₁ = 395 kJ/kg, h₂ = 425 kJ/kg, h₃ = h₄ = 255 kJ/kg. Refrigerant mass flow is 0.1 kg/s.</dd>
+<dt>Find</dt><dd>Refrigeration capacity, compressor power, heat rejected, COP and the Carnot COP.</dd>
+<dt>Assumptions</dt><dd>Steady flow; no pressure drop in pipes and heat exchangers; kinetic and potential energy changes negligible.</dd>
+<dt>Solution</dt><dd>qe = 395 − 255 = 140 kJ/kg; Qe = 0.1 × 140 = 14 kW (14 / 3.517 = 3.98 TR)<br />w = 425 − 395 = 30 kJ/kg; W = 0.1 × 30 = 3 kW<br />Qc = 14 + 3 = 17 kW<br />COP = 14 / 3 = 4.67<br />Carnot COP = 263.15 / (313.15 − 263.15) = 5.26</dd>
+<dt>Answer</dt><dd><strong>About 14 kW (4 TR) of cooling for 3 kW of compressor power, COP 4.7, against a Carnot limit of 5.3</strong></dd>
+<dt>Limitations</dt><dd>Use real refrigerant table values for design. Real compressors are not isentropic, so actual shaft power is higher.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/chiller-tonnage" title="Chiller Tonnage Calculator" />
+
+## Ideal and actual cycles
+
+The simple cycle described above is called the ideal vapour compression cycle. A real system differs from it in several ways that reduce COP:
+
+- **Compressor losses:** friction and heat transfer make the compression non-isentropic, so the discharge enthalpy and the work input are higher than ideal. Isentropic efficiency is used to correct for this.
+- **Pressure drops:** friction in the condenser, evaporator and connecting pipes means the compressor must work over a larger pressure ratio. The pipe friction is calculated with the same methods used for liquids and the [Bernoulli equation](/mechanical-engineering/bernoulli-equation/) extended with losses.
+- **Heat gains:** the suction line picks up heat from the surroundings, raising superheat and the specific volume entering the compressor.
+- **Temperature differences:** the evaporator must run several kelvin below the space temperature, and the condenser several kelvin above the ambient, to drive heat transfer. These differences lower the evaporating pressure and raise the condensing pressure, increasing compressor work.
+
+Good design keeps these losses small: generous heat exchanger surface, short and correctly sized pipes, insulated suction lines and efficient compressors with variable speed drives for part load.
+
+## Refrigerants and practical points
+
+- **Refrigerants** are chosen for suitable pressures, safety class, efficiency and environmental impact. Older CFCs and HCFCs have been phased out under the Montreal Protocol, and high global warming potential HFCs are being phased down. Ammonia, CO₂, hydrocarbons and low GWP HFOs are increasingly used.
+- **Superheat and subcooling:** a few kelvin of superheat protects the compressor from liquid; subcooling increases the refrigeration effect.
+- **Compressor types:** reciprocating, rotary, scroll, screw and centrifugal, chosen by capacity. Large centrifugal chillers work like a [centrifugal pump](/mechanical-engineering/centrifugal-pump-working-principle/) acting on vapour.
+- **Lubrication:** compressor oil must be compatible with the refrigerant and return from the evaporator. See [types of lubrication](/mechanical-engineering/types-of-lubrication/).
+- **Monitoring:** suction and discharge pressure, superheat and approach temperatures reveal most faults. Sensors for these use standard [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) and [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) techniques.
+
+## Common faults
+
+- **Low refrigerant charge:** low suction pressure, high superheat, reduced capacity.
+- **Dirty condenser or failed fan:** high discharge pressure, high power, low COP.
+- **Blocked expansion device or filter drier:** starved evaporator, low suction pressure.
+- **Non-condensable gases:** high condensing pressure that does not match the condensing temperature.
+
+## Related reading
+
+- [Bernoulli Equation: Derivation, Assumptions and Applications](/mechanical-engineering/bernoulli-equation/)
+- [Factor of Safety in Machine Design Explained](/mechanical-engineering/factor-of-safety/)

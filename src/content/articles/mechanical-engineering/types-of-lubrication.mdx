@@ -1,0 +1,131 @@
+---
+title: "Types of Lubrication: Hydrodynamic, Boundary and Mixed"
+description: "The types of lubrication explained: hydrodynamic, elastohydrodynamic, mixed and boundary regimes, the Stribeck curve, film thickness ratio and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mechanical-engineering
+subcategory: tribology
+focusKeyword: "types of lubrication"
+format: explanation
+pillar: true
+math: true
+tags: [lubrication, tribology, stribeck-curve, hydrodynamic, boundary-lubrication]
+faq:
+  - q: "What is the difference between hydrodynamic and boundary lubrication?"
+    a: "In hydrodynamic lubrication a full fluid film, created by surface motion, separates the parts completely, so friction is low and wear is almost zero. In boundary lubrication the film is too thin, the surface peaks touch, and protection comes from additive layers bonded to the surfaces."
+  - q: "When does a journal bearing run in boundary lubrication?"
+    a: "At start and stop, at very low speed, under shock load or when oil supply is poor. The speed is then too low to build a pressure film, which is why most wear in plain bearings happens during starts and stops."
+  - q: "What is elastohydrodynamic lubrication?"
+    a: "It is the regime in rolling bearings and gear teeth, where contact pressures are so high that the surfaces deform elastically and the oil viscosity rises sharply under pressure. A very thin but effective film still separates the surfaces."
+  - q: "Does higher viscosity oil always reduce wear?"
+    a: "Not always. Higher viscosity thickens the film and can move a contact from mixed to full film lubrication, but it also raises fluid friction, power loss and temperature. The right grade gives an adequate film at operating temperature with the least loss."
+references:
+  - text: "B. J. Hamrock, S. R. Schmid and B. O. Jacobson, Fundamentals of Fluid Film Lubrication, 2nd ed., CRC Press"
+  - text: "I. M. Hutchings and P. Shipway, Tribology: Friction and Wear of Engineering Materials, 2nd ed., Butterworth-Heinemann"
+  - text: "G. W. Stachowiak and A. W. Batchelor, Engineering Tribology, 4th ed., Butterworth-Heinemann"
+  - text: "ISO 3448:1992 Industrial liquid lubricants, ISO viscosity classification"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The main **types of lubrication** are **hydrodynamic** (a full fluid film created by motion separates the surfaces), **elastohydrodynamic** (a very thin film in highly loaded rolling and gear contacts), **mixed** (the film carries part of the load and surface peaks touch) and **boundary** (surfaces touch and are protected only by molecular layers from additives). Which one applies depends on viscosity, speed, load and surface roughness.
+
+</Key>
+
+Lubrication reduces friction and wear between surfaces that move against each other. It also carries away heat, keeps out dirt and prevents corrosion. Tribology, the science of friction, wear and lubrication, groups lubricated contacts into regimes according to how thick the lubricant film is compared with the roughness of the surfaces. Knowing the regime explains why a bearing wears at start-up, why gears need extreme pressure additives and how to choose an oil grade.
+
+## The Stribeck curve
+
+In the early twentieth century Richard Stribeck measured friction in bearings over a wide range of conditions. Plotting the coefficient of friction against the bearing parameter (viscosity × speed / load) gives the Stribeck curve, which shows all the regimes on one chart.
+
+<figure>
+<svg width="560" height="300" viewBox="0 0 560 300" fill="none" role="img" aria-label="Stribeck curve: coefficient of friction is high in the boundary region at low values of viscosity times speed over load, falls through the mixed region to a minimum, then rises slowly in the hydrodynamic region">
+<path d="M70 250H530" stroke="#0b2545" stroke-width="2" />
+<path d="M70 250V30" stroke="#0b2545" stroke-width="2" />
+<path d="M75 60C120 62 150 70 180 110C210 155 235 195 270 205C300 210 330 200 380 180C430 160 480 140 525 122" stroke="#13a89e" stroke-width="3" fill="none" />
+<path d="M180 40V250M300 40V250" stroke="#0b2545" stroke-width="1" stroke-dasharray="4 4" />
+<text x="125" y="200" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Boundary</text>
+<text x="240" y="150" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Mixed</text>
+<text x="415" y="238" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Hydrodynamic (full film)</text>
+<text x="300" y="280" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Bearing parameter: viscosity × speed / load</text>
+<text x="30" y="140" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif" transform="rotate(-90 30 140)">Coefficient of friction</text>
+</svg>
+<figcaption>The Stribeck curve (schematic): friction is lowest near the start of full film lubrication.</figcaption>
+</figure>
+
+At the left, low speed or high load means little or no film, and friction is high. Moving right, a film builds up and friction falls. At the minimum, the film just separates the surfaces. Further right, friction rises slowly again because shearing a thicker, more viscous film takes more energy.
+
+## Types of lubrication regimes
+
+### Hydrodynamic lubrication
+
+A full film of lubricant completely separates the surfaces. The pressure that carries the load is generated by the motion itself: the moving surface drags oil into a converging wedge, as in a journal bearing where the shaft runs slightly off centre. The theory comes from Osborne Reynolds (1886). Friction coefficients are very low, of the order of 0.001 to 0.01, and wear is practically zero while the film is maintained. Film thickness is typically several micrometres or more.
+
+Plain journal bearings in turbines, large motors, pumps and compressors run in this regime. Because the film depends on speed, it is lost at start and stop, which is why large machines often use **hydrostatic lifting**: oil is pumped in under pressure to lift the shaft before it turns.
+
+### Elastohydrodynamic lubrication (EHL)
+
+In rolling element bearings, gear teeth and cams, the contact area is tiny and pressures reach thousands of megapascals. Two effects keep a film in place: the surfaces flatten elastically, and the oil's viscosity rises enormously at such pressures. The film is very thin, typically well under a micrometre, so surface finish matters a great deal. EHL governs the life of rolling bearings and gear surfaces, and bearing life calculations include a factor for film adequacy.
+
+### Mixed lubrication
+
+The film is about as thick as the surface roughness. Part of the load is carried by fluid pressure and part by contact between the highest peaks (asperities). Friction and wear are moderate. Many machine elements pass through this regime during start-up, at low speed or under heavy load.
+
+### Boundary lubrication
+
+The film is too thin to separate the surfaces and asperities are in continuous contact. Protection comes from very thin layers formed on the metal by additives: friction modifiers, anti-wear additives (such as zinc dialkyldithiophosphate) and extreme pressure additives that react with the surface under high local temperature. Friction coefficients are higher, roughly 0.05 to 0.15, and some wear is unavoidable. Slow, heavily loaded slides, gear teeth under shock and engine cylinder walls near the end of the stroke see boundary conditions.
+
+## The film thickness ratio
+
+A practical way to identify the regime is the film thickness ratio λ (lambda), the minimum film thickness divided by the composite roughness of the two surfaces:
+
+$$
+\lambda = \frac{h_{\min}}{\sqrt{R_{q1}^2 + R_{q2}^2}}
+$$
+
+Rq is the RMS surface roughness. Commonly used guide values are:
+
+| Film thickness ratio λ | Regime |
+| --- | --- |
+| below about 1 | Boundary |
+| about 1 to 3 | Mixed (partial EHL in rolling contacts) |
+| above about 3 | Full film (hydrodynamic or full EHL) |
+
+The boundaries are approximate and vary between references, but the trend is reliable: a thicker film or smoother surfaces move the contact towards full film lubrication.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A gear contact has a calculated minimum film thickness of 0.5 µm. The RMS roughness of the two tooth flanks is 0.2 µm and 0.3 µm.</dd>
+<dt>Find</dt><dd>The film thickness ratio and the lubrication regime.</dd>
+<dt>Assumptions</dt><dd>Film thickness from an EHL calculation at operating temperature; roughness measured on run-in surfaces.</dd>
+<dt>Solution</dt><dd>Composite roughness = √(0.2² + 0.3²) = √0.13 = 0.36 µm<br />λ = 0.5 / 0.36 = 1.39</dd>
+<dt>Answer</dt><dd><strong>λ ≈ 1.4, so the contact runs in mixed lubrication; anti-wear additives are needed, and a higher viscosity grade or smoother finish would increase the margin</strong></dd>
+<dt>Limitations</dt><dd>Film thickness falls as oil temperature rises, because viscosity drops. Check λ at the highest expected operating temperature.</dd>
+</dl>
+</Example>
+
+Viscosity is the property that controls film thickness. Oils are graded by kinematic viscosity at 40 °C in the ISO VG system (ISO 3448). Convert between dynamic and kinematic viscosity with ν = μ / ρ:
+
+<Calculator path="engineering/kinematic-viscosity" title="Kinematic Viscosity Calculator" />
+
+## Solid and gas lubrication
+
+Not every lubricant is a liquid. **Solid lubricants** such as graphite, molybdenum disulphide and PTFE work where oils would evaporate, burn or contaminate, for example in very hot, vacuum or food environments. **Gas bearings** use a thin air or gas film in hydrodynamic or hydrostatic form and suit very high speed, light load spindles. Both follow the same regime ideas described above.
+
+## Choosing the right lubrication
+
+- **Know the regime** for normal running and for start and stop.
+- **Choose viscosity** to give an adequate film at operating temperature; too thin causes wear, too thick wastes power and generates heat (see [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/) for how it is removed).
+- **Use additives** where boundary or mixed conditions are unavoidable.
+- **Keep it clean and dry:** particles larger than the film thickness and water both destroy films.
+- **Grease** suits rolling bearings that cannot be oil fed; its base oil does the lubricating.
+
+Lubrication links directly to machine design: bearing life and [factor of safety](/mechanical-engineering/factor-of-safety/) checks assume the bearing is properly lubricated. Pumps and compressors such as the [centrifugal pump](/mechanical-engineering/centrifugal-pump-working-principle/) depend on it for bearing and seal life.
+
+## Related reading
+
+- [Stress and Strain: Definitions, Types and Hooke's Law](/mechanical-engineering/stress-and-strain/)
+- [Vapour Compression Refrigeration Cycle Explained](/mechanical-engineering/vapour-compression-refrigeration-cycle/)

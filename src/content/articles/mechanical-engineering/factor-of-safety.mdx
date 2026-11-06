@@ -1,0 +1,144 @@
+---
+title: "Factor of Safety in Machine Design Explained"
+description: "What factor of safety means in machine design, how to calculate it from yield or ultimate strength, typical values and how to choose one, with an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: mechanical-engineering
+subcategory: machine-design
+focusKeyword: "factor of safety"
+format: fundamentals
+pillar: true
+math: true
+tags: [factor-of-safety, design-factor, allowable-stress, margin-of-safety, machine-design]
+faq:
+  - q: "What is a good factor of safety?"
+    a: "There is no single value. Ductile parts with well known loads and materials are often designed with 1.5 to 2 on yield. Uncertain loads, brittle materials, shock or fatigue push the value to 3 or more. Codes such as pressure vessel and lifting equipment standards set mandatory minimum factors."
+  - q: "What is the difference between factor of safety and margin of safety?"
+    a: "Factor of safety is failure load divided by working load. Margin of safety is that factor minus one. A factor of safety of 1.5 equals a margin of safety of 0.5, meaning the part can carry 50 percent more than the working load before failure."
+  - q: "Can the factor of safety be less than 1?"
+    a: "A calculated value below 1 means the predicted stress exceeds the strength, so failure is expected. The design must be changed by increasing size, choosing a stronger material or reducing the load."
+  - q: "Is design factor the same as factor of safety?"
+    a: "They are closely related. The design factor is the target chosen at the start of design. The factor of safety is what the finished design actually achieves after the real size and strength are known, and it should be equal to or greater than the design factor."
+references:
+  - text: "R. G. Budynas and J. K. Nisbett, Shigley's Mechanical Engineering Design, 11th ed., McGraw-Hill"
+  - text: "R. L. Norton, Machine Design: An Integrated Approach, 6th ed., Pearson"
+  - text: "V. B. Bhandari, Design of Machine Elements, 4th ed., McGraw-Hill Education"
+  - text: "ASME Boiler and Pressure Vessel Code, Section VIII, Division 1"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The **factor of safety** (FoS or n) is the ratio of the strength of a part to the stress it actually carries: n = strength / working stress. A value of 2 means the part could take twice its working stress before it fails. Ductile parts usually use yield strength in the ratio; brittle parts use ultimate strength.
+
+</Key>
+
+Every machine part is designed with some reserve. Loads are never known exactly, material strength varies from batch to batch, and analysis methods carry simplifications. The factor of safety is the number that covers these uncertainties. Choosing it well is one of the most important judgements in machine design: too low risks failure, too high wastes material and weight.
+
+## Factor of safety definition and formula
+
+The factor of safety compares a failure quantity with the corresponding working quantity:
+
+$$
+n = \frac{S}{\sigma} \qquad \text{or} \qquad n = \frac{F_{\text{failure}}}{F_{\text{working}}}
+$$
+
+S is the relevant strength of the material and σ is the calculated stress at the critical point. The load form is used when stress and load are proportional, as in most linear elastic problems.
+
+The strength used depends on how the part fails:
+
+- **Ductile materials (steel, aluminium):** failure is taken as yielding, so n = Sy / σ. Permanent deformation usually makes a machine part useless even before it breaks.
+- **Brittle materials (cast iron, some ceramics):** there is little yielding, so n = Sut / σ, using ultimate tensile strength.
+- **Fatigue:** for fluctuating loads the endurance limit or fatigue strength replaces static strength.
+- **Buckling:** for slender columns the critical buckling load replaces the strength.
+
+The **allowable stress** (also called permissible or design stress) follows directly: σallow = S / n. Designers often fix n first, compute σallow and then size the part so its stress stays below that value.
+
+<figure>
+<svg width="540" height="250" viewBox="0 0 540 250" fill="none" role="img" aria-label="Bar chart showing working stress, allowable stress and yield strength, with the factor of safety as the ratio of yield strength to working stress">
+<path d="M60 210H500" stroke="#0b2545" stroke-width="2" />
+<rect x="100" y="150" width="70" height="60" fill="#13a89e" />
+<rect x="235" y="130" width="70" height="80" fill="#9fd9d4" />
+<rect x="370" y="50" width="70" height="160" fill="#0b2545" />
+<text x="135" y="232" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Working stress σ</text>
+<text x="270" y="232" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Allowable S/n</text>
+<text x="405" y="232" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Yield strength Sy</text>
+<path d="M460 50V150" stroke="#f5b800" stroke-width="2" />
+<path d="M454 56L460 48L466 56M454 144L460 152L466 144" stroke="#f5b800" stroke-width="2" />
+<text x="470" y="96" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Reserve</text>
+<text x="470" y="114" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">n = Sy / σ</text>
+<path d="M170 150H460" stroke="#0b2545" stroke-width="1" stroke-dasharray="4 4" />
+</svg>
+<figcaption>The factor of safety is the ratio of strength to working stress; the design must keep σ at or below the allowable stress.</figcaption>
+</figure>
+
+## What the factor of safety covers
+
+A factor of safety is not a fudge factor. It deliberately covers known sources of uncertainty:
+
+- **Load uncertainty:** overloads, shock, starting torque, misuse and dynamic effects that the nominal load does not include.
+- **Material variability:** published strengths are minimum or typical values; actual parts vary with heat treatment, size and supplier.
+- **Manufacturing:** dimensional tolerances, surface finish, residual stresses and weld quality.
+- **Analysis simplifications:** idealised supports, neglected [stress concentrations](/mechanical-engineering/stress-and-strain/), assumed load distribution.
+- **Environment and time:** corrosion, wear, temperature and creep reduce strength during service.
+- **Consequence of failure:** a failure that could injure people or cause large losses justifies a larger margin.
+
+Better information allows a smaller factor. A part whose loads are measured, whose material is certified and whose stresses are checked by test or [finite element analysis](/mechanical-engineering/finite-element-analysis-basics/) can be designed closer to the limit than one based on rough estimates.
+
+## Typical factor of safety values
+
+The ranges below are commonly quoted in machine design textbooks as starting points. Where a code or standard applies, its requirement governs.
+
+| Situation | Typical factor of safety |
+| --- | --- |
+| Reliable materials, well known loads, ductile part (on yield) | 1.25 to 1.5 |
+| Average materials and loads, ordinary machine parts (on yield) | 1.5 to 2 |
+| Less certain loads or material data | 2 to 3 |
+| Brittle materials (on ultimate strength) | 3 to 4 or more |
+| Shock or impact loads, untested materials | 3 to 5 or more |
+
+Aircraft structures may use about 1.5 on ultimate load because weight is critical and testing is extensive. Lifting gear such as wire ropes and chains often uses 4 to 6 or more, set by the relevant lifting standard, because failure is dangerous and wear reduces strength.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A solid circular steel link carries a steady tensile load of 25 kN. Material yield strength Sy = 250 MPa. Required factor of safety on yield n = 2.5.</dd>
+<dt>Find</dt><dd>The minimum diameter of the link, then the actual factor of safety if a 20 mm bar is used.</dd>
+<dt>Assumptions</dt><dd>Static load through the centroid, no stress concentration in the plain section, ductile material.</dd>
+<dt>Solution</dt><dd>Allowable stress σallow = Sy / n = 250 / 2.5 = 100 MPa<br />Required area A = F / σallow = 25,000 / 100 = 250 mm²<br />d = √(4A / π) = √(4 × 250 / 3.1416) = 17.8 mm<br />With d = 20 mm: A = 314.2 mm², σ = 25,000 / 314.2 = 79.6 MPa<br />n = 250 / 79.6 = 3.14</dd>
+<dt>Answer</dt><dd><strong>Minimum diameter 17.8 mm; a standard 20 mm bar gives an actual factor of safety of about 3.1</strong></dd>
+<dt>Limitations</dt><dd>End connections, holes or threads raise local stress and must be checked separately. Fluctuating loads need a fatigue check.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/factor-of-safety" title="Factor of Safety Calculator" />
+
+## How to choose a factor of safety
+
+1. **Check for a governing code.** Pressure vessels, cranes, lifts, structures and aircraft have mandatory rules. Follow them first.
+2. **Identify the failure mode.** Yield, fracture, fatigue, buckling, wear and excessive deflection each need their own check and margin.
+3. **Assess the uncertainty in each input.** Loads, material properties, stress analysis and environment.
+4. **Consider the consequence of failure.** Higher risk to people or production means a higher factor.
+5. **Balance against cost and weight.** In vehicles and aircraft, every extra kilogram matters, so uncertainty is reduced by testing rather than by large factors.
+
+Some designers split the factor into partial factors, one on load and one on material, as structural design codes do. This makes it clear where the margin comes from.
+
+## Factor of safety in practice
+
+- **Shafts and keys:** combined bending and torsion stresses are compared with yield using a failure theory such as maximum shear stress or distortion energy, then the factor of safety is applied.
+- **Bolts:** the proof load and the joint preload set the margin against yield and joint separation.
+- **Bearings:** a rating life approach is used instead; bearing life depends strongly on [lubrication](/mechanical-engineering/types-of-lubrication/).
+- **Pump and compressor parts:** casings are checked for pressure and impellers for centrifugal stress; see the [centrifugal pump working principle](/mechanical-engineering/centrifugal-pump-working-principle/).
+
+## Common mistakes
+
+- Applying the factor twice, once to the load and again to the strength, which leads to oversized parts.
+- Using ultimate strength for a ductile part where yielding is already a failure.
+- Checking only static strength when the load fluctuates and fatigue governs.
+- Treating a large factor of safety as a substitute for understanding the loads.
+
+## Related reading
+
+- [Laws of Thermodynamics Explained for Engineers](/mechanical-engineering/laws-of-thermodynamics/)
+- [Pressure measurement articles](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) on InstrumentationBlog.in
