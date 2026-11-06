@@ -8,9 +8,16 @@ const { a } = Astro.props;
 <div class="card author-box" data-pagefind-ignore>
   {a.photo ? <img src={a.photo} alt={a.name} width="64" height="64" loading="lazy" /> : <Logo size={64} class="mark" />}
   <div style="display:flex;flex-direction:column;gap:6px">
-    <a href={`/author/${a.slug}/`} style="font-weight:700;font-size:17px;color:var(--ze-navy);text-decoration:none">{a.name}</a>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <a href={`/author/${a.slug}/`} style="font-weight:700;font-size:17px;color:var(--ze-navy);text-decoration:none">{a.name}</a>
+      {a.linkedin && (
+        <a class="li-btn" href={a.linkedin} rel="me noopener" target="_blank" aria-label={`${a.name} on LinkedIn`}>
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fff" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.8-2.05 4.06 0 4.8 2.67 4.8 6.15V21h-4v-5.6c0-1.34-.03-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21H9z"/></svg>
+          LinkedIn
+        </a>
+      )}
+    </div>
     <span class="muted" style="font-size:14px">{[a.role, ...a.credentials].join(', ')}</span>
     <p style="margin:0;font-size:15px;line-height:1.6">{a.bio} <a href="/editorial-policy/">Editorial policy</a>.</p>
-    {a.linkedin && <a href={a.linkedin} rel="me noopener" style="display:inline-flex;gap:6px;align-items:center;font-size:14px"><Icon name="linkedin" size={18} /> LinkedIn</a>}
   </div>
 </div>

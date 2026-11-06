@@ -133,6 +133,8 @@ a.card:hover { border-color: var(--ze-navy); }
 .faq details p { margin: 10px 0 0; }
 .refs { font-size: 15px; line-height: 1.7; padding-left: 20px; }
 .author-box { padding: 22px; display: flex; gap: 18px; align-items: flex-start; margin-top: 32px; }
+.li-btn { display: inline-flex; align-items: center; gap: 5px; background: #0a66c2; color: #fff !important; font-size: 12px; font-weight: 600; padding: 4px 9px; border-radius: 4px; text-decoration: none !important; white-space: nowrap; }
+.li-btn:hover { background: #004182; }
 .author-box img, .author-box .mark { width: 64px; height: 64px; border-radius: 32px; flex: none; }
 .ad { min-height: 280px; display: flex; align-items: center; justify-content: center; margin: 1.5em 0; }
 .ad-ph { border: 1px dashed #c5ced9; border-radius: var(--ze-radius); color: var(--ze-ink-2); font-size: 13px; }
