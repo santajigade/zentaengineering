@@ -1,0 +1,103 @@
+---
+// Homepage "Why Zenta Engineering": three steps of the slogan on an animated path, plus trust points.
+// Pure CSS animation, started once when the section scrolls into view. Respects reduced motion.
+import Icon from './Icon.astro';
+const steps = [
+  { n: '01', icon: 'book', title: 'Understand the Principles', text: 'Every topic starts from the physics and the equations, explained step by step with clear diagrams.' },
+  { n: '02', icon: 'factory', title: 'Explore the Applications', text: 'See how each principle works in real equipment, plants and systems, with worked examples in real units.' },
+  { n: '03', icon: 'shield', title: 'Master Engineering', text: 'Test yourself with interview questions and MCQs, follow tutorial series and build projects.' },
+];
+const trust = [
+  { icon: 'file', text: 'Checked against cited references' },
+  { icon: 'shield', text: 'Reviewed by our technical team' },
+  { icon: 'layers', text: 'Worked examples with units' },
+  { icon: 'book', text: 'Free to read, no sign-up needed' },
+];
+---
+<section class="why" id="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="why-head">
+      <span class="why-kicker">Why Zenta Engineering</span>
+      <h2 id="why-title">From the first equation to the plant floor</h2>
+      <p>One path from principle to practice, written for students and working engineers.</p>
+    </div>
+    <div class="why-track">
+      <svg class="why-line" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" d="M167 20H833" pathLength="1" />
+        <path class="flow" d="M167 20H833" />
+      </svg>
+      <ol class="why-steps">
+        {steps.map((s, i) => (
+          <li class="why-step" style={`--d:${i * 0.35}s`}>
+            <span class="why-node"><Icon name={s.icon} size={26} /></span>
+            <span class="why-n">{s.n}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <ul class="why-trust">
+      {trust.map((t, i) => <li style={`--d:${1.2 + i * 0.12}s`}><Icon name={t.icon} size={20} /> {t.text}</li>)}
+    </ul>
+  </div>
+</section>
+<style>
+  .why { background: var(--ze-navy); color: #c9d3df; margin-top: 72px; padding: 72px 0; position: relative; overflow: hidden; }
+  .why::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(#13315c 1px, transparent 1px), linear-gradient(90deg, #13315c 1px, transparent 1px); background-size: 48px 48px; opacity: .5; pointer-events: none; }
+  .why .wrap { position: relative; }
+  .why-head { text-align: center; max-width: 900px; margin: 0 auto; }
+  .why-kicker { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ze-yellow); }
+  .why-head h2 { color: #fff; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem); margin: 10px 0 8px; }
+  .why-head p { margin: 0; font-size: 17px; }
+  .why-track { position: relative; margin-top: 48px; }
+  .why-line { position: absolute; left: 0; right: 0; top: 18px; width: 100%; height: 40px; }
+  .why-line path { fill: none; stroke-width: 3; }
+  .why-line .draw { stroke: #2a4a75; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .why-line .flow { stroke: var(--ze-teal); stroke-dasharray: 10 22; opacity: 0; }
+  .why-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; position: relative; }
+  .why-step { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; transform: translateY(24px); }
+  .why-node { width: 76px; height: 76px; border-radius: 38px; background: var(--ze-navy); border: 3px solid var(--ze-yellow); color: #fff; display: flex; align-items: center; justify-content: center; position: relative; }
+  .why-node::after { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid var(--ze-teal); opacity: 0; }
+  .why-n { font-size: 13px; font-weight: 700; color: var(--ze-teal); letter-spacing: .08em; margin-top: 8px; }
+  .why-step h3 { color: #fff; font-size: 20px; margin: 0; }
+  .why-step:last-child h3 { color: var(--ze-yellow); }
+  .why-step p { margin: 0; font-size: 15px; line-height: 1.6; max-width: 320px; }
+  .why-trust { list-style: none; margin: 48px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+  .why-trust li { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid #2a4a75; border-radius: 22px; font-size: 14px; color: #fff; opacity: 0; transform: translateY(10px); }
+  .why-trust li :global(svg) { color: var(--ze-teal); }
+
+  .why.in .why-line .draw { animation: why-draw 1.4s ease-out forwards; }
+  .why.in .why-line .flow { animation: why-fade .4s 1.3s forwards, why-flow 1.6s 1.3s linear infinite; }
+  .why.in .why-step { animation: why-up .7s var(--d) ease-out forwards; }
+  .why.in .why-step .why-node::after { animation: why-pulse 2.4s calc(var(--d) + .8s) ease-out infinite; }
+  .why.in .why-trust li { animation: why-up .5s var(--d) ease-out forwards; }
+  @keyframes why-draw { to { stroke-dashoffset: 0; } }
+  @keyframes why-fade { to { opacity: 1; } }
+  @keyframes why-flow { to { stroke-dashoffset: -32; } }
+  @keyframes why-up { to { opacity: 1; transform: none; } }
+  @keyframes why-pulse { 0% { opacity: .9; transform: scale(.9); } 70%, 100% { opacity: 0; transform: scale(1.25); } }
+
+  @media (max-width: 760px) {
+    .why-steps { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .why-line { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .why-step, .why-trust li { opacity: 1; transform: none; animation: none !important; }
+    .why-line .draw { stroke-dashoffset: 0; animation: none !important; }
+    .why-line .flow { display: none; }
+    .why-node::after { display: none; }
+  }
+  /* No JavaScript: show everything */
+  :global(.no-js) .why-step, :global(.no-js) .why-trust li { opacity: 1; transform: none; }
+</style>
+<script>
+  const el = document.getElementById('why');
+  if (el) {
+    if (!('IntersectionObserver' in window)) el.classList.add('in');
+    else {
+      const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { el.classList.add('in'); io.disconnect(); } }), { threshold: 0.25 });
+      io.observe(el);
+    }
+  }
+</script>

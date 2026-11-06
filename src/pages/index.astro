@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ItemCard from '../components/ItemCard.astro';
 import DisciplineCard from '../components/DisciplineCard.astro';
+import WhyZenta from '../components/WhyZenta.astro';
 import { SITE } from '../data/site';
 import { DISCIPLINES, FAMILIES, getDiscipline } from '../data/disciplines';
 import { liveArticles, liveLessons, liveInterview, liveProjects, liveResources, articleUrl, interviewUrl, projectUrl, resourceUrl, ARTICLE_FORMATS } from '../lib/content';
@@ -47,6 +48,9 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
       <div style="display:flex;gap:8px;flex-wrap:wrap">{FAMILIES.map((f) => <span class={`chip chip-fam fam-${f.slug}`}>{f.name}</span>)}</div>
       <div class="grid" style="--min:250px">{DISCIPLINES.map((d) => <DisciplineCard d={d} />)}</div>
     </section>
+  </div>
+  <WhyZenta />
+  <div class="wrap">
     {pillars.length > 0 && (
       <section class="section">
         <h2 class="h2">Start with these guides</h2>
