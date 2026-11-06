@@ -1,0 +1,146 @@
+---
+title: "5G Network Architecture Explained"
+description: "5G network architecture explained: user equipment, gNB radio access, 5G core functions, NSA vs SA, network slicing, edge computing and spectrum."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: telecommunication-engineering
+subcategory: cellular-networks
+focusKeyword: "5g network architecture"
+image: { src: /images/featured/5g-network-architecture.webp, alt: "5G Network Architecture Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [5g, cellular-networks, 5g-core, network-slicing, gnb]
+faq:
+  - q: "What is the difference between 5G NSA and SA?"
+    a: "Non-standalone (NSA) 5G adds 5G radios to an existing 4G network and still uses the 4G core (EPC) for control, so it mainly increases speed. Standalone (SA) 5G uses 5G radios with the new 5G core, which enables the full feature set: network slicing, very low latency and massive device connectivity."
+  - q: "What is a private 5G network?"
+    a: "A 5G network dedicated to one organisation, such as a factory, port or mine, using licensed, shared or local spectrum. The radio and often the core run on site, giving the owner control over coverage, security and performance for applications like mobile robots, wireless sensors and remote control."
+  - q: "Is 5G latency really 1 ms?"
+    a: "The 1 ms figure is a design target for the radio interface in ultra reliable low latency (URLLC) mode. Real end to end latency in public networks is typically around 10 to 30 ms. Lower values need standalone 5G, URLLC features and edge computing close to the user."
+references:
+  - text: "3GPP TS 23.501, System architecture for the 5G System (5GS)"
+  - text: "3GPP TS 38.300, NR and NG-RAN Overall description"
+  - text: "ITU-R M.2083, IMT Vision: Framework and overall objectives of the future development of IMT for 2020 and beyond"
+  - text: "E. Dahlman, S. Parkvall and J. Sköld, 5G NR: The Next Generation Wireless Access Technology, 2nd ed., Academic Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **5G network architecture** has three main parts: **user equipment** (phones, sensors, routers), the **radio access network** (NG-RAN) built from base stations called **gNBs**, and the **5G core** (5GC). The core uses a **service based architecture**, with functions such as **AMF** (access and mobility), **SMF** (sessions) and **UPF** (user data forwarding) running as software, often in the cloud. This design enables **network slicing**, **edge computing** and three service types: enhanced mobile broadband, ultra reliable low latency and massive machine communication.
+
+</Key>
+
+5G is the fifth generation of mobile networks, standardised by 3GPP from Release 15 (2018) onwards. Beyond faster phones, it was designed to connect machines, vehicles and industrial systems. Its architecture is a major change from 4G: more software, more flexibility and processing pushed closer to the user.
+
+## The three service types
+
+The ITU defined three usage scenarios for 5G (IMT-2020):
+
+- **eMBB (enhanced mobile broadband):** high data rates, up to several Gbit/s peak, for video, AR and fixed wireless access.
+- **URLLC (ultra reliable low latency communication):** very low latency and high reliability for motion control, remote operation and vehicle communication.
+- **mMTC (massive machine type communication):** up to about a million low power devices per square kilometre, for sensors and meters.
+
+No single network configuration optimises all three at once, which is why slicing matters.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="5G architecture: user equipment connects by radio to gNB base stations in the radio access network; the gNBs connect to the 5G core, where control plane functions AMF, SMF, PCF, UDM and AUSF sit on a service bus, and the UPF forwards user data to edge applications and the internet">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="110" width="90" height="70" rx="6" fill="#eef1f6" />
+<rect x="150" y="110" width="100" height="70" rx="6" fill="#e6f6f4" />
+<rect x="290" y="40" width="290" height="160" rx="8" fill="#ffffff" />
+<rect x="290" y="225" width="120" height="50" rx="6" fill="#fff7e0" /><rect x="450" y="225" width="130" height="50" rx="6" fill="#eef1f6" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#fff7e0"><rect x="305" y="60" width="70" height="34" rx="4" /><rect x="395" y="60" width="70" height="34" rx="4" /><rect x="485" y="60" width="80" height="34" rx="4" /><rect x="305" y="140" width="70" height="34" rx="4" /><rect x="395" y="140" width="70" height="34" rx="4" /><rect x="485" y="140" width="80" height="34" rx="4" fill="#e6f6f4" /></g>
+<path d="M300 117H570" stroke="#13a89e" stroke-width="3" />
+<path d="M340 94V117M430 94V117M525 94V117M340 140V117M430 140V117" stroke="#13a89e" stroke-width="1.5" />
+<g stroke="#b42318" stroke-width="2"><path d="M110 145H150" stroke-dasharray="5 4" /><path d="M250 160H290M525 174V200M350 225V200H525" /><path d="M410 250H450" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="65" y="140" font-weight="700">UE</text><text x="65" y="158" font-size="11">phone, sensor,</text><text x="65" y="172" font-size="11">router</text>
+<text x="200" y="140" font-weight="700">gNB</text><text x="200" y="158" font-size="11">NG-RAN</text><text x="200" y="172" font-size="11">CU + DU + RU</text>
+<text x="435" y="32" font-weight="700">5G core (service based)</text>
+<text x="340" y="82">AMF</text><text x="430" y="82">SMF</text><text x="525" y="82">AUSF</text><text x="340" y="162">PCF</text><text x="430" y="162">UDM</text><text x="525" y="162" font-weight="700">UPF</text>
+<text x="350" y="255">Edge (MEC)</text><text x="515" y="255">Internet / DN</text>
+<text x="130" y="130" font-size="11">radio</text>
+</g>
+</svg>
+<figcaption>Simplified 5G architecture: control functions share a service bus; the UPF carries user data to edge computing and the internet.</figcaption>
+</figure>
+
+## User equipment (UE)
+
+Any device with a 5G modem and SIM or eSIM: smartphones, fixed wireless routers, vehicles, industrial gateways, cameras and sensors. Devices are identified securely by a permanent subscription identifier that is concealed over the air.
+
+## Radio access network (NG-RAN)
+
+The 5G base station is the **gNB** (next generation NodeB). Its functions can be split across three units:
+
+- **RU (radio unit):** antennas and RF electronics at the mast, often with **massive MIMO** arrays of 32 or 64 elements and **beamforming** that steers energy towards each user.
+- **DU (distributed unit):** real time baseband processing near the site.
+- **CU (central unit):** less time critical protocol processing, which can be centralised for many sites.
+
+This split, together with open interfaces promoted by the O-RAN Alliance, lets operators run RAN software on general purpose servers.
+
+### Spectrum
+
+5G New Radio (NR) uses two frequency ranges:
+
+- **FR1 (sub 6 GHz):** including the popular 3.3 to 3.8 GHz mid band, a good balance of coverage and capacity.
+- **FR2 (mmWave, about 24 to 52 GHz):** very high capacity but short range and easily blocked by walls and even hands.
+
+Higher frequencies give wider channels (up to 100 MHz in FR1 and 400 MHz in FR2) but shorter range, because free space path loss rises with frequency:
+
+$$
+\text{FSPL (dB)} = 20\log_{10} d_\text{km} + 20\log_{10} f_\text{MHz} + 32.44
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A device is 500 m from a gNB. Compare free space path loss at 3500 MHz (mid band) and 28 000 MHz (mmWave).</dd>
+<dt>Find</dt><dd>FSPL at each frequency and the difference.</dd>
+<dt>Assumptions</dt><dd>Free space line of sight; real losses are higher with obstacles.</dd>
+<dt>Solution</dt><dd>20 log₁₀(0.5) = −6.02 dB<br />3500 MHz: 20 log₁₀(3500) = 70.88; FSPL = −6.02 + 70.88 + 32.44 = 97.3 dB<br />28 000 MHz: 20 log₁₀(28 000) = 88.94; FSPL = −6.02 + 88.94 + 32.44 = 115.4 dB</dd>
+<dt>Answer</dt><dd><strong>Mid band loss about 97.3 dB, mmWave about 115.4 dB: about 18 dB more, which is why mmWave needs many small cells and beamforming</strong></dd>
+<dt>Limitations</dt><dd>Antenna gain, beamforming and blockage change the real link budget significantly.</dd>
+</dl>
+</Example>
+
+## The 5G core in the 5G network architecture
+
+The 5G core uses a **service based architecture (SBA)**: each network function exposes services through standard HTTP based APIs, and functions are cloud native software that can scale independently. Key functions:
+
+- **AMF (access and mobility management):** registration, connection and mobility of devices.
+- **SMF (session management):** sets up data sessions and selects the UPF.
+- **UPF (user plane function):** forwards user data packets between the RAN and data networks; it can be placed centrally or at the edge.
+- **AUSF and UDM:** authentication and subscriber data.
+- **PCF (policy control):** quality of service and charging policies.
+- **NSSF:** selects the network slice for a device.
+
+Separating the **control plane** (signalling) from the **user plane** (data) lets operators put UPFs close to users for low latency while keeping control functions centralised.
+
+## Network slicing and edge computing
+
+**Network slicing** creates several logical networks on the same physical infrastructure, each with its own performance and isolation: one slice for consumer broadband, another for low latency factory control, another for millions of meters.
+
+**Multi-access edge computing (MEC)** places servers and a local UPF near the base stations, so data from a factory or stadium is processed locally with low latency instead of travelling to a distant data centre.
+
+## NSA and SA deployment
+
+- **Non-standalone (NSA):** 5G radio anchored to a 4G LTE network and core. Quick to deploy; mainly boosts speed.
+- **Standalone (SA):** 5G radio with the 5G core, unlocking slicing, URLLC and the full architecture.
+
+## Security in 5G
+
+5G strengthens security compared with earlier generations. The permanent subscriber identity is never sent in clear text over the air; it is encrypted into a concealed identifier, which defeats the fake base station trackers used against older networks. Authentication is mutual, so the device also verifies the network. User data can be integrity protected as well as encrypted, and the core functions talk to each other through authenticated, encrypted APIs. Operators must still secure their cloud platforms, interfaces to partner networks and the large attack surface created by software based functions.
+
+## 4G and 5G compared
+
+In 4G, the core (EPC) was built from fixed network elements such as the MME, SGW and PGW, each a dedicated box with point to point interfaces. In 5G, the same jobs are split into smaller software functions that discover and call each other through a service bus. The radio also changed: 5G NR supports flexible numerology, with subcarrier spacing from 15 to 120 kHz or more, shorter time slots for low latency, and much wider channels. The result is a network that can be tuned per use case rather than one size for all.
+
+## 5G in industry
+
+Private 5G networks connect autonomous mobile robots, wireless sensors, AR maintenance tools and remote controlled machines in factories, ports and mines, complementing wired [industrial Ethernet](/telecommunication-engineering/osi-vs-tcp-ip-model/) and [Wi-Fi](/telecommunication-engineering/wi-fi-standards-and-bands/). The backhaul connecting gNBs to the core usually runs over [single-mode fibre](/telecommunication-engineering/single-mode-vs-multimode-fiber/). For more on plant connectivity, see the [industrial communication articles on Instrumentation Blog](https://www.instrumentationblog.in/category/automation/communication/).
+
+The 5G network architecture turns the mobile network into a flexible software platform, which is what lets one network serve phones, machines and critical services at the same time.

@@ -121,14 +121,14 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| network-fundamentals | OSI Model vs TCP/IP Model Explained | osi-vs-tcp-ip-model | comparison | to write |
-| routing-and-switching | Router vs Switch: Differences and Roles in a Network | router-vs-switch | comparison | to write |
-| fiber-optics | Single-Mode vs Multimode Optical Fiber | single-mode-vs-multimode-fiber | comparison | to write |
-| cellular-networks | 5G Network Architecture Explained | 5g-network-architecture | explanation | to write |
-| wireless | Wi-Fi Standards and Frequency Bands Explained | wifi-standards-and-bands | explanation | to write |
-| satellite-communication | GEO vs MEO vs LEO Satellites Compared | geo-meo-leo-satellites | comparison | to write |
-| network-security | Firewalls Explained: Types and How They Work | firewalls-explained | explanation | to write |
-| data-transmission | Modulation Techniques: AM, FM and Digital Modulation | modulation-techniques | fundamentals | to write |
+| network-fundamentals | OSI Model vs TCP/IP Model Explained | osi-vs-tcp-ip-model | comparison | draft |
+| routing-and-switching | Router vs Switch: Differences and Roles in a Network | router-vs-switch | comparison | draft |
+| fiber-optics | Single-Mode vs Multimode Optical Fiber | single-mode-vs-multimode-fiber | comparison | draft |
+| cellular-networks | 5G Network Architecture Explained | 5g-network-architecture | explanation | draft |
+| wireless | Wi-Fi Standards and Bands Explained: Wi-Fi 4 to 7 | wi-fi-standards-and-bands | explanation | draft |
+| satellite-communication | GEO vs MEO vs LEO Satellites Compared | geo-meo-leo-satellites | comparison | draft |
+| network-security | Firewalls Explained: Types and How They Work | firewalls-explained | explanation | draft |
+| data-transmission | Modulation Techniques: AM, FM and Digital Modulation | modulation-techniques | fundamentals | draft |
 
 ## petroleum-engineering
 

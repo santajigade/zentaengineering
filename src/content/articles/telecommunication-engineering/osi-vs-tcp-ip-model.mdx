@@ -1,0 +1,130 @@
+---
+title: "OSI vs TCP/IP Model: Layers Compared and Explained"
+description: "OSI vs TCP/IP model explained: the seven OSI layers, the four TCP/IP layers, how they map, protocols, encapsulation and a troubleshooting example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: telecommunication-engineering
+subcategory: network-fundamentals
+focusKeyword: "osi vs tcp/ip model"
+image: { src: /images/featured/osi-vs-tcp-ip-model.webp, alt: "OSI vs TCP/IP Model: Layers Compared and Explained: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [osi-model, tcp-ip, networking, protocols, encapsulation]
+faq:
+  - q: "Which model is used in real networks, OSI or TCP/IP?"
+    a: "Real networks run the TCP/IP protocol suite. The OSI model is used as a teaching and troubleshooting reference because its seven layers separate functions more finely. Engineers often describe problems in OSI terms, such as a 'layer 2 issue', even on TCP/IP networks."
+  - q: "At which layer do switches and routers work?"
+    a: "A traditional switch works at layer 2, the data link layer, forwarding frames using MAC addresses. A router works at layer 3, the network layer, forwarding packets using IP addresses. Layer 3 switches combine both functions."
+  - q: "Is Modbus TCP an application layer protocol?"
+    a: "Yes. Modbus TCP carries Modbus messages as application data inside TCP segments on port 502. TCP, IP and Ethernet below it handle delivery, so in the OSI view Modbus TCP sits at layer 7."
+references:
+  - text: "ISO/IEC 7498-1, Information technology: Open Systems Interconnection, Basic Reference Model"
+  - text: "IETF RFC 1122, Requirements for Internet Hosts: Communication Layers"
+  - text: "A. S. Tanenbaum and D. J. Wetherall, Computer Networks, 5th ed., Pearson"
+  - text: "J. F. Kurose and K. W. Ross, Computer Networking: A Top-Down Approach, 8th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **OSI vs TCP/IP model** comparisons, both describe how data moves through a network in layers. The **OSI model** has **seven layers**: physical, data link, network, transport, session, presentation and application. The **TCP/IP model** has **four layers**: link (network access), internet, transport and application. OSI is a reference model used for teaching and troubleshooting; TCP/IP is the protocol suite the internet and most industrial Ethernet networks actually run on.
+
+</Key>
+
+Network communication is complex: electrical signals, addresses, error checks, retransmissions and application formats all have to work together. Layered models split this work so that each layer handles one job and relies on the layer below. That separation is why a web browser does not care whether the data travels over fibre, copper or Wi-Fi.
+
+## The OSI model: seven layers
+
+The Open Systems Interconnection model was published by ISO in 1984 (ISO/IEC 7498). From bottom to top:
+
+1. **Physical:** transmits raw bits as electrical, optical or radio signals. Cables, connectors, voltage levels, [fibre optics](/telecommunication-engineering/single-mode-vs-multimode-fiber/), hubs and repeaters.
+2. **Data link:** frames bits into frames, adds MAC addresses and an error check (CRC), and controls access to the medium. Ethernet, Wi-Fi MAC, PPP and switches.
+3. **Network:** logical addressing and routing between networks. IP, ICMP and routers.
+4. **Transport:** end to end delivery between applications, using port numbers. TCP gives reliable, ordered delivery; UDP gives fast, connectionless delivery.
+5. **Session:** opens, manages and closes sessions between applications.
+6. **Presentation:** data formats, encoding, compression and encryption, such as TLS and character encoding.
+7. **Application:** the protocols applications use directly: HTTP, DNS, SMTP, FTP, Modbus TCP and OPC UA.
+
+A common memory aid from layer 1 upwards is "Please Do Not Throw Sausage Pizza Away".
+
+## The TCP/IP model: four layers
+
+The TCP/IP model grew out of ARPANET research in the 1970s and is defined in IETF documents such as RFC 1122. It is practical rather than theoretical, built around protocols that already worked:
+
+1. **Link (network access):** combines OSI physical and data link. Ethernet, Wi-Fi, ARP.
+2. **Internet:** IP addressing and routing, matching OSI layer 3.
+3. **Transport:** TCP and UDP, matching OSI layer 4.
+4. **Application:** combines OSI session, presentation and application. Applications handle their own formatting and sessions, for example HTTP over TLS.
+
+Some textbooks show a five layer hybrid that keeps physical and data link separate, which is convenient for teaching.
+
+<figure>
+<svg width="600" height="330" viewBox="0 0 600 330" fill="none" role="img" aria-label="Side by side mapping: OSI layers 7 application, 6 presentation and 5 session map to the TCP/IP application layer; OSI layer 4 transport maps to transport; OSI layer 3 network maps to internet; OSI layers 2 data link and 1 physical map to link layer. Example protocols are listed on the right">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="110" y="24">OSI model</text><text x="300" y="24">TCP/IP model</text><text x="490" y="24">Example protocols</text></g>
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="30" y="40" width="160" height="36" fill="#e6f6f4" /><rect x="30" y="76" width="160" height="36" fill="#e6f6f4" /><rect x="30" y="112" width="160" height="36" fill="#e6f6f4" />
+<rect x="30" y="148" width="160" height="36" fill="#fff7e0" /><rect x="30" y="184" width="160" height="36" fill="#eef1f6" /><rect x="30" y="220" width="160" height="36" fill="#ffe9e7" /><rect x="30" y="256" width="160" height="36" fill="#ffe9e7" />
+<rect x="220" y="40" width="160" height="108" fill="#e6f6f4" /><rect x="220" y="148" width="160" height="36" fill="#fff7e0" /><rect x="220" y="184" width="160" height="36" fill="#eef1f6" /><rect x="220" y="220" width="160" height="72" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="110" y="63">7 Application</text><text x="110" y="99">6 Presentation</text><text x="110" y="135">5 Session</text><text x="110" y="171">4 Transport</text><text x="110" y="207">3 Network</text><text x="110" y="243">2 Data link</text><text x="110" y="279">1 Physical</text>
+<text x="300" y="99">Application</text><text x="300" y="171">Transport</text><text x="300" y="207">Internet</text><text x="300" y="261">Link</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="405" y="84">HTTP, DNS, TLS, MQTT,</text><text x="405" y="102">Modbus TCP, OPC UA</text>
+<text x="405" y="171">TCP, UDP</text><text x="405" y="207">IP, ICMP</text><text x="405" y="252">Ethernet, Wi-Fi, ARP,</text><text x="405" y="270">copper, fibre, radio</text>
+</g>
+<text x="300" y="318" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">Data units: data (7 to 5), segment (4), packet (3), frame (2), bits (1)</text>
+</svg>
+<figcaption>How the seven OSI layers map onto the four TCP/IP layers.</figcaption>
+</figure>
+
+## Encapsulation: how data moves down and up the layers
+
+When an application sends data, each layer adds its own header in front of the data it receives from above. This is **encapsulation**:
+
+- The application produces a message, such as an HTTP request.
+- The transport layer adds a TCP header with source and destination ports, forming a **segment**.
+- The network layer adds an IP header with source and destination IP addresses, forming a **packet**.
+- The data link layer adds an Ethernet header with MAC addresses and a trailer with a CRC, forming a **frame**.
+- The physical layer sends the frame as bits.
+
+The receiver reverses the process, each layer stripping its header and passing the payload up. Routers along the way only open the frame up to layer 3 to read the IP address; switches only look at layer 2. How these devices differ is covered in [router vs switch](/telecommunication-engineering/router-vs-switch/).
+
+## OSI vs TCP/IP model: comparison
+
+| Feature | OSI model | TCP/IP model |
+| --- | --- | --- |
+| Number of layers | 7 | 4 (5 in some texts) |
+| Developed by | ISO, published 1984 | US DoD research, IETF standards |
+| Approach | Reference model first, protocols later | Protocols first, model describes them |
+| Session and presentation | Separate layers | Part of the application layer |
+| Physical and data link | Separate layers | Combined into link layer |
+| Use today | Teaching, troubleshooting vocabulary | Internet and most real networks |
+| Transport | Connection oriented and connectionless defined | TCP (reliable) and UDP (connectionless) |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An HMI cannot read data from a PLC over Modbus TCP. The link light on the PLC port is on. A ping from the HMI to the PLC IP address succeeds, but the Modbus connection times out.</dd>
+<dt>Find</dt><dd>Which layers are working and where to look next.</dd>
+<dt>Assumptions</dt><dd>Both devices are on the same subnet.</dd>
+<dt>Solution</dt><dd>Link light on: layer 1 is working<br />Ping succeeds: layers 2 and 3 work, because ARP resolved the MAC address and ICMP reached the PLC over IP<br />Modbus times out: the problem is at layer 4 or above. Check that TCP port 502 is open (not blocked by a [firewall](/telecommunication-engineering/firewalls-explained/)), that the PLC's Modbus server is enabled, and that the unit ID and register addresses are correct</dd>
+<dt>Answer</dt><dd><strong>Physical, data link and network layers are fine; troubleshoot transport (port 502) and the application settings</strong></dd>
+<dt>Limitations</dt><dd>Some devices block ping while still serving Modbus, so a failed ping does not always mean a layer 3 fault.</dd>
+</dl>
+</Example>
+
+## Why layered models matter
+
+- **Troubleshooting:** working bottom up, layer by layer, quickly narrows down faults, as in the example above.
+- **Interoperability:** vendors can build products for one layer that work with products from others at other layers.
+- **Independent change:** Wi-Fi can replace Ethernet at the link layer without changing TCP or HTTP.
+- **Shared vocabulary:** terms such as layer 2 switch, layer 3 routing and layer 7 firewall come from the OSI model.
+
+## Industrial networks and the layers
+
+Industrial protocols fit the same structure. Modbus TCP, EtherNet/IP and OPC UA sit at the application layer on top of TCP or UDP and IP. PROFINET real time traffic skips IP and runs directly over Ethernet for speed. Serial fieldbuses such as Modbus RTU over RS-485 use only the physical, data link and application layers, as explained in [Modbus RTU vs TCP](/automation-robotics/modbus-rtu-vs-tcp/). More on plant networks is available in the [industrial communication articles on Instrumentation Blog](https://www.instrumentationblog.in/category/automation/communication/).
+
+Understanding both models makes it easier to design, secure and troubleshoot any network, from an office LAN to a plant control system or a web service using [HTTP](/computer-science/how-http-works/).

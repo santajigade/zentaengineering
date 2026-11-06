@@ -96,7 +96,7 @@ PLAN = {
  ('routing-and-switching','Router vs Switch: Differences and Roles in a Network','router-vs-switch','comparison'),
  ('fiber-optics','Single-Mode vs Multimode Optical Fiber','single-mode-vs-multimode-fiber','comparison'),
  ('cellular-networks','5G Network Architecture Explained','5g-network-architecture','explanation'),
- ('wireless','Wi-Fi Standards and Frequency Bands Explained','wifi-standards-and-bands','explanation'),
+ ('wireless','Wi-Fi Standards and Bands Explained: Wi-Fi 4 to 7','wi-fi-standards-and-bands','explanation'),
  ('satellite-communication','GEO vs MEO vs LEO Satellites Compared','geo-meo-leo-satellites','comparison'),
  ('network-security','Firewalls Explained: Types and How They Work','firewalls-explained','explanation'),
  ('data-transmission','Modulation Techniques: AM, FM and Digital Modulation','modulation-techniques','fundamentals'),

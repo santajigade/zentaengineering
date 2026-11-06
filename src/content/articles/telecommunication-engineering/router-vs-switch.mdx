@@ -1,0 +1,125 @@
+---
+title: "Router vs Switch: Differences and Roles in a Network"
+description: "Router vs switch explained: OSI layers, MAC and IP addresses, MAC tables, routing tables, VLANs, layer 3 switches and a worked network example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: telecommunication-engineering
+subcategory: routing-and-switching
+focusKeyword: "router vs switch"
+image: { src: /images/featured/router-vs-switch.webp, alt: "Router vs Switch: Differences and Roles in a Network: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [router, switch, networking, vlan, ip-addressing]
+faq:
+  - q: "Can a switch replace a router?"
+    a: "A basic layer 2 switch cannot, because it only forwards frames within one network and cannot route between IP subnets or connect to the internet. A layer 3 switch can route between internal subnets and VLANs at high speed, but usually lacks WAN interfaces, NAT and advanced firewall features, so an edge router or firewall is still needed for internet access."
+  - q: "What is the difference between a hub and a switch?"
+    a: "A hub repeats every incoming signal out of all ports, so all devices share the bandwidth and collisions occur. A switch learns which device is on which port and forwards each frame only to the correct port, giving each port its own bandwidth and full duplex operation. Hubs are obsolete."
+  - q: "Is a home Wi-Fi router a router or a switch?"
+    a: "It is several devices in one box: a router with NAT and a firewall facing the internet, a small Ethernet switch for the wired ports, a Wi-Fi access point, and usually a DHCP server that hands out IP addresses."
+references:
+  - text: "IEEE 802.1Q, Bridges and Bridged Networks (VLANs)"
+  - text: "IETF RFC 1812, Requirements for IP Version 4 Routers"
+  - text: "A. S. Tanenbaum and D. J. Wetherall, Computer Networks, 5th ed., Pearson"
+  - text: "W. Odom, CCNA 200-301 Official Cert Guide, Cisco Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **router vs switch** comparisons, a **switch** connects devices **within one network** (LAN) and forwards frames by **MAC address** at layer 2 of the OSI model. A **router** connects **different networks** and forwards packets by **IP address** at layer 3, choosing a path using a routing table. Switches build local networks; routers link those networks to each other and to the internet.
+
+</Key>
+
+Every network, from a home to a factory, uses both. Knowing what each device does, and where its job ends, is essential for designing, segmenting and troubleshooting networks. The layers involved are explained in [OSI vs TCP/IP model](/telecommunication-engineering/osi-vs-tcp-ip-model/).
+
+## What a switch does
+
+A switch has many Ethernet ports and connects PCs, PLCs, cameras, servers and access points in a local area network.
+
+- **MAC learning:** when a frame arrives, the switch records the source MAC address and the port it came in on, building a **MAC address table**.
+- **Forwarding:** it looks up the destination MAC address and sends the frame only out of the matching port.
+- **Flooding:** if the destination is unknown, or the frame is a broadcast, it sends the frame out of all ports except the one it arrived on.
+- **Full duplex:** each port sends and receives at the same time without collisions.
+
+All devices on a switch, without VLANs, are in the same **broadcast domain**: a broadcast such as an ARP request reaches every one of them.
+
+### VLANs
+
+A **virtual LAN** (IEEE 802.1Q) splits one physical switch into several logical networks. Ports are assigned to VLANs, and traffic between VLANs needs a router. VLANs are widely used to separate office, control system, CCTV and guest traffic for security and performance. **Managed switches** support VLANs, port mirroring, quality of service and monitoring; **unmanaged switches** simply forward frames.
+
+## What a router does
+
+A router connects two or more IP networks, such as a plant LAN and the internet, or several subnets inside a company.
+
+- **Routing table:** a list of destination networks and the next hop or interface to reach each. Routes are configured manually (**static routing**) or learned from neighbouring routers using protocols such as OSPF and BGP (**dynamic routing**).
+- **Forwarding:** for each packet, the router reads the destination IP address, finds the most specific matching route, decrements the time to live, and sends the packet on in a new layer 2 frame.
+- **Boundary:** a router does not forward broadcasts, so each interface is a separate broadcast domain.
+- **Edge functions:** network address translation (NAT), [firewall](/telecommunication-engineering/firewalls-explained/) rules, VPN termination and DHCP.
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Network with a router in the centre connecting the internet above to two switches below; switch A connects office PCs on network 192.168.10.0/24, switch B connects a PLC and HMI on network 192.168.20.0/24">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M300 75V105M300 155L150 195M300 155L450 195M150 235L90 262M150 235L210 262M450 235L390 262M450 235L510 262" />
+<ellipse cx="300" cy="45" rx="70" ry="28" fill="#eef1f6" />
+<rect x="245" y="105" width="110" height="50" rx="25" fill="#fff7e0" />
+<rect x="90" y="195" width="120" height="40" rx="4" fill="#e6f6f4" /><rect x="390" y="195" width="120" height="40" rx="4" fill="#e6f6f4" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="300" y="50">Internet</text><text x="300" y="127" font-weight="700">Router</text><text x="300" y="144" font-size="11">layer 3, IP</text>
+<text x="150" y="213" font-weight="700">Switch A</text><text x="150" y="228" font-size="11">layer 2, MAC</text>
+<text x="450" y="213" font-weight="700">Switch B</text><text x="450" y="228" font-size="11">layer 2, MAC</text>
+<text x="90" y="280" font-size="12">PC 1</text><text x="210" y="280" font-size="12">PC 2</text><text x="390" y="280" font-size="12">PLC</text><text x="510" y="280" font-size="12">HMI</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#13a89e" font-weight="700"><text x="20" y="180">192.168.10.0/24</text><text x="470" y="180">192.168.20.0/24</text></g>
+</svg>
+<figcaption>Switches connect devices inside each network; the router connects the networks to each other and to the internet.</figcaption>
+</figure>
+
+## Router vs switch: comparison
+
+| Feature | Switch | Router |
+| --- | --- | --- |
+| OSI layer | Layer 2 (data link) | Layer 3 (network) |
+| Address used | MAC address | IP address |
+| Table | MAC address table | Routing table |
+| Connects | Devices within one LAN | Different networks (LANs, WAN, internet) |
+| Broadcasts | Forwarded within the VLAN | Not forwarded; separates broadcast domains |
+| Typical ports | 8 to 48 Ethernet ports | Few LAN ports plus WAN interfaces |
+| Extra functions | VLANs, PoE, QoS, port mirroring | NAT, firewall, VPN, DHCP, dynamic routing |
+| Speed | Hardware forwarding at line rate | Slower per port, more processing per packet |
+
+## Layer 3 switches
+
+A **layer 3 switch** is a switch with built in routing between VLANs, done in hardware at full speed. It is common in the core of enterprise and plant networks to route between internal subnets, while a router or firewall at the edge handles the internet connection, NAT and security policy.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>PC 1 has IP 192.168.10.15/24 and gateway 192.168.10.1. It sends data to the HMI at 192.168.20.30/24. The router interfaces are 192.168.10.1 and 192.168.20.1.</dd>
+<dt>Find</dt><dd>The path the data takes and which device uses which address.</dd>
+<dt>Assumptions</dt><dd>Network as in the figure; ARP tables are already populated.</dd>
+<dt>Solution</dt><dd>PC 1 compares the destination with its own network: 192.168.20.x is outside 192.168.10.0/24, so it sends the packet to its gateway<br />The frame goes to switch A addressed to the router's MAC address; switch A forwards it by MAC<br />The router reads destination IP 192.168.20.30, finds a connected route on its 192.168.20.1 interface, and sends a new frame addressed to the HMI's MAC<br />Switch B forwards the frame to the HMI's port</dd>
+<dt>Answer</dt><dd><strong>Switches forward by MAC within each network; the router forwards by IP between the two networks. The IP addresses stay the same end to end, while the MAC addresses change at the router</strong></dd>
+<dt>Limitations</dt><dd>If NAT or a firewall is configured on the router, addresses or permitted traffic may differ.</dd>
+</dl>
+</Example>
+
+## Redundancy and loops
+
+Switched networks are often built with redundant links so a single cable fault does not cut off an area. Redundant links create loops, and a loop would make broadcast frames circulate forever. The **Spanning Tree Protocol** (STP, and the faster RSTP) blocks redundant paths and reopens them within seconds if the active path fails. Industrial rings use faster protocols such as MRP or vendor ring protocols that recover in tens of milliseconds. Routers handle redundancy differently: they run routing protocols that find alternative paths, and gateway redundancy protocols such as VRRP let two routers share one virtual gateway address, so hosts keep working if one router fails.
+
+## Choosing and placing devices
+
+- Use **switches** to connect devices in each area, with enough ports and speed (1 Gbit/s or more for uplinks).
+- Use **managed switches** where you need VLANs, monitoring or redundancy protocols such as RSTP or industrial ring protocols.
+- Use **PoE switches** to power cameras, access points and some sensors over the Ethernet cable.
+- Use a **router or firewall** at every boundary between trust zones, such as between the control network and the business network, and at the internet edge.
+- Choose **industrial grade switches** in plants for wide temperature ranges, DIN rail mounting and redundant power.
+
+## Industrial networks
+
+In automation systems, segmentation with VLANs and routed zones limits the spread of faults and cyber attacks, following the zones and conduits approach of IEC 62443. Many plants use managed industrial Ethernet switches in a ring at the control level, connected through a firewall to the plant IT network. See [SCADA system architecture](/automation-robotics/scada-system-architecture/) and the [industrial communication articles on Instrumentation Blog](https://www.instrumentationblog.in/category/automation/communication/) for more.
+
+In short, switches make local networks fast and efficient, while routers give them structure, connect them to the wider world and enforce boundaries between them.

@@ -1,0 +1,142 @@
+---
+title: "Firewalls Explained: Types and How They Work"
+description: "Firewalls explained: packet filtering, stateful inspection, proxy and next generation firewalls, rule sets, default deny, DMZ and industrial zones."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: telecommunication-engineering
+subcategory: network-security
+focusKeyword: "firewalls explained"
+image: { src: /images/featured/firewalls-explained.webp, alt: "Firewalls Explained: Types and How They Work: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [firewall, network-security, cybersecurity, dmz, iec-62443]
+faq:
+  - q: "What is the difference between a stateless and a stateful firewall?"
+    a: "A stateless firewall checks every packet on its own against the rules, using addresses, ports and protocol. A stateful firewall also tracks active connections, so it automatically allows the return traffic of a permitted connection and blocks packets that do not belong to any valid session. Stateful inspection is the standard today."
+  - q: "Do I still need a firewall if I have antivirus?"
+    a: "Yes. Antivirus protects individual computers from malicious files, while a firewall controls which network traffic is allowed between systems and zones. They address different threats, and good security uses several layers, including patching, strong authentication and monitoring."
+  - q: "What is a DMZ?"
+    a: "A demilitarised zone is a separate network segment between an untrusted network, such as the internet or the corporate IT network, and a trusted one. Servers that must be reached from outside, such as a web server or a plant data historian replica, sit in the DMZ, so outside users never connect directly to the protected internal network."
+references:
+  - text: "NIST SP 800-41 Rev. 1, Guidelines on Firewalls and Firewall Policy"
+  - text: "IEC 62443-3-3, Industrial communication networks: Network and system security, System security requirements and security levels"
+  - text: "NIST SP 800-82 Rev. 3, Guide to Operational Technology (OT) Security"
+  - text: "W. Stallings, Network Security Essentials, 6th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Firewalls explained** simply: a firewall is a device or software that sits between networks and **allows or blocks traffic based on rules**. Rules match addresses, ports, protocols and, in advanced firewalls, applications and users. Main types are **packet filtering**, **stateful inspection**, **proxy (application level)** and **next generation firewalls (NGFW)** that add intrusion prevention and application awareness. Good practice is **default deny**: block everything, then allow only the traffic that is needed.
+
+</Key>
+
+Every network connected to the internet, and every industrial control network connected to an office network, needs a controlled boundary. A firewall is that boundary. Like a security guard at a gate, it checks every connection against a list of what is allowed.
+
+## How a firewall works
+
+A firewall inspects traffic passing between its interfaces and compares it with an ordered **rule set** (also called an access control list or policy). Each rule typically specifies:
+
+- Source and destination IP address or network
+- Protocol (TCP, UDP, ICMP)
+- Destination port, which identifies the service (for example TCP 443 for HTTPS, TCP 502 for Modbus TCP)
+- Action: allow, deny or drop, and whether to log
+
+Rules are checked from the top; the **first match** decides. The last rule is normally an implicit or explicit **deny all**, so anything not specifically allowed is blocked.
+
+<figure>
+<svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Firewall between an untrusted network on the left and a trusted network on the right, with a DMZ below; traffic arrows pass through a rule table, permitted traffic continues, denied traffic is dropped">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="70" width="130" height="80" rx="6" fill="#ffe9e7" />
+<rect x="225" y="50" width="150" height="120" rx="6" fill="#fff7e0" />
+<rect x="450" y="70" width="130" height="80" rx="6" fill="#e6f6f4" />
+<rect x="235" y="200" width="130" height="45" rx="6" fill="#eef1f6" />
+</g>
+<g stroke="#0b2545" stroke-width="1" fill="#ffffff"><rect x="240" y="82" width="120" height="20" /><rect x="240" y="102" width="120" height="20" /><rect x="240" y="122" width="120" height="20" /><rect x="240" y="142" width="120" height="20" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="85" y="104" font-weight="700">Untrusted</text><text x="85" y="122" font-size="11">internet, IT</text>
+<text x="300" y="72" font-weight="700">Firewall rules</text>
+<text x="515" y="104" font-weight="700">Trusted</text><text x="515" y="122" font-size="11">LAN, control</text>
+<text x="300" y="228" font-weight="700">DMZ</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545">
+<text x="245" y="96">1 allow 443 to DMZ</text><text x="245" y="116">2 allow DNS out</text><text x="245" y="136">3 allow est. return</text><text x="245" y="156">4 deny all</text>
+</g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M150 95H218M375 95H443M300 170V194" /></g>
+<g fill="#13a89e"><path d="M218 90l8 5-8 5z" /><path d="M443 90l8 5-8 5z" /><path d="M295 194l5 8 5-8z" /></g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M150 130H218" /><path d="M200 120l16 20M216 120l-16 20" /></g>
+<text x="185" y="160" font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#b42318" text-anchor="middle">dropped</text>
+</svg>
+<figcaption>A firewall applies ordered rules between zones; a DMZ hosts services reachable from outside.</figcaption>
+</figure>
+
+## Types of firewalls
+
+### Packet filtering (stateless)
+
+The simplest type checks each packet's header (addresses, ports, protocol) against the rules, with no memory of earlier packets. It is fast and cheap, often built into routers as access lists, but it cannot tell whether a packet belongs to a legitimate connection, so return traffic needs separate, broad rules.
+
+### Stateful inspection
+
+A stateful firewall keeps a **connection table**. When an allowed connection starts, for example a TCP handshake from inside to a web server, it records the session and automatically permits the matching return traffic. Packets that do not belong to a known session are dropped. This is the baseline for all modern firewalls.
+
+### Proxy or application level gateway
+
+A proxy firewall terminates the connection itself and opens a new one to the destination on the client's behalf. It can inspect full application content, such as HTTP requests, and hide internal addresses completely, at the cost of more processing and latency.
+
+### Next generation firewall (NGFW)
+
+An NGFW adds:
+
+- **Application identification**, so rules can say "allow Microsoft Teams" rather than just ports.
+- **Intrusion prevention (IPS)** using signatures of known attacks.
+- **User identity** awareness linked to directory services.
+- **TLS inspection**, malware filtering and threat intelligence feeds.
+
+**Industrial firewalls** go further with **deep packet inspection of OT protocols**, for example allowing Modbus reads but blocking writes, or only permitting specific function codes.
+
+### Host based and cloud firewalls
+
+Firewalls also run as software on individual computers (Windows Defender Firewall, iptables or nftables on Linux) and as cloud services such as security groups and web application firewalls.
+
+## Firewall types compared
+
+| Type | Inspects | Strength | Limitation |
+| --- | --- | --- | --- |
+| Packet filter | Headers of each packet | Fast, simple | No connection awareness |
+| Stateful | Headers plus session state | Secure default, efficient | Limited content checks |
+| Proxy | Full application content | Deep inspection, hides hosts | Slower, protocol specific |
+| NGFW | Applications, users, threats | Rich policy and IPS | Cost and complexity |
+| Industrial DPI | OT protocol commands | Blocks unsafe commands | Needs protocol knowledge to configure |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant firewall separates the control network (10.10.0.0/24) from the business network (192.168.1.0/24). A SCADA historian in the DMZ (172.16.0.10) must poll a PLC at 10.10.0.20 using Modbus TCP. Office users must view the historian over HTTPS. Nothing else is required.</dd>
+<dt>Find</dt><dd>A minimal rule set.</dd>
+<dt>Assumptions</dt><dd>Stateful firewall, so return traffic is automatic; first match wins.</dd>
+<dt>Solution</dt><dd>Rule 1: allow TCP from 172.16.0.10 to 10.10.0.20 port 502 (historian polls PLC)<br />Rule 2: allow TCP from 192.168.1.0/24 to 172.16.0.10 port 443 (office views historian)<br />Rule 3: deny all, and log</dd>
+<dt>Answer</dt><dd><strong>Three rules: the historian can poll the PLC, office users can reach only the historian, and no traffic passes directly between the business and control networks</strong></dd>
+<dt>Limitations</dt><dd>Add rules for time sync, patch servers and remote access only as needed, and review the rule set regularly.</dd>
+</dl>
+</Example>
+
+## Firewalls explained in the plant: zones and conduits
+
+Industrial networks are usually divided into levels, following the Purdue reference model: field devices and PLCs at the bottom, supervisory SCADA and HMIs above them, site operations and historians above that, and the business network at the top. Firewalls sit between these levels so that a problem in one zone, such as malware on an office PC, cannot spread directly to the controllers. IEC 62443 calls each protected group a **zone** and each controlled path between zones a **conduit**, and sets target security levels for both.
+
+A common pattern places two firewalls, or one firewall with three interfaces, around an industrial DMZ. The business network can reach only servers in the DMZ, and the control network pushes data out to those servers. No connection ever passes straight through from top to bottom. Remote access for vendors goes through a jump server in the DMZ with multi-factor authentication and session recording, and is enabled only when needed.
+
+## Firewall best practices
+
+- **Default deny** and allow only documented, required traffic.
+- Be **specific**: avoid "any" in source, destination or port where possible.
+- **Segment** networks into zones by trust level, with firewalls at the conduits between them, following IEC 62443 zones and conduits.
+- Place outward facing services in a **DMZ**; never allow direct connections from the internet to control systems.
+- **Log and monitor** denied and allowed traffic; alerts reveal scans and misconfigurations.
+- **Review rules** periodically and remove unused ones.
+- Keep firmware **patched**, and protect the firewall's own management interface.
+- Remember that a firewall is one layer; combine it with patching, strong authentication and backups.
+
+Firewalls work mainly at layers 3 and 4 of the [OSI model](/telecommunication-engineering/osi-vs-tcp-ip-model/), with NGFWs reaching layer 7. They usually sit where a [router](/telecommunication-engineering/router-vs-switch/) connects zones. For plant networks, see [SCADA system architecture](/automation-robotics/scada-system-architecture/) and [DCS architecture](/automation-robotics/dcs-architecture/), and the [industrial communication articles on Instrumentation Blog](https://www.instrumentationblog.in/category/automation/communication/).

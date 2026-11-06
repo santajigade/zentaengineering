@@ -1,0 +1,139 @@
+---
+title: "Modulation Techniques: AM, FM and Digital Modulation"
+description: "Modulation techniques explained: AM, FM and PM, digital ASK, FSK, PSK and QAM, constellation diagrams, bandwidth, bit rate, Carson's rule and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: telecommunication-engineering
+subcategory: data-transmission
+focusKeyword: "modulation techniques"
+image: { src: /images/featured/modulation-techniques.webp, alt: "Modulation Techniques: AM, FM and Digital Modulation: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [modulation, am, fm, qam, digital-communication]
+faq:
+  - q: "Why is modulation needed?"
+    a: "Baseband signals such as audio or data have low frequencies that cannot be radiated efficiently by practical antennas, and many users would interfere if they all transmitted at the same frequencies. Modulation shifts the information onto a high frequency carrier, allowing small antennas, frequency sharing between many channels, and better noise performance."
+  - q: "Why does FM sound better than AM?"
+    a: "Most noise and interference changes a signal's amplitude. An FM receiver uses a limiter that removes amplitude variations and recovers information from frequency only, so much of the noise is rejected. FM broadcast also uses a wider bandwidth, which allows better audio fidelity, at the cost of using more spectrum."
+  - q: "What does 256-QAM mean?"
+    a: "It is quadrature amplitude modulation with 256 distinct symbols, each a unique combination of amplitude and phase. Since 2^8 = 256, each symbol carries 8 bits. Higher orders carry more bits per symbol but need a cleaner signal, so systems switch to lower orders when the signal to noise ratio falls."
+references:
+  - text: "S. Haykin and M. Moher, Communication Systems, 5th ed., Wiley"
+  - text: "B. Sklar, Digital Communications: Fundamentals and Applications, 2nd ed., Prentice Hall"
+  - text: "J. G. Proakis and M. Salehi, Digital Communications, 5th ed., McGraw-Hill"
+  - text: "C. E. Shannon, A Mathematical Theory of Communication, Bell System Technical Journal, 1948"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Modulation techniques** place information onto a high frequency **carrier wave** by varying its **amplitude**, **frequency** or **phase**. **Analogue modulation** includes **AM** (amplitude), **FM** (frequency) and **PM** (phase), used for radio broadcasting. **Digital modulation** maps bits to discrete carrier states: **ASK**, **FSK**, **PSK** and **QAM**, which combines amplitude and phase. Higher order schemes such as 256-QAM carry more bits per symbol but need a better signal to noise ratio.
+
+</Key>
+
+Modulation is at the heart of every radio, TV, mobile phone, Wi-Fi router, satellite link and modem. It is the technique that lets many signals share the airwaves and travel long distances through noisy channels.
+
+## Why modulate?
+
+- **Antenna size:** an efficient antenna is around a quarter wavelength long. A 3 kHz audio signal has a wavelength of 100 km; a 100 MHz carrier has 3 m.
+- **Frequency sharing:** each station or channel uses its own carrier frequency, so many can coexist.
+- **Noise and range:** suitable modulation improves resistance to noise and interference.
+- **Channel matching:** the signal is shaped to fit the medium, whether radio, copper or [optical fibre](/telecommunication-engineering/single-mode-vs-multimode-fiber/).
+
+A carrier is a sine wave:
+
+$$
+c(t) = A_c \cos(2\pi f_c t + \phi)
+$$
+
+Modulation varies A_c, f_c or φ according to the message.
+
+## Analogue modulation
+
+### Amplitude modulation (AM)
+
+The carrier amplitude follows the message signal. The **modulation index** m is the ratio of message peak to carrier peak and should stay at or below 1 to avoid distortion. A message with maximum frequency f_m produces two sidebands, so AM bandwidth is **2f_m**. AM is simple to demodulate with an envelope detector but wastes power in the carrier and is sensitive to noise. It is used in medium wave and shortwave broadcasting and aviation radio. Variants such as single sideband (SSB) save bandwidth and power.
+
+### Frequency modulation (FM)
+
+The carrier frequency shifts above and below its centre in proportion to the message amplitude, while the amplitude stays constant. The peak frequency shift is the **deviation** Δf. Bandwidth is estimated by **Carson's rule**:
+
+$$
+B \approx 2(\Delta f + f_m)
+$$
+
+FM broadcast uses Δf = 75 kHz and audio up to 15 kHz, giving about 180 kHz, within the 200 kHz channel spacing. FM resists amplitude noise well and is used for FM radio, two way radio and older TV sound.
+
+### Phase modulation (PM)
+
+The carrier phase varies with the message. PM and FM are closely related; PM is mainly important as the basis of digital phase shift keying.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Four stacked waveforms: a digital bit stream 1 0 1 1 0; ASK with carrier present for ones and absent for zeros; FSK with higher frequency for ones and lower for zeros; BPSK with carrier phase reversed for zeros">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" font-weight="700"><text x="15" y="45">Data</text><text x="15" y="110">ASK</text><text x="15" y="180">FSK</text><text x="15" y="250">BPSK</text></g>
+<g stroke="#c9d2de" stroke-width="1" stroke-dasharray="3 3"><path d="M70 20V280M170 20V280M270 20V280M370 20V280M470 20V280M570 20V280" /></g>
+<path d="M70 30H170V60H270V30H470V60H570" stroke="#0b2545" stroke-width="2.5" fill="none" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#13a89e" text-anchor="middle" font-weight="700"><text x="120" y="22">1</text><text x="220" y="22">0</text><text x="320" y="22">1</text><text x="420" y="22">1</text><text x="520" y="22">0</text></g>
+<g stroke="#13a89e" stroke-width="2" fill="none">
+<path d="M70 105Q82 85 95 105T120 105T145 105T170 105H270Q282 85 295 105T320 105T345 105T370 105Q382 85 395 105T420 105T445 105T470 105H570" />
+<path d="M70 175Q76 155 82 175T95 175T107 175T120 175T132 175T145 175T157 175T170 175Q195 150 220 175T270 175Q276 155 282 175T295 175T307 175T320 175T332 175T345 175T357 175T370 175Q376 155 382 175T395 175T407 175T420 175T432 175T445 175T457 175T470 175Q495 150 520 175T570 175" />
+<path d="M70 245Q95 220 120 245T170 245Q195 270 220 245T270 245Q295 220 320 245T370 245Q395 220 420 245T470 245Q495 270 520 245T570 245" />
+</g>
+</svg>
+<figcaption>Digital modulation of the bit pattern 1 0 1 1 0 by amplitude, frequency and phase.</figcaption>
+</figure>
+
+## Digital modulation
+
+Digital schemes transmit **symbols**, each representing one or more bits. With M possible symbols, each carries log₂M bits.
+
+- **ASK (amplitude shift keying):** bits change the amplitude; on off keying (OOK) is the simplest form, used in optical fibre links and simple remote controls. Sensitive to noise.
+- **FSK (frequency shift keying):** bits select between frequencies. Robust and simple; used in HART on 4 to 20 mA loops, Bluetooth (as GFSK) and many low power radios.
+- **PSK (phase shift keying):** bits select the carrier phase. **BPSK** uses 2 phases (1 bit per symbol); **QPSK** uses 4 phases (2 bits). Very robust, used in satellite links and GPS.
+- **QAM (quadrature amplitude modulation):** combines amplitude and phase on two carriers 90° apart. 16-QAM carries 4 bits per symbol, 64-QAM 6, 256-QAM 8, 1024-QAM 10 and 4096-QAM 12. Used in [Wi-Fi](/telecommunication-engineering/wi-fi-standards-and-bands/), cable modems, DSL and [5G](/telecommunication-engineering/5g-network-architecture/).
+
+A **constellation diagram** plots each symbol as a point by its in-phase (I) and quadrature (Q) components. More points packed into the same space are closer together, so noise more easily pushes one into its neighbour, causing errors.
+
+Modern systems use **adaptive modulation**: they switch between QPSK, 16-QAM, 64-QAM and higher orders as signal quality changes. **OFDM** splits data across many closely spaced subcarriers, each modulated with QAM, to cope with multipath reflections.
+
+## Comparison of digital schemes
+
+| Scheme | Bits per symbol | Noise robustness | Typical use |
+| --- | --- | --- | --- |
+| BPSK | 1 | Very high | Satellites, GPS, weak signals |
+| QPSK | 2 | High | Satellite TV, LTE and 5G control channels |
+| 16-QAM | 4 | Medium | Mobile data, microwave links |
+| 64-QAM | 6 | Lower | Wi-Fi, cable, LTE and 5G data |
+| 256-QAM | 8 | Low | Wi-Fi 5, 5G, DOCSIS |
+| 1024-QAM | 10 | Very low | Wi-Fi 6, DOCSIS 3.1 |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A link transmits 2 million symbols per second (2 Mbaud). Compare QPSK and 64-QAM. Separately, an FM transmitter has deviation 5 kHz and maximum audio frequency 3 kHz.</dd>
+<dt>Find</dt><dd>The bit rate for each digital scheme, and the FM bandwidth.</dd>
+<dt>Assumptions</dt><dd>No coding overhead; Carson's rule for FM.</dd>
+<dt>Solution</dt><dd>QPSK: log₂4 = 2 bits per symbol; 2 × 2 = 4 Mbit/s<br />64-QAM: log₂64 = 6 bits per symbol; 2 × 6 = 12 Mbit/s<br />FM: B = 2(5 + 3) = 16 kHz</dd>
+<dt>Answer</dt><dd><strong>QPSK gives 4 Mbit/s and 64-QAM gives 12 Mbit/s in the same bandwidth; the FM signal needs about 16 kHz</strong></dd>
+<dt>Limitations</dt><dd>64-QAM needs a much higher signal to noise ratio than QPSK; error correction coding reduces the useful bit rate.</dd>
+</dl>
+</Example>
+
+## The Shannon limit
+
+Shannon's theorem sets the maximum error free capacity of a channel of bandwidth B with signal to noise ratio S/N:
+
+$$
+C = B\log_2\!\left(1 + \frac{S}{N}\right)
+$$
+
+Modern modulation and coding come within a fraction of a decibel of this limit. It explains why higher data rates need either more bandwidth or a cleaner signal.
+
+## Modulation techniques and noise
+
+The quality of a digital link is measured by the **bit error rate** (BER), the fraction of bits received wrongly. BER depends on the energy per bit compared with the noise density, written Eb/N0. For a BER of one error in a million bits, BPSK and QPSK need about 10.5 dB, while 16-QAM needs roughly 14.5 dB and 64-QAM around 19 dB. Each step up in order therefore demands a stronger or cleaner signal. Forward error correction codes such as LDPC and turbo codes add redundant bits that let the receiver correct many errors, trading some throughput for a large gain in robustness.
+
+## Choosing a technique
+
+Choose robust, low order schemes (BPSK, QPSK, FSK) for long range, low power or noisy links such as satellites, IoT sensors and industrial HART signals. Use high order QAM with OFDM where the signal is strong and spectrum is scarce, such as Wi-Fi, cellular data and cable networks. Modulation operates at the physical layer of the [OSI model](/telecommunication-engineering/osi-vs-tcp-ip-model/), beneath every protocol above it.

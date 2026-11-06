@@ -1,0 +1,131 @@
+---
+title: "Single-Mode vs Multimode Fiber: Key Differences"
+description: "Single-mode vs multimode fiber compared: core size, light sources, modal dispersion, distance, OM and OS grades, connectors and a loss budget example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: telecommunication-engineering
+subcategory: fiber-optics
+focusKeyword: "single-mode vs multimode fiber"
+image: { src: /images/featured/single-mode-vs-multimode-fiber.webp, alt: "Single-Mode vs Multimode Fiber: Key Differences: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [fiber-optics, single-mode, multimode, optical-networks, loss-budget]
+faq:
+  - q: "Can I connect single-mode and multimode fiber together?"
+    a: "Not directly. Light from a multimode fibre cannot be launched efficiently into the tiny single-mode core, so losses are very high, and the transceivers on each end are designed for one fibre type. Use matching fibre and optics end to end, or a media converter between the two types."
+  - q: "How can I tell single-mode from multimode cable by colour?"
+    a: "By common convention, single-mode cable jackets are yellow, OM1 and OM2 multimode are orange, OM3 and OM4 are aqua (OM4 sometimes violet), and OM5 is lime green. Always confirm with the printed cable marking, because colours are not guaranteed."
+  - q: "Why is single-mode fiber used for long distances?"
+    a: "Its small core carries only one mode of light, which removes modal dispersion, and it is used at 1310 and 1550 nm where glass loss is lowest, about 0.35 and 0.2 dB/km. Together these allow links of tens of kilometres without amplifiers, and thousands of kilometres with optical amplifiers."
+references:
+  - text: "ITU-T G.652, Characteristics of a single-mode optical fibre and cable"
+  - text: "ISO/IEC 11801-1, Information technology: Generic cabling for customer premises"
+  - text: "TIA-568.3-D, Optical Fiber Cabling and Components Standard"
+  - text: "G. Keiser, Optical Fiber Communications, 5th ed., McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **single-mode vs multimode fiber**, the key difference is the **core size**. **Single-mode fibre** (SMF) has a tiny core of about **9 µm** that carries one path of light, uses lasers at 1310 or 1550 nm, and reaches **tens of kilometres** or more. **Multimode fibre** (MMF) has a larger **50 or 62.5 µm** core that carries many paths, uses low cost VCSEL or LED sources at 850 nm, and is limited to a few hundred metres at high speeds. Multimode is cheaper for short links inside buildings; single-mode is used for campus, metro and long haul links.
+
+</Key>
+
+Optical fibre carries data as pulses of light through glass, offering huge bandwidth, immunity to electrical noise and no risk of sparks, which is why it is widely used in telecom networks, data centres and industrial plants. Choosing the right fibre type is one of the first decisions in any fibre installation.
+
+## How optical fibre guides light
+
+A fibre has a glass **core** surrounded by **cladding** with a slightly lower refractive index, then a protective coating and jacket. Light entering the core at a shallow enough angle undergoes **total internal reflection** at the core and cladding boundary, so it stays trapped in the core. The critical angle follows Snell's law:
+
+$$
+\sin\theta_c = \frac{n_2}{n_1}
+$$
+
+where n₁ is the core index and n₂ the cladding index. The range of angles the fibre accepts is given by the **numerical aperture**, NA = √(n₁² − n₂²).
+
+## Modes and modal dispersion
+
+A **mode** is one allowed path, or field pattern, of light in the core. A large core supports hundreds of modes. Rays that zigzag at steeper angles travel further than rays going straight down the axis, so parts of a pulse arrive at different times. This **modal dispersion** spreads pulses and limits how fast data can be sent over a given length.
+
+Multimode fibres use a **graded index** core, where the refractive index falls gradually from the centre outward. Light on longer outer paths travels faster in the lower index glass, so the arrival times nearly equalise, greatly reducing modal dispersion. Single-mode fibre avoids the problem entirely by making the core so small that only one mode can propagate.
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Two fibre cross sections. Top: multimode fibre with a wide core and several light rays following curved paths of different lengths. Bottom: single-mode fibre with a narrow core and a single straight light path along the axis">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545"><text x="20" y="28">Multimode: 50 or 62.5 µm core, many modes</text><text x="20" y="168">Single-mode: about 9 µm core, one mode</text></g>
+<rect x="20" y="40" width="560" height="100" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="20" y="60" width="560" height="60" fill="#e6f6f4" stroke="#0b2545" stroke-width="1" />
+<rect x="20" y="180" width="560" height="60" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="20" y="206" width="560" height="8" fill="#e6f6f4" stroke="#0b2545" stroke-width="1" />
+<g stroke-width="2" fill="none">
+<path d="M20 90H580" stroke="#13a89e" />
+<path d="M20 90C60 62 100 62 140 90S220 118 260 90S340 62 380 90S460 118 500 90S560 66 580 76" stroke="#f5b800" />
+<path d="M20 90C45 64 70 64 95 90S145 116 170 90S220 64 245 90S295 116 320 90S370 64 395 90S445 116 470 90S520 64 545 90S570 112 580 106" stroke="#b42318" />
+<path d="M20 210H580" stroke="#b42318" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="470" y="55">Cladding 125 µm</text><text x="300" y="258" text-anchor="middle">Single path: no modal dispersion, reaches tens of km</text>
+</g>
+</svg>
+<figcaption>Graded index multimode fibre carries many curved paths; single-mode carries one straight path.</figcaption>
+</figure>
+
+## Fibre grades
+
+Multimode fibre is classified by ISO/IEC 11801 into **OM** grades and single-mode into **OS** grades.
+
+| Grade | Core | Typical 10GBASE reach | Notes |
+| --- | --- | --- | --- |
+| OM1 | 62.5 µm | about 33 m | Legacy, LED era |
+| OM2 | 50 µm | about 82 m | Legacy |
+| OM3 | 50 µm, laser optimised | about 300 m | Aqua jacket, common in data centres |
+| OM4 | 50 µm, laser optimised | about 400 m | Higher bandwidth than OM3 |
+| OM5 | 50 µm, wideband | about 400 m | Supports short wavelength multiplexing |
+| OS1 / OS2 | about 9 µm | 10 km and more | OS2 low water peak, for outdoor and long links |
+
+## Single-mode vs multimode fiber: comparison
+
+| Feature | Single-mode (OS1, OS2) | Multimode (OM1 to OM5) |
+| --- | --- | --- |
+| Core diameter | About 9 µm | 50 or 62.5 µm |
+| Cladding diameter | 125 µm | 125 µm |
+| Light source | Laser (FP, DFB) | VCSEL or LED |
+| Wavelengths | 1310 nm, 1550 nm | 850 nm, 1300 nm |
+| Typical attenuation | 0.35 dB/km at 1310 nm, 0.2 dB/km at 1550 nm | About 3 dB/km at 850 nm |
+| Modal dispersion | None | Present, reduced by graded index |
+| Distance | Up to 10 to 80 km without amplifiers | Up to a few hundred metres at 10 Gbit/s |
+| Transceiver cost | Higher | Lower |
+| Cable colour (common) | Yellow | Orange (OM1, OM2), aqua (OM3, OM4) |
+| Typical use | Campus backbones, metro, long haul, FTTH | Inside buildings and data centres |
+
+The cable itself costs about the same; the difference in system cost comes mainly from the transceivers, although single-mode optics prices have fallen sharply.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 6 km single-mode link at 1310 nm between two plant substations. Fibre loss 0.35 dB/km, 4 connectors at 0.5 dB each, 3 fusion splices at 0.1 dB each, and a 3 dB safety margin. The transceivers have a power budget of 12 dB.</dd>
+<dt>Find</dt><dd>The total link loss and whether the link will work.</dd>
+<dt>Assumptions</dt><dd>Typical maximum component losses; no dispersion limit at this distance.</dd>
+<dt>Solution</dt><dd>Fibre: 6 × 0.35 = 2.1 dB<br />Connectors: 4 × 0.5 = 2.0 dB<br />Splices: 3 × 0.1 = 0.3 dB<br />Total with margin = 2.1 + 2.0 + 0.3 + 3.0 = 7.4 dB</dd>
+<dt>Answer</dt><dd><strong>Total loss 7.4 dB is well below the 12 dB budget, so the link will work with 4.6 dB to spare</strong></dd>
+<dt>Limitations</dt><dd>Verify after installation with an optical loss test set or OTDR; dirty connectors are the most common cause of excess loss.</dd>
+</dl>
+</Example>
+
+## Fibre in industrial plants
+
+Fibre is popular in plants because it is immune to electromagnetic interference from drives, motors and switchgear, does not create ground loops between buildings, and carries no electrical energy into hazardous areas. Typical uses include backbones between control rooms and substations, links to remote I/O cabinets, and long runs along pipelines and conveyors. Industrial Ethernet switches accept SFP transceivers, so the fibre type and distance can be chosen per port. Armoured or rodent resistant cable is common outdoors, and pre-terminated assemblies reduce site splicing.
+
+## Connectors and installation tips
+
+- Common connectors are **LC** (small, used in SFP transceivers), **SC** and older **ST**; MPO connectors carry 12 or more fibres for parallel optics.
+- Single-mode connectors may have **UPC** (blue) or **APC** (green, angled) end faces; never mate APC with UPC.
+- **Clean and inspect** every connector before mating; a speck of dust can block a 9 µm core.
+- Respect the **minimum bend radius**; tight bends leak light and raise loss.
+- Use transceivers matched to the fibre type, wavelength and distance.
+
+## Choosing the right fibre
+
+Use multimode (OM3 or OM4) for short links inside buildings, server rooms and control rooms where low cost optics matter. Use single-mode (OS2) for anything beyond a few hundred metres, between buildings, outdoors, or where future speed upgrades are likely, since single-mode supports far higher speeds over longer distances. Many new industrial and campus installations simply standardise on single-mode.
+
+Fibre forms the physical layer of the [OSI model](/telecommunication-engineering/osi-vs-tcp-ip-model/) and the backbone of [5G networks](/telecommunication-engineering/5g-network-architecture/), data centres and the internet.

@@ -1,0 +1,144 @@
+---
+title: "GEO vs MEO vs LEO Satellites Compared"
+description: "GEO vs MEO vs LEO satellites compared: altitudes, orbital periods, latency, coverage, constellation size, examples like GPS and Starlink, and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: telecommunication-engineering
+subcategory: satellite-communication
+focusKeyword: "leo satellites"
+image: { src: /images/featured/geo-meo-leo-satellites.webp, alt: "GEO vs MEO vs LEO Satellites Compared: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [satellite-communication, geo, leo, meo, orbits]
+faq:
+  - q: "Why does a GEO satellite appear stationary?"
+    a: "At about 35 786 km above the equator, a satellite's orbital period equals one sidereal day, about 23 hours 56 minutes, so it moves around the Earth at the same rate as the Earth rotates. Seen from the ground it stays above one point, so fixed dish antennas can point at it permanently."
+  - q: "Why do LEO constellations need so many satellites?"
+    a: "A LEO satellite at around 550 km sees only a small patch of the Earth and passes overhead in a few minutes. To provide continuous coverage everywhere, many satellites must be spaced so that one is always in view of each user, and links are handed from one satellite to the next. Large broadband constellations use thousands."
+  - q: "Which orbit do GPS satellites use?"
+    a: "GPS satellites are in medium Earth orbit at about 20 200 km altitude with an orbital period of about 12 hours. Other navigation systems such as Galileo, GLONASS and BeiDou also use MEO, although BeiDou adds some geostationary and inclined geosynchronous satellites."
+references:
+  - text: "G. Maral, M. Bousquet and Z. Sun, Satellite Communications Systems, 6th ed., Wiley"
+  - text: "T. Pratt and J. E. Allnutt, Satellite Communications, 3rd ed., Wiley"
+  - text: "ITU Radio Regulations, International Telecommunication Union"
+  - text: "NASA, Catalog of Earth Satellite Orbits, Earth Observatory"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**GEO vs MEO vs LEO** describes satellite orbits by altitude. **GEO** (geostationary, 35 786 km) satellites stay fixed over one point, so three can cover most of the Earth, but signal delay is about **240 ms** one way through the satellite. **MEO** (about 2000 to 35 786 km, typically 8000 to 20 200 km) is used by navigation systems like **GPS** and some broadband networks. **LEO satellites** (about 160 to 2000 km) give low latency, about **20 to 40 ms**, but each covers a small area and moves fast, so constellations need hundreds or thousands of satellites, such as **Starlink** and **OneWeb**.
+
+</Key>
+
+Satellites carry TV broadcasts, internet, navigation, weather data and communications for ships, aircraft and remote sites. The orbit chosen sets the satellite's coverage, latency, cost and how many satellites the system needs.
+
+## Orbital basics
+
+A satellite stays in orbit because its speed carries it around the Earth as fast as gravity pulls it down. Higher orbits are slower and take longer. For a circular orbit, the period follows Kepler's third law:
+
+$$
+T = 2\pi\sqrt{\frac{r^3}{GM}}
+$$
+
+where r is the orbit radius from the Earth's centre (Earth radius about 6371 km plus altitude) and GM = 3.986 × 10¹⁴ m³/s² for the Earth.
+
+<Calculator path="physics/orbital-period" title="Orbital Period Calculator" />
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Earth at the left with three orbit arcs at increasing distance: LEO close to Earth at about 160 to 2000 km, MEO further at about 2000 to 35786 km, and GEO furthest at 35786 km; each with a satellite and a coverage cone, wider for higher orbits">
+<circle cx="70" cy="150" r="60" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<text x="70" y="155" font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">Earth</text>
+<g fill="none" stroke-width="2" stroke-dasharray="6 5">
+<path d="M155 30A150 150 0 0 1 155 270" stroke="#13a89e" />
+<path d="M260 20A250 250 0 0 1 260 280" stroke="#f5b800" />
+<path d="M470 15A420 420 0 0 1 470 285" stroke="#b42318" />
+</g>
+<g fill="#0b2545"><rect x="214" y="144" width="12" height="12" /><rect x="314" y="144" width="12" height="12" /><rect x="484" y="144" width="12" height="12" /></g>
+<g fill-opacity="0.12"><path d="M220 150L128 128L128 172Z" fill="#13a89e" /><path d="M320 150L120 100L120 200Z" fill="#f5b800" /><path d="M490 150L94 92L94 208Z" fill="#b42318" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="220" y="135" font-weight="700">LEO</text><text x="220" y="182" font-size="11">160 to 2000 km</text>
+<text x="335" y="135" font-weight="700">MEO</text><text x="345" y="182" font-size="11">2000 to 35 786 km</text>
+<text x="530" y="135" font-weight="700">GEO</text><text x="530" y="182" font-size="11">35 786 km</text>
+</g>
+<text x="300" y="296" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">Not to scale: higher orbit, wider coverage, longer delay</text>
+</svg>
+<figcaption>The three orbit classes and their relative coverage (not to scale).</figcaption>
+</figure>
+
+## GEO: geostationary orbit
+
+A geostationary satellite orbits above the equator at 35 786 km with a period of one sidereal day, so it appears fixed in the sky.
+
+- **Coverage:** each satellite sees about one third of the Earth; three can cover nearly all populated regions, except the polar areas.
+- **Ground antennas:** fixed dishes, no tracking needed. Ideal for TV broadcasting.
+- **Latency:** the signal travels up and down about 72 000 km, so one way delay through the satellite is about 240 ms and a round trip about 480 ms or more. Fine for TV, noticeable for voice and interactive applications.
+- **Uses:** direct to home TV, VSAT networks, maritime and aeronautical connectivity, weather satellites.
+- **Cost:** large, expensive satellites with 15 or more years of life.
+
+## MEO: medium Earth orbit
+
+MEO lies between LEO and GEO. Satellites take a few hours to about 12 hours per orbit.
+
+- **Navigation:** GPS (about 20 200 km), Galileo, GLONASS and BeiDou.
+- **Broadband:** SES O3b mPOWER at about 8000 km offers latency around 150 ms round trip.
+- **Coverage:** each satellite covers a large area; a few dozen give global service.
+
+## LEO satellites: low Earth orbit
+
+LEO satellites orbit at about 160 to 2000 km, taking roughly 90 to 120 minutes per orbit.
+
+- **Latency:** short distances give round trip times of about 20 to 40 ms, close to terrestrial broadband.
+- **Coverage:** each satellite covers a small footprint and is visible for only a few minutes, so continuous service needs large **constellations** with handovers between satellites and often **inter-satellite laser links**.
+- **User terminals:** need electronically steered phased array antennas or tracking dishes.
+- **Uses:** broadband (Starlink, OneWeb, Amazon Kuiper), Earth observation, the International Space Station, IoT and direct to phone services.
+
+## GEO vs MEO vs LEO: comparison
+
+| Feature | LEO | MEO | GEO |
+| --- | --- | --- | --- |
+| Altitude | About 160 to 2000 km | About 2000 to 35 786 km | 35 786 km |
+| Orbital period | About 90 to 120 min | About 2 to 24 h (GPS 12 h) | 23 h 56 min |
+| Round trip latency (user to ground station) | About 20 to 40 ms | About 100 to 150 ms | About 480 to 600 ms |
+| Satellites for global coverage | Hundreds to thousands | About 10 to 30 | 3 (except poles) |
+| Ground antenna | Tracking or phased array | Tracking | Fixed dish |
+| Path loss | Lowest | Medium | Highest |
+| Typical uses | Broadband, imaging, IoT | Navigation, broadband | TV, VSAT, weather |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Orbital period of a satellite at 550 km altitude (a typical LEO broadband shell), and the one way propagation delay straight up to it and to a GEO satellite.</dd>
+<dt>Find</dt><dd>The LEO period, and the minimum one way ground to satellite delay for both.</dd>
+<dt>Assumptions</dt><dd>Circular orbit, Earth radius 6371 km, GM = 3.986 × 10¹⁴ m³/s², speed of light 3 × 10⁸ m/s, satellite directly overhead.</dd>
+<dt>Solution</dt><dd>r = 6371 + 550 = 6921 km = 6.921 × 10⁶ m<br />r³ = 3.315 × 10²⁰ m³; r³ ÷ GM = 8.317 × 10⁵ s²; √ = 912 s<br />T = 2π × 912 = 5730 s ≈ 95.5 min<br />LEO delay = 550 000 ÷ 3 × 10⁸ = 1.8 ms<br />GEO delay = 35 786 000 ÷ 3 × 10⁸ = 119 ms</dd>
+<dt>Answer</dt><dd><strong>The LEO satellite orbits in about 95.5 minutes; minimum one way delay is about 1.8 ms to LEO versus 119 ms to GEO</strong></dd>
+<dt>Limitations</dt><dd>Real latency adds slant range, the hop down to a ground station, processing and terrestrial routing.</dd>
+</dl>
+</Example>
+
+## Link budget and frequency bands
+
+Signal strength falls with the square of distance, so a GEO link suffers about 36 dB more free space loss than a LEO link at 550 km at the same frequency. GEO systems make up for this with large dishes, high power transponders and narrow spot beams. Satellite services use several frequency bands:
+
+- **L band (1 to 2 GHz):** mobile satellite phones and GPS; penetrates foliage and works with small antennas.
+- **C band (4 to 8 GHz):** robust against rain, used for TV distribution in tropical regions.
+- **Ku band (12 to 18 GHz):** direct to home TV and VSAT broadband.
+- **Ka band (26.5 to 40 GHz):** high throughput broadband with wide channels, but more affected by rain fade.
+
+Higher bands offer more bandwidth but suffer more from rain, so link designs include a fade margin based on local rainfall statistics.
+
+## Space debris and spectrum coordination
+
+Large LEO constellations raise concerns about congestion and debris. Operators now design satellites to deorbit within a few years at end of life, and orbit slots and frequencies are coordinated through the ITU so that systems do not interfere with each other.
+
+## Choosing an orbit
+
+- **Broadcast to large regions with cheap fixed dishes:** GEO.
+- **Global navigation and timing:** MEO.
+- **Low latency broadband, remote sites and mobility:** LEO, or hybrid GEO and LEO services.
+- **High resolution Earth imaging:** LEO, often in sun-synchronous polar orbits.
+
+Satellite links use the same layered protocols as other networks, described in [OSI vs TCP/IP model](/telecommunication-engineering/osi-vs-tcp-ip-model/), with radio [modulation](/telecommunication-engineering/modulation-techniques/) adapted to the long, noisy space channel. Remote oil fields, mines, ships and pipelines often rely on satellite links for SCADA backhaul when no terrestrial network exists.
