@@ -1,0 +1,6 @@
+<svg viewBox="0 0 600 440" fill="none" role="img" aria-label="Circuit breaker symbol with contacts opening and arc"><path d="M300 30V150M300 290V410" stroke="#0b2545" stroke-width="8" stroke-linecap="round"/>
+<path d="M300 290L232 165" stroke="#0b2545" stroke-width="8" stroke-linecap="round"/>
+<path d="M286 136L314 164M314 136L286 164" stroke="#b42318" stroke-width="6" stroke-linecap="round"/>
+<path d="M250 200q-14 -16 0 -32M268 214q-18 -22 0 -46" stroke="#f5b800" stroke-width="5" stroke-linecap="round"/>
+<circle cx="300" cy="290" r="9" fill="#0b2545"/>
+<text x="330" y="60" text-anchor="start" font-size="22" font-weight="400" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Supply</text><text x="330" y="395" text-anchor="start" font-size="22" font-weight="400" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Load</text><text x="360" y="180" text-anchor="start" font-size="22" font-weight="700" fill="#13a89e" font-family="Open Sans Variable, Arial, sans-serif">Contacts open</text><text x="360" y="212" text-anchor="start" font-size="22" font-weight="700" fill="#13a89e" font-family="Open Sans Variable, Arial, sans-serif">Arc quenched</text></svg>

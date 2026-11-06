@@ -1,0 +1,7 @@
+<svg viewBox="0 0 600 440" fill="none" role="img" aria-label="Antenna radiation pattern with main lobe and side lobes"><path d="M60 220H560M300 30V410" stroke="#c9d2de" stroke-width="2"/>
+<circle cx="300" cy="220" r="80" stroke="#c9d2de" stroke-width="2"/><circle cx="300" cy="220" r="160" stroke="#c9d2de" stroke-width="2"/>
+<path d="M300 220C360 140 520 160 545 220C520 280 360 300 300 220Z" fill="#e6f6f4" stroke="#13a89e" stroke-width="5"/>
+<path d="M300 220C280 160 250 150 240 175C235 195 270 210 300 220Z" fill="#fff7e0" stroke="#f5b800" stroke-width="4"/>
+<path d="M300 220C280 280 250 290 240 265C235 245 270 230 300 220Z" fill="#fff7e0" stroke="#f5b800" stroke-width="4"/>
+<path d="M300 220C270 215 230 210 225 220C230 230 270 225 300 220Z" fill="#fff7e0" stroke="#f5b800" stroke-width="4"/>
+<text x="470" y="140" text-anchor="middle" font-size="22" font-weight="700" fill="#13a89e" font-family="Open Sans Variable, Arial, sans-serif">Main lobe</text><text x="190" y="130" text-anchor="middle" font-size="20" font-weight="400" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Side lobes</text><text x="300" y="430" text-anchor="middle" font-size="20" font-weight="400" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Radiation pattern (gain in dBi)</text></svg>

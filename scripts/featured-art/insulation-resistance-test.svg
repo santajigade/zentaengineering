@@ -1,0 +1,6 @@
+<svg viewBox="0 0 600 440" fill="none" role="img" aria-label="Insulation resistance tester connected between conductor and earth"><rect x="40" y="110" width="200" height="200" rx="16" fill="#0b2545"/><rect x="62" y="134" width="156" height="70" rx="6" fill="#e6f6f4"/>
+<text x="140" y="182" text-anchor="middle" font-size="28" font-weight="700" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">500 MΩ</text><text x="140" y="250" text-anchor="middle" font-size="16" font-weight="400" fill="#ffffff" font-family="Open Sans Variable, Arial, sans-serif">DC test voltage</text>
+<circle cx="90" cy="285" r="10" fill="#b42318"/><circle cx="190" cy="285" r="10" fill="#13a89e"/>
+<path d="M90 285C90 380 330 380 380 240" stroke="#b42318" stroke-width="5"/><path d="M190 285C220 340 380 340 440 300" stroke="#13a89e" stroke-width="5"/>
+<rect x="330" y="200" width="230" height="40" rx="20" fill="#3b3f46"/><rect x="330" y="212" width="230" height="16" fill="#c27b2c"/>
+<text x="445" y="180" text-anchor="middle" font-size="20" font-weight="400" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Conductor (Line)</text><text x="470" y="330" text-anchor="middle" font-size="20" font-weight="400" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Sheath / Earth</text></svg>

@@ -90,6 +90,9 @@ import Calculator from '../../../components/Calculator.astro';
 ## Review
 - The owner has approved auto publishing: every new article gets `reviewedDate` equal to its `pubDate`, so it shows "Reviewed by Technical Team" and no Draft label.
 
+## Featured image
+- Every article gets a 1200x630 featured image: run `python3 scripts/make-featured.py <file.mdx>` after writing. It uses the first SVG in the article, or `scripts/featured-art/<slug>.svg` if present, and adds the `image:` front matter line.
+
 ## MDX gotchas
 - Curly braces in prose ({u}) are read as code and break the build. Use them only inside $$ math or code.
 

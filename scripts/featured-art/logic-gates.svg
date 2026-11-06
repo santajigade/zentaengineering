@@ -1,0 +1,8 @@
+<svg viewBox="0 0 600 440" fill="none" role="img" aria-label="Logic gate symbols AND, OR, NOT, NAND and XOR"><g stroke="#0b2545" stroke-width="5" fill="#e6f6f4">
+<path d="M80 40H140A50 50 0 0 1 140 140H80Z"/><path d="M290 40Q330 40 360 90Q330 140 290 140Q310 90 290 40Z"/>
+<path d="M440 50L520 90L440 130Z"/><circle cx="530" cy="90" r="10" fill="#ffffff"/>
+<path d="M80 250H140A50 50 0 0 1 140 350H80Z"/><circle cx="200" cy="300" r="10" fill="#ffffff"/>
+<path d="M290 250Q330 250 360 300Q330 350 290 350Q310 300 290 250Z"/><path d="M276 250Q296 300 276 350" fill="none"/></g>
+<g stroke="#0b2545" stroke-width="4"><path d="M50 70H80M50 110H80M190 90H220M255 70H297M255 110H297M360 90H390M410 90H440M540 90H570M50 280H80M50 320H80M210 300H240M255 280H290M255 320H290M360 300H390"/></g>
+<text x="130" y="175" text-anchor="middle" font-size="22" font-weight="700" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">AND</text><text x="320" y="175" text-anchor="middle" font-size="22" font-weight="700" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">OR</text><text x="490" y="175" text-anchor="middle" font-size="22" font-weight="700" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">NOT</text><text x="135" y="385" text-anchor="middle" font-size="22" font-weight="700" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">NAND</text><text x="320" y="385" text-anchor="middle" font-size="22" font-weight="700" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">XOR</text>
+<text x="500" y="310" text-anchor="middle" font-size="24" font-weight="700" fill="#13a89e" font-family="Open Sans Variable, Arial, sans-serif">Y = A · B</text></svg>
