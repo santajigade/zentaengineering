@@ -1,0 +1,140 @@
+---
+title: "Levelling in Surveying: Methods and Calculations"
+description: "Levelling in surveying explained: terms, instruments, height of instrument and rise and fall methods, arithmetic checks, errors and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: civil-engineering
+subcategory: surveying
+focusKeyword: "levelling in surveying"
+format: fundamentals
+pillar: true
+math: true
+tags: [levelling, surveying, reduced-level, rise-and-fall, height-of-instrument]
+faq:
+  - q: "What is the difference between the height of instrument and rise and fall methods?"
+    a: "Both reduce staff readings to reduced levels. The height of instrument method adds the backsight to a known level to get the line of sight level, then subtracts other readings; it is quick when there are many intermediate sights. The rise and fall method compares consecutive readings; it takes longer but provides a complete arithmetic check on every reading, including intermediate sights."
+  - q: "What is a change point in levelling?"
+    a: "A point on which both a foresight and a backsight are taken, so the instrument can be moved forward while keeping a continuous link of levels. It must be a firm, well defined point, because any movement of the staff between the two readings introduces an error."
+  - q: "Why are backsight and foresight distances kept equal?"
+    a: "Equal sight lengths cancel the collimation error of the instrument (a line of sight that is not exactly horizontal) and most of the curvature and refraction effect, because the same error appears in both readings and drops out of the difference."
+references:
+  - text: "B. C. Punmia, A. K. Jain and A. K. Jain, Surveying, Vol. 1, 17th ed., Laxmi Publications"
+  - text: "S. K. Duggal, Surveying, Vol. 1, 4th ed., McGraw-Hill Education"
+  - text: "W. Schofield and M. Breach, Engineering Surveying, 7th ed., Butterworth-Heinemann"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Levelling in surveying** finds the height of points relative to a datum. A level gives a horizontal line of sight; readings on a graduated staff held on each point show how far below that line the point lies. Starting from a benchmark of known reduced level (RL), the levels of all other points are worked out by the **height of instrument** method or the **rise and fall** method, with an arithmetic check: ΣBS − ΣFS = last RL − first RL.
+
+</Key>
+
+Levelling is used to set out floor levels, road and drain gradients, foundations and pipelines, to draw longitudinal sections and contours, and to calculate earthwork volumes. It is one of the most routine yet most important surveying tasks, because errors in level cause water to pond, drains to flow backwards and structures to sit at the wrong height.
+
+## Basic terms in levelling
+
+- **Datum:** the reference surface to which levels are referred, usually mean sea level.
+- **Benchmark (BM):** a fixed point of known reduced level. GTS benchmarks in India are established by the Survey of India; temporary benchmarks (TBM) are set up for a job.
+- **Reduced level (RL):** the height of a point above or below the datum.
+- **Backsight (BS):** the first reading taken after setting up the instrument, on a point of known level.
+- **Foresight (FS):** the last reading before moving the instrument.
+- **Intermediate sight (IS):** any reading between the BS and FS from the same setup.
+- **Change point (CP):** a point on which an FS and then a BS are taken, to carry levels forward.
+- **Height of instrument (HI):** the RL of the line of sight, also called height of collimation.
+
+## Instruments used
+
+- **Dumpy and tilting levels:** traditional optical levels levelled with a spirit bubble.
+- **Automatic (auto) levels:** an internal compensator keeps the line of sight horizontal once the instrument is roughly levelled. They are the most common on sites today.
+- **Digital levels:** read a bar-coded staff electronically and store the readings.
+- **Levelling staff:** graduated usually in 5 mm or 10 mm divisions; telescopic or folding.
+
+<figure>
+<svg width="560" height="270" viewBox="0 0 560 270" fill="none" role="img" aria-label="Levelling setup: an automatic level on a tripod between two staffs; the horizontal line of sight cuts the backsight staff on the benchmark and the foresight staff on point A, which is lower on sloping ground">
+<path d="M20 170L200 175L360 195L540 215" stroke="#0b2545" stroke-width="2" />
+<rect x="80" y="40" width="12" height="132" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<rect x="450" y="40" width="12" height="167" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<path d="M272 182L280 110L288 184M280 110V186" stroke="#0b2545" stroke-width="2" />
+<rect x="262" y="88" width="36" height="18" rx="3" fill="#0b2545" />
+<path d="M86 97H456" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" />
+<text x="140" y="90" font-size="12" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Line of sight (HI)</text>
+<path d="M104 97V170" stroke="#0b2545" stroke-width="1" />
+<path d="M99 104L104 96L109 104M99 163L104 171L109 163" stroke="#0b2545" stroke-width="1" />
+<text x="112" y="140" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">BS</text>
+<path d="M440 97V206" stroke="#0b2545" stroke-width="1" />
+<path d="M435 104L440 96L445 104M435 199L440 207L445 199" stroke="#0b2545" stroke-width="1" />
+<text x="414" y="160" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">FS</text>
+<text x="50" y="195" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">BM (known RL)</text>
+<text x="440" y="235" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Point A</text>
+<text x="240" y="222" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Level</text>
+</svg>
+<figcaption>HI = RL of BM + BS; RL of A = HI − FS.</figcaption>
+</figure>
+
+## Types of levelling in surveying
+
+- **Simple levelling:** one setup between two points.
+- **Differential (fly) levelling:** a series of setups with change points to find the difference in level between distant points.
+- **Profile (longitudinal section) levelling:** levels at regular intervals along a road, canal or pipeline centreline, often with cross sections.
+- **Reciprocal levelling:** readings from both banks across a river or valley, to cancel collimation, curvature and refraction errors when equal sight lengths are impossible.
+- **Check levelling:** run back to the starting benchmark to confirm the work.
+
+## Height of instrument method
+
+1. HI = RL of the point where BS was taken + BS.
+2. RL of any point = HI − IS or HI − FS.
+3. At a change point, a new HI = RL of CP + new BS.
+4. Check: ΣBS − ΣFS = last RL − first RL.
+
+The check covers only BS and FS readings, not intermediate sights, which is why this method is fast but less rigorously checked.
+
+## Rise and fall method
+
+1. Compare each reading with the one before it from the same setup.
+2. If the new reading is smaller, the point is higher: a **rise** equal to the difference. If larger, a **fall**.
+3. RL of each point = previous RL + rise, or previous RL − fall.
+4. Check: ΣBS − ΣFS = ΣRise − ΣFall = last RL − first RL.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>BM RL 100.000 m. Readings in order: 1.525 (BS on BM), 2.150 (FS on A, a change point), 0.985 (BS on A), 1.760 (IS on B), 2.430 (FS on C).</dd>
+<dt>Find</dt><dd>RLs of A, B and C by both methods, with arithmetic checks.</dd>
+<dt>Assumptions</dt><dd>Readings in metres; instrument in adjustment; sights balanced.</dd>
+<dt>Solution</dt><dd>HI method: HI₁ = 100.000 + 1.525 = 101.525; RL A = 101.525 − 2.150 = 99.375<br />HI₂ = 99.375 + 0.985 = 100.360; RL B = 100.360 − 1.760 = 98.600; RL C = 100.360 − 2.430 = 97.930<br />Rise and fall: BM to A fall 2.150 − 1.525 = 0.625; A to B fall 1.760 − 0.985 = 0.775; B to C fall 2.430 − 1.760 = 0.670<br />Check: ΣBS − ΣFS = 2.510 − 4.580 = −2.070; ΣRise − ΣFall = 0 − 2.070 = −2.070; last − first RL = 97.930 − 100.000 = −2.070</dd>
+<dt>Answer</dt><dd><strong>RL A = 99.375 m, RL B = 98.600 m, RL C = 97.930 m; all three checks agree at −2.070 m</strong></dd>
+<dt>Limitations</dt><dd>The arithmetic check confirms the calculation, not the field readings. Close the line on a benchmark to check fieldwork.</dd>
+</dl>
+</Example>
+
+| Station | BS | IS | FS | Rise | Fall | RL | Remark |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| BM | 1.525 | | | | | 100.000 | Benchmark |
+| A | 0.985 | | 2.150 | | 0.625 | 99.375 | Change point |
+| B | | 1.760 | | | 0.775 | 98.600 | |
+| C | | | 2.430 | | 0.670 | 97.930 | |
+| Sum | 2.510 | | 4.580 | 0 | 2.070 | | Checks agree |
+
+## Good field practice
+
+- Start and finish every levelling run on a benchmark, or close a loop back to the starting point.
+- Keep backsight and foresight lengths roughly equal and below about 50 to 60 m for ordinary work.
+- Choose change points on hard, well defined objects such as kerb stones or a change plate.
+- Book readings in a level book immediately, in the correct column, and never erase; strike through and rewrite.
+- Read the staff at the centre cross hair and check with the stadia hairs where possible.
+- Protect the instrument from sun and wind, which disturb the bubble and the line of sight.
+
+## Errors and corrections
+
+- **Collimation error:** line of sight not truly horizontal. Cancelled by equal BS and FS distances.
+- **Curvature and refraction:** over long sights, the earth's curvature makes staff readings too large and refraction reduces the effect. The combined correction is about 0.0673 d² metres, with d in kilometres, and is subtractive. At 100 m it is under 1 mm, so it matters only for long sights.
+- **Staff not vertical:** always gives readings that are too large; use a staff bubble.
+- **Settlement of tripod or change point:** set up on firm ground and use a change plate.
+- **Reading and booking mistakes:** read carefully, book immediately and check each page.
+
+The permissible closing error depends on the class of work and is usually expressed as a constant times √K millimetres, where K is the distance levelled in kilometres.
+
+## Where levelling is used
+
+Levels set out formation levels for [flexible and rigid pavements](/civil-engineering/flexible-vs-rigid-pavement/), foundation depths where [bearing capacity of soil](/civil-engineering/bearing-capacity-of-soil/) has been tested, and bridge bearing levels in [bridge engineering](/civil-engineering/types-of-bridges/). Spot levels on a grid give earthwork volumes for [quantity estimation](/civil-engineering/quantity-estimation-methods/). In process plants, the same idea of reading a liquid height against a datum underlies [DP transmitter level measurement](https://www.instrumentationblog.in/dp-transmitter-level-measurement/).

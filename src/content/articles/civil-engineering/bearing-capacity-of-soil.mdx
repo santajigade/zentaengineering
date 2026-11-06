@@ -1,0 +1,138 @@
+---
+title: "Bearing Capacity of Soil Explained"
+description: "Bearing capacity of soil explained: ultimate, net and safe bearing capacity, Terzaghi's equation, failure modes, field tests and a worked strip footing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: civil-engineering
+subcategory: geotechnical
+focusKeyword: "bearing capacity of soil"
+format: fundamentals
+pillar: true
+math: true
+tags: [bearing-capacity, terzaghi, foundation, soil-mechanics, geotechnical]
+faq:
+  - q: "What is safe bearing capacity of soil?"
+    a: "It is the maximum pressure a foundation can apply to the soil without shear failure, after dividing the net ultimate bearing capacity by a factor of safety (commonly 2.5 to 3) and adding back the overburden pressure. The allowable pressure used in design is the lower of this value and the pressure that keeps settlement within limits."
+  - q: "How is bearing capacity of soil determined on site?"
+    a: "By field tests such as the plate load test (IS 1888), the standard penetration test and the cone penetration test, together with laboratory tests on samples for shear strength parameters. The results feed into bearing capacity equations and settlement calculations."
+  - q: "Does the water table affect bearing capacity?"
+    a: "Yes. When the water table rises to the base of the footing or above, the effective unit weight of the soil below drops to roughly half, which can reduce the bearing capacity of sandy soils substantially. Design should use the highest expected water level."
+  - q: "Why is settlement sometimes more critical than bearing capacity?"
+    a: "A footing on soft or loose soil may be safe against shear failure yet settle too much, or unevenly, for the structure to tolerate. Codes therefore check both shear failure and settlement, and the lower allowable pressure governs."
+references:
+  - text: "B. M. Das and N. Sivakugan, Principles of Foundation Engineering, 9th ed., Cengage"
+  - text: "K. Terzaghi, Theoretical Soil Mechanics, Wiley, 1943"
+  - text: "IS 6403:1981 Code of Practice for Determination of Bearing Capacity of Shallow Foundations, Bureau of Indian Standards"
+  - text: "IS 1888:1982 Method of Load Test on Soils, Bureau of Indian Standards"
+  - text: "IS 1904:1986 Code of Practice for Design and Construction of Foundations in Soils: General Requirements, Bureau of Indian Standards"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Bearing capacity of soil** is the ability of the ground to carry the pressure from a foundation without shear failure or excessive settlement. The **ultimate bearing capacity** is the pressure at which the soil fails; dividing the net value by a factor of safety (usually 2.5 to 3) gives the **safe bearing capacity**. It is calculated from soil strength (cohesion c and friction angle φ), unit weight, footing size and depth, most simply with Terzaghi's equation.
+
+</Key>
+
+Every structure eventually rests on soil or rock. The foundation must spread the building load over enough area that the soil neither shears out from under it nor compresses so much that the building cracks or tilts. Bearing capacity of soil is the first number a foundation designer needs, and it depends as much on the footing as on the ground.
+
+## Key terms
+
+- **Gross pressure:** total pressure at the base of the footing, including the weight of the footing and backfill.
+- **Ultimate bearing capacity (qu):** the gross pressure at which the soil fails in shear.
+- **Net ultimate bearing capacity (qnu):** qu minus the overburden pressure q = γDf that existed at founding level before excavation. It is the extra pressure the soil can take.
+- **Net safe bearing capacity (qns):** qnu divided by the factor of safety.
+- **Safe bearing capacity (qs):** qns + γDf.
+- **Allowable bearing pressure (qa):** the design value, the lower of the safe bearing capacity and the pressure that limits settlement to an acceptable amount.
+
+## Modes of bearing capacity failure
+
+- **General shear failure:** in dense sand and stiff clay. A clear slip surface forms from the footing edge to the ground surface, the soil heaves beside the footing and failure is sudden with a clear peak load.
+- **Local shear failure:** in medium dense or medium stiff soils. Slip surfaces do not reach the surface and settlement is larger before failure.
+- **Punching shear failure:** in loose sand and soft clay, or for deep footings. The footing pushes down into the soil with little heave; settlement dominates.
+
+<figure>
+<svg width="560" height="280" viewBox="0 0 560 280" fill="none" role="img" aria-label="General shear failure under a strip footing: a wedge of soil under the footing moves down, radial shear zones on each side, and passive zones pushing soil up beside the footing at the ground surface">
+<path d="M20 80H560" stroke="#0b2545" stroke-width="2" />
+<rect x="230" y="40" width="100" height="60" fill="#cfd8e3" stroke="#0b2545" stroke-width="2" />
+<path d="M280 10V36" stroke="#b42318" stroke-width="2.5" /><path d="M273 28L280 38L287 28" stroke="#b42318" stroke-width="2.5" />
+<text x="292" y="24" font-size="13" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Load Q</text>
+<path d="M230 100L280 150L330 100" stroke="#13a89e" stroke-width="2.5" />
+<path d="M280 150C230 205 160 200 130 150L70 80" stroke="#0b2545" stroke-width="2" stroke-dasharray="6 4" />
+<path d="M280 150C330 205 400 200 430 150L490 80" stroke="#0b2545" stroke-width="2" stroke-dasharray="6 4" />
+<path d="M230 100L130 150M330 100L430 150" stroke="#0b2545" stroke-width="1" />
+<text x="280" y="122" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">I</text>
+<text x="205" y="160" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">II</text>
+<text x="355" y="160" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">II</text>
+<text x="160" y="110" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">III</text>
+<text x="400" y="110" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">III</text>
+<path d="M95 78Q110 66 125 78M435 78Q450 66 465 78" stroke="#0b2545" stroke-width="1.5" />
+<text x="20" y="232" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">I: elastic wedge moving down with the footing</text>
+<text x="20" y="250" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">II: radial shear zones</text>
+<text x="20" y="268" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">III: passive zones pushing soil up beside the footing (heave)</text>
+<text x="340" y="60" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Footing, width B, depth Df</text>
+</svg>
+<figcaption>Terzaghi's failure zones for general shear failure under a strip footing (schematic).</figcaption>
+</figure>
+
+## Terzaghi's bearing capacity equation
+
+Terzaghi (1943) combined three contributions to the ultimate bearing capacity of a strip footing of width B at depth Df:
+
+$$
+q_u = c\,N_c + q\,N_q + \tfrac{1}{2}\,\gamma B\,N_\gamma
+$$
+
+- **c Nc:** contribution of soil cohesion.
+- **q Nq:** contribution of the surcharge (overburden) q = γDf beside the footing.
+- **½ γ B Nγ:** contribution of the weight and friction of the soil below the footing.
+
+Nc, Nq and Nγ are bearing capacity factors that depend only on the friction angle φ, read from tables or charts. For square and circular footings, shape factors modify the terms (for example 1.3 c Nc and 0.4 γ B Nγ for a square footing in Terzaghi's form). Later methods by Meyerhof, Hansen and Vesic, which IS 6403 follows, add shape, depth and load inclination factors and use slightly different values of Nγ.
+
+For saturated clay in undrained conditions, φ = 0, Nq = 1 and Nγ = 0, so the net ultimate capacity reduces to about c Nc, with Nc = 5.7 in Terzaghi's theory for a strip (5.14 in later theory).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A strip footing 1.5 m wide at a depth of 1.0 m in dry sand with c = 0, φ = 30° and γ = 18 kN/m³. Terzaghi factors for φ = 30°: Nc = 37.16, Nq = 22.46, Nγ = 19.13. Factor of safety 3.</dd>
+<dt>Find</dt><dd>Ultimate, net ultimate, net safe and safe bearing capacity.</dd>
+<dt>Assumptions</dt><dd>General shear failure; water table well below the footing; vertical central load.</dd>
+<dt>Solution</dt><dd>q = γDf = 18 × 1.0 = 18 kPa<br />qu = 0 + 18 × 22.46 + 0.5 × 18 × 1.5 × 19.13 = 404.3 + 258.3 = 662.6 kPa<br />qnu = 662.6 − 18 = 644.6 kPa<br />qns = 644.6 / 3 = 214.9 kPa<br />qs = 214.9 + 18 = 232.9 kPa</dd>
+<dt>Answer</dt><dd><strong>Ultimate 663 kPa; safe bearing capacity about 233 kPa (net safe about 215 kPa)</strong></dd>
+<dt>Limitations</dt><dd>Settlement must also be checked. If the water table rose to the base of the footing, the effective unit weight below it would roughly halve and the capacity would fall.</dd>
+</dl>
+</Example>
+
+The footing area then follows from contact pressure = load / area, kept below the allowable value:
+
+<Calculator path="physics/pressure" title="Pressure Calculator" />
+
+## Factors affecting bearing capacity of soil
+
+- **Soil type and strength:** higher c and φ give much higher capacity; the factors rise steeply with φ.
+- **Footing depth:** deeper footings gain from the surcharge term q Nq.
+- **Footing width:** in sand, wider footings carry more pressure through the γ B Nγ term, but also settle more.
+- **Water table:** submerged soil has a lower effective unit weight.
+- **Load eccentricity and inclination:** reduce the effective area and capacity.
+- **Layered soil:** a weak layer within about twice the footing width below the base can govern.
+
+## Improving bearing capacity
+
+When the natural soil cannot carry the load economically, engineers can:
+
+- **Go deeper or wider:** a deeper founding level gains from overburden; a wider footing or a raft spreads the load.
+- **Compact or replace the soil:** remove soft or loose soil and replace it with well compacted granular fill.
+- **Drain the site:** lowering the water table increases effective stress and strength.
+- **Ground improvement:** vibro compaction, stone columns, preloading with vertical drains or grouting.
+- **Use deep foundations:** piles carry load to stronger strata through end bearing and skin friction.
+
+The right choice depends on cost, programme, the depth of good strata and the settlement the structure can accept. A geotechnical investigation with boreholes and tests is essential before any of these decisions.
+
+## Field tests
+
+- **Plate load test (IS 1888):** a steel plate is loaded in stages at founding level and settlement recorded; results are scaled to the real footing with care, since the plate stresses only shallow soil.
+- **Standard penetration test (SPT):** the blow count N correlates with φ for sands and with allowable pressure for given settlement.
+- **Cone penetration test (CPT):** gives a continuous profile of tip resistance.
+
+The loads that the soil must carry come from structural analysis and [limit state design of RCC](/civil-engineering/limit-state-design-rcc/) for the footing itself. The footing slab is designed for the [shear force and bending moment](/civil-engineering/shear-force-and-bending-moment/) produced by the upward soil pressure, and [bridge](/civil-engineering/types-of-bridges/) piers and abutments follow the same principles on a larger scale. The overall idea of dividing failure capacity by a margin is the same [factor of safety](/mechanical-engineering/factor-of-safety/) concept used in machine design.

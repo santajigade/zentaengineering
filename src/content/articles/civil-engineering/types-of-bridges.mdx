@@ -1,0 +1,122 @@
+---
+title: "Types of Bridges and How They Carry Loads"
+description: "Types of bridges explained by structural form: beam, truss, arch, cantilever, suspension and cable-stayed, how each carries load, typical spans and uses."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: civil-engineering
+subcategory: bridge-engineering
+focusKeyword: "types of bridges"
+format: explanation
+pillar: true
+math: true
+tags: [bridges, bridge-engineering, arch-bridge, suspension-bridge, cable-stayed, truss]
+faq:
+  - q: "Which type of bridge is the strongest?"
+    a: "No single type is strongest in every situation. Each form is efficient over a particular span range and site. Beam bridges are economical for short spans, arches suit sites with strong abutments, cable-stayed bridges are efficient for medium to long spans, and suspension bridges reach the longest spans."
+  - q: "What is the difference between a suspension bridge and a cable-stayed bridge?"
+    a: "In a suspension bridge the deck hangs from vertical hangers attached to main cables that sag between towers and are anchored at each end. In a cable-stayed bridge straight cables run directly from the towers to the deck, and the horizontal cable forces are balanced within the deck, so large ground anchorages are usually not needed."
+  - q: "What loads are bridges designed for?"
+    a: "Dead load of the structure, superimposed dead load such as surfacing and services, live load from vehicles, trains or pedestrians with impact allowance, wind, temperature, earthquake, braking forces, water current and in some cases vessel or vehicle collision. In India road bridge loads are specified in IRC:6."
+references:
+  - text: "IRC:6-2017 Standard Specifications and Code of Practice for Road Bridges, Section II: Loads and Load Combinations, Indian Roads Congress"
+  - text: "D. J. Victor, Essentials of Bridge Engineering, 6th ed., Oxford and IBH"
+  - text: "N. Krishna Raju, Design of Bridges, 5th ed., Oxford and IBH"
+  - text: "W. F. Chen and L. Duan (eds.), Bridge Engineering Handbook, 2nd ed., CRC Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The main **types of bridges** by structural form are **beam (girder)**, **truss**, **arch**, **cantilever**, **suspension** and **cable-stayed** bridges. They differ in how they carry load to the supports: beams by bending, trusses by axial forces in members, arches mainly by compression, and suspension and cable-stayed bridges by tension in cables carried to towers. The span, site and loads decide which type is economical.
+
+</Key>
+
+A bridge carries a road, railway, pipeline or footpath over an obstacle. Every bridge has the same job, transferring loads to the ground, but the structural form changes how forces travel. Understanding the types of bridges in terms of load path helps engineers choose a form for a span and helps students connect bridge shapes with the basic actions of bending, compression and tension.
+
+## Types of bridges at a glance
+
+<figure>
+<svg width="560" height="300" viewBox="0 0 560 300" fill="none" role="img" aria-label="Six bridge forms drawn as simple elevations: beam bridge on two piers, truss bridge with triangulated members, arch bridge with curved arch under the deck, cantilever bridge with arms meeting at midspan, suspension bridge with sagging main cable and vertical hangers, and cable-stayed bridge with straight cables from towers to deck">
+<g stroke="#0b2545" stroke-width="2" fill="none">
+<path d="M20 90H170" stroke-width="4" /><path d="M45 92V118M145 92V118" />
+<path d="M200 70H350M200 100H350" /><path d="M200 100L225 70L250 100L275 70L300 100L325 70L350 100" stroke-width="1.5" /><path d="M200 100V118M350 100V118" />
+<path d="M380 70H540" stroke-width="4" /><path d="M390 118Q460 30 530 118" /><path d="M420 72V95M460 72V75M500 72V95" stroke-width="1.5" />
+<path d="M20 230H170" stroke-width="4" /><path d="M55 230V262M135 230V262" /><path d="M30 230L55 205L80 230M110 230L135 205L160 230" stroke-width="1.5" />
+<path d="M200 230H350" stroke-width="4" /><path d="M235 180V262M315 180V262" /><path d="M200 230Q215 182 235 180Q275 225 315 180Q335 182 350 230" stroke-width="1.5" /><path d="M255 199V230M275 206V230M295 199V230" stroke-width="1" />
+<path d="M380 230H540" stroke-width="4" /><path d="M460 170V262" /><path d="M460 175L390 230M460 175L410 230M460 175L430 230M460 175L490 230M460 175L510 230M460 175L530 230" stroke-width="1" />
+</g>
+<g font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif" text-anchor="middle">
+<text x="95" y="142">Beam (girder)</text><text x="275" y="142">Truss</text><text x="460" y="142">Arch</text>
+<text x="95" y="286">Cantilever</text><text x="275" y="286">Suspension</text><text x="460" y="286">Cable-stayed</text>
+</g>
+</svg>
+<figcaption>The six basic structural forms of bridges (simplified elevations).</figcaption>
+</figure>
+
+## Parts of a bridge
+
+Whatever the type, most bridges have the same main parts:
+
+- **Superstructure:** the deck, girders, trusses, arches or cables that carry traffic across the span.
+- **Bearings:** devices between superstructure and substructure that transfer load while allowing rotation and thermal movement.
+- **Substructure:** piers and abutments that carry loads down; abutments also retain the approach embankment.
+- **Foundations:** open footings, wells or piles that pass the load to the ground.
+- **Expansion joints, parapets, drainage and approach slabs** that complete the structure.
+
+## Beam (girder) bridges
+
+A beam bridge is a deck carried by beams spanning between supports. The beams resist load by **bending**: the top is in compression, the bottom in tension, as shown by [shear force and bending moment diagrams](/civil-engineering/shear-force-and-bending-moment/). Forms include solid slabs for short spans, T-beam and box girders in reinforced or prestressed concrete, and steel plate or box girders acting compositely with a concrete deck.
+
+Beam bridges are the most common type because they are simple and fast to build, especially with precast or launched girders. Bending moment grows with the square of span, so very long beam spans need deep, heavy sections, which limits their economy. Continuous girders over several supports reduce the midspan moment.
+
+## Truss bridges
+
+A truss is a framework of members arranged in triangles. Loads applied at the joints produce mainly **axial tension or compression** in each member, so material is used efficiently. Common patterns include Pratt, Warren and Howe trusses. Truss bridges are popular for railways and for steel bridges where long members can be fabricated and bolted on site. Members are usually built from [steel sections](/civil-engineering/steel-sections-types/) such as angles, channels, I-sections and box sections.
+
+## Arch bridges
+
+An arch carries load mainly in **compression** along its curved shape, which suits masonry and concrete because both are strong in compression. The arch pushes outwards at its ends (horizontal thrust), so it needs strong abutments or rock, or a tie that holds the ends together (tied arch or bowstring). The deck can sit on top of the arch, hang below it, or pass through it.
+
+## Cantilever bridges
+
+Cantilever arms project from piers, often balanced on each side, and either meet at midspan or carry a short suspended span between them. The arms are in **hogging** bending, with tension at the top. Balanced cantilever construction, adding segments alternately on each side of a pier, lets large concrete box girder bridges be built without falsework over rivers and valleys.
+
+## Suspension bridges
+
+The deck hangs from vertical hangers attached to two main cables. The cables, in **tension**, pass over tall towers and are anchored into massive anchorages at each end. The towers are in compression. This form achieves the longest spans in the world because high strength steel wire is extremely efficient in tension. Suspension decks are relatively flexible, so wind stability must be studied carefully.
+
+## Cable-stayed bridges
+
+Straight cables run directly from one or more towers to points along the deck. Cable tension supports the deck and, because the cables are inclined, it also compresses the deck horizontally, balancing the cable forces within the structure. Cable-stayed bridges are stiffer than suspension bridges, need no heavy anchorages and are very economical for medium to long spans. Cables can be arranged in fan, harp or semi-fan patterns.
+
+## Comparing the types of bridges
+
+| Type | Main action | Typical use |
+| --- | --- | --- |
+| Beam (girder) | Bending | Short to medium spans; flyovers, river bridges, viaducts |
+| Truss | Axial tension and compression | Railways, steel bridges, medium spans |
+| Arch | Compression with horizontal thrust | Valleys and gorges with good rock |
+| Cantilever | Hogging bending | Long concrete box girders, balanced construction |
+| Cable-stayed | Cable tension, deck compression | Medium to long spans |
+| Suspension | Main cable tension | The longest spans |
+
+Bridges are also classified by material (timber, masonry, RCC, prestressed concrete, steel, composite), by use (road, rail, pedestrian, pipeline), by movement (fixed, bascule, swing, lift) and by position of the deck (deck, through, half through).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A simply supported steel footbridge girder of span 12 m carries a uniformly distributed service load of 10 kN/m. E = 200 GPa and I = 500 × 10⁶ mm⁴. The project limits live deflection to span/600.</dd>
+<dt>Find</dt><dd>Midspan deflection and whether the limit is met.</dd>
+<dt>Assumptions</dt><dd>Linear elastic behaviour; uniform section; whole load treated as the load for the deflection check.</dd>
+<dt>Solution</dt><dd>w = 10 kN/m = 10 N/mm; L = 12,000 mm<br />δ = 5 w L⁴ / (384 E I) = 5 × 10 × 12,000⁴ / (384 × 200,000 × 500 × 10⁶) = 1.037 × 10¹⁸ / 3.84 × 10¹⁶ = 27.0 mm<br />Limit = 12,000 / 600 = 20 mm</dd>
+<dt>Answer</dt><dd><strong>Deflection 27 mm exceeds the 20 mm limit; a stiffer girder (I of at least about 675 × 10⁶ mm⁴) is needed</strong></dd>
+<dt>Limitations</dt><dd>Footbridges also need a vibration check, since natural frequency close to walking pace can cause uncomfortable movement. Use the deflection limit in the governing code or specification.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/beam-deflection" title="Beam Deflection Calculator" />
+
+## Choosing a bridge type
+
+Engineers weigh span and clearance needed, foundation conditions (an arch needs firm abutments; see [bearing capacity of soil](/civil-engineering/bearing-capacity-of-soil/)), loads, construction method and access, materials and skills available, maintenance, cost and appearance. Concrete superstructures are designed by [limit state design](/civil-engineering/limit-state-design-rcc/), while complex forms such as cable-stayed bridges are analysed with computer models based on [finite element analysis](/mechanical-engineering/finite-element-analysis-basics/).

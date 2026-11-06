@@ -1,0 +1,141 @@
+---
+title: "Types of Steel Sections Used in Structures"
+description: "Types of steel sections explained: I-beams, columns, channels, angles, tees and hollow sections, their designations, properties, uses and how to choose one."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: civil-engineering
+subcategory: steel-structures
+focusKeyword: "types of steel sections"
+format: explanation
+pillar: true
+math: true
+tags: [steel-sections, i-beam, channel, angle, hollow-section, steel-structures]
+faq:
+  - q: "Which steel section is best for a beam?"
+    a: "An I-section (or H-section for heavier loads) bent about its major axis. Most of its material is in the flanges, far from the neutral axis, which gives a high moment of inertia and section modulus for its weight."
+  - q: "What does ISMB stand for?"
+    a: "Indian Standard Medium weight Beam, one of the hot rolled I-section series covered by IS 808. The number after it is the depth in millimetres, so ISMB 300 is a medium weight beam about 300 mm deep. Other series include ISJB, ISLB, ISWB and ISHB for junior, light, wide flange and heavy column sections."
+  - q: "Why are hollow sections used for columns and trusses?"
+    a: "Circular and square hollow sections have the same stiffness about every axis and a large radius of gyration for their weight, so they resist buckling well. They also have high torsional stiffness, a neat appearance and less surface to paint."
+  - q: "What steel grade is used for structural sections in India?"
+    a: "Hot rolled structural steel is commonly supplied to IS 2062. Grade E250 has a minimum yield strength of 250 MPa for thinner sections, and higher grades such as E350 and E410 are used where greater strength is needed."
+references:
+  - text: "IS 808 Dimensions for hot rolled steel beam, column, channel and angle sections, Bureau of Indian Standards"
+  - text: "IS 800:2007 General Construction in Steel, Code of Practice, Bureau of Indian Standards"
+  - text: "IS 2062:2011 Hot rolled medium and high tensile structural steel, Specification, Bureau of Indian Standards"
+  - text: "IS 4923 Hollow steel sections for structural use, Specification, Bureau of Indian Standards"
+  - text: "N. Subramanian, Design of Steel Structures, Oxford University Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The main **types of steel sections** used in structures are **I-sections** (beams), **H-sections** (columns), **channels**, **angles**, **tees**, **hollow sections** (circular, square and rectangular tubes) and **plates and flats**. Each shape puts material where it is most useful for a particular load: I-sections for bending, hollow sections for compression and torsion, angles for bracing and truss members.
+
+</Key>
+
+Steel structures are assembled from standard rolled shapes rather than solid bars. A well chosen shape carries the same load as a solid section with a fraction of the steel, because it places material far from the neutral axis where it contributes most to stiffness and strength. Knowing the common types of steel sections, how they are named and where each is used is the first step in steel design to codes such as IS 800 or Eurocode 3.
+
+## Types of steel sections at a glance
+
+<figure>
+<svg width="560" height="250" viewBox="0 0 560 250" fill="none" role="img" aria-label="Cross sections of six common steel shapes: I-beam, H column section, channel, equal angle, tee and square and circular hollow sections">
+<g fill="#cfd8e3" stroke="#0b2545" stroke-width="2">
+<path d="M30 40H100V52H70V128H100V140H30V128H60V52H30Z" />
+<path d="M125 40H225V52H181V128H225V140H125V128H169V52H125Z" />
+<path d="M250 40H295V51H262V129H295V140H250Z" />
+<path d="M330 40H342V128H400V140H330Z" />
+<path d="M425 40H495V52H466V140H454V52H425Z" />
+</g>
+<text x="65" y="168" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">I-beam</text>
+<text x="175" y="168" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">H (column)</text>
+<text x="273" y="168" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Channel</text>
+<text x="365" y="168" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Angle</text>
+<text x="460" y="168" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Tee</text>
+<rect x="190" y="185" width="50" height="50" fill="#cfd8e3" stroke="#0b2545" stroke-width="2" />
+<rect x="199" y="194" width="32" height="32" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<circle cx="330" cy="210" r="25" fill="#cfd8e3" stroke="#0b2545" stroke-width="2" />
+<circle cx="330" cy="210" r="17" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<text x="182" y="214" text-anchor="end" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">SHS / RHS</text>
+<text x="364" y="214" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">CHS (tube)</text>
+</svg>
+<figcaption>Common hot rolled and hollow structural steel sections (not to scale).</figcaption>
+</figure>
+
+### I-sections (beams)
+
+An I-section has two flanges joined by a thin web. The flanges resist most of the bending moment and the web resists shear. Bent about the major axis, it is the most efficient common shape for beams, joists, girders and purlins in heavy buildings. Its weakness is low stiffness about the minor axis and low torsional stiffness, so long unbraced beams can fail by lateral torsional buckling. Indian series under IS 808 include ISJB, ISLB, ISMB and ISWB (junior, light, medium and wide flange beams); international equivalents are IPE and UB sections. Parallel flange sections are now widely rolled alongside older taper flange shapes.
+
+### H-sections (columns)
+
+H-sections (ISHB, or HE and UC sections internationally) have wide flanges, close to the depth. Their stiffness about both axes is more balanced, so they resist buckling better as columns and also serve as heavy beams and piles.
+
+### Channels
+
+A channel (ISMC, ISLC, PFC) has a web and two flanges on one side. It is used for purlins, side rails, stair stringers, lintels and as a component of built-up columns where two channels are laced or battened together. Its shear centre lies outside the section, so a load through the web causes twisting unless the channel is restrained or used in pairs.
+
+### Angles
+
+Angles (ISA) are L-shaped and come as equal or unequal leg sections. They are the standard members for trusses, towers, bracing, cleats and connections. Single angles connected by one leg carry eccentric load, which design codes account for.
+
+### Tees
+
+Tee sections, usually cut from I-sections, are used as truss chords, stiffeners and in composite floors. They are less common in general building work.
+
+### Hollow sections
+
+Circular (CHS), square (SHS) and rectangular (RHS) hollow sections, covered in India by IS 4923 and IS 1161, have high torsional stiffness and equal or near equal stiffness about both axes. They make efficient columns, truss members, space frames, handrails and exposed architectural steelwork, and they are easy to keep clean.
+
+### Plates, flats and built-up sections
+
+Plates are welded or bolted into plate girders, box girders and built-up columns when standard rolled sections are not large enough, as in long span [bridges](/civil-engineering/types-of-bridges/).
+
+## Hot rolled and cold formed sections
+
+Most of the sections above are **hot rolled**: steel billets are passed through shaped rolls while red hot, producing thick, compact shapes with some residual stress. **Cold formed** sections, such as C and Z purlins, lipped channels and light gauge framing, are bent from thin sheet at room temperature. They are light and cheap to transport but have thin walls that buckle locally, so they are designed to separate codes such as IS 801. Hollow sections are made either by hot finishing or by cold forming and welding, and the two kinds have slightly different properties.
+
+## Section properties that matter
+
+When choosing a section, the designer uses tabulated properties from the standard or the manufacturer:
+
+- **Area A:** governs axial capacity, mass per metre and cost.
+- **Second moment of area I:** governs bending stiffness and deflection.
+- **Elastic and plastic section modulus Z and Zp:** govern bending strength (σ = M / Z).
+- **Radius of gyration r:** governs column buckling through the slenderness ratio KL/r.
+- **Torsion and warping constants:** govern lateral torsional buckling and twisting.
+
+For an I-section made of rectangles, the major axis second moment of area is:
+
+$$
+I_{xx} = \frac{b D^3 - (b - t_w)\,h^3}{12}
+$$
+
+where b is flange width, D overall depth, tw web thickness and h the clear depth between flanges (root radii ignored).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A welded I-section with flanges 150 mm × 10 mm and a web 280 mm × 7 mm, so overall depth D = 300 mm. Steel density 7850 kg/m³.</dd>
+<dt>Find</dt><dd>Area, mass per metre, Ixx and elastic section modulus Zxx.</dd>
+<dt>Assumptions</dt><dd>Plain rectangles with no root radii or welds; bending about the major axis.</dd>
+<dt>Solution</dt><dd>A = 2 × 150 × 10 + 280 × 7 = 3000 + 1960 = 4960 mm²<br />Mass = 4960 × 10⁻⁶ × 7850 = 38.9 kg/m<br />Ixx = (150 × 300³ − 143 × 280³) / 12 = (4.050 × 10⁹ − 3.139 × 10⁹) / 12 = 75.9 × 10⁶ mm⁴<br />Zxx = Ixx / (D/2) = 75.9 × 10⁶ / 150 = 506 × 10³ mm³</dd>
+<dt>Answer</dt><dd><strong>A = 4960 mm², 38.9 kg/m, Ixx ≈ 7590 cm⁴, Zxx ≈ 506 cm³</strong></dd>
+<dt>Limitations</dt><dd>Rolled sections have root fillets that slightly increase the values. Use tabulated properties from IS 808 or the mill for real design.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/area-moment-of-inertia" title="Area Moment of Inertia Calculator" />
+
+With Z known, the bending stress for a given moment from the [shear force and bending moment diagram](/civil-engineering/shear-force-and-bending-moment/) follows directly; for example 100 kN·m on this section gives 100 × 10⁶ / 506 × 10³ ≈ 198 MPa, which must be compared with the design strength of the steel grade.
+
+## How to choose a steel section
+
+1. **Identify the main action:** bending, compression, tension, torsion or a combination.
+2. **Pick the family:** I for bending, H or hollow for columns, angles or hollow sections for trusses and bracing.
+3. **Size for strength and stiffness:** use Z for bending, A and r for compression, and I for deflection.
+4. **Check stability:** local buckling of thin plates (section classification), lateral torsional buckling and member buckling.
+5. **Consider connections, fabrication and availability:** a slightly heavier standard section is often cheaper than a rare one.
+6. **Allow for protection:** corrosion protection and fire protection add cost and depend on exposed surface area.
+
+Steel design to IS 800 uses limit state principles very similar to [limit state design of RCC](/civil-engineering/limit-state-design-rcc/), with partial safety factors on loads and materials. The underlying material behaviour is covered in [stress and strain](/mechanical-engineering/stress-and-strain/).

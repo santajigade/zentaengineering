@@ -49,16 +49,16 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| structural-analysis | Shear Force and Bending Moment Diagrams Explained | shear-force-and-bending-moment | fundamentals | to write |
-| rcc-design | Limit State Design of RCC: Basic Concepts | limit-state-design-rcc | fundamentals | to write |
-| steel-structures | Types of Steel Sections Used in Structures | steel-sections-types | explanation | to write |
-| concrete-technology | Water Cement Ratio and Its Effect on Concrete Strength | water-cement-ratio | fundamentals | to write |
-| construction-materials | Types of Cement and Their Uses | types-of-cement | explanation | to write |
-| geotechnical | Bearing Capacity of Soil Explained | bearing-capacity-of-soil | fundamentals | to write |
-| surveying | Levelling in Surveying: Methods and Calculations | levelling-in-surveying | fundamentals | to write |
-| transportation | Flexible vs Rigid Pavement: Differences Explained | flexible-vs-rigid-pavement | comparison | to write |
-| bridge-engineering | Types of Bridges and How They Carry Loads | types-of-bridges | explanation | to write |
-| estimation-construction-management | Quantity Estimation Methods in Construction | quantity-estimation-methods | explanation | to write |
+| structural-analysis | Shear Force and Bending Moment Diagrams Explained | shear-force-and-bending-moment | fundamentals | draft |
+| rcc-design | Limit State Design of RCC: Basic Concepts | limit-state-design-rcc | fundamentals | draft |
+| steel-structures | Types of Steel Sections Used in Structures | steel-sections-types | explanation | draft |
+| concrete-technology | Water Cement Ratio and Its Effect on Concrete Strength | water-cement-ratio | fundamentals | draft |
+| construction-materials | Types of Cement and Their Uses | types-of-cement | explanation | draft |
+| geotechnical | Bearing Capacity of Soil Explained | bearing-capacity-of-soil | fundamentals | draft |
+| surveying | Levelling in Surveying: Methods and Calculations | levelling-in-surveying | fundamentals | draft |
+| transportation | Flexible vs Rigid Pavement: Differences Explained | flexible-vs-rigid-pavement | comparison | draft |
+| bridge-engineering | Types of Bridges and How They Carry Loads | types-of-bridges | explanation | draft |
+| estimation-construction-management | Quantity Estimation Methods in Construction | quantity-estimation-methods | explanation | draft |
 
 ## chemical-engineering
 

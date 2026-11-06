@@ -1,0 +1,143 @@
+---
+title: "Quantity Estimation Methods in Construction"
+description: "Quantity estimation methods explained: types of estimates, long wall short wall, centre line and crossing methods, units of measurement and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: civil-engineering
+subcategory: estimation-construction-management
+focusKeyword: "quantity estimation methods"
+format: explanation
+pillar: true
+math: false
+tags: [estimation, quantity-surveying, centre-line-method, bill-of-quantities, costing]
+faq:
+  - q: "Which method of estimation is most accurate?"
+    a: "All three wall methods give the same result when applied correctly. The long wall short wall method is the easiest to check and suits buildings with varying wall sections. The centre line method is fastest for buildings whose walls share the same section, provided junction deductions are made correctly."
+  - q: "What is the difference between an approximate and a detailed estimate?"
+    a: "An approximate estimate, such as a plinth area or cube rate estimate, gives a quick cost from unit rates per square metre or cubic metre of similar buildings. A detailed estimate measures every item of work from the drawings, multiplies by unit rates and adds contingencies, and is used for sanction, tendering and contract control."
+  - q: "What is a bill of quantities?"
+    a: "A document listing each item of work with its description, unit and quantity, prepared from the detailed estimate. Contractors price it in their tenders, and it becomes the basis for measurement and payment during construction."
+references:
+  - text: "IS 1200 Method of Measurement of Building and Civil Engineering Works (all parts), Bureau of Indian Standards"
+  - text: "B. N. Dutta, Estimating and Costing in Civil Engineering: Theory and Practice, UBS Publishers"
+  - text: "M. Chakraborti, Estimating, Costing, Specification and Valuation in Civil Engineering, M. Chakraborti"
+  - text: "CPWD Delhi Schedule of Rates and Analysis of Rates, Central Public Works Department"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Quantity estimation methods** calculate how much of each item of work a project needs, such as excavation, concrete, brickwork and plaster, from the drawings. For walls and foundations, the three standard methods are the **long wall short wall** method, the **centre line** method and the **crossing** method. Quantities are multiplied by unit rates to give the cost. Measurement follows IS 1200 in India.
+
+</Key>
+
+Before a project can be approved, tendered or built, someone must work out what it will need and what it will cost. Estimation turns drawings and specifications into quantities and money. Good quantity estimates prevent cost overruns, material shortages and disputes, and they are the basis of the bill of quantities on which contractors price their work.
+
+## Types of estimates
+
+- **Preliminary (approximate) estimate:** prepared early to judge feasibility and obtain administrative approval, using costs of similar works.
+- **Plinth area estimate:** plinth area × cost per square metre of plinth area for similar construction.
+- **Cube rate estimate:** volume of the building × cost per cubic metre; suits buildings of varying heights.
+- **Detailed estimate:** every item measured from the drawings, multiplied by rates from a schedule of rates or rate analysis, with contingencies and work charged establishment added. Used for technical sanction and tendering.
+- **Revised estimate:** prepared when the sanctioned estimate is likely to be exceeded beyond the permitted limit, or the scope changes.
+- **Supplementary estimate:** for additional work found necessary during construction.
+- **Annual repair and maintenance estimate:** for keeping a structure in serviceable condition.
+
+## Steps in a detailed estimate
+
+1. **Study the drawings and specifications** and list all items of work in construction sequence.
+2. **Take off quantities:** record length, breadth and depth of each item in a measurement sheet.
+3. **Abstract the quantities:** total each item and apply the unit of measurement.
+4. **Apply rates** from the schedule of rates or a rate analysis.
+5. **Add provisions:** contingencies, work charged establishment, taxes, and lump sums for services.
+6. **Check:** independent check of key quantities and arithmetic.
+
+## Quantity estimation methods for walls and foundations
+
+Walls, foundations and their excavation make up a large share of the quantities in buildings, and three methods are used to measure them.
+
+<figure>
+<svg width="540" height="280" viewBox="0 0 540 280" fill="none" role="img" aria-label="Plan of a two room building with an internal partition wall; centre lines of walls are dashed; the two T junctions where the partition meets the long walls are marked; dimensions 8 m by 4 m centre to centre">
+<rect x="80" y="50" width="380" height="180" fill="#e9edf2" stroke="#0b2545" stroke-width="2" />
+<rect x="100" y="70" width="160" height="140" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<rect x="280" y="70" width="160" height="140" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<path d="M90 60H450V220H90Z" stroke="#13a89e" stroke-width="1.5" stroke-dasharray="6 4" />
+<path d="M270 60V220" stroke="#13a89e" stroke-width="1.5" stroke-dasharray="6 4" />
+<circle cx="270" cy="60" r="7" stroke="#b42318" stroke-width="2" />
+<circle cx="270" cy="220" r="7" stroke="#b42318" stroke-width="2" />
+<text x="282" y="44" font-size="12" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">T junction</text>
+<text x="282" y="248" font-size="12" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">T junction</text>
+<path d="M90 262H450" stroke="#0b2545" stroke-width="1" />
+<path d="M90 256V268M450 256V268" stroke="#0b2545" stroke-width="1" />
+<text x="200" y="258" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">8 m centre to centre</text>
+<path d="M480 60V220" stroke="#0b2545" stroke-width="1" />
+<path d="M474 60H486M474 220H486" stroke="#0b2545" stroke-width="1" />
+<text x="492" y="144" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">4 m</text>
+<text x="180" y="145" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Room 1</text>
+<text x="360" y="145" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Room 2</text>
+<text x="20" y="30" font-size="12" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Dashed: wall centre lines</text>
+</svg>
+<figcaption>Plan used in the worked example: two rooms with a shared partition wall.</figcaption>
+</figure>
+
+### Long wall short wall method
+
+Walls in one direction are treated as **long walls** and measured out to out (centre line length plus one width). Walls in the other direction are **short walls**, measured in to in (centre line length minus one width). Each layer (excavation, foundation concrete, footing steps, plinth wall, superstructure) is worked out with its own width. It is easy to check and handles different wall thicknesses well, so it is widely taught and used.
+
+### Centre line method
+
+The total length of all wall centre lines is found once and multiplied by the breadth and depth of each item. It is fast. At each **T junction**, the centre line length is reduced by half the breadth of the item for every junction, because the cross wall's centre line runs into the main wall. Plain corners need no deduction. The method is most convenient when all walls have the same section.
+
+### Crossing method
+
+Each wall is measured centre line to centre line; at corners and junctions the overlapping or missing volumes are then added or deducted. It is less common in practice.
+
+## Units of measurement
+
+IS 1200 sets how each item is measured and in what unit. Typical units are:
+
+| Item | Unit |
+| --- | --- |
+| Earthwork excavation, concrete, brickwork | m³ |
+| Plastering, flooring, painting, formwork | m² |
+| Skirting, pipes, handrails, cornice | m (running) |
+| Reinforcement steel | kg or tonne |
+| Doors, windows, fittings | number |
+
+Dimensions are usually recorded to the nearest 0.01 m, areas to 0.01 m² and volumes to 0.01 m³, as the relevant part of IS 1200 specifies.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>The two room building above: overall 8 m × 4 m centre to centre, with one partition wall. Foundation trench 0.9 m wide and 1.0 m deep under all walls.</dd>
+<dt>Find</dt><dd>Earthwork in excavation by the centre line method, checked by the long wall short wall method.</dd>
+<dt>Assumptions</dt><dd>All walls have the same trench section; no extra working space or slopes.</dd>
+<dt>Solution</dt><dd>Centre line method: total centre line = 2 × (8 + 4) + 4 = 28 m. Two T junctions, deduction = 2 × 0.9 / 2 = 0.9 m. Effective length = 27.1 m. Volume = 27.1 × 0.9 × 1.0 = 24.39 m³<br />Long wall short wall: 2 long walls out to out = 2 × (8 + 0.9) = 17.8 m; 3 short walls in to in = 3 × (4 − 0.9) = 9.3 m; total 27.1 m; volume = 27.1 × 0.9 × 1.0 = 24.39 m³</dd>
+<dt>Answer</dt><dd><strong>Earthwork in excavation = 24.39 m³ by both methods</strong></dd>
+<dt>Limitations</dt><dd>Real trenches may need working space, side slopes or shoring, and quantities for foundation concrete and masonry use their own widths.</dd>
+</dl>
+</Example>
+
+<Calculator path="construction/excavation" title="Excavation Calculator" />
+
+## From quantities to cost: rate analysis
+
+Quantities alone do not give the cost. Each item needs a unit rate, built up by **rate analysis**:
+
+- **Materials:** quantity of each material per unit of work, including wastage, multiplied by its delivered price.
+- **Labour:** man days of each trade per unit of work multiplied by wage rates.
+- **Equipment and tools:** hire or running cost of mixers, vibrators, scaffolding and similar plant.
+- **Overheads and profit:** a percentage added for the contractor's site and head office costs and margin.
+- **Water and sundries:** small charges for water, consumables and transport.
+
+Public works departments publish schedules of rates and standard analyses of rates, such as those of CPWD and state PWDs, which are used for government estimates and adapted for private work with current market prices.
+
+## Tips for accurate quantity estimation
+
+- Follow the sequence of construction so no item is forgotten.
+- Keep a clear measurement sheet with item number, description, number of members and dimensions.
+- Deduct openings in walls and plaster according to the IS 1200 rules, which exempt small openings in some items.
+- Apply bulking and dry volume factors when converting concrete and mortar volumes into cement and sand; see [types of cement](/civil-engineering/types-of-cement/) and [water cement ratio](/civil-engineering/water-cement-ratio/).
+- Use reduced levels from [levelling in surveying](/civil-engineering/levelling-in-surveying/) for earthwork in roads and plots.
+- Use the reinforcement schedule from [limit state design](/civil-engineering/limit-state-design-rcc/) to quantify steel by weight.

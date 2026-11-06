@@ -1,0 +1,147 @@
+---
+title: "Shear Force and Bending Moment Diagrams Explained"
+description: "Shear force and bending moment explained: sign conventions, how to draw SFD and BMD, standard beam cases, load, shear and moment relations and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: civil-engineering
+subcategory: structural-analysis
+focusKeyword: "shear force and bending moment"
+format: fundamentals
+pillar: true
+math: true
+tags: [shear-force, bending-moment, sfd, bmd, beams, structural-analysis]
+faq:
+  - q: "What is the difference between shear force and bending moment?"
+    a: "Shear force at a section is the sum of all vertical forces on one side of that section. Bending moment is the sum of the moments of those forces about the section. Shear force tends to slide one part of the beam past the other; bending moment tends to bend it."
+  - q: "Where is the bending moment maximum in a beam?"
+    a: "Where the shear force is zero or changes sign, because the slope of the bending moment diagram equals the shear force. For cantilevers the maximum is usually at the fixed support."
+  - q: "What is a point of contraflexure?"
+    a: "A point where the bending moment changes sign and passes through zero, so the curvature of the beam reverses. It occurs in overhanging and continuous beams and is a convenient place for reinforcement laps or splices."
+  - q: "Why do engineers draw SFD and BMD?"
+    a: "They show at a glance where the beam is most heavily loaded in shear and bending. The peak values are used to size the section, place reinforcement in concrete beams and check stresses in steel beams."
+references:
+  - text: "R. C. Hibbeler, Structural Analysis, 10th ed., Pearson"
+  - text: "S. Ramamrutham and R. Narayan, Theory of Structures, Dhanpat Rai Publishing"
+  - text: "J. M. Gere and B. J. Goodno, Mechanics of Materials, 9th ed., Cengage"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Shear force and bending moment** are the internal forces that a loaded beam carries. At any section, the shear force V is the sum of the vertical forces on one side, and the bending moment M is the sum of their moments about that section. Plotting them along the beam gives the shear force diagram (SFD) and bending moment diagram (BMD). The maximum bending moment occurs where the shear force is zero.
+
+</Key>
+
+Every beam design, whether in steel, concrete or timber, starts with shear force and bending moment. These two quantities tell the designer how much the beam must resist at each point along its length. The shear force and bending moment diagrams turn a set of loads and supports into a picture of where the beam is most stressed, which then drives the section size and reinforcement.
+
+## What are shear force and bending moment?
+
+Imagine cutting a loaded beam at a section X. For the left part to stay in equilibrium, the right part must exert a vertical force and a moment on it. These are the internal **shear force** V and **bending moment** M at X.
+
+- **Shear force at X** = algebraic sum of all vertical forces (loads and reactions) acting on either side of X.
+- **Bending moment at X** = algebraic sum of the moments of those forces about X.
+
+Both sides give the same magnitude; choose the side with fewer forces.
+
+### Sign convention
+
+The most common convention in Indian and many international textbooks is:
+
+- **Shear force:** positive when the resultant force on the left of the section acts upwards (left side up, right side down).
+- **Bending moment:** positive when it causes **sagging** (the beam bends concave upwards, top in compression, bottom in tension). Negative moment causes **hogging**.
+
+Simply supported beams under downward load sag, so their moments are positive. Cantilevers and beams over intermediate supports hog. Different books use different conventions, so state yours.
+
+## Relation between load, shear force and bending moment
+
+For a beam carrying a distributed load w per unit length (taken positive downwards), equilibrium of a small slice gives two key relations:
+
+$$
+\frac{dV}{dx} = -w \qquad \frac{dM}{dx} = V
+$$
+
+These relations make the diagrams easy to sketch:
+
+- Over an unloaded length, V is constant and M varies linearly.
+- Under a uniformly distributed load (UDL), V varies linearly and M is a parabola.
+- At a concentrated load, V jumps by the size of the load.
+- M is maximum or minimum where V = 0 or changes sign.
+- The change in M between two points equals the area of the SFD between them.
+
+## How to draw SFD and BMD
+
+1. **Find the support reactions** using ΣFy = 0 and ΣM = 0 for the whole beam.
+2. **Mark key points:** supports, point loads, start and end of distributed loads.
+3. **Calculate shear force** just left and right of each key point and join the values with straight lines (or sloping lines under UDL).
+4. **Calculate bending moment** at each key point and at the point of zero shear.
+5. **Draw the diagrams** directly below the beam, to the same horizontal scale, and mark the peak values.
+
+<figure>
+<svg width="540" height="400" viewBox="0 0 540 400" fill="none" role="img" aria-label="Simply supported beam with a uniformly distributed load; the shear force diagram falls linearly from plus wL over 2 at the left support to minus wL over 2 at the right support, and the bending moment diagram is a parabola with maximum wL squared over 8 at midspan">
+<path d="M90 80H450" stroke="#0b2545" stroke-width="4" />
+<path d="M90 84L78 104H102Z" fill="#d8dee8" stroke="#0b2545" stroke-width="1.5" />
+<path d="M450 84L438 104H462Z" fill="#d8dee8" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="440" cy="108" r="3" stroke="#0b2545" /><circle cx="450" cy="108" r="3" stroke="#0b2545" /><circle cx="460" cy="108" r="3" stroke="#0b2545" />
+<path d="M90 45H450V75H90Z" fill="#e6f6f4" stroke="#13a89e" stroke-width="1.5" />
+<path d="M130 48V72M180 48V72M230 48V72M270 48V72M310 48V72M360 48V72M410 48V72" stroke="#13a89e" stroke-width="1.5" />
+<text x="270" y="38" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">UDL w per metre over span L</text>
+<text x="62" y="100" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">A</text>
+<text x="474" y="100" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">B</text>
+<path d="M90 210H450" stroke="#0b2545" stroke-width="1.5" />
+<path d="M90 210V160L450 260V210" stroke="#13a89e" stroke-width="2.5" fill="#e6f6f4" fill-opacity="0.6" />
+<text x="20" y="168" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">+wL/2</text>
+<text x="460" y="262" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">−wL/2</text>
+<text x="20" y="215" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">SFD</text>
+<text x="286" y="198" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">V = 0 at midspan</text>
+<path d="M90 300H450" stroke="#0b2545" stroke-width="1.5" />
+<path d="M90 300Q270 420 450 300" stroke="#0b2545" stroke-width="2.5" fill="#fff7e0" />
+<text x="20" y="305" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">BMD</text>
+<path d="M270 300V360" stroke="#f5b800" stroke-width="1.5" stroke-dasharray="4 3" />
+<text x="282" y="378" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Mmax = wL²/8 (sagging)</text>
+</svg>
+<figcaption>SFD and BMD for a simply supported beam with a uniformly distributed load. The moment diagram is drawn below the axis on the tension side.</figcaption>
+</figure>
+
+## Standard cases of shear force and bending moment
+
+| Beam and load | Maximum shear force | Maximum bending moment |
+| --- | --- | --- |
+| Simply supported, central point load P | P/2 | PL/4 at midspan |
+| Simply supported, UDL w over full span | wL/2 at supports | wL²/8 at midspan |
+| Cantilever, point load P at free end | P | PL at fixed end (hogging) |
+| Cantilever, UDL w over full length | wL | wL²/2 at fixed end (hogging) |
+
+These results appear constantly in design. For example, a quick check of a floor beam carrying a UDL uses wL²/8 to size the section and wL/2 to check shear near the supports.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A simply supported beam of span 6 m carries a UDL of 20 kN/m over the full span and a point load of 30 kN at midspan.</dd>
+<dt>Find</dt><dd>Support reactions, maximum shear force and maximum bending moment.</dd>
+<dt>Assumptions</dt><dd>Self weight included in the UDL; simple supports; loads act vertically through the beam centreline.</dd>
+<dt>Solution</dt><dd>Total load = 20 × 6 + 30 = 150 kN; by symmetry RA = RB = 75 kN<br />Maximum shear = 75 kN at the supports. Just left of midspan V = 75 − 20 × 3 = 15 kN; just right V = 15 − 30 = −15 kN, so shear changes sign at midspan<br />Mmax = wL²/8 + PL/4 = 20 × 6² / 8 + 30 × 6 / 4 = 90 + 45 = 135 kN·m</dd>
+<dt>Answer</dt><dd><strong>Reactions 75 kN each; maximum shear 75 kN; maximum bending moment 135 kN·m (sagging) at midspan</strong></dd>
+<dt>Limitations</dt><dd>These are working (unfactored) values. Limit state design multiplies loads by partial safety factors before sizing the section.</dd>
+</dl>
+</Example>
+
+The bending moment is then converted into bending stress with σ = M y / I, which depends on the shape of the section:
+
+<Calculator path="engineering/bending-stress" title="Bending Stress Calculator" />
+
+## How the diagrams are used in design
+
+- **Concrete beams:** the BMD shows where tension steel is needed (bottom in sagging, top in hogging), and the SFD shows where stirrups must be closer. See [limit state design of RCC](/civil-engineering/limit-state-design-rcc/).
+- **Steel beams:** peak moment selects the section modulus from the range of [steel sections](/civil-engineering/steel-sections-types/), and peak shear is checked against web capacity.
+- **Bridges:** moving vehicle loads produce envelopes of maximum shear and moment, using influence lines. See [types of bridges](/civil-engineering/types-of-bridges/).
+- **Deflection:** integrating the bending moment twice (M = EI d²y/dx²) gives the deflected shape.
+
+Bending moment produces normal stress and shear force produces shear stress in the section, so the diagrams link directly to [stress and strain](/mechanical-engineering/stress-and-strain/) in the material. For complex frames and continuous structures, software using the stiffness method or [finite element analysis](/mechanical-engineering/finite-element-analysis-basics/) produces the same diagrams automatically.
+
+## Common mistakes
+
+- Forgetting a support reaction or getting its direction wrong.
+- Mixing sign conventions between the SFD and BMD.
+- Missing the point of zero shear under a UDL, so the true maximum moment is not found.
+- Using working loads where factored design loads are required.
