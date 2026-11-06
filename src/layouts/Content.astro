@@ -47,6 +47,7 @@ const schema = {
         <a class={`chip chip-fam fam-${d.family}`} href={`/${d.slug}/`}>{d.name}</a>
         {chips.map((c) => (c.href ? <a class={`chip ${c.cls ?? ''}`} href={c.href}>{c.label}</a> : <span class={`chip ${c.cls ?? ''}`}>{c.label}</span>))}
       </div>
+      {!data.reviewedDate && <div data-pagefind-ignore style="background:#fff7ed;border:1px solid #f5b800;color:#7a4b00;border-radius:8px;padding:8px 12px;font-size:14px;font-weight:600;margin-bottom:12px">Draft: awaiting technical review</div>}
       <h1 style="margin:0;font-size:var(--ze-h1)">{data.title}</h1>
       <div class="byline" style="margin-top:14px" data-pagefind-ignore>
         {author.photo ? <img src={author.photo} alt="" width="40" height="40" /> : <Logo size={40} class="mark" />}

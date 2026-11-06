@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { SITE } from '../data/site';
+import { SITE, SHOW_UNREVIEWED } from '../data/site';
 import { DISCIPLINES, getDiscipline } from '../data/disciplines';
 
 export type Article = CollectionEntry<'articles'>;
@@ -10,7 +10,7 @@ export type Resource = CollectionEntry<'resources'>;
 export type AnyItem = Article | Lesson | InterviewSet | Project | Resource;
 
 // SHOW_DRAFTS=1 builds a private review preview with unreviewed, draft and future items. Never deploy it.
-export const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1' || process.env.PREVIEW === '1';
+export const SHOW_DRAFTS = process.env.SHOW_DRAFTS === '1' || process.env.PREVIEW === '1' || SHOW_UNREVIEWED;
 
 type Live = { draft: boolean; pubDate: Date; reviewedDate?: Date };
 export const isLive = (d: Live) =>
