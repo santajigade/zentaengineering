@@ -1,0 +1,130 @@
+---
+title: "SOLAS Lifesaving and Firefighting Equipment Overview"
+description: "SOLAS lifesaving and firefighting equipment explained: lifeboats, liferafts, EPIRB, fire detection, fixed systems, fire main, drills and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: marine-engineering
+subcategory: marine-safety
+focusKeyword: "solas"
+image: { src: /images/featured/solas-lifesaving-firefighting.webp, alt: "SOLAS Lifesaving and Firefighting Equipment Overview: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [solas, lifesaving-appliances, marine-firefighting, lsa-code, fss-code]
+faq:
+  - q: "What does SOLAS stand for?"
+    a: "SOLAS is the International Convention for the Safety of Life at Sea, adopted by the International Maritime Organization. The current version dates from 1974 with many amendments. It sets minimum safety standards for the construction, equipment and operation of merchant ships, and flag states enforce it."
+  - q: "How many lifeboats and liferafts must a cargo ship carry?"
+    a: "A typical cargo ship carries lifeboats on each side able to hold everyone on board, or a free-fall lifeboat at the stern able to hold everyone, plus liferafts. The exact requirements depend on ship type and size under SOLAS Chapter III, with liferafts sufficient for everyone on each side for ships without davit launched boats on both sides."
+  - q: "How often are fire and abandon ship drills held?"
+    a: "On cargo ships, each crew member must take part in at least one abandon ship drill and one fire drill every month, and drills must be held within 24 hours of departure if more than 25% of the crew did not take part in a drill on that ship in the previous month. Passenger ships hold drills weekly."
+references:
+  - text: "IMO, International Convention for the Safety of Life at Sea (SOLAS), 1974, as amended, Chapters II-2 and III"
+  - text: "IMO, International Life-Saving Appliance (LSA) Code, as amended"
+  - text: "IMO, International Code for Fire Safety Systems (FSS Code), as amended"
+  - text: "IMO, International Code for the Application of Fire Test Procedures (FTP Code), 2010"
+  - text: "IMO MSC.1/Circ.1206, Measures to prevent accidents with lifeboats"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**SOLAS** (the International Convention for the Safety of Life at Sea) sets mandatory safety equipment for merchant ships. **Chapter III and the LSA Code** cover **lifesaving appliances**: **lifeboats** (davit launched or **free-fall**), **liferafts** (inflatable, with **hydrostatic release units**), **rescue boats**, **lifejackets**, **immersion suits**, **lifebuoys**, **EPIRBs**, **SARTs**, **pyrotechnics** and **muster and embarkation** arrangements. **Chapter II-2 and the FSS Code** cover **fire safety**: structural fire protection, **fire detection and alarm**, **fire mains, pumps and hydrants**, **fixed firefighting systems** (CO₂, high expansion foam, water mist, sprinklers), **portable extinguishers**, **fireman's outfits** and **EEBDs**. Regular **drills, inspections and maintenance** keep everything ready.
+
+</Key>
+
+SOLAS was first adopted in 1914 after the Titanic disaster and has been updated many times, most significantly in 1974. It is widely regarded as the most important international treaty on merchant ship safety. Flag states, classification societies and port state control inspectors check that ships comply.
+
+## Lifesaving appliances (SOLAS Chapter III, LSA Code)
+
+### Survival craft
+
+- **Lifeboats:** totally enclosed, self righting boats with engines, provisions, water and equipment. **Davit launched** lifeboats are lowered from each side; **free-fall** lifeboats slide from a stern ramp and drop into the sea, allowing fast launching even with list or trim. Tankers carry fire protected lifeboats with water spray and air supply.
+- **Liferafts:** inflatable rafts packed in canisters, inflated by CO₂ gas, either thrown overboard or launched by davit. A **hydrostatic release unit** frees the canister automatically if the ship sinks, at a depth of about 4 m.
+- **Rescue boats:** fast boats for recovering people in the water and marshalling survival craft.
+
+### Personal lifesaving appliances
+
+- **Lifejackets** for every person, plus extras, with lights and whistles; **infant and child sizes** on passenger ships.
+- **Immersion suits** and **thermal protective aids** to prevent hypothermia.
+- **Lifebuoys** around the ship, some with self igniting lights, smoke signals and lines.
+
+### Communication and location
+
+- **EPIRB** (emergency position indicating radio beacon): floats free and transmits a distress signal with position via the COSPAS-SARSAT satellite system, using satellite links like those in [GEO vs MEO vs LEO satellites](/telecommunication-engineering/geo-meo-leo-satellites/).
+- **SART** or **AIS-SART**: shows survival craft position on rescue vessels' radar or AIS.
+- **Two way VHF radios** for survival craft.
+- **Pyrotechnics:** rocket parachute flares, hand flares and buoyant smoke signals.
+- **Line throwing appliance.**
+
+### Muster and embarkation
+
+Muster stations, embarkation ladders, marine evacuation systems on passenger ships, emergency lighting and clear signage support orderly abandonment. The **general emergency alarm** is seven or more short blasts followed by one long blast.
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Side view of a cargo ship showing locations of safety equipment: free-fall lifeboat at the stern, liferafts on each side with hydrostatic release units, rescue boat, lifebuoys along the rails, EPIRB on the bridge top, fire stations and hydrants along the deck, emergency fire pump room, CO2 room, and fixed CO2 system protecting the engine room">
+<path d="M30 150H520L570 120L560 200Q300 230 60 200Z" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<rect x="60" y="80" width="90" height="70" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<rect x="75" y="60" width="60" height="20" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<path d="M30 150L10 125H60" stroke="#0b2545" stroke-width="2" fill="none" />
+<path d="M14 128L40 110L60 125" fill="#f5b800" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#ffe9e7" stroke="#0b2545" stroke-width="1.5"><rect x="160" y="135" width="22" height="14" rx="6" /><rect x="440" y="135" width="22" height="14" rx="6" /></g>
+<rect x="190" y="132" width="30" height="16" rx="7" fill="#13a89e" fill-opacity="0.5" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#b42318"><circle cx="250" cy="146" r="5" /><circle cx="320" cy="146" r="5" /><circle cx="390" cy="146" r="5" /><circle cx="490" cy="146" r="5" /></g>
+<rect x="95" y="160" width="60" height="30" fill="#ffe9e7" fill-opacity="0.6" stroke="#b42318" stroke-width="1.5" stroke-dasharray="4 3" />
+<rect x="100" y="52" width="10" height="8" fill="#f5b800" stroke="#0b2545" stroke-width="1" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545">
+<text x="5" y="100">Free-fall lifeboat</text><text x="115" y="44">EPIRB</text>
+<text x="150" y="122">Liferafts + HRU</text><text x="190" y="170" font-size="9">Rescue boat</text>
+<text x="290" y="135" fill="#b42318">Fire hydrants and hoses</text><text x="60" y="242" fill="#b42318">Engine room: fixed CO₂ or</text><text x="60" y="255" fill="#b42318">water mist, fire detection</text>
+<text x="420" y="122">Liferaft</text><text x="330" y="245">Emergency fire pump outside engine room</text>
+</g>
+</svg>
+<figcaption>Typical locations of SOLAS lifesaving and firefighting equipment on a cargo ship (schematic).</figcaption>
+</figure>
+
+## Fire safety (SOLAS Chapter II-2, FSS Code)
+
+### Prevention and structural fire protection
+
+Ships are divided into **main vertical zones** and spaces separated by fire rated divisions: **A class** (steel, insulated to stop fire for 60 minutes), **B class** and **C class**. Fire doors, dampers and penetrations maintain integrity. Fuel oil systems have shielded high pressure pipes and spray shields to prevent leaks reaching hot surfaces, which are insulated, since engine room oil fires are the most common serious ship fires.
+
+### Detection and alarm
+
+**Fixed fire detection and alarm systems** with smoke and heat detectors and manual call points cover accommodation, service spaces, control stations and unmanned machinery spaces. Detector types and their uses are described in [types of fire detectors](/safety-engineering/types-of-fire-detectors/).
+
+### Fire main, pumps and hydrants
+
+At least two independently driven **main fire pumps** (in the engine room) and an **emergency fire pump** located outside the machinery space supply the **fire main** with hydrants, hoses and dual purpose (jet and spray) nozzles placed so that every part of the ship can be reached by at least two jets.
+
+### Fixed firefighting systems
+
+- **CO₂ total flooding** for engine rooms, cargo holds and pump rooms, released only after people are evacuated and the space is sealed, with pre-discharge alarms.
+- **High expansion foam** and **water based systems** (water mist, local application systems for high risk areas such as engine tops and purifiers).
+- **Automatic sprinklers** in accommodation on passenger ships.
+- **Deck foam systems** and **inert gas** on tankers.
+- **Galley fryer extinguishing systems.**
+
+### Portable equipment and protective gear
+
+Portable and semi-portable extinguishers chosen for the [fire classes](/safety-engineering/fire-classes-and-extinguishers/) likely in each space, **fireman's outfits** with breathing apparatus, fire blankets, and **emergency escape breathing devices (EEBDs)** in accommodation and machinery spaces.
+
+## Drills, training and maintenance
+
+SOLAS requires monthly **abandon ship** and **fire drills** for crew on cargo ships, with lifeboats lowered and launched at specified intervals, enclosed space entry and rescue drills, and familiarisation training for new crew. Equipment must be inspected weekly and monthly, serviced annually by approved service providers (liferafts, hydrostatic release units, CO₂ systems, lifeboat release gear), and tested to the LSA and FSS Codes. Records are kept for inspections by flag and port state.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A bulk carrier has 25 crew. It is fitted with one free-fall lifeboat at the stern for 25 persons, one 25 person liferaft on each side, and one 6 person liferaft forward.</dd>
+<dt>Find</dt><dd>Whether the survival craft capacity is adequate and why each item is needed.</dd>
+<dt>Assumptions</dt><dd>Cargo ship over 85 m in length; requirements as summarised from SOLAS Chapter III Regulation 31.</dd>
+<dt>Solution</dt><dd>Free-fall lifeboat capacity 25 = total persons on board: meets the requirement for a stern free-fall boat<br />Liferafts: one on each side with capacity for all persons (25 each), stowed for transfer to either side or with one on each side: meets the requirement<br />Forward liferaft for 6 persons: required where the stern survival craft are more than 100 m from the bow, so people at the forward end can escape</dd>
+<dt>Answer</dt><dd><strong>Capacity is adequate: the free-fall lifeboat and each side's liferaft can each carry all 25 crew, and the forward liferaft covers crew working far forward</strong></dd>
+<dt>Limitations</dt><dd>Exact requirements depend on ship type, size and flag administration interpretations; check the ship's safety equipment certificate and record of equipment.</dd>
+</dl>
+</Example>
+
+## SOLAS in the wider safety system
+
+Lifesaving and firefighting equipment is the last line of defence. SOLAS also covers ship construction and [stability](/marine-engineering/ship-stability-basics/), machinery and [electrical installations](/marine-engineering/ship-electrical-power-system/) including emergency power, navigation safety and the ISM Code for safety management. Combined with risk assessment tools such as a [risk matrix](/safety-engineering/risk-matrix/), good maintenance and well trained crews, SOLAS equipment gives seafarers the best possible chance of surviving an emergency at sea.

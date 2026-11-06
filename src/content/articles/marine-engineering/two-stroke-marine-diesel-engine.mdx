@@ -1,0 +1,125 @@
+---
+title: "Two-Stroke Marine Diesel Engine Working Principle"
+description: "Two-stroke marine diesel engine working principle: uniflow scavenging, crosshead design, turbocharging, fuel injection, cycle steps, components and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: marine-engineering
+subcategory: marine-propulsion
+focusKeyword: "two-stroke marine diesel engine"
+image: { src: /images/featured/two-stroke-marine-diesel-engine.webp, alt: "Two-Stroke Marine Diesel Engine Working Principle: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [marine-diesel-engine, two-stroke, ship-propulsion, turbocharger, crosshead-engine]
+faq:
+  - q: "Why do large ships use two-stroke engines?"
+    a: "Large two-stroke crosshead engines run at low speed (about 60 to 120 rpm) and can be coupled directly to a large, efficient propeller without a gearbox. They have very high thermal efficiency, often above 50%, burn heavy fuel oil and other low cost fuels, and are extremely reliable for continuous operation over long voyages."
+  - q: "What is the purpose of the crosshead?"
+    a: "The crosshead connects the piston rod to the connecting rod and takes the side thrust from the connecting rod angle, so the piston itself only moves straight up and down without pressing against the liner. This allows a long stroke, separates the crankcase from the combustion space with a stuffing box, and reduces liner wear and cylinder oil contamination."
+  - q: "What is scavenging?"
+    a: "Scavenging is the process of removing exhaust gas from the cylinder and replacing it with fresh air at the end of each power stroke. In modern uniflow engines, pressurised air from the turbocharger enters through ports at the bottom of the liner when the piston uncovers them and pushes exhaust gas upward and out through the exhaust valve."
+references:
+  - text: "D. A. Taylor, Introduction to Marine Engineering, 2nd ed., Butterworth-Heinemann"
+  - text: "D. Woodyard, Pounder's Marine Diesel Engines and Gas Turbines, 10th ed., Butterworth-Heinemann"
+  - text: "MAN Energy Solutions, Basic Principles of Ship Propulsion"
+  - text: "WinGD, Marine Installation Manual, X-engine series"
+  - text: "IMO MARPOL Annex VI, Regulations for the Prevention of Air Pollution from Ships"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **two-stroke marine diesel engine** completes a full working cycle in **one revolution** of the crankshaft: compression and power on the upward and downward strokes, with exhaust and fresh air exchange (**scavenging**) around bottom dead centre. Large ship engines are **low speed** (about 60 to 120 rpm), **crosshead** type, with **uniflow scavenging**: air from **turbochargers** enters through **scavenge ports** at the bottom of the liner and exhaust leaves through a single **exhaust valve** in the cylinder cover. **Fuel is injected** near top dead centre and ignites by the heat of compression. Directly coupled to a fixed or controllable pitch propeller, they reach thermal efficiencies above **50%**.
+
+</Key>
+
+Most of the world's large merchant ships, including tankers, bulk carriers and container ships, are propelled by two-stroke diesel engines built to designs from MAN Energy Solutions, WinGD and Mitsubishi. These engines are among the largest and most efficient reciprocating machines ever made, with cylinder bores up to about 1 m, strokes over 3 m and outputs exceeding 80 MW.
+
+## The two-stroke cycle
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Uniflow scavenged two-stroke cylinder: cylinder cover with central exhaust valve and fuel injectors at the top, piston in the liner, scavenge air ports around the lower liner, scavenge air receiver supplying air, piston rod to crosshead and connecting rod to crankshaft below; arrows show air entering through ports and exhaust leaving through the valve to the turbocharger">
+<rect x="230" y="40" width="140" height="190" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<rect x="220" y="25" width="160" height="20" fill="#c9d2de" stroke="#0b2545" stroke-width="2" />
+<path d="M290 25V5H310V25" fill="#ffe9e7" stroke="#0b2545" stroke-width="2" />
+<path d="M280 45L300 55L320 45" stroke="#0b2545" stroke-width="2" fill="none" />
+<g stroke="#b42318" stroke-width="2"><path d="M250 45V60M350 45V60" /></g>
+<rect x="234" y="150" width="132" height="40" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<g fill="#ffffff" stroke="#0b2545" stroke-width="1.5"><rect x="222" y="195" width="8" height="20" /><rect x="370" y="195" width="8" height="20" /></g>
+<path d="M300 190V250" stroke="#0b2545" stroke-width="5" />
+<rect x="280" y="250" width="40" height="15" fill="#c9d2de" stroke="#0b2545" stroke-width="1.5" />
+<path d="M300 265L330 290" stroke="#0b2545" stroke-width="5" />
+<g stroke="#13a89e" stroke-width="2.5"><path d="M130 205H220M380 205H460" /></g>
+<g fill="#13a89e"><path d="M212 200l9 5-9 5z" /><path d="M388 200l-9 5 9 5z" /></g>
+<g stroke="#13a89e" stroke-width="1.5" stroke-dasharray="4 3" fill="none"><path d="M245 195Q260 120 290 70M355 195Q340 120 310 70" /></g>
+
+<path d="M310 15H460" stroke="#b42318" stroke-width="2.5" /><path d="M452 10l9 5-9 5z" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="465" y="19" fill="#b42318">Exhaust to turbocharger</text><text x="40" y="180" fill="#13a89e">Scavenge air</text><text x="40" y="194" fill="#13a89e">from turbocharger</text>
+<text x="390" y="60">Fuel injectors</text><text x="390" y="40">Cylinder cover</text><text x="390" y="170">Piston</text><text x="390" y="230">Scavenge ports</text>
+<text x="325" y="240">Piston rod</text><text x="330" y="262">Crosshead</text><text x="340" y="290">Connecting rod</text><text x="160" y="110">Cylinder liner</text>
+<text x="160" y="15" font-size="10">Exhaust valve</text>
+</g>
+</svg>
+<figcaption>Uniflow scavenged crosshead two-stroke cylinder (schematic).</figcaption>
+</figure>
+
+1. **Compression (upstroke):** after the piston covers the scavenge ports and the exhaust valve closes, the trapped air is compressed. Pressure rises to about 150 bar and temperature to well above the fuel's ignition temperature.
+2. **Fuel injection and combustion:** shortly before top dead centre (TDC), two or three injectors spray atomised fuel at very high pressure (often 800 to 1000 bar or more with common rail systems). It ignites spontaneously and burns, with peak pressures near 180 to 200 bar in modern engines.
+3. **Expansion (power stroke, downstroke):** hot gas pushes the piston down, turning the crankshaft through the piston rod, crosshead and connecting rod.
+4. **Exhaust:** before bottom dead centre (BDC), the hydraulically operated exhaust valve opens and high pressure gas rushes out to the turbocharger (blowdown).
+5. **Scavenging:** the piston uncovers the ports in the lower liner; pressurised air from the scavenge air receiver flows in, swirling upward and pushing remaining exhaust out through the valve. As the piston rises, it closes the ports, the exhaust valve closes, and compression begins again.
+
+Every revolution is a power stroke for every cylinder, so a two-stroke engine produces more power per cylinder at a given speed than a four-stroke engine, which fires once every two revolutions.
+
+## Main components of a two-stroke marine diesel engine
+
+- **Bedplate and frame (A-frames):** massive welded steel structure carrying the crankshaft main bearings and crosshead guides.
+- **Crankshaft:** semi-built type with shrunk-fit crank throws.
+- **Crosshead, guides and connecting rod:** transmit force from piston rod to crankshaft and absorb side thrust.
+- **Piston and piston rod:** oil or water cooled piston crown with rings; the **stuffing box** seals the piston rod where it passes from the scavenge space to the crankcase.
+- **Cylinder liner:** with scavenge ports, lubricated by separate **cylinder oil** injected through quills.
+- **Cylinder cover and exhaust valve:** hydraulically actuated valve with air spring closing.
+- **Turbochargers:** exhaust driven turbines drive compressors that supply scavenge air through **air coolers** to the scavenge air receiver; auxiliary blowers help at low load.
+- **Fuel system:** booster pumps, viscosity and temperature control for heavy fuel, high pressure pumps or common rail, and injectors.
+- **Electronic control (ME and X type engines):** replaces the camshaft with hydraulic actuators for fuel injection and exhaust valves, allowing optimised timing at all loads.
+
+## Thermal efficiency and power
+
+Engine power can be estimated from mean effective pressure:
+
+$$
+P = p_{me} \times A \times L \times n \times z
+$$
+
+where p_me is mean effective pressure, A piston area, L stroke, n revolutions per second (one power stroke per revolution for two-stroke) and z the number of cylinders. Thermal efficiency is the ratio of power to fuel energy:
+
+$$
+\eta = \frac{P}{\dot{m}_f \times LCV}
+$$
+
+following the principles in the [laws of thermodynamics](/mechanical-engineering/laws-of-thermodynamics/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 6 cylinder engine has bore 0.60 m, stroke 2.40 m, runs at 90 rpm with mean effective pressure 20 bar. Specific fuel consumption is 165 g/kWh, and the fuel's lower calorific value is 42 700 kJ/kg.</dd>
+<dt>Find</dt><dd>Indicated power and thermal efficiency.</dd>
+<dt>Assumptions</dt><dd>Mean effective pressure used directly; one power stroke per revolution.</dd>
+<dt>Solution</dt><dd>A = π × 0.60² ÷ 4 = 0.2827 m²<br />n = 90 ÷ 60 = 1.5 rev/s<br />P = 20 × 10⁵ × 0.2827 × 2.40 × 1.5 × 6 = 12.2 × 10⁶ W ≈ 12.2 MW<br />Fuel energy per kWh = 0.165 kg × 42 700 = 7046 kJ; η = 3600 ÷ 7046 = 0.511</dd>
+<dt>Answer</dt><dd><strong>About 12.2 MW, with a thermal efficiency of about 51%</strong></dd>
+<dt>Limitations</dt><dd>Brake power is lower than indicated power by mechanical losses; fuel consumption depends on load and ambient conditions.</dd>
+</dl>
+</Example>
+
+## Starting, reversing and manoeuvring
+
+The engine is started with compressed air at about 30 bar admitted to cylinders in firing sequence, turning the crankshaft until fuel injection begins. Fixed pitch propeller ships reverse by stopping the engine, changing the timing of fuel injection and exhaust valves, and restarting in the opposite direction, so two-stroke engines are directly reversible. Ships with controllable pitch propellers keep the engine turning in one direction and change blade pitch instead.
+
+## Fuels and emissions
+
+Two-stroke engines burn heavy fuel oil, very low sulphur fuel oil, marine gas oil and increasingly **LNG**, **methanol** and **ammonia** in dual fuel versions, to meet IMO decarbonisation goals. Emissions are controlled under **MARPOL Annex VI**: sulphur limits (0.5% globally, 0.1% in emission control areas) are met with low sulphur fuels or exhaust gas scrubbers, and Tier III NOx limits with **selective catalytic reduction** or **exhaust gas recirculation**. LNG fuel connects shipping to the [LNG process](/petroleum-engineering/lng-process/).
+
+## Operation and maintenance
+
+Key monitoring includes cylinder exhaust temperatures, scavenge air pressure and temperature, cylinder and piston cooling temperatures, bearing temperatures, oil mist detection in the crankcase and cylinder pressure measurement. Regular scavenge port inspections check piston rings, liners and deposits. Lubricating and cooling systems depend on [ship auxiliary machinery](/marine-engineering/ship-auxiliary-machinery/) such as purifiers and coolers, while the engine drives the propeller and sometimes a shaft generator feeding the [ship electrical power system](/marine-engineering/ship-electrical-power-system/). Lubrication principles are covered in [types of lubrication](/mechanical-engineering/types-of-lubrication/). Well maintained, a two-stroke marine diesel engine can run for decades and hundreds of thousands of hours.

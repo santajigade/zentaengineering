@@ -1,0 +1,158 @@
+---
+title: "Ship Stability: Metacentre, GM and Righting Lever"
+description: "Ship stability explained: centre of gravity, buoyancy, metacentre, GM, righting lever GZ, stability curves, free surface effect and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: marine-engineering
+subcategory: naval-architecture
+focusKeyword: "ship stability"
+image: { src: /images/featured/ship-stability-basics.webp, alt: "Ship Stability: Metacentre, GM and Righting Lever: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [ship-stability, metacentric-height, naval-architecture, righting-lever, free-surface-effect]
+faq:
+  - q: "Is a larger GM always better?"
+    a: "No. A positive GM is essential, but a very large GM makes a ship stiff: it rolls quickly and violently back to upright, which is uncomfortable, can damage cargo and stress lashings. A small GM gives a tender ship with slow, gentle rolls but less reserve of stability. Ships are loaded to keep GM within a recommended range for their type."
+  - q: "What is the free surface effect?"
+    a: "When a tank is partly filled, the liquid surface shifts towards the low side as the ship heels, moving the centre of gravity of the liquid sideways and reducing the righting lever. This acts like a rise in the ship's centre of gravity, called a virtual loss of GM. Keeping tanks either full or empty minimises the effect."
+  - q: "What are the IMO intact stability criteria?"
+    a: "The IMO 2008 Intact Stability Code sets minimum requirements for the stability curve, including areas under the GZ curve up to 30 and 40 degrees, a GZ of at least 0.20 m at 30 degrees or more, maximum GZ at an angle of at least 25 degrees and an initial GM of at least 0.15 m, plus a weather criterion for wind and rolling."
+references:
+  - text: "IMO, International Code on Intact Stability, 2008 (2008 IS Code), as amended"
+  - text: "E. C. Tupper, Introduction to Naval Architecture, 5th ed., Butterworth-Heinemann"
+  - text: "K. J. Rawson and E. C. Tupper, Basic Ship Theory, Vol. 1, 5th ed., Butterworth-Heinemann"
+  - text: "A. B. Biran and R. López-Pulido, Ship Hydrostatics and Stability, 2nd ed., Butterworth-Heinemann"
+  - text: "SOLAS Chapter II-1, Construction: Subdivision and stability, machinery and electrical installations"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Ship stability** is a ship's ability to return upright after being heeled by wind, waves or cargo shifts. Weight acts down through the **centre of gravity (G)** and buoyancy acts up through the **centre of buoyancy (B)**. When the ship heels, B moves towards the low side; for small angles the buoyancy line of action passes through the **metacentre (M)**. The **metacentric height GM = KM − KG** measures initial stability: if M is above G (positive GM), the ship rights itself. The **righting lever GZ ≈ GM sin θ** at small angles, and the **GZ curve** describes stability at large angles. The **free surface effect** of slack tanks reduces effective GM.
+
+</Key>
+
+Stability is a matter of life and death at sea. Many capsizes, from ferries to fishing boats, have resulted from poor loading, flooding, cargo shift or free surface effects. Every ship carries a stability booklet, and officers check stability before each voyage using hydrostatic data and loading computers.
+
+## Key points and terms
+
+- **K (keel):** reference point at the bottom of the hull.
+- **G (centre of gravity):** where the total weight of ship, cargo, fuel and ballast acts. Its height above the keel is **KG**.
+- **B (centre of buoyancy):** centroid of the underwater volume, where buoyancy acts. Height **KB**.
+- **M (metacentre):** for small angles of heel, the point where the vertical through the heeled centre of buoyancy meets the centreline. Height **KM**.
+- **BM (metacentric radius):** distance from B to M:
+
+$$
+BM = \frac{I_T}{\nabla}
+$$
+
+where I_T is the transverse second moment of area of the waterplane and ∇ the displaced volume. Wide ships have large I_T and therefore large BM.
+
+- **GM (metacentric height):**
+
+$$
+GM = KB + BM - KG = KM - KG
+$$
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Cross section of a ship heeled to starboard: waterline inclined; centre of gravity G on the centreline; centre of buoyancy moved from B to B1 towards the low side; buoyancy force acting upward through B1 crossing the centreline at metacentre M above G; weight acting down through G; horizontal distance GZ between the two lines is the righting lever">
+<g transform="rotate(12 300 160)">
+<path d="M170 80V200Q170 240 210 240H390Q430 240 430 200V80Z" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<path d="M300 60V250" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="6 4" />
+</g>
+<path d="M60 170H560" stroke="#13a89e" stroke-width="2" />
+<path d="M90 172Q300 180 520 168" stroke="#13a89e" stroke-width="0" />
+<g>
+<circle cx="304" cy="140" r="6" fill="#b42318" /><circle cx="320" cy="66" r="5" fill="#0b2545" />
+<circle cx="320" cy="210" r="6" fill="#13a89e" /><circle cx="289" cy="212" r="4" fill="#7b8794" />
+</g>
+<path d="M304 140V270" stroke="#b42318" stroke-width="3" /><path d="M297 262l7 12 7-12z" fill="#b42318" />
+<path d="M320 210V40" stroke="#13a89e" stroke-width="3" /><path d="M313 48l7-12 7 12z" fill="#13a89e" />
+<path d="M304 140H320" stroke="#0b2545" stroke-width="2.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545">
+<text x="284" y="138">G</text><text x="298" y="62">M</text><text x="330" y="216">B₁</text><text x="270" y="230" fill="#7b8794" font-size="11">B</text><text x="326" y="146">Z</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="330" y="44" fill="#13a89e">Buoyancy</text><text x="314" y="290" fill="#b42318">Weight</text><text x="345" y="122">GZ: righting lever</text>
+<text x="470" y="162" fill="#13a89e">Waterline</text><text x="70" y="100" font-size="11">Ship heeled by angle θ</text>
+</g>
+</svg>
+<figcaption>When the ship heels, B moves to B₁; weight and buoyancy form a righting couple with lever arm GZ (schematic).</figcaption>
+</figure>
+
+## Equilibrium conditions
+
+- **Stable:** M above G (GM positive). Heeling creates a righting moment that returns the ship upright.
+- **Neutral:** M coincides with G (GM zero). The ship stays at whatever angle it is pushed to.
+- **Unstable:** M below G (GM negative). Heeling creates a capsizing moment; the ship lolls to an angle or capsizes.
+
+## Righting lever and righting moment
+
+At small angles (up to about 10 to 15°):
+
+$$
+GZ \approx GM\,\sin\theta
+$$
+
+The **righting moment** is:
+
+$$
+RM = \Delta \times GZ
+$$
+
+where Δ is the displacement (weight). At larger angles, the shape of the hull above and below the waterline matters, so GZ is calculated from hydrostatic **cross curves** (KN values): GZ = KN − KG sin θ.
+
+## The GZ curve
+
+The **curve of statical stability** plots GZ against heel angle. Important features:
+
+- **Initial slope** equals GM (per radian).
+- **Maximum GZ** and the angle at which it occurs.
+- **Angle of vanishing stability**, beyond which GZ becomes negative and the ship capsizes.
+- **Area under the curve** represents the energy needed to heel the ship and is a measure of dynamic stability.
+
+Deck edge immersion and bilge emergence change the curve shape; freeboard and superstructure help large angle stability.
+
+## Free surface effect
+
+Liquid in a partly filled tank moves as the ship heels, shifting its centre of gravity sideways. This reduces GZ as if G had risen, a **virtual rise of G**:
+
+$$
+FSC = \frac{\rho_\text{liquid}\,i}{\Delta}
+$$
+
+where i is the second moment of area of the liquid surface about its centreline (for a rectangular tank i = l b³ ÷ 12) and Δ is the displacement mass. Effective **GM fluid = GM solid − FSC**. Wide tanks have very large effects because of the b³ term, which is why tanks are subdivided with longitudinal bulkheads.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A ship of displacement 10 000 t has KM = 8.0 m and KG = 7.2 m. It has one slack double bottom tank of fuel oil (density 0.95 t/m³) 15 m long and 12 m wide.</dd>
+<dt>Find</dt><dd>Solid GM, free surface correction, fluid GM and the righting moment at 10° heel.</dd>
+<dt>Assumptions</dt><dd>Small angle formula valid at 10°; rectangular tank.</dd>
+<dt>Solution</dt><dd>GM solid = 8.0 − 7.2 = 0.80 m<br />i = 15 × 12³ ÷ 12 = 2160 m⁴<br />FSC = 0.95 × 2160 ÷ 10 000 = 0.205 m<br />GM fluid = 0.80 − 0.205 = 0.595 m<br />GZ = 0.595 × sin 10° = 0.103 m<br />RM = 10 000 × 0.103 = 1030 t·m (about 10 100 kN·m)</dd>
+<dt>Answer</dt><dd><strong>The slack tank cuts GM from 0.80 m to about 0.60 m; righting moment at 10° is about 1030 tonne metres</strong></dd>
+<dt>Limitations</dt><dd>Large angle stability requires KN cross curves; the stability booklet and loading computer give approved values.</dd>
+</dl>
+</Example>
+
+## Inclining experiment
+
+The lightship KG, the starting point for all stability calculations, is found by an **inclining experiment** when the ship is built or significantly modified. Known weights are moved a measured distance across the deck, and the resulting small heel angle is measured with pendulums or electronic inclinometers. From the shifting moment and the heel, GM is calculated: GM = (w × d) ÷ (Δ × tan θ). Knowing KM from hydrostatic tables then gives KG. Every later loading condition builds on this result.
+
+## Longitudinal stability and trim
+
+Ships also need longitudinal stability. Because the waterplane is long, the longitudinal metacentric height is very large, so ships do not capsize end over end, but loading changes **trim**, the difference between forward and aft drafts. Trim affects propeller immersion, speed, fuel consumption and visibility from the bridge, and is controlled with ballast.
+
+## Practical ship stability management
+
+- **Loading:** heavy cargo low, light cargo high; check KG, GM and the GZ curve against the stability booklet before departure.
+- **Ballast:** add low ballast to lower G and increase GM; watch free surface during ballasting.
+- **Consumables:** fuel and water use changes G and free surface during the voyage.
+- **Cargo securing:** prevent shift of bulk cargo, containers and vehicles.
+- **Icing and deck cargo** raise G; fishing vessels and offshore supply ships are particularly vulnerable.
+- **Damage stability:** watertight subdivision under SOLAS ensures the ship survives specified flooding.
+
+## Related principles
+
+Ship stability is built on Archimedes' principle, the same physics that keeps [offshore platforms](/petroleum-engineering/offshore-platform-types/) afloat and governs [fixed vs floating offshore structures](/marine-engineering/fixed-vs-floating-offshore-structures/). Stability is also part of the safety framework set by [SOLAS](/marine-engineering/solas-lifesaving-firefighting/), and good ship stability, together with reliable propulsion from the [two-stroke marine diesel engine](/marine-engineering/two-stroke-marine-diesel-engine/), keeps ships safe in heavy weather.

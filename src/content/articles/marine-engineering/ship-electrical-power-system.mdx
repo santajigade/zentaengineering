@@ -1,0 +1,133 @@
+---
+title: "Ship Electrical Power System Layout"
+description: "Ship electrical power system explained: generators, main and emergency switchboards, distribution, insulated neutral, protection, load sharing and shore power."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: marine-engineering
+subcategory: ship-electrical-systems
+focusKeyword: "ship electrical power system"
+image: { src: /images/featured/ship-electrical-power-system.webp, alt: "Ship Electrical Power System Layout: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [marine-electrical, switchboard, generators, emergency-power, shore-power]
+faq:
+  - q: "Why do ships use insulated neutral systems?"
+    a: "In an insulated (unearthed) neutral system, a single earth fault does not cause a short circuit or trip the supply, so essential services such as steering gear and propulsion keep running. The fault is shown by an earth fault monitor, and engineers can locate and fix it. A second fault on another phase would trip, so the first must be cleared promptly."
+  - q: "What does the emergency generator supply?"
+    a: "The emergency generator, located above the bulkhead deck outside the machinery space, must start automatically and supply essential services within 45 seconds of a main power failure. These include emergency lighting, navigation lights, communications, fire detection and alarms, fire pump, steering gear (in some cases) and other services listed in SOLAS Chapter II-1, for 18 hours on cargo ships and 36 hours on passenger ships."
+  - q: "What is a preferential trip?"
+    a: "A preferential trip disconnects non-essential loads such as galley equipment, air conditioning and some pumps when generators become overloaded. This prevents a complete blackout by keeping essential services such as propulsion auxiliaries, steering and navigation running."
+references:
+  - text: "SOLAS Chapter II-1, Part D, Electrical installations"
+  - text: "IEC 60092 series, Electrical installations in ships"
+  - text: "H. D. McGeorge, Marine Electrical Equipment and Practice, 2nd ed., Butterworth-Heinemann"
+  - text: "D. T. Hall, Practical Marine Electrical Knowledge, 2nd ed., Witherby"
+  - text: "IEC/IEEE 80005-1, Utility connections in port, High voltage shore connection systems"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **ship electrical power system** generates, distributes and protects electrical power on board. Typically, two to four **diesel generators** (and sometimes a **shaft generator**) feed a **main switchboard** at **440 V or 690 V, 60 Hz, three phase** (or 6.6 kV and 11 kV on large ships). The main switchboard supplies large motors directly and feeds **distribution boards** and **transformers** for 230 V lighting and small loads. An **emergency generator** and **emergency switchboard**, outside the machinery space, power essential services if the main supply fails. Ships usually use an **insulated neutral** system with **earth fault monitoring**, and can connect to **shore power** in port.
+
+</Key>
+
+A modern ship is an isolated power station. It must supply propulsion auxiliaries, steering, navigation, cargo handling, refrigeration, accommodation and safety systems at sea for weeks, with no grid to fall back on. Reliability, redundancy and safety are designed in at every level, guided by SOLAS, classification society rules and the IEC 60092 standards.
+
+## Typical layout
+
+<figure>
+<svg width="600" height="310" viewBox="0 0 600 310" fill="none" role="img" aria-label="Single line diagram of a ship electrical system: three diesel generators and a shaft generator feed a main switchboard with a bus tie; the main switchboard supplies large motors, a 440 to 230 volt transformer for lighting and small power distribution boards, and the emergency switchboard through an interconnector; the emergency generator feeds the emergency switchboard which supplies emergency lighting, communications and fire pump; a shore connection box connects to the main switchboard">
+<g stroke="#0b2545" stroke-width="2">
+<circle cx="70" cy="40" r="22" fill="#e6f6f4" /><circle cx="150" cy="40" r="22" fill="#e6f6f4" /><circle cx="230" cy="40" r="22" fill="#e6f6f4" /><circle cx="310" cy="40" r="22" fill="#fff7e0" />
+<path d="M70 62V110M150 62V110M230 62V110M310 62V110" />
+</g>
+<path d="M40 110H340" stroke="#0b2545" stroke-width="6" />
+<path d="M180 104V116" stroke="#ffffff" stroke-width="5" />
+<g stroke="#0b2545" stroke-width="2">
+<path d="M70 110V160M150 110V160M230 110V150M300 110V250H450" />
+<rect x="50" y="160" width="40" height="30" rx="4" fill="#eef1f6" /><rect x="130" y="160" width="40" height="30" rx="4" fill="#eef1f6" />
+<circle cx="230" cy="162" r="12" fill="#ffffff" /><circle cx="230" cy="178" r="12" fill="#ffffff" />
+<path d="M230 190V220M190 220H270" />
+<rect x="180" y="225" width="40" height="25" rx="3" fill="#eef1f6" /><rect x="240" y="225" width="40" height="25" rx="3" fill="#eef1f6" />
+<path d="M200 220V225M260 220V225" />
+<circle cx="520" cy="190" r="22" fill="#ffe9e7" />
+<path d="M520 212V250" />
+</g>
+<path d="M440 250H580" stroke="#b42318" stroke-width="6" />
+<g stroke="#0b2545" stroke-width="2"><path d="M470 250V285M520 250V285M560 250V285" /></g>
+<rect x="360" y="90" width="60" height="40" rx="4" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<path d="M340 110H360" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="70" y="44">DG1</text><text x="150" y="44">DG2</text><text x="230" y="44">DG3</text><text x="310" y="44">SG</text>
+<text x="190" y="100" font-size="10">Main switchboard 440 V</text><text x="180" y="128" font-size="9">bus tie</text>
+<text x="70" y="179">Motor</text><text x="150" y="179">Motor</text><text x="270" y="172" font-size="10">440/230 V</text>
+<text x="200" y="241" font-size="10">DB</text><text x="260" y="241" font-size="10">DB</text>
+<text x="390" y="108">Shore</text><text x="390" y="122">power</text>
+<text x="520" y="194">EG</text><text x="510" y="240" font-size="10" fill="#b42318">Emergency switchboard</text>
+<text x="470" y="300" font-size="9">Em. light</text><text x="520" y="300" font-size="9">Comms</text><text x="565" y="300" font-size="9">Fire pump</text>
+<text x="380" y="243" font-size="9">Interconnector</text>
+</g>
+</svg>
+<figcaption>Simplified single line diagram of a ship electrical power system.</figcaption>
+</figure>
+
+### Generation
+
+- **Diesel generators (DG):** usually three or four medium or high speed diesel engines driving alternators. Several units allow one to be shut down for maintenance while others carry the load with spare capacity.
+- **Shaft generator (SG):** driven by the main engine, often through a power take-off gear, producing cheaper electricity at sea.
+- **Turbo generators** on ships with large exhaust gas boilers, and **battery systems** on hybrid vessels.
+- **Emergency generator (EG):** an independent diesel generator above the bulkhead deck with its own fuel tank, starting automatically on blackout.
+
+### Main switchboard
+
+The main switchboard collects generator output and distributes it. It contains **air circuit breakers** for each generator with protection relays, **synchronising equipment**, **bus tie breakers** splitting the board into two sections for redundancy, feeders for large consumers and section boards, **power management system** controls, metering and the **earth fault monitor**. Switchboard protection devices follow the same principles as on land, see [circuit breaker working principle](/electrical-engineering/circuit-breaker-working-principle/) and [overcurrent relay](/electrical-engineering/overcurrent-relay/).
+
+### Distribution
+
+- **440 V or 690 V:** large motors such as pumps, compressors, fans, cranes and bow thrusters.
+- **Transformers** step down to **230 V or 115 V** for lighting, galley, sockets and small equipment, as described in [transformer working principle](/electrical-engineering/transformer-working-principle/).
+- **Section and distribution boards** around the ship.
+- **24 V DC** systems with batteries for alarms, communications, navigation and emergency lighting backup.
+
+### Emergency power
+
+SOLAS requires a self-contained emergency source capable of supplying essential services: emergency lighting, navigation lights, radio and internal communications, fire detection and alarms, emergency fire pump, watertight doors, and others. A **transitional source** (batteries or UPS) covers the gap until the emergency generator starts, within 45 seconds.
+
+## Insulated neutral system and earth faults
+
+Most low voltage ship systems are **insulated neutral (IT)**: the generator star point is not connected to the hull. A single earth fault does not trip supplies, keeping essential services running, while the **earth fault monitor** alarms. Insulation must be maintained high; engineers test with insulation resistance testers, as in the [insulation resistance test](/electrical-engineering/insulation-resistance-test/). High voltage ship systems often use **high resistance earthing** to limit fault current while allowing selective protection.
+
+## Power management and load sharing
+
+When generators run in parallel, they must be **synchronised** before connecting (matching voltage, frequency and phase) and must share load:
+
+- **Active power (kW)** sharing is set by governors with speed droop.
+- **Reactive power (kVAR)** sharing is set by automatic voltage regulators.
+
+A **power management system (PMS)** starts and stops generators according to load, prevents blackouts by starting standby sets and blocking large motor starts until capacity is available, and performs **preferential tripping** of non-essential loads on overload.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A ship has three 900 kW diesel generators at 440 V, 60 Hz, power factor 0.8. At sea the load is 1250 kW. A 300 kW ballast pump motor is to be started.</dd>
+<dt>Find</dt><dd>Generator loading with two sets running, whether the pump can be started on two sets with a 85% maximum loading limit, and the current per generator.</dd>
+<dt>Assumptions</dt><dd>Equal load sharing; starting surge handled by spare capacity; three phase current I = P ÷ (√3 × V × pf).</dd>
+<dt>Solution</dt><dd>Two sets: capacity 1800 kW; load 1250 kW = 69%<br />After pump: 1550 kW = 86%, above the 85% limit, so the PMS should start the third generator first<br />Three sets: 1550 ÷ 2700 = 57%<br />Current per generator = (1550 ÷ 3) × 1000 ÷ (1.732 × 440 × 0.8) = 516 700 ÷ 609.7 ≈ 847 A</dd>
+<dt>Answer</dt><dd><strong>Start the third generator before the ballast pump; with three sets the load is 57%, about 850 A per generator</strong></dd>
+<dt>Limitations</dt><dd>Direct online motor starting draws several times rated current; soft starters or VFDs reduce the dip.</dd>
+</dl>
+</Example>
+
+## Blackout and recovery
+
+A blackout happens when all generators trip, for example from a fuel problem, governor fault or overload. The emergency generator starts automatically and restores essential services, while the power management system or engineers restart main generators, close breakers onto the dead bus, and restart essential auxiliaries in sequence so the main engine can run again. Blackout recovery is practised in drills because loss of propulsion near a coast or in heavy traffic is very dangerous.
+
+## Electric propulsion and hybrid ships
+
+Cruise ships, offshore vessels, icebreakers and LNG carriers often use **diesel electric propulsion**: generators feed a high voltage switchboard and large **variable frequency drives** power propulsion motors. This allows flexible engine loading and redundancy. **Battery hybrid** ships store energy for peak shaving, spinning reserve and zero emission port operations, similar to [battery energy storage systems](/renewable-energy/battery-energy-storage-systems/) on land.
+
+## Shore power and safety of the ship electrical power system
+
+**Shore power** (cold ironing) lets ships switch off generators in port, reducing emissions and noise, with high voltage shore connections standardised in IEC/IEEE 80005-1. Electrical safety on board covers enclosure ratings for wet and hazardous areas, cable selection under IEC 60092, regular insulation tests, safe isolation procedures and battery room ventilation. A well designed ship electrical power system keeps the vessel powered and safe, from the [ship auxiliary machinery](/marine-engineering/ship-auxiliary-machinery/) in the engine room to the lifesaving and firefighting equipment required by [SOLAS](/marine-engineering/solas-lifesaving-firefighting/).

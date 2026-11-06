@@ -1,0 +1,141 @@
+---
+title: "Fixed vs Floating Offshore Structures"
+description: "Fixed vs floating offshore structures compared: monopiles, jackets, gravity bases, semi-submersibles, spars, TLPs, floating wind, loads and moorings."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: marine-engineering
+subcategory: offshore-structures
+focusKeyword: "fixed vs floating offshore structures"
+image: { src: /images/featured/fixed-vs-floating-offshore-structures.webp, alt: "Fixed vs Floating Offshore Structures: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [offshore-structures, monopile, jacket, floating-wind, mooring]
+faq:
+  - q: "At what water depth do floating structures become better than fixed ones?"
+    a: "It depends on the application. For oil and gas, fixed jackets are usually economic up to about 300 to 400 m, beyond which floaters are preferred. For offshore wind, monopiles suit depths up to about 40 to 60 m and jackets up to about 60 to 80 m; beyond that, floating wind foundations become attractive."
+  - q: "What loads act on offshore structures?"
+    a: "Permanent loads (self weight and equipment), variable operating loads, environmental loads from waves, wind, current, ice and earthquakes, accidental loads such as ship impact, fire and explosion, and installation loads during lifting and transport. Wave loads usually dominate the structural design of fixed structures, while wave induced motions and mooring loads dominate floaters."
+  - q: "What is the difference between catenary and taut moorings?"
+    a: "Catenary moorings use long, heavy chain or wire lines that hang in a curve and lie partly on the seabed; their weight provides restoring force. Taut moorings use lighter synthetic fibre ropes running at an angle to anchors, providing restoring force through stretch. Taut systems have a smaller footprint and are preferred in deep water."
+references:
+  - text: "API RP 2A-WSD, Planning, Designing and Constructing Fixed Offshore Platforms"
+  - text: "DNV-ST-0126, Support structures for wind turbines, and DNV-ST-0119, Floating wind turbine structures"
+  - text: "ISO 19901-7, Stationkeeping systems for floating offshore structures and mobile offshore units"
+  - text: "S. K. Chakrabarti (ed.), Handbook of Offshore Engineering, Elsevier, 2005"
+  - text: "O. M. Faltinsen, Sea Loads on Ships and Offshore Structures, Cambridge University Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **fixed vs floating offshore structures**, **fixed (bottom founded)** structures transfer loads directly to the seabed through **piles** or their own **weight**: **monopiles**, **jackets**, **gravity based structures (GBS)** and **jack-ups**. They are stiff, have small motions and suit shallow to moderate depths. **Floating** structures rely on **buoyancy** for support and **moorings** or **tendons** for station keeping: **semi-submersibles**, **spars**, **tension leg platforms (TLPs)**, **FPSOs** and **floating wind** platforms. They suit deep water, can be built and maintained in port, but move with waves and need careful design of **stability**, **motions** and **moorings**.
+
+</Key>
+
+The ocean hosts oil and gas platforms, offshore wind farms, aquaculture, bridges, ports and research stations. Whether a structure stands on the seabed or floats is the first and most important design decision. It depends on water depth, seabed soil, environment, function, installation method and cost. Specific platform types used in oil and gas are covered in [offshore platform types](/petroleum-engineering/offshore-platform-types/); this article compares the two families more broadly, including offshore wind.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Side by side: left shows fixed structures, a monopile and a jacket, standing on the seabed in shallow water and carrying wind turbines; right shows floating structures in deep water, a semi-submersible with catenary mooring lines and a spar with taut mooring lines, both carrying wind turbines">
+<path d="M10 80H590" stroke="#13a89e" stroke-width="2" />
+<path d="M10 200H260L340 270H590" stroke="#8a6d3b" stroke-width="2.5" fill="none" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="140" y="20">Fixed (shallow)</text><text x="460" y="20">Floating (deep)</text></g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M70 30V220" stroke-width="6" />
+<path d="M70 30L55 22M70 30L85 22M70 30V18" stroke-width="2" />
+<path d="M170 30V70" stroke-width="4" /><path d="M170 30L155 22M170 30L185 22M170 30V18" />
+<path d="M150 70H190L205 200M150 70L135 200M190 70L175 200M150 70L165 200M140 130H200M137 170H203" fill="none" />
+<rect x="370" y="70" width="60" height="25" fill="#eef1f6" /><path d="M380 95V110H420V95" fill="#eef1f6" />
+<path d="M400 70V35" stroke-width="4" /><path d="M400 35L385 27M400 35L415 27M400 35V23" />
+<rect x="510" y="65" width="20" height="120" fill="#eef1f6" />
+<path d="M520 65V35" stroke-width="4" /><path d="M520 35L505 27M520 35L535 27M520 35V23" />
+</g>
+<g stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" fill="none"><path d="M370 100Q330 200 300 248M430 100Q470 200 500 270" /><path d="M510 170L455 270M530 170L585 270" stroke-dasharray="0" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="70" y="240">Monopile</text><text x="170" y="220">Jacket</text><text x="400" y="128">Semi-sub</text><text x="560" y="150">Spar</text>
+<text x="300" y="230">Catenary</text><text x="560" y="240">Taut</text>
+</g>
+</svg>
+<figcaption>Fixed structures stand on the seabed; floating structures are held by moorings (schematic, wind turbine examples).</figcaption>
+</figure>
+
+## Fixed offshore structures
+
+### Monopiles
+
+A single large steel tube, now often 8 to 11 m in diameter, driven or drilled into the seabed. The most common foundation for offshore wind turbines in water up to about 40 to 60 m. Simple and quick to install, but very heavy and sensitive to soil conditions and fatigue from waves and turbine loads.
+
+### Jackets
+
+Welded tubular steel frames pinned to the seabed by piles. Used for oil and gas platforms up to about 400 m and for offshore wind substations and turbines in deeper or difficult sites. Jackets are stiff, relatively transparent to waves and efficient in steel use. Their members behave like the [steel sections](/civil-engineering/steel-sections-types/) of onshore structures, but are designed for wave fatigue and corrosion.
+
+### Gravity based structures
+
+Large concrete or steel bases that rely on their weight to resist sliding and overturning, needing no piles. Suitable for hard seabeds, harsh environments and sites with ice. Concrete GBS can include oil storage cells.
+
+### Jack-ups
+
+Self elevating mobile units with legs that stand on the seabed, used for drilling, accommodation and wind turbine installation.
+
+**Advantages of fixed structures:** very small motions, simple dry access to wells or equipment, well proven, no mooring systems. **Limitations:** cost and steel weight rise steeply with depth; installation needs heavy lift vessels and calm weather; removal at end of life is complex.
+
+## Floating offshore structures
+
+### Semi-submersibles
+
+A deck supported by columns on submerged pontoons. Small waterplane area gives good motion characteristics; moored with spread mooring systems. Used for drilling, production, accommodation and many floating wind designs.
+
+### Spars
+
+A deep draft vertical cylinder with ballast at the bottom, giving very stable motions; moored by catenary or taut lines. Used for oil production and floating wind.
+
+### Tension leg platforms (TLPs)
+
+Excess buoyancy is resisted by vertical tendons anchored to the seabed, almost eliminating heave, pitch and roll. Used in oil and gas and proposed for wind.
+
+### Ship shaped units (FPSO, FLNG)
+
+Ship hulls with process plant, storage and offloading, often turret moored to weathervane.
+
+**Advantages of floating structures:** practical in deep water, can be fabricated and integrated at quayside, towed to site, and in some cases towed back for major repairs; less dependent on seabed conditions. **Limitations:** motions affect equipment, risers and people; moorings and dynamic cables are complex; hydrostatic stability and damage stability must be ensured, as in [ship stability](/marine-engineering/ship-stability-basics/).
+
+## Fixed vs floating offshore structures: comparison
+
+| Factor | Fixed | Floating |
+| --- | --- | --- |
+| Support | Seabed via piles or gravity | Buoyancy plus moorings or tendons |
+| Typical water depth | Shallow to moderate (wind up to about 60 to 80 m; oil and gas up to about 400 m) | Deep (wind beyond about 60 m; oil and gas to over 3000 m) |
+| Motions | Very small | Six degrees of freedom; must be controlled |
+| Installation | Heavy lift offshore, piling | Quayside assembly, tow out, mooring hook-up |
+| Seabed dependency | High | Lower (anchors only) |
+| Key design issues | Wave loads, fatigue, pile capacity, scour | Stability, motions, mooring and cable fatigue |
+| Maturity in wind | Mature, widely used | Early commercial |
+
+## Loads and design
+
+Wave forces on slender members of fixed structures are calculated with **Morison's equation**, combining drag and inertia terms:
+
+$$
+f = \tfrac{1}{2}\rho C_D D\,u|u| + \rho C_M \frac{\pi D^2}{4}\,\dot{u}
+$$
+
+Floaters are analysed for motions using hydrodynamic software, and their moorings for extreme and fatigue loads. Both must resist corrosion through coatings and cathodic protection, as discussed in [types of corrosion](/materials-engineering/types-of-corrosion/), and are designed for [fatigue failure](/materials-engineering/fatigue-failure/) under millions of wave cycles.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A floating wind semi-submersible displaces 12 000 t of seawater (density 1.025 t/m³). The turbine, tower and hull weigh 4000 t, and the mooring lines exert a downward pull of 300 t in still water. The remaining buoyancy is filled with water ballast.</dd>
+<dt>Find</dt><dd>The displaced volume and the ballast mass needed for equilibrium at the design draft.</dd>
+<dt>Assumptions</dt><dd>Still water; vertical forces only.</dd>
+<dt>Solution</dt><dd>Displaced volume = 12 000 ÷ 1.025 = 11 707 m³<br />Buoyancy force (mass) = 12 000 t must equal total weight: 4000 + 300 + ballast<br />Ballast = 12 000 − 4300 = 7700 t</dd>
+<dt>Answer</dt><dd><strong>The hull displaces about 11 700 m³ and needs about 7700 t of water ballast to float at design draft</strong></dd>
+<dt>Limitations</dt><dd>Stability also depends on the vertical position of ballast and the turbine thrust overturning moment; active ballast systems may adjust trim in operation.</dd>
+</dl>
+</Example>
+
+## Choosing between fixed vs floating offshore structures
+
+Soil investigations, metocean data on waves, wind and currents, and port and vessel availability are gathered early, because they often decide the answer.
+
+
+Engineers compare total lifecycle cost, including fabrication, transport, installation, operation, maintenance and decommissioning, together with technical risk and supply chain availability. In offshore wind, most current capacity is fixed bottom in shallow seas, but a large share of the world's wind resource lies over deep water, so floating platforms are expected to grow quickly, as noted in [how wind turbines work](/renewable-energy/how-wind-turbines-work/). The choice is not either or: a region may use monopiles near shore, jackets further out and floating platforms beyond the continental shelf.

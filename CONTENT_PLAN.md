@@ -264,9 +264,9 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| naval-architecture | Ship Stability: Metacentre, GM and Righting Lever | ship-stability-basics | fundamentals | to write |
-| marine-propulsion | Two-Stroke Marine Diesel Engine Working Principle | two-stroke-marine-diesel-engine | working-principle | to write |
-| auxiliary-systems | Ship Auxiliary Machinery: Purifiers, Freshwater Generators and Compressors | ship-auxiliary-machinery | equipment | to write |
-| ship-electrical-systems | Ship Electrical Power System Layout | ship-electrical-power-system | explanation | to write |
-| offshore-structures | Fixed vs Floating Offshore Structures | fixed-vs-floating-offshore-structures | comparison | to write |
-| marine-safety | SOLAS Lifesaving and Firefighting Equipment Overview | solas-lifesaving-firefighting | explanation | to write |
+| naval-architecture | Ship Stability: Metacentre, GM and Righting Lever | ship-stability-basics | fundamentals | draft |
+| marine-propulsion | Two-Stroke Marine Diesel Engine Working Principle | two-stroke-marine-diesel-engine | working-principle | draft |
+| auxiliary-systems | Ship Auxiliary Machinery: Purifiers, Freshwater Generators and Compressors | ship-auxiliary-machinery | equipment | draft |
+| ship-electrical-systems | Ship Electrical Power System Layout | ship-electrical-power-system | explanation | draft |
+| offshore-structures | Fixed vs Floating Offshore Structures | fixed-vs-floating-offshore-structures | comparison | draft |
+| marine-safety | SOLAS Lifesaving and Firefighting Equipment Overview | solas-lifesaving-firefighting | explanation | draft |
