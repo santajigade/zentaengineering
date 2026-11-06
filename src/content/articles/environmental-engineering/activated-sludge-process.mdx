@@ -1,0 +1,148 @@
+---
+title: "Activated Sludge Process in Wastewater Treatment"
+description: "Activated sludge process explained: aeration tank, secondary clarifier, return and waste sludge, F/M ratio, SRT, oxygen demand, nutrient removal and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: environmental-engineering
+subcategory: wastewater-treatment
+focusKeyword: "activated sludge process"
+image: { src: /images/featured/activated-sludge-process.webp, alt: "Activated Sludge Process in Wastewater Treatment: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [wastewater-treatment, activated-sludge, aeration, bod, secondary-treatment]
+faq:
+  - q: "What is sludge bulking?"
+    a: "Bulking is when sludge settles poorly in the secondary clarifier, usually because filamentous bacteria grow excessively. The sludge blanket rises and solids escape with the effluent. Causes include low dissolved oxygen, low F/M ratio, nutrient deficiency or septic wastewater. It is controlled by correcting the cause, selectors, or chlorinating return sludge."
+  - q: "What is the difference between BOD and COD?"
+    a: "BOD (biochemical oxygen demand) measures oxygen used by bacteria to break down biodegradable organic matter, usually over 5 days at 20 °C. COD (chemical oxygen demand) measures oxygen needed to chemically oxidise almost all organic matter with a strong oxidant, in a few hours. COD is always higher than BOD; the ratio indicates how biodegradable the wastewater is."
+  - q: "What is an MBR?"
+    a: "A membrane bioreactor replaces the secondary clarifier with micro or ultrafiltration membranes submerged in or next to the aeration tank. It produces very clear effluent suitable for reuse, allows higher biomass concentration in a smaller footprint, but costs more and needs membrane cleaning and more energy."
+references:
+  - text: "Metcalf & Eddy, Wastewater Engineering: Treatment and Resource Recovery, 5th ed., McGraw-Hill"
+  - text: "M. Henze et al., Biological Wastewater Treatment: Principles, Modelling and Design, IWA Publishing"
+  - text: "CPHEEO, Manual on Sewerage and Sewage Treatment Systems, Ministry of Housing and Urban Affairs, India, 2013"
+  - text: "E. Ardern and W. T. Lockett, Experiments on the Oxidation of Sewage without the Aid of Filters, J. Soc. Chem. Ind., 1914"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **activated sludge process** is the most widely used biological method for treating sewage and industrial wastewater. Wastewater is mixed with a concentrated population of microorganisms (**activated sludge**) in an **aeration tank**, where air or oxygen is supplied. The bacteria consume dissolved and suspended organic matter, measured as BOD, converting it to carbon dioxide, water and new cells. The mixture flows to a **secondary clarifier**, where the sludge settles; most is **returned** to the aeration tank (RAS) to keep the biomass high, and the excess is **wasted** (WAS) for treatment. The clear effluent is discharged or polished further.
+
+</Key>
+
+The activated sludge process was developed by Ardern and Lockett in Manchester in 1914. Over a century later it remains the backbone of municipal sewage treatment worldwide, with many variants that also remove nitrogen and phosphorus.
+
+## Where it fits in a treatment plant
+
+1. **Preliminary treatment:** screens and grit chambers remove rags, plastics and sand.
+2. **Primary treatment:** primary clarifiers settle about 50 to 70% of suspended solids and 25 to 40% of BOD.
+3. **Secondary (biological) treatment:** the activated sludge process removes most of the remaining organic matter.
+4. **Tertiary treatment:** filtration, disinfection, nutrient polishing or membranes for reuse.
+5. **Sludge treatment:** thickening, digestion, dewatering and disposal or reuse.
+
+<figure>
+<svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Activated sludge process: primary effluent enters the aeration tank with diffusers supplying air bubbles; mixed liquor flows to a circular secondary clarifier; clear effluent leaves over the weir; settled sludge is pumped back as return activated sludge to the aeration tank inlet, and excess sludge is removed as waste activated sludge">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="90" y="60" width="220" height="100" fill="#e6f6f4" />
+<path d="M370 60H520L490 160H400Z" fill="#eef1f6" />
+<rect x="190" y="200" width="60" height="30" rx="4" fill="#fff7e0" />
+</g>
+<g stroke="#7b8794" stroke-width="2"><path d="M110 150H290" /></g>
+<g fill="#ffffff" stroke="#13a89e" stroke-width="1.5"><circle cx="130" cy="135" r="4" /><circle cx="150" cy="115" r="4" /><circle cx="170" cy="130" r="4" /><circle cx="190" cy="105" r="4" /><circle cx="210" cy="125" r="4" /><circle cx="230" cy="100" r="4" /><circle cx="250" cy="130" r="4" /><circle cx="270" cy="110" r="4" /><circle cx="140" cy="90" r="4" /><circle cx="260" cy="85" r="4" /></g>
+<path d="M405 155L445 120L485 155" fill="#8a6d3b" fill-opacity="0.4" />
+<g stroke="#13a89e" stroke-width="2.5"><path d="M20 100H90M310 100H385M520 70H580" /></g>
+<g fill="#13a89e"><path d="M82 95l9 5-9 5z" /><path d="M377 95l9 5-9 5z" /><path d="M572 65l9 5-9 5z" /></g>
+<g stroke="#8a6d3b" stroke-width="2.5"><path d="M445 160V215H250M190 215H60V120H90" /><path d="M445 215V245H530" stroke-dasharray="6 3" /></g>
+<g fill="#8a6d3b"><path d="M82 115l9 5-9 5z" /><path d="M522 240l9 5-9 5z" /></g>
+<path d="M200 45V60M200 45H160" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="40" y="92">Influent</text><text x="200" y="182">Aeration tank</text><text x="140" y="40">Air blower</text>
+<text x="445" y="50">Secondary clarifier</text><text x="550" y="60">Effluent</text><text x="340" y="120" font-size="11">Mixed liquor</text>
+<text x="220" y="219" font-size="11">Pump</text><text x="120" y="208" fill="#8a6d3b">Return sludge (RAS)</text><text x="520" y="235" fill="#8a6d3b">Waste sludge (WAS)</text>
+<text x="200" y="146" font-size="10">Diffusers</text>
+</g>
+</svg>
+<figcaption>Basic layout of the activated sludge process with return and waste sludge streams.</figcaption>
+</figure>
+
+## How the activated sludge process works
+
+### Aeration tank
+
+Settled sewage mixes with returned sludge to form **mixed liquor**. Its suspended solids concentration, **MLSS**, is typically 2000 to 4000 mg/L in conventional plants. Blowers deliver air through fine bubble **diffusers** at the tank floor, or surface aerators churn the surface. Aeration does two jobs: it supplies oxygen for the bacteria, and it keeps the sludge in suspension. Dissolved oxygen is usually controlled around 1.5 to 2 mg/L.
+
+Heterotrophic bacteria use organic matter as food and energy:
+
+$$
+\text{Organics} + \mathrm{O_2} + \text{nutrients} \xrightarrow{\text{bacteria}} \mathrm{CO_2} + \mathrm{H_2O} + \text{new cells}
+$$
+
+Protozoa and rotifers graze on free bacteria, helping produce a clear effluent. The microbes clump into **flocs** held together by extracellular polymers, which is what lets them settle.
+
+### Secondary clarifier
+
+The mixed liquor flows to a quiescent clarifier where flocs settle into a sludge blanket and clear effluent overflows the weirs. Good settling is essential; it is measured by the **sludge volume index (SVI)**, the volume in mL occupied by 1 g of sludge after 30 minutes of settling. SVI below about 150 mL/g indicates good settling.
+
+### Return and waste sludge
+
+- **Return activated sludge (RAS)**, typically 50 to 100% of influent flow, keeps the biomass in the aeration tank high.
+- **Waste activated sludge (WAS)** removes the net growth of biomass and controls sludge age.
+
+## Key design and control parameters
+
+- **Hydraulic retention time (HRT):** V ÷ Q, typically 4 to 8 hours for conventional plants.
+- **Solids retention time (SRT) or sludge age:** the average time sludge stays in the system, typically 5 to 15 days; longer for nitrification.
+- **Food to microorganism ratio (F/M):**
+
+$$
+F/M = \frac{Q \times S_0}{V \times X}
+$$
+
+where S₀ is influent BOD and X is MLSS. Conventional plants run at about 0.2 to 0.4 kg BOD per kg MLSS per day.
+
+- **Volumetric loading:** kg BOD per m³ of tank per day.
+- **Oxygen requirement:** depends on BOD removed and nitrification; aeration often uses 50 to 60% of a plant's electricity.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant treats 10 000 m³/day of settled sewage with BOD 200 mg/L. The aeration tank volume is 2500 m³ and MLSS is 3000 mg/L.</dd>
+<dt>Find</dt><dd>The hydraulic retention time and the F/M ratio.</dd>
+<dt>Assumptions</dt><dd>Steady flow; MLSS used as the biomass measure.</dd>
+<dt>Solution</dt><dd>HRT = V ÷ Q = 2500 ÷ 10 000 = 0.25 day = 6 h<br />BOD load = 10 000 m³/d × 0.200 kg/m³ = 2000 kg/d<br />Biomass = 2500 m³ × 3.0 kg/m³ = 7500 kg<br />F/M = 2000 ÷ 7500 = 0.27 per day</dd>
+<dt>Answer</dt><dd><strong>HRT 6 hours and F/M 0.27 kg BOD per kg MLSS per day, within the conventional range</strong></dd>
+<dt>Limitations</dt><dd>Peak flows and seasonal temperature changes affect performance; design also checks SRT and oxygen demand.</dd>
+</dl>
+</Example>
+
+## Variants of the activated sludge process
+
+- **Conventional plug flow:** long, narrow tanks.
+- **Complete mix:** uniform conditions, robust to shock loads, as in a [CSTR](/chemical-engineering/cstr-vs-pfr/).
+- **Extended aeration and oxidation ditches:** long SRT, low sludge production, popular for small plants.
+- **Sequencing batch reactor (SBR):** fill, react, settle and decant in the same tank, in cycles.
+- **Biological nutrient removal (BNR):** anoxic zones for denitrification (removing nitrate as nitrogen gas) and anaerobic zones for enhanced biological phosphorus removal, in configurations such as A2O and Bardenpho.
+- **Membrane bioreactor (MBR):** membranes replace the clarifier, giving reuse quality effluent.
+- **Moving bed biofilm reactor (MBBR) and integrated fixed film (IFAS):** plastic carriers host biofilm to boost capacity.
+
+## Energy and resource recovery
+
+Aeration is energy hungry, so modern plants reduce it with fine bubble diffusers, efficient turbo blowers, dissolved oxygen and ammonia based control, and anoxic zones that use nitrate instead of oxygen. Waste activated sludge is thickened and fed to anaerobic digesters, where bacteria convert part of it to biogas that can run combined heat and power engines, covering a large share of the plant's own electricity. Digested sludge, after dewatering and stabilisation, can be used as a soil conditioner where regulations allow, and phosphorus can be recovered as struvite fertiliser. Treated effluent itself is increasingly reused for industry, irrigation and cooling.
+
+## Nitrogen removal basics
+
+Ammonia in sewage is oxidised to nitrate by slow growing nitrifying bacteria (nitrification), which need a long sludge age, enough oxygen and adequate alkalinity. In an anoxic zone without dissolved oxygen, other bacteria then use nitrate in place of oxygen and convert it to nitrogen gas (denitrification), using organic matter from the influent as food. Recycling nitrate rich mixed liquor from the aerobic zone back to the anoxic zone makes this work.
+
+## Common operating problems
+
+- **Bulking sludge** from filamentous bacteria, causing poor settling.
+- **Foaming** from Nocardia type organisms or surfactants.
+- **Rising sludge** when denitrification in the clarifier lifts sludge with nitrogen gas bubbles.
+- **Pin floc** and turbid effluent from very old sludge.
+- **Toxic shocks** from industrial discharges.
+
+Operators control the process through DO setpoints, RAS and WAS rates and microscopy. Online dissolved oxygen, ammonia, nitrate, MLSS and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) support automatic aeration control, which can cut blower energy significantly.
+
+The activated sludge process complements drinking [water treatment](/environmental-engineering/water-treatment-process/) in the urban water cycle, and its waste sludge is a resource for biogas and nutrients in a [circular economy](/environmental-engineering/circular-economy-principles/).

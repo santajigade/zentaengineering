@@ -1,0 +1,146 @@
+---
+title: "Solid Waste Management Hierarchy and Methods"
+description: "Solid waste management explained: the waste hierarchy, collection, segregation, recycling, composting, waste to energy, landfills and a landfill sizing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: environmental-engineering
+subcategory: waste-management
+focusKeyword: "solid waste management"
+image: { src: /images/featured/solid-waste-management.webp, alt: "Solid Waste Management Hierarchy and Methods: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [solid-waste-management, waste-hierarchy, recycling, composting, landfill]
+faq:
+  - q: "What is the waste management hierarchy?"
+    a: "It is a ranking of waste options from most to least preferred: prevention, reuse, recycling, recovery (including energy recovery), and disposal. It guides policy and practice so that waste is first avoided and kept in use, with landfill as the last resort."
+  - q: "Why is source segregation so important?"
+    a: "When wet organic waste, dry recyclables and hazardous items are kept separate at the source, each can be treated properly: organics composted or digested, recyclables sold cleanly, and hazardous items handled safely. Mixed waste is contaminated, harder to recycle, and usually ends up in landfills or dumps."
+  - q: "What is leachate?"
+    a: "Leachate is liquid that drains from a landfill after rainwater percolates through waste and mixes with liquids from decomposition. It contains organic matter, ammonia, salts and sometimes metals. Engineered landfills use liners and drainage layers to collect leachate and send it for treatment, protecting groundwater."
+references:
+  - text: "G. Tchobanoglous, H. Theisen and S. Vigil, Integrated Solid Waste Management, McGraw-Hill"
+  - text: "Directive 2008/98/EC on waste (Waste Framework Directive), European Union"
+  - text: "Solid Waste Management Rules, 2016, Ministry of Environment, Forest and Climate Change, India"
+  - text: "World Bank, What a Waste 2.0: A Global Snapshot of Solid Waste Management to 2050"
+  - text: "UNEP, Global Waste Management Outlook 2024"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Solid waste management** covers how waste is generated, collected, transported, processed and disposed of. It follows the **waste hierarchy**: **prevent** waste first, then **reuse**, **recycle**, **recover** (composting, anaerobic digestion, waste to energy), and only as a last resort **dispose** in an engineered **sanitary landfill**. Effective systems depend on **source segregation** into wet, dry and hazardous fractions, efficient **collection and transport**, appropriate **processing technologies** and safe residual disposal.
+
+</Key>
+
+The world generates more than two billion tonnes of municipal solid waste each year, and the World Bank projects this to rise sharply by 2050. Poorly managed waste blocks drains, spreads disease, pollutes water and air through open burning and dumps, and releases methane, a potent greenhouse gas. Good solid waste management is therefore a core part of public health, climate action and urban planning.
+
+## Types of solid waste
+
+- **Municipal solid waste (MSW):** from homes, shops, offices and institutions.
+- **Biodegradable (wet) waste:** food, garden and other organic waste, often 40 to 60% of MSW in developing countries.
+- **Dry waste:** paper, cardboard, plastics, metals, glass, textiles.
+- **Hazardous household waste:** batteries, paints, chemicals, medicines.
+- **Construction and demolition (C&D) waste:** concrete, bricks, soil, steel.
+- **E-waste, biomedical waste and industrial waste:** managed under separate, stricter rules.
+
+## The waste hierarchy
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Inverted pyramid of the waste hierarchy from most preferred at the top to least preferred at the bottom: prevention, reuse, recycling, recovery including composting and energy recovery, and disposal">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M80 20H520L484 70H116Z" fill="#13a89e" fill-opacity="0.7" />
+<path d="M116 70H484L448 120H152Z" fill="#13a89e" fill-opacity="0.45" />
+<path d="M152 120H448L412 170H188Z" fill="#f5b800" fill-opacity="0.45" />
+<path d="M188 170H412L376 220H224Z" fill="#f5b800" fill-opacity="0.7" />
+<path d="M224 220H376L340 270H260Z" fill="#b42318" fill-opacity="0.55" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545" text-anchor="middle" font-weight="700">
+<text x="300" y="50">Prevention</text><text x="300" y="100">Reuse</text><text x="300" y="150">Recycling</text><text x="300" y="200">Recovery</text><text x="300" y="250">Disposal</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="525" y="40">Most</text><text x="525" y="54">preferred</text><text x="400" y="260">Least preferred</text>
+<text x="20" y="196">Compost, biogas,</text><text x="20" y="210">waste to energy</text>
+</g>
+</svg>
+<figcaption>The waste hierarchy: options at the top conserve the most resources.</figcaption>
+</figure>
+
+1. **Prevention and reduction:** design products to use less material and last longer; reduce packaging and food waste.
+2. **Reuse:** repair, refill, refurbish and share items.
+3. **Recycling:** reprocess materials such as paper, PET, metals and glass into new products.
+4. **Recovery:** compost or digest organics; recover energy from non-recyclable waste.
+5. **Disposal:** landfill residues that cannot be treated otherwise.
+
+The hierarchy is a central idea of the [circular economy](/environmental-engineering/circular-economy-principles/).
+
+## Functional elements of a solid waste management system
+
+### Generation and source segregation
+
+Households and businesses separate waste into at least wet (biodegradable), dry (recyclable) and domestic hazardous streams, as required by rules such as India's Solid Waste Management Rules, 2016. Segregation at source is the single most effective step for improving recovery.
+
+### Collection and transport
+
+Door to door collection with compartmentalised vehicles, community bins and transfer stations. Collection and transport typically account for a large share, often 50 to 70%, of total system cost, so routes and vehicle sizes are optimised.
+
+### Processing and recovery
+
+- **Material recovery facilities (MRFs):** sort dry waste by hand and machine (screens, magnets, eddy current separators, optical sorters, air classifiers) into saleable fractions.
+- **Composting:** aerobic decomposition of organics in windrows, in-vessel systems or home composters, producing soil conditioner.
+- **Anaerobic digestion:** bacteria break down wet waste without oxygen, producing **biogas** (about 55 to 65% methane) and digestate fertiliser.
+- **Waste to energy:** incineration with energy recovery, or refuse derived fuel (RDF) for cement kilns. Needs waste with sufficient calorific value and strict air pollution control, often including [electrostatic precipitators](/environmental-engineering/electrostatic-precipitator/) or bag filters and acid gas scrubbing.
+- **C&D waste recycling** into aggregates and bricks.
+
+### Disposal in sanitary landfills
+
+An engineered landfill isolates waste from the environment:
+
+- **Composite liner** of compacted clay and HDPE geomembrane at the base.
+- **Leachate collection** pipes and treatment.
+- **Daily cover** of soil to control odour, litter, birds and fires.
+- **Landfill gas collection** for flaring or power generation.
+- **Final cap** with low permeability layers and vegetation.
+- **Groundwater monitoring wells** around the site.
+
+Old open dumps are being closed and **biomined**: excavated, screened and the fractions recovered, freeing land.
+
+## Landfill sizing
+
+The landfill volume needed over its life can be estimated from the waste reaching it and its compacted density:
+
+$$
+V = \frac{M}{\rho_\text{compacted}} \times (1 + c)
+$$
+
+where c allows for daily and intermediate cover, typically 0.1 to 0.2.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A town of 200 000 people generates 0.45 kg of MSW per person per day. Segregation, composting and recycling divert 60% of it. Residual waste is compacted to 0.9 t/m³ in the landfill, and cover adds 15% to the volume.</dd>
+<dt>Find</dt><dd>The landfill volume needed for 20 years, ignoring population growth.</dd>
+<dt>Assumptions</dt><dd>Constant generation and diversion; settlement ignored.</dd>
+<dt>Solution</dt><dd>Daily waste = 200 000 × 0.45 = 90 000 kg = 90 t<br />Residual to landfill = 90 × 0.40 = 36 t/day<br />20 year mass = 36 × 365 × 20 = 262 800 t<br />Volume = 262 800 ÷ 0.9 × 1.15 = 335 800 m³</dd>
+<dt>Answer</dt><dd><strong>About 336 000 m³ of landfill space; without the 60% diversion, it would need about 840 000 m³</strong></dd>
+<dt>Limitations</dt><dd>Real planning includes population growth, changing waste composition, settlement and site geometry.</dd>
+</dl>
+</Example>
+
+## Engineering the collection system
+
+Collection systems are designed around waste quantity, density and route efficiency. Engineers estimate generation per person, choose bin and vehicle sizes, and plan routes so that trucks are full but not overloaded, using GIS and route optimisation. Transfer stations let small collection vehicles hand over to large trucks for long haul to processing sites, cutting fuel use. Smart bins with fill level sensors and GPS tracking of vehicles help cities monitor service, and weighbridges at every facility record the tonnage that makes performance measurable.
+
+## Waste characterisation
+
+Before choosing technologies, engineers sample and sort waste to measure its composition, moisture content, density and calorific value. A city with mostly wet organic waste and low calorific value, typical of many Indian and African cities, suits composting and biogas, while a city with high paper and plastic content and low moisture may support refuse derived fuel or waste to energy. Seasonal sampling captures festival and monsoon variations.
+
+## Challenges and good practice
+
+- Build citizen awareness and enforce segregation with clear rules and user fees.
+- Integrate the **informal sector**, waste pickers and recyclers, who recover large quantities of material in many countries.
+- Apply **extended producer responsibility (EPR)** so producers fund collection and recycling of packaging, electronics and batteries.
+- Match processing technology to waste composition: high moisture, low calorific value waste suits composting and biogas better than incineration.
+- Track performance with weighbridges, data systems and public reporting.
+
+Solid waste management decisions are increasingly assessed with [life cycle assessment](/environmental-engineering/life-cycle-assessment/), and large facilities undergo [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/) before approval.

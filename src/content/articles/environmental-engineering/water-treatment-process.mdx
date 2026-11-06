@@ -1,0 +1,136 @@
+---
+title: "Water Treatment Process Steps Explained"
+description: "Water treatment process steps explained: screening, coagulation, flocculation, sedimentation, filtration, disinfection, sludge handling and a dosing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: environmental-engineering
+subcategory: water-treatment
+focusKeyword: "water treatment process"
+image: { src: /images/featured/water-treatment-process.webp, alt: "Water Treatment Process Steps Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [water-treatment, drinking-water, coagulation, filtration, disinfection]
+faq:
+  - q: "What is the difference between water treatment and wastewater treatment?"
+    a: "Water treatment makes raw water from rivers, lakes or wells safe to drink, focusing on removing turbidity, pathogens and dissolved contaminants. Wastewater treatment cleans used water from homes and industry before it returns to the environment, focusing on removing organic matter, nutrients and solids, often with biological processes such as activated sludge."
+  - q: "Why is chlorine still used if UV and ozone exist?"
+    a: "UV and ozone are strong primary disinfectants but leave no lasting residual in the water. Chlorine or chloramine leaves a residual that keeps protecting the water as it travels through pipes to consumers, preventing regrowth of bacteria. Many plants use UV or ozone first and chlorine for the residual."
+  - q: "What is a jar test?"
+    a: "A jar test is a laboratory simulation of coagulation, flocculation and settling using several beakers of raw water dosed with different amounts of coagulant. Operators compare floc formation and settled turbidity to choose the best chemical and dose, especially when raw water quality changes after rain."
+references:
+  - text: "WHO, Guidelines for Drinking-water Quality, 4th ed. incorporating the 1st and 2nd addenda, 2022"
+  - text: "MWH, Water Treatment: Principles and Design, 3rd ed., Wiley"
+  - text: "AWWA, Water Quality and Treatment: A Handbook on Drinking Water, 6th ed., McGraw-Hill"
+  - text: "IS 10500:2012, Drinking Water: Specification, Bureau of Indian Standards"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A conventional **water treatment process** turns raw surface water into safe drinking water in a sequence of steps: **intake and screening** to remove debris, **coagulation** with chemicals such as alum to destabilise fine particles, **flocculation** to grow them into larger flocs, **sedimentation** (clarification) to settle the flocs, **filtration** through sand or membranes to remove remaining particles and pathogens, and **disinfection**, usually with chlorine, to kill microorganisms and leave a protective residual. Extra steps such as aeration, softening, activated carbon or pH correction are added for specific problems.
+
+</Key>
+
+Rivers, lakes and reservoirs contain silt, algae, bacteria, viruses, organic matter and sometimes chemicals. A treatment plant removes these to meet drinking water standards such as the WHO Guidelines or national standards like IS 10500. The multiple barrier approach, where several steps each remove contaminants, protects public health even if one step underperforms.
+
+<figure>
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Conventional water treatment train: raw water intake with screen, rapid mix tank with coagulant dosing, flocculation tank with slow paddles, sedimentation tank with sludge withdrawal, sand filter, chlorine contact tank, then clear water storage and distribution">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="10" y="90" width="60" height="60" fill="#eef1f6" /><rect x="90" y="90" width="60" height="60" fill="#e6f6f4" /><rect x="170" y="90" width="80" height="60" fill="#e6f6f4" />
+<rect x="270" y="90" width="100" height="60" fill="#eef1f6" /><rect x="390" y="90" width="60" height="60" fill="#fff7e0" /><rect x="470" y="90" width="60" height="60" fill="#e6f6f4" /><rect x="545" y="90" width="45" height="60" fill="#eef1f6" />
+</g>
+<g stroke="#7b8794" stroke-width="1.5"><path d="M25 95V145M35 95V145M45 95V145M55 95V145" /><path d="M120 95V125M110 125H130" /><circle cx="195" cy="120" r="10" /><circle cx="225" cy="120" r="10" /><path d="M280 140L360 140L340 150H300Z" fill="#c9d2de" /><path d="M392 125H448M392 135H448M392 145H448" stroke="#8a6d3b" stroke-dasharray="3 2" /><path d="M478 105H522M478 120H500M500 135H522" /></g>
+<g stroke="#13a89e" stroke-width="2"><path d="M70 120h20M150 120h20M250 120h20M370 120h20M450 120h20M530 120h15" /></g>
+<g stroke="#b42318" stroke-width="2"><path d="M120 60V90M500 60V90" /></g>
+<path d="M320 150V180" stroke="#7b8794" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="40" y="168">Screen</text><text x="120" y="168">Rapid mix</text><text x="210" y="168">Flocculation</text><text x="320" y="198">Sludge</text><text x="320" y="82">Sedimentation</text><text x="420" y="168">Filter</text><text x="500" y="168">Disinfection</text><text x="567" y="168">Storage</text>
+<text x="120" y="52" fill="#b42318">Coagulant</text><text x="500" y="52" fill="#b42318">Chlorine</text><text x="40" y="82">Raw water</text>
+</g>
+<text x="300" y="235" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">Conventional treatment train for surface water</text>
+</svg>
+<figcaption>The main steps of a conventional surface water treatment plant.</figcaption>
+</figure>
+
+## 1. Intake, screening and pre-treatment
+
+Water is drawn from a river, reservoir or well. **Bar screens** and **fine screens** remove leaves, fish, plastics and floating debris. Some plants add:
+
+- **Pre-sedimentation** basins to settle heavy silt in monsoon conditions.
+- **Aeration** to remove dissolved gases such as hydrogen sulphide and carbon dioxide, and to oxidise iron and manganese so they can be removed as solids.
+- **Pre-chlorination or pre-ozonation** to control algae and oxidise contaminants, used carefully because of disinfection by-products.
+
+## 2. Coagulation
+
+Most turbidity comes from tiny colloidal particles of clay, silt and organic matter, often under 1 µm. They carry negative surface charges that repel each other, so they stay suspended indefinitely. A **coagulant** neutralises these charges:
+
+- **Aluminium sulphate (alum)**, the most common.
+- **Ferric chloride** or **ferric sulphate**.
+- **Polyaluminium chloride (PAC)**, effective over a wider pH range and at lower temperatures.
+
+The coagulant is added in a **rapid mix** tank or inline mixer with intense mixing for a few seconds to a minute, so it disperses quickly through all the water. The optimum chemical and dose are found with **jar tests** and depend on raw water turbidity, pH, alkalinity and temperature.
+
+## 3. Flocculation
+
+Destabilised particles collide and stick together to form visible **flocs**. Flocculation tanks use **gentle mixing** from slow paddles or baffles over about 20 to 40 minutes, so particles meet without breaking the fragile flocs. **Polymer flocculant aids** can strengthen flocs. Mixing intensity is expressed by the velocity gradient G, typically about 20 to 80 s⁻¹ in flocculators.
+
+## 4. Sedimentation (clarification)
+
+Water flows slowly through large tanks where the heavy flocs settle under gravity, typically over 2 to 4 hours in conventional basins. Settled **sludge** is removed from the bottom by scrapers. Design is based on the **surface overflow rate**:
+
+$$
+SOR = \frac{Q}{A}
+$$
+
+where Q is flow and A is the tank surface area. Typical values are about 1 to 2.5 m/h for conventional basins. **Tube or plate settlers** and **dissolved air flotation** (for light algal flocs) allow much more compact clarifiers.
+
+## 5. Filtration
+
+**Rapid sand filters** or **dual media filters** (anthracite over sand) remove the remaining fine flocs, particles and many microorganisms, bringing turbidity below about 0.3 to 1 NTU. Typical filtration rates are 5 to 15 m/h. As the bed clogs, head loss rises, and the filter is cleaned by **backwashing** with water and air. **Slow sand filters** rely on a biological layer and suit small communities. **Membrane filtration** (microfiltration and ultrafiltration) provides a physical barrier against bacteria and protozoa such as Cryptosporidium.
+
+## 6. Disinfection
+
+Disinfection inactivates bacteria, viruses and protozoa:
+
+- **Chlorine** (gas or sodium hypochlorite) is cheap and leaves a **residual** that protects the distribution network. Effectiveness depends on concentration and contact time, expressed as **CT** (mg·min/L).
+- **Chloramine** gives a longer lasting residual with fewer by-products.
+- **Ultraviolet (UV)** light is highly effective against Cryptosporidium and Giardia, with no chemicals but no residual.
+- **Ozone** is a strong oxidant and disinfectant that also improves taste and odour.
+
+A typical target is a free chlorine residual of about 0.2 to 0.5 mg/L at the consumer's tap.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant treats 20 MLD (million litres per day). Jar tests show an optimum alum dose of 30 mg/L. The sedimentation tank must have a surface overflow rate of no more than 1.5 m/h.</dd>
+<dt>Find</dt><dd>The daily alum consumption and the required sedimentation surface area.</dd>
+<dt>Assumptions</dt><dd>Constant flow; dose expressed as commercial alum.</dd>
+<dt>Solution</dt><dd>Alum = 30 mg/L × 20 × 10⁶ L/day = 600 × 10⁶ mg = 600 kg per day<br />Q = 20 000 m³/day ÷ 24 = 833 m³/h<br />A = Q ÷ SOR = 833 ÷ 1.5 = 556 m²</dd>
+<dt>Answer</dt><dd><strong>About 600 kg of alum per day and at least 556 m² of settling area, for example two tanks of 280 m² each</strong></dd>
+<dt>Limitations</dt><dd>Dose changes with raw water quality; design must also check detention time and peak flows.</dd>
+</dl>
+</Example>
+
+## Additional treatment steps
+
+- **Softening** with lime or ion exchange to reduce hardness.
+- **Activated carbon** (powdered or granular) to remove taste, odour, pesticides and organic micropollutants.
+- **Iron and manganese removal** by oxidation and filtration.
+- **Fluoride and arsenic removal** with activated alumina or specialised adsorbents where groundwater is affected.
+- **Reverse osmosis** for desalination of seawater and brackish water.
+- **pH and corrosion control** to protect pipes and prevent lead or copper leaching.
+
+## Groundwater treatment
+
+Groundwater is usually clear and free of most pathogens, so treatment is often simpler: aeration and filtration for iron and manganese, softening where hardness is high, removal of specific contaminants such as arsenic, fluoride or nitrate, and disinfection.
+
+## Sludge and residuals
+
+Sedimentation sludge and filter backwash water contain the removed solids and coagulant. They are thickened, dewatered with belt presses, centrifuges or drying beds, and disposed of or reused, while recovered water is often recycled to the plant inlet.
+
+## Monitoring and control of the water treatment process
+
+Plants monitor turbidity, pH, chlorine residual, flow and levels continuously, with laboratory tests for bacteria, metals and other parameters. Accurate [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) paces chemical dosing pumps to the plant flow, and [level measurement](https://www.instrumentationblog.in/category/process-instrumentation/level-measurement/) controls filter levels and storage tanks. Automation through [SCADA systems](/automation-robotics/scada-system-architecture/) helps operators respond quickly to changes in raw water quality.
+
+Used water returning from homes and industry needs a different set of processes, described in the [activated sludge process](/environmental-engineering/activated-sludge-process/).

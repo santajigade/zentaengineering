@@ -160,14 +160,14 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| water-treatment | Water Treatment Process Steps Explained | water-treatment-process | explanation | to write |
-| wastewater-treatment | Activated Sludge Process in Wastewater Treatment | activated-sludge-process | working-principle | to write |
-| air-pollution-control | Electrostatic Precipitator Working Principle | electrostatic-precipitator | working-principle | to write |
-| waste-management | Solid Waste Management Hierarchy and Methods | solid-waste-management | explanation | to write |
-| eia | Environmental Impact Assessment: Process and Steps | environmental-impact-assessment | explanation | to write |
-| emissions-compliance | Continuous Emissions Monitoring Systems (CEMS) Overview | cems-overview | explanation | to write |
-| recycling | Circular Economy Principles for Engineers | circular-economy-principles | fundamentals | to write |
-| sustainability | Life Cycle Assessment (LCA) Explained | life-cycle-assessment | fundamentals | to write |
+| water-treatment | Water Treatment Process Steps Explained | water-treatment-process | explanation | draft |
+| wastewater-treatment | Activated Sludge Process in Wastewater Treatment | activated-sludge-process | working-principle | draft |
+| air-pollution-control | Electrostatic Precipitator Working Principle | electrostatic-precipitator | working-principle | draft |
+| waste-management | Solid Waste Management Hierarchy and Methods | solid-waste-management | explanation | draft |
+| eia | Environmental Impact Assessment: Process and Steps | environmental-impact-assessment | explanation | draft |
+| emissions-compliance | Continuous Emissions Monitoring Systems (CEMS) Overview | cems-overview | explanation | draft |
+| recycling | Circular Economy Principles for Engineers | circular-economy-principles | fundamentals | draft |
+| sustainability | Life Cycle Assessment (LCA) Explained | life-cycle-assessment | fundamentals | draft |
 
 ## mining-engineering
 

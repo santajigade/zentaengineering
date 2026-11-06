@@ -1,0 +1,125 @@
+---
+title: "Life Cycle Assessment (LCA) Explained"
+description: "Life cycle assessment explained: ISO 14040 phases, goal and scope, functional unit, inventory, impact assessment, interpretation and a worked example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: environmental-engineering
+subcategory: sustainability
+focusKeyword: "life cycle assessment"
+image: { src: /images/featured/life-cycle-assessment.webp, alt: "Life Cycle Assessment (LCA) Explained: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [life-cycle-assessment, lca, iso-14040, carbon-footprint, sustainability]
+faq:
+  - q: "What is the difference between cradle to gate and cradle to grave?"
+    a: "Cradle to gate covers a product from raw material extraction to the factory gate, ignoring use and end of life. Cradle to grave adds distribution, use and disposal. Cradle to cradle (or with end of life recovery) also credits recycling or reuse that returns materials to new products."
+  - q: "What is an EPD?"
+    a: "An Environmental Product Declaration is a standardised, third party verified report of a product's life cycle environmental impacts, based on LCA and product category rules under ISO 14025 and, for construction products, EN 15804. EPDs let buyers compare products on a consistent basis."
+  - q: "Is a carbon footprint the same as an LCA?"
+    a: "A carbon footprint is a life cycle assessment limited to one impact category, climate change, measured in kg CO₂ equivalent (ISO 14067 for products). A full LCA considers many categories, such as acidification, water use and toxicity, which helps avoid shifting burdens from one problem to another."
+references:
+  - text: "ISO 14040:2006, Environmental management: Life cycle assessment, Principles and framework"
+  - text: "ISO 14044:2006, Environmental management: Life cycle assessment, Requirements and guidelines"
+  - text: "European Commission JRC, ILCD Handbook: General guide for Life Cycle Assessment, 2010"
+  - text: "M. Z. Hauschild, R. K. Rosenbaum and S. I. Olsen (eds.), Life Cycle Assessment: Theory and Practice, Springer, 2018"
+  - text: "ISO 14067:2018, Greenhouse gases: Carbon footprint of products"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Life cycle assessment** (LCA) measures the environmental impacts of a product, process or service across its whole life, from **raw material extraction** through **manufacturing**, **transport**, **use** and **end of life**. Under **ISO 14040 and 14044** it has four phases: **goal and scope definition** (including the **functional unit** and **system boundary**), **life cycle inventory (LCI)** of all inputs and emissions, **life cycle impact assessment (LCIA)** that converts them into impact categories such as climate change, and **interpretation** of results with sensitivity checks.
+
+</Key>
+
+A product that looks green at the point of use may cause large impacts elsewhere: in mining, energy intensive production, long supply chains or disposal. LCA gives a complete, quantitative picture so that engineers and decision makers can compare options fairly, find hotspots and avoid simply moving a problem from one stage or place to another.
+
+## The four phases of life cycle assessment
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="ISO 14040 LCA framework: goal and scope definition, inventory analysis and impact assessment stacked on the left, each linked by two way arrows to interpretation on the right; direct applications such as product development, policy and marketing shown outside the framework">
+<rect x="20" y="20" width="400" height="240" rx="10" fill="none" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="45" y="40" width="190" height="55" rx="6" fill="#e6f6f4" /><rect x="45" y="112" width="190" height="55" rx="6" fill="#eef1f6" /><rect x="45" y="184" width="190" height="55" rx="6" fill="#fff7e0" />
+<rect x="290" y="40" width="110" height="199" rx="6" fill="#ffe9e7" />
+<rect x="460" y="90" width="125" height="100" rx="6" fill="#ffffff" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M140 95v17M140 167v17M235 67h55M235 139h55M235 211h55M400 139h60" /></g>
+<g fill="#13a89e"><path d="M135 106l5 8 5-8z" /><path d="M135 178l5 8 5-8z" /><path d="M282 62l8 5-8 5z" /><path d="M282 134l8 5-8 5z" /><path d="M282 206l8 5-8 5z" /><path d="M243 62l-8 5 8 5z" /><path d="M243 134l-8 5 8 5z" /><path d="M243 206l-8 5 8 5z" /><path d="M452 134l8 5-8 5z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="140" y="64" font-weight="700">1. Goal and scope</text><text x="140" y="82" font-size="11">functional unit, boundary</text>
+<text x="140" y="136" font-weight="700">2. Inventory (LCI)</text><text x="140" y="154" font-size="11">inputs and emissions</text>
+<text x="140" y="208" font-weight="700">3. Impact assessment</text><text x="140" y="226" font-size="11">LCIA categories</text>
+<text x="345" y="134" font-weight="700">4. Interpre-</text><text x="345" y="150" font-weight="700">tation</text>
+<text x="522" y="114" font-weight="700">Applications</text><text x="522" y="134" font-size="11">product design</text><text x="522" y="150" font-size="11">policy</text><text x="522" y="166" font-size="11">EPDs, reporting</text>
+</g>
+</svg>
+<figcaption>The ISO 14040 framework: the phases are iterative, with interpretation linked to all of them.</figcaption>
+</figure>
+
+### Phase 1: goal and scope definition
+
+- **Goal:** why the study is done, for whom, and whether results will be used for public comparative claims (which need critical review).
+- **Functional unit:** the quantified function on which all comparisons are based, for example "lighting 10 m² at 500 lux for 10 years" or "transporting one tonne of goods 1 km". Comparing per product rather than per function can mislead.
+- **System boundary:** which life cycle stages and processes are included: cradle to gate, cradle to grave or cradle to cradle.
+- **Allocation rules** for shared processes and recycling, **cut-off criteria**, data quality requirements and chosen impact categories.
+
+### Phase 2: life cycle inventory (LCI)
+
+All flows crossing the system boundary are quantified per functional unit: raw materials, energy, water, land use, and emissions to air, water and soil, plus waste. **Foreground data** for processes the study owner controls are collected directly (meter readings, bills of materials, supplier data). **Background data** for electricity, materials and transport come from databases such as ecoinvent or national inventories. Building the inventory is usually the most time consuming phase, similar in spirit to a detailed [material balance](/chemical-engineering/material-balance/).
+
+### Phase 3: life cycle impact assessment (LCIA)
+
+Inventory flows are assigned to **impact categories** and multiplied by **characterisation factors**:
+
+$$
+I_c = \sum_i m_i \times CF_{i,c}
+$$
+
+where m_i is the mass of substance i emitted and CF its characterisation factor for category c. For **climate change**, factors are global warming potentials (GWP100): CO₂ = 1, methane about 27 to 30 and nitrous oxide about 273 kg CO₂e per kg (IPCC AR6).
+
+Common categories include climate change, ozone depletion, acidification, eutrophication, photochemical smog, particulate matter, human and ecotoxicity, water use, land use and resource depletion. Methods such as ReCiPe and the EU Environmental Footprint can also normalise and weight results into single scores, which is optional and value based.
+
+### Phase 4: interpretation
+
+Results are checked for completeness, consistency and sensitivity to key assumptions, such as electricity mix, product lifetime or end of life route. **Hotspots** are identified, conclusions and limitations stated, and recommendations made.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Compare two ways to supply 1000 hours of lighting at the same light output (the functional unit). Bulb A: incandescent, 60 W, lasts 1000 h, manufacturing 0.5 kg CO₂e per bulb. Bulb B: LED, 8 W, lasts 15 000 h, manufacturing 3 kg CO₂e per bulb. Grid electricity emits 0.7 kg CO₂e per kWh.</dd>
+<dt>Find</dt><dd>The carbon footprint of each option per functional unit.</dd>
+<dt>Assumptions</dt><dd>Manufacturing impact allocated by share of lifetime used; end of life ignored.</dd>
+<dt>Solution</dt><dd>A: use = 60 W × 1000 h = 60 kWh × 0.7 = 42.0 kg; manufacturing = 0.5 kg (one bulb); total = 42.5 kg CO₂e<br />B: use = 8 W × 1000 h = 8 kWh × 0.7 = 5.6 kg; manufacturing = 3 × 1000 ÷ 15 000 = 0.2 kg; total = 5.8 kg CO₂e</dd>
+<dt>Answer</dt><dd><strong>Incandescent 42.5 kg vs LED 5.8 kg CO₂e per 1000 hours: the LED cuts emissions by about 86%, and the use phase dominates both</strong></dd>
+<dt>Limitations</dt><dd>Results depend strongly on the electricity mix; a single category hides other impacts such as electronics waste.</dd>
+</dl>
+</Example>
+
+## Types and uses of LCA
+
+- **Attributional LCA:** describes the impacts attributable to a product system as it is.
+- **Consequential LCA:** estimates how impacts change in the wider economy as a result of a decision.
+- **Streamlined or screening LCA:** quick, lower data versions for early design choices.
+- **Social LCA and life cycle costing** extend the approach to social and economic aspects.
+
+Applications include eco-design, choosing materials and suppliers, comparing technologies such as [solar PV systems](/renewable-energy/how-solar-pv-systems-work/) against fossil generation, Environmental Product Declarations, carbon footprint labels and policy making.
+
+## LCA software and data
+
+Practitioners use dedicated software such as SimaPro, GaBi (now LCA for Experts), openLCA and Brightway to model product systems and link them to inventory databases. Data quality is assessed for time, geography and technology relevance, and uncertainty can be explored with Monte Carlo analysis. For engineering firms, a practical approach is to start with a screening LCA in early design to find hotspots, then refine the model with primary supplier and process data for the options that matter most. Reporting should state the functional unit, boundary, data sources, allocation choices and limitations clearly.
+
+## Life cycle assessment in buildings and infrastructure
+
+In construction, LCA covers embodied carbon in materials such as cement, steel and glass as well as operational energy over decades. Standards like EN 15978 define the life cycle modules, and many green building rating systems now award credits for whole building LCA and EPDs.
+
+## Common pitfalls in life cycle assessment
+
+- Using an unfair functional unit or system boundary.
+- Ignoring the use phase or end of life when they dominate.
+- Over-relying on generic database data for key processes.
+- Reporting a single score without showing trade-offs between categories.
+- Drawing comparative public claims without critical review.
+
+LCA is the quantitative backbone of [circular economy principles](/environmental-engineering/circular-economy-principles/) and complements site specific [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/). Used well, it helps engineers make choices that genuinely reduce environmental impact rather than just moving it.

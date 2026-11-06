@@ -1,0 +1,151 @@
+---
+title: "Continuous Emissions Monitoring Systems (CEMS) Overview"
+description: "CEMS overview: extractive and in-situ systems, gas analysers, dust monitors, flow measurement, data acquisition, calibration, QAL standards and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: environmental-engineering
+subcategory: emissions-compliance
+focusKeyword: "cems"
+image: { src: /images/featured/cems-overview.webp, alt: "Continuous Emissions Monitoring Systems (CEMS) Overview: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [cems, emissions-monitoring, gas-analysers, stack-monitoring, compliance]
+faq:
+  - q: "What is the difference between extractive and in-situ CEMS?"
+    a: "An extractive CEMS draws a sample of flue gas through a heated probe and line to analysers in a shelter, conditioning it first if needed. An in-situ CEMS measures directly in the stack or duct, usually with an optical path across the duct or a probe mounted analyser. Extractive systems are flexible and easier to calibrate; in-situ systems have fast response and no sample handling."
+  - q: "Why do emissions need to be corrected to reference oxygen?"
+    a: "Adding extra air dilutes the flue gas and lowers measured concentrations without reducing the actual pollution. Correcting all values to a reference oxygen level, such as 6% for solid fuel boilers or 11% for incinerators, removes this effect so that results can be compared fairly with limits."
+  - q: "How often must a CEMS be calibrated?"
+    a: "Daily automatic zero and span checks are typical, plus periodic audits and linearity tests. Under EN 14181, the system is calibrated against a standard reference method by an accredited laboratory (QAL2) after installation and repeated every few years, with an annual surveillance test (AST) in between."
+references:
+  - text: "EN 14181:2014, Stationary source emissions: Quality assurance of automated measuring systems"
+  - text: "EN 15267-3, Air quality: Certification of automated measuring systems, Performance criteria for stationary source emissions"
+  - text: "U.S. EPA, 40 CFR Part 60 Appendix B, Performance Specifications, and Part 75, Continuous Emission Monitoring"
+  - text: "Central Pollution Control Board, Guidelines for Continuous Emission Monitoring Systems, India, 2018"
+  - text: "J. A. Jahnke, Continuous Emission Monitoring, 2nd ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **CEMS** (continuous emissions monitoring system) measures pollutants in stack gases around the clock and reports them to plant operators and regulators. A typical system includes **gas analysers** for SO₂, NOx, CO, CO₂ and O₂ (plus HCl, NH₃ or others as needed), a **particulate (dust) monitor**, **flow, temperature and pressure** sensors to calculate mass emissions, a **sampling system** (for extractive designs) and a **data acquisition and handling system (DAHS)**. CEMS must be certified and regularly calibrated under standards such as **EN 14181** or **US EPA performance specifications**.
+
+</Key>
+
+Power plants, cement kilns, refineries, steel plants, incinerators and many other industries must prove they meet emission limits. Occasional stack sampling shows only a snapshot. A CEMS provides continuous evidence, triggers alarms when limits approach, supports emissions trading and helps operators tune combustion and pollution control equipment.
+
+## What a CEMS measures
+
+- **Gases:** sulphur dioxide (SO₂), nitrogen oxides (NO and NO₂ as NOx), carbon monoxide (CO), carbon dioxide (CO₂), oxygen (O₂), hydrogen chloride (HCl), hydrogen fluoride (HF), ammonia (NH₃) slip, total organic carbon (TOC) and mercury where required.
+- **Particulate matter (PM):** dust concentration in mg/m³.
+- **Diluents and reference conditions:** O₂ or CO₂, moisture, temperature and pressure for normalising results.
+- **Flow rate:** volumetric flow to convert concentration into mass emission rate (kg/h).
+
+## CEMS types
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Extractive CEMS: a heated probe in the stack withdraws sample gas through a heated line to a sample conditioning unit with a cooler and filter, then to gas analysers in a shelter; a dust monitor and flow monitor are mounted on the stack; all signals go to the data acquisition system and then to the regulator's server">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M60 20V270M140 20V270" />
+<rect x="250" y="120" width="90" height="60" rx="4" fill="#eef1f6" /><rect x="370" y="120" width="90" height="60" rx="4" fill="#e6f6f4" /><rect x="490" y="120" width="95" height="60" rx="4" fill="#fff7e0" /><rect x="490" y="215" width="95" height="40" rx="4" fill="#ffe9e7" />
+<rect x="140" y="60" width="40" height="22" fill="#e6f6f4" /><rect x="140" y="210" width="40" height="22" fill="#e6f6f4" />
+</g>
+<path d="M80 150H140" stroke="#0b2545" stroke-width="3" />
+<path d="M140 150H250" stroke="#b42318" stroke-width="2.5" />
+<g stroke="#13a89e" stroke-width="2"><path d="M340 150h30M460 150h30M537 180v35" /><path d="M180 71H537V120M180 221H232V100H537" stroke-dasharray="5 3" stroke="#7b8794" /></g>
+<g stroke="#f5b800" stroke-width="2" fill="none"><path d="M90 230Q95 215 100 230T110 230T120 230" /><path d="M90 255Q95 240 100 255T110 255T120 255" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="100" y="40">Stack</text><text x="110" y="140" font-size="11">Probe</text><text x="195" y="143" font-size="11" fill="#b42318">Heated line</text>
+<text x="295" y="146">Sample</text><text x="295" y="162">conditioning</text>
+<text x="415" y="146">Gas</text><text x="415" y="162">analysers</text>
+<text x="537" y="146">Data</text><text x="537" y="162">system</text>
+<text x="537" y="240">Regulator</text>
+<text x="230" y="64" font-size="11">Dust monitor</text><text x="180" y="250" font-size="11">Flow monitor</text>
+<text x="100" y="275" font-size="11">Flue gas</text>
+</g>
+</svg>
+<figcaption>A typical extractive CEMS with stack mounted dust and flow monitors.</figcaption>
+</figure>
+
+### Extractive systems
+
+A **heated probe** with a filter draws a continuous sample from the stack.
+
+- **Hot wet extractive:** the sample is kept above its dew point all the way to a heated analyser, essential for water soluble gases such as HCl and NH₃.
+- **Cold dry extractive:** the sample passes through a **chiller** that removes moisture, then to analysers. Results are on a dry basis and simpler analysers can be used, but some soluble gases are lost.
+- **Dilution extractive:** the sample is diluted with clean dry air at the probe, avoiding condensation without heated lines; common in the USA.
+
+### In-situ systems
+
+- **Cross-stack (path) analysers** send a light beam across the duct and measure absorption, for example by differential optical absorption spectroscopy (DOAS) or tunable diode lasers (TDLAS).
+- **Probe type in-situ** analysers measure inside a filtered probe in the gas stream, such as zirconia O₂ probes.
+
+## Analyser technologies
+
+| Measurement | Common principles |
+| --- | --- |
+| SO₂, NO, CO, CO₂ | Non-dispersive infrared (NDIR), UV absorption, FTIR |
+| NOx | Chemiluminescence, UV absorption |
+| O₂ | Zirconia cell, paramagnetic |
+| HCl, NH₃, HF | TDLAS, FTIR (hot wet) |
+| Total organic carbon | Flame ionisation detector (FID) |
+| Mercury | Cold vapour atomic absorption or fluorescence |
+| Particulate | Light scattering, opacity (transmissometer), probe electrification, beta attenuation |
+| Flow | Ultrasonic transit time, differential pressure (averaging pitot), thermal dispersion |
+
+FTIR analysers can measure many components at once, which suits incinerators and complex processes.
+
+## Data acquisition and reporting
+
+The **DAHS** collects analyser signals, often 4 to 20 mA or digital, applies conversions, corrects to standard conditions and reference oxygen, calculates averages (for example half hourly and daily), checks validity, stores records and sends data to the regulator. In India, CPCB requires real time online transmission to its servers. Analogue signals are scaled as described in [signals in instrumentation](https://www.instrumentationblog.in/signals-in-instrumentation-ai-ao-di-do/).
+
+### Reference oxygen correction
+
+Concentrations are normalised to a reference oxygen level:
+
+$$
+C_\text{ref} = C_\text{meas} \times \frac{20.9 - O_{2,\text{ref}}}{20.9 - O_{2,\text{meas}}}
+$$
+
+with concentrations at standard temperature and pressure on a dry basis.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A coal boiler CEMS measures SO₂ at 520 mg/Nm³ dry with 8.0% O₂. The emission limit is 600 mg/Nm³ at 6% O₂. Dry flue gas flow is 400 000 Nm³/h.</dd>
+<dt>Find</dt><dd>SO₂ corrected to 6% O₂, compliance, and the mass emission rate.</dd>
+<dt>Assumptions</dt><dd>Measurement already normalised to standard temperature and pressure, dry basis.</dd>
+<dt>Solution</dt><dd>C_ref = 520 × (20.9 − 6) ÷ (20.9 − 8.0) = 520 × 14.9 ÷ 12.9 = 600.6 mg/Nm³<br />Mass rate = 520 mg/Nm³ × 400 000 Nm³/h = 208 kg/h (using actual measured O₂ and flow)</dd>
+<dt>Answer</dt><dd><strong>Corrected SO₂ is about 601 mg/Nm³, just above the 600 limit; actual emission is about 208 kg/h</strong></dd>
+<dt>Limitations</dt><dd>Compliance is usually judged on validated averages after subtracting measurement uncertainty allowed by the regulation.</dd>
+</dl>
+</Example>
+
+## Selecting and installing a CEMS
+
+A successful CEMS project starts with the regulatory requirements: which parameters, ranges, averaging periods and certification standards apply. The measurement location must have fully developed, representative flow, typically several duct diameters downstream of bends, fans and dampers, with safe platforms, power and weather protection. Engineers then choose between extractive and in-situ designs based on gas composition, moisture, dust load, temperature and corrosive components. Heated sample lines must stay above the acid dew point, and shelters need air conditioning to keep analysers stable. Instrument air, calibration gas storage and data communication links to the plant control system and the regulator complete the design. A stratification test across the duct confirms that a single point probe gives a representative sample.
+
+## Quality assurance
+
+Reliable CEMS data needs a structured quality system:
+
+- **Certified analysers** (QAL1 under EN 15267) suitable for the range and application.
+- **Daily zero and span checks** with certified gases, and drift monitoring.
+- **QAL2:** calibration against a standard reference method by an accredited lab, producing a calibration function and variability test.
+- **QAL3:** ongoing drift and precision control charts by the operator.
+- **Annual surveillance test (AST)** to confirm the calibration remains valid.
+- In the USA, **relative accuracy test audits (RATA)** and cylinder gas audits.
+
+Good maintenance includes probe filter cleaning, heated line checks, chiller and pump servicing, and keeping spare parts and calibration gases in stock.
+
+## Common CEMS problems
+
+- Blocked probe filters or condensation in sample lines, giving low readings.
+- Analyser drift from temperature changes in the shelter.
+- Leaks in the sample system diluting the gas with ambient air, which shows up as high oxygen.
+- Expired calibration gases or wrong certified values entered in the system.
+
+## Using CEMS beyond compliance
+
+Operators use CEMS data to tune combustion (O₂ and CO), optimise urea or ammonia dosing in SCR and SNCR systems, monitor the performance of [electrostatic precipitators](/environmental-engineering/electrostatic-precipitator/) and scrubbers, and report greenhouse gas emissions. CEMS data also verifies predictions made during [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/). For more on analytical and process instruments, see [process instrumentation articles on Instrumentation Blog](https://www.instrumentationblog.in/category/process-instrumentation/).
