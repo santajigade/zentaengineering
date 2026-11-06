@@ -1,0 +1,138 @@
+---
+title: "Distillation Column Working Principle and Parts"
+description: "Distillation column working principle explained: relative volatility, trays, packing, condenser, reflux and reboiler, plus Fenske and McCabe-Thiele."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: mass-transfer
+focusKeyword: "distillation column working principle"
+image: { src: /images/featured/distillation-column-working-principle.webp, alt: "Distillation Column Working Principle and Parts: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [distillation, fractionation, reflux, relative-volatility, mass-transfer]
+faq:
+  - q: "What is reflux in a distillation column?"
+    a: "Reflux is the part of the condensed overhead liquid that is returned to the top of the column instead of being taken as product. It provides the liquid that flows down and contacts rising vapour. A higher reflux ratio improves separation but increases condenser and reboiler duty."
+  - q: "What is the difference between trays and packing?"
+    a: "Trays are horizontal plates that hold a layer of liquid through which vapour bubbles, giving stage-wise contact. Packing fills the column with rings or structured sheets over which liquid flows as a film, giving continuous contact. Packing usually has lower pressure drop, which suits vacuum service; trays handle high liquid rates, fouling and large diameters well."
+  - q: "Why can some mixtures not be separated completely by distillation?"
+    a: "Some mixtures form an azeotrope, a composition at which vapour and liquid have the same composition, so relative volatility equals 1 and simple distillation stops making progress. Ethanol and water at about 95.6 percent ethanol by mass is a well known example. Pressure swing, entrainer (azeotropic or extractive) distillation or membranes are used to cross it."
+references:
+  - text: "W. L. McCabe, J. C. Smith and P. Harriott, Unit Operations of Chemical Engineering, 7th ed., McGraw-Hill"
+  - text: "J. D. Seader, E. J. Henley and D. K. Roper, Separation Process Principles, 3rd ed., Wiley"
+  - text: "H. Z. Kister, Distillation Design, McGraw-Hill"
+  - text: "R. E. Treybal, Mass-Transfer Operations, 3rd ed., McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Distillation column working principle:** a liquid mixture is separated by repeatedly vaporising and condensing it. Vapour rising from a reboiler at the bottom meets liquid flowing down from a condenser at the top. On every tray or section of packing, the more volatile component moves into the vapour and the less volatile into the liquid. The top product (distillate) is rich in the light component, and the bottom product in the heavy component.
+
+</Key>
+
+Distillation is the most widely used separation in the chemical, petroleum and pharmaceutical industries. Crude oil fractionation, solvent recovery, air separation, alcohol production and purification of monomers all depend on it. It works because the components of a liquid mixture have different volatilities: when the mixture boils, the vapour is richer in the more volatile component than the liquid it came from.
+
+## Vapour-liquid equilibrium and relative volatility
+
+For an ideal mixture, **Raoult's law** says the partial pressure of each component equals its mole fraction in the liquid times its pure component vapour pressure: pᵢ = xᵢ Pᵢˢᵃᵗ. The vapour composition then follows from Dalton's law, yᵢ = pᵢ / P.
+
+The ease of separating two components A (lighter) and B is measured by the **relative volatility**:
+
+$$
+\alpha_{AB} = \frac{y_A / x_A}{y_B / x_B} \approx \frac{P_A^{sat}}{P_B^{sat}}
+$$
+
+For a binary mixture this gives the equilibrium curve y = αx / (1 + (α − 1)x). The larger α is, the easier the separation. When α is close to 1, many stages and high reflux are needed; at α = 1 (an azeotrope), simple distillation cannot separate the mixture.
+
+<Calculator path="chemistry/raoults-law" title="Raoult's Law Calculator" />
+
+## Parts of a distillation column
+
+<figure>
+<svg width="540" height="380" viewBox="0 0 540 380" fill="none" role="img" aria-label="Distillation column with trays; feed enters at the middle; vapour from the top goes to a condenser and reflux drum, part of the liquid returns as reflux and the rest leaves as distillate; liquid at the bottom goes to a reboiler which returns vapour to the column, and bottoms product leaves">
+<rect x="200" y="30" width="80" height="320" rx="38" fill="#eef1f6" stroke="#0b2545" stroke-width="2.5" />
+<path d="M206 80H262M218 110H274M206 140H262M218 170H274M206 230H262M218 260H274M206 290H262" stroke="#13a89e" stroke-width="3" />
+<path d="M120 200H198" stroke="#0b2545" stroke-width="2.5" /><path d="M190 193L200 200L190 207" stroke="#0b2545" stroke-width="2.5" />
+<text x="60" y="205" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Feed</text>
+<path d="M240 30V14H380V40" stroke="#b42318" stroke-width="2.5" />
+<rect x="350" y="40" width="60" height="36" rx="6" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" />
+<text x="420" y="63" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Condenser</text>
+<path d="M380 76V100" stroke="#0b2545" stroke-width="2.5" />
+<rect x="340" y="100" width="80" height="34" rx="16" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<text x="430" y="122" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Reflux drum</text>
+<path d="M360 134V158H282" stroke="#0b2545" stroke-width="2.5" /><path d="M290 151L280 158L290 165" stroke="#0b2545" stroke-width="2.5" />
+<text x="296" y="178" font-size="13" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Reflux</text>
+<path d="M400 134V170H500" stroke="#0b2545" stroke-width="2.5" /><path d="M492 163L502 170L492 177" stroke="#0b2545" stroke-width="2.5" />
+<text x="430" y="194" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Distillate</text>
+<path d="M240 350V366H360V330" stroke="#0b2545" stroke-width="2.5" />
+<rect x="330" y="290" width="60" height="40" rx="6" fill="#fde2e2" stroke="#b42318" stroke-width="2" />
+<text x="400" y="306" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Reboiler</text>
+<path d="M360 290V262H282" stroke="#b42318" stroke-width="2.5" /><path d="M290 255L280 262L290 269" stroke="#b42318" stroke-width="2.5" />
+<text x="296" y="252" font-size="13" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Vapour</text>
+<path d="M390 320H500" stroke="#0b2545" stroke-width="2.5" /><path d="M492 313L502 320L492 327" stroke="#0b2545" stroke-width="2.5" />
+<text x="430" y="344" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Bottoms</text>
+<text x="100" y="110" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Rectifying</text>
+<text x="100" y="128" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">section</text>
+<text x="100" y="270" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Stripping</text>
+<text x="100" y="288" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">section</text>
+</svg>
+<figcaption>A continuous distillation column with condenser, reflux drum and reboiler (simplified).</figcaption>
+</figure>
+
+- **Column shell:** a vertical vessel containing trays or packing.
+- **Trays or packing:** provide intimate contact between rising vapour and falling liquid. Sieve, valve and bubble cap trays are common; packing may be random (rings, saddles) or structured (corrugated sheets).
+- **Feed nozzle:** the feed enters at the feed stage, chosen near where the column composition matches the feed.
+- **Condenser:** condenses the overhead vapour, usually with cooling water or air. A total condenser condenses all of it.
+- **Reflux drum and reflux:** collect the condensate; part returns to the top tray as reflux, the rest leaves as distillate.
+- **Reboiler:** heats the bottom liquid, often with steam, to generate the vapour that drives the column. Kettle and thermosiphon reboilers are common heat exchangers; see [heat exchanger types](/chemical-engineering/heat-exchanger-types/).
+
+The section above the feed is the **rectifying (enriching) section**, which purifies the light component; below the feed is the **stripping section**, which removes light component from the heavy product.
+
+## Distillation column working principle, stage by stage
+
+On an ideal (equilibrium) stage, vapour from the stage below and liquid from the stage above mix and leave in equilibrium. The vapour picks up more of the light component and leaves upwards; the liquid gives it up, picks up heavy component and flows down through a downcomer. Each stage gives a small enrichment; many stages stacked together give a sharp separation. Temperature falls from bottom to top, because the top is rich in the lighter, lower boiling component.
+
+Real trays do not reach equilibrium, so the number of actual trays is the number of ideal stages divided by an overall tray efficiency. Efficiency depends on the tray design, the physical properties of the mixture and the vapour and liquid loads, and is estimated from correlations, data from similar columns or tests. Packed columns use the height equivalent to a theoretical plate (HETP) in the same way: packed height equals the number of ideal stages multiplied by HETP.
+
+## Reflux ratio and number of stages
+
+The **reflux ratio** R = L / D (reflux returned / distillate taken) is the key operating variable:
+
+- At **total reflux** (no product), the separation needs the **minimum number of stages**, found from the Fenske equation.
+- At **minimum reflux**, an infinite number of stages would be needed (found by the Underwood method or graphically).
+- Practical designs use R of about 1.2 to 1.5 times the minimum, trading capital cost (more stages) against energy cost (more reflux and reboiler duty).
+
+For binary mixtures the **McCabe-Thiele method** steps off stages graphically between the equilibrium curve and the operating lines, giving a clear picture of how reflux and feed condition affect the design. The column [material balance](/chemical-engineering/material-balance/) (F = D + B and F zF = D xD + B xB) fixes the product flows.
+
+The Fenske equation for the minimum number of theoretical stages is:
+
+$$
+N_{min} = \frac{\ln\left[\dfrac{x_D}{1 - x_D}\cdot\dfrac{1 - x_B}{x_B}\right]}{\ln \alpha}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A binary mixture with an average relative volatility of 2.5 is to give a distillate with 95 mol percent light component and bottoms with 5 mol percent.</dd>
+<dt>Find</dt><dd>The minimum number of theoretical stages at total reflux.</dd>
+<dt>Assumptions</dt><dd>Constant relative volatility; ideal stages; total condenser.</dd>
+<dt>Solution</dt><dd>xD / (1 − xD) = 0.95 / 0.05 = 19; (1 − xB) / xB = 0.95 / 0.05 = 19<br />Nmin = ln(19 × 19) / ln 2.5 = ln 361 / 0.916 = 5.889 / 0.916 = 6.4</dd>
+<dt>Answer</dt><dd><strong>About 6.4 theoretical stages minimum (including the reboiler as a stage); a real column at practical reflux needs roughly twice as many, divided by tray efficiency</strong></dd>
+<dt>Limitations</dt><dd>Relative volatility varies along the column for real mixtures; rigorous simulation is used for final design.</dd>
+</dl>
+</Example>
+
+## Types of distillation
+
+- **Batch distillation:** a charge is boiled and products taken off over time; flexible for small multiproduct plants.
+- **Continuous distillation:** steady feed and products, as described above.
+- **Vacuum distillation:** for heat sensitive or high boiling materials; packing is preferred for low pressure drop.
+- **Steam distillation:** live steam lowers the boiling temperature of immiscible organics such as essential oils.
+- **Azeotropic and extractive distillation:** an added component changes relative volatility to break azeotropes.
+
+## Operation and control
+
+Columns are controlled by managing the energy balance (reboiler duty), material balance (distillate and bottoms flows) and pressure. Key measurements include column pressure and differential pressure across the trays, which warns of flooding, tray temperatures, which indicate composition, and the levels of the reflux drum and column base. [DP transmitters](https://www.instrumentationblog.in/dp-transmitter-level-measurement/) are widely used for those levels. Common problems are flooding (too much vapour or liquid), weeping (too little vapour), foaming and fouling of trays and reboilers. Overall energy use can be reduced by heat integration with [pinch analysis](/chemical-engineering/pinch-analysis/).

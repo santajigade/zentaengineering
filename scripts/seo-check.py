@@ -2,7 +2,7 @@
 # Also checks title <= 60 chars (Google display), description 120 to 160 chars, and 3+ H2 headings.
 # Usage: python3 scripts/seo-check.py [files...]   (default: all articles)
 import re, sys, glob, os
-norm = lambda t: re.sub(r'\s+', ' ', re.sub(r"[^a-z0-9 ]", ' ', t.lower().replace("'", '').replace('-', ' '))).strip()
+norm = lambda t: re.sub(r'\s+', ' ', re.sub(r"[^a-z0-9 ]", ' ', t.lower().replace("'", '').replace('&', '').replace('-', ' '))).strip()
 files = sys.argv[1:] or sorted(glob.glob('src/content/articles/*/*.mdx'))
 bad = 0
 for f in files:

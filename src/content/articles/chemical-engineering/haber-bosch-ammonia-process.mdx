@@ -1,0 +1,120 @@
+---
+title: "Haber-Bosch Process: Ammonia Production Explained"
+description: "The Haber Bosch process explained: ammonia synthesis chemistry, catalyst, syngas preparation and the synthesis loop with recycle and purge."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: process-industries
+focusKeyword: "Haber Bosch process"
+image: { src: /images/featured/haber-bosch-ammonia-process.webp, alt: "Haber-Bosch Process: Ammonia Production Explained: featured diagram" }
+format: explanation
+pillar: true
+math: true
+tags: [ammonia, haber-bosch, fertilizer, synthesis-gas, process-industries]
+faq:
+  - q: "Why is the Haber-Bosch process run at high pressure?"
+    a: "Four moles of gas react to form two moles of ammonia, so higher pressure shifts the equilibrium towards ammonia, by Le Chatelier's principle. It also increases the reaction rate. The pressure chosen balances higher conversion against the cost of compression and thicker equipment."
+  - q: "Why is a moderate temperature used if the reaction is exothermic?"
+    a: "Lower temperature favours a higher equilibrium yield of ammonia, but the reaction becomes too slow even with a catalyst. A compromise of roughly 400 to 500 degrees Celsius gives an acceptable rate while keeping a useful equilibrium conversion."
+  - q: "What is green ammonia?"
+    a: "Ammonia made with hydrogen from water electrolysis powered by renewable electricity, instead of hydrogen from natural gas or coal. The synthesis step is the same Haber-Bosch loop, but the large CO2 emissions of steam reforming are avoided."
+references:
+  - text: "M. Appl, Ammonia: Principles and Industrial Practice, Wiley-VCH"
+  - text: "G. T. Austin, Shreve's Chemical Process Industries, 5th ed., McGraw-Hill"
+  - text: "Ullmann's Encyclopedia of Industrial Chemistry, article Ammonia, Wiley-VCH"
+  - text: "V. Smil, Enriching the Earth: Fritz Haber, Carl Bosch, and the Transformation of World Food Production, MIT Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **Haber-Bosch process** makes ammonia by reacting nitrogen with hydrogen over an iron catalyst at high pressure (typically about 150 to 300 bar) and roughly 400 to 500 °C: N₂ + 3H₂ ⇌ 2NH₃. Only part of the gas reacts in each pass, so ammonia is condensed out and the unreacted gas is recycled. Hydrogen usually comes from natural gas by steam reforming, and nitrogen from air.
+
+</Key>
+
+Ammonia is one of the most produced chemicals in the world and the starting point for almost all nitrogen fertilisers, as well as nitric acid, explosives, plastics and fibres. Fritz Haber demonstrated the high pressure synthesis in the laboratory in 1909, and Carl Bosch at BASF turned it into an industrial process, with the first plant starting in 1913. The Haber-Bosch process is a classic example of chemical engineering: equilibrium, kinetics, catalysis, high pressure equipment, heat recovery and recycle all in one plant.
+
+## The chemistry
+
+$$
+\mathrm{N_2 + 3H_2 \rightleftharpoons 2NH_3} \qquad \Delta H \approx -92\ \text{kJ per mole of N}_2
+$$
+
+The reaction is **reversible**, **exothermic** and **reduces the number of gas moles** from four to two. Le Chatelier's principle therefore tells us:
+
+- **High pressure** favours ammonia, because it shifts the equilibrium towards fewer gas moles.
+- **Low temperature** favours ammonia at equilibrium, because the forward reaction releases heat.
+- But at low temperature the reaction is far too slow, even with a catalyst.
+
+The industrial compromise uses high pressure and moderate temperature with a very active catalyst. Even so, the gas leaving the converter typically contains only about 15 to 25 percent ammonia, which is why recycle is essential.
+
+## The catalyst
+
+The catalyst is mainly **iron**, made from magnetite and promoted with small amounts of potassium oxide, aluminium oxide and calcium oxide. Promoters increase activity and stop the iron crystallites from sintering. The catalyst is poisoned by oxygen compounds (water, CO, CO₂) and sulphur, which is why the synthesis gas must be purified so thoroughly. Ruthenium based catalysts are also used in some modern plants because they are active at lower pressures.
+
+## Haber Bosch process steps in a natural gas plant
+
+<figure>
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" role="img" aria-label="Block flow diagram of an ammonia plant: natural gas and steam go to desulphurisation and reforming, with air added in the secondary reformer; then shift conversion, CO2 removal, methanation and compression feed the synthesis loop, where a converter, cooler and separator produce liquid ammonia while unreacted gas is recycled and a small purge is removed">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<rect x="20" y="40" width="110" height="46" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="75" y="60">Desulphurise</text><text x="75" y="76">and reform</text>
+<rect x="160" y="40" width="100" height="46" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="210" y="60">Shift</text><text x="210" y="76">conversion</text>
+<rect x="290" y="40" width="100" height="46" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="340" y="60">CO₂</text><text x="340" y="76">removal</text>
+<rect x="420" y="40" width="110" height="46" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="475" y="68">Methanation</text>
+<rect x="420" y="150" width="110" height="46" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="475" y="178">Compression</text>
+<rect x="250" y="150" width="120" height="46" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" /><text x="310" y="170">Converter</text><text x="310" y="186">(iron catalyst)</text>
+<rect x="80" y="150" width="120" height="46" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" /><text x="140" y="170">Cool and</text><text x="140" y="186">separate NH₃</text>
+<text x="75" y="22">Natural gas, steam, air</text>
+<text x="140" y="268" font-weight="700">Liquid ammonia</text>
+<text x="230" y="250">Purge</text>
+<text x="310" y="106" fill="#0e7f78">Recycle unreacted gas</text>
+</g>
+<g stroke="#0b2545" stroke-width="2" fill="none">
+<path d="M75 26V38" /><path d="M130 63H158M260 63H288M390 63H418M475 86V148M420 173H372M250 173H202M140 196V250" />
+<path d="M150 57L159 63L150 69M280 57L289 63L280 69M410 57L419 63L410 69M469 140l6 8 6-8M380 167l-8 6 8 6M210 167l-8 6 8 6M134 242l6 8 6-8M69 31L75 39L81 31" />
+</g>
+<path d="M200 160Q240 120 300 120Q400 120 420 160" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" fill="none" />
+<path d="M413 152L420 162L427 154" stroke="#13a89e" stroke-width="2" fill="none" />
+<path d="M180 196L230 236" stroke="#b42318" stroke-width="2" fill="none" />
+</svg>
+<figcaption>Simplified block flow diagram of a natural gas based ammonia plant.</figcaption>
+</figure>
+
+1. **Desulphurisation:** sulphur compounds are removed from natural gas, because they poison the reforming and synthesis catalysts.
+2. **Primary reforming:** methane reacts with steam over a nickel catalyst in externally fired tubes: CH₄ + H₂O ⇌ CO + 3H₂ (strongly endothermic).
+3. **Secondary reforming:** air is added. Its oxygen burns part of the gas to complete the reforming, and its nitrogen supplies the N₂ needed for synthesis. The air rate is set to give a hydrogen to nitrogen ratio of about 3 to 1 in the final gas.
+4. **Shift conversion:** CO reacts with steam to make more hydrogen, CO + H₂O ⇌ CO₂ + H₂, in high and low temperature stages.
+5. **CO₂ removal:** CO₂ is absorbed in an amine or carbonate solution. The recovered CO₂ is often used to make urea from ammonia.
+6. **Methanation:** the last traces of CO and CO₂ are converted back to methane, so no oxygen compounds reach the iron catalyst.
+7. **Compression:** the synthesis gas is compressed, usually by steam turbine driven centrifugal compressors, to the loop pressure.
+8. **Synthesis loop:** gas passes through catalyst beds in the converter. Heat from the exothermic reaction is recovered to raise steam. The gas is cooled and refrigerated so ammonia condenses and is separated as liquid. Unreacted gas is recompressed and recycled with fresh make-up gas.
+9. **Purge:** inert gases, mainly methane and argon from the air, build up in the loop and are removed by a small purge stream; hydrogen is often recovered from it.
+
+The loop is a textbook case of recycle and purge in a [material balance](/chemical-engineering/material-balance/), and the converter behaves close to a packed bed [plug flow reactor](/chemical-engineering/cstr-vs-pfr/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant produces 1000 t/day of ammonia. Molar masses: N₂ = 28, H₂ = 2, NH₃ = 17 kg/kmol. Assume an overall single pass conversion of 20 percent of the hydrogen fed to the converter.</dd>
+<dt>Find</dt><dd>The net N₂ and H₂ consumed, and the approximate hydrogen flow through the converter.</dd>
+<dt>Assumptions</dt><dd>No losses to the purge; stoichiometric 3:1 feed; rounded molar masses.</dd>
+<dt>Solution</dt><dd>2 × 17 = 34 t of NH₃ need 28 t of N₂ and 6 t of H₂<br />N₂ consumed = 1000 × 28 / 34 = 823.5 t/day<br />H₂ consumed = 1000 × 6 / 34 = 176.5 t/day<br />H₂ through converter ≈ 176.5 / 0.20 = 882 t/day</dd>
+<dt>Answer</dt><dd><strong>About 824 t/day of nitrogen and 176 t/day of hydrogen are consumed, but roughly five times that hydrogen circulates through the converter because of the recycle</strong></dd>
+<dt>Limitations</dt><dd>Purge losses, dissolved gases in the product and inerts increase the fresh feed needed; real plants calculate the loop by full simulation.</dd>
+</dl>
+</Example>
+
+## Key equipment and engineering challenges
+
+- **High pressure equipment:** converters, separators and piping are thick walled [pressure vessels](/chemical-engineering/pressure-vessels-basics/) designed against hydrogen attack, which can embrittle ordinary steels at high temperature.
+- **Heat recovery:** the reformer and converter heat is recovered in waste heat boilers and feed preheaters, using many [heat exchanger types](/chemical-engineering/heat-exchanger-types/). Modern plants are highly heat integrated, a natural application of [pinch analysis](/chemical-engineering/pinch-analysis/).
+- **Compression:** large centrifugal compressors for synthesis gas, recycle and refrigeration.
+- **Safety:** ammonia is toxic and flammable within limits, and hydrogen is highly flammable; plants rely on gas detection, relief systems and careful [process instrumentation](https://www.instrumentationblog.in/category/process-instrumentation/).
+
+## Products made from ammonia
+
+Most ammonia is turned into fertilisers: urea (made by reacting ammonia with the CO₂ captured in the plant), ammonium nitrate, ammonium sulphate and ammonium phosphates. Ammonia is also oxidised to nitric acid, which leads to explosives and nylon intermediates, and it is used directly as a refrigerant and in flue gas treatment to reduce nitrogen oxides. It is increasingly studied as a carrier for hydrogen and as a carbon free fuel for ships and power plants.
+
+## Energy and environment
+
+Ammonia production is energy intensive, and plants based on natural gas or coal emit large amounts of CO₂, mostly from making hydrogen. Efficiency gains over the decades have come from better reformers, catalysts, heat recovery and compressor drives. Current efforts include carbon capture from reforming ("blue" ammonia) and hydrogen from renewable powered electrolysis ("green" ammonia), which keeps the Haber-Bosch synthesis loop but removes the reforming steps.

@@ -1,0 +1,128 @@
+---
+title: "Pressure Vessels: Types, Parts and Design Basics"
+description: "Pressure vessels explained: types, shells, heads, nozzles and supports, hoop stress, the ASME thickness formula, testing and safety, with an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: process-equipment
+focusKeyword: "pressure vessels"
+image: { src: /images/featured/pressure-vessels-basics.webp, alt: "Pressure Vessels: Types, Parts and Design Basics: featured diagram" }
+format: equipment
+pillar: true
+math: true
+tags: [pressure-vessel, asme-viii, hoop-stress, vessel-heads, process-equipment]
+faq:
+  - q: "What is the difference between design pressure and operating pressure?"
+    a: "Operating pressure is the pressure the vessel normally sees in service. Design pressure is set higher, to cover upsets and the set pressure of the relief device, and is the value used to calculate thickness. The maximum allowable working pressure (MAWP) is the highest pressure the finished vessel can safely take, based on its actual thicknesses."
+  - q: "Why are hemispherical heads thinner than cylindrical shells?"
+    a: "In a sphere the pressure is resisted equally in all directions, and the membrane stress is half the hoop stress in a cylinder of the same diameter. A hemispherical head therefore needs roughly half the shell thickness, although it costs more to form."
+  - q: "Why is hydrostatic testing preferred to pneumatic testing?"
+    a: "Liquids are nearly incompressible and store very little energy under pressure, so if the vessel fails during a hydrotest it leaks rather than bursts violently. Compressed gas stores much more energy, so pneumatic tests are allowed only when hydrotesting is impractical and need extra precautions."
+references:
+  - text: "ASME Boiler and Pressure Vessel Code, Section VIII, Division 1: Rules for Construction of Pressure Vessels, ASME"
+  - text: "IS 2825:1969 Code for Unfired Pressure Vessels, Bureau of Indian Standards"
+  - text: "EN 13445 Unfired pressure vessels, CEN"
+  - text: "D. R. Moss and M. Basic, Pressure Vessel Design Manual, 4th ed., Butterworth-Heinemann"
+  - text: "R. K. Sinnott and G. Towler, Chemical Engineering Design, 6th ed., Butterworth-Heinemann"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Pressure vessels** are closed containers designed to hold gases or liquids at a pressure substantially different from the surroundings. They are usually cylinders closed by curved heads, fitted with nozzles, manways and supports. Wall thickness is set by the hoop stress σ = PD / 2t, using code formulas such as those in ASME Section VIII, plus a corrosion allowance. Every vessel is pressure tested and protected by a relief device.
+
+</Key>
+
+Reactors, distillation columns, separators, receivers, storage bullets and heat exchanger shells are all pressure vessels. Because a failure can release large amounts of energy and hazardous material, their design, fabrication, inspection and testing are governed by codes and, in most countries, by law. This article explains the basic types, parts and design ideas that every process engineer should know.
+
+## Types of pressure vessels
+
+- **By shape:** cylindrical vessels are the most common because they are easy to fabricate and fit plant layouts; spherical vessels need the least wall thickness for a given volume and pressure and are used for large gas storage, but cost more to build.
+- **By orientation:** vertical vessels save plot space and suit columns and reactors; horizontal vessels suit separators, storage bullets and drums where liquid surface area matters.
+- **By pressure:** internal pressure vessels are the usual case; vacuum and external pressure vessels must be checked against buckling, often needing stiffening rings.
+- **By wall construction:** thin wall (thickness small compared with diameter) for most process work; thick wall and multilayer vessels for very high pressures.
+- **By function:** storage vessels, process vessels (reactors, columns, separators), heat exchanger shells and boilers (fired vessels, under separate rules).
+
+## Main parts of a pressure vessel
+
+<figure>
+<svg width="560" height="270" viewBox="0 0 560 270" fill="none" role="img" aria-label="Horizontal pressure vessel with cylindrical shell, ellipsoidal heads at both ends, inlet and outlet nozzles on top, a manway, a drain nozzle at the bottom and two saddle supports">
+<path d="M130 70H430C500 70 500 190 430 190H130C60 190 60 70 130 70Z" fill="#eef1f6" stroke="#0b2545" stroke-width="3" />
+<path d="M130 70V190M430 70V190" stroke="#0b2545" stroke-width="1.5" stroke-dasharray="5 4" />
+<rect x="170" y="44" width="24" height="26" fill="#d8dee8" stroke="#0b2545" stroke-width="2" /><rect x="164" y="38" width="36" height="8" fill="#0b2545" />
+<rect x="360" y="44" width="24" height="26" fill="#d8dee8" stroke="#0b2545" stroke-width="2" /><rect x="354" y="38" width="36" height="8" fill="#0b2545" />
+<rect x="255" y="34" width="50" height="36" fill="#d8dee8" stroke="#0b2545" stroke-width="2" /><rect x="247" y="28" width="66" height="8" fill="#0b2545" />
+<rect x="270" y="190" width="18" height="20" fill="#d8dee8" stroke="#0b2545" stroke-width="2" />
+<path d="M150 190L135 235H215L200 190" fill="#cfd8e3" stroke="#0b2545" stroke-width="2" />
+<path d="M360 190L345 235H425L410 190" fill="#cfd8e3" stroke="#0b2545" stroke-width="2" />
+<path d="M40 235H520" stroke="#0b2545" stroke-width="2" />
+<g font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">
+<text x="182" y="24" text-anchor="middle">Inlet</text><text x="372" y="24" text-anchor="middle">Outlet</text><text x="280" y="20" text-anchor="middle">Manway</text>
+<text x="280" y="134" text-anchor="middle">Cylindrical shell</text><text x="104" y="134" text-anchor="middle">Head</text><text x="456" y="134" text-anchor="middle">Head</text>
+<text x="175" y="256" text-anchor="middle">Saddle</text><text x="385" y="256" text-anchor="middle">Saddle</text><text x="300" y="226">Drain</text>
+</g>
+</svg>
+<figcaption>Main parts of a horizontal pressure vessel (simplified).</figcaption>
+</figure>
+
+- **Shell:** the main cylindrical body, made of rolled and welded plate or seamless pipe for small diameters.
+- **Heads (end closures):** hemispherical (strongest, thinnest, most expensive to form), 2:1 semi-ellipsoidal (the most common compromise), torispherical (cheaper, for lower pressures), conical (for drainage or transitions) and flat (only for small diameters or low pressures, because they need very thick plate).
+- **Nozzles:** connect piping and instruments. Openings weaken the shell, so the code requires area replacement by thicker nozzle necks or reinforcing pads.
+- **Manways and handholes:** allow entry for inspection and maintenance.
+- **Supports:** saddles for horizontal vessels; skirts, legs or lugs for vertical vessels. Supports must carry weight, contents, wind and earthquake loads.
+- **Internals:** trays, baffles, demisters, coils and distributors depending on the duty.
+
+## Stresses in a thin cylindrical shell
+
+Internal pressure P in a cylinder of diameter D and wall thickness t produces two principal membrane stresses:
+
+$$
+\sigma_{hoop} = \frac{P D}{2t} \qquad \sigma_{long} = \frac{P D}{4t}
+$$
+
+The hoop (circumferential) stress is twice the longitudinal stress, so longitudinal weld seams are the more critical. In a sphere, the stress is PD / 4t in every direction, which is why spheres and hemispherical heads need about half the thickness of a cylinder. These are direct applications of [stress and strain](/mechanical-engineering/stress-and-strain/) to a pressurised shell.
+
+## Thickness by the ASME code formula
+
+ASME Section VIII Division 1 gives the minimum required thickness of a cylindrical shell under internal pressure (circumferential stress, thin wall range) as:
+
+$$
+t = \frac{P R}{S E - 0.6 P}
+$$
+
+R is the inside radius, S the maximum allowable stress of the material at design temperature (from the code tables), and E the joint efficiency, which depends on the type of weld and the extent of radiography. A **corrosion allowance** is added, and the result is rounded up to an available plate thickness, also allowing for mill under-tolerance and forming thinning.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A cylindrical vessel with inside diameter 1000 mm, design pressure 1.5 MPa (gauge). Allowable stress from the code tables for the chosen material at design temperature S = 138 MPa. Joint efficiency E = 0.85 (spot radiography). Corrosion allowance 3 mm.</dd>
+<dt>Find</dt><dd>The required shell thickness.</dd>
+<dt>Assumptions</dt><dd>Internal pressure only; thin wall formula valid; no external loads.</dd>
+<dt>Solution</dt><dd>R = 500 mm<br />t = 1.5 × 500 / (138 × 0.85 − 0.6 × 1.5) = 750 / (117.3 − 0.9) = 750 / 116.4 = 6.44 mm<br />With corrosion allowance: 6.44 + 3 = 9.44 mm</dd>
+<dt>Answer</dt><dd><strong>Minimum 9.44 mm, so a 10 mm plate would normally be selected, subject to tolerance and code minimum thickness checks</strong></dd>
+<dt>Limitations</dt><dd>Heads, nozzle reinforcement, wind, seismic, nozzle loads and external pressure must be checked separately. Only a qualified designer working to the full code can certify a vessel.</dd>
+</dl>
+</Example>
+
+The code approach builds in a margin through the allowable stress, which is a fraction of the material's tensile and yield strength. This is the same idea as the [factor of safety](/mechanical-engineering/factor-of-safety/) in machine design.
+
+## Vacuum and external pressure
+
+Vessels under vacuum or external pressure fail by buckling, not by yielding. Their wall thickness depends on the diameter, the length between stiffeners and the material's elastic modulus, and the code provides charts for the allowable external pressure. Stiffening rings are a cheaper way to resist buckling than a much thicker shell. Many vessels see vacuum during steam out or draining, so this case should always be checked.
+
+## Fabrication, testing and inspection
+
+- **Materials:** carbon steel for most duties; stainless steels, alloy steels and clad plate for corrosion, low temperature or high temperature service. Material certificates must trace each plate.
+- **Welding:** qualified procedures and welders; joints examined by radiography or ultrasonic testing to the extent the design assumes.
+- **Post weld heat treatment:** relieves residual stresses where thickness or service requires it.
+- **Pressure test:** ASME Section VIII Division 1 requires a hydrostatic test, generally at 1.3 times the MAWP adjusted for the stress ratio between test and design temperature. Pneumatic testing at a lower factor is allowed only where hydrotesting is impractical.
+- **Nameplate and documentation:** design data, code stamp and test records.
+
+## Safety in operation
+
+- **Pressure relief:** every vessel needs a relief valve or rupture disc sized for the worst credible overpressure case, set no higher than the MAWP.
+- **Instrumentation:** [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/), level and temperature indication with alarms and trips.
+- **Periodic inspection:** wall thickness surveys, internal inspection and statutory examinations in line with local regulations.
+- **Changes:** never weld, modify or re-rate a vessel without engineering approval.
+
+Pressure vessels appear throughout the plant: reactors such as [CSTRs and PFRs](/chemical-engineering/cstr-vs-pfr/), [distillation columns](/chemical-engineering/distillation-column-working-principle/) and [heat exchanger](/chemical-engineering/heat-exchanger-types/) shells are all designed this way.

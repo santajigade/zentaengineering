@@ -1,0 +1,146 @@
+---
+title: "Heat Exchanger Types and How They Work"
+description: "Heat exchanger types explained: shell and tube, double pipe, plate, air cooled and spiral, flow arrangements, LMTD, fouling and a sizing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: heat-exchangers
+focusKeyword: "heat exchanger types"
+image: { src: /images/featured/heat-exchanger-types.webp, alt: "Heat Exchanger Types and How They Work: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [heat-exchanger, shell-and-tube, plate-heat-exchanger, lmtd, fouling]
+faq:
+  - q: "Which heat exchanger type is most common in process plants?"
+    a: "The shell and tube exchanger. It handles high pressures and temperatures, a wide range of fluids and duties, and can be cleaned and repaired. TEMA standards cover its mechanical design, which makes it the default choice unless another type offers clear advantages."
+  - q: "Why is counterflow more effective than parallel flow?"
+    a: "In counterflow the hot fluid meets the coldest part of the cold stream at each end, so the temperature difference stays more even along the exchanger and the cold outlet can approach or exceed the hot outlet temperature. This gives a larger mean temperature difference and needs less area for the same duty."
+  - q: "What is fouling and how is it allowed for?"
+    a: "Fouling is the build-up of scale, sludge, biological growth, corrosion products or polymers on heat transfer surfaces. It adds thermal resistance and pressure drop. Designers add fouling resistances to the overall heat transfer coefficient, which increases the required area, and provide for cleaning."
+references:
+  - text: "D. Q. Kern, Process Heat Transfer, McGraw-Hill"
+  - text: "R. K. Sinnott and G. Towler, Chemical Engineering Design, 6th ed., Butterworth-Heinemann"
+  - text: "Standards of the Tubular Exchanger Manufacturers Association (TEMA), 10th ed."
+  - text: "F. P. Incropera, D. P. DeWitt, T. L. Bergman and A. S. Lavine, Fundamentals of Heat and Mass Transfer, 7th ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+A heat exchanger transfers heat between two fluids without mixing them. The main **heat exchanger types** are **shell and tube**, **double pipe**, **plate**, **air cooled (fin fan)** and **spiral** exchangers. All work on the same equation, Q = U A ΔTlm, where U is the overall heat transfer coefficient, A the area and ΔTlm the log mean temperature difference. They differ in pressure and temperature limits, compactness, cleanability and cost.
+
+</Key>
+
+Heat exchangers are everywhere in process plants: preheating feed, cooling products, condensing vapours, boiling liquids in reboilers and recovering waste heat. Choosing among heat exchanger types is a balance of thermal performance, pressure drop, materials, maintenance and cost. This guide explains how each main type works and how they are sized.
+
+## How a heat exchanger works
+
+Heat flows from the hot fluid to the wall by convection, through the wall by conduction and from the wall to the cold fluid by convection, the same [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/) that govern any thermal system. Fouling layers on either side add further resistance. The resistances in series combine into the overall coefficient U:
+
+$$
+\frac{1}{U} = \frac{1}{h_h} + R_{f,h} + \frac{t_w}{k_w} + R_{f,c} + \frac{1}{h_c}
+$$
+
+(written for a thin flat wall; tube walls use area ratios). The heat duty is then:
+
+$$
+Q = U A\,\Delta T_{lm}\,F
+$$
+
+ΔTlm is the log mean temperature difference for pure counterflow, and F is a correction factor (1 for pure counter or parallel flow, less than 1 for multipass shell and tube or cross flow arrangements).
+
+## Main heat exchanger types
+
+### Shell and tube heat exchangers
+
+A bundle of tubes sits inside a cylindrical shell. One fluid flows through the tubes, the other through the shell around them. **Baffles** in the shell support the tubes and direct the shell side fluid across the bundle to raise its heat transfer coefficient. Tube sheets hold the tube ends, and channel heads distribute the tube side flow, often in two or more passes.
+
+<figure>
+<svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Shell and tube heat exchanger: tube side fluid enters the front channel head, flows through the tube bundle and leaves the rear head; shell side fluid enters the shell at the top left and zigzags across the tubes around segmental baffles before leaving at the bottom right">
+<rect x="110" y="70" width="360" height="120" rx="6" fill="#eef1f6" stroke="#0b2545" stroke-width="2.5" />
+<path d="M60 80H110V180H60Q40 130 60 80Z" fill="#e6f6f4" stroke="#0b2545" stroke-width="2.5" />
+<path d="M470 80H520Q540 130 520 180H470Z" fill="#e6f6f4" stroke="#0b2545" stroke-width="2.5" />
+<path d="M110 70V190M470 70V190" stroke="#0b2545" stroke-width="5" />
+<path d="M110 100H470M110 120H470M110 140H470M110 160H470" stroke="#13a89e" stroke-width="2" />
+<path d="M190 70V160M290 100V190M390 70V160" stroke="#0b2545" stroke-width="4" />
+<path d="M150 40V70M430 190V220" stroke="#b42318" stroke-width="3" />
+<path d="M143 60L150 70L157 60M423 212L430 222L437 212" stroke="#b42318" stroke-width="3" />
+<path d="M18 130H55" stroke="#13a89e" stroke-width="3" /><path d="M47 123L57 130L47 137" stroke="#13a89e" stroke-width="3" />
+<path d="M525 130H562" stroke="#13a89e" stroke-width="3" /><path d="M554 123L564 130L554 137" stroke="#13a89e" stroke-width="3" />
+<text x="160" y="34" font-size="13" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Shell side in</text>
+<text x="330" y="240" font-size="13" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Shell side out</text>
+<text x="4" y="118" font-size="12" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Tube in</text>
+<text x="540" y="118" font-size="12" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Tube out</text>
+<text x="290" y="58" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Baffles</text>
+<text x="120" y="214" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Tube sheet</text>
+</svg>
+<figcaption>Single pass shell and tube exchanger with segmental baffles (simplified).</figcaption>
+</figure>
+
+TEMA classifies the front head, shell and rear head with three letters. Common designs are:
+
+- **Fixed tube sheet:** cheapest, but the shell side cannot be mechanically cleaned and thermal expansion between shell and tubes must be limited or accommodated with an expansion joint.
+- **U-tube:** tubes are bent into a U, so they expand freely; the bundle can be pulled out, but the inside of the U bends is hard to clean.
+- **Floating head:** one tube sheet is free to move, allowing removal of the bundle and cleaning of both sides; more expensive.
+
+Shell and tube exchangers suit high pressures and temperatures, large duties and dirty or hazardous fluids. Tube side is normally given the higher pressure, more corrosive or more fouling fluid.
+
+### Double pipe (hairpin) heat exchangers
+
+One pipe inside another; one fluid flows in the inner pipe, the other in the annulus, usually in true counterflow. Simple and suitable for small duties, high pressures and for fluids that need true counterflow. Several hairpins can be connected for larger area.
+
+### Plate heat exchangers
+
+Thin corrugated metal plates are clamped together in a frame with gaskets, forming alternate channels for the hot and cold fluids. The corrugations create high turbulence, so heat transfer coefficients are high and the unit is very compact. Close temperature approaches of a few kelvin are possible. Plates can be added to increase capacity and opened for cleaning. Gaskets limit pressure and temperature, so brazed and welded plate designs are used for harsher duties. Common in food, dairy, HVAC and water systems.
+
+### Air cooled heat exchangers
+
+Process fluid flows inside finned tubes while fans blow ambient air across them. They avoid the need for cooling water, which is valuable in dry regions, but take more plot space and are limited by ambient air temperature.
+
+### Spiral heat exchangers
+
+Two long metal sheets are rolled into a spiral, giving single channels for each fluid. The curved flow path resists fouling and suits slurries and viscous or sludge-like fluids.
+
+### Other types
+
+Finned tube and compact exchangers for gases, scraped surface exchangers for viscous foods, and direct contact devices such as cooling towers and barometric condensers, where the fluids do mix.
+
+## Flow arrangements and LMTD
+
+For counterflow, with ΔT₁ and ΔT₂ the temperature differences at the two ends:
+
+$$
+\Delta T_{lm} = \frac{\Delta T_1 - \Delta T_2}{\ln(\Delta T_1 / \Delta T_2)}
+$$
+
+Counterflow gives the largest ΔTlm and is preferred. Parallel flow gives a smaller ΔTlm and the cold outlet can never exceed the hot outlet temperature. Cross flow and multipass designs fall between and use the F factor.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Hot oil cools from 150 °C to 90 °C while cooling water heats from 30 °C to 70 °C. Duty Q = 500 kW. Overall coefficient U = 500 W/m²K.</dd>
+<dt>Find</dt><dd>LMTD for counterflow and the area required.</dd>
+<dt>Assumptions</dt><dd>Pure counterflow (F = 1); constant U; no heat loss to surroundings.</dd>
+<dt>Solution</dt><dd>ΔT₁ = 150 − 70 = 80 K; ΔT₂ = 90 − 30 = 60 K<br />ΔTlm = (80 − 60) / ln(80/60) = 20 / 0.2877 = 69.5 K<br />A = Q / (U ΔTlm) = 500,000 / (500 × 69.5) = 14.4 m²</dd>
+<dt>Answer</dt><dd><strong>LMTD about 69.5 K; heat transfer area about 14.4 m² before any design margin</strong></dd>
+<dt>Limitations</dt><dd>A multipass shell and tube unit would need an F correction and more area. Fouling allowances in U also increase the area.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/lmtd" title="LMTD Calculator" />
+
+## Selecting among heat exchanger types
+
+| Type | Strengths | Limits |
+| --- | --- | --- |
+| Shell and tube | High pressure and temperature, versatile, cleanable | Large and heavy for the duty |
+| Double pipe | Simple, true counterflow, high pressure | Small duties only |
+| Plate (gasketed) | Very compact, high U, close approach, expandable | Gasket limits on pressure and temperature |
+| Air cooled | No cooling water | Large footprint, depends on ambient temperature |
+| Spiral | Handles fouling fluids and slurries | Harder to repair |
+
+## Operation and monitoring
+
+Inlet and outlet temperatures, flows and pressure drops reveal the condition of an exchanger. A falling U at constant flow or a rising pressure drop indicates fouling. Reliable [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) is therefore important. In a whole plant, exchangers are arranged to recover heat between process streams, which is the subject of [pinch analysis](/chemical-engineering/pinch-analysis/). Exchanger duties come from the plant [material balance](/chemical-engineering/material-balance/) and energy balance, and reboilers and condensers are essential parts of every [distillation column](/chemical-engineering/distillation-column-working-principle/).

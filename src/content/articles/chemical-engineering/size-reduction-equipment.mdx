@@ -1,0 +1,140 @@
+---
+title: "Size Reduction Equipment: Crushing and Grinding Explained"
+description: "Size reduction equipment explained: crushers, grinders and ultrafine mills, how they break particles, Rittinger, Kick and Bond laws, with an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: mechanical-operations
+focusKeyword: "size reduction equipment"
+image: { src: /images/featured/size-reduction-equipment.webp, alt: "Size Reduction Equipment: Crushing and Grinding Explained: featured diagram" }
+format: equipment
+pillar: true
+math: true
+tags: [size-reduction, crusher, ball-mill, bond-work-index, mechanical-operations]
+faq:
+  - q: "What is the difference between crushing and grinding?"
+    a: "Crushing reduces large lumps, typically from hundreds of millimetres down to a few millimetres or centimetres, using slow compressive machines such as jaw and cone crushers. Grinding takes the crushed material down to fine powder, often below 1 mm and down to micrometres, in mills that use impact and attrition."
+  - q: "What is the critical speed of a ball mill?"
+    a: "It is the speed at which the balls would just be carried round the shell by centrifugal force instead of tumbling. For a mill of diameter D and ball diameter d in metres, it is about 42.3 divided by the square root of (D minus d) revolutions per minute. Mills normally run at roughly 65 to 80 percent of it."
+  - q: "Why is size reduction so energy intensive?"
+    a: "Only a small fraction of the energy supplied creates new surface. Most is lost as heat, noise, elastic deformation and friction between particles and with the machine. Fine grinding is especially inefficient, which is why staged crushing and closed circuit operation are used."
+references:
+  - text: "W. L. McCabe, J. C. Smith and P. Harriott, Unit Operations of Chemical Engineering, 7th ed., McGraw-Hill"
+  - text: "J. F. Richardson, J. H. Harker and J. R. Backhurst, Coulson and Richardson's Chemical Engineering, Vol. 2, 5th ed., Butterworth-Heinemann"
+  - text: "F. C. Bond, Crushing and Grinding Calculations, British Chemical Engineering, 1961"
+  - text: "B. A. Wills and J. Finch, Wills' Mineral Processing Technology, 8th ed., Butterworth-Heinemann"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Size reduction equipment** breaks solids into smaller pieces using compression, impact, attrition (rubbing) and cutting. **Crushers** (jaw, gyratory, cone, roll) handle coarse feed; **grinders** (hammer, ball, rod and roller mills) produce intermediate and fine powders; **ultrafine mills** (jet and stirred media mills) reach micrometre sizes. The energy needed is estimated with Rittinger's, Kick's or Bond's law.
+
+</Key>
+
+Many processes need solids of a particular size: cement clinker ground to powder, ores liberated before separation, coal pulverised for burners, catalysts and pharmaceuticals milled for fast reaction or dissolution. Size reduction, also called comminution, increases surface area, frees valuable minerals from waste rock, and makes materials easier to handle, mix and react. It is also one of the largest energy users in mining and cement plants, so choosing the right equipment matters.
+
+## How particles are broken
+
+Every machine uses one or more of four mechanisms:
+
+- **Compression:** the particle is squeezed between two surfaces until it fractures. Used for hard, coarse material in jaw, gyratory and cone crushers and crushing rolls.
+- **Impact:** a fast moving hammer or bar strikes the particle, or the particle is thrown against a surface. Used in hammer mills and impact crushers for brittle material.
+- **Attrition:** particles are rubbed between surfaces or against each other, producing fines. Important in ball mills and stirred mills.
+- **Cutting:** a sharp edge slices tough or fibrous material such as rubber, plastics and plant material in knife cutters.
+
+## Types of size reduction equipment
+
+### Coarse crushers
+
+- **Jaw crusher:** a fixed jaw and a swinging jaw form a V shaped chamber. Material is nipped and crushed as the moving jaw closes, then falls lower as it opens, leaving through the gap at the bottom. Simple and robust for primary crushing of hard rock.
+- **Gyratory crusher:** a conical head gyrates inside a conical bowl, crushing continuously around its circumference. High capacity primary crusher for large mines.
+
+<figure>
+<svg width="540" height="300" viewBox="0 0 540 300" fill="none" role="img" aria-label="Jaw crusher: a fixed jaw on the left and a swinging jaw on the right driven by an eccentric shaft form a V shaped chamber; large feed lumps enter at the top and crushed product leaves through the narrow discharge gap at the bottom">
+<path d="M170 40L235 250" stroke="#0b2545" stroke-width="10" stroke-linecap="round" />
+<path d="M370 40L285 250" stroke="#13a89e" stroke-width="10" stroke-linecap="round" />
+<circle cx="390" cy="40" r="16" stroke="#0b2545" stroke-width="3" /><circle cx="394" cy="38" r="4" fill="#0b2545" />
+<path d="M300 255L360 280" stroke="#0b2545" stroke-width="3" /><path d="M360 272V292" stroke="#0b2545" stroke-width="3" />
+<path d="M392 120Q420 135 392 150" stroke="#f5b800" stroke-width="3" fill="none" /><path d="M396 146L390 152L398 156" stroke="#f5b800" stroke-width="3" />
+<g fill="#cfd8e3" stroke="#0b2545" stroke-width="1.5"><path d="M230 70L260 62L275 85L250 100L228 90Z" /><path d="M265 105L290 98L300 118L278 128Z" /><path d="M248 160L262 156L268 170L254 174Z" /><circle cx="256" cy="215" r="7" /><circle cx="266" cy="232" r="5" /></g>
+<g fill="#cfd8e3"><circle cx="252" cy="268" r="3" /><circle cx="262" cy="276" r="3" /><circle cx="258" cy="286" r="2.5" /></g>
+<text x="100" y="140" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Fixed jaw</text>
+<text x="440" y="200" text-anchor="middle" font-size="13" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Swing jaw</text>
+<text x="425" y="44" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Eccentric shaft</text>
+<text x="270" y="30" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Feed</text>
+<text x="150" y="285" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Product through gap</text>
+<text x="380" y="292" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Toggle</text>
+</svg>
+<figcaption>Simplified jaw crusher: compression between a fixed and a swinging jaw.</figcaption>
+</figure>
+
+### Intermediate crushers
+
+- **Cone crusher:** similar to a gyratory crusher but with a flatter head, used for secondary and tertiary crushing.
+- **Crushing rolls:** two rolls rotating towards each other nip and compress particles. Smooth rolls give a product with few fines. High pressure grinding rolls compress a bed of particles and are used in cement and mineral plants for energy savings.
+- **Hammer mill:** swinging hammers on a fast rotor shatter friable material by impact against breaker plates; a screen at the outlet controls product size.
+
+### Fine grinders
+
+- **Ball mill:** a rotating horizontal drum partly filled with steel or ceramic balls. Balls are lifted by the shell and cascade or cataract onto the charge, grinding by impact and attrition. Common for cement, ores, ceramics and pigments.
+- **Rod mill:** uses long steel rods instead of balls, giving a more uniform product with less overgrinding.
+- **Vertical roller mill:** rollers press material against a rotating table, combining grinding, drying and classification. Widely used for cement raw meal and coal.
+
+### Ultrafine grinders
+
+- **Fluid energy (jet) mill:** high velocity air or steam jets make particles collide with each other. No grinding media, so contamination is low; used for pharmaceuticals and pigments.
+- **Stirred media mill:** small beads agitated in a slurry produce particles in the micrometre range.
+
+### Cutting machines
+
+- **Knife cutters and granulators** for plastics, rubber, paper and food.
+
+## Energy laws for size reduction
+
+Three classical laws relate energy to the change in particle size. With feed size D₁ and product size D₂:
+
+$$
+\text{Rittinger:}\; E = K_R\left(\frac{1}{D_2} - \frac{1}{D_1}\right) \qquad \text{Kick:}\; E = K_K \ln\frac{D_1}{D_2}
+$$
+
+Rittinger's law (energy proportional to new surface) fits fine grinding best; Kick's law (energy depends only on reduction ratio) fits coarse crushing. **Bond's law** lies between them and is the one most used in practice:
+
+$$
+W = 10\,W_i\left(\frac{1}{\sqrt{P_{80}}} - \frac{1}{\sqrt{F_{80}}}\right)
+$$
+
+W is the work input in kWh per tonne, Wi is the **Bond work index** of the material (the energy to reduce it from very large size to 80 percent passing 100 µm, in kWh per tonne), and F80 and P80 are the sizes in micrometres through which 80 percent of the feed and product pass. Work indices are measured in standard laboratory tests.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A material with Bond work index Wi = 13 kWh/t is ground from F80 = 10,000 µm to P80 = 100 µm at 50 t/h.</dd>
+<dt>Find</dt><dd>Specific energy and mill power.</dd>
+<dt>Assumptions</dt><dd>Bond's law applies directly; Wi in kWh per tonne matching the units used; no correction factors for mill type or circuit.</dd>
+<dt>Solution</dt><dd>1/√100 = 0.100; 1/√10,000 = 0.010<br />W = 10 × 13 × (0.100 − 0.010) = 11.7 kWh/t<br />Power = 11.7 × 50 = 585 kW</dd>
+<dt>Answer</dt><dd><strong>About 11.7 kWh per tonne, so roughly 585 kW of grinding power at 50 t/h</strong></dd>
+<dt>Limitations</dt><dd>Real mill sizing applies efficiency factors for wet or dry grinding, open or closed circuit, mill diameter and feed size, so motor rating is higher than this estimate.</dd>
+</dl>
+</Example>
+
+## Ball mill operating speed
+
+The critical speed, at which balls would centrifuge and stop grinding, is approximately:
+
+$$
+N_c = \frac{42.3}{\sqrt{D - d}}\ \text{rpm}
+$$
+
+with mill and ball diameters D and d in metres. Mills run at about 65 to 80 percent of critical speed so that the balls cascade and cataract effectively.
+
+## Selecting size reduction equipment
+
+- **Feed and product size:** reduction ratios per stage are limited, so coarse to fine reduction uses several stages.
+- **Hardness and abrasiveness:** hard abrasive ores suit compression crushers; soft friable materials suit hammer mills.
+- **Moisture and stickiness:** wet sticky feeds clog crushers and screens; wet grinding may be preferred.
+- **Heat sensitivity:** cryogenic or jet milling avoids heat damage to plastics and pharmaceuticals.
+- **Capacity and energy:** closed circuit grinding with a classifier returns oversize and avoids overgrinding, saving energy.
+- **Contamination:** media wear can contaminate products; ceramic linings or jet mills reduce it.
+
+Dust control, noise enclosures and safe guarding of moving parts are essential for all size reduction equipment. Size reduction is usually followed by screening or classification, and the solids are then conveyed, mixed or fed to reactors and separators. Its throughput and product splits enter the plant [material balance](/chemical-engineering/material-balance/). Mill motors and drives are [induction motors](/electrical-engineering/induction-motor-working-principle/), and bearings and gears need correct [lubrication](/mechanical-engineering/types-of-lubrication/). Mill power and feed rate are monitored with standard [process instrumentation](https://www.instrumentationblog.in/category/process-instrumentation/).

@@ -1,0 +1,156 @@
+---
+title: "PFD vs P&ID: Differences and How to Read Them"
+description: "PFD vs P&ID explained: what each drawing shows, who uses it, symbols, line and instrument tags, ISA 5.1 identification letters and a step-by-step reading guide."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: pfd-pid
+focusKeyword: "PFD vs P&ID"
+image: { src: /images/featured/pfd-vs-pid.webp, alt: "PFD vs P&ID: Differences and How to Read Them: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [pfd, p-and-id, process-drawings, isa-5-1, instrument-tags]
+faq:
+  - q: "Which comes first, the PFD or the P&ID?"
+    a: "The PFD comes first. It is produced during process design from the heat and material balance. The P&ID is developed from it during detailed engineering, adding every line, valve, instrument and control loop needed to build and operate the plant."
+  - q: "What standard is used for P&ID symbols and instrument tags?"
+    a: "ANSI/ISA 5.1, Instrumentation Symbols and Identification, is the most widely used standard for instrument bubbles, identification letters and loop numbering. ISO 10628 covers diagrams for the chemical and petrochemical industry and ISO 14617 graphical symbols. Many companies also add their own legend sheets."
+  - q: "Does a P&ID show pipe lengths and equipment locations?"
+    a: "No. A P&ID is not to scale and does not show physical layout. Pipe routing, lengths, elevations and equipment positions are shown on plot plans, piping layouts and isometric drawings."
+references:
+  - text: "ANSI/ISA-5.1-2009 Instrumentation Symbols and Identification, International Society of Automation"
+  - text: "ISO 10628-1:2014 Diagrams for the chemical and petrochemical industry, Part 1: Specification of diagrams"
+  - text: "R. K. Sinnott and G. Towler, Chemical Engineering Design, 6th ed., Butterworth-Heinemann"
+  - text: "M. Toghraei, Piping and Instrumentation Diagram Development, Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In the **PFD vs P&ID** comparison, a **process flow diagram (PFD)** shows the main equipment, main process streams and operating conditions, together with a heat and material balance table: what the process does. A **piping and instrumentation diagram (P&ID)** shows every pipe, valve, instrument, control loop and safety device with tags and specifications: how the plant is built and controlled. The PFD comes first in design; the P&ID is the master document for construction, operation and maintenance.
+
+</Key>
+
+Engineers communicate a process plant through drawings. Two of the most important are the PFD and the P&ID. They look similar at first glance, since both are schematic and not to scale, but they serve different purposes and audiences. Knowing what belongs on each, and how to read them, is an essential skill for process, instrumentation, mechanical and operations engineers.
+
+## What is a PFD?
+
+A process flow diagram is produced during process design to describe the process concept. It typically shows:
+
+- Major equipment: vessels, columns, reactors, heat exchangers, pumps and compressors, with tag numbers and key design data.
+- Main process streams with stream numbers, flow direction and connections.
+- A **stream table** of flow rates, compositions, temperatures and pressures, taken from the [material balance](/chemical-engineering/material-balance/) and energy balance.
+- Major control loops at a conceptual level.
+- Utilities only where they matter to the process (steam to a reboiler, cooling water to a condenser).
+
+It does **not** show minor lines, isolation valves, drains, vents, instrument details or piping specifications.
+
+## What is a P&ID?
+
+A piping and instrumentation diagram develops the PFD into a complete schematic of the plant for detailed engineering. It shows:
+
+- All equipment, including spares and packages, with tags.
+- **All piping**, with line numbers giving size, fluid service, sequence number, piping class and insulation.
+- **All valves**: isolation, control, check, relief and manual valves, with their types.
+- **All instruments and control loops**, with ISA style tag bubbles indicating function and location (field, control room panel, DCS, safety system).
+- Safety devices, interlocks and shutdown systems.
+- Vents, drains, sample points, reducers, strainers, spectacle blinds and tie-ins.
+- Off-page connectors to link sheets.
+
+<figure>
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" role="img" aria-label="Left: a PFD of a tank feeding a pump with one stream number. Right: the same section as a P&ID with isolation valves, a level transmitter and level controller bubble, a control valve on the pump discharge and a line number">
+<g font-family="Open Sans Variable, Arial, sans-serif" fill="#0b2545">
+<text x="135" y="24" text-anchor="middle" font-size="14" font-weight="700">PFD</text>
+<text x="430" y="24" text-anchor="middle" font-size="14" font-weight="700">P&amp;ID</text>
+</g>
+<path d="M290 30V290" stroke="#c9d2de" stroke-width="2" />
+<rect x="30" y="60" width="70" height="120" rx="10" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<text x="65" y="125" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">T-101</text>
+<path d="M100 165H150" stroke="#0b2545" stroke-width="2" />
+<circle cx="168" cy="165" r="18" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<text x="168" y="200" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">P-101</text>
+<path d="M186 165H270" stroke="#0b2545" stroke-width="2" /><path d="M262 159L272 165L262 171" stroke="#0b2545" stroke-width="2" />
+<path d="M220 165l8 -10h16l8 10l-8 10h-16z" fill="#fff7e0" stroke="#f5b800" stroke-width="1.5" />
+<text x="236" y="169" text-anchor="middle" font-size="11" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">3</text>
+<text x="135" y="250" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Main equipment, stream number,</text>
+<text x="135" y="266" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">conditions in a stream table</text>
+<rect x="310" y="60" width="70" height="120" rx="10" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<text x="345" y="125" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">T-101</text>
+<path d="M380 165H434" stroke="#0b2545" stroke-width="2" />
+<path d="M396 157L412 173V157L396 173Z" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="452" cy="165" r="18" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<path d="M470 165H570" stroke="#0b2545" stroke-width="2" />
+<path d="M500 157L516 173V157L500 173Z" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<path d="M508 165V140M498 140H518" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="404" cy="80" r="17" fill="#ffffff" stroke="#13a89e" stroke-width="2" />
+<text x="404" y="78" text-anchor="middle" font-size="10" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">LT</text>
+<text x="404" y="90" text-anchor="middle" font-size="9" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">101</text>
+<path d="M380 80H387" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="508" cy="80" r="17" fill="#ffffff" stroke="#13a89e" stroke-width="2" /><path d="M491 80H525" stroke="#13a89e" stroke-width="1.5" />
+<text x="508" y="76" text-anchor="middle" font-size="10" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">LIC</text>
+<text x="508" y="93" text-anchor="middle" font-size="9" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">101</text>
+<path d="M421 80H491M508 97V140" stroke="#13a89e" stroke-width="1.5" stroke-dasharray="5 4" />
+<text x="430" y="210" text-anchor="middle" font-size="11" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">2"-P-1003-A1A</text>
+<text x="430" y="250" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Valves, instruments, control loops,</text>
+<text x="430" y="266" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">line numbers and specifications</text>
+</svg>
+<figcaption>The same pump-out section drawn as a PFD (left) and a P&amp;ID (right), simplified.</figcaption>
+</figure>
+
+## PFD vs P&ID: key differences
+
+| Feature | PFD | P&ID |
+| --- | --- | --- |
+| Purpose | Show process concept and balances | Show complete piping, instruments and controls |
+| Stage | Conceptual and basic design | Detailed design, construction, operation |
+| Equipment | Major items only | All items, including spares and packages |
+| Lines | Main process streams | Every line with line number and specification |
+| Valves | Usually only control valves of interest | All valves, with types |
+| Instruments | Key loops, conceptual | Every instrument and loop, fully tagged |
+| Process data | Stream table with flows and conditions | Design data in equipment and line lists |
+| Main users | Process engineers, management | All disciplines, operators, maintenance, safety reviews (HAZOP) |
+
+## How to read a P&ID
+
+1. **Start with the legend sheets.** They define symbols, line types, abbreviations and the tag format used in that project. Standard symbol sets are summarised in [P&ID symbols](https://www.instrumentationblog.in/tools/pid-symbols/) on InstrumentationBlog.in.
+2. **Find the main process path.** Follow the heavy lines from feed to product, equipment by equipment, as on the PFD.
+3. **Read equipment tags.** A letter prefix shows type (for example V for vessel, P for pump, E for exchanger, T for tank or tower, depending on the project) and a number shows its unit and sequence.
+4. **Read line numbers.** These typically encode size, service, sequence and piping class, for example 2"-P-1003-A1A.
+5. **Read instrument bubbles.** The letters give the function; the number is the loop. A circle alone means a field instrument; a line through it means control room panel; a circle in a square indicates a shared display such as a DCS.
+6. **Trace control loops.** Follow the dashed signal lines from transmitter to controller to final element, usually a control valve.
+7. **Check safety features.** Relief valves, shutdown valves, interlocks and alarms are often shown with special symbols and tags.
+
+## Instrument identification letters (ISA 5.1)
+
+The first letter is the measured or initiating variable; succeeding letters describe functions:
+
+| First letter | Variable | Succeeding letter | Function |
+| --- | --- | --- | --- |
+| F | Flow | I | Indicate |
+| L | Level | T | Transmit |
+| P | Pressure | C | Control |
+| T | Temperature | V | Valve |
+| A | Analysis | A | Alarm (with H or L for high or low) |
+| S | Speed | E | Primary element (sensor) |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A P&amp;ID shows bubbles tagged LT-101, LIC-101 and LV-101 around a tank, and PSV-102 on top of it.</dd>
+<dt>Find</dt><dd>What each tag means and how the loop works.</dd>
+<dt>Assumptions</dt><dd>Tags follow ANSI/ISA 5.1 conventions; 101 and 102 are loop numbers.</dd>
+<dt>Solution</dt><dd>LT-101: level transmitter in loop 101<br />LIC-101: level indicating controller in the same loop<br />LV-101: level control valve, the final element<br />PSV-102: pressure safety valve, a separate safety device</dd>
+<dt>Answer</dt><dd><strong>The transmitter measures tank level, the controller compares it with the set point and positions the control valve on the outlet; the safety valve independently protects the tank from overpressure</strong></dd>
+<dt>Limitations</dt><dd>Projects may add their own letter conventions; always check the legend sheet.</dd>
+</dl>
+</Example>
+
+Decoding tags quickly gets easier with practice, and an [instrument tag decoder](https://instrumentationblog.in/tools/instrument-tags/) helps with less common combinations.
+
+## Who uses which drawing
+
+- **PFDs** are used for process design, debottlenecking studies, operator training overviews and cost estimates.
+- **P&IDs** are used by piping, instrumentation, electrical and mechanical engineers in detailed design; by operators and maintenance teams for isolation and permits; and in hazard and operability (HAZOP) studies, where each line and control loop is reviewed node by node.
+
+Both drawings must be kept up to date, and a revision block on each sheet records every change. Every modification in the field should be marked up and incorporated into the as-built P&ID, because operators rely on it to isolate equipment safely. Equipment on both drawings, from [pressure vessels](/chemical-engineering/pressure-vessels-basics/) to [distillation columns](/chemical-engineering/distillation-column-working-principle/) and [heat exchangers](/chemical-engineering/heat-exchanger-types/), is described further in their own articles.

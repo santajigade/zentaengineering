@@ -64,15 +64,15 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| process-fundamentals | Material Balance in Chemical Engineering with Examples | material-balance | fundamentals | to write |
-| mechanical-operations | Particle Size Reduction: Crushing and Grinding Equipment | size-reduction-equipment | equipment | to write |
-| heat-exchangers | Heat Exchanger Types and How They Work | heat-exchanger-types | working-principle | to write |
-| mass-transfer | Distillation Column Working Principle | distillation-column-working-principle | working-principle | to write |
-| reaction-engineering | CSTR vs PFR: Ideal Reactors Compared | cstr-vs-pfr | comparison | to write |
-| process-equipment | Pressure Vessels: Types, Parts and Design Basics | pressure-vessels-basics | equipment | to write |
-| pfd-pid | PFD vs P&ID: Differences and How to Read Them | pfd-vs-pid | comparison | to write |
-| process-industries | Ammonia Production by the Haber-Bosch Process | haber-bosch-ammonia-process | explanation | to write |
-| process-optimization | Pinch Analysis for Heat Recovery Explained | pinch-analysis | fundamentals | to write |
+| process-fundamentals | Material Balance in Chemical Engineering with Examples | material-balance | fundamentals | draft |
+| mechanical-operations | Particle Size Reduction: Crushing and Grinding Equipment | size-reduction-equipment | equipment | draft |
+| heat-exchangers | Heat Exchanger Types and How They Work | heat-exchanger-types | working-principle | draft |
+| mass-transfer | Distillation Column Working Principle | distillation-column-working-principle | working-principle | draft |
+| reaction-engineering | CSTR vs PFR: Ideal Reactors Compared | cstr-vs-pfr | comparison | draft |
+| process-equipment | Pressure Vessels: Types, Parts and Design Basics | pressure-vessels-basics | equipment | draft |
+| pfd-pid | PFD vs P&ID: Differences and How to Read Them | pfd-vs-pid | comparison | draft |
+| process-industries | Ammonia Production by the Haber-Bosch Process | haber-bosch-ammonia-process | explanation | draft |
+| process-optimization | Pinch Analysis for Heat Recovery Explained | pinch-analysis | fundamentals | draft |
 
 ## computer-science
 

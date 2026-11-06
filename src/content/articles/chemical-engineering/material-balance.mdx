@@ -1,0 +1,131 @@
+---
+title: "Material Balance in Chemical Engineering with Examples"
+description: "Material balance explained: the general balance equation, steady and unsteady state, systems with and without reaction, degrees of freedom and worked examples."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: process-fundamentals
+focusKeyword: "material balance"
+image: { src: /images/featured/material-balance.webp, alt: "Material Balance in Chemical Engineering with Examples: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [material-balance, mass-balance, process-calculations, stoichiometry, recycle]
+faq:
+  - q: "What is the difference between a material balance and an energy balance?"
+    a: "A material balance accounts for mass entering, leaving, generated, consumed and accumulating in a system. An energy balance does the same for energy: heat, work and the enthalpy carried by streams. Most process design solves the material balance first, then uses its flows in the energy balance."
+  - q: "Is mass always conserved in a material balance?"
+    a: "Total mass is conserved in chemical processes. The mass of an individual chemical species is not, because reactions generate and consume species. That is why component balances on reacting systems include generation and consumption terms, while total mass and element balances do not."
+  - q: "Why are recycle streams used?"
+    a: "To return unreacted feed to a reactor when single pass conversion is low, to recover valuable material, or to control conditions such as temperature or concentration. Recycle increases overall conversion and yield but makes the balance calculations iterative or requires solving simultaneous equations."
+references:
+  - text: "R. M. Felder, R. W. Rousseau and L. G. Bullard, Elementary Principles of Chemical Processes, 4th ed., Wiley"
+  - text: "D. M. Himmelblau and J. B. Riggs, Basic Principles and Calculations in Chemical Engineering, 8th ed., Prentice Hall"
+  - text: "B. I. Bhatt and S. B. Thakore, Stoichiometry, 5th ed., McGraw-Hill Education"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **material balance** applies conservation of mass to a process: **input + generation − output − consumption = accumulation**. At steady state accumulation is zero. Balances are written for total mass and for each component, and solving them gives the unknown flow rates and compositions of every stream. It is the first calculation in almost every chemical engineering problem.
+
+</Key>
+
+Before a chemical engineer can size a pump, choose a heat exchanger or estimate the cost of a plant, they need to know how much material flows in every stream and what it contains. The material balance provides those numbers. It is simple in principle, since matter is neither created nor destroyed, but applying it carefully to mixers, separators, reactors and recycle loops is a core professional skill.
+
+## The general material balance equation
+
+Draw a boundary around the system of interest: a single unit, a group of units or a whole plant. For any quantity crossing that boundary:
+
+$$
+\text{Input} + \text{Generation} - \text{Output} - \text{Consumption} = \text{Accumulation}
+$$
+
+- **Input and output:** material entering and leaving through the boundary in streams.
+- **Generation and consumption:** formation or disappearance of a species by chemical reaction inside the system.
+- **Accumulation:** build-up (or depletion) of material inside the system with time.
+
+The equation can be written as a **differential balance** (rates, such as kg/h, at an instant) for continuous processes, or an **integral balance** (amounts, such as kg, between two times) for batch processes.
+
+## Simplified forms
+
+- **Steady state, continuous process:** nothing changes with time, so accumulation = 0. Input + generation = output + consumption.
+- **No reaction:** generation and consumption are zero for every species, so input = output for each component at steady state.
+- **Total mass:** reactions do not create or destroy mass, so total mass in = total mass out at steady state, even with reaction.
+- **Batch process:** initial content + generation = final content + consumption.
+
+<figure>
+<svg width="560" height="260" viewBox="0 0 560 260" fill="none" role="img" aria-label="Mixer block with two inlet streams and one outlet: stream 1 is 100 kg/h of 20 percent NaOH solution, stream 2 is water of unknown flow, and stream 3 is the 5 percent NaOH product of unknown flow">
+<rect x="230" y="80" width="110" height="90" rx="10" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" />
+<text x="285" y="131" text-anchor="middle" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Mixer</text>
+<path d="M60 100H228" stroke="#0b2545" stroke-width="2.5" /><path d="M220 93L230 100L220 107" stroke="#0b2545" stroke-width="2.5" />
+<path d="M60 150H228" stroke="#0b2545" stroke-width="2.5" /><path d="M220 143L230 150L220 157" stroke="#0b2545" stroke-width="2.5" />
+<path d="M340 125H510" stroke="#0b2545" stroke-width="2.5" /><path d="M502 118L512 125L502 132" stroke="#0b2545" stroke-width="2.5" />
+<text x="60" y="88" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">1: 100 kg/h, 20% NaOH</text>
+<text x="60" y="176" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">2: water, W kg/h</text>
+<text x="360" y="113" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">3: P kg/h, 5% NaOH</text>
+<path d="M214 50H356V200H214Z" stroke="#f5b800" stroke-width="1.5" stroke-dasharray="6 5" />
+<text x="290" y="242" text-anchor="middle" font-size="13" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">System boundary</text>
+</svg>
+<figcaption>A labelled flowchart with the system boundary for the dilution example.</figcaption>
+</figure>
+
+## A systematic procedure
+
+Most errors in material balances come from rushing. A reliable method is:
+
+1. **Draw and label a flowchart.** Show every stream with its flow rate and composition, known or unknown. Use symbols for unknowns.
+2. **Choose a basis of calculation,** such as 100 kg of feed or 1 hour of operation, if none is given. Results can be scaled later.
+3. **Convert units** so all quantities are consistent (mass or moles, not a mixture).
+4. **Count degrees of freedom:** number of unknowns minus number of independent equations (balances, specifications, physical relations). If it is zero the problem can be solved; if positive, information is missing; if negative, the problem is over specified or inconsistent.
+5. **Write balances** starting with those that involve the fewest unknowns, often a component that passes through one stream only (a "tie component").
+6. **Solve and check:** verify the total balance and that compositions sum to 1.
+
+For several connected units, balances can be written on each unit, on mixing and splitting points, and on the overall process. Only a set of independent equations can be used.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>100 kg/h of 20 percent (by mass) NaOH solution is diluted with pure water to give a 5 percent NaOH product.</dd>
+<dt>Find</dt><dd>The water flow W and the product flow P.</dd>
+<dt>Assumptions</dt><dd>Steady state; no reaction; compositions by mass.</dd>
+<dt>Solution</dt><dd>NaOH balance (tie component, present only in streams 1 and 3): 0.20 × 100 = 0.05 × P, so P = 400 kg/h<br />Total balance: 100 + W = P, so W = 400 − 100 = 300 kg/h<br />Check water: 0.80 × 100 + 300 = 380 kg/h in; 0.95 × 400 = 380 kg/h out</dd>
+<dt>Answer</dt><dd><strong>Add 300 kg/h of water to obtain 400 kg/h of 5 percent NaOH</strong></dd>
+<dt>Limitations</dt><dd>Mixing NaOH with water releases heat; an energy balance is needed to find the outlet temperature.</dd>
+</dl>
+</Example>
+
+## Material balance with chemical reaction
+
+When reactions occur, species balances need generation and consumption terms, which come from **stoichiometry** and the **extent of reaction**. Useful terms are:
+
+- **Limiting reactant:** the reactant that would be used up first if the reaction went to completion.
+- **Excess reactant:** any reactant supplied beyond the stoichiometric amount; percent excess = (fed − stoichiometric) / stoichiometric × 100.
+- **Conversion:** fraction of a reactant fed that reacts.
+- **Yield and selectivity:** how much desired product forms compared with the reactant consumed or with undesired by-products.
+
+There are three equivalent approaches: species balances with generation terms, **atomic (element) balances**, which need no reaction terms because atoms are conserved, and the **extent of reaction** method. For combustion, it is common to work in moles, using air as 21 percent O₂ and 79 percent N₂ by mole.
+
+As an example, in ammonia synthesis N₂ + 3H₂ → 2NH₃, producing 2 kmol of NH₃ consumes 1 kmol N₂ and 3 kmol H₂. The [Haber-Bosch process](/chemical-engineering/haber-bosch-ammonia-process/) applies these balances to a reactor with a large recycle stream.
+
+## Recycle, bypass and purge
+
+- **Recycle:** part of an outlet stream is returned to an earlier point. Unreacted feed is often separated and recycled so that overall conversion approaches 100 percent while single pass conversion stays modest. The difference between the two is an important design quantity.
+- **Bypass:** part of the feed skips a unit and rejoins the product, used to control product composition.
+- **Purge:** a small stream removed from a recycle loop to stop inert or unwanted species building up. Without a purge, the inert would accumulate until the plant could not run.
+
+Recycle problems are solved by writing balances around the overall process (where the recycle stream is internal and cancels), then around the mixing point, reactor or separator. The same reasoning applies to [CSTR and PFR reactors](/chemical-engineering/cstr-vs-pfr/) in a flowsheet and to separators such as a [distillation column](/chemical-engineering/distillation-column-working-principle/), where the feed must equal top product plus bottoms.
+
+## Where material balances are used
+
+- Process design: stream tables on the [process flow diagram](/chemical-engineering/pfd-vs-pid/) come from the material and energy balances.
+- Equipment sizing: flows set the size of pumps, pipes, columns and [heat exchangers](/chemical-engineering/heat-exchanger-types/).
+- Plant monitoring: closing the balance around a unit checks [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) accuracy and reveals leaks or losses.
+- Environmental reporting: emissions and effluent loads are estimated by balance.
+
+## Common mistakes
+
+- Mixing mass and mole units, or mass fractions and mole fractions, in one equation.
+- Forgetting generation and consumption terms for reacting species.
+- Writing dependent equations (for example, all component balances plus the total balance) and thinking more information is available than there is.
+- Leaving out inert components such as nitrogen in combustion air.

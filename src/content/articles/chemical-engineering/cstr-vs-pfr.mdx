@@ -1,0 +1,130 @@
+---
+title: "CSTR vs PFR: Ideal Reactors Compared"
+description: "CSTR vs PFR compared: mixing assumptions, design equations, residence time, reactor volume for first order reactions, reactors in series and when to use each."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: chemical-engineering
+subcategory: reaction-engineering
+focusKeyword: "CSTR vs PFR"
+image: { src: /images/featured/cstr-vs-pfr.webp, alt: "CSTR vs PFR: Ideal Reactors Compared: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [cstr, pfr, reactor-design, residence-time, reaction-engineering]
+faq:
+  - q: "Why does a PFR need less volume than a CSTR for the same conversion?"
+    a: "For reactions whose rate falls as reactant is used up (positive order kinetics), a CSTR operates entirely at the low outlet concentration and therefore the lowest rate. A PFR passes through high concentrations near its inlet, so its average rate is higher and less volume is needed."
+  - q: "When is a CSTR preferred over a PFR?"
+    a: "When good temperature control is needed for strongly exothermic reactions, for liquid phase reactions with slurries or viscous fluids that need agitation, when the reaction is autocatalytic at low conversion, and when selectivity benefits from keeping a reactant concentration low. CSTRs are also easy to build, clean and control."
+  - q: "What is space time?"
+    a: "Space time is the reactor volume divided by the volumetric feed flow rate measured at inlet conditions. For constant density flow it equals the mean residence time. It is the time needed to process one reactor volume of feed."
+references:
+  - text: "H. S. Fogler, Elements of Chemical Reaction Engineering, 6th ed., Pearson"
+  - text: "O. Levenspiel, Chemical Reaction Engineering, 3rd ed., Wiley"
+  - text: "J. M. Smith, Chemical Engineering Kinetics, 3rd ed., McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+In the **CSTR vs PFR** comparison, a **continuous stirred tank reactor (CSTR)** is perfectly mixed, so its contents and outlet have the same uniform composition. A **plug flow reactor (PFR)** is a tube in which fluid moves as plugs with no back-mixing, so concentration falls steadily along its length. For most reactions a PFR reaches a given conversion in a smaller volume; a CSTR offers better temperature control and simpler operation.
+
+</Key>
+
+Reactor design starts with two idealised models. Real reactors fall between them, but these ideals give the design equations, explain why reactors behave as they do and set limits for what a real reactor can achieve. Understanding the CSTR vs PFR comparison is central to chemical reaction engineering.
+
+## The two ideal reactors
+
+<figure>
+<svg width="560" height="270" viewBox="0 0 560 270" fill="none" role="img" aria-label="Left: a stirred tank reactor with feed in, an agitator and product out, uniform composition throughout. Right: a tubular plug flow reactor with concentration falling along its length from inlet to outlet">
+<rect x="50" y="60" width="140" height="150" rx="14" fill="#e6f6f4" stroke="#0b2545" stroke-width="2.5" />
+<path d="M120 30V170M90 170H150" stroke="#0b2545" stroke-width="3" />
+<path d="M90 162L90 178M150 162L150 178" stroke="#0b2545" stroke-width="3" />
+<path d="M20 80H48" stroke="#0b2545" stroke-width="2.5" /><path d="M40 73L50 80L40 87" stroke="#0b2545" stroke-width="2.5" />
+<path d="M190 190H230" stroke="#0b2545" stroke-width="2.5" /><path d="M222 183L232 190L222 197" stroke="#0b2545" stroke-width="2.5" />
+<text x="120" y="236" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">CSTR</text>
+<text x="120" y="256" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Uniform composition, equal to outlet</text>
+<defs><linearGradient id="pfrg" x1="0" x2="1"><stop offset="0" stop-color="#13a89e" /><stop offset="1" stop-color="#e6f6f4" /></linearGradient></defs>
+<rect x="290" y="95" width="230" height="60" rx="8" fill="url(#pfrg)" stroke="#0b2545" stroke-width="2.5" />
+<path d="M262 125H288" stroke="#0b2545" stroke-width="2.5" /><path d="M280 118L290 125L280 132" stroke="#0b2545" stroke-width="2.5" />
+<path d="M520 125H548" stroke="#0b2545" stroke-width="2.5" /><path d="M540 118L550 125L540 132" stroke="#0b2545" stroke-width="2.5" />
+<path d="M340 100V150M390 100V150M440 100V150M490 100V150" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4 4" />
+<text x="405" y="80" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Reactant concentration falls along length</text>
+<text x="405" y="236" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">PFR</text>
+<text x="405" y="256" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">No mixing along the flow direction</text>
+</svg>
+<figcaption>Ideal CSTR (left) and ideal PFR (right). Darker shading means higher reactant concentration.</figcaption>
+</figure>
+
+**CSTR (mixed flow reactor).** A tank with an agitator, fed and drained continuously. The ideal assumes perfect mixing: every point in the tank has the same composition and temperature, equal to the outlet stream. Feed is diluted the moment it enters.
+
+**PFR (tubular reactor).** Fluid flows through a tube with a flat velocity profile and no mixing in the flow direction, but complete mixing across the cross section. Each element of fluid spends exactly the same time in the reactor, so it behaves like a small batch reactor moving down the tube.
+
+## Design equations
+
+For a reactant A fed at molar flow FA0, with conversion X and rate of disappearance −rA, the steady state mole balances give:
+
+$$
+\text{CSTR:}\;\; V = \frac{F_{A0}\,X}{-r_A}\Big|_{\text{exit}} \qquad \text{PFR:}\;\; V = F_{A0}\int_0^X \frac{dX}{-r_A}
+$$
+
+The CSTR rate is evaluated at the exit conditions. The PFR integrates the rate along the tube.
+
+For a **first order liquid phase reaction** (−rA = k CA, constant density), these become simple expressions in space time τ = V / v₀:
+
+$$
+\tau_{\text{CSTR}} = \frac{X}{k(1 - X)} \qquad \tau_{\text{PFR}} = \frac{-\ln(1 - X)}{k}
+$$
+
+### The Levenspiel plot
+
+Plotting FA0 / (−rA) against X gives a curve that rises with X for normal kinetics. The PFR volume is the area under the curve; the CSTR volume is the rectangle of height equal to the exit value. The rectangle is always larger for such kinetics, which shows visually why the PFR is smaller.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A first order liquid reaction with k = 0.5 min⁻¹ must reach 90 percent conversion. Feed rate 100 L/min.</dd>
+<dt>Find</dt><dd>Space time and volume for a single CSTR and for a PFR.</dd>
+<dt>Assumptions</dt><dd>Isothermal; constant density; ideal mixing in the CSTR and ideal plug flow in the PFR.</dd>
+<dt>Solution</dt><dd>CSTR: τ = 0.9 / (0.5 × 0.1) = 18 min; V = 18 × 100 = 1800 L<br />PFR: τ = −ln(0.1) / 0.5 = 2.303 / 0.5 = 4.6 min; V = 4.6 × 100 = 461 L</dd>
+<dt>Answer</dt><dd><strong>The CSTR needs about 1800 L and the PFR about 461 L, roughly a quarter of the volume, for the same 90 percent conversion</strong></dd>
+<dt>Limitations</dt><dd>The difference grows at higher conversion and shrinks at low conversion. Non-isothermal operation, side reactions and real mixing can change the conclusion.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/residence-time" title="Residence Time Calculator" />
+
+## CSTRs in series
+
+Splitting the CSTR volume into several tanks in series lets the early tanks run at higher concentration, so the total volume falls. With N equal tanks, a first order reaction gives 1 − X = 1 / (1 + kτᵢ)ᴺ, where τᵢ is the space time of each tank. As N increases, the train approaches PFR behaviour. In the example above, two equal tanks need a total space time of about 8.6 min instead of 18. This is why industrial liquid phase processes often use a cascade of stirred tanks.
+
+## CSTR vs PFR: comparison table
+
+| Feature | CSTR | PFR |
+| --- | --- | --- |
+| Mixing | Perfect, uniform composition | None in flow direction |
+| Concentration | Constant, equal to outlet | Falls along length |
+| Volume for given conversion (positive order) | Larger | Smaller |
+| Temperature control | Easy, large mixed volume | Harder; hot spots possible |
+| Typical phase | Liquid, slurries | Gas phase, also liquids |
+| Construction | Stirred vessel | Tube, often multitubular |
+| Residence time distribution | Wide (exponential) | Narrow (all fluid same time) |
+| Start-up and cleaning | Easy | Harder for long tubes |
+
+## Effect on selectivity
+
+When more than one reaction can occur, the reactor type affects not only volume but also how much of the desired product forms. For parallel reactions in which the desired reaction has a higher order in the reactant than the undesired one, high reactant concentration favours the desired product, so a PFR or batch reactor is better. If the desired reaction has the lower order, a CSTR, which keeps the reactant concentration low, gives better selectivity. For series reactions such as A to R to S, where R is wanted, a PFR usually gives a higher maximum yield of R because every fluid element has the same residence time and can be stopped at the optimum.
+
+## Comparison with batch reactors
+
+A batch reactor is filled, reacted and emptied. Every element of fluid spends the same time in it, so for the same reaction time it achieves the same conversion as a PFR with equal space time. Batch reactors suit small volumes, many products and slow reactions, but add downtime for filling, heating, emptying and cleaning. Semi-batch operation, in which one reactant is added gradually, is used to control heat release and selectivity.
+
+## When to use each
+
+- **Choose a CSTR** for liquid phase reactions that need agitation or suspension of solids, strongly exothermic reactions where uniform temperature is vital, reactions where a low reactant concentration improves selectivity, and multipurpose plants.
+- **Choose a PFR** for gas phase reactions, high conversion requirements, fast reactions and catalytic processes in packed tubes. Fixed bed catalytic reactors, such as the ammonia converters in the [Haber-Bosch process](/chemical-engineering/haber-bosch-ammonia-process/), approach plug flow.
+
+## Real reactors
+
+Real reactors show dead zones, channelling and partial back-mixing. Engineers measure the **residence time distribution** with tracer tests and describe it with models such as tanks in series or axial dispersion. The heat removed or added is calculated with an energy balance and transferred through jackets, coils or external [heat exchangers](/chemical-engineering/heat-exchanger-types/). Flows and compositions entering and leaving come from the plant [material balance](/chemical-engineering/material-balance/), and reactor vessels are designed as [pressure vessels](/chemical-engineering/pressure-vessels-basics/). Temperature, pressure, level and flow loops keep the reactor at its design point; see [process instrumentation](https://www.instrumentationblog.in/category/process-instrumentation/) on InstrumentationBlog.in.
