@@ -90,6 +90,9 @@ import Calculator from '../../../components/Calculator.astro';
 ## Review
 - The owner has approved auto publishing: every new article gets `reviewedDate` equal to its `pubDate`, so it shows "Reviewed by Technical Team" and no Draft label.
 
+## MDX gotchas
+- Curly braces in prose ({u}) are read as code and break the build. Use them only inside $$ math or code.
+
 ## Links
 - 3 to 6 internal links to related Zenta Engineering articles, with descriptive anchor text. Link only to pages that are already live. Pillar articles link to every article in their cluster.
 - ZentaCalculator.com (zentacalculator.com): one or two links or embeds at most, only where the article performs or discusses that calculation.
