@@ -1,13 +1,17 @@
 // Site-wide settings. Only true information here.
+// PREVIEW=1 builds the private review copy (preview.zentaengineering.com): drafts shown, never indexed.
+export const IS_PREVIEW = process.env.PREVIEW === '1';
+const LAUNCHED = false; // set true at launch (Phase 6)
+
 export const SITE = {
   name: 'Zenta Engineering',
-  url: 'https://zentaengineering.com',
+  url: IS_PREVIEW ? 'https://preview.zentaengineering.com' : 'https://zentaengineering.com',
   tagline: 'Understand the Principles. Explore the Applications. Master Engineering.',
   description:
     'Articles, tutorials, interview preparation and projects across engineering disciplines, for students and working engineers.',
   email: 'contact@zentaengineering.com', // TODO: confirm contact email
   // Until launch: the whole site is noindex and robots.txt blocks crawlers.
-  launched: false,
+  launched: LAUNCHED && !IS_PREVIEW,
   // Items go live only when they have a reviewedDate (technical review before publishing).
   requireReview: true,
   // A discipline page is indexable from this many live items; a subcategory archive from subcategoryMinItems.

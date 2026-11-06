@@ -1,9 +1,8 @@
 # Builds the site and uploads it to Hostinger by FTP.
 # Runs on every push to main, three times a day (so scheduled items go live), and on demand.
-# Required GitHub secrets (Settings > Secrets and variables > Actions):
-#   FTP_SERVER    e.g. ftp.zentaengineering.com or the IP from hPanel > Files > FTP Accounts
-#   FTP_USERNAME  FTP username from hPanel
-#   FTP_PASSWORD  FTP password from hPanel
+# Live site secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD (FTP account rooted at zentaengineering.com/public_html)
+# Preview site secrets (optional): PREVIEW_FTP_SERVER, PREVIEW_FTP_USERNAME, PREVIEW_FTP_PASSWORD
+#   (FTP account rooted at the preview.zentaengineering.com folder). The preview includes unreviewed drafts.
 name: Build and deploy to Hostinger
 on:
   push:
@@ -23,11 +22,36 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Upload to Hostinger
+      - name: Upload live site to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          server-dir: ./ # FTP account is rooted at public_html
+          server-dir: ./
+  preview:
+    runs-on: ubuntu-latest
+    env:
+      HAS_PREVIEW: ${{ secrets.PREVIEW_FTP_SERVER != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.HAS_PREVIEW == 'true'
+      - uses: actions/setup-node@v4
+        if: env.HAS_PREVIEW == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+        if: env.HAS_PREVIEW == 'true'
+      - run: PREVIEW=1 npm run build
+        if: env.HAS_PREVIEW == 'true'
+      - name: Upload preview site
+        if: env.HAS_PREVIEW == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.PREVIEW_FTP_SERVER }}
+          username: ${{ secrets.PREVIEW_FTP_USERNAME }}
+          password: ${{ secrets.PREVIEW_FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./
