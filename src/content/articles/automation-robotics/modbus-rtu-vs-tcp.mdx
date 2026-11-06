@@ -1,0 +1,135 @@
+---
+title: "Modbus RTU vs Modbus TCP Explained"
+description: "Modbus RTU vs Modbus TCP compared: physical layer, frame format, addressing, CRC and MBAP header, speed, distance, topology and when to use each, with examples."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: automation-robotics
+subcategory: industrial-networks
+focusKeyword: "Modbus RTU vs Modbus TCP"
+image: { src: /images/featured/modbus-rtu-vs-tcp.webp, alt: "Modbus RTU vs Modbus TCP Explained: featured diagram" }
+format: comparison
+pillar: true
+math: false
+tags: [modbus, modbus-rtu, modbus-tcp, rs485, industrial-networks]
+faq:
+  - q: "Can Modbus RTU and Modbus TCP devices talk to each other?"
+    a: "Yes, through a Modbus gateway. The gateway receives Modbus TCP requests on Ethernet, uses the Unit Identifier to select the serial slave, sends the equivalent RTU frame on RS-485, and returns the reply as a TCP message. The function codes and data model are the same."
+  - q: "How many devices can be connected on a Modbus RTU network?"
+    a: "Modbus allows slave addresses 1 to 247. The electrical limit of a standard RS-485 segment is 32 unit loads, so more devices need repeaters or transceivers rated at a fraction of a unit load. Practical limits also come from polling time, since only one device can talk at a time."
+  - q: "What port does Modbus TCP use?"
+    a: "TCP port 502 by default. The secure variant, Modbus/TCP Security, uses TLS on port 802."
+references:
+  - text: "Modbus Application Protocol Specification V1.1b3, Modbus Organization"
+  - text: "Modbus over Serial Line Specification and Implementation Guide V1.02, Modbus Organization"
+  - text: "Modbus Messaging on TCP/IP Implementation Guide V1.0b, Modbus Organization"
+  - text: "TIA-485-A Electrical Characteristics of Generators and Receivers for Use in Balanced Digital Multipoint Systems"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **Modbus RTU vs Modbus TCP**, both use the same Modbus data model and function codes. **Modbus RTU** sends compact binary frames over serial lines, usually RS-485, with a slave address and a CRC check, one master polling up to 247 slaves in turn. **Modbus TCP** carries the same messages inside TCP/IP packets over Ethernet, with an MBAP header instead of the CRC, much higher speed and many simultaneous connections. RTU suits simple, long, low cost links; TCP suits plant networks and SCADA.
+
+</Key>
+
+Modbus, introduced by Modicon in 1979 for its PLCs, is one of the oldest and most widely supported industrial protocols. Meters, drives, PLCs, transmitters, analysers and gateways from almost every manufacturer speak it. Its two most common forms, Modbus RTU and Modbus TCP, are often found in the same plant, so engineers need to understand both.
+
+## The common Modbus data model
+
+Both variants access the same four data tables:
+
+| Table | Access | Size | Typical use |
+| --- | --- | --- | --- |
+| Coils | Read and write | 1 bit | Digital outputs, commands |
+| Discrete inputs | Read only | 1 bit | Digital inputs, status |
+| Input registers | Read only | 16 bits | Measured values |
+| Holding registers | Read and write | 16 bits | Set points, configuration, also measurements |
+
+Common function codes are 01 Read Coils, 02 Read Discrete Inputs, 03 Read Holding Registers, 04 Read Input Registers, 05 Write Single Coil, 06 Write Single Register, 15 Write Multiple Coils and 16 Write Multiple Registers. Values larger than 16 bits, such as 32-bit floating point numbers, use two registers, and the word order must be agreed between devices.
+
+## Modbus RTU
+
+Modbus RTU runs on a serial line, nearly always **RS-485** two-wire (half duplex) multidrop, sometimes RS-232 for a single device.
+
+- **Master and slave:** one master (often the PLC or SCADA) sends requests; slaves (addresses 1 to 247) reply only when addressed. Address 0 is broadcast.
+- **Frame:** slave address (1 byte), function code (1 byte), data (variable) and a **CRC-16** (2 bytes). Frames are separated by a silence of at least 3.5 character times.
+- **Character format:** 1 start bit, 8 data bits, parity or second stop bit, 1 stop bit, so 11 bits per byte.
+- **Speed:** commonly 9600 or 19200 bit/s; up to 115.2 kbit/s on short links.
+- **Distance:** RS-485 reaches up to about 1200 m at lower bit rates.
+- **Wiring:** a daisy chained twisted pair with 120 Ω termination at both ends and bias resistors; see [RS-485 termination and biasing resistors](https://www.instrumentationblog.in/rs485-termination-biasing-resistors/).
+
+## Modbus TCP
+
+Modbus TCP wraps the Modbus request in a TCP/IP packet on Ethernet.
+
+- **Client and server:** a client (for example SCADA) opens a TCP connection to port 502 on the server device. Several clients can talk to one server, and a client can talk to many servers at once.
+- **MBAP header:** 7 bytes: transaction ID (2), protocol ID (2, always 0), length (2) and **unit ID** (1). The unit ID addresses serial devices behind a gateway.
+- **No CRC:** error checking is handled by Ethernet and TCP.
+- **Speed:** 100 Mbit/s or 1 Gbit/s networks with switched, full duplex links.
+- **Distance:** 100 m per copper segment between switches; fibre for longer runs.
+- **Topology:** star, ring or line through Ethernet switches, shared with other plant traffic if designed carefully.
+
+<figure>
+<svg width="580" height="230" viewBox="0 0 580 230" fill="none" role="img" aria-label="Frame comparison: a Modbus RTU frame with slave address, function code, data and CRC; and a Modbus TCP frame with a 7 byte MBAP header containing transaction ID, protocol ID, length and unit ID, followed by function code and data, carried inside a TCP/IP packet">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="20" y="24" text-anchor="start" font-weight="700">Modbus RTU frame</text>
+<rect x="20" y="36" width="90" height="40" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="65" y="61">Address 1 B</text>
+<rect x="110" y="36" width="100" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="160" y="61">Function 1 B</text>
+<rect x="210" y="36" width="200" height="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="310" y="61">Data (n bytes)</text>
+<rect x="410" y="36" width="90" height="40" fill="#fde2e2" stroke="#b42318" stroke-width="2" /><text x="455" y="61">CRC 2 B</text>
+<text x="20" y="124" text-anchor="start" font-weight="700">Modbus TCP frame (inside TCP/IP)</text>
+<rect x="20" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="55" y="154">Trans.</text><text x="55" y="169">ID 2 B</text>
+<rect x="90" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="125" y="154">Protocol</text><text x="125" y="169">ID 2 B</text>
+<rect x="160" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="195" y="154">Length</text><text x="195" y="169">2 B</text>
+<rect x="230" y="136" width="70" height="40" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="265" y="154">Unit</text><text x="265" y="169">ID 1 B</text>
+<rect x="300" y="136" width="100" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="350" y="161">Function 1 B</text>
+<rect x="400" y="136" width="160" height="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="480" y="161">Data (n bytes)</text>
+<text x="160" y="200" fill="#1d4ed8">MBAP header, 7 bytes</text>
+</g>
+<path d="M20 186H300" stroke="#1d4ed8" stroke-width="1.5" /><path d="M20 182V190M300 182V190" stroke="#1d4ed8" stroke-width="1.5" />
+</svg>
+<figcaption>The same request in Modbus RTU and Modbus TCP form.</figcaption>
+</figure>
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A master reads 2 holding registers starting at address 0 from slave 1, over RTU at 9600 bit/s and over TCP.</dd>
+<dt>Find</dt><dd>The request bytes in each form and the RTU transmission time.</dd>
+<dt>Assumptions</dt><dd>11 bits per character on the serial line; CRC as given by the standard algorithm.</dd>
+<dt>Solution</dt><dd>RTU request: 01 03 00 00 00 02 C4 0B (address, function 03, start 0000, quantity 0002, CRC)<br />TCP request: 00 01 00 00 00 06 01 03 00 00 00 02 (transaction 1, protocol 0, length 6, unit 1, then the same PDU, no CRC)<br />RTU request time: 8 bytes × 11 bits / 9600 = 9.2 ms; reply of 9 bytes (01 03 04, 4 data bytes, CRC) = 10.3 ms</dd>
+<dt>Answer</dt><dd><strong>About 20 ms on the wire per RTU transaction, plus device response time and 3.5 character gaps; the same TCP exchange takes well under a millisecond on the network</strong></dd>
+<dt>Limitations</dt><dd>Real throughput is set mostly by device response times and polling design, not raw bit rate.</dd>
+</dl>
+</Example>
+
+## Modbus RTU vs Modbus TCP: comparison
+
+| Feature | Modbus RTU | Modbus TCP |
+| --- | --- | --- |
+| Physical layer | RS-485 (or RS-232) serial | Ethernet |
+| Typical speed | 9.6 to 115.2 kbit/s | 100 Mbit/s to 1 Gbit/s |
+| Distance | Up to about 1200 m per segment | 100 m per copper link; unlimited with switches and fibre |
+| Devices | Up to 247 addresses; 32 unit loads per RS-485 segment | Limited by IP addressing and server connection limits |
+| Communication | One master polls slaves in turn | Many clients and servers simultaneously |
+| Error check | CRC-16 in each frame | TCP/IP and Ethernet checks |
+| Addressing | Slave address | IP address plus unit ID |
+| Cost and simplicity | Very low cost, simple | Needs switches and IP configuration |
+| Diagnostics | Basic | Standard network tools, managed switches |
+
+## When to use each
+
+**Use Modbus RTU** for a few slow devices over long distances, retrofits with existing RS-485 cabling, energy meters, small drives and instruments in cost sensitive projects.
+
+**Use Modbus TCP** for plant wide networks, SCADA connections, many devices, faster updates and integration with IT systems. A [SCADA system](/automation-robotics/scada-system-architecture/) or [DCS](/automation-robotics/dcs-architecture/) often polls hundreds of Modbus TCP devices, and gateways connect older RTU equipment to them.
+
+## Security note
+
+Classic Modbus has no authentication or encryption: any device on the network can read or write registers. Keep Modbus networks segmented behind firewalls, restrict which hosts may connect to port 502, and use Modbus/TCP Security (TLS) where devices support it.
+
+## Troubleshooting tips
+
+- RTU: check matching baud rate, parity and stop bits; correct A and B polarity; termination only at the two ends; unique addresses; adequate timeout.
+- TCP: check IP address, subnet and gateway; port 502 open; unit ID required by gateways; register address offsets (some manuals count from 1, others from 0).
+
+More on industrial protocols is in the [communication category](https://www.instrumentationblog.in/category/automation/communication/) on InstrumentationBlog.in. The serial bit framing used by RTU is the same idea as [UART communication](https://www.instrumentationblog.in/uart-communication-frame-baud-rate/), and choosing PLC communication ports is covered in [PLC hardware selection](/automation-robotics/plc-hardware-selection/).

@@ -1,0 +1,131 @@
+---
+title: "Types of Industrial Robots and Their Applications"
+description: "Types of industrial robots explained: articulated, SCARA, Cartesian, cylindrical, delta and collaborative robots, their work envelopes, payload, speed and uses."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: automation-robotics
+subcategory: industrial-robotics
+focusKeyword: "types of industrial robots"
+image: { src: /images/featured/types-of-industrial-robots.webp, alt: "Types of Industrial Robots and Their Applications: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [industrial-robots, scara, delta-robot, cobot, robotics]
+faq:
+  - q: "What is the most common type of industrial robot?"
+    a: "The articulated robot, usually with six rotary axes. Its large, flexible work envelope suits welding, painting, machine tending, handling and assembly, so it makes up the largest share of installations in most industries."
+  - q: "What does degrees of freedom mean for a robot?"
+    a: "The number of independent motions the robot can make, usually equal to its number of axes. Six degrees of freedom let the tool reach a point in space (three) with any orientation (three). Simpler tasks such as pick and place on a flat table need only four, which is why SCARA and many delta robots use four axes."
+  - q: "Can collaborative robots work without guarding?"
+    a: "Only after a risk assessment of the whole application shows it is safe. Cobots have power and force limiting and other safety functions, but a sharp tool, a heavy part or a fast motion can still be dangerous. ISO 10218 and ISO/TS 15066 guide the assessment and the allowable contact forces."
+references:
+  - text: "ISO 8373:2021 Robotics, Vocabulary"
+  - text: "ISO 10218-1 and ISO 10218-2, Robotics, Safety requirements for industrial robots and robot systems"
+  - text: "ISO/TS 15066:2016 Robots and robotic devices, Collaborative robots"
+  - text: "J. J. Craig, Introduction to Robotics: Mechanics and Control, 4th ed., Pearson"
+  - text: "M. P. Groover, Automation, Production Systems, and Computer-Integrated Manufacturing, 5th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+
+<Key title="Short answer">
+
+The main **types of industrial robots** are classified by their mechanical structure: **articulated** (rotary jointed arms, usually 6 axes), **SCARA** (fast, rigid vertically, compliant horizontally), **Cartesian or gantry** (three linear axes), **cylindrical**, **polar (spherical)**, **delta (parallel)** and **collaborative robots (cobots)** that can work alongside people. The choice depends on reach, payload, speed, accuracy, work envelope and the task.
+
+</Key>
+
+Industrial robots are programmable, multi-axis manipulators that move parts or tools automatically. They weld car bodies, assemble electronics, pack food, tend machine tools and palletise boxes. ISO 8373 defines an industrial robot as an automatically controlled, reprogrammable, multipurpose manipulator programmable in three or more axes. Different mechanical arrangements give very different strengths, so selecting the right type is the first step in any robot cell design.
+
+## Basic terms
+
+- **Axis or joint:** a single motion, either rotary (revolute) or linear (prismatic).
+- **Degrees of freedom (DOF):** number of independent motions; six are needed to reach any position with any orientation.
+- **Work envelope:** the volume the robot can reach.
+- **Payload:** maximum mass the robot can carry at its wrist, including the gripper.
+- **Repeatability:** how closely the robot returns to the same taught point, often a few hundredths of a millimetre for small robots.
+- **End effector:** the gripper, welding torch, spray gun, suction cup or tool at the end of the arm.
+
+<figure>
+<svg width="580" height="270" viewBox="0 0 580 270" fill="none" role="img" aria-label="Simplified side views of four robot types: an articulated arm with rotary joints, a SCARA robot with two horizontal arms and a vertical quill, a Cartesian gantry with three linear axes, and a delta robot with three parallel arms carrying a small platform">
+<g stroke="#0b2545" stroke-width="5" stroke-linecap="round" fill="none">
+<path d="M40 210H110" /><path d="M75 210V170L115 110L150 140" /><path d="M150 140L160 160" stroke-width="3" />
+<path d="M190 210H260" /><path d="M225 210V100H285L325 100" /><path d="M325 100V150" stroke-width="3" />
+<path d="M350 210V90M470 210V90M350 90H470" /><path d="M410 90V160" stroke-width="3" />
+<path d="M490 80H570" /><path d="M500 80L520 140M530 80L530 140M560 80L540 140" stroke-width="3" /><path d="M515 145H545" />
+</g>
+<g fill="#13a89e"><circle cx="75" cy="170" r="7" /><circle cx="115" cy="110" r="7" /><circle cx="150" cy="140" r="6" /><circle cx="225" cy="100" r="7" /><circle cx="285" cy="100" r="7" /><circle cx="410" cy="90" r="7" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="95" y="240">Articulated</text><text x="255" y="240">SCARA</text><text x="410" y="240">Cartesian (gantry)</text><text x="530" y="240">Delta</text>
+</g>
+</svg>
+<figcaption>Four common robot types (simplified side views; dots mark rotary joints).</figcaption>
+</figure>
+
+## Types of industrial robots
+
+### Articulated robots
+
+An articulated robot looks like a human arm: a rotating base, shoulder, elbow and a wrist, usually with six rotary axes. Its work envelope is roughly spherical and very flexible, so it can reach around obstacles and approach parts from many angles. Payloads range from a few kilograms to over a tonne for the largest models.
+
+**Uses:** arc and spot welding, painting, machine tending, material handling, palletising, assembly, deburring and grinding.
+
+### SCARA robots
+
+SCARA (Selective Compliance Assembly Robot Arm) robots have two parallel rotary joints moving in a horizontal plane, plus a vertical linear axis and usually a rotation at the tool. They are stiff vertically but slightly compliant sideways, which helps insert pins and parts into holes. They are compact, fast and accurate within a cylindrical work area.
+
+**Uses:** electronics assembly, screw driving, small part pick and place, dispensing and inspection.
+
+### Cartesian (gantry) robots
+
+Cartesian robots move along three perpendicular linear axes (X, Y, Z), often built from linear modules driven by belts, screws or rack and pinion. Large overhead versions are called **gantry robots**. They are simple to program, very rigid and easily scaled to large work areas and heavy loads.
+
+**Uses:** CNC machine loading, 3D printing, dispensing, large part handling, palletising and storage systems.
+
+### Cylindrical and polar robots
+
+A **cylindrical robot** has a rotating base, a vertical linear axis and a radial linear axis, giving a cylindrical work envelope. A **polar (spherical) robot** combines two rotary joints and one linear extension. Both were common in early robotics and are still used for simple handling, die casting and machine loading, though articulated robots have largely replaced them.
+
+### Delta (parallel) robots
+
+A delta robot has three or more lightweight arms connected to a base above and to a small moving platform below. Because the motors are fixed on the base, the moving mass is tiny, allowing very high speeds and accelerations.
+
+**Uses:** high speed picking and packing of food, pharmaceuticals and small products from conveyors, often guided by [machine vision](/automation-robotics/machine-vision-components/).
+
+### Collaborative robots (cobots)
+
+Cobots are designed to work near or with people. They use power and force limiting, speed and separation monitoring, hand guiding and safety rated stops. They usually have lower payload and speed than industrial arms but are quick to deploy and easy to program, often by moving the arm by hand.
+
+**Uses:** machine tending, screwdriving, quality inspection, packaging and assistance tasks in small and medium sized factories.
+
+### Mobile robots
+
+Autonomous mobile robots (AMRs) and automated guided vehicles (AGVs) move materials around factories and warehouses. Mobile manipulators combine a mobile base with an arm.
+
+## Comparing the main types
+
+| Type | Typical axes | Strengths | Limitations |
+| --- | --- | --- | --- |
+| Articulated | 6 (sometimes 4, 5 or 7) | Large, flexible reach; versatile | Higher cost; complex kinematics |
+| SCARA | 4 | Fast, accurate, compact | Limited vertical reach and tilt |
+| Cartesian | 3 (plus tool rotation) | Rigid, simple, scalable | Large footprint; limited orientations |
+| Delta | 3 or 4 | Very fast for light parts | Small payload and work area |
+| Cobot | 6 or 7 | Safe near people, easy to deploy | Lower speed and payload |
+
+## Robot programming methods
+
+Robots are programmed by **teach pendant**, jogging the arm to points and recording them; by **offline programming**, creating paths in simulation software from CAD data and downloading them; and, for cobots, by **hand guiding**, moving the arm physically through the motion. Offline programming reduces downtime on the line, while vision and force sensors let modern robots adapt to part position and contact instead of following fixed paths.
+
+Most robot makers also offer simulation software for checking reach and cycle time before purchase.
+
+## How to choose a robot type
+
+1. **Define the task:** what is moved, how far, how fast, with what accuracy.
+2. **Check payload:** include the gripper and part, with allowance for offset loads and inertia.
+3. **Check reach and work envelope** against the cell layout.
+4. **Check cycle time and speed** needed to meet production rates.
+5. **Consider the environment:** clean room, food grade, washdown, explosive atmospheres.
+6. **Plan safety:** guarding, light curtains, safety rated controllers and a risk assessment to ISO 10218.
+7. **Consider integration:** controller, communication with the line [PLC](/automation-robotics/plc-hardware-selection/), vision, tools and programming effort.
+
+## What drives the axes
+
+Robot joints are driven by [servo motors](/automation-robotics/servo-vs-stepper-motor/) with gearboxes and encoders, controlled by a robot controller that calculates joint motions from tool paths using kinematics. A robot is a clear example of a [mechatronic system](/automation-robotics/mechatronic-system-elements/), and its gears and bearings rely on proper [lubrication](/mechanical-engineering/types-of-lubrication/) for long life. Robot cells are increasingly designed and commissioned virtually with a [digital twin](/automation-robotics/digital-twin-explained/) before the hardware is installed.

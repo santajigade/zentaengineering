@@ -93,15 +93,15 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| plc | PLC Hardware Selection: CPU, I/O Modules and Power Supply | plc-hardware-selection | equipment | to write |
-| scada-hmi | SCADA System Architecture Explained | scada-system-architecture | fundamentals | to write |
-| dcs | What Is a DCS? Architecture and Applications | dcs-architecture | fundamentals | to write |
-| industrial-robotics | Types of Industrial Robots and Their Applications | types-of-industrial-robots | explanation | to write |
-| motion-control | Servo Motor vs Stepper Motor: Differences Explained | servo-vs-stepper-motor | comparison | to write |
-| industrial-networks | Modbus RTU vs Modbus TCP Explained | modbus-rtu-vs-tcp | comparison | to write |
-| machine-vision | Machine Vision System Components Explained | machine-vision-components | equipment | to write |
-| mechatronics | What Is Mechatronics? Elements of a Mechatronic System | mechatronic-system-elements | fundamentals | to write |
-| industry-4-0 | Digital Twin Explained: Types and Industrial Uses | digital-twin-explained | explanation | to write |
+| plc | PLC Hardware Selection: CPU, I/O Modules and Power Supply | plc-hardware-selection | equipment | draft |
+| scada-hmi | SCADA System Architecture Explained | scada-system-architecture | fundamentals | draft |
+| dcs | What Is a DCS? Architecture and Applications | dcs-architecture | fundamentals | draft |
+| industrial-robotics | Types of Industrial Robots and Their Applications | types-of-industrial-robots | explanation | draft |
+| motion-control | Servo Motor vs Stepper Motor: Differences Explained | servo-vs-stepper-motor | comparison | draft |
+| industrial-networks | Modbus RTU vs Modbus TCP Explained | modbus-rtu-vs-tcp | comparison | draft |
+| machine-vision | Machine Vision System Components Explained | machine-vision-components | equipment | draft |
+| mechatronics | What Is Mechatronics? Elements of a Mechatronic System | mechatronic-system-elements | fundamentals | draft |
+| industry-4-0 | Digital Twin Explained: Types and Industrial Uses | digital-twin-explained | explanation | draft |
 
 ## ai-data-engineering
 

@@ -1,0 +1,155 @@
+---
+title: "Servo Motor vs Stepper Motor: Differences Explained"
+description: "Servo motor vs stepper motor compared: how each works, open and closed loop control, torque and speed, accuracy, cost and how to choose for an application."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: automation-robotics
+subcategory: motion-control
+focusKeyword: "servo motor vs stepper motor"
+image: { src: /images/featured/servo-vs-stepper-motor.webp, alt: "Servo Motor vs Stepper Motor: Differences Explained: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [servo-motor, stepper-motor, motion-control, encoder, microstepping]
+faq:
+  - q: "Why do stepper motors lose steps?"
+    a: "A stepper in open loop assumes it moved every time it received a pulse. If the load torque or the acceleration demand exceeds the torque the motor can produce at that speed, the rotor slips behind the field and steps are missed without the controller knowing. Proper sizing, gentler acceleration or closed loop steppers prevent it."
+  - q: "Can a servo motor hold position at standstill?"
+    a: "Yes. The servo drive continuously corrects any position error using encoder feedback, so it holds position actively. When power is removed it cannot, so vertical axes use a holding brake."
+  - q: "What is microstepping?"
+    a: "Microstepping divides each full step into smaller increments by driving the two phase currents with sine and cosine shaped values. It gives smoother motion and less resonance. It increases resolution, but the actual positional accuracy of each microstep is lower than the resolution suggests, especially under load."
+references:
+  - text: "T. Kenjo and A. Sugawara, Stepping Motors and Their Microprocessor Controls, 2nd ed., Oxford University Press"
+  - text: "G. Ellis, Control System Design Guide, 4th ed., Butterworth-Heinemann"
+  - text: "IEC 60034-1 Rotating electrical machines, Part 1: Rating and performance"
+  - text: "H. Gross, J. Hamann and G. Wiegärtner, Electrical Feed Drives in Automation, Siemens / Publicis"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+In **servo motor vs stepper motor**, a **stepper** moves in fixed angular steps (commonly 1.8°, 200 steps per revolution) for each pulse it receives, usually without feedback, so it is simple and cheap but can lose steps and loses torque at higher speed. A **servo** is a motor with an encoder and a drive that constantly corrects position and speed in a closed loop, giving high speed, high dynamic torque and confirmed accuracy at higher cost and complexity.
+
+</Key>
+
+Precise motion is at the heart of CNC machines, robots, packaging lines, 3D printers and pick and place systems. Two motor technologies dominate small and medium motion axes: stepper motors and servo motors. Choosing the right one affects machine speed, accuracy, reliability and cost.
+
+## How a stepper motor works
+
+A stepper motor has a toothed rotor (permanent magnet or hybrid) and a stator with several windings. The driver energises the windings in sequence; each change pulls the rotor to the next stable position, one step. A typical hybrid stepper has 200 full steps per revolution (1.8° per step). Speed is set by the pulse frequency, and position by counting pulses, so no feedback is needed in basic systems.
+
+**Microstepping** drivers control the phase currents in finer increments, for example 16 microsteps per full step, which smooths motion and reduces resonance.
+
+Key characteristics:
+
+- **High torque at low speed** and strong **holding torque** at standstill.
+- **Torque falls as speed rises,** because winding inductance limits how fast current can build up at each step.
+- **Open loop:** if the load demands more torque than available, the motor **loses steps** and the controller does not know.
+- **Resonance** at certain speeds can cause vibration and step loss.
+- Draws current even when stationary, so runs warm.
+
+## How a servo motor works
+
+An industrial servo system has three parts: a motor (usually a permanent magnet synchronous AC motor), a **feedback device** (encoder or resolver) and a **servo drive**. The drive compares the commanded position and speed with the feedback and adjusts motor current in nested control loops: current (torque), velocity and position. Any error, from load changes or disturbances, is corrected within milliseconds.
+
+<figure>
+<svg width="580" height="260" viewBox="0 0 580 260" fill="none" role="img" aria-label="Top: open loop stepper system where a controller sends step and direction pulses to a driver that powers the stepper motor with no feedback. Bottom: closed loop servo system where a controller sends a command to a servo drive that powers the motor, and an encoder on the motor feeds position back to the drive">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="20" y="26" text-anchor="start" font-weight="700">Stepper (open loop)</text>
+<rect x="20" y="40" width="120" height="50" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="80" y="70">Controller</text>
+<rect x="220" y="40" width="120" height="50" rx="8" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="280" y="70">Stepper driver</text>
+<rect x="420" y="40" width="130" height="50" rx="8" fill="#0b2545" /><text x="485" y="70" fill="#ffffff">Stepper motor</text>
+<text x="180" y="56" font-size="11">step, direction</text>
+<text x="20" y="146" text-anchor="start" font-weight="700">Servo (closed loop)</text>
+<rect x="20" y="160" width="120" height="50" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="80" y="190">Controller</text>
+<rect x="220" y="160" width="120" height="50" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="280" y="190">Servo drive</text>
+<rect x="420" y="160" width="100" height="50" rx="8" fill="#0b2545" /><text x="470" y="190" fill="#ffffff">Servo motor</text>
+<rect x="520" y="170" width="40" height="30" rx="4" fill="#13a89e" /><text x="540" y="226" font-size="11">Encoder</text>
+<text x="180" y="176" font-size="11">position cmd</text>
+<text x="380" y="252" font-size="11" fill="#0e7f78">position and speed feedback</text>
+</g>
+<g stroke="#0b2545" stroke-width="2" fill="none"><path d="M140 65H218M210 59L220 65L210 71M340 65H418M410 59L420 65L410 71M140 185H218M210 179L220 185L210 191M340 185H418M410 179L420 185L410 191" /></g>
+<g stroke="#13a89e" stroke-width="2" fill="none"><path d="M540 200V236H280V212" /><path d="M274 220L280 210L286 220" /></g>
+</svg>
+<figcaption>Stepper systems usually run open loop; servo systems close the loop with an encoder.</figcaption>
+</figure>
+
+Key characteristics:
+
+- **Near constant torque up to rated speed,** and often several thousand rpm.
+- **Peak torque** of typically two to three times the rated value for short accelerations.
+- **High dynamic response** and smooth motion at all speeds.
+- **Confirmed position:** the drive detects following errors and raises alarms instead of silently losing position.
+- Draws current in proportion to load, so runs cooler at light load.
+- Requires **tuning** of control loop gains for the mechanical load.
+
+## Servo motor vs stepper motor: comparison
+
+| Feature | Stepper motor | Servo motor |
+| --- | --- | --- |
+| Control | Usually open loop (closed loop versions exist) | Closed loop with encoder or resolver |
+| Torque at low speed | High | High |
+| Torque at high speed | Falls sharply | Maintained to rated speed |
+| Typical maximum speed | Up to roughly 1000 to 2000 rpm usable | Often 3000 to 6000 rpm |
+| Overload capability | Little; stalls or loses steps | Short peaks of 2 to 3 times rated |
+| Position verification | None in open loop | Continuous |
+| Smoothness | Vibration and resonance at some speeds | Very smooth |
+| Setup | Simple, no tuning | Needs tuning and parameter setup |
+| Holding at standstill | Holding torque, current always on | Active holding; brake for vertical loads |
+| Cost | Lower | Higher |
+
+## Torque, speed and power
+
+The mechanical power of a motor is torque times angular speed:
+
+$$
+P = T\,\omega = T \cdot \frac{2\pi N}{60}
+$$
+
+with T in N·m, N in rpm and P in watts. Because stepper torque falls with speed, a stepper's power peaks at a moderate speed, while a servo's power rises nearly in proportion to speed up to its rating.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An axis needs 2 N·m at 3000 rpm. An alternative design uses a 200 step per revolution stepper with 16 microsteps to run a lighter axis at 600 rpm.</dd>
+<dt>Find</dt><dd>The servo power required for the first axis, and the pulse frequency the stepper driver needs for the second.</dd>
+<dt>Assumptions</dt><dd>Steady speed; no gearbox; losses ignored.</dd>
+<dt>Solution</dt><dd>ω = 2π × 3000 / 60 = 314.2 rad/s; P = 2 × 314.2 = 628 W<br />Stepper: 200 × 16 = 3200 pulses per revolution; 600 rpm = 10 rev/s; frequency = 3200 × 10 = 32,000 pulses per second</dd>
+<dt>Answer</dt><dd><strong>About 630 W of servo power (a 750 W servo would usually be chosen); the stepper needs 32 kHz step pulses</strong></dd>
+<dt>Limitations</dt><dd>Acceleration torque, friction and load inertia must be added for real sizing, and the stepper's torque at 600 rpm must be checked on its speed torque curve.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/torque-power-speed" title="Torque, Power and Speed Calculator" />
+
+Gearboxes let a smaller motor run at higher speed with more output torque, matching either motor type to the load.
+
+## How to choose
+
+**Choose a stepper motor when:**
+
+- Loads are light and predictable, and speeds are low to moderate.
+- Cost and simplicity matter more than top performance.
+- Typical uses: 3D printers, small CNC routers, laboratory instruments, camera sliders, valve actuators, label printers.
+
+**Choose a servo motor when:**
+
+- High speed, fast acceleration or high throughput is needed.
+- Loads vary or position must be guaranteed.
+- Smooth motion is important, or the motor must run long periods at high duty.
+- Typical uses: industrial [robots](/automation-robotics/types-of-industrial-robots/), CNC machine tools, packaging machines, printing presses, electronic assembly.
+
+**Closed loop steppers** (steppers with an encoder) are a middle option: they prevent lost steps and reduce heating at modest extra cost.
+
+## Sizing tips
+
+Accurate sizing prevents both overheating and wasted cost.
+
+
+- Calculate the load inertia reflected to the motor, including gearbox ratio, and keep the load to motor inertia ratio within the drive maker's guidance for good stability.
+- Size for the peak torque during acceleration and the RMS torque over the duty cycle.
+- Check speed against the motor's torque speed curve, not just its rated values.
+- Add a brake for vertical axes.
+
+Both motors are controlled by a PLC or motion controller; see [PLC hardware selection](/automation-robotics/plc-hardware-selection/). They are core elements of every [mechatronic system](/automation-robotics/mechatronic-system-elements/). The electromagnetic principles behind them are shared with the [induction motor](/electrical-engineering/induction-motor-working-principle/), and motor nameplate data is explained in [motor nameplate details](https://www.instrumentationblog.in/motor-nameplate-details-explained/) on InstrumentationBlog.in.

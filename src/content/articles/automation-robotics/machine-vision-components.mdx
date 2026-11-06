@@ -1,0 +1,150 @@
+---
+title: "Machine Vision Components: Parts of a Vision System"
+description: "Machine vision components explained: lighting, lenses, cameras and sensors, processors, software and interfaces, with a camera resolution sizing example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: automation-robotics
+subcategory: machine-vision
+focusKeyword: "machine vision components"
+image: { src: /images/featured/machine-vision-components.webp, alt: "Machine Vision Components: Parts of a Vision System: featured diagram" }
+format: equipment
+pillar: true
+math: true
+tags: [machine-vision, industrial-camera, lighting, image-processing, inspection]
+faq:
+  - q: "What is the difference between machine vision and computer vision?"
+    a: "Computer vision is the broad field of making computers understand images. Machine vision is its industrial application: cameras, lighting and software integrated into production equipment to inspect, measure, identify and guide, usually with strict requirements on speed, reliability and repeatability."
+  - q: "Why is lighting so important in machine vision?"
+    a: "The camera can only measure what the lighting makes visible. Good lighting maximises the contrast of the features of interest and suppresses everything else, which makes the software simpler and the result more reliable. Poor lighting is the most common cause of unreliable vision systems."
+  - q: "When should I use a smart camera instead of a PC based system?"
+    a: "A smart camera combines sensor, processor and software in one housing and suits single inspection points with moderate complexity. PC based systems with separate cameras suit multiple cameras, high resolution, heavy processing such as deep learning, or complex 3D applications."
+references:
+  - text: "A. Hornberg (ed.), Handbook of Machine and Computer Vision, 2nd ed., Wiley-VCH"
+  - text: "E. R. Davies, Computer Vision: Principles, Algorithms, Applications, Learning, 5th ed., Academic Press"
+  - text: "EMVA 1288 Standard for Characterization of Image Sensors and Cameras, European Machine Vision Association"
+  - text: "GenICam and GigE Vision standards, Association for Advancing Automation and EMVA"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The main **machine vision components** are **lighting**, which creates contrast on the part; a **lens**, which forms the image; a **camera** with an image sensor, which converts light to pixels; a **processor** (smart camera, PC or embedded system) running **vision software** that finds, measures, reads or classifies features; and **communication and I/O** that send results to a PLC or robot and trigger rejects. The application defines each choice, starting from field of view and smallest feature to detect.
+
+</Key>
+
+Machine vision gives automated equipment the ability to see. It checks that labels are present and straight, reads barcodes and printed dates, measures dimensions, finds defects on surfaces and tells robots where to pick parts. A reliable system depends on all components working together, so each one must be chosen for the task.
+
+<figure>
+<svg width="580" height="260" viewBox="0 0 580 260" fill="none" role="img" aria-label="Machine vision setup: a part on a conveyor lit by a ring light, a camera with lens above it, a trigger sensor beside the conveyor, a vision processor receiving images, and a PLC receiving pass or fail results that drives a reject device">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<rect x="20" y="200" width="300" height="16" rx="8" fill="#cfd8e3" stroke="#0b2545" stroke-width="1.5" />
+<rect x="150" y="174" width="50" height="26" rx="3" fill="#f5b800" /><text x="175" y="235">Part on conveyor</text>
+<rect x="155" y="40" width="40" height="50" rx="4" fill="#0b2545" /><text x="120" y="60" text-anchor="end">Camera</text>
+<rect x="163" y="90" width="24" height="24" fill="#3b3f46" /><text x="120" y="108" text-anchor="end">Lens</text>
+<ellipse cx="175" cy="132" rx="46" ry="9" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" /><text x="120" y="136" text-anchor="end">Ring light</text>
+<rect x="250" y="160" width="20" height="20" fill="#0b2545" /><text x="300" y="166" text-anchor="start">Trigger</text><text x="300" y="180" text-anchor="start">sensor</text>
+<rect x="380" y="30" width="170" height="60" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="465" y="56">Vision processor</text><text x="465" y="74" font-size="11">software, tools, AI</text>
+<rect x="380" y="130" width="170" height="50" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="465" y="160">PLC</text>
+<text x="465" y="232">Reject device</text>
+</g>
+<g stroke="#0b2545" stroke-width="2" fill="none"><path d="M195 60H378M370 54L380 60L370 66" /><path d="M465 90V128M459 120L465 130L471 120" /><path d="M465 180V214M459 206L465 216L471 206" /><path d="M260 160V150H380" /></g>
+<g stroke="#f5b800" stroke-width="1.5" stroke-dasharray="4 3"><path d="M165 114L150 174M185 114L200 174" /></g>
+</svg>
+<figcaption>A typical inline machine vision inspection station.</figcaption>
+</figure>
+
+## Machine vision components in detail
+
+### 1. Lighting
+
+Lighting is the most important and most underestimated component. Its job is to make the feature of interest stand out and hide everything else. Common techniques:
+
+- **Ring lights:** general illumination around the lens; simple but can cause glare on shiny parts.
+- **Bright field (front) lighting:** light reflects from flat surfaces into the camera.
+- **Dark field (low angle) lighting:** only scratches, edges and embossed features scatter light into the lens, so they appear bright on a dark background.
+- **Backlighting:** the part is between light and camera, giving a sharp silhouette for dimension and presence checks.
+- **Diffuse dome lighting:** even, shadow free light for curved or shiny surfaces.
+- **Coaxial lighting:** light along the lens axis for flat, reflective surfaces.
+- **Structured light:** projected lines or patterns for 3D measurement.
+
+Colour (wavelength) also matters: red light is common and cheap, coloured light can enhance or suppress coloured features, and infrared or ultraviolet reveal things invisible to the eye. Strobing the light synchronised with the camera freezes motion and overpowers ambient light.
+
+### 2. Lens (optics)
+
+The lens forms the image on the sensor. Key choices:
+
+- **Focal length:** with the working distance, it sets the field of view.
+- **Aperture (f-number):** controls brightness and depth of field; a smaller aperture gives more depth of field but needs more light.
+- **Resolution:** the lens must resolve detail at least as fine as the sensor pixels.
+- **Telecentric lenses:** keep magnification constant with distance and avoid perspective error, essential for precise gauging.
+- **Filters:** polarisers to cut glare, band pass filters to block ambient light.
+
+### 3. Camera and image sensor
+
+The sensor, nowadays almost always CMOS, converts light into a grid of pixels. Choose:
+
+- **Resolution** (number of pixels) to see the smallest feature.
+- **Frame rate** and **exposure time** to match line speed.
+- **Shutter type:** global shutter for moving parts; rolling shutter can distort fast motion.
+- **Monochrome or colour:** monochrome gives better resolution and sensitivity; colour is used when colour must be judged.
+- **Area scan or line scan:** line scan cameras build images line by line from moving webs or rotating parts.
+- **3D cameras:** laser triangulation, stereo, structured light or time of flight for height and volume.
+
+Sensor performance can be compared with the EMVA 1288 standard.
+
+### 4. Processor and software
+
+Images are analysed by a **smart camera** with a built-in processor, a **vision controller** or an industrial **PC** with one or more cameras. Software provides tools such as:
+
+- Image preprocessing (filters, thresholds, morphology).
+- **Pattern matching** to locate parts regardless of position and rotation.
+- **Measurement** of edges, distances, diameters and angles.
+- **Blob analysis** for presence, count and area.
+- **Code reading** (barcodes, 2D codes) and **OCR** for printed text.
+- **Colour** analysis.
+- **Deep learning** classification and defect detection for variable appearances that are hard to describe with rules.
+
+### 5. Communication and I/O
+
+Results are useful only when acted on. Vision systems use digital I/O for trigger inputs and pass or fail outputs, and industrial Ethernet protocols (such as PROFINET, EtherNet/IP or Modbus TCP, compared in [Modbus RTU vs Modbus TCP](/automation-robotics/modbus-rtu-vs-tcp/)) to exchange data with the [PLC](/automation-robotics/plc-hardware-selection/) or robot. Camera interfaces include GigE Vision, USB3 Vision and CoaXPress, with the GenICam standard for common configuration.
+
+## Sizing the camera: field of view and resolution
+
+A practical rule is that the smallest feature to be detected should span several pixels, often at least 2 to 4, and more for precise measurement. The required number of pixels along one axis is:
+
+$$
+\text{pixels} = \frac{\text{field of view}}{\text{smallest feature}} \times \text{pixels per feature}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A label on a box must be inspected across a 120 mm field of view (the longer side). The smallest defect to detect is 0.2 mm, and each defect should cover at least 3 pixels.</dd>
+<dt>Find</dt><dd>The minimum sensor resolution along that axis.</dd>
+<dt>Assumptions</dt><dd>Lens resolves the detail; field of view includes positioning tolerance.</dd>
+<dt>Solution</dt><dd>Pixels = 120 / 0.2 × 3 = 1800 pixels</dd>
+<dt>Answer</dt><dd><strong>At least 1800 pixels across the 120 mm side, so a camera of about 2048 pixels wide (for example a 5 megapixel sensor) would be a sensible choice</strong></dd>
+<dt>Limitations</dt><dd>Check frame rate, exposure time for motion blur and lens resolution as well as pixel count.</dd>
+</dl>
+</Example>
+
+## Typical applications
+
+Vision is used wherever human inspection would be too slow, too tiring or too inconsistent.
+
+
+- **Inspection:** presence and absence, defects, fill level, cap and seal checks, print quality.
+- **Gauging:** dimensions, hole positions, gaps and alignment.
+- **Identification:** barcodes, 2D codes, OCR of dates and lot numbers for traceability.
+- **Guidance:** locating parts for [industrial robots](/automation-robotics/types-of-industrial-robots/), including random bin picking with 3D vision.
+- **Sorting** by colour, size or quality in food, recycling and logistics.
+
+## Tips for reliable systems
+
+1. Start with sample parts, including good and every type of bad.
+2. Experiment with lighting first; it solves most problems.
+3. Fix the mechanics: consistent part position and distance.
+4. Shield from ambient light and vibration.
+5. Validate with large sample sets and track false rejects and escapes.
+
+Machine vision is a key sensing element in [mechatronic systems](/automation-robotics/mechatronic-system-elements/) and in smart factories, where inspection data feeds analytics and [digital twins](/automation-robotics/digital-twin-explained/). The image sensor itself works on the [sampling theorem](/electronics-engineering/sampling-theorem/) in space as well as time, which is why fine detail needs enough pixels.

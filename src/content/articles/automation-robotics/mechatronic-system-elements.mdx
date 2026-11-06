@@ -1,0 +1,147 @@
+---
+title: "What Is Mechatronics? Elements of a Mechatronic System"
+description: "Mechatronics explained: the elements of a mechatronic system, sensors, actuators, controllers, interfaces and mechanics, the design approach and examples."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: automation-robotics
+subcategory: mechatronics
+focusKeyword: "mechatronic system"
+image: { src: /images/featured/mechatronic-system-elements.webp, alt: "What Is Mechatronics? Elements of a Mechatronic System: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [mechatronics, sensors, actuators, control-systems, embedded-systems]
+faq:
+  - q: "Who coined the term mechatronics?"
+    a: "The term was introduced in Japan in 1969 by Tetsuro Mori, an engineer at Yaskawa Electric Corporation, to describe the combination of mechanical engineering and electronics in their products."
+  - q: "Is a washing machine a mechatronic system?"
+    a: "A modern one is. It uses sensors for water level, temperature, drum speed and load, a microcontroller that runs wash programs, and actuators such as the motor, pump, valves and door lock. The mechanical design and the control software are developed together."
+  - q: "What is the difference between mechatronics and robotics?"
+    a: "Robotics is one application of mechatronics. Mechatronics covers any product or machine that integrates mechanics, electronics, control and software, including cameras, cars, printers, medical devices and machine tools. Robots are mechatronic systems specialised for manipulation or mobility."
+references:
+  - text: "W. Bolton, Mechatronics: Electronic Control Systems in Mechanical and Electrical Engineering, 7th ed., Pearson"
+  - text: "D. G. Alciatore and M. B. Histand, Introduction to Mechatronics and Measurement Systems, 5th ed., McGraw-Hill"
+  - text: "VDI 2206:2021 Development of mechatronic and cyber-physical systems, Verein Deutscher Ingenieure"
+  - text: "K. Ogata, Modern Control Engineering, 5th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Mechatronics** is the integrated design of mechanical systems with electronics, control and software. A **mechatronic system** has five main elements: the **mechanical system** being controlled, **sensors** that measure its state, **signal conditioning and interfaces** that convert signals, a **controller** (microcontroller, PLC or computer) that decides what to do, and **actuators** that act on the mechanism. Together they form a feedback loop that makes a machine accurate, adaptive and smart.
+
+</Key>
+
+A modern car, a camera with autofocus, a 3D printer, an industrial robot and a hard disk drive all have something in common: precise mechanical motion controlled by electronics and software. Designing such products requires engineers to think across disciplines from the start, rather than adding controls to a finished mechanical design. That integrated approach is mechatronics.
+
+## Elements of a mechatronic system
+
+<figure>
+<svg width="580" height="270" viewBox="0 0 580 270" fill="none" role="img" aria-label="Mechatronic system block diagram: a set point enters the controller, which drives an actuator through a power amplifier; the actuator moves the mechanical system; a sensor measures the output and feeds it back through signal conditioning to the controller">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<rect x="80" y="40" width="110" height="56" rx="8" fill="#0b2545" /><text x="135" y="66" fill="#ffffff">Controller</text><text x="135" y="82" fill="#9fd9d4" font-size="11">MCU, PLC, PC</text>
+<rect x="220" y="40" width="100" height="56" rx="8" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="270" y="66">Power</text><text x="270" y="82">driver</text>
+<rect x="350" y="40" width="90" height="56" rx="8" fill="#fde2e2" stroke="#b42318" stroke-width="2" /><text x="395" y="72">Actuator</text>
+<rect x="470" y="40" width="100" height="56" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="520" y="66">Mechanical</text><text x="520" y="82">system</text>
+<rect x="400" y="170" width="110" height="50" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="455" y="200">Sensor</text>
+<rect x="190" y="170" width="150" height="50" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="265" y="192">Signal conditioning</text><text x="265" y="208" font-size="11">amplify, filter, ADC</text>
+<text x="30" y="60">Set</text><text x="30" y="76">point</text>
+<text x="290" y="256" fill="#0e7f78">Feedback</text>
+</g>
+<g stroke="#0b2545" stroke-width="2" fill="none">
+<path d="M50 68H78M70 62L80 68L70 74" /><path d="M190 68H218M210 62L220 68L210 74" /><path d="M320 68H348M340 62L350 68L340 74" /><path d="M440 68H468M460 62L470 68L460 74" />
+<path d="M520 96V195H512M520 195H510M518 189L508 195L518 201" />
+<path d="M400 195H342M350 189L340 195L350 201" />
+<path d="M190 195H135V98M129 106L135 96L141 106" stroke="#13a89e" />
+</g>
+</svg>
+<figcaption>Closed loop structure of a mechatronic system.</figcaption>
+</figure>
+
+### 1. Mechanical system
+
+The physical part that moves or carries load: linkages, gears, belts, lead screws, bearings, frames and the load itself. Its mass, stiffness, friction and backlash decide how fast and precisely it can be controlled. Mechanical design draws on [stress and strain](/mechanical-engineering/stress-and-strain/), [factor of safety](/mechanical-engineering/factor-of-safety/) and [lubrication](/mechanical-engineering/types-of-lubrication/).
+
+### 2. Sensors
+
+Sensors measure what the controller needs to know:
+
+- **Position and speed:** encoders, resolvers, potentiometers, LVDTs, hall effect sensors.
+- **Proximity and presence:** inductive, capacitive, photoelectric and ultrasonic sensors.
+- **Force and pressure:** strain gauges, load cells, pressure transmitters.
+- **Temperature:** thermocouples, RTDs, thermistors.
+- **Acceleration and orientation:** MEMS accelerometers and gyroscopes.
+- **Vision:** cameras for inspection and guidance; see [machine vision system components](/automation-robotics/machine-vision-components/).
+
+### 3. Signal conditioning and interfacing
+
+Raw sensor signals are often small, noisy or in the wrong form. Conditioning circuits amplify, filter, isolate and convert them. **Analog to digital converters** turn voltages into numbers for the controller, and digital to analog converters and PWM outputs do the reverse. Op-amp circuits such as the [inverting and non-inverting amplifier](/electronics-engineering/inverting-and-non-inverting-amplifier/) are standard building blocks, and the ADC must sample fast enough according to the [sampling theorem](/electronics-engineering/sampling-theorem/).
+
+### 4. Controller
+
+The controller compares measurements with the desired value and computes commands. It may be a **microcontroller** in a consumer product, a **PLC** in a machine, a motion controller or an industrial PC. Algorithms range from simple on and off logic to PID control, state machines, model based and adaptive control. Software is as much a part of the product as the mechanics.
+
+### 5. Actuators and drivers
+
+Actuators convert energy into motion or force:
+
+- **Electric:** DC motors, brushless motors, [servo and stepper motors](/automation-robotics/servo-vs-stepper-motor/), solenoids, linear motors, piezo actuators.
+- **Hydraulic:** cylinders and motors for very high force.
+- **Pneumatic:** cylinders and grippers for fast, simple, low cost motion.
+
+Power drivers (motor drives, H-bridges, solenoid drivers, valves) amplify low power controller signals to the energy level the actuator needs.
+
+## Open loop and closed loop control
+
+In **open loop** control the controller sends commands without measuring the result, as in a simple stepper motor positioning system. In **closed loop** control, sensors feed back the actual output and the controller corrects the error continuously. For a PID controller, the output is:
+
+$$
+u(t) = K_p\,e(t) + K_i \int e(t)\,dt + K_d\,\frac{de(t)}{dt}
+$$
+
+where e(t) is the error between set point and measurement. Closed loop control compensates for disturbances and variations, which is why most precision mechatronic systems use it.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A conveyor positioning axis uses a 1000 line incremental encoder read in quadrature (4 counts per line) on the motor shaft. The motor drives a belt pulley through a 10:1 gearbox, and the pulley moves the belt 100 mm per revolution.</dd>
+<dt>Find</dt><dd>The position resolution at the belt.</dd>
+<dt>Assumptions</dt><dd>No backlash or belt stretch; encoder counts read correctly at all speeds.</dd>
+<dt>Solution</dt><dd>Counts per motor revolution = 1000 × 4 = 4000<br />Counts per pulley revolution = 4000 × 10 = 40,000<br />Resolution = 100 mm / 40,000 = 0.0025 mm</dd>
+<dt>Answer</dt><dd><strong>About 2.5 µm per count, far finer than the accuracy the belt and gearbox can actually deliver</strong></dd>
+<dt>Limitations</dt><dd>Real accuracy is limited by mechanical backlash, belt elasticity and temperature, which is why mechanical and control design must be considered together.</dd>
+</dl>
+</Example>
+
+## The mechatronic design approach
+
+Mechatronic design develops mechanics, electronics and software in parallel, with frequent integration and testing. Guidelines such as VDI 2206 describe a V model: define requirements, split them into domain specific designs, then integrate and verify step by step. Modelling and simulation, including model based design and [digital twins](/automation-robotics/digital-twin-explained/), let teams test control strategies before hardware exists.
+
+Benefits include fewer moving parts (software replaces cams and linkages), more functions and flexibility, better accuracy and self diagnosis.
+
+## Skills a mechatronics engineer needs
+
+Mechatronics engineers combine several disciplines:
+
+- **Mechanical design:** kinematics, dynamics, materials and machine elements.
+- **Electronics:** analog and digital circuits, power electronics and motor drives.
+- **Control engineering:** modelling, feedback, PID tuning and stability.
+- **Programming:** embedded C, PLC languages and higher level tools for testing and data analysis.
+- **Measurement:** sensor selection, calibration and signal processing.
+- **Systems thinking:** managing interfaces and trade-offs between domains.
+
+Because problems often sit at the boundaries, for example vibration caused by controller tuning or noise from a motor drive, the ability to work across disciplines is the defining skill.
+
+## Common challenges
+
+Typical problems in mechatronic products include electrical noise from motor drives corrupting sensor signals, mechanical resonance that limits how aggressively a loop can be tuned, heat from electronics affecting mechanical tolerances, and software timing that is not deterministic. Good grounding and shielding, stiff mechanical design, careful thermal layout and real-time operating systems address these issues.
+
+Testing each element alone and then the complete loop, with hardware in the loop simulation where possible, catches these problems early.
+
+## Examples of mechatronic systems
+
+- **Automotive:** anti-lock brakes, electronic stability control, engine management, electric power steering.
+- **Manufacturing:** CNC machines, [industrial robots](/automation-robotics/types-of-industrial-robots/), automated assembly and packaging machines.
+- **Consumer:** washing machines, camera autofocus and image stabilisation, printers, drones.
+- **Medical:** infusion pumps, surgical robots, prosthetic limbs.
+- **Aerospace:** fly-by-wire flight controls and landing gear systems.

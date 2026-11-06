@@ -1,0 +1,120 @@
+---
+title: "Digital Twin Explained: Types and Industrial Uses"
+description: "Digital twin explained: what it is, how data flows between the physical asset and the virtual model, types, maturity levels, uses, benefits and challenges."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: automation-robotics
+subcategory: industry-4-0
+focusKeyword: "digital twin"
+image: { src: /images/featured/digital-twin-explained.webp, alt: "Digital Twin Explained: Types and Industrial Uses: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [digital-twin, industry-4-0, simulation, iiot, predictive-maintenance]
+faq:
+  - q: "What is the difference between a digital twin and a simulation?"
+    a: "A simulation is a model used to study what would happen under chosen conditions. A digital twin is a model linked to a specific real asset by live or regularly updated data, so it reflects that asset's current state and history and can be used to monitor, predict and optimise its operation."
+  - q: "Do I need a full 3D model to have a digital twin?"
+    a: "No. Many valuable digital twins are physics or data driven models of behaviour, such as a pump performance model or a heat exchanger fouling model, with no 3D geometry at all. 3D visualisation helps people understand the model but is not the core of a twin."
+  - q: "Where did the digital twin concept come from?"
+    a: "Michael Grieves presented the concept of a virtual representation linked to a physical product in product lifecycle management courses at the University of Michigan around 2002. NASA used the term digital twin in its technology roadmaps around 2010, and the idea spread rapidly with industrial IoT."
+references:
+  - text: "ISO 23247-1:2021 Automation systems and integration, Digital twin framework for manufacturing, Part 1: Overview and general principles"
+  - text: "M. Grieves and J. Vickers, Digital Twin: Mitigating Unpredictable, Undesirable Emergent Behavior in Complex Systems, in Transdisciplinary Perspectives on Complex Systems, Springer, 2017"
+  - text: "F. Tao, M. Zhang and A. Y. C. Nee, Digital Twin Driven Smart Manufacturing, Academic Press, 2019"
+  - text: "W. Kritzinger et al., Digital Twin in manufacturing: A categorical literature review and classification, IFAC-PapersOnLine, 2018"
+---
+import Key from '../../../components/Key.astro';
+
+<Key title="Short answer">
+
+A **digital twin** is a virtual model of a specific physical asset, process or system that is kept up to date with data from its real counterpart. Sensors send operating data to the model; the model analyses, simulates and predicts; and the results feed decisions or controls back to the real asset. Digital twins are used to design products, commission machines virtually, predict failures, optimise processes and train operators.
+
+</Key>
+
+Industry 4.0 connects machines, sensors and software across factories and supply chains. The digital twin is one of its most useful ideas: instead of studying a generic model of a pump, a production line or a power plant, engineers work with a model of their particular asset, calibrated with its own data and following its real history. That lets them ask "what if" questions safely and see problems before they happen.
+
+## How a digital twin works
+
+<figure>
+<svg width="580" height="260" viewBox="0 0 580 260" fill="none" role="img" aria-label="Digital twin data loop: a physical asset with sensors sends data through connectivity to the digital twin, which contains models, simulation and analytics; the twin returns insights, predictions and optimised settings to operators and to the control system of the physical asset">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<rect x="20" y="60" width="170" height="130" rx="12" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="105" y="90" font-weight="700">Physical asset</text><text x="105" y="118" font-size="12">machine, line, plant</text><text x="105" y="140" font-size="12">sensors, PLC, DCS</text><text x="105" y="162" font-size="12">actuators</text>
+<rect x="390" y="60" width="170" height="130" rx="12" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="475" y="90" font-weight="700">Digital twin</text><text x="475" y="118" font-size="12">physics and data models</text><text x="475" y="140" font-size="12">simulation, analytics</text><text x="475" y="162" font-size="12">visualisation</text>
+<text x="290" y="72" font-size="12">Data: process values, events,</text><text x="290" y="88" font-size="12">condition, maintenance records</text>
+<text x="290" y="196" font-size="12">Insights, predictions,</text><text x="290" y="212" font-size="12">optimised settings, alerts</text>
+<text x="290" y="246" font-size="12" fill="#0e7f78">Users: engineers, operators, maintenance planners</text>
+</g>
+<g stroke="#0b2545" stroke-width="2.5" fill="none"><path d="M190 105H388M380 98L390 105L380 112" /><path d="M390 160H192M200 153L190 160L200 167" stroke="#13a89e" /></g>
+</svg>
+<figcaption>Data flows from the physical asset to its digital twin, and insights flow back.</figcaption>
+</figure>
+
+A digital twin has three parts:
+
+1. **The physical entity:** a product, machine, production line, building, plant or network, instrumented with sensors and controlled by PLCs or a DCS.
+2. **The virtual model:** geometry, physics based models (for example thermodynamics, fluid flow, mechanics), data driven models (machine learning trained on history), and rules or logic.
+3. **The connection:** data from the physical side (via industrial networks, gateways and protocols such as OPC UA or MQTT) updates the model, and results go back to people or, in advanced twins, directly to the control system.
+
+ISO 23247 describes a reference framework for manufacturing digital twins built around these elements.
+
+## Levels of integration
+
+Researchers often distinguish three levels by how data flows:
+
+- **Digital model:** no automatic data exchange; data is entered manually. Useful for design studies.
+- **Digital shadow:** data flows automatically from the physical asset to the model, but changes to the asset are made by people.
+- **Digital twin:** data flows automatically in both directions, so the model can influence the asset, for example by adjusting set points.
+
+## Types of digital twins
+
+- **Component or part twin:** a single critical part, such as a bearing or turbine blade, tracking wear and remaining life.
+- **Asset or product twin:** a whole machine, such as a pump, compressor, motor or robot.
+- **System or unit twin:** several assets working together, such as a production line or a [distillation](/chemical-engineering/distillation-column-working-principle/) unit.
+- **Process twin:** an entire factory or process, used for scheduling, throughput and energy optimisation.
+
+They can also be grouped by life cycle stage: **design twins** for engineering, **commissioning twins** for testing control software, and **operational twins** for running assets.
+
+## Industrial uses
+
+- **Product design:** test designs virtually with [finite element analysis](/mechanical-engineering/finite-element-analysis-basics/) and simulation before building prototypes.
+- **Virtual commissioning:** connect the real PLC program to a simulated machine or line, find logic errors in the office and shorten site commissioning. Robot cells for [industrial robots](/automation-robotics/types-of-industrial-robots/) are routinely commissioned this way.
+- **Predictive maintenance:** compare live vibration, temperature and performance with the model to detect degradation and schedule work before failure.
+- **Process optimisation:** run "what if" scenarios on throughput, quality and energy use, then apply the best settings.
+- **Operator training:** realistic simulators connected to copies of the real control system, such as a [DCS](/automation-robotics/dcs-architecture/) training system.
+- **Energy and utilities:** grid, water network and building twins for planning and operations.
+
+## Benefits
+
+- Fewer physical prototypes and faster development.
+- Shorter commissioning and earlier production start.
+- Less unplanned downtime through early warnings.
+- Better decisions based on a consistent, data backed view of the asset.
+- A record of each asset's history for quality, compliance and service.
+
+## Challenges
+
+- **Data quality and connectivity:** sensors must be accurate and calibrated, and legacy equipment may need retrofitting. Reliable instrumentation is the foundation; see [process instrumentation](https://www.instrumentationblog.in/category/process-instrumentation/) on InstrumentationBlog.in.
+- **Model fidelity:** models must be detailed enough for the purpose and kept calibrated as equipment ages.
+- **Integration:** data from PLCs, [SCADA](/automation-robotics/scada-system-architecture/), historians, maintenance systems and ERP must be combined with consistent naming.
+- **Cybersecurity:** two way links to control systems must be protected according to standards such as IEC 62443.
+- **Cost and skills:** a clear business case and a cross disciplinary team are needed.
+
+## Example: a pump digital twin
+
+A cooling water pump is fitted with flow, suction and discharge pressure, motor power and vibration sensors. Its digital twin combines the manufacturer's pump curve with the measured values. As the impeller wears, the measured head at a given flow drops below the curve and efficiency falls; the twin shows the trend and estimates when efficiency will reach the replacement threshold. It can also compare running the pump at a lower speed through a variable speed drive with throttling a valve, and show the energy saved. Maintenance can then be planned at the next shutdown instead of after a breakdown.
+
+## Technologies behind digital twins
+
+Digital twins combine several technologies: industrial IoT gateways and edge computers that collect data close to the machines; time series databases and historians; physics simulation tools; machine learning platforms; 3D visualisation and augmented reality; and cloud or on-premises platforms that host the models. Standard information models, such as OPC UA companion specifications and the Asset Administration Shell, help describe assets consistently so twins from different suppliers can work together.
+
+Successful projects keep the model simple enough to maintain.
+
+## How to start
+
+1. Pick one asset or problem with a clear value, such as frequent pump failures or a bottleneck line.
+2. Check which data already exists and how good it is.
+3. Start with a digital shadow: monitoring plus a simple model.
+4. Validate predictions against real events, then extend to more assets and closed loop use.
+
+Digital twins build on the basics of automation: well designed [PLC systems](/automation-robotics/plc-hardware-selection/), clean data from industrial networks such as [Modbus TCP](/automation-robotics/modbus-rtu-vs-tcp/), and good understanding of each [mechatronic system](/automation-robotics/mechatronic-system-elements/). Data driven twins also use the methods covered in the [industrial AI](https://www.instrumentationblog.in/category/automation/industrial-ai/) category on InstrumentationBlog.in.
