@@ -1,7 +1,8 @@
 ---
 title: "Electrical Earthing: Purpose, Types and Systems (TN, TT, IT)"
 description: "Electrical earthing explained: why systems are earthed, system and equipment earthing, TN, TT and IT systems, and earth electrode resistance."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: earthing
 focusKeyword: "electrical earthing"
@@ -30,7 +31,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 Electrical earthing connects parts of an electrical system to earth so that:
 
-- people are protected from electric shock when insulation fails,
+- people are protected from electric shock when [insulation](/electrical-engineering/insulation-resistance-test/) fails,
 - fault current has a low resistance path, so protective devices trip quickly,
 - system voltages stay stable with respect to earth.
 
@@ -40,7 +41,7 @@ IEC 60364 classifies low voltage systems as **TN** (TN-S, TN-C, TN-C-S), **TT** 
 
 ## Why electrical earthing is needed
 
-If a live conductor touches the metal case of an appliance and the case is not earthed, the case rises to a dangerous voltage. Anyone touching it completes a path to earth through their body. When the case is connected to earth through a protective conductor, the fault current flows through that conductor instead, and it is large enough to operate the fuse, circuit breaker or residual current device (RCD) quickly.
+If a live conductor touches the metal case of an appliance and the case is not earthed, the case rises to a dangerous voltage. Anyone touching it completes a path to earth through their body. When the case is connected to earth through a [protective conductor](/electrical-engineering/cable-sizing/), the fault current flows through that conductor instead, and it is large enough to operate the fuse, [circuit breaker](/electrical-engineering/circuit-breaker-working-principle/) or residual current device (RCD) quickly.
 
 Earthing also:
 
@@ -77,7 +78,7 @@ The main advantage of the IT system is continuity: a first earth fault does not 
 
 ## Disconnection times
 
-IEC 60364-4-41 sets maximum disconnection times for automatic disconnection of supply. For final circuits up to 32 A on a 230 V system, the limit is 0.4 s in a TN system and 0.2 s in a TT system. To meet these times in a TN system, the **earth fault loop impedance** must be low enough for the fault current to trip the protective device quickly.
+IEC 60364-4-41 sets maximum disconnection times for automatic disconnection of supply. For final circuits up to 32 A on a 230 V system, the limit is 0.4 s in a TN system and 0.2 s in a TT system. To meet these times in a TN system, the **earth fault [loop impedance](https://www.instrumentationblog.in/earth-fault-loop-impedance-zs-testing/)** must be low enough for the fault current to trip the protective device quickly.
 
 ## Earth electrodes
 
@@ -113,11 +114,15 @@ $$
 
 In high voltage substations, earth fault currents can reach tens of kiloamperes. As this current flows into the ground, the soil surface around the earthing system rises in potential, and the potential varies from point to point. Two hazards follow:
 
-- **Touch voltage:** the voltage between a person's hand on earthed metalwork and their feet on the ground.
+- **[Touch voltage](https://www.instrumentationblog.in/step-and-touch-voltage-ieee-80/):** the voltage between a person's hand on earthed metalwork and their feet on the ground.
 - **Step voltage:** the voltage between a person's feet one step apart on the ground.
 
-Substation earthing grids are designed, for example to IEEE 80, so that these voltages stay below tolerable limits for the fault current and clearing time. Designers use a buried mesh of conductors, a surface layer of crushed rock with high resistivity, and bonding of all metal structures and fences. The total grid resistance is usually required to be low, often around 1 Ω or below for large substations, but the step and touch voltage limits are the real design criteria.
+Substation earthing grids are designed, for example to IEEE 80, so that these voltages stay below tolerable limits for the fault current and clearing time. Designers use a buried mesh of conductors, a surface layer of crushed rock with high resistivity, and [bonding](https://www.instrumentationblog.in/equipotential-bonding-electrical-safety/) of all metal structures and fences. The total grid resistance is usually required to be low, often around 1 Ω or below for large substations, but the step and touch voltage limits are the real design criteria.
 
 ## Testing and maintenance
 
 Earth electrode resistance is measured with an earth tester, for example by the fall-of-potential method. Earth fault loop impedance is measured at socket outlets and distribution boards to confirm that protective devices will trip in time. Connections should be inspected for corrosion and tightness, because a broken protective conductor removes protection without any visible sign.
+
+## Related reading
+
+- [Overcurrent Relay: Working Principle and Characteristics](/electrical-engineering/overcurrent-relay/)

@@ -1,7 +1,8 @@
 ---
 title: "CMOS Inverter Working Principle"
 description: "How the CMOS inverter works, its voltage transfer characteristic, noise margins, transistor sizing, propagation delay and static and dynamic power."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: vlsi
 focusKeyword: "CMOS inverter"
@@ -32,7 +33,7 @@ A CMOS inverter is built from one **PMOS** transistor connected to the supply an
 
 ## Why the inverter matters
 
-The inverter is the simplest CMOS logic gate, and its behaviour defines how all CMOS logic works. NAND, NOR and complex gates use the same idea: a **pull-up network** of PMOS transistors and a complementary **pull-down network** of NMOS transistors. Understanding the inverter's switching threshold, delay and power explains the speed and power limits of entire chips.
+The inverter is the simplest CMOS [logic gate](/electronics-engineering/logic-gates/), and its behaviour defines how all CMOS logic works. NAND, NOR and complex gates use the same idea: a **pull-up network** of PMOS transistors and a complementary **pull-down network** of NMOS transistors. Understanding the inverter's switching threshold, delay and power explains the speed and power limits of entire chips.
 
 ## Circuit structure
 
@@ -130,8 +131,14 @@ Because PMOS transistors are weaker, series PMOS stacks are slow. NAND gates, wh
 
 ## Supply voltage scaling
 
-Because dynamic power depends on VDD squared, supply voltages have fallen with each process generation, from 5 V in early CMOS to around 1 V or less in modern processors. Lower voltage reduces power and allows smaller transistors, but it also reduces the current drive, slows switching and shrinks noise margins, so the threshold voltages of the transistors must be reduced too, which increases leakage.
+Because dynamic power depends on VDD squared, [supply voltages](https://www.instrumentationblog.in/logic-level-shifter-3v3-5v/) have fallen with each process generation, from 5 V in early CMOS to around 1 V or less in modern processors. Lower voltage reduces power and allows smaller transistors, but it also reduces the current drive, slows switching and shrinks noise margins, so the threshold voltages of the transistors must be reduced too, which increases leakage.
 
 ## Applications
 
-The CMOS inverter is used as a buffer and clock driver, as a building block of ring oscillators for process monitoring, and as the basis of SRAM cells, where two cross-coupled inverters store one bit. Every CMOS logic gate in a processor, FPGA or microcontroller is an extension of the same complementary pull-up and pull-down principle.
+The CMOS inverter is used as a buffer and clock driver, as a building block of ring oscillators for process monitoring, and as the basis of SRAM cells, where two cross-coupled inverters store one bit. Every CMOS logic gate in a processor, FPGA or [microcontroller](/electronics-engineering/microcontroller-vs-microprocessor/) is an extension of the same complementary pull-up and pull-down principle.
+
+## Related reading
+
+- [What Is a Diode? Working, Types and Characteristics](/electronics-engineering/what-is-a-diode/)
+- [PCB Design Basics: Layers, Traces and Design Rules](/electronics-engineering/pcb-design-basics/)
+- [Schmitt trigger and hysteresis](https://www.instrumentationblog.in/schmitt-trigger-hysteresis/) on InstrumentationBlog.in

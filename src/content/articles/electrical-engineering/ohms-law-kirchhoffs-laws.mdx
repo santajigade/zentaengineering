@@ -1,7 +1,8 @@
 ---
 title: "Ohm's Law and Kirchhoff's Laws with Worked Examples"
 description: "Ohm's law and Kirchhoff's laws explained: V = IR, KCL and KVL, series and parallel circuits, and a fully checked worked example for students."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: circuit-fundamentals
 focusKeyword: "Ohm's law and Kirchhoff's laws"
@@ -58,7 +59,7 @@ Power is in watts (W). The form I²R is the basis of the term "I²R losses" used
 
 Ohm's law describes **linear** or ohmic components. A metal film resistor at a steady temperature follows it closely. Many devices do not:
 
-- A diode conducts very little current until its forward voltage is reached, then conducts heavily.
+- A [diode](/electronics-engineering/what-is-a-diode/) conducts very little current until its forward voltage is reached, then conducts heavily.
 - The resistance of a tungsten lamp filament rises sharply as it heats up.
 - Transistors and gas discharge lamps have strongly non-linear characteristics.
 
@@ -145,11 +146,17 @@ Both methods give a set of simultaneous linear equations. Circuit simulators suc
 These laws are used every day in electrical work, not only in exams:
 
 - **Fault finding:** measuring the voltage across each element of a circuit and checking that the drops add up to the supply (KVL) quickly shows where a connection is open or a component has failed.
-- **Cable and busbar heating:** the I²R form of the power equation gives the heat produced in a conductor, which sets its current rating.
+- **[Cable](/electrical-engineering/cable-sizing/) and busbar heating:** the I²R form of the power equation gives the heat produced in a conductor, which sets its current rating.
 - **Shunt resistors:** a known low resistance in series with a load turns current into a small measurable voltage, I = V / R.
 - **Sensor circuits:** voltage dividers built from a fixed resistor and a resistive sensor, such as a thermistor, convert a change in resistance into a change in voltage.
-- **Checking measurements:** in a DC panel, the outgoing branch currents should add up to the incoming current (KCL). A large mismatch points to a meter error or an unrecorded load. In AC circuits KCL still holds, but the currents must be added as phasors because they may not be in phase.
+- **Checking measurements:** in a DC panel, the outgoing branch currents should add up to the incoming current (KCL). A large mismatch points to a meter error or an unrecorded load. In AC circuits KCL still holds, but the currents must be added as [phasors](/electrical-engineering/power-factor/) because they may not be in phase.
 
 ## Limits of Kirchhoff's laws
 
 KCL and KVL assume a **lumped** circuit, where the physical size of the circuit is small compared with the wavelength of the signals in it. This holds for power circuits at 50 Hz or 60 Hz and for most electronics. At radio and microwave frequencies, or on very long transmission lines, voltages and currents vary along the conductors and transmission line theory is needed instead.
+
+## Related reading
+
+- [Generation, Transmission and Distribution of Electricity](/electrical-engineering/generation-transmission-distribution/)
+- [Thevenin's theorem made simple](https://www.instrumentationblog.in/thevenins-theorem-made-simple/) on InstrumentationBlog.in
+- [Star delta transformation](https://www.instrumentationblog.in/star-delta-transformation-formula/) on InstrumentationBlog.in

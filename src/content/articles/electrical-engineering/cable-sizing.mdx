@@ -1,7 +1,8 @@
 ---
 title: "Cable Sizing: Current Rating and Voltage Drop Explained"
 description: "Cable sizing explained: how to select a low voltage cable by current rating, derating, voltage drop and short-circuit withstand, with worked examples."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: wiring-installation
 focusKeyword: "cable sizing"
@@ -30,8 +31,8 @@ import Calculator from '../../../components/Calculator.astro';
 
 Cable sizing means choosing the smallest standard conductor that is safe and efficient. A cable is sized so that it:
 
-1. **carries the load current** without exceeding its insulation temperature, after derating for the way it is installed,
-2. is **protected** by a fuse or breaker whose rating sits between the load current and the cable rating,
+1. **carries the load current** without exceeding its insulation temperature, after [derating](https://www.instrumentationblog.in/cable-derating-factors/) for the way it is installed,
+2. is **protected** by a fuse or [breaker](/electrical-engineering/circuit-breaker-working-principle/) whose rating sits between the load current and the cable rating,
 3. keeps the **voltage drop** within limits at the load,
 4. can **withstand the short-circuit current** until the protective device trips.
 
@@ -47,7 +48,7 @@ $$
 I_b = \frac{P}{\sqrt{3}\; V \cos\varphi \;\eta}
 $$
 
-Here P is the output power in watts, V the line voltage, cos φ the power factor and η the efficiency, which applies to motors where P is the shaft output. For resistive loads, cos φ and η are both 1.
+Here P is the output power in watts, V the line voltage, cos φ the [power factor](/electrical-engineering/power-factor/) and η the efficiency, which applies to motors where P is the shaft output. For resistive loads, cos φ and η are both 1.
 
 ## Step 2: Protective device
 
@@ -91,7 +92,7 @@ The cable size is the smallest one in the table whose It meets this value for th
 
 ## Step 4: Voltage drop
 
-Current through the resistance and reactance of a cable causes a voltage drop, so the load receives less than the supply voltage. IEC 60364-5-52 recommends limits of 3 percent for lighting and 5 percent for other uses when the installation is supplied directly from a public low voltage network, with higher values allowed for installations with their own transformer. Local rules and project specifications may set different limits.
+Current through the [resistance](/electrical-engineering/ohms-law-kirchhoffs-laws/) and reactance of a cable causes a voltage drop, so the load receives less than the supply voltage. IEC 60364-5-52 recommends limits of 3 percent for lighting and 5 percent for other uses when the installation is supplied directly from a public low voltage network, with higher values allowed for installations with their own transformer. Local rules and project specifications may set different limits.
 
 Manufacturers usually give voltage drop as millivolts per ampere per metre (mV/A/m), which already includes the effect of resistance and reactance:
 
@@ -126,9 +127,9 @@ For example, a copper PVC cable that must carry a fault current of 10 kA for 0.1
 
 ## Other cable sizing checks
 
-- **Earth fault loop impedance:** the cable and its protective conductor must be short and large enough for the protective device to disconnect within the required time.
-- **Motor starting:** voltage drop during starting can be several times the running drop and may cause the motor to stall or contactors to drop out.
-- **Harmonics:** in four-wire circuits feeding many non-linear loads, the neutral can carry high third harmonic current and may need to be sized larger.
+- **[Earth fault](/electrical-engineering/electrical-earthing/) loop impedance:** the cable and its protective conductor must be short and large enough for the protective device to disconnect within the required time.
+- **[Motor](/electrical-engineering/induction-motor-working-principle/) starting:** voltage drop during starting can be several times the running drop and may cause the motor to stall or contactors to drop out.
+- **Harmonics:** in four-wire circuits feeding many non-linear loads, the [neutral](https://www.instrumentationblog.in/neutral-conductor-sizing-harmonics/) can carry high third harmonic current and may need to be sized larger.
 - **Mechanical protection:** armour, conduit or trunking where the cable could be damaged.
 
 ## Copper or aluminium?
@@ -141,3 +142,7 @@ Both are used for power cables. Aluminium has a higher resistivity than copper, 
 - Forgetting voltage drop on long runs to pumps, lighting columns and outbuildings.
 - Choosing a breaker larger than the cable's derated capacity.
 - Using a single-phase voltage drop value for a three-phase circuit, or the reverse.
+
+## Related reading
+
+- [Motor starting voltage dip calculation](https://www.instrumentationblog.in/motor-starting-voltage-dip-calculation/) on InstrumentationBlog.in

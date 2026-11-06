@@ -97,3 +97,9 @@ export const ARTICLE_FORMATS: Record<string, string> = {
 };
 
 export { DISCIPLINES };
+
+/** Popular topic chips, keeping only subcategory pages that have live articles (no links to empty pages). */
+export async function popularTopics() {
+  const { bySub } = await counts();
+  return SITE.popularTopics.filter(([, h]) => (bySub.get(h.split('/').filter(Boolean).join('/')) ?? 0) > 0);
+}

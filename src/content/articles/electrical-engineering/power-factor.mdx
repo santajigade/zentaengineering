@@ -1,7 +1,8 @@
 ---
 title: "Power Factor Explained: Causes, Effects and Correction"
 description: "What power factor is, the power triangle, why low power factor costs money, and how to size capacitors for power factor correction with a worked example."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: power-quality
 focusKeyword: "power factor"
@@ -66,16 +67,16 @@ When the load current contains harmonics, as with drives and rectifiers, the **t
 
 ## Causes of low power factor
 
-- **Induction motors,** which need magnetising current. Their power factor is lowest at light load.
-- **Transformers,** which draw magnetising current even at no load.
+- **[Induction motors](/electrical-engineering/induction-motor-working-principle/),** which need magnetising current. Their power factor is lowest at light load.
+- **[Transformers](/electrical-engineering/transformer-working-principle/),** which draw magnetising current even at no load.
 - **Inductive loads** such as induction furnaces, welding transformers and older magnetic lamp ballasts.
-- **Non-linear loads** such as rectifiers and drives, which lower the true power factor through harmonic distortion.
+- **Non-linear loads** such as rectifiers and drives, which lower the true power factor through [harmonic](https://www.instrumentationblog.in/active-harmonic-filter-working-sizing/) distortion.
 
 ## Effects of low power factor
 
 For the same real power, a lower power factor means a higher current, because I is proportional to 1 / PF. This causes:
 
-- **Higher I²R losses** in cables, transformers and switchgear.
+- **Higher I²R losses** in [cables](/electrical-engineering/cable-sizing/), transformers and switchgear.
 - **Larger voltage drop,** which can affect equipment performance.
 - **Reduced capacity:** transformers, generators and cables are rated in kVA or amperes, so less real power can be supplied.
 - **Higher bills:** many tariffs include kVA maximum demand charges or penalties for low power factor or excess reactive energy.
@@ -137,7 +138,7 @@ Typical power factor values help when estimating correction, but measured values
 
 - **Induction motors** at full load usually have a power factor of roughly 0.8 to 0.9, falling sharply at light load.
 - **Resistive heaters and incandescent lamps** have a power factor close to 1.
-- **Drives and switch mode power supplies** may show a high displacement power factor but a lower true power factor because of harmonics, unless they have power factor correction stages.
+- **Drives and switch mode [power supplies](https://www.instrumentationblog.in/pfc-circuit-boost-power-factor-correction/)** may show a high displacement power factor but a lower true power factor because of harmonics, unless they have power factor correction stages.
 
 ## Practical cautions
 
@@ -145,3 +146,8 @@ Typical power factor values help when estimating correction, but measured values
 - **Watch for resonance.** Capacitors and the supply inductance form a resonant circuit. If it is tuned near a harmonic produced by the plant, voltages and currents can rise sharply and damage capacitors.
 - **Discharge before work.** Capacitors hold charge after disconnection. They are fitted with discharge resistors, and the discharge time must elapse before anyone touches them.
 - **Switching transients.** Use capacitor-duty contactors with pre-insertion resistors or thyristor switching for frequently switched steps.
+
+## Related reading
+
+- [Generation, Transmission and Distribution of Electricity](/electrical-engineering/generation-transmission-distribution/)
+- [Synchronous condenser working](https://www.instrumentationblog.in/synchronous-condenser-working/) on InstrumentationBlog.in

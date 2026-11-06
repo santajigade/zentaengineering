@@ -1,7 +1,8 @@
 ---
 title: "Insulation Resistance Test (Megger Test) Explained"
 description: "How an insulation resistance test works, choosing the test voltage, reading the results, polarization index and temperature effects, with IEEE 43 guidance."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: high-voltage
 focusKeyword: "insulation resistance test"
@@ -27,17 +28,17 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-An insulation resistance test (IR test) applies a **DC voltage**, typically 500 V to 5 kV, between a conductor and earth or between conductors, and measures the small current that flows through the insulation. The tester reports the result as resistance in megohms (MΩ) or gigohms (GΩ). High, rising readings show clean, dry insulation; low or falling readings point to moisture, contamination or damage.
+An insulation resistance test (IR test) applies a **DC voltage**, typically 500 V to 5 kV, between a conductor and [earth](/electrical-engineering/electrical-earthing/) or between conductors, and measures the small current that flows through the insulation. The tester reports the result as resistance in megohms (MΩ) or gigohms (GΩ). High, rising readings show clean, dry insulation; low or falling readings point to moisture, contamination or damage.
 
 </Key>
 
 ## Why the insulation resistance test is done
 
-Insulation in motors, generators, transformers, cables and switchgear degrades with heat, moisture, dirt, vibration and age. An IR test is a simple, non-destructive way to:
+Insulation in [motors](/electrical-engineering/induction-motor-working-principle/), generators, [transformers](/electrical-engineering/transformer-working-principle/), cables and switchgear degrades with heat, moisture, dirt, vibration and age. An IR test is a simple, non-destructive way to:
 
 - check new installations before they are energised,
 - check equipment after repair, flooding or long storage,
-- track insulation condition over time in a maintenance programme.
+- track insulation condition over time in a [maintenance](https://www.instrumentationblog.in/transformer-maintenance-checklist/) programme.
 
 A single reading is useful, but the **trend** of readings taken under similar conditions is far more informative.
 
@@ -110,7 +111,7 @@ The value of insulation testing comes from comparing results over time. Each rec
 
 ## Safe test procedure
 
-1. Isolate the equipment, lock it off and prove it is dead.
+1. [Isolate](https://www.instrumentationblog.in/electrical-isolation-permit-to-work/) the equipment, lock it off and prove it is dead.
 2. Disconnect sensitive electronics, surge arresters and capacitors that could be damaged or affect the result.
 3. Clean and dry terminals to reduce surface leakage.
 4. Connect the tester: line lead to the conductor, earth lead to the frame or earth. Use the guard terminal to remove surface leakage if needed.
@@ -121,7 +122,7 @@ The value of insulation testing comes from comparing results over time. Each rec
 
 Insulation resistance of cables is tested between each core and the other cores connected to earth, and between each core and the armour or screen. Points to remember:
 
-- **Length matters.** A long cable has more insulation in parallel, so its resistance is lower than a short cable of the same type. Results are sometimes converted to MΩ·km for comparison.
+- **Length matters.** A long [cable](/electrical-engineering/cable-sizing/) has more insulation in parallel, so its resistance is lower than a short cable of the same type. Results are sometimes converted to MΩ·km for comparison.
 - **Capacitance matters.** Long cables take time to charge, so readings should be taken after the reading stabilises, and the cable must be discharged afterwards.
 - **Disconnect both ends.** Equipment at either end, such as drives, meters or surge arresters, must be disconnected or the result will reflect that equipment instead of the cable.
 
@@ -133,3 +134,7 @@ For medium and high voltage cables, an IR test is usually followed by withstand 
 - **Low but rising:** often surface moisture or dirt; cleaning and drying usually help.
 - **Low and flat or falling:** moisture absorbed into the insulation, contamination or damage; investigate before energising.
 - **Sudden drop between routine tests:** a warning sign even if the value is still above the minimum.
+
+## Related reading
+
+- [Insulation resistance test with PI and DAR](https://www.instrumentationblog.in/insulation-resistance-test-megger/) on InstrumentationBlog.in

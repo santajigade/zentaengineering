@@ -1,7 +1,8 @@
 ---
 title: "Buck Converter Working Principle and Design Equations"
 description: "A buck converter is a step-down DC-DC converter. Learn how it works, the duty cycle equation, inductor and capacitor selection, and losses."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: power-electronics
 focusKeyword: "buck converter"
@@ -59,7 +60,7 @@ Vout = D × Vin
 A buck converter has four power components:
 
 - **Switch S,** usually a MOSFET, turned on and off by a pulse width modulation (PWM) controller.
-- **Diode D** (or a second MOSFET in a synchronous converter), which carries the inductor current when the switch is off.
+- **[Diode](/electronics-engineering/what-is-a-diode/) D** (or a second MOSFET in a synchronous converter), which carries the inductor current when the switch is off.
 - **Inductor L,** which stores energy and smooths the current.
 - **Output capacitor C,** which smooths the output voltage.
 
@@ -115,7 +116,7 @@ The main losses in a buck converter are:
 
 - **Conduction loss in the MOSFET:** I² × RDS(on) during the on time.
 - **Switching loss:** energy lost in each transition, which rises with switching frequency and input voltage.
-- **Diode loss:** forward voltage × current during the off time. At low output voltages this is large, which is why synchronous rectification is used.
+- **Diode loss:** forward voltage × current during the off time. At low output voltages this is large, which is why [synchronous rectification](https://www.instrumentationblog.in/synchronous-rectification-buck-converter/) is used.
 - **Inductor loss:** resistance of the winding (DCR) and core loss.
 - **Capacitor loss:** ripple current flowing through ESR.
 
@@ -140,11 +141,18 @@ In **continuous conduction mode** (CCM), the inductor current never reaches zero
 
 ## Protection features
 
-Practical buck regulators include protection that the basic circuit lacks: cycle-by-cycle current limiting to protect the switch and inductor, soft start to limit inrush current into the output capacitor, undervoltage lockout so the converter does not run from too low an input, and thermal shutdown.
+Practical buck regulators include protection that the basic circuit lacks: cycle-by-cycle current limiting to protect the switch and inductor, soft start to limit inrush current into the output capacitor, undervoltage lockout so the converter does not run from too low an input, and [thermal](https://www.instrumentationblog.in/heat-sink-calculation/) shutdown.
 
 ## Applications
 
-- **Point-of-load supplies** that step 12 V or 5 V down to the core voltages of processors and FPGAs.
+- **Point-of-load supplies** that step 12 V or 5 V down to the core voltages of [processors](/electronics-engineering/microcontroller-vs-microprocessor/) and FPGAs.
 - **Battery-powered devices,** where efficiency directly extends run time.
 - **Automotive electronics,** converting the vehicle battery voltage to 5 V and 3.3 V rails.
 - **LED drivers,** where the converter regulates current instead of voltage.
+
+## Related reading
+
+- [PCB Design Basics: Layers, Traces and Design Rules](/electronics-engineering/pcb-design-basics/)
+- [Logic Gates: Types and Truth Tables Explained](/electronics-engineering/logic-gates/)
+- [Boost converter working principle](https://www.instrumentationblog.in/boost-converter-working-principle-2/) on InstrumentationBlog.in
+- [LDO regulator and dropout voltage](https://www.instrumentationblog.in/ldo-regulator-dropout-voltage/) on InstrumentationBlog.in

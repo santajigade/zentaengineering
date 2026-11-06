@@ -1,7 +1,8 @@
 ---
 title: "Sampling Theorem and Aliasing Explained"
 description: "The Nyquist-Shannon sampling theorem, what aliasing is, how to calculate alias frequencies and how anti-aliasing filters and sampling rate choice prevent it."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: signal-processing
 focusKeyword: "sampling theorem"
@@ -27,13 +28,13 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The **sampling theorem** states that a signal containing no frequencies above fmax can be reconstructed exactly from samples taken at a rate fs greater than **2 × fmax**. If a signal contains frequencies above half the sampling rate, they are not lost: they reappear as false lower frequencies called **aliases**. An analog **anti-aliasing filter** before the ADC prevents this.
+The **sampling theorem** states that a signal containing no frequencies above fmax can be reconstructed exactly from samples taken at a rate fs greater than **2 × fmax**. If a signal contains frequencies above half the sampling rate, they are not lost: they reappear as false lower frequencies called **aliases**. An analog **[anti-aliasing filter](https://www.instrumentationblog.in/active-filter-sallen-and-key/)** before the ADC prevents this.
 
 </Key>
 
 ## Why sampling needs a rule
 
-Digital systems such as microcontrollers, data loggers, digital oscilloscopes and audio recorders measure analog signals at discrete instants. Between samples, nothing is recorded. The question is how often samples must be taken so that the original signal can be recovered without ambiguity. The Nyquist-Shannon sampling theorem answers it.
+Digital systems such as [microcontrollers](/electronics-engineering/microcontroller-vs-microprocessor/), data loggers, digital oscilloscopes and audio recorders measure analog signals at discrete instants. Between samples, nothing is recorded. The question is how often samples must be taken so that the original signal can be recovered without ambiguity. The Nyquist-Shannon sampling theorem answers it.
 
 ## The Nyquist-Shannon sampling theorem
 
@@ -81,7 +82,7 @@ The same effect is seen in films when a turning wheel appears to rotate slowly b
 
 The only reliable protection is an analog **low-pass filter** placed before the ADC. It attenuates all frequencies above the Nyquist frequency to a level below the ADC's resolution, so nothing significant is left to alias.
 
-A simple RC filter rolls off at only 20 dB per decade, which is rarely enough on its own. Practical anti-aliasing filters are often second order or higher, such as Sallen-Key or multiple feedback active filters, or a combination of an RC filter with a high sampling rate.
+A simple [RC filter](/electronics-engineering/pcb-design-basics/) rolls off at only 20 [dB](https://www.instrumentationblog.in/decibel-in-electronics-db-dbm/) per decade, which is rarely enough on its own. Practical anti-aliasing filters are often second order or higher, such as Sallen-Key or multiple feedback active filters, or a combination of an RC filter with a high sampling rate.
 
 <Calculator path="electronics/rc-filter" title="RC Filter Calculator" />
 
@@ -129,3 +130,10 @@ Consider a power monitor that must measure mains voltage and current up to the 2
 - Design an anti-aliasing filter that attenuates everything above fs / 2 below the ADC's noise floor.
 - Consider oversampling with digital filtering where a sharp analog filter is hard to build.
 - Never rely on software to remove aliasing after sampling.
+
+## Related reading
+
+- [Inverting and Non-Inverting Amplifier: Op-Amp Basics](/electronics-engineering/inverting-and-non-inverting-amplifier/)
+- [Logic Gates: Types and Truth Tables Explained](/electronics-engineering/logic-gates/)
+- [Sample and hold circuit](https://www.instrumentationblog.in/sample-and-hold-circuit/) on InstrumentationBlog.in
+- [Voltage reference selection for ADCs](https://www.instrumentationblog.in/voltage-reference-ic-selection/) on InstrumentationBlog.in

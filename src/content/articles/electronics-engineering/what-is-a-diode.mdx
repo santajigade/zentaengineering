@@ -1,7 +1,8 @@
 ---
 title: "What Is a Diode? Working, Types and Characteristics"
 description: "What is a diode? Learn how a PN junction diode works, its V-I characteristic, the main diode types, key ratings and common circuits, with an example."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: components
 focusKeyword: "what is a diode"
@@ -78,7 +79,7 @@ Always choose a reverse voltage rating with margin above the highest voltage the
 
 ### Rectifiers
 
-A **half-wave rectifier** uses one diode and passes only one half of each AC cycle. A **bridge rectifier** uses four diodes to pass both halves, giving full-wave rectified DC with two diode drops in the current path. A smoothing capacitor after the rectifier stores charge to reduce ripple.
+A **half-wave [rectifier](https://www.instrumentationblog.in/precision-rectifier-op-amp-circuit/)** uses one diode and passes only one half of each AC cycle. A **bridge rectifier** uses four diodes to pass both halves, giving full-wave rectified DC with two diode drops in the current path. A smoothing capacitor after the rectifier stores charge to reduce ripple.
 
 ### Flyback (freewheeling) diode
 
@@ -94,7 +95,7 @@ Diodes connected from a signal line to the supply rails clamp voltages that try 
 
 ## Worked example: series resistor for an LED
 
-An LED must have its current limited, normally by a series resistor. The resistor drops the difference between the supply voltage and the LED forward voltage:
+An LED must have its current limited, normally by a [series resistor](/electrical-engineering/ohms-law-kirchhoffs-laws/). The [resistor](https://www.instrumentationblog.in/led-resistor-calculation/) drops the difference between the supply voltage and the LED forward voltage:
 
 $$
 R = \frac{V_S - V_F}{I_F}
@@ -120,3 +121,10 @@ When a conducting PN junction diode is suddenly reverse biased, charge stored in
 ## Testing a diode
 
 Most digital multimeters have a diode test mode that passes a small current and displays the forward voltage. A healthy silicon diode reads roughly 0.5 to 0.7 V in the forward direction and shows an open circuit in reverse. A reading near zero in both directions indicates a shorted diode; an open reading in both directions indicates an open diode. Test diodes out of circuit, because parallel components can give misleading readings.
+
+## Related reading
+
+- [Buck Converter Working Principle and Design Equations](/electronics-engineering/buck-converter/)
+- [Logic Gates: Types and Truth Tables Explained](/electronics-engineering/logic-gates/)
+- [PCB Design Basics: Layers, Traces and Design Rules](/electronics-engineering/pcb-design-basics/)
+- [Reverse polarity protection circuits](https://www.instrumentationblog.in/reverse-polarity-protection-circuits/) on InstrumentationBlog.in

@@ -1,7 +1,8 @@
 ---
 title: "Logic Gates: Types and Truth Tables Explained"
 description: "The seven basic logic gates with Boolean expressions and truth tables, universal gates, De Morgan's theorems, logic levels and a half adder worked example."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: digital-electronics
 focusKeyword: "logic gates"
@@ -69,7 +70,7 @@ NAND and NOR are called **universal gates** because each one alone can build any
 - **OR from NAND:** invert each input with a NAND, then NAND the results, because (A′·B′)′ = A + B.
 - **XOR from NAND:** four NAND gates are enough.
 
-The same constructions exist for NOR. In CMOS technology, NAND and NOR gates need fewer transistors than AND and OR, which is one reason they are so widely used.
+The same constructions exist for NOR. In [CMOS](/electronics-engineering/cmos-inverter/) technology, NAND and NOR gates need fewer transistors than AND and OR, which is one reason they are so widely used.
 
 ## De Morgan's theorems
 
@@ -97,7 +98,7 @@ Gates are combined to perform arithmetic. A **half adder** adds two single bits 
 
 ## Logic levels and noise margin
 
-Real gates accept a range of voltages as 0 or 1. For standard 5 V TTL logic, the datasheet values are:
+Real gates accept a range of voltages as 0 or 1. For standard 5 V [TTL](https://www.instrumentationblog.in/ttl-vs-cmos-logic-families/) logic, the datasheet values are:
 
 | Parameter | Meaning | Standard TTL value |
 | --- | --- | --- |
@@ -113,11 +114,11 @@ The **noise margin** is the amount of noise a signal can pick up and still be re
 - **Propagation delay:** the time from an input change to the resulting output change. It limits how fast a circuit can operate.
 - **Fan-out:** how many inputs one output can drive while keeping valid logic levels.
 - **Power consumption:** CMOS gates draw very little current when static; most power is used when they switch, so it rises with frequency.
-- **Schmitt trigger inputs:** some gates have hysteresis, so slow or noisy input signals produce clean output transitions.
+- **[Schmitt](https://www.instrumentationblog.in/schmitt-trigger-hysteresis/) trigger inputs:** some gates have hysteresis, so slow or noisy input signals produce clean output transitions.
 
 ## Combinational and sequential logic
 
-Circuits built only from gates, where the outputs depend only on the present inputs, are called **combinational logic**. Adders, decoders and multiplexers are examples. When gates are connected with feedback, they can store a state. Two cross-coupled NAND or NOR gates form an SR latch, the simplest memory element, and latches combine into flip-flops, registers and counters. Circuits whose outputs depend on both present inputs and stored state are called **sequential logic**, and they are the basis of every processor and state machine.
+Circuits built only from gates, where the outputs depend only on the present inputs, are called **combinational logic**. Adders, [decoders](https://www.instrumentationblog.in/7-segment-display-decoder/) and multiplexers are examples. When gates are connected with feedback, they can store a state. Two cross-coupled NAND or NOR gates form an SR latch, the simplest memory element, and latches combine into flip-flops, registers and counters. Circuits whose outputs depend on both present inputs and stored state are called **sequential logic**, and they are the basis of every [processor](/electronics-engineering/microcontroller-vs-microprocessor/) and state machine.
 
 ## Where logic gates are used
 
@@ -125,3 +126,8 @@ Circuits built only from gates, where the outputs depend only on the present inp
 - **Multiplexers and decoders:** selecting data paths and memory locations.
 - **Control logic:** interlocks, enable signals and glue logic between chips.
 - **Programmable logic:** FPGAs and CPLDs implement millions of gates defined in a hardware description language.
+
+## Related reading
+
+- [What Is a Diode? Working, Types and Characteristics](/electronics-engineering/what-is-a-diode/)
+- [PCB Design Basics: Layers, Traces and Design Rules](/electronics-engineering/pcb-design-basics/)

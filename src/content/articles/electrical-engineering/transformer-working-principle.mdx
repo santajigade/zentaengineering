@@ -1,7 +1,8 @@
 ---
 title: "Transformer Working Principle, Construction and EMF Equation"
 description: "Transformer working principle explained: mutual induction, construction, the EMF equation E = 4.44 f N Φm, turns ratio and losses, with a worked example."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: transformers
 focusKeyword: "transformer working principle"
@@ -63,7 +64,7 @@ Because it has no moving parts, a transformer is very efficient. Large power tra
 
 ## Transformer working principle
 
-A transformer works on **Faraday's law of electromagnetic induction**: a changing magnetic flux linking a coil induces an EMF in that coil. The operation happens in four steps:
+A transformer works on **[Faraday's law](https://www.instrumentationblog.in/faradays-law-electromagnetic-induction/) of electromagnetic induction**: a changing magnetic flux linking a coil induces an EMF in that coil. The operation happens in four steps:
 
 1. An alternating voltage V1 is applied to the primary winding, and a small magnetising current flows in it.
 2. This current sets up an alternating magnetic flux in the core. The core is made of a magnetic material, so almost all the flux stays in it.
@@ -138,15 +139,23 @@ There are two basic core arrangements:
 
 A real transformer has two main groups of losses:
 
-- **Core (iron) losses:** hysteresis loss and eddy current loss in the core. They depend on the voltage and frequency and are almost constant at any load.
+- **Core (iron) losses:** hysteresis loss and [eddy current](https://www.instrumentationblog.in/eddy-current-loss-hysteresis-loss/) loss in the core. They depend on the voltage and frequency and are almost constant at any load.
 - **Copper losses:** I²R loss in the winding resistances. They vary with the square of the load current.
 
 Maximum efficiency occurs at the load where copper loss equals core loss. Both losses are measured by the open-circuit and short-circuit tests. Because distribution transformers are energised all the time but often lightly loaded, low core loss designs, such as those using amorphous metal cores, can save more energy over a year than designs with low copper loss.
 
 ## Applications
 
-- **Power transmission:** step-up transformers raise generator voltage so that power can be sent over long lines with lower current and lower I²R loss.
+- **Power [transmission](/electrical-engineering/generation-transmission-distribution/):** step-up transformers raise generator voltage so that power can be sent over long lines with lower current and lower I²R loss.
 - **Distribution:** step-down transformers reduce the voltage to levels used by industry and homes, such as 415 V three-phase in many countries.
 - **Isolation:** isolation transformers separate equipment from the supply for safety or noise reduction.
 - **Electronics:** small transformers supply low voltages in power supplies and control circuits.
-- **Measurement:** current and voltage transformers scale large currents and voltages down for meters and protection relays.
+- **Measurement:** current and voltage transformers scale large currents and voltages down for meters and [protection relays](/electrical-engineering/overcurrent-relay/).
+
+## Related reading
+
+- [Power Factor Explained: Causes, Effects and Correction](/electrical-engineering/power-factor/)
+- [Insulation Resistance Test (Megger Test) Explained](/electrical-engineering/insulation-resistance-test/)
+- [Circuit Breaker Working Principle and Types](/electrical-engineering/circuit-breaker-working-principle/)
+- [Transformer inrush current](https://www.instrumentationblog.in/transformer-inrush-current/) on InstrumentationBlog.in
+- [Autotransformer working principle](https://www.instrumentationblog.in/autotransformer-working-principle/) on InstrumentationBlog.in

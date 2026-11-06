@@ -1,7 +1,8 @@
 ---
 title: "Inverting and Non-Inverting Amplifier: Op-Amp Basics"
 description: "How op-amps work with negative feedback, gain equations for inverting and non-inverting amplifiers, and limits such as bandwidth and slew rate."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: analog-electronics
 focusKeyword: "inverting and non-inverting amplifier"
@@ -53,7 +54,7 @@ For analysis, an ideal op-amp is assumed to have infinite open-loop gain, infini
 1. **No current flows into either input.**
 2. **The output adjusts so that the two inputs are at the same voltage** (V+ = V−).
 
-These rules, together with Ohm's law and Kirchhoff's current law, are enough to derive the gain of most op-amp circuits.
+These rules, together with [Ohm's law](/electrical-engineering/ohms-law-kirchhoffs-laws/) and Kirchhoff's current law, are enough to derive the gain of most op-amp circuits.
 
 ## Inverting amplifier
 
@@ -111,7 +112,7 @@ The same golden rules explain many other circuits:
 
 - **Summing amplifier:** several inputs, each through its own resistor, feed the virtual ground of an inverting amplifier. The output is the negative weighted sum of the inputs, which is used in audio mixers and in analog computation.
 - **Difference amplifier:** amplifies the difference between two inputs with four matched resistors. It rejects voltage common to both inputs, which is useful for current sense resistors.
-- **Instrumentation amplifier:** a difference amplifier with buffered high-impedance inputs, used with bridge sensors and thermocouples.
+- **[Instrumentation amplifier](https://www.instrumentationblog.in/instrumentation-amplifier-working/):** a difference amplifier with buffered high-impedance inputs, used with bridge sensors and thermocouples.
 - **Integrator:** a capacitor in place of Rf makes the output proportional to the integral of the input, the basis of ramp generators and PI controllers.
 - **Comparator use:** without feedback, the op-amp output switches between its limits depending on which input is higher. Dedicated comparator ICs are better for this because they recover faster from saturation.
 
@@ -156,3 +157,11 @@ $$
 ## Choosing resistor values
 
 Resistors in the range of about 1 kΩ to 100 kΩ suit most general purpose op-amps. Much smaller values load the output and waste power; much larger values increase noise and errors from bias current and stray capacitance. Use 1 percent tolerance resistors where the gain must be accurate, since the gain depends on their ratio.
+
+## Related reading
+
+- [Sampling Theorem and Aliasing Explained](/electronics-engineering/sampling-theorem/)
+- [Microcontroller vs Microprocessor: Differences Explained](/electronics-engineering/microcontroller-vs-microprocessor/)
+- [CMOS Inverter Working Principle](/electronics-engineering/cmos-inverter/)
+- [Inverting amplifier gain formula](https://www.instrumentationblog.in/inverting-amplifier-gain-formula/) on InstrumentationBlog.in
+- [Active filter design with Sallen and Key](https://www.instrumentationblog.in/active-filter-sallen-and-key/) on InstrumentationBlog.in

@@ -1,7 +1,8 @@
 ---
 title: "Circuit Breaker Working Principle and Types"
 description: "Circuit breaker working principle explained: how a breaker detects faults and quenches the arc, the main types (MCB, MCCB, ACB, VCB, SF6) and key ratings."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: switchgear
 focusKeyword: "circuit breaker working principle"
@@ -39,7 +40,7 @@ A circuit breaker has four duties:
 - **Carry** its rated current continuously without overheating.
 - **Make** (close onto) a circuit, including one that already has a fault on it.
 - **Break** normal load current when switched off.
-- **Interrupt** short-circuit current quickly enough to limit damage, when commanded by its own trip unit or by an external protection relay.
+- **Interrupt** short-circuit current quickly enough to limit damage, when commanded by its own trip unit or by an external [protection relay](/electrical-engineering/overcurrent-relay/).
 
 ## Circuit breaker working principle: how it interrupts current
 
@@ -97,7 +98,7 @@ IEC 60898-1 defines the instantaneous (magnetic) trip range of MCBs as a multipl
 
 ## Selecting breaking capacity
 
-The breaking capacity must be at least the **prospective short-circuit current** at the point of installation. Close to a distribution transformer, a simple estimate assumes an infinite source behind the transformer:
+The breaking capacity must be at least the **prospective short-circuit current** at the point of installation. Close to a distribution [transformer](/electrical-engineering/transformer-working-principle/), a simple estimate assumes an infinite source behind the transformer:
 
 $$
 I_{FL} = \frac{S}{\sqrt{3}\,V}, \qquad I_{sc} \approx \frac{I_{FL}}{Z_{pu}}
@@ -139,3 +140,10 @@ Manufacturers publish selectivity tables that show which combinations of their b
 ## Maintenance and testing
 
 Breakers are inspected and tested at intervals set by the manufacturer. Typical checks include contact resistance measurement, operating time tests, insulation resistance tests, trip unit testing by secondary or primary injection, and inspection of the operating mechanism and arc chutes. For vacuum interrupters, vacuum integrity is checked with a high voltage test.
+
+## Related reading
+
+- [Cable Sizing: Current Rating and Voltage Drop Explained](/electrical-engineering/cable-sizing/)
+- [Electrical Earthing: Purpose, Types and Systems (TN, TT, IT)](/electrical-engineering/electrical-earthing/)
+- [IDMT relay characteristics](https://www.instrumentationblog.in/idmt-relay-characteristics-tms-psm/) on InstrumentationBlog.in
+- [RCD types explained](https://www.instrumentationblog.in/rcd-types-ac-a-f-b-explained/) on InstrumentationBlog.in

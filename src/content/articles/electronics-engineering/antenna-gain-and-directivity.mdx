@@ -1,7 +1,8 @@
 ---
 title: "Antenna Gain and Directivity: Radiation Pattern Explained"
 description: "Antenna gain and directivity explained: radiation pattern, dBi, beamwidth, polarisation and impedance, with dipole length and radio link examples."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: rf-microwave-antennas
 focusKeyword: "antenna gain and directivity"
@@ -27,7 +28,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-Antenna gain and directivity describe how well an antenna focuses energy in a chosen direction. An antenna converts electrical signals in a transmission line into radio waves, and back again on receive. Its **radiation pattern** shows how strongly it radiates in each direction. **Directivity** measures how concentrated that pattern is compared with an antenna radiating equally in all directions, and **gain** is directivity reduced by the antenna's losses. Gain is usually quoted in **dBi**.
+Antenna gain and directivity describe how well an antenna focuses energy in a chosen direction. An antenna converts electrical signals in a transmission line into radio waves, and back again on receive. Its **radiation pattern** shows how strongly it radiates in each direction. **Directivity** measures how concentrated that pattern is compared with an antenna radiating equally in all directions, and **gain** is directivity reduced by the antenna's losses. Gain is usually quoted in **[dBi](https://www.instrumentationblog.in/decibel-in-electronics-db-dbm/)**.
 
 </Key>
 
@@ -41,7 +42,7 @@ $$
 
 where c is about 3 × 10⁸ m/s in free space. At 100 MHz the wavelength is 3 m; at 2.4 GHz it is 12.5 cm.
 
-Antennas are **reciprocal**: an antenna has the same pattern, gain and impedance whether it transmits or receives.
+Antennas are **reciprocal**: an antenna has the same pattern, gain and [impedance](https://www.instrumentationblog.in/what-is-impedance/) whether it transmits or receives.
 
 ## Radiation pattern
 
@@ -77,7 +78,7 @@ A half-wave dipole has a directivity of about 1.64, or 2.15 dBi. Gain relative t
 An antenna presents an impedance at its feed point. A half-wave dipole in free space has a radiation resistance of about 73 Ω at resonance. Maximum power transfers when the antenna impedance matches the transmission line, typically 50 Ω or 75 Ω. Mismatch reflects part of the power back, which is measured as:
 
 - **Return loss:** how far the reflected power is below the incident power, in dB. Higher is better.
-- **VSWR:** voltage standing wave ratio. A VSWR of 1:1 is a perfect match; 2:1 or better is a common acceptance level.
+- **[VSWR](https://www.instrumentationblog.in/impedance-matching-explained/):** voltage standing wave ratio. A VSWR of 1:1 is a perfect match; 2:1 or better is a common acceptance level.
 
 The **bandwidth** of an antenna is the frequency range over which its impedance match, gain and pattern stay within specified limits.
 
@@ -142,3 +143,10 @@ For the same gain, the effective aperture falls with the square of frequency. Th
 ## Near field and far field
 
 Close to an antenna, the fields are complex and the pattern is not yet formed. The far field, where the radiation pattern is valid, begins at roughly 2D² / λ for an antenna of largest dimension D. Antenna measurements must be made in the far field or corrected with near-field techniques.
+
+## Related reading
+
+- [PCB Design Basics: Layers, Traces and Design Rules](/electronics-engineering/pcb-design-basics/)
+- [Sampling Theorem and Aliasing Explained](/electronics-engineering/sampling-theorem/)
+- [Logic Gates: Types and Truth Tables Explained](/electronics-engineering/logic-gates/)
+- [What Is a Diode? Working, Types and Characteristics](/electronics-engineering/what-is-a-diode/)

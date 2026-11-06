@@ -1,7 +1,8 @@
 ---
 title: "Overcurrent Relay: Working Principle and Characteristics"
 description: "How an overcurrent relay works: pickup setting, instantaneous, definite time and IDMT characteristics, the IEC curve equation and time grading, with an example."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electrical-engineering
 subcategory: protection-relays
 focusKeyword: "overcurrent relay"
@@ -27,7 +28,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-An overcurrent relay measures the current in a circuit through a current transformer (CT). When the current rises above a set **pickup value**, the relay starts timing, and if the current stays high long enough it **trips the circuit breaker**. The operating time can be instantaneous, fixed (definite time) or **inversely related to the current** (IDMT), so heavier faults are cleared faster.
+An overcurrent relay measures the current in a circuit through a current [transformer](/electrical-engineering/transformer-working-principle/) (CT). When the current rises above a set **pickup value**, the relay starts timing, and if the current stays high long enough it **trips the [circuit breaker](/electrical-engineering/circuit-breaker-working-principle/)**. The operating time can be instantaneous, fixed (definite time) or **inversely related to the current** (IDMT), so heavier faults are cleared faster.
 
 </Key>
 
@@ -101,10 +102,10 @@ Settings are a balance between sensitivity and stability:
 
 - **Current setting (pickup):** set above the maximum load current the circuit can carry, including allowed overloads, so the relay never trips on normal load. It must also be well below the minimum fault current at the far end of the protected zone, so that every fault is detected.
 - **Instantaneous element:** set above the largest current that flows for faults beyond the next downstream protection, and above transformer inrush and motor starting currents, so it trips only for close-in faults.
-- **Earth fault setting:** can be much lower than the phase setting, because normal load produces little residual current. It must stay above any standing unbalance or leakage.
+- **[Earth fault](/electrical-engineering/electrical-earthing/) setting:** can be much lower than the phase setting, because normal load produces little residual current. It must stay above any standing unbalance or leakage.
 - **Time multiplier:** chosen during the grading study, starting from the relay nearest the load and working back towards the source.
 
-Settings should be recorded in a protection settings schedule and re-checked whenever the network changes, for example when a new transformer or a larger feeder cable increases the fault level.
+Settings should be recorded in a protection settings schedule and re-checked whenever the network changes, for example when a new transformer or a larger feeder [cable](/electrical-engineering/cable-sizing/) increases the fault level.
 
 ## Numerical relay features
 
@@ -112,13 +113,17 @@ Modern numerical relays combine several functions in one device. Besides phase a
 
 ## CT selection
 
-The CT must deliver an accurate current to the relay up to the maximum fault current without saturating. Its burden, which includes the relay input and the resistance of the connecting leads, must stay within the CT's rated burden.
+The CT must deliver an accurate current to the relay up to the maximum fault current without saturating. Its [burden](https://www.instrumentationblog.in/ct-burden-calculation-va/), which includes the relay input and the resistance of the connecting leads, must stay within the CT's rated burden.
 
 <Calculator path="electrical/ct-burden" title="CT Burden Calculator" />
 
 ## Applications
 
-- **Distribution feeders:** IDMT phase and earth fault protection with an instantaneous element for close-in faults.
+- **Distribution feeders:** [IDMT](https://www.instrumentationblog.in/idmt-relay-characteristics-tms-psm/) phase and earth fault protection with an instantaneous element for close-in faults.
 - **Transformers:** overcurrent protection on the primary as backup to differential protection.
 - **Motors:** overcurrent and earth fault elements, combined with thermal overload protection.
 - **Transmission lines:** backup to distance and differential protection.
+
+## Related reading
+
+- [Directional overcurrent relay (67)](https://www.instrumentationblog.in/directional-overcurrent-relay-67/) on InstrumentationBlog.in

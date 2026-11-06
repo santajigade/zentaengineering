@@ -1,4 +1,6 @@
 ---
+import { popularTopics } from '../lib/content';
+const popular = await popularTopics();
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ItemCard from '../components/ItemCard.astro';
@@ -32,7 +34,7 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
           <input id="q" name="q" type="search" placeholder="Search transformer, PLC timer, NPSH..." />
           <button type="submit" class="btn btn-primary"><Icon name="search" size={20} stroke={2} /> Search</button>
         </form>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px"><span class="muted">Popular:</span>{SITE.popularTopics.slice(0, 4).map(([l, h]) => <a class="chip chip-teal" href={h}>{l}</a>)}</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px"><span class="muted">Popular:</span>{popular.slice(0, 4).map(([l, h]) => <a class="chip chip-teal" href={h}>{l}</a>)}</div>
       </div>
       <div style="flex:0 1 340px;display:flex;justify-content:center" aria-hidden="true">
         <svg width="300" height="300" viewBox="0 0 64 64">

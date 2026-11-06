@@ -1,7 +1,8 @@
 ---
 title: "Microcontroller vs Microprocessor: Differences Explained"
 description: "Microcontroller vs microprocessor: the differences in architecture, memory, peripherals, operating systems, power and cost, and how to choose one."
-pubDate: 2026-12-01
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
 discipline: electronics-engineering
 subcategory: embedded-systems
 focusKeyword: "microcontroller vs microprocessor"
@@ -42,7 +43,7 @@ A typical microcontroller integrates:
 - a **CPU core**, such as an ARM Cortex-M, AVR, PIC or RISC-V core,
 - **flash memory** for the program,
 - **SRAM** for variables,
-- **peripherals**: digital input/output (GPIO), timers, PWM outputs, analog to digital converters (ADC), UART, SPI and I²C interfaces, often USB, CAN and Ethernet,
+- **peripherals**: digital input/output (GPIO), timers, PWM outputs, analog to digital converters ([ADC](/electronics-engineering/sampling-theorem/)), [UART](https://www.instrumentationblog.in/uart-communication-frame-baud-rate/), SPI and I²C interfaces, often USB, CAN and Ethernet,
 - clock sources, power management and a watchdog timer.
 
 Because everything is on one chip, a microcontroller needs only a few external parts, such as a power supply, decoupling capacitors and sometimes a crystal. It starts running its program within milliseconds of power-up.
@@ -122,7 +123,7 @@ Choose a **microcontroller** when:
 - the device performs a defined control or sensing task,
 - low power and battery life matter,
 - fast, predictable response to inputs is needed,
-- cost and board size must be minimal.
+- cost and [board](/electronics-engineering/pcb-design-basics/) size must be minimal.
 
 Typical examples are thermostats, motor drives, sensors, smart meters, remote controls and industrial I/O modules.
 
@@ -143,3 +144,10 @@ Microcontrollers offer several low-power modes. In sleep or stop modes the core 
 ## Development differences
 
 Microcontroller firmware is usually written in C or C++, sometimes MicroPython, and loaded into flash through a debug interface such as SWD or JTAG. Developers work close to the hardware, configuring registers or using vendor hardware abstraction libraries. Microprocessor development involves a bootloader, an operating system image, device drivers and applications, and can use almost any programming language.
+
+## Related reading
+
+- [Logic Gates: Types and Truth Tables Explained](/electronics-engineering/logic-gates/)
+- [CMOS Inverter Working Principle](/electronics-engineering/cmos-inverter/)
+- [Switch debouncing methods](https://www.instrumentationblog.in/switch-debouncing-hardware-software/) on InstrumentationBlog.in
+- [Logic level shifter for 3.3 V and 5 V](https://www.instrumentationblog.in/logic-level-shifter-3v3-5v/) on InstrumentationBlog.in
