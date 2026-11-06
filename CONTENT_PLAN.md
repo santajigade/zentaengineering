@@ -35,15 +35,15 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| components | Diodes Explained: Working, Types and Characteristics | diodes-explained | fundamentals | to write |
-| analog-electronics | Operational Amplifier Basics: Inverting and Non-Inverting Amplifiers | op-amp-basics | fundamentals | to write |
-| digital-electronics | Logic Gates Explained with Truth Tables | logic-gates-explained | fundamentals | to write |
-| power-electronics | Buck Converter Working Principle and Design Equations | buck-converter-working-principle | working-principle | to write |
-| pcb-design | PCB Design Basics: Layers, Traces and Design Rules | pcb-design-basics | fundamentals | to write |
-| embedded-systems | Microcontroller vs Microprocessor: Differences Explained | microcontroller-vs-microprocessor | comparison | to write |
-| vlsi | CMOS Inverter Working Principle | cmos-inverter | working-principle | to write |
-| signal-processing | Sampling Theorem and Aliasing Explained | sampling-theorem-and-aliasing | fundamentals | to write |
-| rf-microwave-antennas | Antenna Basics: Gain, Directivity and Radiation Pattern | antenna-basics | fundamentals | to write |
+| components | Diodes Explained: Working, Types and Characteristics | diodes-explained | fundamentals | draft |
+| analog-electronics | Operational Amplifier Basics: Inverting and Non-Inverting Amplifiers | op-amp-basics | fundamentals | draft |
+| digital-electronics | Logic Gates Explained with Truth Tables | logic-gates-explained | fundamentals | draft |
+| power-electronics | Buck Converter Working Principle and Design Equations | buck-converter-working-principle | working-principle | draft |
+| pcb-design | PCB Design Basics: Layers, Traces and Design Rules | pcb-design-basics | fundamentals | draft |
+| embedded-systems | Microcontroller vs Microprocessor: Differences Explained | microcontroller-vs-microprocessor | comparison | draft |
+| vlsi | CMOS Inverter Working Principle | cmos-inverter | working-principle | draft |
+| signal-processing | Sampling Theorem and Aliasing Explained | sampling-theorem-and-aliasing | fundamentals | draft |
+| rf-microwave-antennas | Antenna Basics: Gain, Directivity and Radiation Pattern | antenna-basics | fundamentals | draft |
 
 ## civil-engineering
 

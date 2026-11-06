@@ -1,0 +1,155 @@
+---
+title: "Op-Amp Basics: Inverting and Non-Inverting Amplifiers"
+description: "How op-amps work with negative feedback, gain equations for inverting and non-inverting amplifiers, and limits such as bandwidth and slew rate."
+pubDate: 2026-12-01
+discipline: electronics-engineering
+subcategory: analog-electronics
+format: fundamentals
+pillar: true
+math: true
+tags: [op-amp, operational-amplifier, inverting-amplifier, non-inverting-amplifier, gain-bandwidth]
+faq:
+  - q: "What is a virtual ground?"
+    a: "In an inverting amplifier the non-inverting input is grounded. Negative feedback forces the inverting input to the same voltage, so it sits at 0 V even though it is not connected to ground. That node is called a virtual ground."
+  - q: "Why does an op-amp need negative feedback?"
+    a: "An op-amp's open-loop gain is enormous and varies between devices and with temperature. Negative feedback trades most of that gain for a precise, stable gain set by resistors, and it also widens bandwidth and reduces distortion."
+  - q: "What is the difference between gain bandwidth product and slew rate?"
+    a: "Gain bandwidth product limits how fast small signals can change for a given gain. Slew rate limits how fast the output voltage can change at all, which matters for large output swings. A circuit must satisfy both."
+references:
+  - text: "A. S. Sedra and K. C. Smith, Microelectronic Circuits, Oxford University Press"
+  - text: "S. Franco, Design with Operational Amplifiers and Analog Integrated Circuits, McGraw-Hill"
+  - text: "R. Mancini (ed.), Op Amps for Everyone, Texas Instruments"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+An operational amplifier (op-amp) is a very high gain differential amplifier. Used with **negative feedback**, its gain is set by two resistors:
+
+- **Inverting amplifier:** gain = −Rf / Rin
+- **Non-inverting amplifier:** gain = 1 + Rf / Rg
+
+Real op-amps are limited by their gain bandwidth product, slew rate, output swing and input errors.
+
+</Key>
+
+## What an op-amp is
+
+An op-amp has two inputs, the **non-inverting input** (+) and the **inverting input** (−), and one output. It amplifies the difference between the inputs:
+
+$$
+V_{out} = A_{OL}\,(V_+ - V_-)
+$$
+
+The open-loop gain AOL is very large, typically 100,000 or more at DC. Without feedback, even a microvolt difference drives the output to one of its supply limits, which is why op-amps are almost always used with feedback from the output back to the inverting input.
+
+## The ideal op-amp and the golden rules
+
+For analysis, an ideal op-amp is assumed to have infinite open-loop gain, infinite input impedance, zero output impedance and unlimited bandwidth. With negative feedback in place, two simple rules follow:
+
+1. **No current flows into either input.**
+2. **The output adjusts so that the two inputs are at the same voltage** (V+ = V−).
+
+These rules, together with Ohm's law and Kirchhoff's current law, are enough to derive the gain of most op-amp circuits.
+
+## Inverting amplifier
+
+<figure>
+<svg width="520" height="220" viewBox="0 0 520 220" fill="none" role="img" aria-label="Inverting amplifier: input through Rin to the inverting input, feedback resistor Rf from output to inverting input, non-inverting input grounded">
+<path d="M220 60V160L320 110Z" stroke="#0b2545" stroke-width="2.5" stroke-linejoin="round" fill="#ffffff" />
+<path d="M40 85H90M150 85H220M180 85V35H250M310 35H400V110M320 110H460M220 135H200V175" stroke="#0b2545" stroke-width="2.5" />
+<path d="M188 175H212M192 181H208M197 187H203" stroke="#0b2545" stroke-width="2" />
+<rect x="90" y="75" width="60" height="20" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
+<rect x="250" y="25" width="60" height="20" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
+<circle cx="40" cy="85" r="4" fill="#0b2545" /><circle cx="460" cy="110" r="4" fill="#0b2545" /><circle cx="180" cy="85" r="4" fill="#0b2545" /><circle cx="400" cy="110" r="4" fill="#0b2545" />
+<text x="229" y="90" font-size="18" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">−</text>
+<text x="228" y="141" font-size="18" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">+</text>
+<text x="120" y="66" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Rin</text>
+<text x="280" y="17" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Rf</text>
+<text x="34" y="70" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Vin</text>
+<text x="466" y="98" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Vout</text>
+</svg>
+<figcaption>Inverting amplifier. The non-inverting input is grounded, so the inverting input is a virtual ground.</figcaption>
+</figure>
+
+The input signal is applied through Rin to the inverting input, and Rf feeds the output back to the same input. The non-inverting input is grounded. By rule 2, the inverting input is held at 0 V, a **virtual ground**. The input current is Vin / Rin, and by rule 1 all of it flows through Rf, so Vout = −(Vin / Rin) × Rf:
+
+$$
+A_v = \frac{V_{out}}{V_{in}} = -\frac{R_f}{R_{in}}
+$$
+
+The minus sign means the output is inverted, shifted by 180 degrees. The input impedance seen by the source is simply Rin, so Rin must not be too small for the source to drive.
+
+## Non-inverting amplifier
+
+In the non-inverting amplifier, the signal goes to the non-inverting input. A divider made of Rf (output to inverting input) and Rg (inverting input to ground) feeds back a fraction of the output. Because the inputs are held equal, Vin = Vout × Rg / (Rf + Rg), which gives:
+
+$$
+A_v = 1 + \frac{R_f}{R_g}
+$$
+
+The gain is always 1 or more, and the output is in phase with the input. The input impedance is very high, because the signal drives an op-amp input directly. With Rf = 0 and Rg removed, the gain is exactly 1: this is the **voltage follower** or buffer, used to connect a high impedance source to a low impedance load.
+
+| Feature | Inverting | Non-inverting |
+| --- | --- | --- |
+| Gain | −Rf / Rin | 1 + Rf / Rg |
+| Phase | Inverted (180°) | In phase |
+| Minimum gain magnitude | Any, including below 1 | 1 |
+| Input impedance | About Rin | Very high |
+| Common mode voltage at inputs | Near 0 V | Follows the input signal |
+
+<Calculator path="electronics/op-amp-gain" title="Op-Amp Gain Calculator" />
+
+## Other common op-amp circuits
+
+The same golden rules explain many other circuits:
+
+- **Summing amplifier:** several inputs, each through its own resistor, feed the virtual ground of an inverting amplifier. The output is the negative weighted sum of the inputs, which is used in audio mixers and in analog computation.
+- **Difference amplifier:** amplifies the difference between two inputs with four matched resistors. It rejects voltage common to both inputs, which is useful for current sense resistors.
+- **Instrumentation amplifier:** a difference amplifier with buffered high-impedance inputs, used with bridge sensors and thermocouples.
+- **Integrator:** a capacitor in place of Rf makes the output proportional to the integral of the input, the basis of ramp generators and PI controllers.
+- **Comparator use:** without feedback, the op-amp output switches between its limits depending on which input is higher. Dedicated comparator ICs are better for this because they recover faster from saturation.
+
+## Real op-amp limitations
+
+### Gain bandwidth product
+
+The open-loop gain of a typical voltage-feedback op-amp falls with frequency. Its **gain bandwidth product** (GBW) is roughly constant, so the closed-loop bandwidth is approximately:
+
+$$
+f_{-3dB} \approx \frac{\text{GBW}}{\text{noise gain}}
+$$
+
+The noise gain is 1 + Rf / Rg for both configurations. For an inverting amplifier with a gain of −10, the noise gain is 11, the same as a non-inverting amplifier with a gain of 11.
+
+### Slew rate
+
+The **slew rate** (SR) is the maximum rate of change of the output voltage, in V/µs. A sine wave of peak amplitude Vp and frequency f needs a slope of 2πfVp, so the largest undistorted frequency at that amplitude, the full power bandwidth, is:
+
+$$
+f_{max} = \frac{SR}{2\pi V_p}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Op-amp with GBW = 1 MHz and slew rate 0.5 V/µs, used as a non-inverting amplifier with Rf = 100 kΩ and Rg = 10 kΩ. Output peak amplitude 5 V.</dd>
+<dt>Find</dt><dd>Gain, small-signal bandwidth and full power bandwidth.</dd>
+<dt>Assumptions</dt><dd>Single-pole op-amp response; supplies large enough for a 5 V peak output.</dd>
+<dt>Solution</dt><dd>Gain = 1 + 100 / 10 = 11<br />Bandwidth ≈ 1,000,000 / 11 = 91 kHz<br />Full power bandwidth = 500,000 / (2π × 5) = 15.9 kHz</dd>
+<dt>Answer</dt><dd><strong>Gain 11; small signals pass up to about 91 kHz, but a full 5 V peak output is limited to about 16 kHz by slew rate</strong></dd>
+<dt>Limitations</dt><dd>Datasheet GBW and slew rate are typical values that vary with supply voltage, load and temperature.</dd>
+</dl>
+</Example>
+
+### Other practical limits
+
+- **Output swing:** the output cannot reach the supply rails unless the op-amp is a rail-to-rail output type, and swing falls further with heavy loads.
+- **Input offset voltage:** a small built-in voltage between the inputs, amplified by the noise gain, which appears as a DC error at the output.
+- **Input bias current:** small currents into the inputs, which create errors when they flow through large resistors.
+- **Common mode input range:** the inputs must stay within the range the datasheet allows, which may not include the supply rails.
+
+## Choosing resistor values
+
+Resistors in the range of about 1 kΩ to 100 kΩ suit most general purpose op-amps. Much smaller values load the output and waste power; much larger values increase noise and errors from bias current and stray capacitance. Use 1 percent tolerance resistors where the gain must be accurate, since the gain depends on their ratio.
