@@ -11,7 +11,7 @@ const embed = `${SITE.sister.calculator}/embed/${clean}/`;
 ---
 <div class="card calc not-prose">
   <div class="calc-head"><b style="color:var(--ze-navy);font-size:15px">{title}</b><span class="muted">From <a href={page}>ZentaCalculator.com</a></span></div>
-  <iframe src={embed} title={title} loading="lazy" data-zcalc></iframe>
+  <iframe src={embed} title={title} loading="lazy" data-zcalc height="320" scrolling="no"></iframe>
   <div style="padding:10px 18px;font-size:14px;border-top:1px solid var(--ze-line)"><a href={page}>Open the full {title.toLowerCase()}</a></div>
 </div>
 <script>
@@ -19,7 +19,12 @@ const embed = `${SITE.sister.calculator}/embed/${clean}/`;
   addEventListener('message', (e) => {
     if (e.origin !== 'https://zentacalculator.com' || typeof e.data?.zentaHeight !== 'number') return;
     document.querySelectorAll<HTMLIFrameElement>('iframe[data-zcalc]').forEach((f) => {
-      if (f.contentWindow === e.source) f.style.height = Math.min(e.data.zentaHeight + 4, 2400) + 'px';
+      // Use the reported height exactly: adding any margin makes the embed grow without end,
+      // because its scrollHeight never reports less than the iframe's own height.
+      if (f.contentWindow === e.source) {
+        const h = Math.min(Math.round(e.data.zentaHeight), 2400);
+        if (Math.abs(f.offsetHeight - h) > 1) f.style.height = h + 'px';
+      }
     });
   });
 </script>

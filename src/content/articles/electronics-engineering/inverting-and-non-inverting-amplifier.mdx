@@ -1,9 +1,10 @@
 ---
-title: "Op-Amp Basics: Inverting and Non-Inverting Amplifiers"
+title: "Inverting and Non-Inverting Amplifier: Op-Amp Basics"
 description: "How op-amps work with negative feedback, gain equations for inverting and non-inverting amplifiers, and limits such as bandwidth and slew rate."
 pubDate: 2026-12-01
 discipline: electronics-engineering
 subcategory: analog-electronics
+focusKeyword: "inverting and non-inverting amplifier"
 format: fundamentals
 pillar: true
 math: true
@@ -26,7 +27,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-An operational amplifier (op-amp) is a very high gain differential amplifier. Used with **negative feedback**, its gain is set by two resistors:
+The inverting and non-inverting amplifier are the two basic op-amp circuits. An operational amplifier (op-amp) is a very high gain differential amplifier. Used with **negative feedback**, its gain is set by two resistors:
 
 - **Inverting amplifier:** gain = −Rf / Rin
 - **Non-inverting amplifier:** gain = 1 + Rf / Rg
@@ -91,6 +92,8 @@ A_v = 1 + \frac{R_f}{R_g}
 $$
 
 The gain is always 1 or more, and the output is in phase with the input. The input impedance is very high, because the signal drives an op-amp input directly. With Rf = 0 and Rg removed, the gain is exactly 1: this is the **voltage follower** or buffer, used to connect a high impedance source to a low impedance load.
+
+## Inverting and non-inverting amplifier compared
 
 | Feature | Inverting | Non-inverting |
 | --- | --- | --- |

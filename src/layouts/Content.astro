@@ -37,7 +37,7 @@ const schema = {
   publisher: { '@id': `${SITE.url}/#org` },
 };
 ---
-<Base title={`${data.seoTitle ?? data.title} | ${SITE.name}`} description={data.description} ogType="article"
+<Base title={((t) => (`${t} | ${SITE.name}`.length <= 65 ? `${t} | ${SITE.name}` : t))(data.seoTitle ?? data.title)} description={data.description} ogType="article"
   image={data.image?.src.replace(/\.webp$/, '.jpg')} jsonld={[schema]} math={data.math}>
   <div class="wrap" style="padding-top:20px"><Breadcrumbs items={crumbs} /></div>
   <div class="wrap layout">

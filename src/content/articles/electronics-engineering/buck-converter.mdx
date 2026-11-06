@@ -1,9 +1,10 @@
 ---
 title: "Buck Converter Working Principle and Design Equations"
-description: "How a buck (step-down) DC-DC converter works, the duty cycle equation, inductor and capacitor selection, losses and a complete design example."
+description: "A buck converter is a step-down DC-DC converter. Learn how it works, the duty cycle equation, inductor and capacitor selection, and losses."
 pubDate: 2026-12-01
 discipline: electronics-engineering
 subcategory: power-electronics
+focusKeyword: "buck converter"
 format: working-principle
 pillar: true
 math: true
@@ -62,7 +63,7 @@ A buck converter has four power components:
 - **Inductor L,** which stores energy and smooths the current.
 - **Output capacitor C,** which smooths the output voltage.
 
-## How it works
+## How a buck converter works
 
 1. **Switch on (time D × T).** The input is connected to the inductor. The voltage across the inductor is Vin − Vout, so its current rises linearly. The inductor stores energy, and current flows to the capacitor and load.
 2. **Switch off (time (1 − D) × T).** The inductor keeps its current flowing, so the switch node falls until the diode conducts. The inductor now has −Vout across it, and its current falls linearly as it releases stored energy to the load.

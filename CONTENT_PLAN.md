@@ -20,30 +20,30 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| circuit-fundamentals | Ohm's Law and Kirchhoff's Laws with Worked Examples | ohms-law-and-kirchhoffs-laws | fundamentals | draft |
+| circuit-fundamentals | Ohm's Law and Kirchhoff's Laws with Worked Examples | ohms-law-kirchhoffs-laws | fundamentals | draft |
 | electrical-machines | Three-Phase Induction Motor Working Principle | induction-motor-working-principle | working-principle | draft |
 | transformers | Transformer Working Principle, Construction and EMF Equation | transformer-working-principle | working-principle | draft |
-| power-systems | Power System Structure: Generation, Transmission and Distribution | power-system-structure | fundamentals | draft |
+| power-systems | Power System Structure: Generation, Transmission and Distribution | generation-transmission-distribution | fundamentals | draft |
 | switchgear | Circuit Breaker Working Principle and Types | circuit-breaker-working-principle | working-principle | draft |
 | protection-relays | Overcurrent Relay: Working Principle and Characteristics | overcurrent-relay | working-principle | draft |
-| earthing | Electrical Earthing: Purpose, Types and Systems (TN, TT, IT) | electrical-earthing-systems | explanation | draft |
-| power-quality | Power Factor Explained: Causes, Effects and Correction | power-factor-explained | fundamentals | draft |
-| wiring-installation | Cable Sizing Basics: Current Rating and Voltage Drop | cable-sizing-basics | fundamentals | draft |
-| high-voltage | Insulation Resistance Testing with a Megger Explained | insulation-resistance-testing | explanation | draft |
+| earthing | Electrical Earthing: Purpose, Types and Systems (TN, TT, IT) | electrical-earthing | explanation | draft |
+| power-quality | Power Factor Explained: Causes, Effects and Correction | power-factor | fundamentals | draft |
+| wiring-installation | Cable Sizing Basics: Current Rating and Voltage Drop | cable-sizing | fundamentals | draft |
+| high-voltage | Insulation Resistance Testing with a Megger Explained | insulation-resistance-test | explanation | draft |
 
 ## electronics-engineering
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| components | Diodes Explained: Working, Types and Characteristics | diodes-explained | fundamentals | draft |
-| analog-electronics | Operational Amplifier Basics: Inverting and Non-Inverting Amplifiers | op-amp-basics | fundamentals | draft |
-| digital-electronics | Logic Gates Explained with Truth Tables | logic-gates-explained | fundamentals | draft |
-| power-electronics | Buck Converter Working Principle and Design Equations | buck-converter-working-principle | working-principle | draft |
+| components | Diodes Explained: Working, Types and Characteristics | what-is-a-diode | fundamentals | draft |
+| analog-electronics | Operational Amplifier Basics: Inverting and Non-Inverting Amplifiers | inverting-and-non-inverting-amplifier | fundamentals | draft |
+| digital-electronics | Logic Gates Explained with Truth Tables | logic-gates | fundamentals | draft |
+| power-electronics | Buck Converter Working Principle and Design Equations | buck-converter | working-principle | draft |
 | pcb-design | PCB Design Basics: Layers, Traces and Design Rules | pcb-design-basics | fundamentals | draft |
 | embedded-systems | Microcontroller vs Microprocessor: Differences Explained | microcontroller-vs-microprocessor | comparison | draft |
 | vlsi | CMOS Inverter Working Principle | cmos-inverter | working-principle | draft |
-| signal-processing | Sampling Theorem and Aliasing Explained | sampling-theorem-and-aliasing | fundamentals | draft |
-| rf-microwave-antennas | Antenna Basics: Gain, Directivity and Radiation Pattern | antenna-basics | fundamentals | draft |
+| signal-processing | Sampling Theorem and Aliasing Explained | sampling-theorem | fundamentals | draft |
+| rf-microwave-antennas | Antenna Basics: Gain, Directivity and Radiation Pattern | antenna-gain-and-directivity | fundamentals | draft |
 
 ## civil-engineering
 

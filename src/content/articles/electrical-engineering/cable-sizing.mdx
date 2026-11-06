@@ -1,9 +1,10 @@
 ---
-title: "Cable Sizing Basics: Current Rating and Voltage Drop"
-description: "How to size a low voltage cable: design current, protection, derating, current rating, voltage drop and short-circuit withstand, with examples."
+title: "Cable Sizing: Current Rating and Voltage Drop Explained"
+description: "Cable sizing explained: how to select a low voltage cable by current rating, derating, voltage drop and short-circuit withstand, with worked examples."
 pubDate: 2026-12-01
 discipline: electrical-engineering
 subcategory: wiring-installation
+focusKeyword: "cable sizing"
 format: fundamentals
 pillar: true
 math: true
@@ -27,7 +28,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-A cable is sized so that it:
+Cable sizing means choosing the smallest standard conductor that is safe and efficient. A cable is sized so that it:
 
 1. **carries the load current** without exceeding its insulation temperature, after derating for the way it is installed,
 2. is **protected** by a fuse or breaker whose rating sits between the load current and the cable rating,
@@ -123,7 +124,7 @@ The factor k depends on the conductor material and insulation. Typical values ar
 
 For example, a copper PVC cable that must carry a fault current of 10 kA for 0.1 s needs S ≥ √(10,000² × 0.1) / 115 = 3162 / 115 = 27.5 mm². A 35 mm² cable passes this check, while a 25 mm² cable does not.
 
-## Other checks
+## Other cable sizing checks
 
 - **Earth fault loop impedance:** the cable and its protective conductor must be short and large enough for the protective device to disconnect within the required time.
 - **Motor starting:** voltage drop during starting can be several times the running drop and may cause the motor to stall or contactors to drop out.

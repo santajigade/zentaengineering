@@ -26,12 +26,21 @@ Rules for every article, lesson, interview set, project and resource. The public
 - Slug: lowercase, hyphens, 3 to 6 words, the main search phrase (`transformer-working-principle`). It must not equal a subcategory slug in the same discipline.
 - Tutorials: `src/content/tutorials/<series>/<lesson-slug>.md` with `series` and `order`.
 
+## SEO rules (checked by `python3 scripts/seo-check.py`)
+- Every article has one `focusKeyword`: the main phrase people search for.
+- The slug is built from the focus keyword (`what-is-a-diode`, `buck-converter`).
+- The focus keyword appears in the title (ideally near the start), the meta description, the first paragraph and at least one H2.
+- Title up to 60 characters so Google shows it in full; description 120 to 160 characters.
+- At least 3 H2 sections; use the keyword naturally, never stuffed.
+- Do not change a slug after the site launches without adding a 301 redirect in `public/.htaccess`.
+
 ## Front matter (articles)
 ```yaml
 ---
 title: "How a Transformer Works: Principle, Construction and Losses" # max 70
 description: "..."                       # max 160, no dashes
 pubDate: 2026-12-01
+focusKeyword: "transformer working principle"
 discipline: electrical-engineering      # slug from src/data/disciplines.ts
 subcategory: transformers               # slug from src/data/disciplines.ts
 format: working-principle               # fundamentals | working-principle | explanation | troubleshooting | comparison | equipment | application | case-study | tutorial

@@ -6,6 +6,7 @@ const common = {
   title: z.string().max(70),
   description: z.string().max(160), // meta description, no dashes
   seoTitle: z.string().max(65).optional(), // overrides the <title> when set
+  focusKeyword: z.string().optional(), // main search phrase; must appear in slug, title, description, intro and one H2
   pubDate: z.coerce.date(), // goes live on this date (scheduled publishing)
   updatedDate: z.coerce.date().optional(), // only for meaningful edits
   author: z.string().optional(), // empty = rule in authorFor(): Electronics by Santaji Gadepatil, others Editorial Staff

@@ -138,7 +138,7 @@ a.card:hover { border-color: var(--ze-navy); }
 .ad-ph { border: 1px dashed #c5ced9; border-radius: var(--ze-radius); color: var(--ze-ink-2); font-size: 13px; }
 .calc { margin: 1.5em 0; overflow: hidden; }
 .calc-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; padding: 12px 18px; background: var(--ze-paper); border-bottom: 1px solid var(--ze-line); font-size: 14px; }
-.calc iframe { display: block; width: 100%; border: 0; min-height: 420px; }
+.calc iframe { display: block; width: 100%; border: 0; height: 320px; }
 .series-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .progress { flex: 1; min-width: 160px; height: 8px; background: var(--ze-navy-100); border-radius: 4px; }
 .progress > div { height: 8px; background: var(--ze-teal); border-radius: 4px; }
