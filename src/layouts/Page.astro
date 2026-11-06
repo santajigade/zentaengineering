@@ -1,0 +1,17 @@
+---
+// Layout for simple Markdown pages (policies, about).
+import Base from './Base.astro';
+import { SITE } from '../data/site';
+const { frontmatter } = Astro.props;
+---
+<Base title={`${frontmatter.title} | ${SITE.name}`} description={frontmatter.description}>
+  <main class="page">
+    <h1>{frontmatter.title}</h1>
+    {frontmatter.updated && <p class="upd">Last updated {frontmatter.updated}</p>}
+    <slot />
+  </main>
+</Base>
+<style>
+  .page { max-width: var(--ze-column); margin: 0 auto; padding: 48px 20px 72px; }
+  .upd { color: var(--ze-ink-2); font-size: 0.9rem; }
+</style>
