@@ -19,11 +19,11 @@ const resources = (await liveResources()).slice(0, 4);
 const fam = (slug: string) => getDiscipline(slug)!;
 const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 ---
-<Base title={`${SITE.name}: Engineering Articles, Tutorials and Interview Questions`} description={SITE.description}>
+<Base title={`${SITE.name}: Understand the Principles, Explore the Applications, Master Engineering`} description={SITE.description}>
   <section class="page-head" style="border-bottom:1px solid var(--ze-line)">
     <div class="wrap" style="padding-top:64px;padding-bottom:64px;flex-direction:row;align-items:center;gap:48px;flex-wrap:wrap">
       <div style="flex:1 1 520px;display:flex;flex-direction:column;gap:18px">
-        <h1 style="font-size:clamp(2rem,1.4rem + 2.4vw,2.9rem);line-height:1.15">Engineering explained clearly, from first principles to the plant floor.</h1>
+        <h1 style="font-size:clamp(2rem,1.4rem + 2.4vw,2.9rem);line-height:1.15">Understand the Principles.<br />Explore the Applications.<br /><span style="color:var(--ze-teal-700)">Master Engineering.</span></h1>
         <p class="lead">Articles, tutorials, interview preparation and projects across engineering disciplines, for students and working engineers.</p>
         <form class="search-form" role="search" action="/search/" method="get">
           <label for="q" class="sr-only">Search Zenta Engineering</label>
@@ -33,11 +33,10 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:14px"><span class="muted">Popular:</span>{SITE.popularTopics.slice(0, 4).map(([l, h]) => <a class="chip chip-teal" href={h}>{l}</a>)}</div>
       </div>
       <div style="flex:0 1 340px;display:flex;justify-content:center" aria-hidden="true">
-        <svg width="340" height="284" viewBox="0 0 360 300" fill="none" stroke-linejoin="round">
-          <g stroke="#dde2e8"><path d="M0 60H360M0 120H360M0 180H360M0 240H360M60 0V300M120 0V300M180 0V300M240 0V300M300 0V300" /></g>
-          <path d="M60 60H300L60 240H300" stroke="#0b2545" stroke-width="10" />
-          <circle cx="60" cy="60" r="22" fill="#13a89e" /><circle cx="300" cy="240" r="22" fill="#13a89e" />
-          <circle cx="300" cy="60" r="18" fill="#fff" stroke="#0b2545" stroke-width="8" /><circle cx="60" cy="240" r="18" fill="#fff" stroke="#0b2545" stroke-width="8" />
+        <svg width="300" height="300" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="30" fill="#0b2545" stroke="#F5B800" stroke-width="3" />
+          <path d="M18 20H46L18 44H46" fill="none" stroke="#fff" stroke-width="4.5" stroke-linejoin="round" />
+          <circle cx="18" cy="20" r="5" fill="#13a89e" /><circle cx="46" cy="44" r="5" fill="#13a89e" />
         </svg>
       </div>
     </div>

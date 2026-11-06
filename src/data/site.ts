@@ -2,7 +2,7 @@
 export const SITE = {
   name: 'Zenta Engineering',
   url: 'https://zentaengineering.com',
-  tagline: 'Engineering explained clearly, from first principles to the plant floor.',
+  tagline: 'Understand the Principles. Explore the Applications. Master Engineering.',
   description:
     'Articles, tutorials, interview preparation and projects across engineering disciplines, for students and working engineers.',
   email: 'contact@zentaengineering.com', // TODO: confirm contact email
