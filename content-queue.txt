@@ -1,0 +1,176 @@
+# Daily publishing queue. One line per article: discipline|subcategory|title|slug|format|focus keyword|status
+# The daily run takes the first 6 lines with status "todo", writes them, then changes status to the publish date.
+mechanical-engineering|strength-of-materials|Poisson's Ratio Explained with Examples|poissons-ratio|fundamentals|poisson's ratio|todo
+electrical-engineering|circuit-fundamentals|Thevenin's Theorem: Steps and Solved Examples|thevenins-theorem|fundamentals|thevenin's theorem|todo
+electronics-engineering|components|Transistor Working Principle: BJT Basics|transistor-working-principle|working-principle|transistor working principle|todo
+civil-engineering|structural-analysis|Types of Beams and Supports in Structures|types-of-beams|explanation|types of beams|todo
+chemical-engineering|process-fundamentals|Energy Balance in Chemical Processes Explained|energy-balance|fundamentals|energy balance|todo
+computer-science|data-structures|Stack vs Queue: Differences and Uses|stack-vs-queue|comparison|stack vs queue|todo
+automation-robotics|plc|PLC Ladder Logic Basics with Examples|plc-ladder-logic|fundamentals|plc ladder logic|todo
+ai-data-engineering|machine-learning|Overfitting and Underfitting in Machine Learning|overfitting-and-underfitting|fundamentals|overfitting and underfitting|todo
+telecommunication-engineering|network-fundamentals|IP Addressing and Subnetting Explained|ip-addressing-and-subnetting|fundamentals|ip addressing and subnetting|todo
+petroleum-engineering|reservoir-engineering|Reservoir Drive Mechanisms Explained|reservoir-drive-mechanisms|explanation|reservoir drive mechanisms|todo
+renewable-energy|solar-pv|Solar Panel Efficiency: Factors and Calculation|solar-panel-efficiency|fundamentals|solar panel efficiency|todo
+environmental-engineering|water-treatment|Reverse Osmosis Water Treatment Explained|reverse-osmosis|working-principle|reverse osmosis|todo
+mining-engineering|mining-methods|Open Pit Mine Design: Benches, Slopes and Ramps|open-pit-mine-design|explanation|open pit mine design|todo
+manufacturing-engineering|manufacturing-processes|Metal Casting Process: Steps and Types|metal-casting-process|explanation|metal casting process|todo
+materials-engineering|engineering-materials|Mechanical Properties of Materials Explained|mechanical-properties-of-materials|fundamentals|mechanical properties of materials|todo
+safety-engineering|hazard-identification|Job Safety Analysis (JSA): Steps and Example|job-safety-analysis|explanation|job safety analysis|todo
+agricultural-engineering|irrigation-systems|Irrigation Water Requirement Calculation|irrigation-water-requirement|fundamentals|irrigation water requirement|todo
+aerospace-engineering|aerodynamics|Drag Force on Aircraft: Types and Equation|drag-force-on-aircraft|fundamentals|drag force|todo
+biomedical-engineering|biomedical-sensors|Pulse Oximeter Working Principle|pulse-oximeter-working-principle|working-principle|pulse oximeter working principle|todo
+marine-engineering|naval-architecture|Ship Resistance and Powering Basics|ship-resistance-and-powering|fundamentals|ship resistance|todo
+mechanical-engineering|machine-design|Gear Types and Their Applications|types-of-gears|explanation|types of gears|todo
+electrical-engineering|electrical-machines|DC Motor Working Principle and Types|dc-motor-working-principle|working-principle|dc motor working principle|todo
+electronics-engineering|analog-electronics|Active and Passive Filters Explained|active-vs-passive-filters|comparison|active vs passive filters|todo
+civil-engineering|rcc-design|Types of Foundations and When to Use Them|types-of-foundations|explanation|types of foundations|todo
+chemical-engineering|mechanical-operations|Filtration in Chemical Engineering: Types and Equipment|filtration-equipment|equipment|filtration equipment|todo
+computer-science|algorithms|Sorting Algorithms Compared with Examples|sorting-algorithms|comparison|sorting algorithms|todo
+automation-robotics|scada-hmi|HMI Design Best Practices for Operators|hmi-design-best-practices|explanation|hmi design|todo
+ai-data-engineering|deep-learning|Convolutional Neural Networks (CNN) Explained|convolutional-neural-networks|fundamentals|convolutional neural networks|todo
+telecommunication-engineering|routing-and-switching|VLAN Explained: Types and Configuration Basics|vlan-explained|explanation|vlan|todo
+petroleum-engineering|drilling|Drilling Fluid (Mud) Functions and Types|drilling-fluid-types|explanation|drilling fluid|todo
+renewable-energy|wind-energy|Wind Turbine Power Curve and Capacity Factor|wind-turbine-power-curve|fundamentals|wind turbine power curve|todo
+environmental-engineering|wastewater-treatment|Sewage Treatment Plant Process Explained|sewage-treatment-plant-process|explanation|sewage treatment plant|todo
+mining-engineering|drilling-and-blasting|Explosives Used in Mining: Types and Properties|mining-explosives-types|explanation|mining explosives|todo
+manufacturing-engineering|cnc|CNC Turning vs Milling: Differences|cnc-turning-vs-milling|comparison|cnc turning vs milling|todo
+materials-engineering|metallurgy|Types of Steel and Their Uses|types-of-steel|explanation|types of steel|todo
+safety-engineering|risk-assessment|Layer of Protection Analysis (LOPA) Explained|lopa-explained|explanation|lopa|todo
+agricultural-engineering|farm-machinery|Combine Harvester Working Principle|combine-harvester-working-principle|working-principle|combine harvester|todo
+aerospace-engineering|aircraft-structures|Aircraft Materials: Aluminium, Titanium and Composites|aircraft-materials|explanation|aircraft materials|todo
+biomedical-engineering|medical-imaging|How an MRI Scanner Works|how-mri-works|working-principle|how mri works|todo
+marine-engineering|marine-propulsion|Marine Propeller Types: FPP vs CPP|marine-propeller-types|comparison|marine propeller types|todo
+mechanical-engineering|thermodynamics|Carnot Cycle: Efficiency and PV Diagram|carnot-cycle|fundamentals|carnot cycle|todo
+electrical-engineering|transformers|Transformer Losses and Efficiency Explained|transformer-losses-and-efficiency|fundamentals|transformer losses|todo
+electronics-engineering|digital-electronics|Flip-Flops Explained: SR, JK, D and T|flip-flops-explained|fundamentals|flip-flops|todo
+civil-engineering|steel-structures|Bolted vs Welded Steel Connections|bolted-vs-welded-connections|comparison|bolted vs welded connections|todo
+chemical-engineering|heat-exchangers|Shell and Tube Heat Exchanger Design Basics|shell-and-tube-heat-exchanger-design|fundamentals|shell and tube heat exchanger|todo
+computer-science|operating-systems|CPU Scheduling Algorithms Explained|cpu-scheduling-algorithms|explanation|cpu scheduling algorithms|todo
+automation-robotics|dcs|PLC vs DCS: Differences and How to Choose|plc-vs-dcs|comparison|plc vs dcs|todo
+ai-data-engineering|computer-vision|Image Preprocessing Techniques for Computer Vision|image-preprocessing-techniques|explanation|image preprocessing|todo
+telecommunication-engineering|fiber-optics|Optical Fiber Splicing: Fusion vs Mechanical|fiber-splicing-fusion-vs-mechanical|comparison|fiber splicing|todo
+petroleum-engineering|well-logging|Well Completion Types Explained|well-completion-types|explanation|well completion|todo
+renewable-energy|energy-storage|Lithium-Ion vs Lead Acid Batteries Compared|lithium-ion-vs-lead-acid|comparison|lithium-ion vs lead acid|todo
+environmental-engineering|air-pollution-control|Wet Scrubber Working Principle and Types|wet-scrubber-working-principle|working-principle|wet scrubber|todo
+mining-engineering|mine-ventilation|Mine Gases: Types, Hazards and Detection|mine-gases|explanation|mine gases|todo
+manufacturing-engineering|additive-manufacturing|Metal 3D Printing: Powder Bed Fusion Explained|metal-3d-printing|working-principle|metal 3d printing|todo
+materials-engineering|heat-treatment|Case Hardening Methods: Carburizing and Nitriding|case-hardening-methods|explanation|case hardening|todo
+safety-engineering|fmea|Fault Tree Analysis (FTA) Explained|fault-tree-analysis|explanation|fault tree analysis|todo
+agricultural-engineering|precision-agriculture|Soil Moisture Sensors: Types and Working|soil-moisture-sensors|working-principle|soil moisture sensors|todo
+aerospace-engineering|propulsion|Rocket Propulsion Basics and Thrust Equation|rocket-propulsion-basics|fundamentals|rocket propulsion|todo
+biomedical-engineering|medical-devices|Infusion Pump Working Principle and Types|infusion-pump-working-principle|working-principle|infusion pump|todo
+marine-engineering|auxiliary-systems|Marine Boiler Types and Working|marine-boiler-types|explanation|marine boiler|todo
+mechanical-engineering|fluid-mechanics|Reynolds Number: Laminar and Turbulent Flow|reynolds-number|fundamentals|reynolds number|todo
+electrical-engineering|power-systems|Power Transmission Line Losses Explained|transmission-line-losses|fundamentals|transmission line losses|todo
+electronics-engineering|power-electronics|Boost Converter Working Principle and Design|boost-converter|working-principle|boost converter|todo
+civil-engineering|concrete-technology|Concrete Mix Design Steps Explained|concrete-mix-design|fundamentals|concrete mix design|todo
+chemical-engineering|mass-transfer|Absorption vs Adsorption: Differences|absorption-vs-adsorption|comparison|absorption vs adsorption|todo
+computer-science|databases|SQL vs NoSQL Databases Compared|sql-vs-nosql|comparison|sql vs nosql|todo
+automation-robotics|industrial-robotics|Robot End Effectors: Grippers and Tools|robot-end-effectors|explanation|robot end effectors|todo
+ai-data-engineering|nlp|Sentiment Analysis Explained: Methods and Uses|sentiment-analysis|explanation|sentiment analysis|todo
+telecommunication-engineering|cellular-networks|4G vs 5G: Key Differences Explained|4g-vs-5g|comparison|4g vs 5g|todo
+petroleum-engineering|production-engineering|Oil and Gas Separators: Types and Working|oil-gas-separators|equipment|oil and gas separators|todo
+renewable-energy|hydrogen-fuel-cells|Fuel Cell Working Principle and Types|fuel-cell-working-principle|working-principle|fuel cell working principle|todo
+environmental-engineering|waste-management|Landfill Design: Liners, Leachate and Gas|landfill-design|explanation|landfill design|todo
+mining-engineering|rock-mechanics|Rock Bolting and Ground Support Methods|rock-bolting-ground-support|explanation|rock bolting|todo
+manufacturing-engineering|lean-manufacturing|5S Methodology Explained with Examples|5s-methodology|explanation|5s methodology|todo
+materials-engineering|welding|Welding Defects: Causes and Remedies|welding-defects|troubleshooting|welding defects|todo
+safety-engineering|functional-safety|Safety Instrumented System (SIS) Basics|safety-instrumented-system|fundamentals|safety instrumented system|todo
+agricultural-engineering|agricultural-automation|Greenhouse Climate Control Systems|greenhouse-climate-control|application|greenhouse climate control|todo
+aerospace-engineering|flight-mechanics|Aircraft Stability: Static and Dynamic|aircraft-stability|fundamentals|aircraft stability|todo
+biomedical-engineering|biomaterials|Hydrogels in Biomedical Engineering|hydrogels-biomedical-applications|explanation|hydrogels|todo
+marine-engineering|ship-electrical-systems|Marine Shore Power Connection Explained|marine-shore-power|explanation|shore power|todo
+mechanical-engineering|heat-transfer|Fourier's Law of Heat Conduction Explained|fouriers-law-of-heat-conduction|fundamentals|fourier's law|todo
+electrical-engineering|switchgear|MCB vs MCCB vs ACB: Differences|mcb-vs-mccb-vs-acb|comparison|mcb vs mccb vs acb|todo
+electronics-engineering|pcb-design|PCB Grounding Techniques Explained|pcb-grounding-techniques|explanation|pcb grounding|todo
+civil-engineering|construction-materials|Types of Bricks and Their Properties|types-of-bricks|explanation|types of bricks|todo
+chemical-engineering|reaction-engineering|Catalysts in Chemical Reactions: Types and Uses|catalyst-types|explanation|catalyst types|todo
+computer-science|computer-architecture|Cache Memory Explained: Levels and Mapping|cache-memory|fundamentals|cache memory|todo
+automation-robotics|motion-control|PID Controller Explained with Tuning Methods|pid-controller|fundamentals|pid controller|todo
+ai-data-engineering|generative-ai|Retrieval Augmented Generation (RAG) Explained|retrieval-augmented-generation|explanation|retrieval augmented generation|todo
+telecommunication-engineering|wireless|Bluetooth vs Wi-Fi vs Zigbee Compared|bluetooth-vs-wifi-vs-zigbee|comparison|bluetooth vs wifi vs zigbee|todo
+petroleum-engineering|gas-processing-lng|Natural Gas Dehydration: Glycol and Mol Sieve|natural-gas-dehydration|explanation|natural gas dehydration|todo
+renewable-energy|inverters|MPPT Explained: Maximum Power Point Tracking|mppt-explained|fundamentals|mppt|todo
+environmental-engineering|eia|Air Quality Index (AQI): Calculation and Pollutants|air-quality-index|fundamentals|air quality index|todo
+mining-engineering|mineral-processing|Crushing and Grinding Circuits in Mineral Processing|crushing-and-grinding-circuits|explanation|crushing and grinding|todo
+manufacturing-engineering|quality|Quality Control vs Quality Assurance|quality-control-vs-quality-assurance|comparison|quality control vs quality assurance|todo
+materials-engineering|corrosion|Cathodic Protection: Sacrificial vs Impressed Current|cathodic-protection|comparison|cathodic protection|todo
+safety-engineering|fire-detection|Gas Detectors: Types and Working Principles|gas-detector-types|working-principle|gas detectors|todo
+agricultural-engineering|post-harvest|Grain Storage Structures and Silos|grain-storage-structures|explanation|grain storage|todo
+aerospace-engineering|avionics|Instrument Landing System (ILS) Explained|instrument-landing-system|working-principle|instrument landing system|todo
+biomedical-engineering|prosthetics|Exoskeletons in Rehabilitation Engineering|rehabilitation-exoskeletons|explanation|exoskeletons|todo
+marine-engineering|offshore-structures|Mooring Systems for Floating Structures|mooring-systems|explanation|mooring systems|todo
+mechanical-engineering|pumps-compressors-turbines|Pump Cavitation and NPSH Explained|pump-cavitation-and-npsh|troubleshooting|pump cavitation|todo
+electrical-engineering|protection-relays|Differential Protection of Transformers|transformer-differential-protection|working-principle|differential protection|todo
+electronics-engineering|embedded-systems|UART vs SPI vs I2C Communication Compared|uart-vs-spi-vs-i2c|comparison|uart vs spi vs i2c|todo
+civil-engineering|geotechnical|Soil Compaction Tests: Proctor Test Explained|proctor-compaction-test|explanation|proctor compaction test|todo
+chemical-engineering|process-equipment|Storage Tank Types in Process Plants|storage-tank-types|equipment|storage tank types|todo
+computer-science|web-development|Frontend vs Backend Development Explained|frontend-vs-backend|comparison|frontend vs backend|todo
+automation-robotics|industrial-networks|PROFINET vs EtherNet/IP Compared|profinet-vs-ethernet-ip|comparison|profinet vs ethernet/ip|todo
+ai-data-engineering|data-science|Exploratory Data Analysis (EDA) Steps|exploratory-data-analysis|explanation|exploratory data analysis|todo
+telecommunication-engineering|satellite-communication|Satellite Link Budget Calculation Explained|satellite-link-budget|fundamentals|satellite link budget|todo
+petroleum-engineering|refining|Fluid Catalytic Cracking (FCC) Process|fluid-catalytic-cracking|working-principle|fluid catalytic cracking|todo
+renewable-energy|ev-charging|EV Battery Management System (BMS) Explained|ev-battery-management-system|fundamentals|battery management system|todo
+environmental-engineering|emissions-compliance|NOx Control: SCR and SNCR Explained|nox-control-scr-sncr|working-principle|nox control|todo
+mining-engineering|exploration|Ore Reserve vs Mineral Resource Explained|ore-reserve-vs-mineral-resource|comparison|ore reserve vs mineral resource|todo
+manufacturing-engineering|spc|Process Capability Cp and Cpk Explained|process-capability-cp-cpk|fundamentals|process capability|todo
+materials-engineering|polymers-and-composites|Fiber Reinforced Composites: Types and Uses|fiber-reinforced-composites|explanation|fiber reinforced composites|todo
+safety-engineering|fire-suppression|Fire Sprinkler System Types Explained|fire-sprinkler-system-types|explanation|fire sprinkler system|todo
+agricultural-engineering|food-processing|Food Drying and Dehydration Methods|food-drying-methods|explanation|food drying|todo
+aerospace-engineering|spacecraft|Orbital Mechanics Basics: Kepler's Laws|orbital-mechanics-basics|fundamentals|orbital mechanics|todo
+biomedical-engineering|bioprocess-engineering|Sterilization Methods for Medical Devices|sterilization-methods|explanation|sterilization methods|todo
+marine-engineering|marine-safety|MARPOL Annexes Explained|marpol-annexes|explanation|marpol annexes|todo
+mechanical-engineering|hvac-refrigeration|HVAC Load Calculation Basics|hvac-load-calculation|fundamentals|hvac load calculation|todo
+electrical-engineering|earthing|Lightning Protection Systems Explained|lightning-protection-system|explanation|lightning protection system|todo
+electronics-engineering|vlsi|FPGA vs ASIC: Differences Explained|fpga-vs-asic|comparison|fpga vs asic|todo
+civil-engineering|surveying|Total Station Surveying Explained|total-station-surveying|working-principle|total station|todo
+chemical-engineering|pfd-pid|P&ID Symbols and Line Designations Explained|pid-symbols|explanation|p&id symbols|todo
+computer-science|apis-backend|GraphQL vs REST APIs Compared|graphql-vs-rest|comparison|graphql vs rest|todo
+automation-robotics|machine-vision|Industrial Camera Types: Area Scan vs Line Scan|area-scan-vs-line-scan-camera|comparison|area scan vs line scan|todo
+ai-data-engineering|data-pipelines|Data Warehouse vs Data Lake Compared|data-warehouse-vs-data-lake|comparison|data warehouse vs data lake|todo
+telecommunication-engineering|network-security|VPN Explained: Types and How It Works|vpn-explained|explanation|vpn|todo
+petroleum-engineering|pipelines|Pipeline Leak Detection Methods|pipeline-leak-detection|explanation|pipeline leak detection|todo
+renewable-energy|microgrids|Grid-Tied vs Off-Grid vs Hybrid Solar Systems|grid-tied-vs-off-grid-solar|comparison|grid-tied vs off-grid|todo
+environmental-engineering|recycling|E-Waste Recycling Process Explained|e-waste-recycling|explanation|e-waste recycling|todo
+mining-engineering|mine-safety|Mine Dust Control Methods|mine-dust-control|explanation|mine dust control|todo
+manufacturing-engineering|production-planning|MRP vs ERP: Differences Explained|mrp-vs-erp|comparison|mrp vs erp|todo
+materials-engineering|mechanical-testing|Hardness Testing: Rockwell, Brinell and Vickers|hardness-testing-methods|comparison|hardness testing|todo
+safety-engineering|reliability-engineering|Weibull Analysis Explained for Engineers|weibull-analysis|fundamentals|weibull analysis|todo
+agricultural-engineering|cold-chain|Refrigerated Transport (Reefer) Basics|refrigerated-transport|explanation|refrigerated transport|todo
+aerospace-engineering|uav|Drone Batteries: LiPo Types and Flight Time|drone-batteries|fundamentals|drone batteries|todo
+biomedical-engineering|laboratory-instrumentation|Centrifuge Working Principle and RCF|centrifuge-working-principle|working-principle|centrifuge working principle|todo
+marine-engineering|naval-architecture|Ship Hull Form and Coefficients Explained|ship-hull-coefficients|fundamentals|ship hull coefficients|todo
+mechanical-engineering|tribology|Bearing Types and Selection Guide|types-of-bearings|explanation|types of bearings|todo
+electrical-engineering|power-quality|Harmonics in Power Systems: Causes and Effects|harmonics-in-power-systems|fundamentals|harmonics in power systems|todo
+electronics-engineering|signal-processing|Fourier Transform Explained for Engineers|fourier-transform|fundamentals|fourier transform|todo
+civil-engineering|transportation|Highway Geometric Design Basics|highway-geometric-design|fundamentals|highway geometric design|todo
+chemical-engineering|process-industries|Sulphuric Acid Manufacturing: Contact Process|contact-process-sulphuric-acid|explanation|contact process|todo
+computer-science|software-design|Design Patterns Explained with Examples|design-patterns|explanation|design patterns|todo
+automation-robotics|mechatronics|Sensors and Actuators in Mechatronics|sensors-and-actuators|fundamentals|sensors and actuators|todo
+ai-data-engineering|big-data|Apache Spark Explained for Beginners|apache-spark-explained|explanation|apache spark|todo
+telecommunication-engineering|data-transmission|Multiplexing Techniques: FDM, TDM and WDM|multiplexing-techniques|fundamentals|multiplexing techniques|todo
+petroleum-engineering|offshore|Subsea Production Systems Explained|subsea-production-systems|explanation|subsea production systems|todo
+renewable-energy|energy-management|Demand Side Management and Load Shifting|demand-side-management|explanation|demand side management|todo
+environmental-engineering|sustainability|Carbon Footprint Calculation for Engineers|carbon-footprint-calculation|fundamentals|carbon footprint calculation|todo
+mining-engineering|mining-methods|Underground Mine Development: Shafts and Declines|underground-mine-development|explanation|underground mine development|todo
+manufacturing-engineering|industrial-engineering|Line Balancing Explained with Example|line-balancing|fundamentals|line balancing|todo
+materials-engineering|ndt|Ultrasonic Testing Explained: Principles and Uses|ultrasonic-testing|working-principle|ultrasonic testing|todo
+safety-engineering|root-cause-analysis|Incident Investigation Process Steps|incident-investigation-process|explanation|incident investigation|todo
+agricultural-engineering|food-safety|Food Packaging Materials and Methods|food-packaging-materials|explanation|food packaging|todo
+aerospace-engineering|aerodynamics|Mach Number and Compressibility Explained|mach-number|fundamentals|mach number|todo
+biomedical-engineering|biomedical-sensors|Blood Pressure Measurement Methods|blood-pressure-measurement|explanation|blood pressure measurement|todo
+marine-engineering|marine-propulsion|Marine Fuel Oil System Explained|marine-fuel-oil-system|explanation|marine fuel oil system|todo
+mechanical-engineering|cad-cae-fea|GD&T Basics: Symbols and Tolerances|gdt-basics|fundamentals|gd&t|todo
+electrical-engineering|wiring-installation|Residual Current Device (RCD) Working Principle|rcd-working-principle|working-principle|rcd working principle|todo
+electrical-engineering|high-voltage|Partial Discharge Testing Explained|partial-discharge-testing|explanation|partial discharge|todo
+electronics-engineering|rf-microwave-antennas|Impedance Matching in RF Circuits|impedance-matching|fundamentals|impedance matching|todo
+civil-engineering|bridge-engineering|Bridge Bearings: Types and Functions|bridge-bearings|explanation|bridge bearings|todo
+civil-engineering|estimation-construction-management|CPM vs PERT in Project Scheduling|cpm-vs-pert|comparison|cpm vs pert|todo
+chemical-engineering|process-optimization|Process Simulation Software Basics|process-simulation-basics|fundamentals|process simulation|todo
+computer-science|software-testing|Unit Testing Best Practices|unit-testing-best-practices|explanation|unit testing|todo
+computer-science|programming-languages|Python vs C++ for Engineers|python-vs-cpp|comparison|python vs c++|todo
+automation-robotics|industry-4-0|IIoT Explained: Architecture and Use Cases|iiot-explained|explanation|iiot|todo
+ai-data-engineering|industrial-ai|Anomaly Detection in Industrial Sensor Data|anomaly-detection-industrial|application|anomaly detection|todo
+manufacturing-engineering|supply-chain|ABC Analysis in Inventory Management|abc-analysis-inventory|fundamentals|abc analysis|todo
+manufacturing-engineering|maintenance-engineering|Total Productive Maintenance (TPM) Pillars|tpm-pillars|explanation|total productive maintenance|todo
+materials-engineering|failure-analysis|Creep in Materials: Stages and Prevention|creep-in-materials|fundamentals|creep|todo
