@@ -1,0 +1,151 @@
+---
+title: "Medical Imaging Modalities: X-Ray, CT, MRI and Ultrasound"
+description: "Medical imaging modalities compared: X-ray, CT, MRI, ultrasound and nuclear imaging, physical principles, uses, radiation dose, resolution, cost and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: biomedical-engineering
+subcategory: medical-imaging
+focusKeyword: "medical imaging modalities"
+image: { src: /images/featured/medical-imaging-modalities.webp, alt: "Medical Imaging Modalities: X-Ray, CT, MRI and Ultrasound: featured diagram" }
+format: comparison
+pillar: true
+math: true
+tags: [medical-imaging, x-ray, ct, mri, ultrasound]
+faq:
+  - q: "Which medical imaging modalities use ionising radiation?"
+    a: "X-ray radiography, fluoroscopy, mammography and CT use X-rays, and nuclear medicine (SPECT, PET) uses radioactive tracers emitting gamma rays. All involve ionising radiation and are used when the benefit justifies the dose. MRI and ultrasound do not use ionising radiation."
+  - q: "Why can't some patients have an MRI?"
+    a: "The strong magnetic field can move or heat some metal objects and interfere with electronic devices. Certain older pacemakers, cochlear implants, metal fragments in the eye and some aneurysm clips are contraindicated. Many modern implants are MR conditional, meaning they are safe under specified conditions, so patients are screened before every scan."
+  - q: "Why is ultrasound used in pregnancy?"
+    a: "Ultrasound uses sound waves, not ionising radiation, is portable, relatively inexpensive and gives real time images, including movement and blood flow with Doppler. At diagnostic intensities it has an excellent safety record, which makes it the first choice for imaging the fetus."
+references:
+  - text: "J. T. Bushberg, J. A. Seibert, E. M. Leidholdt and J. M. Boone, The Essential Physics of Medical Imaging, 4th ed., Wolters Kluwer"
+  - text: "J. L. Prince and J. M. Links, Medical Imaging Signals and Systems, 2nd ed., Pearson"
+  - text: "ICRP Publication 103, The 2007 Recommendations of the International Commission on Radiological Protection"
+  - text: "IEC 60601-2-33, Particular requirements for magnetic resonance equipment for medical diagnosis"
+  - text: "A. Webb, Introduction to Biomedical Imaging, 2nd ed., Wiley-IEEE Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The main **medical imaging modalities** are **X-ray radiography**, which shows dense structures such as bone by differential X-ray absorption; **computed tomography (CT)**, which rotates an X-ray source to build cross-sectional 3D images; **magnetic resonance imaging (MRI)**, which uses strong magnetic fields and radio waves to image soft tissue with excellent contrast and no ionising radiation; **ultrasound**, which uses high frequency sound echoes for real time, portable imaging; and **nuclear medicine (SPECT and PET)**, which images function using radioactive tracers. Each differs in physics, contrast, resolution, speed, safety and cost.
+
+</Key>
+
+Medical imaging lets clinicians see inside the body without surgery, diagnose disease earlier, guide procedures and monitor treatment. Choosing the right modality depends on what needs to be seen (bone, soft tissue, blood flow, metabolism), how quickly, at what risk and cost. Biomedical engineers design, maintain and optimise these complex systems.
+
+## X-ray radiography
+
+X-rays are produced in an **X-ray tube** when electrons accelerated by tens of kilovolts strike a tungsten target. As X-rays pass through the body, they are absorbed more by dense, high atomic number tissues (bone, contrast agents) than by soft tissue and air. The transmitted intensity follows exponential attenuation:
+
+$$
+I = I_0\,e^{-\mu x}
+$$
+
+where μ is the linear attenuation coefficient and x the thickness. A digital detector records the transmitted pattern as a 2D projection image.
+
+- **Uses:** fractures, chest imaging, dental imaging, mammography, fluoroscopy for real time guidance.
+- **Strengths:** fast, cheap, widely available, excellent for bone and lungs.
+- **Limits:** overlapping structures in 2D, poor soft tissue contrast, ionising radiation (low dose for a chest X-ray, about 0.02 to 0.1 mSv).
+
+## Computed tomography (CT)
+
+An X-ray tube and detector array rotate around the patient while the table moves (helical scanning). Hundreds of projections from different angles are mathematically reconstructed, using filtered back projection or iterative methods, into cross-sectional slices and 3D volumes. Pixel values are expressed in **Hounsfield units** (water = 0, air = −1000, bone about +1000).
+
+- **Uses:** trauma, stroke, cancer staging, chest, abdomen, angiography, guiding biopsies.
+- **Strengths:** fast (whole body in seconds), 3D, good for bone, lungs and bleeding.
+- **Limits:** higher radiation dose (a few to about 10 mSv), soft tissue contrast lower than MRI, iodine contrast agent risks.
+
+## Magnetic resonance imaging (MRI)
+
+The patient lies in a strong static magnetic field, typically **1.5 or 3 tesla**, which aligns hydrogen nuclei (protons) in water and fat. Radiofrequency pulses at the **Larmor frequency** tip the protons; as they relax, they emit signals detected by receiver coils. **Gradient coils** encode position, and Fourier transforms reconstruct images. Different pulse sequences give **T1, T2, diffusion** and other contrasts.
+
+$$
+f = \gamma\,B_0
+$$
+
+where γ for hydrogen is about 42.58 MHz per tesla.
+
+- **Uses:** brain, spinal cord, joints, muscles, liver, prostate, heart, tumours.
+- **Strengths:** excellent soft tissue contrast, no ionising radiation, functional imaging.
+- **Limits:** slow (tens of minutes), expensive, noisy, claustrophobic for some, contraindicated for some implants; strict safety zones because the magnet is always on.
+
+## Ultrasound
+
+A **transducer** with piezoelectric elements sends short pulses of high frequency sound (typically 2 to 15 MHz) into the body and receives echoes from tissue boundaries. The time delay gives depth (using about 1540 m/s in soft tissue), and echo strength gives brightness (B-mode). **Doppler** ultrasound measures blood flow velocity from the frequency shift of echoes from moving blood cells. Higher frequencies give better resolution but less penetration.
+
+- **Uses:** obstetrics, abdomen, heart (echocardiography), blood vessels, guiding needles, point of care.
+- **Strengths:** real time, portable, no ionising radiation, low cost.
+- **Limits:** cannot see through bone or gas, operator dependent, limited depth at high frequency.
+
+## Nuclear medicine: SPECT and PET
+
+A radioactive tracer is injected, swallowed or inhaled and accumulates in tissues according to their function. **Gamma cameras** (planar and SPECT) detect single gamma photons; **PET** detects pairs of 511 keV photons from positron annihilation, often using fluorodeoxyglucose (FDG) to show glucose metabolism. PET is usually combined with CT (PET/CT) or MRI for anatomical reference.
+
+- **Uses:** cancer staging, heart perfusion, bone scans, thyroid, brain disorders.
+- **Strengths:** functional and molecular information.
+- **Limits:** lower resolution, radiation dose, tracer production logistics.
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Four schematics: X-ray tube sending beam through patient to detector; CT with source and detector rotating around patient in a ring gantry; MRI with patient inside a cylindrical magnet with RF coil; ultrasound probe on skin sending pulses and receiving echoes from an organ">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="75" y="20">X-ray</text><text x="225" y="20">CT</text><text x="375" y="20">MRI</text><text x="525" y="20">Ultrasound</text></g>
+<rect x="55" y="35" width="40" height="22" rx="4" fill="#ffe9e7" stroke="#0b2545" stroke-width="1.5" />
+<path d="M75 57L45 210H105Z" fill="#f5b800" fill-opacity="0.2" stroke="#f5b800" stroke-width="1" />
+<ellipse cx="75" cy="150" rx="30" ry="18" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="35" y="215" width="80" height="12" fill="#0b2545" />
+<circle cx="225" cy="140" r="70" fill="none" stroke="#0b2545" stroke-width="8" stroke-opacity="0.3" />
+<ellipse cx="225" cy="140" rx="30" ry="18" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="210" y="62" width="30" height="16" rx="3" fill="#ffe9e7" stroke="#0b2545" stroke-width="1.5" />
+<path d="M190 205H260" stroke="#0b2545" stroke-width="6" />
+<path d="M225 78L195 200M225 78L255 200" stroke="#f5b800" stroke-width="1" />
+<path d="M250 50A90 90 0 0 1 300 100" stroke="#13a89e" stroke-width="2" fill="none" /><path d="M296 92l5 10 3-11z" fill="#13a89e" />
+<rect x="320" y="70" width="110" height="140" rx="20" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<rect x="340" y="120" width="70" height="40" rx="15" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<ellipse cx="375" cy="140" rx="25" ry="14" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<path d="M480 60H570" stroke="#0b2545" stroke-width="2" />
+<rect x="505" y="40" width="40" height="22" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#13a89e" stroke-width="1.5" fill="none"><path d="M510 80Q525 74 540 80" /><path d="M505 100Q525 92 545 100" /><path d="M500 120Q525 110 550 120" /></g>
+<ellipse cx="525" cy="160" rx="35" ry="20" fill="#ffe9e7" stroke="#0b2545" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545" text-anchor="middle">
+<text x="75" y="246">Projection image</text><text x="75" y="260">ionising</text>
+<text x="225" y="246">Rotating source and</text><text x="225" y="260">detector, 3D slices</text>
+<text x="375" y="246">Magnet + RF coils</text><text x="375" y="260">no ionising radiation</text>
+<text x="525" y="246">Sound echoes</text><text x="525" y="260">real time, portable</text>
+<text x="525" y="35">Probe</text><text x="375" y="98">1.5 to 3 T</text>
+</g>
+</svg>
+<figcaption>Simplified principles of four major imaging modalities.</figcaption>
+</figure>
+
+## Medical imaging modalities compared
+
+| Feature | X-ray | CT | MRI | Ultrasound | PET |
+| --- | --- | --- | --- | --- | --- |
+| Physical basis | X-ray attenuation | X-ray attenuation, tomography | Nuclear magnetic resonance | Acoustic reflection | Positron emitting tracer |
+| Ionising radiation | Yes, low | Yes, moderate | No | No | Yes |
+| Best for | Bone, chest | Trauma, bone, lungs, bleeding | Soft tissue, brain, joints | Fetus, heart, vessels, abdomen | Metabolism, cancer |
+| Typical scan time | Seconds | Seconds | 15 to 60 min | Minutes, real time | 20 to 40 min |
+| Spatial resolution | High (about 0.1 mm) | About 0.5 mm | About 1 mm | 0.2 to 2 mm | 4 to 6 mm |
+| Relative cost | Low | Medium | High | Low | High |
+| Portability | Mobile units | Fixed | Fixed | Handheld possible | Fixed |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An ultrasound echo from the back wall of a structure returns 104 µs after the pulse. A 3 T MRI scanner images hydrogen.</dd>
+<dt>Find</dt><dd>The depth of the reflecting boundary and the MRI Larmor frequency.</dd>
+<dt>Assumptions</dt><dd>Speed of sound in soft tissue 1540 m/s; γ = 42.58 MHz/T for hydrogen.</dd>
+<dt>Solution</dt><dd>Depth = (1540 × 104 × 10⁻⁶) ÷ 2 = 0.080 m = 8.0 cm<br />Larmor frequency = 42.58 × 3 = 127.7 MHz</dd>
+<dt>Answer</dt><dd><strong>The reflecting boundary is about 8 cm deep; the 3 T scanner operates at about 128 MHz</strong></dd>
+<dt>Limitations</dt><dd>Speed of sound varies between tissues (fat is slower, muscle faster), causing small depth errors.</dd>
+</dl>
+</Example>
+
+## Image quality basics
+
+All modalities trade off three things: spatial resolution (smallest detail), contrast (difference between tissues) and noise. Reducing dose or scan time usually raises noise, so engineers develop better detectors and reconstruction to keep images diagnostic at lower dose.
+
+## Choosing among medical imaging modalities
+
+Clinicians follow appropriateness guidelines: start with the safest, cheapest test that answers the question, such as X-ray for a suspected fracture or ultrasound for gallstones, and escalate to CT or MRI when needed. Radiation protection follows the **ALARA** principle (as low as reasonably achievable). Engineers contribute through detector physics, image reconstruction, AI image analysis ([classification, detection and segmentation](/ai-data-engineering/classification-vs-detection-vs-segmentation/)), quality assurance, equipment safety under [medical device regulation](/biomedical-engineering/medical-device-classification/), and maintenance. Together, these medical imaging modalities form the backbone of modern diagnosis.

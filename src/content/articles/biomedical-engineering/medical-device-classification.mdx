@@ -1,0 +1,129 @@
+---
+title: "Medical Device Classification and Regulation Basics"
+description: "Medical device classification explained: risk classes under EU MDR, US FDA and India CDSCO, classification rules, ISO 13485, ISO 14971 and examples."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: biomedical-engineering
+subcategory: medical-devices
+focusKeyword: "medical device classification"
+image: { src: /images/featured/medical-device-classification.webp, alt: "Medical Device Classification and Regulation Basics: featured diagram" }
+format: explanation
+pillar: true
+math: false
+tags: [medical-devices, regulation, mdr, fda, iso-13485]
+faq:
+  - q: "What decides a medical device's risk class?"
+    a: "Mainly the intended purpose and the risk to patients and users: how long the device is in contact with the body, whether it is invasive or implantable, whether it is active (powered), which organs it affects (for example the heart or central nervous system), and whether it delivers energy or medicines. Regulations set out rules that map these features to classes."
+  - q: "Is software a medical device?"
+    a: "Software is a medical device (SaMD) when its intended purpose is medical, such as diagnosing, monitoring or deciding treatment, without being part of hardware. For example, an app that analyses ECG data to detect atrial fibrillation is regulated, while a general fitness tracker app usually is not. Under the EU MDR, Rule 11 often places such software in Class IIa or higher."
+  - q: "What is ISO 13485?"
+    a: "ISO 13485 is the international quality management system standard for medical device manufacturers. It covers design control, risk management, supplier control, production, traceability, complaint handling and corrective actions. Certification to ISO 13485 is a central part of regulatory compliance in the EU, Canada, India and many other markets, and the US FDA's QMSR aligns with it."
+references:
+  - text: "Regulation (EU) 2017/745 on medical devices (MDR), Annex VIII Classification Rules"
+  - text: "U.S. FDA, 21 CFR Parts 860 to 892 Device Classification, and 21 CFR Part 820 Quality Management System Regulation"
+  - text: "Medical Devices Rules, 2017, Central Drugs Standard Control Organisation (CDSCO), India"
+  - text: "ISO 13485:2016, Medical devices: Quality management systems, Requirements for regulatory purposes"
+  - text: "ISO 14971:2019, Medical devices: Application of risk management to medical devices"
+  - text: "IMDRF, Principles of Medical Devices Classification, GHTF/SG1/N77:2012"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Medical device classification** groups devices by **risk** to patients and users, which decides how strictly they are regulated before and after sale. The **EU MDR** uses **Class I, IIa, IIb and III**; the **US FDA** uses **Class I, II and III**; and **India's Medical Devices Rules 2017** use **Class A, B, C and D**, all rising in risk. Classification depends on **intended purpose**, **duration of contact**, **invasiveness**, whether the device is **active** or **implantable**, and the **body part** affected. Higher classes need more evidence, such as clinical data and third party review by a **notified body** or regulator, under quality systems such as **ISO 13485** and risk management to **ISO 14971**.
+
+</Key>
+
+Medical devices range from tongue depressors and bandages to pacemakers, MRI scanners, insulin pumps and diagnostic software. Regulating them all identically would either leave high risk devices under-controlled or bury simple products in paperwork. Risk based classification solves this, and it is the first regulatory decision any device developer must make, because it determines the whole route to market.
+
+## What counts as a medical device
+
+A medical device is any instrument, apparatus, software, implant, material or other article intended by the manufacturer for a medical purpose, such as diagnosis, prevention, monitoring, treatment or alleviation of disease or injury, or for investigating or replacing anatomy or a physiological process, and which does not achieve its main effect by pharmacological, immunological or metabolic means (which would make it a drug). The **intended purpose**, as stated in labelling and marketing, is central.
+
+## Classification systems compared
+
+<figure>
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Risk ladder comparing classification systems: from low to high risk, EU classes I, IIa, IIb, III; US FDA classes I, II, III; India classes A, B, C, D; examples at each level: bandages and stethoscopes, hearing aids and infusion sets, ventilators and bone screws, pacemakers and heart valves">
+<path d="M40 240L570 240" stroke="#0b2545" stroke-width="2" /><path d="M560 234l12 6-12 6z" fill="#0b2545" />
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="60" y="180" width="115" height="50" fill="#13a89e" fill-opacity="0.35" />
+<rect x="185" y="140" width="115" height="90" fill="#f5b800" fill-opacity="0.35" />
+<rect x="310" y="100" width="115" height="130" fill="#e8822a" fill-opacity="0.45" />
+<rect x="435" y="60" width="115" height="170" fill="#b42318" fill-opacity="0.45" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="117" y="200" font-weight="700">EU I / US I</text><text x="117" y="218">India A</text>
+<text x="242" y="160" font-weight="700">EU IIa / US II</text><text x="242" y="178">India B</text>
+<text x="367" y="120" font-weight="700">EU IIb / US II</text><text x="367" y="138">India C</text>
+<text x="492" y="80" font-weight="700">EU III / US III</text><text x="492" y="98">India D</text>
+<text x="117" y="170" font-size="10">Bandages, stethoscopes</text>
+<text x="242" y="210" font-size="10">Hearing aids,</text><text x="242" y="222" font-size="10">infusion sets</text>
+<text x="367" y="190" font-size="10">Ventilators, X-ray,</text><text x="367" y="202" font-size="10">bone screws</text>
+<text x="492" y="170" font-size="10">Pacemakers,</text><text x="492" y="182" font-size="10">heart valves,</text><text x="492" y="194" font-size="10">breast implants</text>
+<text x="300" y="262" font-size="11">Increasing risk and regulatory control</text>
+</g>
+</svg>
+<figcaption>Approximate correspondence of risk classes in the EU, USA and India. Exact class always depends on the rules and intended purpose.</figcaption>
+</figure>
+
+| Risk | EU MDR | US FDA | India MDR 2017 | Typical examples |
+| --- | --- | --- | --- | --- |
+| Low | Class I (incl. Is sterile, Im measuring, Ir reusable surgical) | Class I (often exempt from 510(k)) | Class A | Bandages, tongue depressors, wheelchairs |
+| Low to moderate | Class IIa | Class II | Class B | Hearing aids, short term catheters, dental fillings |
+| Moderate to high | Class IIb | Class II (some III) | Class C | Ventilators, infusion pumps, long term implants like bone screws |
+| High | Class III | Class III | Class D | Pacemakers, heart valves, drug eluting stents |
+
+In vitro diagnostic devices (IVDs), such as blood glucose meters and test kits, have separate rules, for example the EU IVDR with Classes A to D.
+
+## How medical device classification works in the EU
+
+The EU MDR Annex VIII contains **22 rules** grouped by device type:
+
+- **Non-invasive devices** (Rules 1 to 4): mostly Class I unless they channel or store fluids for infusion, modify blood, or contact injured skin.
+- **Invasive devices** (Rules 5 to 8): depends on whether invasion is through a body orifice or surgical, and on duration: **transient** (under 60 minutes), **short term** (60 minutes to 30 days) or **long term** (over 30 days). Implantable and long term devices are generally IIb or III; devices in contact with the heart, central circulatory system or central nervous system are Class III.
+- **Active devices** (Rules 9 to 13): therapeutic devices delivering energy (IIa, IIb if potentially hazardous), diagnostic and monitoring devices, and **software (Rule 11)**.
+- **Special rules** (Rules 14 to 22): devices incorporating medicines, contraception, disinfection, nanomaterials, devices made with animal tissues, and others.
+
+When several rules apply, the **highest class** applies.
+
+## United States
+
+The FDA classifies devices into about 1700 generic types in 21 CFR. Routes to market:
+
+- **Class I:** general controls; most are exempt from premarket notification.
+- **Class II:** general and special controls; usually a **510(k)** showing substantial equivalence to a legally marketed predicate device.
+- **Class III:** **premarket approval (PMA)** with clinical evidence of safety and effectiveness.
+- **De Novo** pathway for novel low to moderate risk devices with no predicate.
+
+## India
+
+Under the **Medical Devices Rules 2017**, administered by **CDSCO**, devices are Classes A to D. Class A and B manufacturing licences are granted by state licensing authorities, while Classes C and D are licensed centrally, with notified bodies auditing quality systems for lower classes. Classification lists for each device category are published by CDSCO.
+
+## Conformity assessment and requirements
+
+Higher classes need more:
+
+- **Quality management system** to **ISO 13485**, including design controls.
+- **Risk management** to **ISO 14971**, identifying hazards, estimating and controlling risks and monitoring after sale. Tools such as [FMEA](/safety-engineering/fmea-explained/) are widely used.
+- **Technical documentation:** design, verification and validation, labelling.
+- **Electrical safety and EMC** to the **IEC 60601** series for medical electrical equipment, and **IEC 62304** for software life cycle.
+- **Biocompatibility** to **ISO 10993** for materials contacting the body, see [biomaterials](/biomedical-engineering/biomaterials-types/).
+- **Clinical evaluation** with clinical data, especially for Class IIb and III.
+- **Notified body or regulator review** for all but the lowest classes.
+- **Post-market surveillance**, vigilance reporting and periodic safety updates.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Four products under the EU MDR: (A) a reusable stethoscope; (B) a single use hypodermic needle; (C) a hip joint replacement; (D) a standalone app that analyses smartphone camera images of skin lesions and indicates melanoma risk to guide referral decisions.</dd>
+<dt>Find</dt><dd>The likely EU class of each.</dd>
+<dt>Assumptions</dt><dd>Typical intended purposes; final classification requires checking all rules and guidance.</dd>
+<dt>Solution</dt><dd>A: non-invasive, no special function: Rule 1, Class I<br />B: surgically invasive, transient use: Rule 6, Class IIa<br />C: implantable, long term, total joint replacement: Rule 8 places joint replacements in Class III<br />D: software providing information used for diagnostic decisions, where a wrong result could lead to serious deterioration: Rule 11, at least Class IIb</dd>
+<dt>Answer</dt><dd><strong>Stethoscope Class I, hypodermic needle Class IIa, hip replacement Class III, melanoma app Class IIb or higher</strong></dd>
+<dt>Limitations</dt><dd>Intended purpose wording, MDCG guidance and borderline cases can change the class; consult the regulation and a notified body.</dd>
+</dl>
+</Example>
+
+## Practical tips for engineers
+
+Define the intended purpose and indications precisely early in design, since changing them later can change the class. Build regulatory requirements into the design process from the start, keep a living risk management file, plan clinical evidence needs, and design for usability (IEC 62366), because many incidents come from use errors. Choosing a slightly narrower intended purpose can sometimes lower the class and shorten time to market, but claims must then match the labelling. Medical device classification is not paperwork at the end of a project: it shapes the whole development, from [biopotential measurement](/biomedical-engineering/biopotential-measurement-basics/) front ends to [prosthetic limbs](/biomedical-engineering/prosthetic-limbs/) and imaging systems.

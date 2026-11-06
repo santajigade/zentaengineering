@@ -1,0 +1,151 @@
+---
+title: "Bioreactor Types and How They Work"
+description: "Bioreactor types explained: stirred tank, airlift, bubble column, packed bed, membrane and single use bioreactors, operating modes, control and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: biomedical-engineering
+subcategory: bioprocess-engineering
+focusKeyword: "bioreactor types"
+image: { src: /images/featured/bioreactor-types.webp, alt: "Bioreactor Types and How They Work: featured diagram" }
+format: working-principle
+pillar: true
+math: true
+tags: [bioreactor, bioprocess, fermentation, cell-culture, kla]
+faq:
+  - q: "What is the difference between a fermenter and a bioreactor?"
+    a: "The terms are often used interchangeably. Fermenter traditionally refers to vessels for microbial fermentation (bacteria, yeast, fungi), while bioreactor is the broader term covering microbial, mammalian cell, plant cell and tissue cultures, as well as enzyme reactors."
+  - q: "Why is oxygen transfer often the limiting factor?"
+    a: "Oxygen dissolves poorly in water, only about 7 to 8 mg/L at 30 to 37 °C from air, while fast growing aerobic cultures consume it rapidly. If oxygen cannot be transferred from gas bubbles to the liquid fast enough, cells become oxygen starved. Engineers improve transfer with better agitation, finer bubbles, higher gas flow, oxygen enrichment or pressure."
+  - q: "What are single use bioreactors?"
+    a: "Single use bioreactors use pre-sterilised plastic bags instead of stainless steel vessels. They avoid cleaning and sterilisation in place, reduce cross contamination risk and turnaround time, and are now common in biopharmaceutical production of antibodies and vaccines up to about 2000 to 6000 litres."
+references:
+  - text: "P. M. Doran, Bioprocess Engineering Principles, 2nd ed., Academic Press"
+  - text: "M. L. Shuler, F. Kargi and M. DeLisa, Bioprocess Engineering: Basic Concepts, 3rd ed., Pearson"
+  - text: "H. W. Blanch and D. S. Clark, Biochemical Engineering, CRC Press"
+  - text: "ASME BPE-2022, Bioprocessing Equipment"
+  - text: "J. Monod, The growth of bacterial cultures, Annual Review of Microbiology, 1949"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+A bioreactor is a vessel that provides controlled conditions for cells or enzymes to grow and make products such as antibiotics, vaccines, antibodies, enzymes, biofuels and fermented foods. The main **bioreactor types** are the **stirred tank** (impeller mixing, the industry workhorse), **bubble column** and **airlift** (mixing by rising gas, gentle and low energy), **packed bed** and **fluidised bed** (cells or enzymes immobilised on solids), **membrane** and **hollow fibre** reactors (cells retained behind membranes), **photobioreactors** for algae, and **single use** bag reactors. They operate in **batch**, **fed-batch** or **continuous** mode with tight control of **temperature, pH, dissolved oxygen, agitation and feeding**.
+
+</Key>
+
+Living cells are sensitive: they need the right temperature, pH, nutrients and oxygen, must be protected from contamination, and some (especially animal cells) are damaged by strong shear. Bioreactor design balances these needs with efficient mixing and mass transfer at scales from millilitres in the lab to hundreds of cubic metres in industry.
+
+## Stirred tank bioreactor
+
+<figure>
+<svg width="600" height="310" viewBox="0 0 600 310" fill="none" role="img" aria-label="Stirred tank bioreactor: cylindrical vessel with cooling jacket, motor driven shaft with two Rushton turbine impellers, baffles on the walls, air sparger at the bottom producing bubbles, probes for pH, dissolved oxygen and temperature, feed, acid and base inlets, exhaust gas outlet with filter and harvest outlet at the bottom">
+<rect x="180" y="60" width="200" height="220" rx="30" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<rect x="168" y="100" width="12" height="150" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" /><rect x="380" y="100" width="12" height="150" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="260" y="20" width="40" height="30" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<path d="M280 50V250" stroke="#0b2545" stroke-width="3" />
+<g fill="#7b8794" stroke="#0b2545" stroke-width="1.5"><rect x="250" y="140" width="60" height="10" /><rect x="250" y="210" width="60" height="10" /></g>
+<g fill="#7b8794"><rect x="190" y="100" width="6" height="150" /><rect x="364" y="100" width="6" height="150" /></g>
+<path d="M240 262H320" stroke="#0b2545" stroke-width="3" />
+<g fill="#ffffff" stroke="#13a89e" stroke-width="1.2"><circle cx="255" cy="245" r="4" /><circle cx="300" cy="238" r="4" /><circle cx="235" cy="195" r="4" /><circle cx="330" cy="185" r="4" /><circle cx="250" cy="120" r="4" /><circle cx="320" cy="115" r="4" /></g>
+<path d="M240 262V295H140" stroke="#13a89e" stroke-width="2" />
+<g stroke="#b42318" stroke-width="2"><path d="M340 60V30H420" /><path d="M210 60V35H150" /></g>
+<g stroke="#0b2545" stroke-width="2"><path d="M350 130H430M350 170H430M350 230H430" /></g>
+<path d="M280 280V300H330" stroke="#8a6d3b" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="305" y="40">Motor</text><text x="425" y="34">Exhaust gas, filter</text><text x="60" y="39">Feed, acid, base</text>
+<text x="435" y="134">pH probe</text><text x="435" y="174">DO probe</text><text x="435" y="234">Temperature</text>
+<text x="70" y="298">Sterile air in</text><text x="335" y="304">Harvest</text>
+<text x="100" y="110">Cooling</text><text x="100" y="124">jacket</text><text x="200" y="90">Baffle</text><text x="318" y="167">Impeller</text>
+<text x="250" y="275" font-size="10">Sparger</text>
+</g>
+</svg>
+<figcaption>A stirred tank bioreactor with sensors, sparger, impellers and jacket (schematic).</figcaption>
+</figure>
+
+The **stirred tank reactor (STR)** is used for most microbial fermentations and mammalian cell cultures.
+
+- A motor drives one or more **impellers**: Rushton turbines for high gas dispersion in microbial cultures, or pitched blade and marine impellers for gentle mixing of shear sensitive cells.
+- **Baffles** prevent vortexing and improve mixing.
+- A **sparger** releases sterile air or oxygen as bubbles.
+- A **jacket** or internal coils remove the heat generated by metabolism and agitation.
+- **Probes** measure temperature, pH, dissolved oxygen (DO), and often foam level, pressure and off-gas composition.
+- **Sterile design:** steam sterilisable stainless steel, aseptic seals, sterile filters on gas lines, clean in place (CIP) and steam in place (SIP).
+
+Its behaviour approximates an ideal well mixed reactor, the [CSTR](/chemical-engineering/cstr-vs-pfr/) of chemical engineering.
+
+## Other bioreactor types
+
+- **Bubble column:** a tall vessel where gas sparged at the bottom provides mixing; simple, low shear, low energy, but less control of mixing.
+- **Airlift:** a bubble column with a draft tube or external loop; the riser contains gas and the downcomer degassed liquid, creating a defined circulation. Used for single cell protein, some cell cultures and wastewater.
+- **Packed bed:** cells or enzymes immobilised on particles in a column through which medium flows; high cell density, used for enzyme conversions and some cell cultures.
+- **Fluidised bed:** immobilised cells on particles kept suspended by upward flow; good mass transfer.
+- **Membrane and hollow fibre:** cells grow on one side of semi-permeable fibres while medium flows on the other; very high cell densities, used for antibodies and cell therapy.
+- **Photobioreactors:** tubular or flat panel transparent reactors that provide light for algae and cyanobacteria.
+- **Wave (rocking) and single use stirred bag reactors:** disposable bags agitated by rocking or internal impellers, widely used in biopharmaceutical production.
+- **Bioreactors for tissue engineering:** perfusion and rotating wall vessels that grow 3D tissues.
+
+| Type | Mixing | Shear | Typical use |
+| --- | --- | --- | --- |
+| Stirred tank | Impeller | Medium to high | Microbial fermentation, antibodies |
+| Bubble column | Gas | Low | Simple aerobic processes, yeast |
+| Airlift | Gas, defined loop | Low | Single cell protein, cell culture |
+| Packed / fluidised bed | Liquid flow | Low | Immobilised enzymes and cells |
+| Hollow fibre | Perfusion | Very low | High density cell culture, cell therapy |
+| Single use | Rocking or impeller | Low to medium | Biopharmaceuticals, clinical supplies |
+
+## Operating modes
+
+- **Batch:** all nutrients added at the start; cells grow through lag, exponential, stationary and death phases. Simple, but product titre is limited.
+- **Fed-batch:** nutrients fed during the run to extend growth and production while avoiding inhibition; the most common industrial mode.
+- **Continuous (chemostat):** fresh medium flows in and culture flows out at the same rate, keeping cells growing at a steady state; the dilution rate D equals the specific growth rate μ at steady state.
+- **Perfusion:** cells retained by filters while medium is exchanged continuously, giving very high cell densities.
+
+## Growth kinetics
+
+During exponential growth:
+
+$$
+X = X_0\,e^{\mu t} \qquad t_d = \frac{\ln 2}{\mu}
+$$
+
+The **Monod equation** relates specific growth rate to limiting substrate concentration S:
+
+$$
+\mu = \frac{\mu_{max}\,S}{K_S + S}
+$$
+
+<Calculator path="biology/specific-growth-rate" title="Specific Growth Rate Calculator" />
+
+## Oxygen transfer
+
+For aerobic cultures, oxygen transfer rate is:
+
+$$
+OTR = k_L a\,(C^* - C_L)
+$$
+
+where k_La is the volumetric mass transfer coefficient, C* the saturation concentration and C_L the actual dissolved oxygen. The oxygen uptake rate of the cells must not exceed the OTR.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An E. coli fermentation reaches 20 g/L of cells with a specific oxygen uptake of 15 mmol O₂ per g cells per hour. Oxygen saturation with air is 0.21 mmol/L, and dissolved oxygen must be kept at 30% of saturation.</dd>
+<dt>Find</dt><dd>The oxygen uptake rate and the minimum k_La required.</dd>
+<dt>Assumptions</dt><dd>Steady state, OTR equals OUR; air sparging only.</dd>
+<dt>Solution</dt><dd>OUR = 20 × 15 = 300 mmol/L·h<br />C* − C_L = 0.21 − 0.3 × 0.21 = 0.147 mmol/L<br />k_La = 300 ÷ 0.147 = 2041 h⁻¹ ≈ 0.57 s⁻¹</dd>
+<dt>Answer</dt><dd><strong>The culture needs about 300 mmol O₂/L·h, requiring k_La of about 2000 h⁻¹, which is at the upper limit of large stirred tanks, so oxygen enrichment or lower cell density would be needed</strong></dd>
+<dt>Limitations</dt><dd>Using pure oxygen raises C* about fivefold, greatly easing the requirement; heat removal also becomes limiting at high rates.</dd>
+</dl>
+</Example>
+
+## Control and monitoring
+
+Contamination control is as important as process control: every connection, sample port and gas line must keep the culture sterile for the whole run, sometimes weeks long.
+
+
+Typical control loops: temperature by jacket water, pH by acid and base addition, dissolved oxygen by cascading agitation speed, gas flow and oxygen enrichment, foam by antifoam addition, and feed rate by profiles or feedback from off-gas or glucose sensors. Accurate [temperature](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) and well tuned controllers keep conditions within tight ranges. Process analytical technology adds online sensors for biomass, metabolites and product quality.
+
+## Scale-up of bioreactor types
+
+Scaling from lab to production is challenging because mixing time, oxygen transfer, shear and heat removal do not scale equally. Engineers use criteria such as constant power per volume, constant k_La, constant impeller tip speed or constant mixing time, together with pilot runs and computational fluid dynamics. Downstream, product recovery begins, and many final products, such as vaccines and biologics, are then regulated as medicines or used with devices covered under [medical device classification](/biomedical-engineering/medical-device-classification/).

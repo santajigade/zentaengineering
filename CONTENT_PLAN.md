@@ -252,13 +252,13 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| biomedical-sensors | ECG Electrodes and Biopotential Measurement Basics | biopotential-measurement-basics | fundamentals | to write |
-| medical-imaging | Medical Imaging Modalities: X-Ray, CT, MRI and Ultrasound | medical-imaging-modalities | comparison | to write |
-| medical-devices | Medical Device Classification and Regulation Basics | medical-device-classification | explanation | to write |
-| biomaterials | Biomaterials: Types, Properties and Biocompatibility | biomaterials-types | fundamentals | to write |
-| prosthetics | How Prosthetic Limbs Work: Body-Powered vs Myoelectric | prosthetic-limbs | comparison | to write |
-| bioprocess-engineering | Bioreactor Types and How They Work | bioreactor-types | working-principle | to write |
-| laboratory-instrumentation | Spectrophotometer Working Principle and Beer-Lambert Law | spectrophotometer-working-principle | working-principle | to write |
+| biomedical-sensors | ECG Electrodes and Biopotential Measurement Basics | biopotential-measurement-basics | fundamentals | draft |
+| medical-imaging | Medical Imaging Modalities: X-Ray, CT, MRI and Ultrasound | medical-imaging-modalities | comparison | draft |
+| medical-devices | Medical Device Classification and Regulation Basics | medical-device-classification | explanation | draft |
+| biomaterials | Biomaterials: Types, Properties and Biocompatibility | biomaterials-types | fundamentals | draft |
+| prosthetics | How Prosthetic Limbs Work: Body-Powered vs Myoelectric | prosthetic-limbs | comparison | draft |
+| bioprocess-engineering | Bioreactor Types and How They Work | bioreactor-types | working-principle | draft |
+| laboratory-instrumentation | Spectrophotometer Working Principle and Beer-Lambert Law | spectrophotometer-working-principle | working-principle | draft |
 
 ## marine-engineering
 

@@ -1,0 +1,140 @@
+---
+title: "Biomaterials: Types, Properties and Biocompatibility"
+description: "Biomaterials explained: metals, ceramics, polymers, composites and natural materials, properties, biocompatibility, ISO 10993 testing and an example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: biomedical-engineering
+subcategory: biomaterials
+focusKeyword: "biomaterials"
+image: { src: /images/featured/biomaterials-types.webp, alt: "Biomaterials: Types, Properties and Biocompatibility: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [biomaterials, biocompatibility, implants, titanium, iso-10993]
+faq:
+  - q: "What does biocompatibility mean?"
+    a: "Biocompatibility is the ability of a material to perform with an appropriate host response in a specific application. It is not a fixed property of the material: the same polymer may be biocompatible in a short term catheter but not in a permanent vascular graft. It depends on the material, the device design, the site and the duration of contact."
+  - q: "Why is titanium widely used for implants?"
+    a: "Titanium and its alloys, especially Ti-6Al-4V, combine high strength, low density, a lower elastic modulus than steel or cobalt chromium, excellent corrosion resistance from a stable oxide film, and good integration with bone (osseointegration). These properties suit dental implants, hip stems, bone plates and screws."
+  - q: "What is stress shielding?"
+    a: "Bone remodels according to the loads it carries. When a much stiffer metal implant carries most of the load, the surrounding bone is under-loaded and can lose density over time, which may loosen the implant. Designers reduce stress shielding by using lower modulus materials, porous structures and implant shapes that share load with bone."
+references:
+  - text: "B. D. Ratner, A. S. Hoffman, F. J. Schoen and J. E. Lemons (eds.), Biomaterials Science: An Introduction to Materials in Medicine, 4th ed., Academic Press"
+  - text: "ISO 10993-1:2018, Biological evaluation of medical devices, Part 1: Evaluation and testing within a risk management process"
+  - text: "J. B. Park and R. S. Lakes, Biomaterials: An Introduction, 3rd ed., Springer"
+  - text: "D. F. Williams, On the mechanisms of biocompatibility, Biomaterials, 29(20), 2941-2953, 2008"
+  - text: "ASTM F136, Standard Specification for Wrought Titanium-6Aluminum-4Vanadium ELI Alloy for Surgical Implant Applications"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Biomaterials** are materials designed to interact with biological systems in medical devices and implants. The main types are **metals** (titanium alloys, cobalt chromium, 316L stainless steel) for load bearing implants; **ceramics** (alumina, zirconia, hydroxyapatite, bioactive glass) for joint bearings, dental and bone repair; **polymers** (UHMWPE, PEEK, silicone, PMMA, PLA and PLGA) for bearings, soft tissue devices and degradable implants; **composites**; and **natural materials** (collagen, chitosan, decellularised tissue). Key requirements are **biocompatibility**, appropriate **mechanical properties**, **corrosion and wear resistance**, **sterilisability** and, for some, **controlled degradation**, evaluated under **ISO 10993**.
+
+</Key>
+
+From dental fillings and contact lenses to hip replacements, heart valves and stents, biomaterials improve and extend millions of lives every year. Choosing a biomaterial is a classic materials engineering problem with an extra, demanding constraint: the material must work in the warm, wet, salty, chemically active and immunologically watchful environment of the human body, often for decades.
+
+## Generations of biomaterials
+
+- **First generation (bioinert):** materials chosen to cause minimal reaction, such as titanium, alumina and UHMWPE.
+- **Second generation (bioactive and bioresorbable):** materials that bond to tissue (hydroxyapatite, bioactive glass) or dissolve as tissue heals (PLA, PLGA sutures and screws).
+- **Third generation (bioinstructive):** materials that stimulate specific cell responses, such as scaffolds with growth factors for tissue engineering.
+
+## Types of biomaterials
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Total hip replacement showing biomaterials: titanium alloy femoral stem in the femur, cobalt chromium or ceramic femoral head, UHMWPE liner inside a titanium acetabular cup in the pelvis, hydroxyapatite coating on the stem surface; labels for each material">
+<path d="M150 40Q220 30 260 70Q290 100 280 130L240 130Q230 100 200 90Q170 80 150 90Z" fill="#f5e6c8" stroke="#0b2545" stroke-width="2" />
+<path d="M300 140L330 270H390L360 150Z" fill="#f5e6c8" stroke="#0b2545" stroke-width="2" />
+<path d="M232 128A35 35 0 0 1 302 128Z" fill="#7b8794" stroke="#0b2545" stroke-width="2" />
+<path d="M238 128A29 29 0 0 1 296 128Z" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="267" cy="140" r="22" fill="#c9d2de" stroke="#0b2545" stroke-width="2" />
+<path d="M275 160L320 175L345 250L332 252L312 185Z" fill="#7b8794" stroke="#0b2545" stroke-width="2" />
+<path d="M318 180L343 250" stroke="#13a89e" stroke-width="3" stroke-dasharray="3 3" />
+<g stroke="#0b2545" stroke-width="1"><path d="M240 60L400 40M300 112L420 85M267 140L420 130M330 200L440 185M340 230L440 230" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="405" y="44">Pelvis (bone)</text><text x="425" y="89">Titanium shell + UHMWPE liner</text><text x="425" y="134">CoCr or ceramic head</text>
+<text x="445" y="189">Titanium alloy stem</text><text x="445" y="234">Hydroxyapatite coating</text><text x="395" y="268" font-size="11">Femur</text>
+</g>
+</svg>
+<figcaption>Biomaterials in a total hip replacement (schematic): metals, ceramics, polymers and bioactive coatings working together.</figcaption>
+</figure>
+
+### Metals
+
+- **Titanium and Ti-6Al-4V:** strong, light, corrosion resistant, osseointegrating; dental implants, hip stems, bone plates, spinal cages.
+- **Cobalt chromium alloys:** very wear and corrosion resistant; femoral heads, knee components, heart valve frames.
+- **316L stainless steel:** low cost, strong; temporary fracture fixation, surgical instruments.
+- **Nitinol (nickel titanium):** shape memory and superelasticity; self expanding stents and orthodontic wires.
+
+Metals are stiff and strong but may release ions, corrode and cause stress shielding. Corrosion mechanisms are discussed in [types of corrosion](/materials-engineering/types-of-corrosion/).
+
+### Ceramics
+
+- **Alumina and zirconia toughened alumina:** very hard, low wear femoral heads and dental crowns.
+- **Hydroxyapatite and calcium phosphates:** similar to bone mineral; coatings on implants and bone graft substitutes.
+- **Bioactive glasses:** bond to bone and soft tissue, used in bone fillers and dental products.
+
+Ceramics are hard and wear resistant but brittle.
+
+### Polymers
+
+- **UHMWPE:** low friction bearings in hip and knee joints; highly cross-linked versions reduce wear.
+- **PEEK:** spinal cages and trauma devices; modulus close to bone and radiolucent.
+- **Silicone:** catheters, breast implants, shunts.
+- **PMMA:** bone cement, intraocular lenses.
+- **Hydrogels:** contact lenses, wound dressings, drug delivery.
+- **Biodegradable PLA, PGA, PLGA, PCL:** sutures, resorbable screws, drug delivery, tissue scaffolds.
+
+Polymer families are compared in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/).
+
+### Composites and natural materials
+
+Carbon fibre reinforced PEEK for implants, dental composites of resin and glass filler, and natural materials such as collagen, gelatin, alginate, chitosan, silk and decellularised tissue matrices for tissue engineering.
+
+## Key properties
+
+| Material | Elastic modulus (GPa) | Typical use |
+| --- | --- | --- |
+| Cortical bone | About 15 to 20 | Reference |
+| Ti-6Al-4V | About 110 | Stems, plates, dental implants |
+| CoCrMo | About 210 to 240 | Joint bearings |
+| 316L stainless steel | About 190 to 200 | Fracture fixation |
+| Alumina | About 380 | Femoral heads |
+| PEEK | About 3 to 4 | Spinal cages |
+| UHMWPE | About 0.5 to 1 | Joint liners |
+
+The mismatch between implant and bone stiffness drives **stress shielding**: when two materials share a load in parallel, each carries load in proportion to its stiffness (modulus times area):
+
+$$
+\frac{F_\text{implant}}{F_\text{bone}} = \frac{E_i A_i}{E_b A_b}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A section of femur and implant shares an axial load of 2000 N in parallel. Bone area is 300 mm² with E = 17 GPa. Compare a titanium alloy stem (E = 110 GPa) and a CoCr stem (E = 220 GPa), each of 150 mm² cross-section.</dd>
+<dt>Find</dt><dd>The load carried by bone in each case.</dd>
+<dt>Assumptions</dt><dd>Equal strain in bone and implant (perfect bonding); linear elastic behaviour.</dd>
+<dt>Solution</dt><dd>Bone stiffness term: 17 × 300 = 5100<br />Titanium: 110 × 150 = 16 500; bone share = 5100 ÷ (5100 + 16 500) = 23.6%, so bone carries 472 N<br />CoCr: 220 × 150 = 33 000; bone share = 5100 ÷ 38 100 = 13.4%, so bone carries 268 N</dd>
+<dt>Answer</dt><dd><strong>With titanium, bone carries about 470 N (24%); with CoCr only about 270 N (13%), so the stiffer stem shields bone more</strong></dd>
+<dt>Limitations</dt><dd>Real hip mechanics involve bending, interfaces and complex geometry; finite element models are used in design.</dd>
+</dl>
+</Example>
+
+## Biocompatibility and testing
+
+Biocompatibility depends on the whole device and its use. **ISO 10993-1** sets out a risk based biological evaluation, considering the nature and duration of body contact. Typical endpoints include **cytotoxicity**, **sensitisation**, **irritation**, **acute and chronic systemic toxicity**, **genotoxicity**, **implantation** effects, **haemocompatibility** for blood contacting devices, and **chemical characterisation** of leachables. Sterilisation (steam, ethylene oxide, gamma or electron beam) must not degrade the material, and surface finish, cleanliness and manufacturing residues matter as much as the bulk material.
+
+## Host responses
+
+When a material is implanted, proteins adsorb within seconds, followed by an inflammatory response. Bioinert materials end up encapsulated in a thin fibrous layer; bioactive materials bond directly to tissue; degradable materials are gradually replaced. Problems include chronic inflammation, infection on implant surfaces (biofilms), wear particle induced bone loss (osteolysis) around joints, and metal ion release. Surface engineering, such as porous coatings, antibacterial treatments and drug eluting layers, improves outcomes.
+
+## Manufacturing biomaterials
+
+Processing changes properties. Titanium implants may be machined, forged or 3D printed by powder bed fusion, which allows porous lattice structures that encourage bone ingrowth and lower stiffness. UHMWPE is cross-linked by radiation and then heat treated to improve wear resistance while controlling oxidation. Ceramics are pressed and sintered with tight control of grain size and porosity, since small flaws cause brittle fracture. Surface treatments such as grit blasting, acid etching, plasma spraying of hydroxyapatite and anodising tune how cells and proteins interact with the implant.
+
+## Choosing biomaterials
+
+Selection balances mechanical needs, biological response, degradation behaviour, imaging compatibility (MRI, X-ray), manufacturability, sterilisation and cost, within the regulatory framework for the device's class, as described in [medical device classification](/biomedical-engineering/medical-device-classification/). Engineers also test mechanical performance, such as fatigue of hip stems, using methods from [fatigue failure](/materials-engineering/fatigue-failure/) analysis. The same principles guide the design of [prosthetic limbs](/biomedical-engineering/prosthetic-limbs/) and sockets that sit against skin rather than inside the body.

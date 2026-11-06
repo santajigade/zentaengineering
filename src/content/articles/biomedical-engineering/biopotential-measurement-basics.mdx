@@ -1,0 +1,147 @@
+---
+title: "ECG Electrodes and Biopotential Measurement Basics"
+description: "Biopotential measurement basics: ECG, EEG and EMG signals, electrodes, skin interface, instrumentation amplifiers, CMRR, filtering, safety and a gain example."
+pubDate: 2026-11-06
+reviewedDate: 2026-11-06
+discipline: biomedical-engineering
+subcategory: biomedical-sensors
+focusKeyword: "biopotential measurement"
+image: { src: /images/featured/biopotential-measurement-basics.webp, alt: "ECG Electrodes and Biopotential Measurement Basics: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [ecg, biopotential, electrodes, instrumentation-amplifier, biomedical-instrumentation]
+faq:
+  - q: "What is the difference between wet and dry electrodes?"
+    a: "Wet electrodes, usually silver/silver chloride with conductive gel, give low, stable skin contact impedance and low noise, so they are standard for clinical ECG. Dry electrodes make direct contact without gel, which is convenient for wearables and long term monitoring, but they have higher and more variable impedance and are more sensitive to motion artefacts."
+  - q: "Why is a high common mode rejection ratio important?"
+    a: "The body picks up large mains interference (50 or 60 Hz) that appears almost equally on all electrodes as a common mode voltage, often much larger than the millivolt ECG signal. An amplifier with high CMRR, typically above 100 dB, amplifies only the difference between electrodes and rejects the common interference."
+  - q: "What are the 12 leads of an ECG?"
+    a: "A standard 12 lead ECG uses 10 electrodes: four on the limbs and six on the chest. They produce three bipolar limb leads (I, II, III), three augmented limb leads (aVR, aVL, aVF) and six precordial chest leads (V1 to V6), each viewing the heart's electrical activity from a different direction."
+references:
+  - text: "J. G. Webster (ed.), Medical Instrumentation: Application and Design, 4th ed., Wiley"
+  - text: "IEC 60601-2-25:2011, Particular requirements for the basic safety and essential performance of electrocardiographs"
+  - text: "IEC 60601-1:2005+A2:2020, Medical electrical equipment, General requirements for basic safety and essential performance"
+  - text: "AAMI EC13, Cardiac Monitors, Heart Rate Meters, and Alarms"
+  - text: "R. M. Rangayyan, Biomedical Signal Analysis, 2nd ed., Wiley-IEEE Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Biopotential measurement** records the small electrical signals produced by cells in the heart (**ECG**), brain (**EEG**), muscles (**EMG**) and eyes (**EOG**). **Electrodes**, usually **silver/silver chloride** with gel, convert ionic currents in the body into electronic currents in wires. Because the signals are tiny (ECG about **1 mV**, EEG tens of **µV**) and buried in interference, they are amplified by a **differential instrumentation amplifier** with high input impedance and high **common mode rejection ratio (CMRR)**, then **filtered**, digitised and displayed. Patient **electrical safety** under **IEC 60601** is essential.
+
+</Key>
+
+Measuring the body's electrical activity is one of the oldest and most important tools in medicine. Willem Einthoven recorded the first practical ECG in 1903; today ECG, EEG and EMG are used everywhere from intensive care units to smartwatches. The engineering challenge is to capture very small signals reliably and safely.
+
+## Where biopotentials come from
+
+Nerve and muscle cells maintain a resting potential of about −70 to −90 mV across their membranes. When they fire, ion channels open and the membrane depolarises in an **action potential**. The coordinated activity of many cells produces electric fields that spread through body tissues and can be measured at the skin surface.
+
+| Signal | Source | Typical amplitude | Frequency range |
+| --- | --- | --- | --- |
+| ECG | Heart | 0.5 to 4 mV | 0.05 to 150 Hz |
+| EEG | Brain cortex | 5 to 300 µV | 0.5 to 100 Hz |
+| EMG (surface) | Skeletal muscle | 0.1 to 5 mV | 10 to 500 Hz |
+| EOG | Eye movement | 50 to 3500 µV | DC to 50 Hz |
+
+## Electrodes and the skin interface
+
+Current in the body is carried by ions; current in wires by electrons. The **electrode electrolyte interface** converts between them through chemical reactions.
+
+- **Silver/silver chloride (Ag/AgCl)** electrodes are almost **non-polarisable**: they pass current with small, stable half-cell potential and low noise, which is why they are standard for ECG.
+- **Conductive gel** wets the skin, lowering impedance through the outer dead skin layer (stratum corneum).
+- **Skin preparation** (light abrasion, cleaning) reduces impedance and **motion artefact**.
+- Electrodes have a **half-cell potential** (DC offset of tens to hundreds of mV) that the amplifier must tolerate without saturating.
+- **Dry and textile electrodes** suit wearables; **needle electrodes** are used for intramuscular EMG; **cup electrodes** with paste for EEG.
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Biopotential measurement chain: two electrodes on the body connected to an instrumentation amplifier with a right leg drive electrode; amplifier output passes through high pass filter, low pass filter and 50 or 60 hertz notch filter, then isolation barrier, ADC and display; common mode interference from mains shown coupling to the body">
+<ellipse cx="80" cy="150" rx="55" ry="95" fill="#ffe9e7" stroke="#0b2545" stroke-width="2" />
+<g fill="#7b8794" stroke="#0b2545" stroke-width="1.5"><circle cx="60" cy="100" r="9" /><circle cx="100" cy="150" r="9" /><circle cx="70" cy="220" r="9" /></g>
+<g stroke="#0b2545" stroke-width="2" fill="none"><path d="M69 100H150V125H170M109 150H150V165H170M79 220H230V200" /></g>
+<path d="M170 105L170 185L240 145Z" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="270" y="125" width="60" height="40" rx="4" fill="#fff7e0" /><rect x="345" y="125" width="60" height="40" rx="4" fill="#fff7e0" /><rect x="420" y="125" width="60" height="40" rx="4" fill="#fff7e0" />
+<rect x="510" y="125" width="70" height="40" rx="4" fill="#eef1f6" />
+</g>
+<path d="M240 145h30M330 145h15M405 145h15M480 145h30" stroke="#13a89e" stroke-width="2" />
+<path d="M495 110V180" stroke="#b42318" stroke-width="2.5" stroke-dasharray="5 3" />
+<path d="M215 175V200" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="80" y="40">Patient</text><text x="30" y="90">RA</text><text x="125" y="160">LA</text><text x="45" y="240">RL</text>
+<text x="200" y="98">In-amp</text><text x="200" y="215" font-size="10">Right leg drive</text>
+<text x="300" y="142">HPF</text><text x="300" y="156" font-size="9">0.05 Hz</text><text x="375" y="142">LPF</text><text x="375" y="156" font-size="9">150 Hz</text><text x="450" y="142">Notch</text><text x="450" y="156" font-size="9">50/60 Hz</text>
+<text x="545" y="142">ADC</text><text x="545" y="156" font-size="9">display</text>
+<text x="495" y="100" fill="#b42318" font-size="10">Isolation</text>
+</g>
+<g stroke="#f5b800" stroke-width="1.5" fill="none"><path d="M150 30Q160 20 170 30T190 30T210 30" /></g>
+<text x="250" y="34" font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#b8860b">Mains interference (common mode)</text>
+</svg>
+<figcaption>A typical ECG front end: electrodes, instrumentation amplifier with right leg drive, filters, isolation and digitisation.</figcaption>
+</figure>
+
+## The amplifier
+
+### Instrumentation amplifier
+
+A **differential instrumentation amplifier** amplifies the difference between two electrodes while rejecting voltages common to both. Requirements:
+
+- **High input impedance** (well above 10 MΩ) so that unequal electrode impedances do not convert common mode voltage into a differential error.
+- **High CMRR**, typically 100 dB or more at mains frequency.
+- **Low noise**, a few µV peak to peak or less in the signal band.
+- **DC offset tolerance** for electrode half-cell potentials.
+
+The classic three op-amp design, described in [inverting and non-inverting amplifiers](/electronics-engineering/inverting-and-non-inverting-amplifier/), sets gain with a single resistor:
+
+$$
+G = 1 + \frac{2R_1}{R_G}
+$$
+
+<Calculator path="electronics/instrumentation-amplifier-gain" title="Instrumentation Amplifier Gain Calculator" />
+
+### CMRR
+
+$$
+CMRR_{dB} = 20\log_{10}\frac{A_d}{A_{cm}}
+$$
+
+### Right leg drive
+
+A **driven right leg** circuit senses the common mode voltage and feeds an inverted version back to the body through a third electrode, actively reducing interference further.
+
+## Filtering and digitisation
+
+- **High pass filter** (0.05 Hz for diagnostic ECG, 0.5 Hz for monitoring) removes baseline wander from breathing and electrode drift.
+- **Low pass filter** (40 Hz for monitoring, 150 Hz or more for diagnostic ECG) removes high frequency noise and prevents aliasing before sampling, following the [sampling theorem](/electronics-engineering/sampling-theorem/).
+- **Notch filter** at 50 or 60 Hz suppresses remaining mains interference.
+- **ADC:** modern front ends use 16 to 24 bit sigma-delta converters sampling at 250 to 1000 samples per second or more.
+
+Digital processing then detects QRS complexes, calculates heart rate and classifies rhythms.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An ECG front end must map a 1 mV ECG to about 1 V for a ±2.5 V ADC input. Electrode offset can reach ±300 mV. Mains common mode interference at the body is 1 V peak; the amplifier CMRR is 100 dB.</dd>
+<dt>Find</dt><dd>A suitable gain strategy and the residual interference at the output relative to the ECG.</dd>
+<dt>Assumptions</dt><dd>Two stage design: in-amp first stage, then high pass filter and second gain stage.</dd>
+<dt>Solution</dt><dd>Total gain needed = 1 V ÷ 1 mV = 1000<br />If the first stage had gain 1000, ±300 mV offset would become ±300 V and saturate, so the first stage gain must be small, for example G₁ = 10 (offset becomes ±3 V, still too large for a single 5 V supply, so G₁ = 5 gives ±1.5 V)<br />Use G₁ = 5, then a 0.05 Hz high pass filter to remove DC, then G₂ = 200: total gain 1000<br />Common mode gain = A_d ÷ 10^(100/20) = 5 ÷ 100 000 = 5 × 10⁻⁵ in the first stage; interference after stage 1 = 1 V × 5 × 10⁻⁵ = 50 µV, versus 5 mV ECG: ratio 1:100</dd>
+<dt>Answer</dt><dd><strong>Use a low first stage gain (about 5), remove DC offset with a high pass filter, then add gain of about 200; with 100 dB CMRR, mains pickup ends up about 1% of the ECG amplitude before notch filtering</strong></dd>
+<dt>Limitations</dt><dd>Electrode impedance mismatch reduces effective CMRR; a right leg drive and shielded leads further reduce interference.</dd>
+</dl>
+</Example>
+
+## Patient safety
+
+Electrodes create a direct path into the body, so medical equipment must limit leakage current to microamp levels under **IEC 60601-1**. Measures include **isolated power supplies** and **isolation amplifiers or digital isolators** between the patient side and mains powered parts, **defibrillation protection** so the input survives shocks of several kV, and classification of applied parts (B, BF and CF, with CF for direct cardiac contact having the strictest limits). Good [electrical earthing](/electrical-engineering/electrical-earthing/) practice in hospitals adds further protection.
+
+## Common problems and solutions in biopotential measurement
+
+- **Baseline wander:** improve skin preparation, use appropriate high pass filtering.
+- **Mains interference:** check electrode contact and lead dress, use shielded cables and right leg drive.
+- **Motion artefacts:** secure electrodes and cables, use good quality Ag/AgCl electrodes.
+- **EMG noise on ECG:** keep the patient relaxed and warm, use low pass filtering.
+
+Biopotential measurement links physiology with electronics, and the same front end principles apply in wearables, sleep labs, brain computer interfaces and the myoelectric [prosthetic limbs](/biomedical-engineering/prosthetic-limbs/) that use EMG to control motors.
