@@ -1,0 +1,165 @@
+---
+title: "Poisson's Ratio Explained with Examples"
+description: "Poisson's ratio explained: definition, formula, typical values for metals, concrete and rubber, links to E, G and K, and a solved example."
+pubDate: 2026-11-07
+reviewedDate: 2026-11-07
+discipline: mechanical-engineering
+subcategory: strength-of-materials
+focusKeyword: "poisson's ratio"
+image: { src: /images/featured/poissons-ratio.webp, alt: "Poisson's Ratio Explained with Examples: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [poissons-ratio, lateral-strain, elastic-constants, youngs-modulus, shear-modulus]
+faq:
+  - q: "Why is Poisson's ratio positive when lateral strain is negative?"
+    a: "The definition includes a minus sign. Under tension the axial strain is positive and the lateral strain is negative, so dividing them gives a negative number. The minus sign makes the ratio positive for ordinary materials, which is how it is always quoted."
+  - q: "Why can Poisson's ratio not exceed 0.5 for an isotropic material?"
+    a: "The bulk modulus is K = E / (3(1 - 2ν)). At ν = 0.5 the denominator becomes zero and K becomes infinite, meaning the material cannot change volume at all. Above 0.5 the bulk modulus would be negative, which is not possible for a stable isotropic solid."
+  - q: "Does Poisson's ratio have a unit?"
+    a: "No. It is a ratio of two strains, and strain itself is a length divided by a length, so Poisson's ratio is dimensionless. The same value applies whether lengths are measured in millimetres or inches."
+references:
+  - text: "J. M. Gere and B. J. Goodno, Mechanics of Materials, 9th ed., Cengage"
+  - text: "R. C. Hibbeler, Mechanics of Materials, 10th ed., Pearson"
+  - text: "S. P. Timoshenko and J. N. Goodier, Theory of Elasticity, 3rd ed., McGraw-Hill"
+  - text: "ASTM E132 Standard Test Method for Poisson's Ratio at Room Temperature"
+  - text: "W. D. Callister and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Poisson's ratio** (ν) is the negative ratio of lateral strain to axial strain in a material loaded along one axis: ν = − ε<sub>lateral</sub> / ε<sub>axial</sub>. A bar that is stretched gets thinner, and a bar that is squeezed gets fatter. For most metals ν is about 0.3; for an isotropic material it must lie between −1 and 0.5.
+
+</Key>
+
+Poisson's ratio is one of the elastic constants that describe how a solid deforms under load. Together with Young's modulus it fixes the shear modulus and the bulk modulus of an isotropic material, so it appears in shaft design, pressure vessel calculations, strain gauge work and every finite element model. This guide explains the definition, typical values, the links to other elastic constants and how the ratio is measured, then works through a numerical example.
+
+## What is Poisson's ratio?
+
+When a prismatic bar is pulled along its length, it stretches in that direction. At the same time its width and thickness shrink. The French mathematician Siméon Denis Poisson studied this lateral contraction, and the ratio is named after him.
+
+Two strains are involved:
+
+- **Axial (longitudinal) strain:** ε<sub>axial</sub> = ΔL / L, the change in length divided by the original length, measured along the load.
+- **Lateral (transverse) strain:** ε<sub>lateral</sub> = Δd / d, the change in a transverse dimension such as diameter or width, divided by its original value.
+
+In tension, ε<sub>axial</sub> is positive and ε<sub>lateral</sub> is negative. In compression the signs reverse. The definition adds a minus sign so that the ratio is positive for ordinary materials:
+
+$$
+\nu = -\frac{\varepsilon_{lateral}}{\varepsilon_{axial}}
+$$
+
+Poisson's ratio is dimensionless. It is constant only in the linear elastic range. Once the material yields, plastic flow takes place at almost constant volume and the apparent ratio rises toward 0.5.
+
+<figure>
+<svg width="560" height="300" viewBox="0 0 560 300" fill="none" role="img" aria-label="A bar of original length L and diameter d, drawn dashed, is pulled by axial forces F at both ends. The loaded bar, drawn solid, is longer by delta L and thinner by delta d.">
+<rect x="130" y="100" width="300" height="80" stroke="#0b2545" stroke-width="2" stroke-dasharray="6 4" />
+<rect x="110" y="110" width="340" height="60" fill="#e6f6f5" stroke="#13a89e" stroke-width="3" />
+<path d="M110 140H40M40 140L56 130M40 140L56 150" stroke="#0b2545" stroke-width="2.5" />
+<path d="M450 140H520M520 140L504 130M520 140L504 150" stroke="#0b2545" stroke-width="2.5" />
+<text x="42" y="122" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">F</text>
+<text x="508" y="122" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">F</text>
+<path d="M130 60V92M430 60V92M130 70H430" stroke="#0b2545" stroke-width="1.5" />
+<text x="280" y="55" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Original length L (dashed)</text>
+<path d="M110 218V180M450 218V180M110 210H450" stroke="#0e7f78" stroke-width="1.5" />
+<text x="280" y="234" text-anchor="middle" font-size="13" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Loaded length L + ΔL</text>
+<text x="280" y="145" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Original diameter d shrinks to d − Δd</text>
+<text x="280" y="270" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">ν = − (lateral strain) / (axial strain)</text>
+</svg>
+<figcaption>Poisson effect: an axial tensile load lengthens a bar and reduces its diameter (deformation exaggerated).</figcaption>
+</figure>
+
+## Typical values of Poisson's ratio
+
+The ratio depends mainly on the type of bonding and structure of the material. Values below are typical figures from mechanics and materials textbooks; use supplier data or the material standard for design.
+
+| Material | Typical Poisson's ratio ν |
+| --- | --- |
+| Structural and carbon steel | about 0.27 to 0.30 |
+| Aluminium alloys | about 0.33 |
+| Copper | about 0.34 |
+| Titanium alloys | about 0.34 |
+| Concrete | about 0.1 to 0.2 |
+| Soda-lime glass | about 0.22 to 0.23 |
+| Rubber | close to 0.5 |
+| Cork | close to 0 |
+
+Rubber is nearly incompressible, so its volume hardly changes and ν approaches 0.5. Cork has a cellular structure that collapses without bulging sideways, which is why a cork can be pushed into a bottle neck easily. Some engineered foams and lattice structures, called **auxetic** materials, have a negative Poisson's ratio: they get wider when stretched.
+
+## Poisson's ratio and the other elastic constants
+
+For a homogeneous, isotropic, linear elastic material only two elastic constants are independent. If Young's modulus E and Poisson's ratio ν are known, the shear modulus G and bulk modulus K follow:
+
+$$
+G = \frac{E}{2(1+\nu)} \qquad K = \frac{E}{3(1-2\nu)}
+$$
+
+These relations explain the allowed range. For G to be positive, ν must be greater than −1. For K to be positive, ν must be less than 0.5. For steel with E = 200 GPa and ν = 0.3, G is about 77 GPa and K is about 167 GPa.
+
+### Volume change under axial load
+
+A bar under uniaxial stress changes volume by a fraction:
+
+$$
+\frac{\Delta V}{V} = \varepsilon_{axial}\,(1 - 2\nu)
+$$
+
+With ν = 0.5 the volume change is zero. With ν = 0.3 a stretched steel bar gains volume equal to 40 percent of its axial strain.
+
+### Multiaxial loading
+
+In a body loaded in several directions, Poisson's ratio couples the strains. The generalized Hooke's law for normal strain in the x direction is:
+
+$$
+\varepsilon_x = \frac{1}{E}\left[\sigma_x - \nu\left(\sigma_y + \sigma_z\right)\right]
+$$
+
+This is why a thin plate restrained from contracting sideways is stiffer than a free bar, and why the hoop and axial strains in a pressurized cylinder each depend on both stresses. Introductory treatment of the stresses themselves is in the guide to [stress and strain](/mechanical-engineering/stress-and-strain/).
+
+## How Poisson's ratio is measured
+
+ASTM E132 describes a room temperature tension test for structural materials. A flat specimen is loaded in the elastic range while axial and transverse strains are measured, normally with bonded strain gauges or extensometers on both axes. The ratio is taken from the slopes of the transverse strain and axial strain plotted against stress.
+
+Points to watch during measurement:
+
+- Keep the load in the linear elastic range; yielding changes the ratio.
+- Align the specimen carefully, because bending adds strain on one face and distorts readings.
+- Use gauges with matched gauge factors and correct for the transverse sensitivity of the gauge where required.
+
+Dynamic methods, which compute ν from measured longitudinal and shear wave speeds or resonant frequencies, are also used, especially for ceramics and concrete.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A steel rod of 20 mm diameter and 500 mm length carries an axial tensile load of 50 kN. E = 200 GPa, ν = 0.30.</dd>
+<dt>Find</dt><dd>The axial strain, the elongation, the lateral strain, the change in diameter, the fractional volume change and the shear modulus.</dd>
+<dt>Assumptions</dt><dd>Load applied through the centroid, uniform section, homogeneous isotropic steel, stress within the elastic range.</dd>
+<dt>Solution</dt><dd>A = π × 20² / 4 = 314.16 mm²<br />σ = 50,000 / 314.16 = 159.2 MPa<br />ε axial = σ / E = 159.2 / 200,000 = 0.000796<br />ΔL = 0.000796 × 500 = 0.398 mm<br />ε lateral = − ν × ε axial = − 0.30 × 0.000796 = − 0.000239<br />Δd = − 0.000239 × 20 = − 0.00477 mm<br />ΔV / V = 0.000796 × (1 − 2 × 0.30) = 0.000318<br />G = 200 / (2 × 1.30) = 76.9 GPa</dd>
+<dt>Answer</dt><dd><strong>Elongation about 0.40 mm, diameter reduced by about 0.0048 mm (4.8 micrometres), volume up by about 0.032 percent, G about 77 GPa</strong></dd>
+<dt>Limitations</dt><dd>The result holds only below the proportional limit. Real rods have threads or shoulders where local stress and strain are higher, and a measured ν for a given steel can differ slightly from 0.30.</dd>
+</dl>
+</Example>
+
+The diameter change is tiny compared with the elongation, which is why it is rarely noticed in practice. It still matters for press fits, seals and bolts, where a few micrometres change the contact pressure.
+
+## Where Poisson's ratio is used
+
+- **Pressure vessels and pipes:** hoop and axial strains of a cylinder depend on ν, which affects the diameter growth of a pipe under pressure. See the basics of [pressure vessels](/chemical-engineering/pressure-vessels-basics/).
+- **Strain gauges and load cells:** gauges are often arranged with some elements along the load and some across it. The transverse gauges read the Poisson strain and increase bridge output. The [pressure measurement articles](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) on InstrumentationBlog.in show how such gauges are used in sensors.
+- **Finite element analysis:** every linear static model needs E and ν for each material. An incorrect ν, or a value too close to 0.5 with ordinary elements, can make results inaccurate. The [finite element analysis basics](/mechanical-engineering/finite-element-analysis-basics/) guide covers material input.
+- **Geotechnical and concrete design:** ν of soil and concrete enters settlement and slab calculations.
+- **Rubber mounts and seals:** near incompressible behaviour means a rubber block loaded in compression bulges sideways, so its stiffness depends strongly on its shape.
+
+## Common mistakes
+
+- Dropping the minus sign and quoting a negative ratio for steel.
+- Applying the isotropic relations G = E / (2(1 + ν)) to wood, composites or rolled sheet, which are anisotropic and have different ratios in different directions.
+- Using ν = 0.5 exactly in a finite element model with standard elements, which can cause numerical locking.
+- Confusing Poisson's ratio with the Poisson distribution in statistics, which is unrelated.
+
+## Related reading
+
+- [Stress and Strain: Definitions, Types and Hooke's Law](/mechanical-engineering/stress-and-strain/)
+- [Factor of Safety in Machine Design Explained](/mechanical-engineering/factor-of-safety/)
+- [Finite Element Analysis (FEA): Basic Steps Explained](/mechanical-engineering/finite-element-analysis-basics/)

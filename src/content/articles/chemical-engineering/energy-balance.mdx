@@ -1,0 +1,157 @@
+---
+title: "Energy Balance in Chemical Processes Explained"
+description: "Energy balance in chemical processes explained: first law for closed and open systems, enthalpy, heat duty, reference states and a solved steam heater example."
+pubDate: 2026-11-07
+reviewedDate: 2026-11-07
+discipline: chemical-engineering
+subcategory: process-fundamentals
+focusKeyword: "energy balance"
+image: { src: /images/featured/energy-balance.webp, alt: "Energy Balance in Chemical Processes Explained: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [energy-balance, first-law, enthalpy, heat-duty, process-calculations]
+faq:
+  - q: "What is the difference between a material balance and an energy balance?"
+    a: "A material balance tracks mass entering, leaving, generated, consumed and accumulating in a system. An energy balance tracks energy in the same way, using the first law of thermodynamics. Most process problems need the material balance first, because the stream flows are inputs to the energy balance."
+  - q: "Why is enthalpy used for flowing streams instead of internal energy?"
+    a: "A stream entering or leaving a system does flow work, the pressure times volume needed to push it across the boundary. Enthalpy, H = U + PV, includes that flow work, so using enthalpy for each stream accounts for it automatically."
+  - q: "Can kinetic and potential energy be ignored in an energy balance?"
+    a: "Usually, for equipment such as heat exchangers, reactors and columns, because they are very small compared with enthalpy changes from heating, phase change or reaction. They must be kept for turbines, nozzles, high velocity gas flows and systems with large elevation changes, such as pumping water uphill."
+references:
+  - text: "R. M. Felder, R. W. Rousseau and L. G. Bullard, Elementary Principles of Chemical Processes, 4th ed., Wiley"
+  - text: "D. M. Himmelblau and J. B. Riggs, Basic Principles and Calculations in Chemical Engineering, 8th ed., Prentice Hall"
+  - text: "J. M. Smith, H. C. Van Ness, M. M. Abbott and M. T. Swihart, Introduction to Chemical Engineering Thermodynamics, 8th ed., McGraw-Hill"
+  - text: "Y. A. Çengel and M. A. Boles, Thermodynamics: An Engineering Approach, 9th ed., McGraw-Hill"
+  - text: "D. W. Green and M. Z. Southard (eds.), Perry's Chemical Engineers' Handbook, 9th ed., McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+An **energy balance** applies the first law of thermodynamics to a process: energy entering a system, minus energy leaving, equals the energy accumulated. For a steady flow process with negligible kinetic and potential energy changes it reduces to Q − W<sub>s</sub> = ΔH, where Q is heat added, W<sub>s</sub> is shaft work done by the system and ΔH is the enthalpy of the outlet streams minus that of the inlet streams.
+
+</Key>
+
+Energy balances size heaters, coolers, condensers, reboilers and reactor jackets, and they set the steam, cooling water and fuel consumption of a plant. Together with the [material balance](/chemical-engineering/material-balance/), the energy balance is one of the two basic calculations every chemical engineer performs. This guide explains the forms of energy involved, the closed and open system equations, how enthalpy changes are found, and a step by step method with a solved example.
+
+## Forms of energy in an energy balance
+
+A system can hold energy in three forms:
+
+- **Internal energy (U):** energy of molecular motion and interactions; it depends on temperature, phase and composition.
+- **Kinetic energy (E<sub>k</sub>):** ½ m v², from bulk motion of the material.
+- **Potential energy (E<sub>p</sub>):** m g z, from height in a gravity field.
+
+Energy crosses the system boundary in two ways other than with flowing material:
+
+- **Heat (Q):** energy transferred because of a temperature difference.
+- **Work (W):** energy transferred by a force acting through a distance, such as a pump impeller, a compressor or a turbine shaft.
+
+Sign conventions vary between textbooks. This article follows Felder, Rousseau and Bullard: Q is positive when heat is transferred to the system, and W is positive when work is done by the system on the surroundings.
+
+## Closed system energy balance
+
+A closed (batch) system exchanges no material with the surroundings during the process. The first law gives:
+
+$$
+Q - W = \Delta U + \Delta E_k + \Delta E_p
+$$
+
+For a batch reactor or a sealed tank that does not move, ΔE<sub>k</sub> and ΔE<sub>p</sub> are zero. If no moving parts do work, W = 0 and the heat added equals the change in internal energy. The thermodynamic background is in [laws of thermodynamics explained for engineers](/mechanical-engineering/laws-of-thermodynamics/).
+
+## Open system steady state energy balance
+
+Most continuous process units are open systems at steady state. Material flows in and out, and nothing accumulates. Work is split into **shaft work** W<sub>s</sub>, delivered through a rotating shaft, and **flow work**, the work needed to push streams in and out. Flow work is absorbed by using enthalpy, H = U + PV, for each stream. The result is:
+
+$$
+\dot{Q} - \dot{W}_s = \Delta \dot{H} + \Delta \dot{E}_k + \Delta \dot{E}_p
+$$
+
+where each Δ term means the total for outlet streams minus the total for inlet streams, for example:
+
+$$
+\Delta \dot{H} = \sum_{out} \dot{m}_j \hat{H}_j - \sum_{in} \dot{m}_i \hat{H}_i
+$$
+
+Ĥ is specific enthalpy (kJ/kg or kJ/mol). For heat exchangers, heaters, mixers and most reactors, shaft work and the kinetic and potential terms are negligible, so Q̇ = ΔḢ. For an adiabatic unit Q̇ = 0 and the balance gives the outlet temperature.
+
+<figure>
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" role="img" aria-label="A dashed system boundary around a process unit. Feed streams with mass flow and specific enthalpy enter from the left, product streams leave on the right. Heat Q enters from below and shaft work Ws leaves from the top.">
+<rect x="190" y="80" width="200" height="130" stroke="#0b2545" stroke-width="2" stroke-dasharray="7 5" />
+<rect x="230" y="110" width="120" height="70" fill="#e6f6f5" stroke="#13a89e" stroke-width="2.5" />
+<path d="M60 125H230M218 118L230 125L218 132" stroke="#0b2545" stroke-width="2.5" />
+<path d="M60 165H230M218 158L230 165L218 172" stroke="#0b2545" stroke-width="2.5" />
+<path d="M350 125H520M508 118L520 125L508 132" stroke="#0b2545" stroke-width="2.5" />
+<path d="M350 165H520M508 158L520 165L508 172" stroke="#0b2545" stroke-width="2.5" />
+<path d="M290 265V180M283 192L290 180L297 192" stroke="#f5b800" stroke-width="3" />
+<path d="M290 110V30M283 42L290 30L297 42" stroke="#0e7f78" stroke-width="3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<text x="290" y="150" text-anchor="middle">Process unit</text>
+<text x="70" y="115">Feed 1: m, Ĥ</text>
+<text x="70" y="190">Feed 2: m, Ĥ</text>
+<text x="400" y="115">Product 1: m, Ĥ</text>
+<text x="400" y="190">Product 2: m, Ĥ</text>
+<text x="302" y="255">Heat Q in</text>
+<text x="302" y="45">Shaft work Ws out</text>
+<text x="184" y="228" text-anchor="end" fill="#0e7f78">System boundary</text>
+</g>
+</svg>
+<figcaption>Control volume for a steady state open system energy balance: streams carry enthalpy across the boundary, while heat and shaft work cross it without material.</figcaption>
+</figure>
+
+## Calculating enthalpy changes
+
+Enthalpy is always relative to a **reference state**, a chosen phase, temperature and pressure where Ĥ = 0. Any convenient reference may be used, as long as it is the same for a given species in every stream. Steam tables use liquid water at the triple point as their reference.
+
+Common contributions:
+
+- **Sensible heat:** a temperature change without phase change. With a constant mean heat capacity, ΔĤ = c<sub>p</sub> (T<sub>2</sub> − T<sub>1</sub>). For wide ranges, integrate a c<sub>p</sub> polynomial from Perry's handbook or a similar source.
+- **Latent heat:** a phase change at constant temperature, such as the heat of vaporization ΔĤ<sub>v</sub>. Values for water are read from steam tables.
+- **Heat of mixing or solution:** significant for some systems, such as sulfuric acid in water.
+- **Heat of reaction:** for reactive systems, the standard heat of reaction (or heats of formation) is included. Exothermic reactions release heat that must be removed, which is a key factor when choosing between a [CSTR and a PFR](/chemical-engineering/cstr-vs-pfr/).
+
+A useful approach is to build a **hypothetical path**: take each species from the reference state to its stream condition through steps whose enthalpy changes are tabulated (heat, change phase, mix, react). Because enthalpy is a state function, the path does not change the answer.
+
+## Steps to solve an energy balance problem
+
+1. Draw and label the flowchart; complete the material balance so all stream flows and compositions are known.
+2. Choose a reference state for each species.
+3. Build an inlet and outlet enthalpy table: flow and specific enthalpy for every species in every stream.
+4. Calculate Ĥ for each entry from heat capacities, latent heats, steam tables or heats of formation.
+5. Decide which of Q, W<sub>s</sub>, ΔE<sub>k</sub> and ΔE<sub>p</sub> are zero or negligible, and write the simplified balance.
+6. Solve for the unknown, usually Q or an outlet temperature, and check that the sign makes physical sense.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>2.0 kg/s of liquid water is heated from 25 °C to 80 °C in a shell and tube heater. The heating medium is saturated steam at 150 °C, which condenses and leaves as saturated liquid at 150 °C. Mean c<sub>p</sub> of water = 4.18 kJ/(kg·K). Latent heat of steam at 150 °C, ΔĤ<sub>v</sub> = 2113.8 kJ/kg (steam tables).</dd>
+<dt>Find</dt><dd>The heat duty and the steam consumption.</dd>
+<dt>Assumptions</dt><dd>Steady state; no heat loss to the surroundings; no shaft work; kinetic and potential energy changes negligible; condensate leaves without subcooling.</dd>
+<dt>Solution</dt><dd>Water side: Q = ṁ c<sub>p</sub> ΔT = 2.0 × 4.18 × (80 − 25) = 459.8 kW<br />Steam side: the heat released equals the heat absorbed, so ṁ<sub>steam</sub> × 2113.8 = 459.8<br />ṁ<sub>steam</sub> = 459.8 / 2113.8 = 0.2175 kg/s<br />In hourly terms: 0.2175 × 3600 = 783 kg/h</dd>
+<dt>Answer</dt><dd><strong>Heat duty about 460 kW; steam consumption about 0.218 kg/s (783 kg/h)</strong></dd>
+<dt>Limitations</dt><dd>Real heaters lose some heat to the surroundings and may subcool the condensate, so actual steam use differs. Using a constant c<sub>p</sub> is acceptable for liquid water over this range but not for gases over wide temperature ranges.</dd>
+</dl>
+</Example>
+
+The equipment that carries out this duty is described in [heat exchanger types and how they work](/chemical-engineering/heat-exchanger-types/). On a plant, the duty is often checked from measured flow and temperatures; see the [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) articles on InstrumentationBlog.in.
+
+## Applications of the energy balance
+
+- **Utility sizing:** steam, cooling water, refrigeration and fuel demand for each unit.
+- **Adiabatic temperature rise:** predicting how hot a reactor gets if cooling fails, an input to process safety studies.
+- **Heat recovery:** matching hot and cold streams across a plant, the basis of [pinch analysis](/chemical-engineering/pinch-analysis/).
+- **Separation units:** condenser and reboiler duties of a distillation column follow from an overall and stagewise energy balance.
+
+## Common mistakes
+
+- Mixing sign conventions for heat and work from different textbooks.
+- Using different reference states for the same species in inlet and outlet streams.
+- Forgetting latent heat when a stream changes phase.
+- Solving the energy balance before the material balance is complete.
+
+## Related reading
+
+- [Material Balance in Chemical Engineering with Examples](/chemical-engineering/material-balance/)
+- [Heat Exchanger Types and How They Work](/chemical-engineering/heat-exchanger-types/)
+- [Pinch Analysis for Heat Recovery Explained](/chemical-engineering/pinch-analysis/)

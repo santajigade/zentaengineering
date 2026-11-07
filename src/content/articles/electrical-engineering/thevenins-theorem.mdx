@@ -1,0 +1,164 @@
+---
+title: "Thevenin's Theorem: Steps and Solved Examples"
+description: "Thevenin's theorem explained step by step: finding Vth and Rth, dependent sources, the Norton link and maximum power transfer, with a solved example."
+pubDate: 2026-11-07
+reviewedDate: 2026-11-07
+discipline: electrical-engineering
+subcategory: circuit-fundamentals
+focusKeyword: "thevenin's theorem"
+image: { src: /images/featured/thevenins-theorem.webp, alt: "Thevenin's Theorem: Steps and Solved Examples: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [thevenins-theorem, norton-theorem, network-theorems, maximum-power-transfer, circuit-analysis]
+faq:
+  - q: "Can Thevenin's theorem be used for AC circuits?"
+    a: "Yes. For a linear AC circuit at a single frequency, the same steps are carried out with phasors and impedances. The result is a Thevenin voltage phasor in series with a Thevenin impedance, which can include resistance and reactance."
+  - q: "Why are voltage sources shorted when finding Rth?"
+    a: "Finding Rth means looking at the circuit with all independent sources set to zero. A voltage source set to zero volts behaves like a short circuit, and a current source set to zero amperes behaves like an open circuit. Dependent sources are left in place."
+  - q: "Does Thevenin's theorem work for non-linear circuits?"
+    a: "No. The theorem relies on superposition, which holds only for linear elements. A circuit containing diodes or transistors can be replaced by a Thevenin equivalent only around a fixed operating point, using a linearized small signal model."
+references:
+  - text: "C. K. Alexander and M. N. O. Sadiku, Fundamentals of Electric Circuits, 7th ed., McGraw-Hill"
+  - text: "W. H. Hayt, J. E. Kemmerly and J. D. Phillips, Engineering Circuit Analysis, 9th ed., McGraw-Hill"
+  - text: "J. W. Nilsson and S. A. Riedel, Electric Circuits, 11th ed., Pearson"
+  - text: "R. L. Boylestad, Introductory Circuit Analysis, 13th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Thevenin's theorem** states that any linear two-terminal circuit, however complex, can be replaced at its terminals by a single voltage source V<sub>th</sub> in series with a single resistance R<sub>th</sub>. V<sub>th</sub> is the open-circuit voltage at the terminals, and R<sub>th</sub> is the resistance seen at the terminals with all independent sources turned off.
+
+</Key>
+
+Thevenin's theorem is one of the most useful tools in circuit analysis. It lets an engineer collapse a large network into a two-element model and then study what happens when only the load changes. This guide explains the theorem, gives the step by step method, covers circuits with dependent sources, links Thevenin and Norton forms, and solves a complete example including maximum power transfer.
+
+## What Thevenin's theorem says
+
+The French engineer Léon Charles Thévenin published the theorem in 1883. It applies to any circuit made of linear elements (resistors, inductors, capacitors, linear dependent sources) and independent sources. Looking into two terminals A and B, the whole circuit behaves exactly like:
+
+- an ideal voltage source V<sub>th</sub>, equal to the voltage across A and B when nothing is connected, in series with
+- a resistance R<sub>th</sub>, equal to the resistance measured across A and B with independent sources deactivated.
+
+"Behaves exactly like" means that for any load connected across A and B, the load voltage and current are the same in the original circuit and in the equivalent. What happens inside the original circuit, such as the power lost in its internal resistors, is not represented by the equivalent.
+
+The load current follows directly from the model:
+
+$$
+I_L = \frac{V_{th}}{R_{th} + R_L}
+$$
+
+<figure>
+<svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Left: a 24 volt source with series resistor R1 of 6 ohms, a shunt resistor R2 of 3 ohms, and a series resistor R3 of 2 ohms leading to terminals A and B with load RL. Right: the Thevenin equivalent, a source Vth of 8 volts in series with Rth of 4 ohms feeding the same terminals.">
+<g stroke="#0b2545" stroke-width="2" fill="none">
+<circle cx="50" cy="140" r="20" />
+<path d="M50 120V60H80M120 60H160V100M160 180V220H50V160" />
+<rect x="80" y="50" width="40" height="20" />
+<rect x="150" y="100" width="20" height="80" />
+<path d="M160 60H190M230 60H260M160 220H260" />
+<rect x="190" y="50" width="40" height="20" />
+<circle cx="380" cy="140" r="20" />
+<path d="M380 120V60H410M450 60H490M380 160V220H490" />
+<rect x="410" y="50" width="40" height="20" />
+</g>
+<circle cx="260" cy="60" r="4" fill="#13a89e" />
+<circle cx="260" cy="220" r="4" fill="#13a89e" />
+<circle cx="490" cy="60" r="4" fill="#13a89e" />
+<circle cx="490" cy="220" r="4" fill="#13a89e" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<text x="50" y="135" text-anchor="middle">+</text>
+<text x="50" y="152" text-anchor="middle">−</text>
+<text x="22" y="100" text-anchor="middle">24 V</text>
+<text x="100" y="40" text-anchor="middle">R1 = 6 Ω</text>
+<text x="178" y="145">R2 = 3 Ω</text>
+<text x="210" y="40" text-anchor="middle">R3 = 2 Ω</text>
+<text x="268" y="56">A</text>
+<text x="268" y="226">B</text>
+<text x="380" y="135" text-anchor="middle">+</text>
+<text x="380" y="152" text-anchor="middle">−</text>
+<text x="350" y="100" text-anchor="middle">Vth = 8 V</text>
+<text x="430" y="40" text-anchor="middle">Rth = 4 Ω</text>
+<text x="498" y="56">A</text>
+<text x="498" y="226">B</text>
+<text x="150" y="262" text-anchor="middle" fill="#0e7f78">Original network</text>
+<text x="440" y="262" text-anchor="middle" fill="#0e7f78">Thevenin equivalent</text>
+</g>
+<path d="M296 140H336M336 140L326 133M336 140L326 147" stroke="#f5b800" stroke-width="3" />
+</svg>
+<figcaption>The network used in the solved example (left) and its Thevenin equivalent seen from terminals A and B (right). The load RL connects across A and B.</figcaption>
+</figure>
+
+## Steps to apply Thevenin's theorem
+
+1. **Identify the load.** Choose the element or branch you want to study and remove it. Mark the two terminals A and B where it was connected.
+2. **Find V<sub>th</sub>.** Calculate the open-circuit voltage between A and B using any method: voltage divider, nodal analysis, mesh analysis or superposition. The basic tools are covered in [Ohm's law and Kirchhoff's laws](/electrical-engineering/ohms-law-kirchhoffs-laws/).
+3. **Find R<sub>th</sub>.** Turn off every independent source: replace voltage sources with short circuits and current sources with open circuits. Then find the equivalent resistance between A and B by series and parallel reduction. Where resistors form a bridge, a [star delta transformation](https://www.instrumentationblog.in/star-delta-transformation-formula/) may be needed.
+4. **Draw the equivalent.** Place V<sub>th</sub> in series with R<sub>th</sub>, with the polarity that gives the open-circuit voltage you found.
+5. **Reconnect the load.** Calculate the load current and voltage from the simple series circuit.
+
+An alternative to step 3 is to find the short-circuit current I<sub>sc</sub> between A and B. Then R<sub>th</sub> = V<sub>th</sub> / I<sub>sc</sub>. This is also how an equivalent is found from measurements on real equipment: measure the open-circuit voltage, then the current into a known load, and solve for R<sub>th</sub>.
+
+### Circuits with dependent sources
+
+Dependent (controlled) sources must not be switched off, because their value depends on a voltage or current elsewhere in the circuit. Two methods are used:
+
+- **Test source method:** turn off independent sources only, apply a test voltage V<sub>t</sub> across A and B, find the current I<sub>t</sub> it delivers, and take R<sub>th</sub> = V<sub>t</sub> / I<sub>t</sub>.
+- **Open circuit and short circuit method:** find V<sub>th</sub> and I<sub>sc</sub> with all sources active, then divide.
+
+With dependent sources R<sub>th</sub> can even come out negative, which indicates that the circuit can supply energy, as in an amplifier model.
+
+## Thevenin and Norton equivalents
+
+Norton's theorem gives the dual result: the same terminals can be modelled by a current source I<sub>N</sub> in parallel with a resistance R<sub>N</sub>. The two forms are related by source transformation:
+
+$$
+R_N = R_{th} \qquad I_N = \frac{V_{th}}{R_{th}}
+$$
+
+Use whichever form makes the next step easier. A Thevenin model suits loads added in series; a Norton model suits loads added in parallel.
+
+## Maximum power transfer
+
+For a source with a fixed Thevenin resistance, the power delivered to a resistive load is greatest when R<sub>L</sub> = R<sub>th</sub>. The maximum power is then:
+
+$$
+P_{max} = \frac{V_{th}^2}{4 R_{th}}
+$$
+
+At this point the efficiency is only 50 percent, because equal power is lost in R<sub>th</sub>. Power systems therefore do not operate at matched conditions; they keep the source resistance much smaller than the load to achieve high efficiency. Matching is used in communication and signal circuits, where getting the most power to a load matters more than efficiency. In AC circuits the condition becomes a load impedance equal to the complex conjugate of the source impedance; see [what is impedance](https://www.instrumentationblog.in/what-is-impedance/) for background.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 24 V DC source feeds R1 = 6 Ω in series, then R2 = 3 Ω connected across the circuit, then R3 = 2 Ω in series to terminals A and B, as in the figure. A load R<sub>L</sub> = 4 Ω is connected across A and B.</dd>
+<dt>Find</dt><dd>The Thevenin equivalent at A and B, the load current, and the load power. Check whether this load receives maximum power.</dd>
+<dt>Assumptions</dt><dd>Ideal source with zero internal resistance, linear resistors, steady DC conditions.</dd>
+<dt>Solution</dt><dd>Remove R<sub>L</sub>. With A and B open, no current flows in R3, so V<sub>th</sub> equals the voltage across R2.<br />V<sub>th</sub> = 24 × 3 / (6 + 3) = 8 V<br />Short the 24 V source. R1 and R2 are now in parallel, in series with R3.<br />R<sub>th</sub> = (6 × 3) / (6 + 3) + 2 = 2 + 2 = 4 Ω<br />I<sub>L</sub> = 8 / (4 + 4) = 1.0 A<br />P<sub>L</sub> = 1.0² × 4 = 4.0 W<br />P<sub>max</sub> = 8² / (4 × 4) = 4.0 W</dd>
+<dt>Answer</dt><dd><strong>V<sub>th</sub> = 8 V, R<sub>th</sub> = 4 Ω, load current 1.0 A, load power 4.0 W. Since R<sub>L</sub> = R<sub>th</sub>, this is the maximum power the network can deliver.</strong></dd>
+<dt>Limitations</dt><dd>The equivalent predicts only terminal quantities. The power lost inside R1, R2 and R3 is not 4 W and must be found from the original circuit. A real source has internal resistance, which would add to R1.</dd>
+</dl>
+</Example>
+
+To check the result, solve the original circuit directly with the 4 Ω load. R3 plus R<sub>L</sub> is 6 Ω, which in parallel with R2 gives 2 Ω. The total resistance is 8 Ω, so the source current is 3 A and the voltage across R2 is 6 V. The load branch current is 6 / 6 = 1 A, matching the Thevenin result.
+
+## Where Thevenin's theorem is used
+
+- **Load studies:** finding the current in one branch for many values of load without re-solving the whole network.
+- **Fault calculations:** the Thevenin impedance at a bus in a power system sets the short circuit current at that point.
+- **Electronics:** modelling a sensor, signal source or bias network as a source with an output resistance, which shows how much the reading drops when a meter or amplifier input loads it.
+- **Instrumentation:** checking that a transmitter loop or bridge output is not pulled down by the input resistance of the measuring device. A further explanation with diagrams is in [Thevenin's theorem made simple](https://www.instrumentationblog.in/thevenins-theorem-made-simple/) on InstrumentationBlog.in.
+
+## Common mistakes
+
+- Leaving the load connected while finding V<sub>th</sub>.
+- Opening a voltage source instead of shorting it when finding R<sub>th</sub>.
+- Switching off dependent sources.
+- Using the equivalent to calculate power inside the original network.
+- Getting the polarity of V<sub>th</sub> wrong, which reverses the load current.
+
+## Related reading
+
+- [Ohm's Law and Kirchhoff's Laws with Worked Examples](/electrical-engineering/ohms-law-kirchhoffs-laws/)
+- [Power Factor Explained: Causes, Effects and Correction](/electrical-engineering/power-factor/)
+- [Cable Sizing: Current Rating and Voltage Drop Explained](/electrical-engineering/cable-sizing/)

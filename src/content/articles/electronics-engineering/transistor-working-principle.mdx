@@ -1,0 +1,155 @@
+---
+title: "Transistor Working Principle: BJT Basics"
+description: "Transistor working principle explained for the BJT: NPN and PNP structure, biasing, current gain, operating regions and a solved switch example."
+pubDate: 2026-11-07
+reviewedDate: 2026-11-07
+discipline: electronics-engineering
+subcategory: components
+focusKeyword: "transistor working principle"
+image: { src: /images/featured/transistor-working-principle.webp, alt: "Transistor Working Principle: BJT Basics: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [transistor, bjt, npn, pnp, current-gain, transistor-switch]
+faq:
+  - q: "Why is the base of a BJT made thin and lightly doped?"
+    a: "Electrons injected from the emitter must cross the base and reach the collector before they recombine with holes. A thin, lightly doped base has few holes and a short path, so only a small fraction of the carriers recombine. That small fraction is the base current, which keeps the current gain high."
+  - q: "Can the emitter and collector of a BJT be swapped?"
+    a: "The transistor will still conduct in the reverse-active mode, but with a much lower current gain. The emitter is heavily doped and the collector is larger and more lightly doped, so the two regions are not interchangeable in practice."
+  - q: "What is the difference between a BJT and a MOSFET?"
+    a: "A BJT is current controlled: a base current controls a larger collector current, and both electrons and holes take part in conduction. A MOSFET is voltage controlled: the gate voltage sets the channel conductance and almost no steady gate current flows."
+references:
+  - text: "A. S. Sedra, K. C. Smith, T. C. Carusone and V. Gaudet, Microelectronic Circuits, 8th ed., Oxford University Press"
+  - text: "R. L. Boylestad and L. Nashelsky, Electronic Devices and Circuit Theory, 11th ed., Pearson"
+  - text: "P. Horowitz and W. Hill, The Art of Electronics, 3rd ed., Cambridge University Press"
+  - text: "D. A. Neamen, Semiconductor Physics and Devices: Basic Principles, 4th ed., McGraw-Hill"
+  - text: "S. M. Sze and K. K. Ng, Physics of Semiconductor Devices, 3rd ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The **transistor working principle** of a bipolar junction transistor (BJT) is that a small current into the base controls a much larger current from collector to emitter. With the base-emitter junction forward biased and the base-collector junction reverse biased, carriers injected from the emitter cross a thin base and are swept into the collector, so I<sub>C</sub> ≈ β I<sub>B</sub>.
+
+</Key>
+
+The transistor is the building block of amplifiers, switches, oscillators and digital logic. The bipolar junction transistor was the first type to be mass produced, and it is still widely used for discrete switching, analog amplifiers and power stages. This guide explains its structure, how it works inside, the equations that describe it, its operating regions, and how to design a simple transistor switch.
+
+## Construction of a BJT
+
+A BJT is made of three doped semiconductor regions forming two PN junctions. In an **NPN** transistor a thin P-type base sits between an N-type emitter and an N-type collector. A **PNP** transistor has the opposite arrangement. The three regions are not alike:
+
+- **Emitter:** heavily doped, so it can inject a large number of carriers into the base.
+- **Base:** very thin and lightly doped, so most injected carriers pass through without recombining.
+- **Collector:** moderately doped and physically the largest region, because it must collect the carriers and dissipate most of the heat.
+
+The circuit symbol has an arrow on the emitter showing the direction of conventional current: out of the emitter for NPN, into the emitter for PNP. If you are new to PN junctions, the article [what is a diode](/electronics-engineering/what-is-a-diode/) explains forward and reverse bias first.
+
+## Transistor working principle step by step
+
+The description below is for an NPN device in the forward-active mode. For PNP the roles of electrons and holes, and all polarities, are reversed.
+
+1. **Bias the junctions.** The base-emitter (BE) junction is forward biased, about 0.6 to 0.7 V for silicon. The base-collector (BC) junction is reverse biased by making the collector more positive than the base.
+2. **Emitter injects electrons.** Forward bias lowers the BE barrier, and the heavily doped emitter injects a large flow of electrons into the base.
+3. **Electrons diffuse across the base.** Because the base is thin and lightly doped, few electrons find holes to recombine with. The few that do, plus holes injected from base into emitter, make up the small base current I<sub>B</sub>.
+4. **Collector sweeps them up.** Electrons reaching the edge of the reverse biased BC depletion region are pulled across by its electric field into the collector. This forms the collector current I<sub>C</sub>.
+5. **Control.** Raising V<sub>BE</sub> slightly raises the injection exponentially, so the base terminal controls the collector current while drawing only a small current itself.
+
+<figure>
+<svg width="580" height="300" viewBox="0 0 580 300" fill="none" role="img" aria-label="NPN transistor structure: a wide N type emitter on the left, a thin P type base in the middle and an N type collector on the right. Electrons flow from emitter through base to collector. A small base current leaves at the base terminal. The base emitter junction is forward biased and the base collector junction reverse biased.">
+<rect x="60" y="90" width="170" height="110" fill="#d9eef8" stroke="#0b2545" stroke-width="2" />
+<rect x="230" y="90" width="50" height="110" fill="#fde9a8" stroke="#0b2545" stroke-width="2" />
+<rect x="280" y="90" width="220" height="110" fill="#e6f6f5" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<text x="145" y="115" text-anchor="middle">Emitter (N+)</text>
+<text x="390" y="115" text-anchor="middle">Collector (N)</text>
+<text x="246" y="232" text-anchor="end">Base (P)</text>
+<text x="145" y="75" text-anchor="middle">BE junction: forward bias</text>
+<text x="400" y="75" text-anchor="middle">BC junction: reverse bias</text>
+<text x="30" y="150" text-anchor="middle">E</text>
+<text x="545" y="150" text-anchor="middle">C</text>
+<text x="255" y="285" text-anchor="middle">B</text>
+<text x="180" y="185" text-anchor="middle" fill="#0e7f78">electrons</text>
+<text x="350" y="285" fill="#0e7f78">small base current</text>
+<text x="400" y="185" text-anchor="middle" fill="#0e7f78">collector current</text>
+</g>
+<path d="M40 145H60M500 145H535M255 200V270" stroke="#0b2545" stroke-width="2" />
+<path d="M90 150H440M440 150L428 142M440 150L428 158" stroke="#13a89e" stroke-width="3" />
+<path d="M266 158V250L338 274" stroke="#f5b800" stroke-width="2" stroke-dasharray="5 4" />
+<path d="M230 82V208M280 82V208" stroke="#0b2545" stroke-width="1" stroke-dasharray="3 3" />
+</svg>
+<figcaption>NPN transistor in the forward-active mode: most electrons from the emitter cross the thin base into the collector; a few recombine and form the base current (not to scale).</figcaption>
+</figure>
+
+## BJT current equations
+
+Kirchhoff's current law at the device gives:
+
+$$
+I_E = I_C + I_B
+$$
+
+The common-emitter current gain β (also written h<sub>FE</sub> for the DC value) and the common-base gain α are:
+
+$$
+\beta = \frac{I_C}{I_B} \qquad \alpha = \frac{I_C}{I_E} = \frac{\beta}{\beta + 1}
+$$
+
+β for small signal transistors is typically in the range of about 50 to 300, and it varies widely between devices of the same type and with temperature and collector current. Good designs therefore never depend on an exact value of β. α is slightly less than 1.
+
+In the active region, the collector current depends exponentially on the base-emitter voltage:
+
+$$
+I_C = I_S \, e^{V_{BE}/V_T}
+$$
+
+where I<sub>S</sub> is the saturation current and V<sub>T</sub> is the thermal voltage, about 25.9 mV at 300 K. This exponential law is why V<sub>BE</sub> stays near 0.7 V over a wide range of currents: a tenfold change in I<sub>C</sub> changes V<sub>BE</sub> by only about 60 mV.
+
+## Operating regions
+
+| Region | BE junction | BC junction | Behaviour | Typical use |
+| --- | --- | --- | --- | --- |
+| Cutoff | Reverse or zero bias | Reverse bias | Almost no current flows | Switch OFF |
+| Forward-active | Forward bias | Reverse bias | I<sub>C</sub> ≈ β I<sub>B</sub> | Amplifier |
+| Saturation | Forward bias | Forward bias | V<sub>CE</sub> small, about 0.1 to 0.3 V | Switch ON |
+| Reverse-active | Reverse bias | Forward bias | Low gain | Rarely used |
+
+In saturation the collector current is limited by the external circuit, not by β. Logic families such as TTL use transistors switching between cutoff and saturation; the [logic gates](/electronics-engineering/logic-gates/) article shows the gate functions they build.
+
+## Transistor configurations
+
+- **Common emitter:** input at base, output at collector. Gives both voltage and current gain with phase inversion; the most common amplifier stage.
+- **Common collector (emitter follower):** output at emitter. Voltage gain just below 1, high input resistance, low output resistance; used as a buffer.
+- **Common base:** input at emitter. Current gain just below 1 but good high frequency response.
+
+## Using a BJT as a switch
+
+To switch a load such as a relay, LED string or small motor from a microcontroller pin, the transistor is driven hard into saturation. Horowitz and Hill recommend supplying more base current than the minimum I<sub>C</sub> / β, commonly designing for a ratio of collector to base current of about 10 (a "forced beta" of 10), so that the transistor stays saturated even with a low-gain device. An inductive load also needs a flyback diode across it.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An NPN transistor switches a 30 mA load from a 12 V supply. The base is driven from a 5 V logic output. V<sub>BE</sub> = 0.7 V when ON.</dd>
+<dt>Find</dt><dd>A suitable base resistor R<sub>B</sub> and the resulting forced beta.</dd>
+<dt>Assumptions</dt><dd>Design for a forced beta of 10; the logic output reaches 5 V and can source a few milliamperes; the transistor's minimum β is well above 10.</dd>
+<dt>Solution</dt><dd>Required base current I<sub>B</sub> = I<sub>C</sub> / 10 = 30 / 10 = 3.0 mA<br />R<sub>B</sub> = (5 − 0.7) / 0.003 = 1433 Ω<br />The nearest E12 value is 1.5 kΩ, slightly higher, so check it:<br />I<sub>B</sub> = 4.3 / 1500 = 2.87 mA<br />Forced beta = 30 / 2.87 = 10.5</dd>
+<dt>Answer</dt><dd><strong>R<sub>B</sub> = 1.5 kΩ gives about 2.9 mA of base current and a forced beta of about 10.5, which keeps the transistor well saturated</strong></dd>
+<dt>Limitations</dt><dd>Check the logic output's current rating and the transistor's datasheet for V<sub>CE(sat)</sub>, maximum collector current and power dissipation. V<sub>BE</sub> rises slightly at higher base current.</dd>
+</dl>
+</Example>
+
+<Calculator path="electronics/transistor-base-resistor" title="Transistor Base Resistor Calculator" />
+
+## Advantages and limitations of the BJT
+
+- **Advantages:** high transconductance for a given current, predictable V<sub>BE</sub>, low noise in many analog stages, simple to drive at low voltages.
+- **Limitations:** needs continuous base current, which wastes power in switching; slower to turn off from saturation because stored charge must be removed; current gain varies with temperature and between devices; risk of thermal runaway in power stages without emitter resistance.
+
+For switching at higher power and speed, MOSFETs are often preferred. The [CMOS inverter](/electronics-engineering/cmos-inverter/) article shows how MOSFETs build digital logic, and [TTL vs CMOS logic families](https://www.instrumentationblog.in/ttl-vs-cmos-logic-families/) on InstrumentationBlog.in compares the two technologies.
+
+## Related reading
+
+- [What Is a Diode? Working, Types and Characteristics](/electronics-engineering/what-is-a-diode/)
+- [Inverting and Non-Inverting Amplifier: Op-Amp Basics](/electronics-engineering/inverting-and-non-inverting-amplifier/)
+- [CMOS Inverter Working Principle](/electronics-engineering/cmos-inverter/)

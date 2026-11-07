@@ -1,0 +1,167 @@
+---
+title: "Stack vs Queue: Differences and Uses"
+description: "Stack vs queue compared: LIFO and FIFO order, core operations, time complexity, array and linked list implementations, and where each is used."
+pubDate: 2026-11-07
+reviewedDate: 2026-11-07
+discipline: computer-science
+subcategory: data-structures
+focusKeyword: "stack vs queue"
+image: { src: /images/featured/stack-vs-queue.webp, alt: "Stack vs Queue: Differences and Uses: featured diagram" }
+format: comparison
+pillar: false
+math: false
+tags: [stack, queue, lifo, fifo, deque, data-structures]
+faq:
+  - q: "Can a queue be built from two stacks?"
+    a: "Yes. Push new items onto an input stack. To dequeue, pop from an output stack; when the output stack is empty, pop every item from the input stack and push it onto the output stack, which reverses the order. Each item is moved at most once, so the amortised cost per operation is constant."
+  - q: "Is a priority queue a queue?"
+    a: "It shares the queue interface of inserting and removing items, but it does not follow FIFO order. It always removes the item with the highest priority. It is usually built on a binary heap, where insert and remove take logarithmic time."
+  - q: "What happens when a stack overflows?"
+    a: "A fixed size stack cannot accept more items once it is full. In a running program, the call stack has a limited size, and very deep or infinite recursion fills it. The program then stops with a stack overflow error, such as RecursionError in Python or StackOverflowError in Java."
+references:
+  - text: "T. H. Cormen, C. E. Leiserson, R. L. Rivest and C. Stein, Introduction to Algorithms, 4th ed., MIT Press"
+  - text: "R. Sedgewick and K. Wayne, Algorithms, 4th ed., Addison-Wesley"
+  - text: "D. E. Knuth, The Art of Computer Programming, Vol. 1: Fundamental Algorithms, 3rd ed., Addison-Wesley"
+  - text: "Python Software Foundation, The Python Standard Library documentation: collections.deque"
+  - text: "Oracle, Java SE API documentation: java.util.Deque and java.util.Stack"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **stack vs queue**, the difference is the order in which items leave. A **stack** is last in, first out (LIFO): items are added and removed at the same end, the top. A **queue** is first in, first out (FIFO): items join at the rear and leave from the front. Both support their main operations in constant time; stacks suit nested and backtracking tasks, queues suit fair, in-order processing.
+
+</Key>
+
+Stacks and queues are two of the simplest and most widely used data structures. Both hold a collection of items and restrict which item can be removed next. That restriction is what makes them useful: it matches the natural order of many problems, from function calls and undo histories to print jobs and network packets. This guide compares them side by side, shows how they are implemented, and explains when to use each.
+
+## How a stack and a queue work
+
+A **stack** works like a pile of plates. You put a plate on top (push) and take the top plate off (pop). The plate removed is always the most recently added one.
+
+A **queue** works like a line at a ticket counter. People join at the back (enqueue) and are served from the front (dequeue). The person served is always the one who has waited longest.
+
+<figure>
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Left: a stack of four boxes labelled 10, 20, 30 and 40 from bottom to top, with push and pop arrows both at the top. Right: a queue of four boxes 10, 20, 30, 40 from front to rear, with dequeue at the front on the left and enqueue at the rear on the right.">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="80" y="220" width="100" height="36" fill="#e6f6f5" />
+<rect x="80" y="184" width="100" height="36" fill="#e6f6f5" />
+<rect x="80" y="148" width="100" height="36" fill="#e6f6f5" />
+<rect x="80" y="112" width="100" height="36" fill="#fde9a8" />
+<rect x="340" y="140" width="56" height="44" fill="#fde9a8" />
+<rect x="396" y="140" width="56" height="44" fill="#e6f6f5" />
+<rect x="452" y="140" width="56" height="44" fill="#e6f6f5" />
+<rect x="508" y="140" width="56" height="44" fill="#e6f6f5" />
+</g>
+<path d="M105 50V100M98 88L105 100L112 88" stroke="#13a89e" stroke-width="2.5" />
+<path d="M155 100V50M148 62L155 50L162 62" stroke="#0e7f78" stroke-width="2.5" />
+<path d="M340 162H290M302 155L290 162L302 169" stroke="#0e7f78" stroke-width="2.5" />
+<path d="M536 106V136M529 124L536 136L543 124" stroke="#13a89e" stroke-width="2.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545">
+<text x="130" y="244" text-anchor="middle">10</text>
+<text x="130" y="208" text-anchor="middle">20</text>
+<text x="130" y="172" text-anchor="middle">30</text>
+<text x="130" y="136" text-anchor="middle">40</text>
+<text x="368" y="167" text-anchor="middle">10</text>
+<text x="424" y="167" text-anchor="middle">20</text>
+<text x="480" y="167" text-anchor="middle">30</text>
+<text x="536" y="167" text-anchor="middle">40</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<text x="96" y="40" text-anchor="middle">push</text>
+<text x="160" y="40" text-anchor="middle">pop</text>
+<text x="190" y="135">top</text>
+<text x="130" y="285" text-anchor="middle" fill="#0e7f78">Stack (LIFO)</text>
+<text x="306" y="146" text-anchor="middle">dequeue</text>
+<text x="368" y="210" text-anchor="middle">front</text>
+<text x="536" y="210" text-anchor="middle">rear</text>
+<text x="536" y="96" text-anchor="middle">enqueue</text>
+<text x="452" y="285" text-anchor="middle" fill="#0e7f78">Queue (FIFO)</text>
+</g>
+</svg>
+<figcaption>A stack adds and removes at the top. A queue adds at the rear and removes from the front. Highlighted cells show the next item to leave.</figcaption>
+</figure>
+
+## Stack vs queue comparison table
+
+| Feature | Stack | Queue |
+| --- | --- | --- |
+| Order | LIFO: last in, first out | FIFO: first in, first out |
+| Insert | push (at top) | enqueue (at rear) |
+| Remove | pop (from top) | dequeue (from front) |
+| Look without removing | peek or top | peek or front |
+| Ends used | One end | Two ends |
+| Time for insert and remove | O(1) | O(1) |
+| Typical array implementation | Array with a top index | Circular buffer with front and rear indices |
+| Classic algorithm | Depth-first search | Breadth-first search |
+| Typical uses | Function calls, undo, parsing, backtracking | Scheduling, buffering, message passing |
+
+All the main operations run in constant time, O(1), when the structure is implemented correctly. The meaning of this notation is explained in [Big O notation explained with examples](/computer-science/big-o-notation/).
+
+## Differences explained
+
+### Access order
+
+The only real difference between the two structures is which item leaves next. A stack reverses order: push A, B, C and you pop C, B, A. A queue preserves order: enqueue A, B, C and you dequeue A, B, C. Every use case follows from this property.
+
+### Implementation
+
+Both can be built on an array or a linked list. The trade-offs between those two storage methods are covered in [arrays vs linked lists](/computer-science/arrays-vs-linked-lists/).
+
+- **Stack on an array:** keep an index to the top. Push writes at top and increments it; pop decrements it and reads. A dynamic array grows when full, giving amortised O(1) push.
+- **Stack on a linked list:** push and pop at the head node.
+- **Queue on an array:** a naive array that removes from index 0 must shift every remaining element, which is O(n). A **circular buffer** avoids this. It keeps front and rear indices that wrap around to the start of the array using the modulo operation.
+- **Queue on a linked list:** keep pointers to both the head (front) and tail (rear) nodes, so both operations are O(1).
+
+### In standard libraries
+
+- **Python:** a list works as a stack with append and pop. For a queue, the documentation recommends collections.deque, because list.pop(0) and list.insert(0, x) are O(n), while deque supports fast appends and pops at both ends.
+- **Java:** the Java API documentation states that the Deque interface and its implementations (such as ArrayDeque) provide a more complete set of LIFO stack operations and should be used in preference to the older Stack class. Queue is an interface implemented by ArrayDeque and LinkedList.
+- **C++:** std::stack and std::queue are container adaptors, by default built on std::deque.
+
+## Related structures
+
+- **Deque (double-ended queue):** insert and remove at both ends, so it can act as either a stack or a queue.
+- **Circular queue:** a fixed capacity queue on a circular buffer, common in device drivers and embedded systems.
+- **Priority queue:** removes the highest priority item rather than the oldest; usually a binary heap with O(log n) insert and remove.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>(1) The postfix expression 5 3 + 2 ×, to be evaluated with a stack. (2) A circular queue with capacity 8, front index 6 and 4 items currently stored.</dd>
+<dt>Find</dt><dd>(1) The value of the expression and the stack contents after each step. (2) The array index where the next enqueued item will be stored.</dd>
+<dt>Assumptions</dt><dd>Operands are pushed; each operator pops two operands, applies the operation and pushes the result. Queue indices start at 0 and rear = (front + count) mod capacity.</dd>
+<dt>Solution</dt><dd>(1) Read 5: push, stack [5]<br />Read 3: push, stack [5, 3]<br />Read +: pop 3 and 5, push 5 + 3 = 8, stack [8]<br />Read 2: push, stack [8, 2]<br />Read ×: pop 2 and 8, push 8 × 2 = 16, stack [16]<br />(2) Items occupy indices 6, 7, 0 and 1. Next index = (6 + 4) mod 8 = 10 mod 8 = 2</dd>
+<dt>Answer</dt><dd><strong>(1) The expression evaluates to 16, the single value left on the stack. (2) The next item goes to index 2.</strong></dd>
+<dt>Limitations</dt><dd>The postfix evaluator assumes a valid expression; a real one must check for too few operands or extra values left on the stack. The circular queue must check count before enqueueing, because it is full when count equals capacity.</dd>
+</dl>
+</Example>
+
+## When to use a stack vs queue
+
+Use a **stack** when the most recent item must be handled first:
+
+- **Function calls:** the call stack stores return addresses and local variables; the most recent call returns first. Each [process or thread](/computer-science/process-vs-thread/) has its own call stack.
+- **Undo and back navigation:** editors and browsers push each action or page and pop to go back.
+- **Parsing and expression evaluation:** checking balanced brackets, converting infix to postfix, and evaluating postfix expressions, as in the example.
+- **Backtracking and depth-first search:** maze solving, puzzle solvers and graph traversal go as deep as possible, then pop back.
+
+Use a **queue** when items must be handled in arrival order:
+
+- **Scheduling:** operating system ready queues, print spoolers and job queues.
+- **Buffering:** keyboard input, serial communication and audio streams use circular buffers between a producer and a consumer running at different speeds.
+- **Breadth-first search:** exploring a graph level by level, which finds the shortest path in an unweighted graph.
+- **Messaging:** message brokers and task queues pass work between services in order.
+
+## Common mistakes
+
+- Using a Python list as a queue with pop(0), which becomes slow for large queues.
+- Popping from an empty stack or dequeuing from an empty queue without a check.
+- Forgetting the modulo wrap in a circular buffer, which writes past the end of the array.
+- Writing deep recursion without considering the call stack limit; an explicit stack can replace recursion.
+
+## Related reading
+
+- [Arrays vs Linked Lists: Differences and Use Cases](/computer-science/arrays-vs-linked-lists/)
+- [Big O Notation Explained with Examples](/computer-science/big-o-notation/)
+- [Process vs Thread in Operating Systems](/computer-science/process-vs-thread/)
