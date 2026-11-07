@@ -28,7 +28,9 @@ export const SITE = {
   showAdPlaceholders: false,
   // Newsletter form POST URL from MailerLite or Brevo. The signup box is hidden while empty.
   newsletterAction: '',
-  ga4: '', // GA4 measurement ID, e.g. 'G-XXXXXXXXXX'
+  ga4: '', // GA4 measurement ID, e.g. 'G-XXXXXXXXXX'. Leave empty while GA4 runs through Google Tag Manager.
+  // Google Tag Manager container (GA4 is configured inside it). Loaded on the live site only, never on preview.
+  gtm: 'GTM-WD669NV9',
   // Sister sites: linked only inside content, never in menus.
   sister: {
     calculator: 'https://zentacalculator.com',
