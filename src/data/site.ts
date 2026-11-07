@@ -31,6 +31,13 @@ export const SITE = {
   ga4: '', // GA4 measurement ID, e.g. 'G-XXXXXXXXXX'. Leave empty while GA4 runs through Google Tag Manager.
   // Google Tag Manager container (GA4 is configured inside it). Loaded on the live site only, never on preview.
   gtm: 'GTM-WD669NV9',
+  // Social profiles: icons show in the footer only when a URL is set.
+  social: {
+    linkedin: 'https://www.linkedin.com/company/zentaengineering',
+    facebook: 'https://www.facebook.com/zentaengineering',
+    instagram: '',
+    youtube: '',
+  },
   // Sister sites: linked only inside content, never in menus.
   sister: {
     calculator: 'https://zentacalculator.com',

@@ -22,6 +22,7 @@ const ogImage = new URL(image ?? '/brand/og-default.png', SITE.url).href;
 const org = {
   '@context': 'https://schema.org', '@type': 'Organization', '@id': `${SITE.url}/#org`, name: SITE.name, url: SITE.url,
   logo: `${SITE.url}/icon-512.png`, email: SITE.email,
+  sameAs: Object.values(SITE.social).filter(Boolean),
 };
 const site = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${SITE.url}/#website`, name: SITE.name, url: SITE.url, publisher: { '@id': `${SITE.url}/#org` } };
 const schemas = Astro.url.pathname === '/' ? [org, site, ...jsonld] : [org, ...jsonld];

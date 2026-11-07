@@ -80,6 +80,9 @@ a.card:hover { border-color: var(--ze-navy); }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
 .site-footer a { color: #c9d3df; text-decoration: none; display: inline-flex; min-height: 32px; align-items: center; }
 .site-footer a:hover { color: #fff; }
+.site-footer .social { display: flex; gap: 10px; }
+.site-footer .social a { width: 36px; height: 36px; justify-content: center; border-radius: 50%; border: 1px solid rgba(255,255,255,.28); color: #c9d3df; }
+.site-footer .social a:hover { background: var(--ze-teal); border-color: var(--ze-teal); color: #fff; }
 .site-footer .legal { border-top: 1px solid var(--ze-navy-700); padding-top: 18px; padding-bottom: 26px; font-size: 13px; }
 
 /* Page heads */
