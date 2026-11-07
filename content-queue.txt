@@ -1,11 +1,11 @@
 # Daily publishing queue. One line per article: discipline|subcategory|title|slug|format|focus keyword|status
 # The daily run takes the first 6 lines with status "todo", writes them, then changes status to the publish date.
-mechanical-engineering|strength-of-materials|Poisson's Ratio Explained with Examples|poissons-ratio|fundamentals|poisson's ratio|todo
-electrical-engineering|circuit-fundamentals|Thevenin's Theorem: Steps and Solved Examples|thevenins-theorem|fundamentals|thevenin's theorem|todo
-electronics-engineering|components|Transistor Working Principle: BJT Basics|transistor-working-principle|working-principle|transistor working principle|todo
-civil-engineering|structural-analysis|Types of Beams and Supports in Structures|types-of-beams|explanation|types of beams|todo
-chemical-engineering|process-fundamentals|Energy Balance in Chemical Processes Explained|energy-balance|fundamentals|energy balance|todo
-computer-science|data-structures|Stack vs Queue: Differences and Uses|stack-vs-queue|comparison|stack vs queue|todo
+mechanical-engineering|strength-of-materials|Poisson's Ratio Explained with Examples|poissons-ratio|fundamentals|poisson's ratio|2026-11-07
+electrical-engineering|circuit-fundamentals|Thevenin's Theorem: Steps and Solved Examples|thevenins-theorem|fundamentals|thevenin's theorem|2026-11-07
+electronics-engineering|components|Transistor Working Principle: BJT Basics|transistor-working-principle|working-principle|transistor working principle|2026-11-07
+civil-engineering|structural-analysis|Types of Beams and Supports in Structures|types-of-beams|explanation|types of beams|2026-11-07
+chemical-engineering|process-fundamentals|Energy Balance in Chemical Processes Explained|energy-balance|fundamentals|energy balance|2026-11-07
+computer-science|data-structures|Stack vs Queue: Differences and Uses|stack-vs-queue|comparison|stack vs queue|2026-11-07
 automation-robotics|plc|PLC Ladder Logic Basics with Examples|plc-ladder-logic|fundamentals|plc ladder logic|todo
 ai-data-engineering|machine-learning|Overfitting and Underfitting in Machine Learning|overfitting-and-underfitting|fundamentals|overfitting and underfitting|todo
 telecommunication-engineering|network-fundamentals|IP Addressing and Subnetting Explained|ip-addressing-and-subnetting|fundamentals|ip addressing and subnetting|todo
