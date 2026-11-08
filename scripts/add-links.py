@@ -250,6 +250,9 @@ def main():
         for cands, url in links:
             if f']({url})' in text:
                 continue
+            # Owner rule (8 Nov 2026): at most one InstrumentationBlog.in link per article.
+            if 'instrumentationblog.in' in url and 'instrumentationblog.in' in '\n'.join(lines):
+                continue
             mask = prose_mask(lines)
             got = None
             for c in cands:

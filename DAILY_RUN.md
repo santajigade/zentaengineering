@@ -19,7 +19,7 @@ File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that al
 - A worked Example with Given, Find, Assumptions, Solution, Answer, Limitations. Check the arithmetic by running it in Python.
 - FAQ with exactly 3 questions in front matter; 4 or more real references (standards, textbooks, official handbooks).
 - Internal links ONLY to articles that already exist in `src/content/` (check with ls). Never link to queued or unwritten slugs.
-- instrumentationblog.in links only where relevant and only to URLs already used on the site, listed in `scripts/instrumentationblog-verified.txt` (the shell cannot reach external sites to verify new ones).
+- instrumentationblog.in: at most 1 link per article, in body text only (never in Related reading), only when it directly helps the reader, and only to URLs listed in `scripts/instrumentationblog-verified.txt`. Most articles need none. See AUTHORING.md, Links.
 - Calculator: embed `<Calculator path="category/slug" title="..." />` only when a path in `scripts/zentacalculator-list.txt` directly matches the topic. Otherwise no calculator.
 - MDX safety: no curly braces in prose; no "<" followed by a letter in prose; no markdown links inside `<dd>`; imports exactly `import Example from '../../../components/Example.astro';` (same pattern for Key and Calculator), never `':../`.
 

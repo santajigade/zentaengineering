@@ -83,7 +83,7 @@ The same effect is seen in films when a turning wheel appears to rotate slowly b
 
 The only reliable protection is an analog **low-pass filter** placed before the ADC. It attenuates all frequencies above the Nyquist frequency to a level below the ADC's resolution, so nothing significant is left to alias.
 
-A simple [RC filter](/electronics-engineering/pcb-design-basics/) rolls off at only 20 [dB](https://www.instrumentationblog.in/decibel-in-electronics-db-dbm/) per decade, which is rarely enough on its own. Practical anti-aliasing filters are often second order or higher, such as Sallen-Key or multiple feedback active filters, or a combination of an RC filter with a high sampling rate.
+A simple [RC filter](/electronics-engineering/pcb-design-basics/) rolls off at only 20 dB per decade, which is rarely enough on its own. Practical anti-aliasing filters are often second order or higher, such as Sallen-Key or multiple feedback active filters, or a combination of an RC filter with a high sampling rate.
 
 <Calculator path="electronics/rc-filter" title="RC Filter Calculator" />
 
@@ -136,5 +136,3 @@ Consider a power monitor that must measure mains voltage and current up to the 2
 
 - [Inverting and Non-Inverting Amplifier: Op-Amp Basics](/electronics-engineering/inverting-and-non-inverting-amplifier/)
 - [Logic Gates: Types and Truth Tables Explained](/electronics-engineering/logic-gates/)
-- [Sample and hold circuit](https://www.instrumentationblog.in/sample-and-hold-circuit/) on InstrumentationBlog.in
-- [Voltage reference selection for ADCs](https://www.instrumentationblog.in/voltage-reference-ic-selection/) on InstrumentationBlog.in

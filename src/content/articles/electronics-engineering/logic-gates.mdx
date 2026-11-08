@@ -115,11 +115,11 @@ The **noise margin** is the amount of noise a signal can pick up and still be re
 - **Propagation delay:** the time from an input change to the resulting output change. It limits how fast a circuit can operate.
 - **Fan-out:** how many inputs one output can drive while keeping valid logic levels.
 - **Power consumption:** CMOS gates draw very little current when static; most power is used when they switch, so it rises with frequency.
-- **[Schmitt](https://www.instrumentationblog.in/schmitt-trigger-hysteresis/) trigger inputs:** some gates have hysteresis, so slow or noisy input signals produce clean output transitions.
+- **Schmitt trigger inputs:** some gates have hysteresis, so slow or noisy input signals produce clean output transitions.
 
 ## Combinational and sequential logic
 
-Circuits built only from gates, where the outputs depend only on the present inputs, are called **combinational logic**. Adders, [decoders](https://www.instrumentationblog.in/7-segment-display-decoder/) and multiplexers are examples. When gates are connected with feedback, they can store a state. Two cross-coupled NAND or NOR gates form an SR latch, the simplest memory element, and latches combine into flip-flops, registers and counters. Circuits whose outputs depend on both present inputs and stored state are called **sequential logic**, and they are the basis of every [processor](/electronics-engineering/microcontroller-vs-microprocessor/) and state machine.
+Circuits built only from gates, where the outputs depend only on the present inputs, are called **combinational logic**. Adders, decoders and multiplexers are examples. When gates are connected with feedback, they can store a state. Two cross-coupled NAND or NOR gates form an SR latch, the simplest memory element, and latches combine into flip-flops, registers and counters. Circuits whose outputs depend on both present inputs and stored state are called **sequential logic**, and they are the basis of every [processor](/electronics-engineering/microcontroller-vs-microprocessor/) and state machine.
 
 ## Where logic gates are used
 

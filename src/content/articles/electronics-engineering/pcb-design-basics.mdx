@@ -53,7 +53,7 @@ A common finished thickness is 1.6 mm. Boards are described by their number of c
 - **Traces (tracks):** copper paths that connect pads.
 - **Pads:** copper areas where component leads or terminals are soldered. Through-hole pads have a plated hole; surface mount pads sit on the surface.
 - **Vias:** plated holes that connect layers. Through [vias](https://www.instrumentationblog.in/pcb-via-current-capacity/) pass through the whole board; blind vias connect an outer layer to an inner one; buried vias connect inner layers only.
-- **Planes:** large copper areas, usually ground or power, that give low [impedance](https://www.instrumentationblog.in/controlled-impedance-pcb-traces/) supply paths and a clean return path for signals.
+- **Planes:** large copper areas, usually ground or power, that give low impedance supply paths and a clean return path for signals.
 - **Thermal reliefs:** spoke connections between a pad and a plane, which make soldering easier by limiting heat flow into the plane.
 
 ## The PCB design workflow
@@ -95,7 +95,7 @@ Conductors at different voltages need enough spacing to prevent arcing and leaka
 
 ## Layout good practice
 
-- **Use a solid [ground plane](https://www.instrumentationblog.in/pcb-copper-pour-guidelines/)** on at least one layer. It gives every signal a short return path directly under its trace, which reduces noise and radiated emissions.
+- **Use a solid ground plane** on at least one layer. It gives every signal a short return path directly under its trace, which reduces noise and radiated emissions.
 - **Place decoupling capacitors close to IC power pins,** with short connections to the pin and to ground, so they can supply fast current pulses.
 - **Keep switching power loops small.** In a [buck converter](/electronics-engineering/buck-converter/), the input capacitor, switch and diode or low-side MOSFET form a loop carrying fast-changing current; it should be as compact as possible.
 - **Separate noisy and sensitive circuits** by placement, keeping analog inputs away from switching nodes and clock lines.
@@ -117,7 +117,7 @@ Every fabricator publishes minimum trace width and spacing, drill sizes, annular
 
 ## Applications
 
-PCBs are used in nearly every electronic product: consumer devices, industrial controllers, power supplies, automotive modules, medical equipment and communication systems. The same design principles apply from a simple two-layer sensor board to a twelve-layer processor board, with more attention to [signal integrity](https://www.instrumentationblog.in/signal-integrity-high-speed-pcb-design/) as speeds rise.
+PCBs are used in nearly every electronic product: consumer devices, industrial controllers, power supplies, automotive modules, medical equipment and communication systems. The same design principles apply from a simple two-layer sensor board to a twelve-layer processor board, with more attention to signal integrity as speeds rise.
 
 ## Related reading
 
