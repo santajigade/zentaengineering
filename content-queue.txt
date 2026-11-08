@@ -6,12 +6,12 @@ electronics-engineering|components|Transistor Working Principle: BJT Basics|tran
 civil-engineering|structural-analysis|Types of Beams and Supports in Structures|types-of-beams|explanation|types of beams|2026-11-07
 chemical-engineering|process-fundamentals|Energy Balance in Chemical Processes Explained|energy-balance|fundamentals|energy balance|2026-11-07
 computer-science|data-structures|Stack vs Queue: Differences and Uses|stack-vs-queue|comparison|stack vs queue|2026-11-07
-automation-robotics|plc|PLC Ladder Logic Basics with Examples|plc-ladder-logic|fundamentals|plc ladder logic|todo
-ai-data-engineering|machine-learning|Overfitting and Underfitting in Machine Learning|overfitting-and-underfitting|fundamentals|overfitting and underfitting|todo
-telecommunication-engineering|network-fundamentals|IP Addressing and Subnetting Explained|ip-addressing-and-subnetting|fundamentals|ip addressing and subnetting|todo
-petroleum-engineering|reservoir-engineering|Reservoir Drive Mechanisms Explained|reservoir-drive-mechanisms|explanation|reservoir drive mechanisms|todo
-renewable-energy|solar-pv|Solar Panel Efficiency: Factors and Calculation|solar-panel-efficiency|fundamentals|solar panel efficiency|todo
-environmental-engineering|water-treatment|Reverse Osmosis Water Treatment Explained|reverse-osmosis|working-principle|reverse osmosis|todo
+automation-robotics|plc|PLC Ladder Logic Basics with Examples|plc-ladder-logic|fundamentals|plc ladder logic|2026-11-08
+ai-data-engineering|machine-learning|Overfitting and Underfitting in Machine Learning|overfitting-and-underfitting|fundamentals|overfitting and underfitting|2026-11-08
+telecommunication-engineering|network-fundamentals|IP Addressing and Subnetting Explained|ip-addressing-and-subnetting|fundamentals|ip addressing and subnetting|2026-11-08
+petroleum-engineering|reservoir-engineering|Reservoir Drive Mechanisms Explained|reservoir-drive-mechanisms|explanation|reservoir drive mechanisms|2026-11-08
+renewable-energy|solar-pv|Solar Panel Efficiency: Factors and Calculation|solar-panel-efficiency|fundamentals|solar panel efficiency|2026-11-08
+environmental-engineering|water-treatment|Reverse Osmosis Water Treatment Explained|reverse-osmosis|working-principle|reverse osmosis|2026-11-08
 mining-engineering|mining-methods|Open Pit Mine Design: Benches, Slopes and Ramps|open-pit-mine-design|explanation|open pit mine design|todo
 manufacturing-engineering|manufacturing-processes|Metal Casting Process: Steps and Types|metal-casting-process|explanation|metal casting process|todo
 materials-engineering|engineering-materials|Mechanical Properties of Materials Explained|mechanical-properties-of-materials|fundamentals|mechanical properties of materials|todo
