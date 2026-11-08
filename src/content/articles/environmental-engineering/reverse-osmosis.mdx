@@ -1,0 +1,144 @@
+---
+title: "Reverse Osmosis Water Treatment Explained"
+description: "Reverse osmosis explained: osmotic pressure, how RO membranes work, plant layout, pretreatment, recovery and rejection, uses and a worked seawater example."
+pubDate: 2026-11-08
+reviewedDate: 2026-11-08
+discipline: environmental-engineering
+subcategory: water-treatment
+focusKeyword: "reverse osmosis"
+image: { src: /images/featured/reverse-osmosis.webp, alt: "Reverse Osmosis Water Treatment Explained: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [reverse-osmosis, desalination, membrane, water-treatment, osmotic-pressure]
+faq:
+  - q: "What does reverse osmosis remove from water?"
+    a: "RO membranes reject most dissolved salts and ions, as well as larger molecules such as many organics, and they act as a barrier to particles, bacteria and viruses. Small uncharged molecules, some dissolved gases such as carbon dioxide and some low molecular weight organics pass more easily, so RO is often combined with other treatment steps."
+  - q: "Why is reverse osmosis water remineralised?"
+    a: "RO permeate has very low mineral content, low alkalinity and is often slightly acidic. Such water can be corrosive to pipes and lacks calcium and magnesium. Desalination plants therefore add minerals, commonly by lime or calcite contact, adjust the pH and disinfect the water before distribution, as described in WHO guidance on desalination."
+  - q: "What is the difference between reverse osmosis and nanofiltration?"
+    a: "Both are pressure driven membrane processes. Nanofiltration membranes are looser: they reject most divalent ions such as calcium, magnesium and sulfate but pass more monovalent ions such as sodium and chloride, and they operate at lower pressure. RO rejects both monovalent and divalent ions and is used for desalination."
+references:
+  - text: "J. C. Crittenden, R. R. Trussell, D. W. Hand, K. J. Howe and G. Tchobanoglous, MWH's Water Treatment: Principles and Design, 3rd ed., Wiley, 2012"
+  - text: "AWWA Manual M46, Reverse Osmosis and Nanofiltration, 3rd ed., American Water Works Association, 2019"
+  - text: "DuPont Water Solutions, FilmTec Reverse Osmosis Membranes Technical Manual"
+  - text: "World Health Organization, Safe Drinking-water from Desalination, WHO, 2011"
+  - text: "M. Mulder, Basic Principles of Membrane Technology, 2nd ed., Kluwer Academic, 1996"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Reverse osmosis** (RO) is a membrane process that removes dissolved salts and most other contaminants from water. A high pressure pump pushes feed water against a semi-permeable membrane at a pressure greater than the osmotic pressure, so water passes through the membrane while salts are held back. One stream of purified water (permeate) and one stream of concentrated brine (concentrate) leave the unit.
+
+</Key>
+
+Reverse osmosis is the main technology for seawater and brackish water desalination, and it is widely used for boiler feed water, pharmaceutical and electronics grade water, and the reuse of treated wastewater. It removes dissolved ions that conventional coagulation and filtration, described in the [water treatment process](/environmental-engineering/water-treatment-process/), cannot remove. This article explains the principle, the equipment, the key design numbers and the limits of the process.
+
+## Osmosis and osmotic pressure
+
+When pure water and a salt solution are separated by a semi-permeable membrane, water naturally flows from the pure side into the salty side. This is **osmosis**. The flow stops when the pressure on the salty side rises enough to balance it. That balancing pressure is the **osmotic pressure** π.
+
+For dilute solutions, osmotic pressure follows the van 't Hoff equation:
+
+$$
+\pi = i\,C\,R\,T
+$$
+
+where i is the number of ions each dissolved molecule forms (2 for sodium chloride), C is the molar concentration (mol/L), R is the gas constant (0.08314 L·bar/(mol·K)) and T is the absolute temperature (K). Osmotic pressure rises roughly in proportion to salt concentration, so seawater has a far higher osmotic pressure than brackish groundwater.
+
+<Calculator path="chemistry/osmotic-pressure" title="Osmotic Pressure Calculator" />
+
+## How reverse osmosis works
+
+If a pressure larger than the osmotic pressure is applied to the salty side, the natural flow reverses: water is forced from the concentrated side through the membrane to the dilute side, leaving salts behind. The driving force is the difference between the applied pressure difference ΔP and the osmotic pressure difference Δπ across the membrane. The simple solution diffusion model, described in MWH's Water Treatment and by Mulder, gives:
+
+$$
+J_w = A\,(\Delta P - \Delta \pi) \qquad J_s = B\,(C_f - C_p)
+$$
+
+where Jw is the water flux, Js is the salt flux, A and B are the water and salt permeability coefficients of the membrane, and Cf and Cp are the feed and permeate concentrations. Two practical results follow:
+
+- Water flux rises with applied pressure, but salt flux does not, so higher pressure gives purer permeate.
+- As water leaves the feed, the remaining feed becomes saltier and its osmotic pressure rises, which reduces the net driving pressure along the membrane.
+
+RO plants operate in **cross-flow**: the feed sweeps along the membrane surface rather than being pushed straight through it. The sweeping flow carries rejected salts away as concentrate and limits fouling.
+
+<figure>
+<svg width="600" height="240" viewBox="0 0 600 240" fill="none" role="img" aria-label="Reverse osmosis process flow. Feed water passes through pretreatment, then a high pressure pump, into a pressure vessel divided by a membrane. Water passes through the membrane to the low pressure permeate side and leaves as product water. The concentrated brine leaves the high pressure side through a control valve.">
+<rect x="50" y="80" width="100" height="50" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<circle cx="205" cy="105" r="22" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<rect x="260" y="70" width="210" height="70" rx="6" fill="#dbeafe" stroke="#0b2545" stroke-width="2" />
+<path d="M260 110H470" stroke="#e8590c" stroke-width="2.5" stroke-dasharray="8 4" />
+<g stroke="#0b2545" stroke-width="2">
+<path d="M10 105H50M150 105H183M227 90H260M470 86H580M365 140V200H580" />
+<path d="M44 100L50 105L44 110M177 100L183 105L177 110M254 85L260 90L254 95M574 81L580 86L574 91M574 195L580 200L574 205" />
+<path d="M505 78L525 94V78L505 94Z" fill="#ffffff" />
+</g>
+<g stroke="#1d4ed8" stroke-width="2"><path d="M310 96V124M420 96V124M305 118L310 124L315 118M415 118L420 124L425 118" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="28" y="95">Feed</text>
+<text x="100" y="102">Pretreatment</text>
+<text x="100" y="120" fill="#4a5a70">filters, dosing</text>
+<text x="205" y="109">HP</text>
+<text x="205" y="146">pump</text>
+<text x="365" y="88">Feed side, high pressure</text>
+<text x="365" y="134">Permeate side</text>
+<text x="365" y="62" fill="#e8590c">Semi-permeable membrane</text>
+<text x="545" y="70">Concentrate</text>
+<text x="515" y="114" fill="#4a5a70">valve</text>
+<text x="470" y="192">Permeate (product)</text>
+<text x="150" y="200" fill="#4a5a70">Applied pressure must exceed</text>
+<text x="150" y="216" fill="#4a5a70">the osmotic pressure</text>
+</g>
+</svg>
+<figcaption>A single RO stage: pretreated feed is pressurised, water crosses the membrane to the permeate side, and salts leave in the concentrate through a pressure control valve.</figcaption>
+</figure>
+
+## Main parts of a reverse osmosis plant
+
+1. **Intake and pretreatment.** Removes particles, colloids and organisms that would foul the membranes. Steps may include screening, coagulation, media filtration or ultrafiltration, antiscalant dosing to stop mineral scale, and fine cartridge filters just before the pumps. Membrane suppliers specify feed limits such as the silt density index (SDI); the FilmTec manual, for example, requires an SDI below 5.
+2. **Dechlorination.** Polyamide thin film composite membranes are damaged by free chlorine, so chlorine used upstream is removed, commonly with sodium bisulfite.
+3. **High pressure pumps.** Usually multistage [centrifugal pumps](/mechanical-engineering/centrifugal-pump-working-principle/) that raise the feed to the required operating pressure.
+4. **Membrane elements and pressure vessels.** Spiral wound elements, made of flat membrane sheets wrapped around a permeate tube with feed spacers, are housed in series inside pressure vessels. Vessels are arranged in stages and passes.
+5. **Energy recovery devices.** In seawater plants the concentrate leaves at high pressure. Pressure exchangers or turbines transfer that energy back to the feed, cutting energy use considerably.
+6. **Post treatment.** Remineralisation, pH adjustment and disinfection make the permeate stable and safe for distribution.
+7. **Cleaning system.** Clean in place (CIP) skids circulate acid and alkaline solutions to remove scale and biofilm when performance falls.
+
+Feed, interstage and concentrate pressures are monitored continuously, because a rising differential pressure across a stage is an early sign of fouling. The instruments used are covered in the [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) section of InstrumentationBlog.in.
+
+## Recovery, rejection and reverse osmosis performance
+
+Two ratios describe how an RO system performs:
+
+$$
+r = \frac{Q_p}{Q_f} \qquad R = 1 - \frac{C_p}{C_f}
+$$
+
+**Recovery** r is the fraction of feed flow that becomes permeate. **Salt rejection** R is the fraction of dissolved salt held back. Modern seawater membranes have rejections above 99 percent. Recovery is limited by scaling and by the rising osmotic pressure of the concentrate: seawater systems commonly run at around 35 to 50 percent recovery, while brackish water systems can reach about 75 to 85 percent, according to MWH's Water Treatment.
+
+The concentrate flow and concentration follow from a simple mass balance: Qf Cf = Qp Cp + Qc Cc.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Feed water treated as a 35 g/L sodium chloride solution at 25 °C. Feed flow 100 m³/h, recovery 45 percent, salt rejection 99.5 percent. NaCl molar mass 58.44 g/mol.</dd>
+<dt>Find</dt><dd>The ideal osmotic pressure of the feed, the permeate and concentrate flows, and the permeate and concentrate concentrations.</dd>
+<dt>Assumptions</dt><dd>Ideal van 't Hoff behaviour with i = 2; rejection based on feed concentration; steady state.</dd>
+<dt>Solution</dt><dd>C = 35 / 58.44 = 0.599 mol/L; T = 298.15 K<br />π = 2 × 0.599 × 0.08314 × 298.15 = 29.7 bar<br />Qp = 0.45 × 100 = 45 m³/h; Qc = 100 − 45 = 55 m³/h<br />Cp = (1 − 0.995) × 35 = 0.175 g/L = 175 mg/L<br />Cc = (100 × 35 − 45 × 0.175) / 55 = 3492.1 / 55 = 63.5 g/L</dd>
+<dt>Answer</dt><dd><strong>Feed osmotic pressure about 29.7 bar (ideal); 45 m³/h of permeate at about 175 mg/L and 55 m³/h of concentrate at about 63.5 g/L</strong></dd>
+<dt>Limitations</dt><dd>Real seawater is a mixture of salts and is not ideal, so its actual osmotic pressure is lower than this ideal NaCl estimate. The concentrate end of the membrane sees nearly twice the feed osmotic pressure, which is why applied pressures are far above the feed value.</dd>
+</dl>
+</Example>
+
+## Advantages and limitations of reverse osmosis
+
+| Advantages | Limitations |
+| --- | --- |
+| Removes dissolved salts, most organics and microorganisms | Needs high pressure, so energy use is significant for seawater |
+| Modular: capacity grows by adding vessels | Sensitive to fouling, scaling and chlorine; needs good pretreatment |
+| No phase change, unlike thermal desalination | Produces a concentrate stream that needs proper disposal |
+| Continuous operation with automatic control | Permeate needs remineralisation for drinking use |
+
+Concentrate disposal is a real environmental issue. Seawater plants usually discharge through diffusers designed to dilute the brine quickly, while inland brackish plants may need evaporation ponds or further treatment. These impacts are assessed during [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/) of new plants. For water reuse, RO often follows biological treatment such as the [activated sludge process](/environmental-engineering/activated-sludge-process/) and ultrafiltration, producing water suitable for industrial use or further purification.

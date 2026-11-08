@@ -1,0 +1,156 @@
+---
+title: "Reservoir Drive Mechanisms Explained"
+description: "Reservoir drive mechanisms explained: rock and fluid expansion, solution gas, gas cap, water drive, gravity drainage, drive indices and typical recovery."
+pubDate: 2026-11-08
+reviewedDate: 2026-11-08
+discipline: petroleum-engineering
+subcategory: reservoir-engineering
+focusKeyword: "reservoir drive mechanisms"
+image: { src: /images/featured/reservoir-drive-mechanisms.webp, alt: "Reservoir Drive Mechanisms Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [reservoir-engineering, drive-mechanism, material-balance, oil-recovery, water-drive]
+faq:
+  - q: "Which reservoir drive mechanism gives the highest recovery?"
+    a: "Water drive and efficient gravity drainage usually give the highest primary recovery. Ahmed's Reservoir Engineering Handbook quotes ultimate recovery of about 35 to 75 percent of oil in place for water drive, compared with about 20 to 40 percent for gas cap drive and less than 5 to about 30 percent for solution gas drive."
+  - q: "How can engineers tell which drive mechanism is acting?"
+    a: "From production behaviour and the material balance. Reservoir pressure trend, producing gas oil ratio, water production and well location in the structure each point to a mechanism. The material balance equation then quantifies the share of each mechanism as drive indices that add up to one."
+  - q: "What happens when primary drive energy is not enough?"
+    a: "Operators add energy or support pressure. Artificial lift such as rod pumps or gas lift helps wells flow, while waterflooding and gas injection maintain reservoir pressure and displace more oil. Enhanced oil recovery methods such as thermal, miscible gas or chemical flooding target oil left after these steps."
+references:
+  - text: "T. Ahmed, Reservoir Engineering Handbook, 5th ed., Gulf Professional Publishing, 2019"
+  - text: "B. C. Craft and M. F. Hawkins, revised by R. E. Terry and J. B. Rogers, Applied Petroleum Reservoir Engineering, 3rd ed., Pearson, 2015"
+  - text: "L. P. Dake, Fundamentals of Reservoir Engineering, Elsevier, 1978"
+  - text: "L. W. Lake (ed.), Petroleum Engineering Handbook, Vol. V: Reservoir Engineering and Petrophysics, Society of Petroleum Engineers, 2007"
+  - text: "A. Satter and G. M. Iqbal, Reservoir Engineering: The Fundamentals, Simulation, and Management of Conventional and Unconventional Recoveries, Gulf Professional Publishing, 2016"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Reservoir drive mechanisms** are the natural sources of energy that push oil and gas from the reservoir rock into the wells. The main ones are rock and liquid expansion, solution gas (depletion) drive, gas cap drive, water drive and gravity drainage. Most reservoirs produce under a combination of them. The dominant mechanism controls how fast pressure falls, how gas and water production change and how much oil can be recovered before secondary methods are needed.
+
+</Key>
+
+When a well is opened, fluids flow because the reservoir pressure is higher than the pressure in the wellbore. As fluids are withdrawn, that pressure would fall quickly unless something expands or flows in to replace the produced volume. What fills that space defines the drive. Reservoir drive mechanisms are therefore the starting point of every field development plan: they decide well spacing, artificial lift timing, whether to inject water or gas, and the expected recovery factor.
+
+## The main reservoir drive mechanisms
+
+Ahmed groups primary recovery into six mechanisms:
+
+1. **Rock and liquid expansion drive**
+2. **Depletion drive** (solution gas or dissolved gas drive)
+3. **Gas cap drive**
+4. **Water drive**
+5. **Gravity drainage drive**
+6. **Combination drive**
+
+<figure>
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Cross-section of an anticline reservoir. A gas cap sits at the crest above the gas oil contact, the oil zone lies below it, and water fills the flanks below the oil water contact. Arrows show aquifer water moving up dip into the oil zone and gas cap gas expanding downward. A producing well penetrates the oil zone.">
+<defs><clipPath id="resv"><path d="M30 250Q300 -130 570 250V280Q300 20 30 280Z" /></clipPath></defs>
+<g clip-path="url(#resv)">
+<rect x="0" y="0" width="600" height="290" fill="#dbeafe" />
+<rect x="0" y="0" width="600" height="190" fill="#e6f6f4" />
+<rect x="0" y="0" width="600" height="110" fill="#fde2e2" />
+<path d="M0 110H600" stroke="#b42318" stroke-width="1.5" stroke-dasharray="6 4" />
+<path d="M0 190H600" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="6 4" />
+</g>
+<path d="M30 250Q300 -130 570 250M30 280Q300 20 570 280" stroke="#0b2545" stroke-width="2" />
+<path d="M380 6V140" stroke="#0b2545" stroke-width="4" />
+<g stroke="#1d4ed8" stroke-width="2.5"><path d="M86 226L118 196M514 226L482 196" /><path d="M118 196L104 200M118 196L114 210M482 196L496 200M482 196L486 210" /></g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M260 76V100M260 100L254 92M260 100L266 92M330 76V100M330 100L324 92M330 100L336 92" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="388" y="20">Producing well</text>
+<text x="295" y="92" text-anchor="middle">Gas cap</text>
+<text x="300" y="140" text-anchor="middle">Oil zone</text>
+<text x="446" y="114">GOC</text>
+<text x="532" y="186">OWC</text>
+<text x="300" y="250" text-anchor="middle" fill="#4a5a70">Blue: water zone. Aquifer water moves up dip as pressure falls</text>
+<text x="40" y="40" fill="#4a5a70">Cap rock seals the top</text>
+</g>
+</svg>
+<figcaption>An anticline trap with a gas cap, oil zone and aquifer. Gas cap expansion pushes from above, water influx pushes from the flanks, and gas released from solution expands within the oil zone.</figcaption>
+</figure>
+
+## Rock and liquid expansion drive
+
+When an oil reservoir is **undersaturated**, its pressure is above the bubble point and all gas is dissolved in the oil. As pressure falls, the oil, the connate water and the rock itself expand slightly, and the pore volume shrinks. This small expansion pushes oil to the wells.
+
+Because liquids and rock are only slightly compressible, pressure falls quickly for little production. This mechanism usually recovers only a few percent of the oil in place before the bubble point is reached. The volume balance above the bubble point can be written with an effective compressibility:
+
+$$
+N_p B_o = N B_{oi}\, c_e\, \Delta p, \qquad c_e = \frac{c_o S_o + c_w S_{wi} + c_f}{1 - S_{wi}}
+$$
+
+where N is the initial oil in place, Np the cumulative oil produced, Bo the oil formation volume factor, c the compressibilities of oil, water and formation, S the saturations and Δp the pressure drop.
+
+## Solution gas drive (depletion drive)
+
+Below the bubble point, gas comes out of solution as bubbles in the oil zone. The expanding gas pushes oil towards the wells. Ahmed lists these typical signs:
+
+- Reservoir pressure declines rapidly and continuously.
+- Producing gas oil ratio (GOR) is low at first, then rises sharply once free gas becomes mobile, then falls as the reservoir gas is used up.
+- Little or no water is produced, because there is no active aquifer.
+- Wells often need artificial lift early, such as the [artificial lift methods](/petroleum-engineering/artificial-lift-methods/) used for low pressure wells.
+- Ultimate recovery is low, from less than 5 percent to about 30 percent of the oil in place.
+
+The main weakness is that the energy source, the gas, is produced along with the oil and is lost.
+
+## Gas cap drive
+
+Some reservoirs have a free gas cap above the oil from the start. As oil is produced, the gas cap expands downward and displaces oil, while solution gas also helps. Typical behaviour:
+
+- Pressure falls slowly and continuously, more slowly than in solution gas drive.
+- GOR rises continuously in wells located high on the structure as the expanding gas reaches them.
+- Little water production.
+- Ultimate recovery is typically 20 to 40 percent, depending on the gas cap size, vertical permeability and how well gas production is limited.
+
+Good practice is to complete wells low in the oil column and to avoid producing the gas cap gas, which is the drive energy.
+
+## Water drive
+
+Many reservoirs are connected to an **aquifer**, a large volume of water bearing rock. As pressure falls, the water expands and flows into the oil zone, replacing produced oil. Aquifers may be edge water (water along the flanks) or bottom water (water underlying the whole oil zone). Typical behaviour:
+
+- Reservoir pressure stays high when the aquifer is strong.
+- GOR stays low and steady.
+- Water production starts early in wells low on the structure and rises steadily.
+- Ultimate recovery is usually the highest of the primary mechanisms, about 35 to 75 percent of oil in place.
+
+The strength of the aquifer depends on its size, permeability and connection to the reservoir. Rock properties such as those described in [porosity and permeability](/petroleum-engineering/porosity-and-permeability/) control how quickly water can move in.
+
+## Gravity drainage drive
+
+In thick reservoirs with high dip and good vertical permeability, the density difference between oil, gas and water causes them to segregate. Gas migrates up, oil drains down to wells placed low on the structure, and a secondary gas cap may form. Gravity drainage is slow, but when it works it can give high recovery, with low GOR in down structure wells.
+
+## Combination drive and drive indices
+
+Most real reservoirs have more than one mechanism at work, for example a small gas cap and a weak aquifer together. The relative contribution of each is measured with **drive indices** obtained from the material balance equation:
+
+$$
+DDI + SDI + WDI + EDI = 1
+$$
+
+where DDI is the depletion drive index, SDI the segregation (gas cap) drive index, WDI the water drive index and EDI the expansion index for rock and connate water. Tracking these indices over time shows whether, for example, the aquifer is becoming more important.
+
+| Mechanism | Pressure trend | GOR trend | Water production | Typical recovery |
+| --- | --- | --- | --- | --- |
+| Solution gas | Falls rapidly | Low, then rises sharply, then falls | Little or none | Less than 5 to about 30 percent |
+| Gas cap | Falls slowly | Rises in up structure wells | Little | 20 to 40 percent |
+| Water drive | Stays high | Low and steady | Early and increasing | 35 to 75 percent |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An undersaturated oil reservoir falls from its initial pressure to its bubble point, a drop of 10 MPa. Oil compressibility 2.0 × 10⁻³ MPa⁻¹, water compressibility 0.45 × 10⁻³ MPa⁻¹, formation compressibility 0.6 × 10⁻³ MPa⁻¹, connate water saturation 0.25, initial Bo 1.30 and Bo at the bubble point 1.32 reservoir m³ per stock tank m³.</dd>
+<dt>Find</dt><dd>The fraction of oil in place recovered by rock and liquid expansion down to the bubble point.</dd>
+<dt>Assumptions</dt><dd>No water influx, no injection, constant compressibilities, So = 1 − Swi = 0.75.</dd>
+<dt>Solution</dt><dd>ce = (2.0 × 0.75 + 0.45 × 0.25 + 0.6) × 10⁻³ / 0.75 = 2.2125 × 10⁻³ / 0.75 = 2.95 × 10⁻³ MPa⁻¹<br />Np / N = Boi × ce × Δp / Bo = 1.30 × 2.95 × 10⁻³ × 10 / 1.32 = 0.0291</dd>
+<dt>Answer</dt><dd><strong>About 2.9 percent of the oil in place is recovered before the bubble point</strong></dd>
+<dt>Limitations</dt><dd>Compressibilities change with pressure and the formation compressibility is uncertain; a real aquifer would add water drive energy and raise the recovery.</dd>
+</dl>
+</Example>
+
+## Why the drive mechanism matters for field development
+
+Identifying the drive early helps engineers decide when to start pressure maintenance by waterflooding or gas injection, where to place and complete wells, and when to install artificial lift. Data from [well logging](/petroleum-engineering/well-logging-methods/), pressure tests and production history are combined in the material balance to confirm the mechanism and refine the recovery forecast.

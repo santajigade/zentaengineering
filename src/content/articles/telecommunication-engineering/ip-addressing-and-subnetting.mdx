@@ -1,0 +1,159 @@
+---
+title: "IP Addressing and Subnetting Explained"
+description: "IP addressing and subnetting explained: IPv4 format, CIDR prefixes, subnet masks, private ranges, host counts, IPv6 basics and a worked /26 subnet example."
+pubDate: 2026-11-08
+reviewedDate: 2026-11-08
+discipline: telecommunication-engineering
+subcategory: network-fundamentals
+focusKeyword: "IP addressing and subnetting"
+image: { src: /images/featured/ip-addressing-and-subnetting.webp, alt: "IP Addressing and Subnetting Explained: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [ip-address, subnetting, cidr, ipv4, ipv6, networking]
+faq:
+  - q: "Why are two addresses subtracted when counting usable hosts?"
+    a: "In a normal IPv4 subnet the address with all host bits set to 0 identifies the network itself, and the address with all host bits set to 1 is the directed broadcast address. Neither is assigned to a device, so usable hosts equal 2 to the power of the host bits, minus 2. RFC 3021 allows /31 subnets on point to point links, where both addresses are usable."
+  - q: "What is the difference between a subnet mask and a CIDR prefix?"
+    a: "They carry the same information in two notations. A subnet mask writes the network bits as a dotted decimal number, such as 255.255.255.0. A CIDR prefix writes the count of network bits after a slash, such as /24. Both tell a device which part of an address is the network and which part is the host."
+  - q: "Do IPv6 networks use subnetting too?"
+    a: "Yes, but differently. IPv6 addresses are 128 bits long and a single LAN subnet is normally a /64, leaving 64 bits for interface identifiers. Subnetting in IPv6 is done in the bits between the site prefix and the /64, so there is no need to squeeze host counts as in IPv4, and there is no broadcast address."
+references:
+  - text: "IETF RFC 791, Internet Protocol, 1981"
+  - text: "IETF RFC 950, Internet Standard Subnetting Procedure, 1985"
+  - text: "IETF RFC 1918, Address Allocation for Private Internets, 1996"
+  - text: "IETF RFC 4632, Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan, 2006"
+  - text: "IETF RFC 4291, IP Version 6 Addressing Architecture, 2006"
+  - text: "J. F. Kurose and K. W. Ross, Computer Networking: A Top-Down Approach, 8th ed., Pearson, 2021"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**IP addressing and subnetting** is how devices on a network get unique addresses and how those addresses are grouped. An IPv4 address is 32 bits, written as four decimal numbers such as 192.168.10.77. A prefix length such as /26, or the equivalent subnet mask 255.255.255.192, splits the address into a network part and a host part. A subnet with h host bits contains 2 to the power h addresses, of which 2 to the power h minus 2 can be given to hosts.
+
+</Key>
+
+Every device that talks over the Internet Protocol needs an address, and every router needs a way to decide where to send each packet. IP addressing and subnetting solve both problems. Subnetting divides one block of addresses into smaller networks, which keeps broadcast traffic local, separates departments or machines for security, and lets routers forward traffic using short summary routes instead of individual host addresses. It is a core skill for network, telecom and industrial automation engineers alike.
+
+## IPv4 address format
+
+IPv4, defined in RFC 791, uses 32 bit addresses. For readability, the 32 bits are split into four 8 bit octets, and each octet is written in decimal from 0 to 255, separated by dots. This is dotted decimal notation.
+
+- 192.168.10.77 in binary is 11000000.10101000.00001010.01001101.
+- The total address space is 2³² addresses, about 4.3 billion.
+
+Each address has two parts:
+
+- **Network part (prefix):** identifies the network or subnet. All devices on the same subnet share it.
+- **Host part:** identifies one interface on that subnet.
+
+IP sits at the network layer, layer 3, of the models compared in [OSI vs TCP/IP](/telecommunication-engineering/osi-vs-tcp-ip-model/). Switches forward frames inside a subnet using MAC addresses, while routers forward packets between subnets using IP addresses, as explained in [router vs switch](/telecommunication-engineering/router-vs-switch/).
+
+## Subnet masks and CIDR prefixes
+
+A **subnet mask** is a 32 bit value with 1s in the network bit positions and 0s in the host positions. A device finds its network address by a bitwise AND of its address and the mask.
+
+**Classless Inter-Domain Routing (CIDR)**, described in RFC 4632, writes the mask as a prefix length: the number of leading 1 bits. So 255.255.255.0 is /24 and 255.255.255.192 is /26. CIDR replaced the original classful scheme, in which the first bits of an address fixed the network size (class A /8, class B /16, class C /24). Classful sizes wasted addresses, and CIDR allows any prefix length.
+
+For a prefix length n, the number of host bits is 32 minus n, and:
+
+$$
+\text{Addresses per subnet} = 2^{32-n} \qquad \text{Usable hosts} = 2^{32-n} - 2
+$$
+
+| Prefix | Subnet mask | Addresses | Usable hosts |
+| --- | --- | --- | --- |
+| /24 | 255.255.255.0 | 256 | 254 |
+| /25 | 255.255.255.128 | 128 | 126 |
+| /26 | 255.255.255.192 | 64 | 62 |
+| /27 | 255.255.255.224 | 32 | 30 |
+| /28 | 255.255.255.240 | 16 | 14 |
+| /30 | 255.255.255.252 | 4 | 2 |
+
+The two addresses removed are the **network address** (all host bits 0) and the **broadcast address** (all host bits 1). RFC 3021 makes an exception for /31 subnets on point to point links, where both addresses are used.
+
+<figure>
+<svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="The address 192.168.10.77 with prefix /26 shown as four binary octets. The first 26 bits form the network portion and the last 6 bits the host portion. Below, the 192.168.10.0/24 block is divided into four /26 subnets starting at .0, .64, .128 and .192, with the .64 subnet highlighted because it contains .77.">
+<rect x="30" y="70" width="130" height="50" rx="4" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<rect x="170" y="70" width="130" height="50" rx="4" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<rect x="310" y="70" width="130" height="50" rx="4" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<rect x="450" y="70" width="34" height="50" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<rect x="484" y="70" width="96" height="50" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2"><path d="M30 52H482M30 46V58M482 46V58" /><path d="M486 52H580M486 46V58M580 46V58" stroke="#b07d00" /></g>
+<rect x="30" y="196" width="134" height="44" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="168" y="196" width="134" height="44" rx="4" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" />
+<rect x="306" y="196" width="134" height="44" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="444" y="196" width="136" height="44" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<g font-family="Courier New, monospace" font-size="15" font-weight="bold" fill="#0b2545" text-anchor="middle">
+<text x="95" y="100">11000000</text>
+<text x="235" y="100">10101000</text>
+<text x="375" y="100">00001010</text>
+<text x="467" y="100">01</text>
+<text x="532" y="100">001101</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="256" y="38">Network portion: 26 bits</text>
+<text x="533" y="38">Host: 6 bits</text>
+<text x="95" y="140">192</text>
+<text x="235" y="140">168</text>
+<text x="375" y="140">10</text>
+<text x="515" y="140">77</text>
+<text x="305" y="172">Mask 255.255.255.192 (/26): 192.168.10.0/24 split into four subnets</text>
+<text x="97" y="214">.0/26</text><text x="97" y="231">hosts .1 to .62</text>
+<text x="235" y="214">.64/26 (has .77)</text><text x="235" y="231">hosts .65 to .126</text>
+<text x="373" y="214">.128/26</text><text x="373" y="231">hosts .129 to .190</text>
+<text x="512" y="214">.192/26</text><text x="512" y="231">hosts .193 to .254</text>
+</g>
+</svg>
+<figcaption>192.168.10.77/26: the first 26 bits identify the subnet and the last 6 bits the host. A /24 block gives four /26 subnets of 64 addresses each.</figcaption>
+</figure>
+
+## Private, public and special IPv4 addresses
+
+RFC 1918 reserves three ranges for private networks. They can be reused inside any organisation and are not routed on the public internet:
+
+- **10.0.0.0/8** (10.0.0.0 to 10.255.255.255)
+- **172.16.0.0/12** (172.16.0.0 to 172.31.255.255)
+- **192.168.0.0/16** (192.168.0.0 to 192.168.255.255)
+
+Devices with private addresses reach the internet through network address translation (NAT) on a router or [firewall](/telecommunication-engineering/firewalls-explained/), which maps them to a public address. Other special blocks include 127.0.0.0/8 for loopback (127.0.0.1 is the local host) and 169.254.0.0/16 for link local addresses that a host assigns itself when no DHCP server answers.
+
+## How IP addressing and subnetting work step by step
+
+To find the subnet details for any address and prefix:
+
+1. **Find the host bits:** 32 minus the prefix length.
+2. **Find the block size:** 2 to the power of the host bits, counted in the octet where the prefix ends. For /26 the block size is 64 in the fourth octet.
+3. **Find the network address:** the largest multiple of the block size that is not greater than the address in that octet.
+4. **Find the broadcast address:** network address plus block size minus 1.
+5. **Find the usable range:** from network plus 1 to broadcast minus 1.
+
+When dividing a block into equal subnets, borrow enough host bits to make the number of subnets needed. Borrowing b bits creates 2 to the power b subnets. **Variable length subnet masking (VLSM)** goes further and gives each subnet only the size it needs, for example /30 or /31 for router links and /24 for a user LAN.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An office has the block 192.168.10.0/24 and needs 4 equal subnets, each with at least 50 hosts. A PC in one subnet has the address 192.168.10.77.</dd>
+<dt>Find</dt><dd>The prefix and mask, the usable hosts per subnet, and the network, broadcast and usable range of the PC's subnet.</dd>
+<dt>Assumptions</dt><dd>Equal sized subnets; network and broadcast addresses not assignable.</dd>
+<dt>Solution</dt><dd>Subnets needed = 4 = 2², so borrow 2 bits: prefix = 24 + 2 = /26, mask 255.255.255.192.<br />Host bits = 32 − 26 = 6; addresses = 2⁶ = 64; usable hosts = 64 − 2 = 62, which is at least 50.<br />Block size 64 in the fourth octet: subnets start at .0, .64, .128 and .192.<br />77 lies between 64 and 127, so network = 192.168.10.64 and broadcast = 64 + 64 − 1 = 192.168.10.127.</dd>
+<dt>Answer</dt><dd><strong>/26 (255.255.255.192), 62 hosts per subnet. The PC is on 192.168.10.64/26, broadcast 192.168.10.127, usable hosts .65 to .126</strong></dd>
+<dt>Limitations</dt><dd>Equal subnets waste addresses when needs differ; VLSM is better for mixed sizes. Leave room for growth and for gateway, printer and server addresses.</dd>
+</dl>
+</Example>
+
+## IPv6 addressing basics
+
+IPv4 addresses ran out at the regional registries, which is why IPv6 was developed. IPv6 addresses, defined in RFC 4291, are 128 bits long and written as eight groups of four hexadecimal digits separated by colons, for example 2001:db8:0:1::10. Leading zeros in a group can be dropped, and one run of all zero groups can be replaced by a double colon.
+
+In IPv6 a normal LAN subnet is a **/64**: the first 64 bits are the network prefix and the last 64 bits are the interface identifier. Sites typically receive a larger prefix, such as a /48 or /56, and create /64 subnets from the bits in between. IPv6 has no broadcast address; it uses multicast instead.
+
+## Common subnetting mistakes
+
+- Assigning the network or broadcast address to a device.
+- Using a mask on a host that does not match the router interface, so the host cannot reach its gateway.
+- Overlapping subnets in different sites that must later be connected by VPN.
+- Forgetting to plan address space for future growth, management networks and point to point links.
+
+Correct addressing is the foundation for everything above it, from [how HTTP works](/computer-science/how-http-works/) on a web server to industrial Ethernet networks in a plant.

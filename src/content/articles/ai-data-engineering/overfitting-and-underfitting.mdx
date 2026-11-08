@@ -1,0 +1,145 @@
+---
+title: "Overfitting and Underfitting in Machine Learning"
+description: "Overfitting and underfitting explained: bias and variance, training versus validation error, learning curves, how to detect and fix each, with an example."
+pubDate: 2026-11-08
+reviewedDate: 2026-11-08
+discipline: ai-data-engineering
+subcategory: machine-learning
+focusKeyword: "overfitting and underfitting"
+image: { src: /images/featured/overfitting-and-underfitting.webp, alt: "Overfitting and Underfitting in Machine Learning: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [machine-learning, overfitting, underfitting, bias-variance, regularization]
+faq:
+  - q: "How do I know if my model is overfitting?"
+    a: "Compare the error on the training data with the error on data the model has not seen, such as a validation set or cross validation folds. A low training error with a much higher validation error is the classic sign of overfitting. If both errors are high and similar, the model is underfitting."
+  - q: "Does more training data always fix overfitting?"
+    a: "More representative data usually reduces overfitting because it gives a flexible model fewer chances to memorise noise. It does not help an underfitting model, and it does not help if the new data has the same biases or label errors as the old data."
+  - q: "What is the difference between the validation set and the test set?"
+    a: "The validation set, or cross validation, is used repeatedly while choosing the model, its features and its hyperparameters. The test set is held back and used once at the end to estimate performance on new data. Using the test set for tuning makes its result optimistic."
+references:
+  - text: "I. Goodfellow, Y. Bengio and A. Courville, Deep Learning, MIT Press, 2016"
+  - text: "T. Hastie, R. Tibshirani and J. Friedman, The Elements of Statistical Learning, 2nd ed., Springer, 2009"
+  - text: "G. James, D. Witten, T. Hastie and R. Tibshirani, An Introduction to Statistical Learning, 2nd ed., Springer, 2021"
+  - text: "C. M. Bishop, Pattern Recognition and Machine Learning, Springer, 2006"
+  - text: "N. Srivastava et al., Dropout: A Simple Way to Prevent Neural Networks from Overfitting, Journal of Machine Learning Research 15, 2014"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Overfitting and underfitting** are the two ways a machine learning model fails to generalise. An overfitted model learns the noise in its training data, so it scores well in training but poorly on new data. An underfitted model is too simple to capture the real pattern, so it scores poorly on both. The goal is the model complexity between the two, found by comparing training error with validation error.
+
+</Key>
+
+Every supervised learning model is trained on a finite sample of data, but it is used on data it has never seen. What matters is the error on that new data, called the **generalisation error**. Overfitting and underfitting describe the two directions in which a model can miss this goal. Understanding them is essential before trusting any model, whether it predicts house prices, classifies images or flags failing machines in [predictive maintenance](/ai-data-engineering/predictive-maintenance-machine-learning/).
+
+## What overfitting and underfitting mean
+
+**Underfitting** happens when the model cannot represent the relationship in the data. A straight line fitted to a curved relationship is the standard example. The training error is high, and the validation error is similarly high. The model has high **bias**: its assumptions are too rigid.
+
+**Overfitting** happens when the model is flexible enough to fit the random noise in the training set as well as the signal. A high degree polynomial that passes through every training point is the standard example. Training error is very low, but validation error is much higher, because the noise it memorised does not repeat in new data. The model has high **variance**: it would change a lot if trained on a different sample.
+
+A **good fit** captures the underlying pattern and ignores the noise. Its training error is a little lower than its validation error, and both are acceptably low.
+
+## The bias and variance trade-off
+
+For squared error loss, the expected prediction error at a point can be split into three parts, as shown in Hastie, Tibshirani and Friedman:
+
+$$
+\text{Expected error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible noise}
+$$
+
+- **Bias** is the error from wrong or too simple assumptions.
+- **Variance** is the error from sensitivity to the particular training sample.
+- **Irreducible noise** is randomness in the data that no model can remove.
+
+Increasing model complexity, for example more polynomial terms, deeper trees or more neural network parameters, usually lowers bias but raises variance. The total error therefore follows a U shape against complexity, and the best model sits near the bottom of the validation curve.
+
+<figure>
+<svg width="580" height="280" viewBox="0 0 580 280" fill="none" role="img" aria-label="Error against model complexity. Training error falls steadily as complexity increases. Validation error falls, reaches a minimum at the best fit, then rises. The left region is underfitting with high bias and the right region is overfitting with high variance.">
+<g stroke="#0b2545" stroke-width="2"><path d="M60 40V230H520" /></g>
+<path d="M268 40V230" stroke="#4a5a70" stroke-width="1.5" stroke-dasharray="6 5" />
+<path d="M70 108C150 195 300 212 510 218" stroke="#13a89e" stroke-width="3" />
+<path d="M70 85C170 185 360 185 510 80" stroke="#e8590c" stroke-width="3" />
+<path d="M330 88H360" stroke="#13a89e" stroke-width="3" />
+<path d="M330 108H360" stroke="#e8590c" stroke-width="3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="366" y="92">Training error</text>
+<text x="366" y="112">Validation error</text>
+<g text-anchor="middle">
+<text x="150" y="28">Underfitting</text>
+<text x="150" y="46" fill="#4a5a70">high bias</text>
+<text x="268" y="28">Best fit</text>
+<text x="420" y="28">Overfitting</text>
+<text x="420" y="46" fill="#4a5a70">high variance</text>
+<text x="290" y="258">Model complexity</text>
+<text x="34" y="135" transform="rotate(-90 34 135)">Error</text>
+</g>
+</g>
+</svg>
+<figcaption>Training error keeps falling as complexity grows, while validation error is lowest at the best fit and rises again when the model overfits.</figcaption>
+</figure>
+
+## How to detect overfitting and underfitting
+
+The basic tool is to keep data the model does not train on:
+
+1. **Hold out a validation set.** Split the data, for example into training, validation and test sets. Train on the first, tune on the second and report the final result once on the third.
+2. **Use k-fold cross validation.** Split the training data into k folds, train k times, each time validating on a different fold, and average the k validation errors. James et al. describe 5 or 10 folds as common choices.
+3. **Plot learning curves.** Plot training and validation error against the amount of training data or the number of training epochs.
+
+Reading the results:
+
+| Pattern | Training error | Validation error | Diagnosis |
+| --- | --- | --- | --- |
+| Both high and close together | High | High | Underfitting (high bias) |
+| Large gap between them | Low | Much higher | Overfitting (high variance) |
+| Both low, small gap | Low | Slightly higher | Good fit |
+| Validation rises during training | Falling | Rising after a minimum | Overfitting with more epochs |
+
+In neural networks the last pattern is common: validation loss falls for some epochs and then starts rising while training loss keeps falling. The model is beginning to memorise the training set.
+
+## How to fix underfitting
+
+- **Use a more flexible model:** add polynomial or interaction features, use deeper trees, or add layers and units to a [neural network](/ai-data-engineering/how-neural-networks-work/).
+- **Engineer better features:** give the model inputs that actually carry information about the target.
+- **Reduce regularisation:** a very large penalty forces weights towards zero and can make the model too simple.
+- **Train longer:** an iterative model stopped too early may not have converged.
+
+## How to fix overfitting
+
+- **Get more representative data,** or use data augmentation for images and signals.
+- **Simplify the model:** fewer features, shallower trees, fewer parameters.
+- **Regularisation:** add a penalty on large weights to the training loss. Ridge (L2) regression minimises
+
+$$
+J(\mathbf{w}) = \frac{1}{n}\sum_{i=1}^{n}\left(y_i - \hat{y}_i\right)^2 + \lambda \sum_{j} w_j^2
+$$
+
+where λ controls the strength of the penalty. Lasso (L1) uses the sum of absolute weights instead and can drive some weights exactly to zero, which also selects features.
+- **Early stopping:** stop training at the epoch where validation error is lowest. Goodfellow, Bengio and Courville describe it as one of the most commonly used forms of regularisation in deep learning.
+- **Dropout:** randomly drop units during training so the network cannot rely on any single path, as introduced by Srivastava et al.
+- **Ensembles:** bagging and random forests average many high variance models, which reduces variance.
+- **Prune decision trees** or limit their depth and minimum leaf size.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Three regression models trained on the same data, with mean squared error (MSE) in kW² for a machine power prediction. Model A: training 0.02, validation 0.35. Model B: training 0.30, validation 0.32. Model C: training 0.10, validation 0.12. Five-fold cross validation of Model C gives fold MSEs of 0.14, 0.12, 0.15, 0.13 and 0.11.</dd>
+<dt>Find</dt><dd>The diagnosis for each model, the model to choose and the cross validation estimate for Model C.</dd>
+<dt>Assumptions</dt><dd>All models use the same features and data split; lower validation error is better.</dd>
+<dt>Solution</dt><dd>Model A: gap = 0.35 − 0.02 = 0.33, very low training error, so overfitting.<br />Model B: gap = 0.32 − 0.30 = 0.02 but both errors high, so underfitting.<br />Model C: gap = 0.12 − 0.10 = 0.02 with low errors, so a good fit.<br />Cross validation mean for C = (0.14 + 0.12 + 0.15 + 0.13 + 0.11) / 5 = 0.65 / 5 = 0.13</dd>
+<dt>Answer</dt><dd><strong>Choose Model C, with an estimated MSE on new data of about 0.13 kW²</strong></dd>
+<dt>Limitations</dt><dd>The fold results vary (sample standard deviation about 0.016), so small differences between models may not be significant. The final estimate should come from a held back test set.</dd>
+</dl>
+</Example>
+
+## Data leakage: a hidden cause of false confidence
+
+A model can look well fitted and still fail in service if information from the validation or test data leaked into training. Common causes are scaling or feature selection fitted on the whole dataset before splitting, duplicate records across splits, and random splits of time series that let the model see the future. Fit all preprocessing on the training folds only, and split time series by time. This is part of a disciplined [data science workflow](/ai-data-engineering/data-science-workflow/).
+
+## Summary
+
+Overfitting and underfitting apply to every [supervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) method, from linear regression to large networks. Always judge a model on unseen data, read the gap between training and validation error, and adjust complexity, data and regularisation until both errors are low and close together.
