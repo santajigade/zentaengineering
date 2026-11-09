@@ -12,12 +12,12 @@ telecommunication-engineering|network-fundamentals|IP Addressing and Subnetting 
 petroleum-engineering|reservoir-engineering|Reservoir Drive Mechanisms Explained|reservoir-drive-mechanisms|explanation|reservoir drive mechanisms|2026-11-08
 renewable-energy|solar-pv|Solar Panel Efficiency: Factors and Calculation|solar-panel-efficiency|fundamentals|solar panel efficiency|2026-11-08
 environmental-engineering|water-treatment|Reverse Osmosis Water Treatment Explained|reverse-osmosis|working-principle|reverse osmosis|2026-11-08
-mining-engineering|mining-methods|Open Pit Mine Design: Benches, Slopes and Ramps|open-pit-mine-design|explanation|open pit mine design|todo
-manufacturing-engineering|manufacturing-processes|Metal Casting Process: Steps and Types|metal-casting-process|explanation|metal casting process|todo
-materials-engineering|engineering-materials|Mechanical Properties of Materials Explained|mechanical-properties-of-materials|fundamentals|mechanical properties of materials|todo
-safety-engineering|hazard-identification|Job Safety Analysis (JSA): Steps and Example|job-safety-analysis|explanation|job safety analysis|todo
-agricultural-engineering|irrigation-systems|Irrigation Water Requirement Calculation|irrigation-water-requirement|fundamentals|irrigation water requirement|todo
-aerospace-engineering|aerodynamics|Drag Force on Aircraft: Types and Equation|drag-force-on-aircraft|fundamentals|drag force|todo
+mining-engineering|mining-methods|Open Pit Mine Design: Benches, Slopes and Ramps|open-pit-mine-design|explanation|open pit mine design|2026-11-09
+manufacturing-engineering|manufacturing-processes|Metal Casting Process: Steps and Types|metal-casting-process|explanation|metal casting process|2026-11-09
+materials-engineering|engineering-materials|Mechanical Properties of Materials Explained|mechanical-properties-of-materials|fundamentals|mechanical properties of materials|2026-11-09
+safety-engineering|hazard-identification|Job Safety Analysis (JSA): Steps and Example|job-safety-analysis|explanation|job safety analysis|2026-11-09
+agricultural-engineering|irrigation-systems|Irrigation Water Requirement Calculation|irrigation-water-requirement|fundamentals|irrigation water requirement|2026-11-09
+aerospace-engineering|aerodynamics|Drag Force on Aircraft: Types and Equation|drag-force-on-aircraft|fundamentals|drag force|2026-11-09
 biomedical-engineering|biomedical-sensors|Pulse Oximeter Working Principle|pulse-oximeter-working-principle|working-principle|pulse oximeter working principle|todo
 marine-engineering|naval-architecture|Ship Resistance and Powering Basics|ship-resistance-and-powering|fundamentals|ship resistance|todo
 mechanical-engineering|machine-design|Gear Types and Their Applications|types-of-gears|explanation|types of gears|todo
