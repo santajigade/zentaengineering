@@ -1,0 +1,152 @@
+---
+title: "Open Pit Mine Design: Benches, Slopes and Ramps"
+description: "Open pit mine design explained: bench height, catch berms, face, inter-ramp and overall slope angles, haul ramps, pit limits and a worked slope example."
+pubDate: 2026-11-09
+reviewedDate: 2026-11-09
+discipline: mining-engineering
+subcategory: mining-methods
+focusKeyword: "open pit mine design"
+image: { src: /images/featured/open-pit-mine-design.webp, alt: "Open Pit Mine Design: Benches, Slopes and Ramps: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [open-pit-mining, bench-design, slope-angle, haul-road, pit-limits]
+faq:
+  - q: "What is the difference between inter-ramp angle and overall slope angle?"
+    a: "The inter-ramp angle is measured across a stack of benches between two haul ramps, from toe to toe or crest to crest. The overall slope angle is measured from the pit floor to the surface crest across the whole wall, including any ramps and wide geotechnical berms, so it is always flatter than the inter-ramp angle on a wall that carries a ramp."
+  - q: "How steep are open pit haul ramps?"
+    a: "Haul ramps are commonly designed at grades of about 8 to 10 percent. Steeper grades shorten the ramp and reduce waste stripping, but they slow loaded trucks, raise fuel use and brake wear, and make downhill braking more critical. The grade is chosen with the truck manufacturer's performance data."
+  - q: "Why does the pit slope angle matter so much?"
+    a: "The slope angle controls how much waste must be removed to expose the ore. A flatter wall is more stable but adds waste over the whole height and length of the pit, while a steeper wall saves stripping but raises the risk of bench or wall failure. Slope design therefore balances safety, geotechnical data and economics."
+references:
+  - text: "W. Hustrulid, M. Kuchta and R. Martin, Open Pit Mine Planning and Design, 3rd ed., CRC Press, 2013"
+  - text: "J. Read and P. Stacey (eds.), Guidelines for Open Pit Slope Design, CSIRO Publishing, 2009"
+  - text: "P. Darling (ed.), SME Mining Engineering Handbook, 3rd ed., Society for Mining, Metallurgy and Exploration, 2011"
+  - text: "W. W. Kaufman and J. C. Ault, Design of Surface Mine Haulage Roads: A Manual, U.S. Bureau of Mines Information Circular 8758, 1977"
+  - text: "U.S. Code of Federal Regulations, 30 CFR 56.9300 Berms or guardrails, Mine Safety and Health Administration"
+  - text: "H. Lerchs and I. F. Grossmann, Optimum design of open-pit mines, Transactions CIM, Vol. 68, 1965"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Open pit mine design** sets the shape of the pit: the final pit limit, the bench height and face angle, the width of the catch berms, the inter-ramp and overall slope angles, and the layout of the haul ramps that carry ore and waste out of the pit. The geometry must be stable, safe for equipment and people, and economic, because every degree of slope changes the volume of waste that has to be stripped.
+
+</Key>
+
+An open pit is excavated from the surface downward in a series of horizontal slices called **benches**. Each bench is drilled, blasted, loaded and hauled before the next one below is started. The design work turns a geological block model and geotechnical data into a practical pit that can be mined with real shovels and trucks. This article explains the main design elements and shows how they combine into the slope angles that drive pit economics.
+
+## Elements of open pit mine design
+
+The pit wall in cross-section is a staircase. The standard terms, as used in Hustrulid, Kuchta and Martin and in the CSIRO slope design guidelines, are:
+
+- **Bench height (H):** vertical distance between the toe and crest of one bench. It is usually matched to the reach of the loading equipment and the drill.
+- **Bench face angle (α):** the angle of the bench face measured from horizontal. It depends on rock strength, joint orientation and blasting quality.
+- **Catch bench or berm (B):** the flat ledge left at the toe of each face in the final wall. Its job is to catch rocks that fall from the faces above.
+- **Crest and toe:** the top edge and the bottom edge of a bench face.
+- **Inter-ramp angle:** the slope across a stack of benches between ramps.
+- **Overall slope angle:** the slope of the whole wall from pit floor to surface crest, including ramps.
+- **Haul ramp:** the inclined road that spirals or switches back down the pit wall.
+
+<figure>
+<svg viewBox="0 0 640 340" width="640" height="340" fill="none" role="img" aria-label="Cross-section of an open pit wall showing four benches with a haul ramp between the second and third bench, labels for bench height, bench face angle, catch berm, ramp, crest, toe, inter-ramp angle and overall slope angle">
+<g stroke="#0b2545" stroke-width="2" fill="#f2efe6">
+<path d="M40 300 L120 300 L140 245 L165 245 L185 190 L255 190 L275 135 L300 135 L320 80 L600 80 L600 320 L40 320 Z" />
+</g>
+<path d="M120 300 L320 80" stroke="#b42318" stroke-width="1.5" stroke-dasharray="6 4" />
+<path d="M185 190 L320 80" stroke="#13a89e" stroke-width="1.5" stroke-dasharray="4 3" />
+<path d="M120 300 H180" stroke="#7b8794" stroke-width="1" stroke-dasharray="2 3" />
+<path d="M145 300 A25 25 0 0 0 136.8 281.5" stroke="#b42318" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="1">
+<path d="M345 135 V80" /><path d="M148 211 L170 222" /><path d="M340 135 H350" /><path d="M340 80 H350" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="355" y="112">Bench height H</text>
+<text x="300" y="155" text-anchor="middle">Berm B</text>
+<text x="246" y="212" text-anchor="middle">Haul ramp</text>
+<text x="420" y="72">Surface crest</text>
+<text x="44" y="292">Pit floor</text>
+<text x="112" y="316" font-size="11">Toe</text>
+<text x="44" y="250" fill="#b42318" font-size="11">Overall slope</text>
+<text x="44" y="263" fill="#b42318" font-size="11">angle</text>
+<text x="150" y="120" fill="#13a89e" font-size="11">Inter-ramp angle</text>
+<text x="80" y="215" font-size="11">Face angle α</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#7b8794"><text x="420" y="250">Rock mass behind the final wall</text></g>
+</svg>
+<figcaption>Open pit wall in section: benches with catch berms, a haul ramp, and the inter-ramp and overall slope angles measured across them.</figcaption>
+</figure>
+
+## Bench design
+
+Bench height is usually chosen first, because it ties the pit to the mining fleet. A shovel or excavator must be able to dig the full face safely, and the drill must reach the bench floor plus subdrill. Hustrulid and co-authors note that larger equipment fleets favour taller benches, while selective mining of narrow ore zones favours lower benches to reduce dilution. In the final wall, two or three working benches are sometimes combined into one **double or triple bench** to make wider berms possible.
+
+The bench face angle comes from geotechnical work: rock strength, the orientation of joints relative to the wall, and the quality of controlled blasting near the final limit. Poor blasting damages the crest and flattens the achieved face angle.
+
+### Catch berm width
+
+A berm that is too narrow fills with rubble and stops catching rock. The CSIRO guidelines (Read and Stacey) describe the **modified Ritchie criterion** as a common starting point for berm width:
+
+$$
+B = 4.5 + 0.2\,H \quad \text{(metres)}
+$$
+
+For a 15 m bench this gives 7.5 m. The value is then checked against rockfall studies and the reliability of the berms after blasting.
+
+## Slope angles in open pit mine design
+
+Once H, α and B are fixed, the inter-ramp angle follows from simple geometry. Each bench adds a horizontal distance equal to the face run plus the berm:
+
+$$
+\tan(\theta_{IR}) = \frac{H}{H/\tan\alpha + B}
+$$
+
+The overall slope angle is flatter, because haul ramps and any wide geotechnical berms add horizontal distance without adding height. The CSIRO guidelines treat slope design as a hierarchy: bench scale, inter-ramp scale and overall scale, each checked for its own failure modes (bench wedges and toppling, inter-ramp planar failures, and deep overall failures through the rock mass). Rock mass quality is commonly described with the systems covered in [rock mass classification](/mining-engineering/rock-mass-classification/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Final wall 150 m high made of 10 benches, bench height H = 15 m, bench face angle α = 70°. One haul ramp 30 m wide crosses the wall. Berm width from the modified Ritchie criterion.</dd>
+<dt>Find</dt><dd>Berm width, inter-ramp angle, overall slope angle with the ramp, and ramp length at a 10 percent grade.</dd>
+<dt>Assumptions</dt><dd>Uniform rock and bench geometry; the ramp replaces one berm; the ramp length is for a straight run with no switchbacks.</dd>
+<dt>Solution</dt><dd>B = 4.5 + 0.2 × 15 = 7.5 m<br />Face run per bench = 15 ÷ tan 70° = 15 ÷ 2.747 = 5.46 m<br />Inter-ramp angle = atan(15 ÷ (5.46 + 7.5)) = atan(15 ÷ 12.96) = 49.2°<br />Horizontal width of wall without ramp = 10 × 5.46 + 9 × 7.5 = 54.6 + 67.5 = 122.1 m<br />With the ramp replacing one berm = 122.1 + 30 - 7.5 = 144.6 m<br />Overall slope angle = atan(150 ÷ 144.6) = 46.1°<br />Ramp length to climb 150 m at 10 percent = 150 ÷ 0.10 = 1500 m</dd>
+<dt>Answer</dt><dd><strong>Berm 7.5 m, inter-ramp angle about 49°, overall slope angle about 46° with the ramp, and about 1.5 km of ramp</strong></dd>
+<dt>Limitations</dt><dd>Real walls vary by rock domain and must be checked by stability analysis. The ramp normally spirals around the pit, so its effect on each wall depends on where it crosses.</dd>
+</dl>
+</Example>
+
+The example shows why ramps matter: a single 30 m ramp flattened the wall by about 3°, and over the full perimeter of a large pit that change means millions of extra tonnes of waste.
+
+## Haul ramp and road design
+
+Haul ramps are designed around the largest truck that will use them. The U.S. Bureau of Mines haul road manual by Kaufman and Ault recommends a running surface for two-way traffic of about **3.5 times the width of the widest vehicle**, with extra width for drainage ditches and safety berms. Grades of about 8 to 10 percent are typical, as noted by Hustrulid and co-authors; the final grade is checked against the truck rimpull and retarder charts.
+
+Along open edges the road needs a **safety berm**. In the United States, 30 CFR 56.9300 requires berms or guardrails on the banks of elevated roadways that are at least mid-axle height of the largest self-propelled mobile equipment that usually travels the road. Other good practice items include curve widening, superelevation on bends, runaway escape lanes on long downgrades, and switchbacks placed on the flattest, most stable walls.
+
+## Pit limits and stripping ratio
+
+The **ultimate pit limit** is the final shell beyond which mining a block costs more than its ore is worth. The classic method is the **Lerchs-Grossmann algorithm** (1965), which finds the shell with the maximum total value while honouring the slope angles. Modern software runs this optimisation for a range of metal prices to create nested shells, which guide the order of **pushbacks** (phases) from the high value core outward.
+
+The **stripping ratio** is the waste removed per unit of ore, in tonnes per tonne or cubic metres per tonne. The break-even stripping ratio, where the value of the ore just pays for removing the waste above it, sets how deep the pit can economically go before an underground method becomes attractive. The trade-off between the two approaches is covered in [surface vs underground mining](/mining-engineering/surface-vs-underground-mining/).
+
+## Design workflow
+
+A typical open pit mine design proceeds in this order:
+
+1. Build the geological block model from drilling data, as described in [mineral exploration methods](/mining-engineering/mineral-exploration-methods/).
+2. Define geotechnical domains and slope design sectors with recommended bench, inter-ramp and overall angles.
+3. Run pit optimisation to find the ultimate pit and nested shells.
+4. Design practical pushbacks with ramps, minimum mining widths and access.
+5. Schedule production by bench and phase, and plan [drilling and blasting](/mining-engineering/drilling-and-blasting-basics/) patterns, including controlled blasting near final walls.
+6. Monitor walls during mining with radar, prisms and inspections, and update the design as conditions are exposed.
+
+## Safety considerations
+
+Wall instability, rockfall, and vehicle collisions on haul roads are leading hazards in surface mines. Controls include berm cleaning, scaling of loose rock, slope monitoring with alarm thresholds, traffic management rules, and keeping people and light vehicles away from the toe of unstable walls. The wider set of controls is summarised in [mine hazards and controls](/mining-engineering/mine-hazards-and-controls/).
+
+## Key points
+
+- Bench height follows the equipment; face angle and berm width follow the rock and the blasting.
+- Inter-ramp angle comes from H, α and B; ramps and wide berms flatten the overall angle.
+- Ramp width, grade and safety berms are set by the largest truck.
+- The ultimate pit balances slope safety against the waste stripping that a flatter wall demands.

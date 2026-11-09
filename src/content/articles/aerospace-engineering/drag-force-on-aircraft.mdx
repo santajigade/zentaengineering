@@ -1,0 +1,154 @@
+---
+title: "Drag Force on Aircraft: Types and Equation"
+description: "Drag force on aircraft explained: drag equation, parasite and induced drag, wave drag, the drag polar, minimum drag speed and a worked light aircraft example."
+pubDate: 2026-11-09
+reviewedDate: 2026-11-09
+discipline: aerospace-engineering
+subcategory: aerodynamics
+focusKeyword: "drag force"
+image: { src: /images/featured/drag-force-on-aircraft.webp, alt: "Drag Force on Aircraft: Types and Equation: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [aerodynamics, drag, induced-drag, parasite-drag, drag-polar]
+faq:
+  - q: "Why does induced drag decrease as speed increases?"
+    a: "In level flight the wing must always produce lift equal to weight. At high speed the dynamic pressure is large, so only a small lift coefficient and a small angle of attack are needed, and the wingtip vortices and downwash are weak. At low speed the wing needs a high lift coefficient, which strengthens the vortices. Induced drag is therefore roughly proportional to one over speed squared."
+  - q: "What is the Oswald efficiency factor?"
+    a: "The Oswald efficiency factor e corrects the ideal induced drag of an elliptical lift distribution for a real aircraft. An ideal elliptical wing has e equal to 1. Real aircraft have values below 1 because of non elliptical lift distribution, fuselage interference and the increase of parasite drag with lift, and design textbooks such as Raymer give typical estimation methods."
+  - q: "How do winglets reduce drag?"
+    a: "Winglets reduce the strength of the wingtip vortices by limiting the flow of high pressure air from below the wing around the tip to the low pressure upper surface. This reduces induced drag, which matters most at the high lift coefficients of climb and long range cruise. They add some weight and parasite drag, so their net benefit depends on the aircraft and mission."
+references:
+  - text: "J. D. Anderson Jr., Introduction to Flight, 9th ed., McGraw-Hill"
+  - text: "J. D. Anderson Jr., Fundamentals of Aerodynamics, 6th ed., McGraw-Hill"
+  - text: "D. P. Raymer, Aircraft Design: A Conceptual Approach, 6th ed., AIAA Education Series"
+  - text: "S. F. Hoerner, Fluid-Dynamic Drag, published by the author, 1965"
+  - text: "FAA, Pilot's Handbook of Aeronautical Knowledge, FAA-H-8083-25C, Chapter 5 Aerodynamics of Flight"
+  - text: "NASA Glenn Research Center, Beginner's Guide to Aeronautics: The Drag Equation"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Drag force** is the aerodynamic force that opposes an aircraft's motion through the air, acting parallel to the relative wind. It is calculated with the drag equation D = ½ ρ v² S C_D. Total drag is the sum of **parasite drag**, which rises with the square of speed, and **induced drag**, which is the cost of producing lift and falls as speed rises. At high subsonic and supersonic speeds, **wave drag** from shock waves is added.
+
+</Key>
+
+Drag is one of the [four forces of flight](/aerospace-engineering/forces-of-flight-and-axes/). In steady level flight, engine thrust equals drag and lift equals weight. Every reduction in drag means less thrust, less fuel and longer range, so drag prediction and reduction run through every stage of aircraft design.
+
+## The drag force equation
+
+The drag equation used throughout aerodynamics, as given by Anderson and by NASA Glenn Research Center, is:
+
+$$
+D = \tfrac{1}{2}\,\rho\,v^2\,S\,C_D
+$$
+
+- **ρ** air density (1.225 kg/m³ at sea level in the standard atmosphere).
+- **v** true airspeed.
+- **S** reference area, normally the wing planform area.
+- **C_D** drag coefficient, which depends on shape, angle of attack (through lift), Reynolds number and Mach number.
+
+The product ½ρv² is the dynamic pressure q, the same term that appears in the lift equation explained in [how wings generate lift](/aerospace-engineering/how-wings-generate-lift/). Drag and lift are simply the two components of the total aerodynamic force, measured parallel and perpendicular to the relative wind.
+
+<Calculator path="physics/drag-force" title="Drag Force Calculator" />
+
+## Types of drag force on aircraft
+
+### Parasite drag
+
+Parasite drag is all drag not associated with producing lift. The FAA Pilot's Handbook of Aeronautical Knowledge divides it into three kinds:
+
+- **Form (pressure) drag:** caused by flow separation and the pressure difference between front and rear of a body. Streamlining keeps the flow attached and reduces it.
+- **Skin friction drag:** shear stress in the thin boundary layer on every wetted surface. It depends on wetted area, surface roughness and whether the boundary layer is laminar or turbulent.
+- **Interference drag:** extra drag where components meet, such as the wing to fuselage junction or a strut to wing joint. Fairings and fillets reduce it.
+
+Parasite drag is expressed through the **zero lift drag coefficient** C_D,0, which is roughly constant at a given Mach number, so parasite drag grows with v².
+
+### Induced drag
+
+A finite wing produces lift by creating higher pressure below than above. At the tips, air flows around from the high pressure side to the low pressure side, forming **wingtip vortices**. These vortices create a downward flow (downwash) over the wing that tilts the local lift vector backward. The rearward component is **induced drag**. Anderson gives its coefficient as:
+
+$$
+C_{D,i} = \frac{C_L^2}{\pi\,e\,AR}
+$$
+
+where AR = b²/S is the aspect ratio (span squared over wing area) and e is the span or Oswald efficiency factor. Long, slender wings with high aspect ratio produce less induced drag, which is why gliders and long range airliners have them.
+
+### Wave drag
+
+As an aircraft approaches the speed of sound, local flow over the wing becomes supersonic and shock waves form. Shocks cause a large pressure rise and can separate the boundary layer, adding **wave drag**. The Mach number at which drag starts to rise sharply is the drag divergence Mach number. Swept wings, thin airfoils and supercritical airfoil sections delay it, which is why jet airliners use swept wings.
+
+## The drag polar and total drag
+
+Combining parasite and induced drag gives the **drag polar**, the relation between C_D and C_L for the whole aircraft:
+
+$$
+C_D = C_{D,0} + \frac{C_L^2}{\pi\,e\,AR}
+$$
+
+Because parasite drag rises with speed and induced drag falls, total drag has a minimum. Anderson shows that minimum drag, and so maximum lift to drag ratio, occurs where the two are equal, C_D,0 = C_D,i, and that:
+
+$$
+\left(\frac{L}{D}\right)_{max} = \frac{1}{2}\sqrt{\frac{\pi\,e\,AR}{C_{D,0}}}
+$$
+
+Flying at the minimum drag speed gives the best glide ratio, and for propeller driven aircraft Anderson shows that maximum range is obtained at maximum L/D. Minimum power required occurs at a lower speed, where induced drag is three times parasite drag.
+
+<figure>
+<svg viewBox="0 0 640 320" width="640" height="320" fill="none" role="img" aria-label="Graph of drag force against airspeed for a light aircraft: parasite drag curve rising with speed squared, induced drag curve falling with speed, and the total drag curve forming a U shape with its minimum where parasite and induced drag are equal, at about 39 metres per second">
+<path d="M80 270 H600" stroke="#0b2545" stroke-width="1.5" />
+<path d="M80 270 V40" stroke="#0b2545" stroke-width="1.5" />
+<path d="M596 265 L606 270 L596 275" stroke="#0b2545" stroke-width="1.5" />
+<path d="M75 44 L80 34 L85 44" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#7b8794" stroke-width="1" stroke-dasharray="2 4">
+<path d="M80 215 H590" /><path d="M80 160 H590" /><path d="M80 105 H590" />
+</g>
+<path d="M97 256 L114 253 L131 250 L148 247 L165 243 L182 240 L199 236 L216 232 L233 227 L250 223 L267 218 L284 213 L301 208 L318 202 L335 196 L352 190 L369 184 L386 178 L403 171 L420 164 L437 157 L454 149 L471 142 L488 134 L505 126 L522 117 L539 109 L556 100 L573 91 L590 81" stroke="#f5b800" stroke-width="2.5" />
+<path d="M97 129 L114 151 L131 169 L148 183 L165 194 L182 203 L199 211 L216 217 L233 223 L250 227 L267 231 L284 235 L301 238 L318 240 L335 243 L352 245 L369 247 L386 248 L403 250 L420 251 L437 252 L454 253 L471 254 L488 255 L505 256 L522 257 L539 257 L556 258 L573 259 L590 259" stroke="#13a89e" stroke-width="2.5" />
+<path d="M97 114 L114 134 L131 149 L148 160 L165 167 L182 173 L199 177 L216 179 L233 180 L250 180 L267 179 L284 178 L301 175 L318 172 L335 169 L352 165 L369 161 L386 156 L403 151 L420 145 L437 139 L454 133 L471 126 L488 119 L505 112 L522 104 L539 96 L556 88 L573 79 L590 71" stroke="#0b2545" stroke-width="3" />
+<path d="M242 180 V270" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" />
+<circle cx="242" cy="180" r="4" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="20" y="30">Drag (N)</text>
+<text x="470" y="300">True airspeed (m/s)</text>
+<text x="520" y="62" font-weight="700">Total drag</text>
+<text x="505" y="150" fill="#b38600">Parasite drag</text>
+<text x="105" y="92" fill="#13a89e">Induced drag</text>
+<text x="200" y="150" fill="#b42318" font-size="11">Minimum drag</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#7b8794">
+<text x="74" y="219" text-anchor="end">500</text><text x="74" y="164" text-anchor="end">1000</text><text x="74" y="109" text-anchor="end">1500</text>
+<text x="250" y="284" text-anchor="middle">40</text><text x="420" y="284" text-anchor="middle">60</text><text x="590" y="284" text-anchor="middle">80</text>
+</g>
+</svg>
+<figcaption>Drag force against airspeed for the example aircraft at sea level: parasite drag rises with speed, induced drag falls, and total drag is lowest where the two are equal.</figcaption>
+</figure>
+
+## Worked example: drag force on a light aircraft
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Light aircraft, mass 1100 kg, wing area S = 16.2 m², aspect ratio AR = 7.5, Oswald factor e = 0.8, zero lift drag coefficient C_D,0 = 0.027. Level flight at sea level, ρ = 1.225 kg/m³, at v = 55 m/s.</dd>
+<dt>Find</dt><dd>Lift coefficient, drag coefficient, drag force, power required, and the minimum drag speed and maximum L/D.</dd>
+<dt>Assumptions</dt><dd>Lift equals weight; parabolic drag polar; g = 9.81 m/s²; no compressibility effects.</dd>
+<dt>Solution</dt><dd>W = 1100 × 9.81 = 10 791 N<br />q = 0.5 × 1.225 × 55² = 1852.8 Pa<br />C_L = 10 791 ÷ (1852.8 × 16.2) = 0.360<br />C_D,i = 0.360² ÷ (π × 0.8 × 7.5) = 0.1293 ÷ 18.85 = 0.00686<br />C_D = 0.027 + 0.00686 = 0.0339<br />D = 1852.8 × 16.2 × 0.0339 = 1016 N (parasite 810 N, induced 206 N)<br />Power required = D × v = 1016 × 55 = 55.9 kW<br />(L/D)max = 0.5 × √(18.85 ÷ 0.027) = 0.5 × 26.42 = 13.2<br />At minimum drag, C_L = √(C_D,0 × π e AR) = √(0.027 × 18.85) = 0.713<br />v_md = √(2 × 10 791 ÷ (1.225 × 16.2 × 0.713)) = 39.0 m/s; D_min = 10 791 ÷ 13.2 = 817 N</dd>
+<dt>Answer</dt><dd><strong>At 55 m/s the drag force is about 1020 N (L/D about 10.6) and the power required is about 56 kW; minimum drag of about 820 N occurs near 39 m/s with L/D of about 13</strong></dd>
+<dt>Limitations</dt><dd>Real drag polars are not exactly parabolic, C_D,0 changes with Reynolds number, flap and gear settings, and propeller efficiency must be included to find engine power.</dd>
+</dl>
+</Example>
+
+At cruise, parasite drag is about four fifths of the total, so cleaning up the airframe pays off most. At low speed, as in climb or approach, induced drag dominates.
+
+## Reducing drag force
+
+- **Streamlining** fuselages, nacelles and landing gear fairings to delay separation.
+- **Retractable landing gear** and flush rivets to cut parasite drag.
+- **High aspect ratio wings** and **winglets** to reduce induced drag.
+- **Laminar flow airfoils** and smooth, clean surfaces to reduce skin friction.
+- **Swept and supercritical wings** to raise the drag divergence Mach number.
+- Fairings at wing roots and strut joints to cut interference drag.
+
+Engine installation drag also matters; the intake and nozzle design of [turbofan and turboprop engines](/aerospace-engineering/turbojet-vs-turbofan-vs-turboprop/) is shaped with this in mind. For small rotorcraft, body and arm drag limit forward speed, as discussed in [how a quadcopter flies](/aerospace-engineering/how-a-quadcopter-flies/).

@@ -1,0 +1,150 @@
+---
+title: "Mechanical Properties of Materials Explained"
+description: "Mechanical properties of materials explained: stiffness, yield and tensile strength, ductility, toughness, hardness, fatigue and creep, with a worked example."
+pubDate: 2026-11-09
+reviewedDate: 2026-11-09
+discipline: materials-engineering
+subcategory: engineering-materials
+focusKeyword: "mechanical properties of materials"
+image: { src: /images/featured/mechanical-properties-of-materials.webp, alt: "Mechanical Properties of Materials Explained: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [mechanical-properties, strength, ductility, toughness, hardness]
+faq:
+  - q: "What is the difference between strength and toughness?"
+    a: "Strength is the stress a material can carry before it yields or breaks. Toughness is the energy it can absorb before fracture, which depends on both strength and ductility. A very hard, strong ceramic can have low toughness because it breaks with almost no plastic deformation, while a medium strength structural steel is tough because it stretches a lot before failing."
+  - q: "Is stiffness the same as strength?"
+    a: "No. Stiffness is resistance to elastic deformation and is measured by the modulus of elasticity. Strength is the stress at which permanent deformation or fracture begins. Heat treatment can double the strength of a steel, but its modulus stays close to about 200 GPa, so a stronger steel part does not deflect any less under the same load."
+  - q: "Why do engineers use the 0.2 percent offset yield strength?"
+    a: "Many metals, such as aluminium alloys and many steels, do not show a sharp yield point. The 0.2 percent offset method draws a line parallel to the elastic part of the stress-strain curve, starting at 0.002 strain, and takes the stress where it crosses the curve. This gives a repeatable yield value defined in standards such as ASTM E8/E8M and ISO 6892-1."
+references:
+  - text: "W. D. Callister Jr. and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley, 2018"
+  - text: "G. E. Dieter, Mechanical Metallurgy, SI Metric ed., McGraw-Hill, 1988"
+  - text: "ASTM E8/E8M, Standard Test Methods for Tension Testing of Metallic Materials, ASTM International"
+  - text: "ISO 6892-1:2019 Metallic materials, Tensile testing, Part 1: Method of test at room temperature"
+  - text: "ASTM E23, Standard Test Methods for Notched Bar Impact Testing of Metallic Materials, ASTM International"
+  - text: "ASTM E10, Standard Test Method for Brinell Hardness of Metallic Materials, ASTM International"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **mechanical properties of materials** describe how a material responds to applied forces. The main ones are **stiffness** (modulus of elasticity), **strength** (yield and ultimate tensile strength), **ductility** (how much it stretches before breaking), **toughness** (energy absorbed before fracture), **hardness** (resistance to indentation), and the long term properties **fatigue strength** and **creep resistance**. Most are measured with standard tests such as the tensile, hardness and Charpy impact tests.
+
+</Key>
+
+Choosing a material for a shaft, a bridge girder or a pressure vessel always starts with these properties. They tell the designer how much a part will deflect, at what load it will bend permanently, whether it will fail suddenly or give warning, and how long it will survive repeated or high temperature loading. The broader families of materials are covered in [engineering materials classification](/materials-engineering/engineering-materials-classification/).
+
+## Stress, strain and the tensile test
+
+Most mechanical properties of materials are defined in terms of **engineering stress** σ = F/A₀ (force over original area) and **engineering strain** ε = ΔL/L₀ (change in length over original gauge length). The basics are explained in [stress and strain](/mechanical-engineering/stress-and-strain/). A [tensile test](/materials-engineering/tensile-test/) to ASTM E8/E8M or ISO 6892-1 pulls a standard specimen to fracture and records the full stress-strain curve, from which several properties are read at once.
+
+<figure>
+<svg viewBox="0 0 640 340" width="640" height="340" fill="none" role="img" aria-label="Engineering stress-strain curve for a ductile metal showing the linear elastic region with slope E, the 0.2 percent offset line defining yield strength, strain hardening up to the ultimate tensile strength, necking and fracture, with the area under the elastic part marked as resilience and the total area as toughness">
+<path d="M80 290 L102 130 C125 98 170 78 260 65 C320 60 360 62 400 70 C440 82 470 105 500 140 L500 290 Z" fill="#e6f6f4" stroke="none" />
+<path d="M80 290 L102 130 L102 290 Z" fill="#cfe3f5" stroke="none" />
+<path d="M80 290 H600" stroke="#0b2545" stroke-width="1.5" />
+<path d="M80 290 V30" stroke="#0b2545" stroke-width="1.5" />
+<path d="M596 285 L606 290 L596 295" stroke="#0b2545" stroke-width="1.5" />
+<path d="M75 34 L80 24 L85 34" stroke="#0b2545" stroke-width="1.5" />
+<path d="M80 290 L102 130 C125 98 170 78 260 65 C320 60 360 62 400 70 C440 82 470 105 500 140" stroke="#0b2545" stroke-width="2.5" />
+<path d="M500 140 V290" stroke="#7b8794" stroke-width="1" stroke-dasharray="3 3" />
+<path d="M92 290 L116 115" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" />
+<circle cx="111" cy="119" r="4" fill="#b42318" />
+<circle cx="330" cy="61" r="4" fill="#0b2545" />
+<circle cx="500" cy="140" r="4" fill="#0b2545" />
+<path d="M80 119 H105" stroke="#7b8794" stroke-width="1" stroke-dasharray="2 3" />
+<path d="M80 61 H325" stroke="#7b8794" stroke-width="1" stroke-dasharray="2 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="120" y="124" fill="#b42318">Yield strength (0.2% offset)</text>
+<text x="300" y="48">Ultimate tensile strength</text>
+<text x="508" y="132">Fracture</text>
+<text x="420" y="312">Strain ε</text>
+<text x="20" y="22">Stress σ</text>
+<text x="96" y="306" fill="#b42318" font-size="11">0.002</text>
+<text x="110" y="230" font-size="11">Slope = E</text>
+<text x="230" y="200" fill="#13a89e">Area under curve: toughness</text>
+<text x="400" y="100" font-size="11">Necking</text>
+</g>
+<path d="M108 226 L94 215" stroke="#7b8794" stroke-width="1" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#2b6cb0"><text x="20" y="330">Shaded blue triangle under the elastic line: resilience</text></g>
+</svg>
+<figcaption>Engineering stress-strain curve of a ductile metal and the properties read from it.</figcaption>
+</figure>
+
+## Key mechanical properties of materials
+
+### Elastic modulus (stiffness)
+
+In the linear elastic region, stress is proportional to strain (Hooke's law), σ = Eε. The **modulus of elasticity** E measures stiffness. Callister lists room temperature values of about 207 GPa for steel, 110 GPa for copper, 107 GPa for titanium, 69 GPa for aluminium and 45 GPa for magnesium. E depends mainly on atomic bonding, so alloying and heat treatment change it very little. The related lateral contraction is described by [Poisson's ratio](/mechanical-engineering/poissons-ratio/).
+
+### Yield strength
+
+The **yield strength** is the stress at which plastic (permanent) deformation begins. For metals without a clear yield point it is found by the **0.2 percent offset** method. Yield strength is the basis for most static design, with a [factor of safety](/mechanical-engineering/factor-of-safety/) applied to keep working stresses below it.
+
+### Ultimate tensile strength
+
+The **ultimate tensile strength (UTS)** is the maximum engineering stress on the curve. After this point a ductile specimen starts to **neck**, the cross-section shrinks locally and the engineering stress falls until fracture.
+
+### Ductility
+
+Ductility is the amount of plastic deformation before fracture, reported as:
+
+$$
+\%EL = \frac{L_f - L_0}{L_0} \times 100 \qquad \%RA = \frac{A_0 - A_f}{A_0} \times 100
+$$
+
+where L is gauge length and A is cross-sectional area, with subscripts 0 for original and f for fracture. Callister notes that a material with less than about 5 percent elongation at fracture is generally considered brittle.
+
+### Resilience and toughness
+
+**Resilience** is the elastic energy a material absorbs per unit volume up to yield. For a linear elastic region the modulus of resilience is:
+
+$$
+U_r = \frac{\sigma_y^2}{2E}
+$$
+
+**Toughness** is the total energy absorbed per unit volume up to fracture, equal to the area under the whole stress-strain curve. Tough materials combine strength and ductility. Under impact and with notches, toughness is measured by the **Charpy V-notch test** (ASTM E23), which reports absorbed energy in joules. Many steels show a ductile to brittle transition as temperature falls, which is why Charpy tests are often specified at low temperature.
+
+### Hardness
+
+Hardness is resistance to localised plastic deformation, measured by pressing an indenter into the surface: Brinell (ASTM E10), Rockwell and Vickers are the common scales. Hardness tests are quick and nearly non-destructive. For many steels, Callister gives the approximate relation between tensile strength and Brinell hardness:
+
+$$
+TS\,(\text{MPa}) \approx 3.45 \times HB
+$$
+
+### Fatigue strength and creep
+
+Under repeated loading, parts can fail at stresses well below the UTS. The **fatigue limit** or **fatigue strength** at a stated number of cycles comes from S-N testing, explained in [fatigue failure](/materials-engineering/fatigue-failure/). At high temperature, typically above about 0.4 of the absolute melting temperature according to Callister, metals deform slowly under constant load; this is **creep**, which governs boiler tubes, turbine blades and furnace parts.
+
+## Worked example: properties from a tensile test
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A steel specimen of 12.5 mm diameter and 50 mm gauge length. Load at 0.2 percent offset yield = 31.0 kN; maximum load = 49.0 kN. After fracture: gauge length 62.5 mm, neck diameter 8.0 mm. E = 207 GPa.</dd>
+<dt>Find</dt><dd>Yield strength, UTS, percent elongation, percent reduction of area, elastic strain at yield and modulus of resilience.</dd>
+<dt>Assumptions</dt><dd>Engineering stress based on the original area; linear elastic behaviour up to yield.</dd>
+<dt>Solution</dt><dd>A₀ = π × 12.5² ÷ 4 = 122.7 mm²<br />σy = 31 000 ÷ 122.7 = 252.6 MPa<br />UTS = 49 000 ÷ 122.7 = 399.3 MPa<br />%EL = (62.5 - 50) ÷ 50 × 100 = 25.0 percent<br />%RA = (1 - (8.0 ÷ 12.5)²) × 100 = (1 - 0.4096) × 100 = 59.0 percent<br />Elastic strain at yield = 252.6 ÷ 207 000 = 0.00122<br />Ur = 252.6² ÷ (2 × 207 000) = 0.154 MPa = 0.154 MJ/m³</dd>
+<dt>Answer</dt><dd><strong>Yield strength about 253 MPa, UTS about 399 MPa, elongation 25 percent, reduction of area 59 percent, resilience about 0.15 MJ/m³: a ductile low carbon steel</strong></dd>
+<dt>Limitations</dt><dd>Engineering stress understates the true stress after necking. Results depend on specimen geometry, strain rate and temperature, which the test standard controls.</dd>
+</dl>
+</Example>
+
+Using the hardness relation in reverse, a UTS of about 399 MPa corresponds to roughly 399 ÷ 3.45 = 116 HB, a typical value for an annealed low carbon steel. This is a useful cross-check when only one test is available.
+
+## How processing changes the properties
+
+Strength, hardness and toughness can be changed a great deal by cold working, alloying, grain size control and [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/). Quenching and tempering, for example, raises yield strength and hardness while trading away some ductility. Dieter emphasises that the elastic modulus is the exception: it is structure insensitive, so a stronger alloy of the same base metal is not any stiffer.
+
+## Choosing materials by mechanical properties
+
+- **Stiffness limited design** (deflection of beams, machine frames): select on E, or on E per unit density for lightweight parts.
+- **Strength limited design** (shafts, bolts, pressure parts): select on yield strength with a safety factor.
+- **Impact and crack resistance** (pressure vessels, cold climate structures): specify minimum Charpy energy at the lowest service temperature.
+- **Cyclic loading** (axles, springs, rotating parts): select on fatigue strength and control surface finish and notches.
+- **High temperature service:** select on creep strength and rupture life.
+
+Reading the mechanical properties of materials correctly, and knowing which one governs a design, is one of the core skills of mechanical and materials engineers.

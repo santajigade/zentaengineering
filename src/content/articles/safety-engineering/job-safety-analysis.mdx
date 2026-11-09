@@ -1,0 +1,134 @@
+---
+title: "Job Safety Analysis (JSA): Steps and Example"
+description: "Job safety analysis explained: selecting jobs, breaking them into steps, identifying hazards, applying the hierarchy of controls, with a worked JSA example."
+pubDate: 2026-11-09
+reviewedDate: 2026-11-09
+discipline: safety-engineering
+subcategory: hazard-identification
+focusKeyword: "job safety analysis"
+image: { src: /images/featured/job-safety-analysis.webp, alt: "Job Safety Analysis (JSA): Steps and Example: featured diagram" }
+format: explanation
+pillar: false
+tags: [jsa, jha, hazard-identification, hierarchy-of-controls, risk-assessment]
+faq:
+  - q: "Is a JSA the same as a JHA?"
+    a: "Yes, in practice. Job safety analysis (JSA) and job hazard analysis (JHA) describe the same technique: breaking a task into steps, identifying the hazards of each step and deciding controls. OSHA uses the term job hazard analysis in its guidance publication OSHA 3071, while many companies and contractors use JSA. Some organisations also call it a task hazard analysis."
+  - q: "Who should prepare a job safety analysis?"
+    a: "A supervisor or safety professional usually leads it, but the workers who actually do the job must take part. OSHA stresses that employee involvement is essential, because workers know the real steps, shortcuts and problems of the task. Involving them also improves acceptance of the controls that come out of the analysis."
+  - q: "How often should a JSA be reviewed?"
+    a: "A JSA should be reviewed whenever the job, equipment, materials or work environment changes, after any incident or near miss linked to the job, and periodically even when nothing seems to have changed. OSHA notes that reviewing a JHA after an incident often shows that a hazard was missed or a control was not followed."
+references:
+  - text: "OSHA 3071, Job Hazard Analysis, U.S. Department of Labor, Occupational Safety and Health Administration, 2002 (revised)"
+  - text: "ISO 45001:2018 Occupational health and safety management systems, Requirements with guidance for use"
+  - text: "ANSI/ASSP Z10.0-2019 Occupational Health and Safety Management Systems, American Society of Safety Professionals"
+  - text: "NIOSH, Hierarchy of Controls, National Institute for Occupational Safety and Health, U.S. Centers for Disease Control and Prevention"
+  - text: "HSE, Managing for health and safety, HSG65, 3rd ed., Health and Safety Executive, 2013"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **job safety analysis (JSA)** is a structured review of one specific task. The task is broken into its basic steps, the hazards of each step are identified, and controls are chosen to eliminate or reduce each hazard, preferably using the hierarchy of controls. The result is a written JSA that is used to train workers, brief the crew before the job and investigate incidents.
+
+</Key>
+
+A JSA focuses on the relationship between the **worker, the task, the tools and the work environment**, as OSHA describes it in its guidance publication OSHA 3071. It sits between broad, plant level studies such as a [HAZOP study](/safety-engineering/hazop-study/) and the daily permit to work. Where a HAZOP looks at process deviations, a JSA looks at what a person physically does, step by step.
+
+## When to use a job safety analysis
+
+OSHA 3071 recommends giving priority to:
+
+- Jobs with the highest injury or illness rates.
+- Jobs with the potential to cause severe or disabling injuries or illness, even if there is no history of incidents.
+- Jobs where one simple human error could lead to severe injury.
+- Jobs that are new to the operation or have changed in process or procedure.
+- Jobs complex enough to need written instructions.
+
+In many workplaces a JSA is also required before non-routine work such as maintenance on live plant, lifting operations, confined space entry or work at height. Management system standards such as ISO 45001:2018 and ANSI/ASSP Z10.0-2019 require hazard identification and risk assessment for routine and non-routine activities, and a JSA is one of the common ways of meeting that requirement at task level.
+
+## Steps of a job safety analysis
+
+<figure>
+<svg viewBox="0 0 640 300" width="640" height="300" fill="none" role="img" aria-label="Flow chart of the job safety analysis steps: select the job, involve workers, break the job into steps, identify hazards for each step, decide controls using the hierarchy of controls, document and communicate, then review and update with a feedback arrow back to the job steps">
+<g stroke="#0b2545" stroke-width="2" fill="#e6f6f4">
+<rect x="20" y="40" width="170" height="60" rx="8" />
+<rect x="235" y="40" width="170" height="60" rx="8" />
+<rect x="450" y="40" width="170" height="60" rx="8" />
+<rect x="450" y="180" width="170" height="60" rx="8" />
+<rect x="235" y="180" width="170" height="60" rx="8" />
+<rect x="20" y="180" width="170" height="60" rx="8" />
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M190 70 H227" /><path d="M405 70 H442" /><path d="M535 100 V172" /><path d="M450 210 H413" /><path d="M235 210 H198" />
+</g>
+<g fill="#0b2545">
+<path d="M227 64 L235 70 L227 76 Z" /><path d="M442 64 L450 70 L442 76 Z" /><path d="M529 172 L535 180 L541 172 Z" /><path d="M413 204 L405 210 L413 216 Z" /><path d="M198 204 L190 210 L198 216 Z" />
+</g>
+<path d="M105 180 V145 H320 V108" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" />
+<path d="M314 112 L320 102 L326 112 Z" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="105" y="66" font-weight="700">1. Select the job</text><text x="105" y="84" font-size="11">and involve workers</text>
+<text x="320" y="66" font-weight="700">2. Break into steps</text><text x="320" y="84" font-size="11">in working order</text>
+<text x="535" y="66" font-weight="700">3. Identify hazards</text><text x="535" y="84" font-size="11">for each step</text>
+<text x="535" y="206" font-weight="700">4. Decide controls</text><text x="535" y="224" font-size="11">hierarchy of controls</text>
+<text x="320" y="206" font-weight="700">5. Document and brief</text><text x="320" y="224" font-size="11">train the crew</text>
+<text x="105" y="206" font-weight="700">6. Review and update</text><text x="105" y="224" font-size="11">after change or incident</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#b42318"><text x="118" y="137">Feedback: revise steps and hazards</text></g>
+</svg>
+<figcaption>The job safety analysis cycle, with review feeding back into the job steps.</figcaption>
+</figure>
+
+### 1. Select the job and involve workers
+
+Choose the job using the priorities above, and form a small team that includes people who do the job regularly. OSHA 3071 stresses employee involvement: workers know the real sequence, the awkward moments and the informal shortcuts.
+
+### 2. Break the job into steps
+
+List the steps in the order they are done, starting each with an action verb (isolate, remove, lift, install). OSHA advises avoiding steps that are so broad that hazards are missed, or so detailed that the list becomes unusable. Watching the job being done, or reviewing photos and video, helps capture what really happens.
+
+### 3. Identify the hazards of each step
+
+For each step ask what can go wrong: struck by or against, caught in or between, falls, contact with energy (electrical, mechanical, pressure, thermal), harmful substances, manual handling strain, noise and environmental conditions. Record the hazard, the way it could cause harm and who could be harmed.
+
+### 4. Decide controls using the hierarchy
+
+Controls are chosen in the order set out by NIOSH and by ISO 45001: **elimination, substitution, engineering controls, administrative controls, and personal protective equipment (PPE)**. Higher levels are more reliable because they do not depend on people doing the right thing every time. PPE is the last line of defence, not the first answer.
+
+### 5. Document and communicate
+
+The JSA is written in a simple three or four column form: job step, hazards, controls, and often a responsible person. It is used for training new workers and for a briefing at the start of each job, where the crew confirms that conditions match the JSA.
+
+### 6. Review and update
+
+Review the JSA after any change, incident or near miss, and at a set interval. Incident findings from [root cause analysis](/safety-engineering/root-cause-analysis-methods/) often reveal a missing step or a weak control.
+
+## Scoring risk in a JSA
+
+OSHA's JHA method does not require numeric scoring, but many companies add a likelihood and severity rating from their own [risk matrix](/safety-engineering/risk-matrix/) to each step, before and after controls. This shows where controls make the biggest difference and which residual risks still need attention. The scales and acceptance limits are set by each organisation, so scores from different companies are not comparable.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A JSA for replacing the drive belt on a ventilation fan. The company uses a 5 × 5 matrix, risk = likelihood × severity, each rated 1 to 5. Four steps were rated before and after controls:<br />1. Isolate the fan: unexpected start, before L3 × S5, after L1 × S5 (lockout and tagout with a zero energy check).<br />2. Remove the belt guard: cut hand on sharp edge, before L3 × S2, after L2 × S2 (cut resistant gloves).<br />3. Replace the belt: hand caught between belt and pulley, before L3 × S4, after L1 × S4 (pulley checked stationary, bar used to roll the belt on).<br />4. Refit guard and test run: guard left off, before L2 × S4, after L1 × S4 (guard interlock check and supervisor sign off).</dd>
+<dt>Find</dt><dd>Risk score of each step before and after controls, the total, and the percentage reduction.</dd>
+<dt>Assumptions</dt><dd>Scores are the team's agreed ratings; the company treats a score of 10 or more as needing additional control before work starts.</dd>
+<dt>Solution</dt><dd>Before: 3 × 5 = 15; 3 × 2 = 6; 3 × 4 = 12; 2 × 4 = 8. Total = 15 + 6 + 12 + 8 = 41<br />After: 1 × 5 = 5; 2 × 2 = 4; 1 × 4 = 4; 1 × 4 = 4. Total = 5 + 4 + 4 + 4 = 17<br />Reduction = (41 - 17) ÷ 41 × 100 = 58.5 percent<br />Steps at 10 or more before controls: step 1 (15) and step 3 (12); after controls none exceed 5</dd>
+<dt>Answer</dt><dd><strong>Total risk score falls from 41 to 17, a reduction of about 59 percent, and the two high risk steps (isolation and belt replacement) drop below the action threshold</strong></dd>
+<dt>Limitations</dt><dd>Summing scores is only a rough indicator; one high severity step matters more than several minor ones. The scores depend on the organisation's own matrix definitions.</dd>
+</dl>
+</Example>
+
+The largest reductions came from engineering and procedural controls on energy (lockout and stopping the pulley), not from PPE. For the isolation step, the energy isolation and permit process is explained well in this guide to [electrical isolation and permit to work](https://www.instrumentationblog.in/electrical-isolation-permit-to-work/).
+
+## Common mistakes in a job safety analysis
+
+- Writing the JSA in the office without watching the job or talking to the crew.
+- Steps that are too vague ("do maintenance") to reveal real hazards.
+- Relying on "be careful" or "use PPE" as the only control.
+- Copying an old JSA without checking that the equipment, site and crew are the same.
+- Treating the JSA as paperwork and never using it in the pre-job briefing.
+
+## JSA and other hazard identification methods
+
+A JSA is task based and person focused. [FMEA](/safety-engineering/fmea-explained/) is equipment and failure focused, and HAZOP is process deviation focused. In a mature safety programme they work together: the HAZOP sets the engineered safeguards for the plant, FMEA examines how equipment fails, and the JSA makes sure each person doing a task understands its hazards and controls on the day.

@@ -1,0 +1,141 @@
+---
+title: "Metal Casting Process: Steps and Types"
+description: "Metal casting process explained: pattern, mould, gating, melting, pouring, solidification and cleaning, the main casting types and Chvorinov's rule example."
+pubDate: 2026-11-09
+reviewedDate: 2026-11-09
+discipline: manufacturing-engineering
+subcategory: manufacturing-processes
+focusKeyword: "metal casting process"
+image: { src: /images/featured/metal-casting-process.webp, alt: "Metal Casting Process: Steps and Types: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [casting, sand-casting, die-casting, investment-casting, solidification]
+faq:
+  - q: "What is the difference between expendable and permanent mould casting?"
+    a: "In expendable mould casting, such as sand, shell and investment casting, the mould is destroyed to remove each casting, so a new mould is made every time. In permanent mould casting, such as gravity die casting and high pressure die casting, a metal mould is reused for many thousands of parts. Permanent moulds give better surface finish and tolerance but are costly and limited to lower melting point alloys."
+  - q: "Why is a riser needed in a sand casting?"
+    a: "Most metals shrink as they solidify. A riser is a reservoir of molten metal that solidifies after the casting, so it can feed liquid metal into the casting to make up for that shrinkage. Without a correctly sized and placed riser, shrinkage cavities form in the last regions of the casting to freeze."
+  - q: "Which metals are most commonly cast?"
+    a: "Cast irons, steels, aluminium alloys, copper alloys such as bronze and brass, magnesium alloys and zinc alloys are all widely cast. Grey cast iron is especially well suited to casting because of its good fluidity and low solidification shrinkage, while aluminium and zinc alloys dominate high pressure die casting."
+references:
+  - text: "M. P. Groover, Fundamentals of Modern Manufacturing: Materials, Processes, and Systems, 6th ed., Wiley"
+  - text: "S. Kalpakjian and S. R. Schmid, Manufacturing Engineering and Technology, 7th ed., Pearson"
+  - text: "J. Campbell, Complete Casting Handbook: Metal Casting Processes, Metallurgy, Techniques and Design, 2nd ed., Butterworth-Heinemann, 2015"
+  - text: "ASM Handbook, Volume 15: Casting, ASM International, 2008"
+  - text: "N. Chvorinov, Theory of the solidification of castings, Giesserei, Vol. 27, 1940"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The **metal casting process** makes a part by pouring molten metal into a mould cavity that has the shape of the part, letting it solidify, and then removing and cleaning the casting. The main steps are pattern and mould making, melting, pouring, solidification, shakeout and finishing. Casting can produce complex shapes in almost any size, from small jewellery pieces to engine blocks and turbine housings.
+
+</Key>
+
+Casting is one of the oldest shaping methods and one of the main **primary shaping** processes in the [classification of manufacturing processes](/manufacturing-engineering/manufacturing-processes-classification/). It is chosen when a part has internal cavities, curved passages or a shape that would need a lot of machining from solid stock, and when the alloy suits being melted and poured.
+
+## Steps of the metal casting process
+
+Using sand casting as the reference case, Groover and Kalpakjian describe the following sequence.
+
+1. **Pattern making.** A pattern is a full size replica of the part, made from wood, metal or plastic. It is made slightly larger than the part to allow for shrinkage as the metal cools, and it includes extra stock on surfaces that will be machined.
+2. **Core making.** Where the casting needs an internal cavity, a **core** made of bonded sand is placed in the mould. Core prints on the pattern create seats that hold it.
+3. **Mould making.** Sand mixed with a binder is packed around the pattern in a two part box called a **flask**. The upper half is the **cope** and the lower half is the **drag**; they meet at the **parting line**. The pattern is then removed, leaving the cavity.
+4. **Gating system.** Channels are cut or moulded to carry metal into the cavity: the **pouring basin**, the vertical **sprue**, the horizontal **runner** and the **gates**. A **riser** is added to feed the casting as it shrinks.
+5. **Melting.** The metal is melted in a furnace such as a cupola, induction furnace or crucible furnace, and its composition and temperature are adjusted.
+6. **Pouring.** Molten metal is poured into the basin at a controlled rate and temperature. Too cold and it may freeze before filling thin sections; too fast and it erodes the mould and traps air.
+7. **Solidification and cooling.** The metal freezes from the mould walls inward and contracts as it cools.
+8. **Shakeout and cleaning.** The sand mould is broken away, the gates and risers are cut off, and the surfaces are cleaned by shot blasting. This finishing work is often called **fettling**.
+9. **Inspection and finishing.** Castings are checked visually and dimensionally, and often by [non-destructive testing methods](/materials-engineering/ndt-methods/) such as radiography for internal porosity. Many are then heat treated and machined.
+
+<figure>
+<svg viewBox="0 0 640 330" width="640" height="330" fill="none" role="img" aria-label="Cross-section of a two part sand mould in a flask: cope on top and drag below separated by the parting line, with pouring basin, sprue, runner, gate, casting cavity containing a core, and a riser">
+<rect x="150" y="50" width="340" height="230" fill="#f2efe6" stroke="#0b2545" stroke-width="2" />
+<path d="M140 160 H500" stroke="#b42318" stroke-width="1.5" stroke-dasharray="6 4" />
+<path d="M190 50 L200 75 L215 75 L225 50 Z" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect x="200" y="75" width="15" height="85" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect x="200" y="160" width="80" height="14" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect x="280" y="160" width="20" height="10" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect x="300" y="120" width="120" height="80" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<rect x="340" y="148" width="40" height="24" fill="#d9c9a3" stroke="#0b2545" stroke-width="1.5" />
+<rect x="430" y="70" width="30" height="90" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect x="420" y="130" width="10" height="20" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#7b8794" stroke-width="1">
+<path d="M207 62 L120 40" /><path d="M200 110 L120 110" /><path d="M230 174 L200 240" /><path d="M290 170 L280 260" />
+<path d="M360 172 L380 250" /><path d="M445 70 L540 50" /><path d="M415 190 L540 200" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="30" y="44">Pouring basin</text>
+<text x="70" y="114">Sprue</text>
+<text x="160" y="254">Runner</text>
+<text x="262" y="274">Gate</text>
+<text x="370" y="264">Core</text>
+<text x="545" y="54">Riser</text>
+<text x="545" y="204">Cavity</text>
+<text x="505" y="164" fill="#b42318" font-size="11">Parting line</text>
+<text x="160" y="300" font-size="11" fill="#7b8794">Flask: cope above the parting line, drag below</text>
+</g>
+</svg>
+<figcaption>Sand mould in section: metal flows from the pouring basin down the sprue, along the runner and through the gate into the cavity, while the riser feeds shrinkage.</figcaption>
+</figure>
+
+## Types of metal casting process
+
+Casting processes are grouped by whether the mould is destroyed after each casting.
+
+### Expendable mould processes
+
+- **Sand casting:** green sand (sand, clay and water) or chemically bonded sand around a pattern. It suits almost any alloy, any size and low to medium quantities, but gives a rougher surface and wider tolerances than other methods.
+- **Shell moulding:** a thin shell of resin bonded sand is formed on a heated metal pattern. It gives better finish and accuracy than green sand and suits medium to high volumes.
+- **Investment (lost wax) casting:** a wax pattern is coated with ceramic slurry, the wax is melted out and metal is poured into the ceramic shell. It produces fine detail and good finish, and is used for turbine blades, medical implants and jewellery.
+- **Lost foam casting:** a polystyrene foam pattern stays in the sand mould and vaporises as the metal enters.
+
+### Permanent mould processes
+
+- **Gravity die casting (permanent mould casting):** metal is poured under gravity into a reusable metal mould, typically for aluminium, magnesium and copper alloys.
+- **High pressure die casting:** molten metal is injected into a steel die at high pressure. It gives very high production rates and thin walls, mainly for aluminium, zinc and magnesium alloys. Hot chamber machines are used for low melting alloys such as zinc; cold chamber machines are used for aluminium.
+- **Centrifugal casting:** the mould spins so that centrifugal force throws the metal against the mould wall, used for pipes, liners and rings.
+- **Continuous casting:** molten steel or other metal is solidified continuously into slabs, blooms or billets, which are then rolled.
+
+## Solidification and Chvorinov's rule
+
+The time a casting takes to solidify controls its grain structure and where shrinkage defects form. **Chvorinov's rule** relates solidification time to the volume and surface area of the casting:
+
+$$
+t_s = B \left(\frac{V}{A}\right)^{n}
+$$
+
+where V is volume, A is the surface area through which heat leaves, B is a mould constant that depends on the metal, mould material and pouring temperature, and n is usually taken as 2. The ratio V/A is called the **casting modulus**. A riser must freeze **after** the section it feeds, so its modulus must be larger than the casting's.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A rectangular plate casting 200 mm × 100 mm × 20 mm. Mould constant B = 2.0 min/cm², n = 2. A cylindrical riser with height equal to diameter is to solidify 25 percent later than the plate.</dd>
+<dt>Find</dt><dd>Solidification time of the plate and the required riser diameter.</dd>
+<dt>Assumptions</dt><dd>All surfaces of both plate and riser lose heat to the mould; the same mould constant applies to both.</dd>
+<dt>Solution</dt><dd>Plate: V = 20 × 10 × 2 = 400 cm³; A = 2(20 × 10 + 20 × 2 + 10 × 2) = 520 cm²<br />Modulus = 400 ÷ 520 = 0.769 cm<br />t = 2.0 × 0.769² = 1.18 min<br />Riser time = 1.25 × 1.18 = 1.48 min, so riser modulus = 0.769 × √1.25 = 0.860 cm<br />For a cylinder with H = D: V = πD³ ÷ 4 and A = πD² + 2(πD² ÷ 4) = 1.5πD², so modulus = D ÷ 6<br />D = 6 × 0.860 = 5.16 cm</dd>
+<dt>Answer</dt><dd><strong>The plate solidifies in about 1.2 min; a riser of about 52 mm diameter and 52 mm height solidifies about 25 percent later</strong></dd>
+<dt>Limitations</dt><dd>The riser must also hold enough metal to cover the volumetric shrinkage and be placed so that a feeding path exists. Real designs also use insulating sleeves and simulation software.</dd>
+</dl>
+</Example>
+
+## Common casting defects
+
+Campbell and the ASM Handbook describe a set of defects that every foundry engineer learns to recognise:
+
+- **Shrinkage cavities:** voids in the last regions to freeze, caused by poor feeding.
+- **Gas porosity:** round holes from dissolved gas or air and moisture from the mould.
+- **Misruns and cold shuts:** the metal freezes before filling the cavity, or two streams meet without fusing, often from low pouring temperature or thin sections.
+- **Inclusions:** sand, slag or oxide films trapped in the metal; Campbell stresses that turbulent filling creates oxide film defects.
+- **Hot tears:** cracks that form while the casting is still weak near the end of solidification, when contraction is restrained by the mould or core.
+
+Good gating that fills the mould smoothly, correct riser size, controlled pouring temperature and dry, permeable sand prevent most of them.
+
+## Advantages and limitations
+
+Casting can make complex external and internal shapes in one step, handles very large parts, and suits alloys that are hard to forge or machine, such as grey cast iron. Its limitations are lower mechanical properties than wrought material of the same alloy in some cases, porosity risk, dimensional tolerance and surface finish that often need machining, and the environmental load of melting. Cast steel and iron parts are often heat treated afterwards; the phases involved are explained in the [iron-carbon phase diagram](/materials-engineering/iron-carbon-phase-diagram/) and [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+
+## Casting compared with other processes
+
+Where very small batches of complex parts are needed, metal [3D printing technologies](/manufacturing-engineering/3d-printing-technologies/) are an alternative, and 3D printed sand moulds and wax patterns now combine both approaches. For high volume parts with simple shapes, forging or machining from bar may be cheaper. Process selection weighs quantity, size, alloy, tolerance and cost together.
