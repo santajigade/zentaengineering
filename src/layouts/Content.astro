@@ -6,6 +6,7 @@ import Toc from '../components/Toc.astro';
 import AuthorBox from '../components/AuthorBox.astro';
 import Faq from '../components/Faq.astro';
 import References from '../components/References.astro';
+import ShareBar from '../components/ShareBar.astro';
 import Newsletter from '../components/Newsletter.astro';
 import AdSlot from '../components/AdSlot.astro';
 import Logo from '../components/Logo.astro';
@@ -60,8 +61,9 @@ const schema = {
         <span>Published <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate)}</time></span>
         {data.updatedDate && <span>Updated <time datetime={data.updatedDate.toISOString()}>{formatDate(data.updatedDate)}</time></span>}
       </div>
+      <ShareBar url={url} title={data.title} image={image} />
       {data.image && (
-        <figure style="margin:24px 0 0">
+        <figure style="margin:20px 0 0">
           <img src={data.image.src} alt={data.image.alt} width="1200" height="630" style="width:100%;height:auto;border-radius:var(--ze-radius);display:block" fetchpriority="high" />
         </figure>
       )}

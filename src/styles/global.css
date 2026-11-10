@@ -206,3 +206,10 @@ figure.anim.paused * { animation-play-state: paused !important; }
 .nl-fine { margin: 10px 0 0; font-size: 12px; color: var(--ze-ink-2); }
 @media (max-width: 600px) { .nl-pop { right: 12px; bottom: 12px; padding: 16px; } .nl-pop .nl-logo { display: none; } .nl-pop .nl-p { display: none; } .nl-pop .nl-t { font-size: 17px; margin-bottom: 10px; } .nl-pop .nl-fine { margin-top: 6px; } }
 @media (prefers-reduced-motion: reduce) { .nl-pop { transition: none; } }
+
+/* Share buttons */
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; }
+.share-l { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ze-ink-2); margin-right: 4px; }
+.share-b { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--ze-line); background: #fff; color: var(--c); cursor: pointer; padding: 0; transition: background .15s, color .15s, border-color .15s; }
+.share-b:hover, .share-b:focus-visible { background: var(--c); border-color: var(--c); color: #fff; }
+.share-msg { font-size: 13px; color: var(--ze-teal-700); }
