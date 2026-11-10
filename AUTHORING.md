@@ -104,3 +104,6 @@ import Calculator from '../../../components/Calculator.astro';
   - Put it in body text where it helps the reader. Never in "Related reading", which is for Zenta Engineering pages only.
   - Skip it when the match is loose. Many articles should have none. Prefer a specific article over a category page, and never write "see more on InstrumentationBlog" style promo sentences.
 - External references: link to the publisher or standards body page, not to pirated copies.
+
+## Animated diagrams
+Optional, for topics where motion explains the idea (flows, signals, rotation, cycles). Use animated inline SVG, never GIF or video. Add `class="anim"` to the `<figure>`; the page adds a Pause button and respects reduced motion settings. Classes (defined in src/styles/global.css): `anim-flow`, `anim-flow-slow`, `anim-flow-rev`, `anim-pulse`, `anim-spin`, `anim-blink`, delays `anim-d1` to `anim-d3`. Example: renewable-energy/how-solar-pv-systems-work.mdx.

@@ -16,6 +16,7 @@ File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that al
 - Authors are set automatically (Electronics: Santaji Gadepatil; others: Editorial Staff, reviewed by Technical Team). Leave `author` and `reviewedBy` out of front matter.
 - SEO: focus keyword in slug, title (60 characters or fewer), description (120 to 150 characters), first paragraph, and at least one H2. At least 3 H2s.
 - One accurate SVG diagram, viewBox based, with no overlapping or clipped text. Use `&#123;` and `&#125;` for braces in SVG.
+- Animation: where motion helps explain the concept (current or fluid flow, signal paths, rotating machines, process steps, cycles), make the main diagram animated: put `class="anim"` on the `<figure>` and use the CSS classes `anim-flow`, `anim-flow-slow`, `anim-flow-rev` (moving dashes along a path; draw a white or light path on top of the coloured line), `anim-pulse`, `anim-spin`, `anim-blink` and delays `anim-d1` to `anim-d3` (see the solar PV article for an example). Animation must only add to a diagram that is already correct when still; no animation for static topics. Never use GIF or video files. Keep text static.
 - A worked Example with Given, Find, Assumptions, Solution, Answer, Limitations. Check the arithmetic by running it in Python.
 - FAQ with exactly 3 questions in front matter; 4 or more real references (standards, textbooks, official handbooks).
 - Internal links ONLY to articles that already exist in `src/content/` (check with ls). Never link to queued or unwritten slugs.

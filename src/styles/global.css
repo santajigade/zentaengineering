@@ -165,3 +165,20 @@ a.card:hover { border-color: var(--ze-navy); }
 .search-form { display: flex; gap: 8px; max-width: 640px; }
 .search-form input { flex: 1; min-width: 0; height: 52px; border: 1px solid #c5ced9; border-radius: var(--ze-radius); padding: 0 16px; font: 16px var(--ze-font); }
 .search-form .btn { min-height: 52px; }
+
+/* Animated diagrams: add class="anim" to the figure, then use these classes on SVG elements. */
+.anim-flow { stroke-dasharray: 6 12; animation: ze-flow 1s linear infinite; }
+.anim-flow-slow { stroke-dasharray: 6 12; animation: ze-flow 2s linear infinite; }
+.anim-flow-rev { stroke-dasharray: 6 12; animation: ze-flow 1s linear infinite reverse; }
+.anim-pulse { transform-box: fill-box; transform-origin: center; animation: ze-pulse 2s ease-in-out infinite; }
+.anim-spin { transform-box: fill-box; transform-origin: center; animation: ze-spin 3s linear infinite; }
+.anim-blink { animation: ze-blink 1.6s ease-in-out infinite; }
+.anim-d1 { animation-delay: .4s; } .anim-d2 { animation-delay: .8s; } .anim-d3 { animation-delay: 1.2s; }
+@keyframes ze-flow { to { stroke-dashoffset: -18; } }
+@keyframes ze-pulse { 50% { transform: scale(1.12); opacity: .8; } }
+@keyframes ze-spin { to { transform: rotate(360deg); } }
+@keyframes ze-blink { 50% { opacity: .25; } }
+.prose figure.anim { position: relative; }
+.anim-toggle { position: absolute; top: 6px; right: 6px; font: 600 12px var(--ze-font); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--ze-line); background: #fff; color: var(--ze-navy); cursor: pointer; }
+figure.anim.paused * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { figure.anim * { animation: none !important; } .anim-toggle { display: none; } }

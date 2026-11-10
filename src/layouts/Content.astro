@@ -75,4 +75,13 @@ const schema = {
     </aside>
   </div>
   <slot name="below" />
+<script>
+  document.querySelectorAll('figure.anim').forEach((f) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'anim-toggle'; b.textContent = 'Pause';
+    b.setAttribute('aria-label', 'Pause or play the animation');
+    b.addEventListener('click', () => { const p = f.classList.toggle('paused'); b.textContent = p ? 'Play' : 'Pause'; });
+    f.appendChild(b);
+  });
+</script>
 </Base>
