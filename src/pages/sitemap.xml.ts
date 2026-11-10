@@ -1,4 +1,5 @@
 // Lists only indexable pages (same thresholds as the pages' noindex rules).
+import diagrams from '../../public/images/diagrams/manifest.json';
 import { SITE, AUTHORS, authorFor } from '../data/site';
 import { DISCIPLINES } from '../data/disciplines';
 import { SERIES } from '../data/series';
@@ -26,7 +27,7 @@ export async function GET() {
   res.forEach((r) => urls.push([resourceUrl(r), last(r)]));
   Object.values(AUTHORS).filter((a) => articles.some((x) => authorFor(x.data).slug === a.slug)).forEach((a) => urls.push([`/author/${a.slug}/`]));
   const body = SITE.launched
-    ? urls.map(([u, d]) => `<url><loc>${SITE.url}${u}</loc>${d ? `<lastmod>${d.toISOString().slice(0, 10)}</lastmod>` : ''}</url>`).join('')
+    ? urls.map(([u, d]) => `<url><loc>${SITE.url}${u}</loc>${d ? `<lastmod>${d.toISOString().slice(0, 10)}</lastmod>` : ''}${((diagrams as any)[u] ?? []).map((x: { src: string }) => `<image:image><image:loc>${SITE.url}${x.src}</image:loc></image:image>`).join('')}</url>`).join('')
     : '';
-  return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${body}</urlset>\n`, { headers: { 'Content-Type': 'application/xml' } });
+  return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">${body}</urlset>\n`, { headers: { 'Content-Type': 'application/xml' } });
 }

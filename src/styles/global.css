@@ -182,3 +182,5 @@ a.card:hover { border-color: var(--ze-navy); }
 .anim-toggle { position: absolute; top: 6px; right: 6px; font: 600 12px var(--ze-font); padding: 4px 10px; border-radius: 12px; border: 1px solid var(--ze-line); background: #fff; color: var(--ze-navy); cursor: pointer; }
 figure.anim.paused * { animation-play-state: paused !important; }
 @media (prefers-reduced-motion: reduce) { figure.anim * { animation: none !important; } .anim-toggle { display: none; } }
+
+.dl-diagram { display: inline-block; margin-top: 6px; font-size: 13px; }
