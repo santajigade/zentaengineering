@@ -1,0 +1,78 @@
+---
+// Newsletter signup. variant="inline" = box at the end of an article; variant="popup" = slide-in card
+// shown once per visitor after 40 s or half the article (never on load, so it does not block content).
+interface Props { variant?: 'inline' | 'popup' }
+const { variant = 'inline' } = Astro.props;
+const title = 'Get one engineering email a week';
+const text = 'New articles, worked examples and study notes every week. Free, no spam, unsubscribe any time.';
+---
+{variant === 'inline' ? (
+  <section class="nl nl-inline" aria-labelledby="nl-inline-t">
+    <h2 id="nl-inline-t" class="nl-t">{title}</h2>
+    <p class="nl-p">{text}</p>
+    <form class="nl-form" data-form="inline" novalidate>
+      <label class="sr" for="nl-inline-e">Email address</label>
+      <input id="nl-inline-e" type="email" name="email" placeholder="Enter your email" autocomplete="email" required />
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="nl-hp" aria-hidden="true" />
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+      <p class="nl-msg" role="status"></p>
+    </form>
+  </section>
+) : (
+  <div class="nl nl-pop" id="nl-pop" role="dialog" aria-labelledby="nl-pop-t" aria-modal="false" hidden>
+    <button type="button" class="nl-x" aria-label="Close">&times;</button>
+    <img src="/icon-192.png" alt="" width="48" height="48" class="nl-logo" />
+    <p id="nl-pop-t" class="nl-t">{title}</p>
+    <p class="nl-p">{text}</p>
+    <form class="nl-form" data-form="popup" novalidate>
+      <label class="sr" for="nl-pop-e">Email address</label>
+      <input id="nl-pop-e" type="email" name="email" placeholder="Enter your email" autocomplete="email" required />
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="nl-hp" aria-hidden="true" />
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+      <p class="nl-msg" role="status"></p>
+    </form>
+    <p class="nl-fine">By subscribing you agree to our <a href="/privacy-policy/">privacy policy</a>.</p>
+  </div>
+)}
+{variant === 'popup' && (
+<script>
+  const KEY = 'ze-nl';
+  const get = () => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch { return {}; } };
+  const set = (v: object) => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch {} };
+  const pop = document.getElementById('nl-pop');
+  const st = get();
+  const recentlyClosed = st.closed && Date.now() - st.closed < 30 * 864e5;
+  if (pop && !st.subscribed && !recentlyClosed) {
+    let shown = false;
+    const show = () => { if (shown) return; shown = true; pop.hidden = false; requestAnimationFrame(() => pop.classList.add('in')); removeEventListener('scroll', onScroll); };
+    const onScroll = () => { const h = document.documentElement; if (h.scrollTop / (h.scrollHeight - h.clientHeight) > 0.5) show(); };
+    setTimeout(show, 40000);
+    addEventListener('scroll', onScroll, { passive: true });
+    const close = () => { pop.classList.remove('in'); setTimeout(() => (pop.hidden = true), 250); set({ ...get(), closed: Date.now() }); };
+    pop.querySelector('.nl-x')!.addEventListener('click', close);
+    addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pop.hidden) close(); });
+  }
+</script>
+)}
+<script>
+  document.querySelectorAll<HTMLFormElement>('form.nl-form:not([data-ready])').forEach((f) => {
+    f.dataset.ready = '1';
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = f.querySelector('.nl-msg') as HTMLElement;
+      const input = f.querySelector('input[type=email]') as HTMLInputElement;
+      const email = input.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Please enter a valid email address.'; return; }
+      const body = new FormData(f); body.set('page', location.pathname); body.set('form', f.dataset.form || '');
+      const btn = f.querySelector('button') as HTMLButtonElement; btn.disabled = true; msg.textContent = 'Subscribing...';
+      try {
+        const r = await fetch('/api/subscribe.php', { method: 'POST', body });
+        const j = await r.json();
+        if (!j.ok) throw new Error();
+        f.innerHTML = '<p class="nl-done">Thanks, you are subscribed. Look out for our weekly email.</p>';
+        try { localStorage.setItem('ze-nl', JSON.stringify({ subscribed: Date.now() })); } catch {}
+        const pop = document.getElementById('nl-pop'); if (pop && f.closest('#nl-pop')) setTimeout(() => { pop.classList.remove('in'); setTimeout(() => (pop.hidden = true), 250); }, 2500);
+      } catch { msg.textContent = 'Something went wrong. Please try again.'; btn.disabled = false; }
+    });
+  });
+</script>

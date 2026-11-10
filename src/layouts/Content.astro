@@ -6,6 +6,7 @@ import Toc from '../components/Toc.astro';
 import AuthorBox from '../components/AuthorBox.astro';
 import Faq from '../components/Faq.astro';
 import References from '../components/References.astro';
+import Newsletter from '../components/Newsletter.astro';
 import AdSlot from '../components/AdSlot.astro';
 import Logo from '../components/Logo.astro';
 import type { MarkdownHeading } from 'astro';
@@ -68,6 +69,7 @@ const schema = {
       <div class="prose" style="margin-top:20px"><slot /></div>
       <slot name="after" />
       <div class="prose" style="margin-top:12px"><Faq items={data.faq} /><References items={data.references} /></div>
+      <Newsletter variant="inline" />
       <AdSlot slot="endOfArticle" />
       <AuthorBox a={author} />
     </article>
@@ -78,6 +80,7 @@ const schema = {
     </aside>
   </div>
   <slot name="below" />
+<Newsletter variant="popup" />
 <script>
   document.querySelectorAll('figure.anim').forEach((f) => {
     const b = document.createElement('button');
