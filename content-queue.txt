@@ -18,12 +18,12 @@ materials-engineering|engineering-materials|Mechanical Properties of Materials E
 safety-engineering|hazard-identification|Job Safety Analysis (JSA): Steps and Example|job-safety-analysis|explanation|job safety analysis|2026-11-09
 agricultural-engineering|irrigation-systems|Irrigation Water Requirement Calculation|irrigation-water-requirement|fundamentals|irrigation water requirement|2026-11-09
 aerospace-engineering|aerodynamics|Drag Force on Aircraft: Types and Equation|drag-force-on-aircraft|fundamentals|drag force|2026-11-09
-biomedical-engineering|biomedical-sensors|Pulse Oximeter Working Principle|pulse-oximeter-working-principle|working-principle|pulse oximeter working principle|todo
-marine-engineering|naval-architecture|Ship Resistance and Powering Basics|ship-resistance-and-powering|fundamentals|ship resistance|todo
-mechanical-engineering|machine-design|Gear Types and Their Applications|types-of-gears|explanation|types of gears|todo
-electrical-engineering|electrical-machines|DC Motor Working Principle and Types|dc-motor-working-principle|working-principle|dc motor working principle|todo
-electronics-engineering|analog-electronics|Active and Passive Filters Explained|active-vs-passive-filters|comparison|active vs passive filters|todo
-civil-engineering|rcc-design|Types of Foundations and When to Use Them|types-of-foundations|explanation|types of foundations|todo
+biomedical-engineering|biomedical-sensors|Pulse Oximeter Working Principle|pulse-oximeter-working-principle|working-principle|pulse oximeter working principle|2026-11-10
+marine-engineering|naval-architecture|Ship Resistance and Powering Basics|ship-resistance-and-powering|fundamentals|ship resistance|2026-11-10
+mechanical-engineering|machine-design|Gear Types and Their Applications|types-of-gears|explanation|types of gears|2026-11-10
+electrical-engineering|electrical-machines|DC Motor Working Principle and Types|dc-motor-working-principle|working-principle|dc motor working principle|2026-11-10
+electronics-engineering|analog-electronics|Active and Passive Filters Explained|active-vs-passive-filters|comparison|active vs passive filters|2026-11-10
+civil-engineering|rcc-design|Types of Foundations and When to Use Them|types-of-foundations|explanation|types of foundations|2026-11-10
 chemical-engineering|mechanical-operations|Filtration in Chemical Engineering: Types and Equipment|filtration-equipment|equipment|filtration equipment|todo
 computer-science|algorithms|Sorting Algorithms Compared with Examples|sorting-algorithms|comparison|sorting algorithms|todo
 automation-robotics|scada-hmi|HMI Design Best Practices for Operators|hmi-design-best-practices|explanation|hmi design|todo
