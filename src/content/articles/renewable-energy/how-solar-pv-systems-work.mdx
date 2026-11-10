@@ -31,7 +31,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**Solar PV systems** turn sunlight directly into electricity. **Solar cells** made of semiconductor material (mostly silicon) release electrons when struck by light, the **photovoltaic effect**, producing **DC** current. Cells are wired into **panels (modules)**, panels into **strings** and **arrays**. An **inverter** converts DC to **AC** for use in buildings or export to the grid. Other components include **mounting structures**, **DC and AC protection**, **meters** and optionally **batteries**. Systems are **grid-tied**, **off-grid** or **hybrid**.
+**Solar PV systems** convert sunlight directly into electricity using solar cells, which produce DC current through the **photovoltaic effect**. Cells form panels, panels form strings and arrays, and an **inverter** converts the DC to AC for buildings or the grid. Systems are **grid-tied**, **off-grid** or **hybrid**.
 
 </Key>
 
@@ -148,6 +148,16 @@ where P_peak is array rating in kWp, H the annual peak sun hours (kWh/m² per ye
 
 <Calculator path="ecology/solar-system-size" title="Solar System Size Calculator" />
 
+## Key formulas for solar PV systems
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Array rating | P_peak = N × P_module | N = number of modules, P_module in W (STC) |
+| Annual energy | E = P_peak × H × PR | E in kWh, P_peak in kWp, H = peak sun hours per year, PR = performance ratio (0.75 to 0.85) |
+| Average daily energy | E_day = E ÷ 365 | kWh per day |
+| Temperature derating | P = P_STC × [1 + γ (T_cell − 25)] | γ = power temperature coefficient, about −0.003 to −0.004 per °C for silicon |
+| Module efficiency | η = P_STC ÷ (1000 W/m² × A) | A = module area in m² |
+
 ## Installation and maintenance
 
 Good practice includes a structural check of the roof, correct string sizing within the inverter voltage limits at the coldest temperature, secure cable management, labelled isolators, and commissioning tests of insulation resistance and string voltages. PV systems need little maintenance: periodic cleaning where dust is heavy, visual inspection, checking connections and monitoring data for drops in output. Thermal imaging finds hot spots from faulty cells or connectors.
@@ -155,3 +165,11 @@ Good practice includes a structural check of the roof, correct string sizing wit
 ## Solar PV systems in the wider energy system
 
 Solar output peaks at midday and falls to zero at night, so as solar grows, grids need flexibility: storage, demand response, other renewables such as [wind turbines](/renewable-energy/how-wind-turbines-work/), and smarter networks like [microgrids](/renewable-energy/microgrid-explained/). Large solar parks connect at medium or high voltage through step up transformers into the [power grid](/electrical-engineering/generation-transmission-distribution/).
+
+## Solar PV systems interview and viva questions
+
+1. **What is the photovoltaic effect?** When photons with energy above the band gap strike a p-n junction, they create electron and hole pairs, and the junction field separates them, producing a DC voltage and current.
+2. **Why are PV modules connected in series strings?** Series connection adds module voltages to reach the inverter's input range, typically 600 to 1500 V DC, which lowers current and cable losses.
+3. **What is a performance ratio?** It is the ratio of actual energy output to the theoretical output at STC ratings, accounting for temperature, soiling, wiring, mismatch and inverter losses. Typical values are 0.75 to 0.85.
+4. **Why does a grid-tied inverter shut down during a power cut?** Anti-islanding protection stops it from feeding a de-energised grid, which would endanger line workers.
+5. **How does temperature affect PV output?** Cell voltage falls as temperature rises, so power drops by about 0.3 to 0.4% for each °C above 25 °C.

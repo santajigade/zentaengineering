@@ -10,13 +10,16 @@ Each line: discipline|subcategory|title|slug|format|focus keyword|status.
 File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that already exists.
 
 ## 2. Write each article (hard rules)
-- 1000 to 1500 words as counted by `scripts/check-article.py`. Aim for about 1300; drafts usually come out short, so include one extra section from the start.
+- 1000 to 1800 words as counted by `scripts/check-article.py`. Aim for about 1400 including the sections below; drafts usually come out short, so include one extra section from the start.
 - No em dashes or en dashes anywhere. Hyphens inside words are fine.
 - Front matter: pubDate and reviewedDate both = today's date in IST (YYYY-MM-DD). `pillar: false`. `math: true` only if KaTeX is used.
 - Authors are set automatically (Electronics: Santaji Gadepatil; others: Editorial Staff, reviewed by Technical Team). Leave `author` and `reviewedBy` out of front matter.
 - SEO: focus keyword in slug, title (60 characters or fewer), description (120 to 150 characters), first paragraph, and at least one H2. At least 3 H2s.
 - One accurate SVG diagram, viewBox based, with no overlapping or clipped text. Use `&#123;` and `&#125;` for braces in SVG.
 - Animation (default for every article): animate the main diagram wherever any motion, flow, sequence or change can be shown, which is almost every engineering topic: current, fluid, heat, data or signal flow (`anim-flow`, `anim-flow-slow`, `anim-flow-rev` on a light dashed path drawn on top of the coloured line), rotating parts such as motors, pumps, fans, gears and turbines (`anim-spin`), process steps or cycle stages highlighted in order (`anim-blink` with delays `anim-d1` to `anim-d5`), and key points or sources (`anim-pulse`). Put `class="anim"` on the `<figure>`. Only skip animation when nothing in the topic moves or changes. The diagram must be correct when still; text stays static; motion must follow the real physics (correct flow direction, rotation sense). Never use GIF or video files. Example: renewable-energy/how-solar-pv-systems-work.mdx.
+- Short answer: the `<Key title="Short answer">` box right after the imports is a direct, self-contained answer to the focus keyword in 40 to 60 words (the featured snippet and AI Overview target). Start with the keyword and a definition; no lists inside.
+- Key formulas: when the article uses equations (math: true), add an H2 "Key formulas for <topic>" with a Markdown table: Quantity | Formula | Symbols and units. Formulas must match the article and its references.
+- Interview and viva questions: before the end, add an H2 "<Topic> interview and viva questions" with 5 numbered questions, each a bold question followed by a 1 to 2 sentence answer. Answers must be consistent with the article; no new unreferenced numbers.
 - A worked Example with Given, Find, Assumptions, Solution, Answer, Limitations. Check the arithmetic by running it in Python.
 - FAQ with exactly 3 questions in front matter; 4 or more real references (standards, textbooks, official handbooks).
 - Internal links ONLY to articles that already exist in `src/content/` (check with ls). Never link to queued or unwritten slugs.
@@ -24,12 +27,12 @@ File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that al
 - Calculator: embed `<Calculator path="category/slug" title="..." />` only when a path in `scripts/zentacalculator-list.txt` directly matches the topic. Otherwise no calculator.
 - MDX safety: no curly braces in prose; no "<" followed by a letter in prose; no markdown links inside `<dd>`; imports exactly `import Example from '../../../components/Example.astro';` (same pattern for Key and Calculator), never `':../`.
 
-## 2b. Animate 12 existing articles
-Take the first 12 file paths in `anim-backlog.txt`. For each, add animation to its existing diagram(s) using the rules above, without changing the diagram's geometry or text. If nothing in a diagram can sensibly move, leave it static. Delete those 12 lines from `anim-backlog.txt`. Render them with render-svgs.py and check them like new articles. If the backlog is empty, skip this step.
+## 2b. Upgrade 8 existing articles
+Take the first 8 file paths in `upgrade-backlog.txt`. For each, bring it up to the current format without changing facts or slug: animate its diagram(s) per the animation rule (no change to geometry or text), rewrite the Short answer box to 40 to 60 words, add the Key formulas table if it uses equations, and add the interview and viva questions section. Use renewable-energy/how-solar-pv-systems-work.mdx as the model. Set `updatedDate` to today. Delete those 8 lines from `upgrade-backlog.txt`. Check them exactly like new articles (missing= must be empty). If the backlog is empty, skip this step.
 
 ## 3. Check and fix
 ```
-python3 scripts/check-article.py <files>   (new and re-animated files)
+python3 scripts/check-article.py <files>   (new and upgraded files; words 1000 to 1800, dashes=0, missing=[] for each)
 python3 scripts/seo-check.py <files>
 python3 scripts/render-svgs.py <files>
 ```

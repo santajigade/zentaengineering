@@ -9,4 +9,12 @@ for f in sys.argv[1:]:
     words = len(re.findall(r"[A-Za-z0-9][A-Za-z0-9'.,/%]*", b))
     dashes = len(re.findall('[–—]', s))
     bad = [p for p in re.findall(r'<Calculator path="([^"]+)"', body) if p not in calc]
-    print(f"{f.split('/')[-1]}: {words} words, dashes={dashes}, bad calculators={bad}")
+    sa = re.search(r'<Key title="Short answer">(.*?)</Key>', body, re.S)
+    sa_words = len(sa.group(1).split()) if sa else 0
+    math = re.search(r'^math:\s*true', fm, re.M)
+    missing = [n for n, ok in [
+        ('Short answer 40-60 words', 40 <= sa_words <= 60),
+        ('interview/viva H2', bool(re.search(r'^## .*(interview|viva)', body, re.M | re.I))),
+        ('Key formulas H2', not math or bool(re.search(r'^## .*formula', body, re.M | re.I))),
+    ] if not ok]
+    print(f"{f.split('/')[-1]}: {words} words, dashes={dashes}, bad calculators={bad}, missing={missing}")

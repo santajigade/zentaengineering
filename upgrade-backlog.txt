@@ -1,4 +1,4 @@
-# Existing articles whose diagrams are not yet animated. The daily run animates the first 12 and deletes their lines.
+# Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
 src/content/articles/aerospace-engineering/aircraft-structural-components.mdx
 src/content/articles/aerospace-engineering/avionics-systems-overview.mdx
 src/content/articles/aerospace-engineering/drag-force-on-aircraft.mdx
@@ -77,16 +77,29 @@ src/content/articles/computer-science/solid-principles.mdx
 src/content/articles/computer-science/stack-vs-queue.mdx
 src/content/articles/computer-science/types-of-software-testing.mdx
 src/content/articles/computer-science/von-neumann-vs-harvard-architecture.mdx
+src/content/articles/electrical-engineering/cable-sizing.mdx
+src/content/articles/electrical-engineering/circuit-breaker-working-principle.mdx
 src/content/articles/electrical-engineering/dc-motor-working-principle.mdx
+src/content/articles/electrical-engineering/electrical-earthing.mdx
+src/content/articles/electrical-engineering/generation-transmission-distribution.mdx
+src/content/articles/electrical-engineering/induction-motor-working-principle.mdx
+src/content/articles/electrical-engineering/insulation-resistance-test.mdx
 src/content/articles/electrical-engineering/ohms-law-kirchhoffs-laws.mdx
+src/content/articles/electrical-engineering/overcurrent-relay.mdx
 src/content/articles/electrical-engineering/power-factor.mdx
 src/content/articles/electrical-engineering/thevenins-theorem.mdx
 src/content/articles/electrical-engineering/transformer-working-principle.mdx
 src/content/articles/electronics-engineering/active-vs-passive-filters.mdx
+src/content/articles/electronics-engineering/antenna-gain-and-directivity.mdx
 src/content/articles/electronics-engineering/buck-converter.mdx
 src/content/articles/electronics-engineering/cmos-inverter.mdx
 src/content/articles/electronics-engineering/inverting-and-non-inverting-amplifier.mdx
+src/content/articles/electronics-engineering/logic-gates.mdx
+src/content/articles/electronics-engineering/microcontroller-vs-microprocessor.mdx
+src/content/articles/electronics-engineering/pcb-design-basics.mdx
+src/content/articles/electronics-engineering/sampling-theorem.mdx
 src/content/articles/electronics-engineering/transistor-working-principle.mdx
+src/content/articles/electronics-engineering/what-is-a-diode.mdx
 src/content/articles/environmental-engineering/activated-sludge-process.mdx
 src/content/articles/environmental-engineering/cems-overview.mdx
 src/content/articles/environmental-engineering/circular-economy-principles.mdx
