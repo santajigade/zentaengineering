@@ -1,0 +1,151 @@
+---
+title: "Active vs Passive Filters: Differences Explained"
+description: "Active vs passive filters compared: components, gain, loading, power, frequency range and noise, with cutoff formulas and a worked RC loading example."
+pubDate: 2026-11-10
+reviewedDate: 2026-11-10
+discipline: electronics-engineering
+subcategory: analog-electronics
+focusKeyword: "active vs passive filters"
+image: { src: /images/featured/active-vs-passive-filters.webp, alt: "Active vs Passive Filters: Differences Explained: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [filters, active-filter, passive-filter, rc-filter, sallen-key, op-amp]
+faq:
+  - q: "Can a passive filter have gain?"
+    a: "A passive filter cannot give power gain, because it has no energy source. An RLC circuit can show a voltage peak near resonance when Q is high, but the output power is still less than the input power. Any real gain above unity needs an active device such as an op amp or transistor."
+  - q: "Why are inductors avoided in low frequency filters?"
+    a: "At low frequencies the inductance needed for a given cutoff becomes large, so the inductor is bulky, heavy, costly and has significant winding resistance and core losses. It can also pick up magnetic interference. Active filters reach the same response using only resistors, capacitors and an op amp."
+  - q: "Which is better for anti-aliasing before an ADC, active or passive?"
+    a: "Both are used. An active filter, often a Sallen-Key or multiple feedback stage, gives a sharp second order or higher roll off with a low output impedance that can drive the ADC. A simple passive RC is still often placed right at the ADC input to supply the charge for the sampling capacitor and limit wideband noise."
+references:
+  - text: "P. Horowitz and W. Hill, The Art of Electronics, 3rd ed., Cambridge University Press, 2015"
+  - text: "A. S. Sedra and K. C. Smith, Microelectronic Circuits, 8th ed., Oxford University Press, 2020"
+  - text: "R. Mancini and B. Carter (eds.), Op Amps for Everyone, 5th ed., Texas Instruments and Newnes, 2017"
+  - text: "A. B. Williams and F. J. Taylor, Electronic Filter Design Handbook, 4th ed., McGraw-Hill, 2006"
+  - text: "Texas Instruments, Application Report SLOA049, Active Low-Pass Filter Design"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The key difference in active vs passive filters is the use of an amplifying device. A **passive filter** uses only resistors, capacitors and inductors, needs no power supply and can never give power gain. An **active filter** adds an op amp or transistor, so it can provide gain, has a low output impedance that is not affected by the load, and can realise inductor-like responses with only R and C. Passive filters win at high frequencies and high power; active filters win at audio and low frequencies where inductors would be large.
+
+</Key>
+
+Filters pass the frequencies you want and attenuate the rest. They appear in audio equipment, sensor interfaces, power supplies, radio receivers and in front of every analog to digital converter to prevent aliasing, as explained in the [sampling theorem](/electronics-engineering/sampling-theorem/). The comparison below follows Horowitz and Hill, Sedra and Smith, and the Texas Instruments book Op Amps for Everyone.
+
+## Comparison table: active vs passive filters
+
+| Feature | Passive filter | Active filter |
+| --- | --- | --- |
+| Components | R, L, C only | R, C plus op amp or transistor |
+| Power supply | Not needed | Needed |
+| Gain | Cannot exceed unity power gain | Can provide voltage and power gain |
+| Output impedance | Depends on the components; can be high | Very low (op amp output) |
+| Effect of load | Load changes gain and cutoff | Little effect when buffered |
+| Cascading stages | Stages load each other | Stages can be cascaded independently |
+| Inductors | Often needed for sharp responses | Not needed |
+| Frequency range | Up to RF and microwave | Limited by op amp bandwidth and slew rate |
+| Signal level | Handles high voltage and power | Limited by supply rails and output current |
+| Noise | Thermal noise of resistors only | Adds op amp voltage and current noise |
+| Tuning | Fixed by component values | Gain and Q set easily by resistor ratios |
+
+## Passive filters explained
+
+The simplest passive filter is an RC low pass: a series resistor and a shunt capacitor. Its cutoff frequency, where the output has fallen by 3 dB (to about 70.7 percent of the input voltage), is:
+
+$$
+f_c = \frac{1}{2\pi R C}
+$$
+
+Swapping R and C gives a high pass filter with the same cutoff formula. A single RC stage is **first order**: above cutoff the gain falls at 20 dB per decade. Sharper roll off needs more reactive components. LC ladder filters, for example, give second order or higher responses with low loss, because ideal inductors and capacitors dissipate no power. That is why LC filters dominate in radio frequency circuits and in power supply and mains filters, where large currents and voltages must be handled.
+
+The weakness of passive filters is **loading**. The source impedance driving the filter and the load impedance at its output both become part of the circuit. Connecting a low impedance load shifts the cutoff and reduces the passband gain, as the worked example below shows. Cascading two RC stages to get a second order response also gives a poor result, because the second stage loads the first.
+
+## Active filters explained
+
+An active filter places an amplifier inside or after the RC network. The amplifier provides a high input impedance and a very low output impedance, so the filter response is set by its own components and does not change with the load. The two most common second order topologies, described in Op Amps for Everyone and TI application report SLOA049, are:
+
+- **Sallen-Key:** a unity gain or non-inverting amplifier with two resistors and two capacitors. It is simple, needs few parts and has low sensitivity to op amp gain at unity gain.
+- **Multiple feedback (MFB):** an inverting amplifier with the filter components in its feedback paths. It gives an inverted output and is less sensitive to component tolerances at higher Q.
+
+Each second order stage gives a roll off of 40 dB per decade. Higher orders are built by cascading second order stages and, for odd orders, one first order stage. The response shape is chosen from classic approximations: **Butterworth** for the flattest passband, **Chebyshev** for a steeper transition with passband ripple, and **Bessel** for the best phase linearity and step response. The basic amplifier circuits used are those in [inverting and non-inverting amplifiers](/electronics-engineering/inverting-and-non-inverting-amplifier/), and a detailed Sallen-Key design walk-through is available on [InstrumentationBlog](https://www.instrumentationblog.in/active-filter-sallen-and-key/).
+
+<figure>
+<svg viewBox="0 0 640 330" width="640" height="330" fill="none" role="img" aria-label="Bode magnitude plot of a first order passive RC low pass filter and a second order active Butterworth low pass filter, both with a 1 kilohertz cutoff. Both are 3 dB down at the cutoff; the first order curve then falls at 20 dB per decade and the second order curve at 40 dB per decade.">
+<g stroke="#7b8794" stroke-width="1" stroke-dasharray="2 4">
+<path d="M80 50 H560" /><path d="M80 130 H560" /><path d="M80 210 H560" />
+<path d="M200 50 V290" /><path d="M440 50 V290" />
+</g>
+<path d="M80 290 H565" stroke="#0b2545" stroke-width="1.5" />
+<path d="M80 290 V40" stroke="#0b2545" stroke-width="1.5" />
+<path d="M320 50 V290" stroke="#b38600" stroke-width="1.2" stroke-dasharray="5 4" />
+<path d="M80 50 L225 50 L230 51 L255 51 L260 52 L270 52 L275 53 L280 53 L285 54 L290 55 L295 56 L300 57 L305 58 L310 59 L315 60 L320 62 L325 64 L330 66 L335 68 L340 70 L345 72 L350 75 L355 77 L360 80 L365 83 L370 86 L375 89 L380 92 L385 95 L390 98 L395 101 L400 104 L405 107 L410 111 L415 114 L420 117 L425 120 L430 124 L435 127 L440 130 L445 133 L450 137 L455 140 L460 143 L465 147 L470 150 L475 153 L480 157 L485 160 L490 163 L495 167 L500 170 L505 173 L510 177 L515 180 L520 183 L525 187 L530 190 L535 193 L540 197 L545 200 L550 203 L555 207 L560 210" stroke="#13a89e" stroke-width="2.5" />
+<path d="M80 50 L270 50 L275 51 L285 51 L290 52 L295 52 L300 53 L305 55 L310 57 L315 59 L320 62 L325 66 L330 70 L335 75 L340 80 L345 86 L350 92 L355 98 L360 104 L365 111 L370 117 L375 124 L380 130 L385 137 L390 143 L395 150 L400 157 L405 163 L410 170 L415 177 L420 183 L425 190 L430 197 L435 203 L440 210 L445 217 L450 223 L455 230 L460 237 L465 243 L470 250 L475 257 L480 263 L485 270 L490 277 L495 283 L500 290" stroke="#b42318" stroke-width="2.5" />
+<circle cx="320" cy="62" r="4" fill="#0b2545" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="20" y="30">Gain (dB)</text>
+<text x="560" y="324" text-anchor="end">Frequency (log scale)</text>
+<text x="230" y="84">-3 dB at fc</text>
+<text x="326" y="270" fill="#b38600">fc = 1 kHz</text>
+<text x="515" y="146" fill="#13a89e">First order RC</text>
+<text x="515" y="162" fill="#13a89e" font-size="11">-20 dB/decade</text>
+<text x="410" y="236" text-anchor="end" fill="#b42318">Second order active</text>
+<text x="410" y="252" text-anchor="end" fill="#b42318" font-size="11">-40 dB/decade</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#7b8794">
+<text x="74" y="54" text-anchor="end">0</text><text x="74" y="134" text-anchor="end">-20</text><text x="74" y="214" text-anchor="end">-40</text><text x="74" y="294" text-anchor="end">-60</text>
+<text x="80" y="306" text-anchor="middle">10 Hz</text><text x="200" y="306" text-anchor="middle">100 Hz</text><text x="320" y="306" text-anchor="middle">1 kHz</text><text x="440" y="306" text-anchor="middle">10 kHz</text><text x="560" y="306" text-anchor="middle">100 kHz</text>
+</g>
+</svg>
+<figcaption>Magnitude response of a first order passive RC low pass and a second order active Butterworth low pass, both with fc = 1 kHz. The active stage rolls off twice as fast in decibels per decade.</figcaption>
+</figure>
+
+## Worked example: why loading matters
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Passive RC low pass with R = 10 kΩ and C = 10 nF, driven from an ideal voltage source. The output is connected to a load of RL = 10 kΩ.</dd>
+<dt>Find</dt><dd>Cutoff frequency unloaded, then the passband gain and cutoff frequency with the load connected, and the effect of adding a unity gain op amp buffer.</dd>
+<dt>Assumptions</dt><dd>Ideal source with zero output impedance; ideal op amp buffer with infinite input impedance and zero output impedance.</dd>
+<dt>Solution</dt><dd>Unloaded: fc = 1 / (2π × 10 000 × 10 × 10⁻⁹) = 1592 Hz, passband gain = 1 (0 dB)<br />Loaded: the source sees R in series with C parallel RL. Using Thevenin's theorem at the capacitor, the source becomes a divider gain RL / (R + RL) = 10 / 20 = 0.5 behind a resistance R parallel RL = 5 kΩ<br />Passband gain = 0.5, which is 20 log10(0.5) = -6.0 dB<br />fc = 1 / (2π × 5000 × 10 × 10⁻⁹) = 3183 Hz<br />With a buffer between the capacitor and the load, the RC network sees no load, so fc = 1592 Hz and gain = 1 are restored</dd>
+<dt>Answer</dt><dd><strong>Unloaded fc = 1592 Hz at 0 dB; loaded fc = 3183 Hz at -6.0 dB; buffered (active) fc = 1592 Hz at 0 dB</strong></dd>
+<dt>Limitations</dt><dd>A real op amp has finite bandwidth and output impedance, which matter at high frequencies, and a real source has some output resistance that adds to R.</dd>
+</dl>
+</Example>
+
+<Calculator path="electronics/rc-filter" title="RC Filter Cutoff Calculator" />
+
+The loaded filter has its cutoff doubled and its signal halved. This is the loading problem in one line, and it is why active filters are preferred when the next stage has a low or unknown impedance. The divider step uses the method shown in [Thevenin's theorem](/electrical-engineering/thevenins-theorem/).
+
+## When to use which
+
+Choose a **passive filter** when:
+
+- The frequency is high, from tens of megahertz into RF, where op amps run out of bandwidth.
+- Large voltages or currents are involved, as in mains EMI filters, power converter output filters and loudspeaker crossovers.
+- No power supply is available, or the lowest possible noise and distortion are needed.
+- A simple first order RC is enough, for example decoupling or an ADC input network.
+
+Choose an **active filter** when:
+
+- The frequency is low, such as audio, biomedical and sensor signals, where inductors would be large.
+- Gain, buffering or a sharp, precisely defined response is needed.
+- Several stages must be cascaded without loading each other.
+- The filter must be adjustable or easily tuned through resistor values.
+
+## Design tips
+
+- Keep the op amp gain bandwidth product well above the product of the stage gain, Q and cutoff frequency; TI SLOA049 gives guidance for each topology.
+- Use stable capacitor types such as C0G/NP0 ceramic or film capacitors in the frequency setting positions.
+- Place high Q stages last in a cascade to reduce the risk of clipping inside the filter.
+- Lay out the filter close to the ADC with a solid ground return, as covered in [PCB design basics](/electronics-engineering/pcb-design-basics/).
+
+## Related reading
+
+- [Inverting and Non-Inverting Amplifier](/electronics-engineering/inverting-and-non-inverting-amplifier/)
+- [Sampling Theorem](/electronics-engineering/sampling-theorem/)
+- [Transistor Working Principle](/electronics-engineering/transistor-working-principle/)

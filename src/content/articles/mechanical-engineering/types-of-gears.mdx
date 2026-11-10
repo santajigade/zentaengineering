@@ -1,0 +1,163 @@
+---
+title: "Types of Gears and Their Applications"
+description: "Types of gears explained: spur, helical, herringbone, bevel, hypoid, worm and rack, with shaft layouts, gear ratio formulas and a worked example."
+pubDate: 2026-11-10
+reviewedDate: 2026-11-10
+discipline: mechanical-engineering
+subcategory: machine-design
+focusKeyword: "types of gears"
+image: { src: /images/featured/types-of-gears.webp, alt: "Types of Gears and Their Applications: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [gears, spur-gear, helical-gear, bevel-gear, worm-gear, gear-ratio]
+faq:
+  - q: "Which type of gear is the most efficient?"
+    a: "Spur and helical gears on parallel shafts are the most efficient because the teeth mainly roll with only a small amount of sliding. Worm gears have the lowest efficiency of the common types because the worm thread slides across the wheel teeth, and their efficiency falls as the lead angle gets smaller."
+  - q: "Why are helical gears quieter than spur gears?"
+    a: "On a spur gear each tooth makes contact across its whole face width at once, so load is applied and removed suddenly. On a helical gear the inclined teeth come into contact gradually from one end of the face to the other, and more than one pair of teeth share the load. This smoother transfer of load reduces noise and vibration."
+  - q: "What does self-locking mean in a worm gear?"
+    a: "A self-locking worm drive cannot be driven backwards from the wheel, because friction at the thread is high enough to stop the wheel turning the worm. It happens when the lead angle is small relative to the friction angle. It is useful in hoists and lifts, but designers should not rely on it alone as a safety brake, because vibration can reduce friction."
+references:
+  - text: "R. G. Budynas and J. K. Nisbett, Shigley's Mechanical Engineering Design, 11th ed., McGraw-Hill, 2020"
+  - text: "R. L. Norton, Machine Design: An Integrated Approach, 6th ed., Pearson, 2020"
+  - text: "S. P. Radzevich, Dudley's Handbook of Practical Gear Design and Manufacture, 3rd ed., CRC Press, 2016"
+  - text: "ISO 53:1998 Cylindrical gears for general and heavy engineering, Standard basic rack tooth profile"
+  - text: "ISO 54:1996 Cylindrical gears for general engineering and for heavy engineering, Modules"
+  - text: "ANSI/AGMA 1012-G05 Gear Nomenclature, Definitions of Terms with Symbols"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The main **types of gears** are **spur**, **helical** and **herringbone** gears for parallel shafts, **bevel** gears for intersecting shafts, and **worm**, **hypoid** and **crossed helical** gears for shafts that neither meet nor run parallel. A **rack and pinion** turns rotation into straight line motion. The choice depends on the shaft layout, the speed ratio, the load, the noise allowed and the efficiency needed.
+
+</Key>
+
+Gears transmit motion and torque between shafts through meshing teeth. Unlike belts, they give a fixed speed ratio with no slip, they carry high loads in a small space and they can change the direction of rotation. They appear in machine tools, vehicle transmissions, [tractor drivelines](/agricultural-engineering/tractor-power-transmission/), wind turbines, pumps and clocks.
+
+## Gear terms you need first
+
+The terms below follow ANSI/AGMA 1012 and the textbooks by Budynas and Nisbett (Shigley) and Norton.
+
+- **Pitch circle:** an imaginary circle on which two meshing gears roll without slipping. Its diameter is the pitch diameter d.
+- **Number of teeth z** and **module m:** in metric practice d = m z. The module is the size of the teeth in millimetres. ISO 54 lists the preferred module values.
+- **Pressure angle:** the angle between the line of action and the common tangent to the pitch circles. ISO 53 specifies a basic rack with a 20 degree pressure angle.
+- **Gear ratio:** i = z2 / z1 = n1 / n2, where n is speed. The small gear is the pinion.
+- **Centre distance:** a = m (z1 + z2) / 2 for a standard external spur pair.
+
+The teeth of almost all power gears have an **involute** profile. An involute tooth keeps a constant velocity ratio even if the centre distance changes slightly, which is why it is the standard form.
+
+## Types of gears by shaft arrangement
+
+### Parallel shafts
+
+**Spur gears** have straight teeth parallel to the shaft axis. They are the simplest to make and inspect, produce no axial thrust and are very efficient. Their drawback is noise at high speed, because each tooth picks up its load suddenly. They suit gearboxes, pumps, machine tools and moderate speed drives.
+
+**Helical gears** have teeth cut at a helix angle to the axis. Contact starts at one end of the tooth and spreads across the face, so the load is shared by more teeth and the mesh is quieter and smoother. The helix angle produces an **axial thrust** that the bearings must carry. Helical gears are standard in automotive gearboxes and industrial speed reducers.
+
+**Double helical and herringbone gears** have two sets of opposite hand helical teeth side by side. The axial thrust of one half cancels the other, so heavy loads can be carried without large thrust bearings. They are used in large turbine reduction gears, rolling mills and heavy marine drives.
+
+**Internal gears** have teeth on the inside of a ring. An internal pair rotates in the same direction and gives a compact layout, which is why internal gears form the ring of planetary gear trains.
+
+### Rack and pinion
+
+A **rack** is a gear of infinite radius: a straight bar with teeth. A pinion meshing with it converts rotation into linear motion, with travel per revolution equal to π d. Examples are vehicle steering, machine tool slides and linear actuators.
+
+### Intersecting shafts
+
+**Bevel gears** are cut on cones and connect shafts whose axes meet, usually at 90 degrees. **Straight bevel** gears have straight teeth and suit low speeds. **Spiral bevel** gears have curved, inclined teeth that engage gradually, giving quieter running at higher speeds. A pair of equal bevel gears at 90 degrees is a **mitre** gear set. Bevel gears are used in differentials, hand drills and right angle gearboxes.
+
+### Non-parallel, non-intersecting shafts
+
+**Hypoid gears** look like spiral bevel gears, but the pinion axis is offset from the gear axis. The offset allows a larger, stronger pinion and lets a vehicle's drive shaft sit lower. The teeth slide more than in bevel gears, so hypoid sets need extreme pressure lubricants, as discussed in [types of lubrication](/mechanical-engineering/types-of-lubrication/).
+
+**Worm gears** consist of a screw (the worm) meshing with a worm wheel, normally with shafts at 90 degrees. A single start worm advances the wheel by one tooth per revolution, so very high ratios are possible in one stage. The thread slides across the wheel teeth, so efficiency is lower than for other types and heat must be removed. Small lead angles can make the drive **self-locking**. Worms are usually hardened steel and wheels are often bronze to reduce friction and wear.
+
+**Crossed helical gears** are two helical gears on non-parallel shafts. Contact is ideally at a point, so they carry only light loads, for example in instrument drives.
+
+<figure>
+<svg viewBox="0 0 640 330" width="640" height="330" fill="none" role="img" aria-label="Spur gear pair: a 20 tooth driving pinion meshing with a 60 tooth driven gear, showing dashed pitch circles touching at the pitch point, the 20 degree line of action, opposite directions of rotation and the 120 millimetre centre distance.">
+<path d="M204.1 165.0 L204.1 162.9 L212.7 160.4 L212.0 156.2 L203.1 156.5 L202.5 154.5 L201.7 152.4 L209.2 147.5 L207.2 143.6 L198.8 146.7 L197.6 144.9 L196.3 143.2 L201.8 136.2 L198.8 133.2 L191.8 138.7 L190.1 137.4 L188.3 136.2 L191.4 127.8 L187.5 125.8 L182.6 133.3 L180.5 132.5 L178.5 131.9 L178.8 123.0 L174.6 122.3 L172.1 130.9 L170.0 130.9 L167.9 130.9 L165.4 122.3 L161.2 123.0 L161.5 131.9 L159.5 132.5 L157.4 133.3 L152.5 125.8 L148.6 127.8 L151.7 136.2 L149.9 137.4 L148.2 138.7 L141.2 133.2 L138.2 136.2 L143.7 143.2 L142.4 144.9 L141.2 146.7 L132.8 143.6 L130.8 147.5 L138.3 152.4 L137.5 154.5 L136.9 156.5 L128.0 156.2 L127.3 160.4 L135.9 162.9 L135.9 165.0 L135.9 167.1 L127.3 169.6 L128.0 173.8 L136.9 173.5 L137.5 175.5 L138.3 177.6 L130.8 182.5 L132.8 186.4 L141.2 183.3 L142.4 185.1 L143.7 186.8 L138.2 193.8 L141.2 196.8 L148.2 191.3 L149.9 192.6 L151.7 193.8 L148.6 202.2 L152.5 204.2 L157.4 196.7 L159.5 197.5 L161.5 198.1 L161.2 207.0 L165.4 207.7 L167.9 199.1 L170.0 199.1 L172.1 199.1 L174.6 207.7 L178.8 207.0 L178.5 198.1 L180.5 197.5 L182.6 196.7 L187.5 204.2 L191.4 202.2 L188.3 193.8 L190.1 192.6 L191.8 191.3 L198.8 196.8 L201.8 193.8 L196.3 186.8 L197.6 185.1 L198.8 183.3 L207.2 186.4 L209.2 182.5 L201.7 177.6 L202.5 175.5 L203.1 173.5 L212.0 173.8 L212.7 169.6 L204.1 167.1 Z" fill="#fff6d6" stroke="#b38600" stroke-width="1.2" />
+<path d="M214.0 159.1 L213.9 161.5 L205.1 163.0 L205.1 167.0 L213.9 168.5 L214.0 170.9 L214.2 173.2 L205.6 175.6 L206.0 179.7 L214.9 180.2 L215.3 182.5 L215.6 184.9 L207.3 188.2 L208.2 192.1 L217.1 191.7 L217.7 194.0 L218.3 196.3 L210.4 200.4 L211.7 204.3 L220.5 203.0 L221.3 205.2 L222.2 207.4 L214.7 212.3 L216.4 216.0 L225.1 213.8 L226.1 215.9 L227.2 218.0 L220.3 223.7 L222.3 227.2 L230.7 224.1 L232.0 226.1 L233.3 228.0 L227.0 234.4 L229.4 237.7 L237.4 233.7 L238.9 235.6 L240.4 237.4 L234.8 244.4 L237.5 247.4 L245.1 242.6 L246.7 244.3 L248.4 245.9 L243.6 253.5 L246.6 256.2 L253.6 250.6 L255.4 252.1 L257.3 253.6 L253.3 261.6 L256.6 264.0 L263.0 257.7 L264.9 259.0 L266.9 260.3 L263.8 268.7 L267.3 270.7 L273.0 263.8 L275.1 264.9 L277.2 265.9 L275.0 274.6 L278.7 276.3 L283.6 268.8 L285.8 269.7 L288.0 270.5 L286.7 279.3 L290.6 280.6 L294.7 272.7 L297.0 273.3 L299.3 273.9 L298.9 282.8 L302.8 283.7 L306.1 275.4 L308.5 275.7 L310.8 276.1 L311.3 285.0 L315.4 285.4 L317.8 276.8 L320.1 277.0 L322.5 277.1 L324.0 285.9 L328.0 285.9 L329.5 277.1 L331.9 277.0 L334.2 276.8 L336.6 285.4 L340.7 285.0 L341.2 276.1 L343.5 275.7 L345.9 275.4 L349.2 283.7 L353.1 282.8 L352.7 273.9 L355.0 273.3 L357.3 272.7 L361.4 280.6 L365.3 279.3 L364.0 270.5 L366.2 269.7 L368.4 268.8 L373.3 276.3 L377.0 274.6 L374.8 265.9 L376.9 264.9 L379.0 263.8 L384.7 270.7 L388.2 268.7 L385.1 260.3 L387.1 259.0 L389.0 257.7 L395.4 264.0 L398.7 261.6 L394.7 253.6 L396.6 252.1 L398.4 250.6 L405.4 256.2 L408.4 253.5 L403.6 245.9 L405.3 244.3 L406.9 242.6 L414.5 247.4 L417.2 244.4 L411.6 237.4 L413.1 235.6 L414.6 233.7 L422.6 237.7 L425.0 234.4 L418.7 228.0 L420.0 226.1 L421.3 224.1 L429.7 227.2 L431.7 223.7 L424.8 218.0 L425.9 215.9 L426.9 213.8 L435.6 216.0 L437.3 212.3 L429.8 207.4 L430.7 205.2 L431.5 203.0 L440.3 204.3 L441.6 200.4 L433.7 196.3 L434.3 194.0 L434.9 191.7 L443.8 192.1 L444.7 188.2 L436.4 184.9 L436.7 182.5 L437.1 180.2 L446.0 179.7 L446.4 175.6 L437.8 173.2 L438.0 170.9 L438.1 168.5 L446.9 167.0 L446.9 163.0 L438.1 161.5 L438.0 159.1 L437.8 156.8 L446.4 154.4 L446.0 150.3 L437.1 149.8 L436.7 147.5 L436.4 145.1 L444.7 141.8 L443.8 137.9 L434.9 138.3 L434.3 136.0 L433.7 133.7 L441.6 129.6 L440.3 125.7 L431.5 127.0 L430.7 124.8 L429.8 122.6 L437.3 117.7 L435.6 114.0 L426.9 116.2 L425.9 114.1 L424.8 112.0 L431.7 106.3 L429.7 102.8 L421.3 105.9 L420.0 103.9 L418.7 102.0 L425.0 95.6 L422.6 92.3 L414.6 96.3 L413.1 94.4 L411.6 92.6 L417.2 85.6 L414.5 82.6 L406.9 87.4 L405.3 85.7 L403.6 84.1 L408.4 76.5 L405.4 73.8 L398.4 79.4 L396.6 77.9 L394.7 76.4 L398.7 68.4 L395.4 66.0 L389.0 72.3 L387.1 71.0 L385.1 69.7 L388.2 61.3 L384.7 59.3 L379.0 66.2 L376.9 65.1 L374.8 64.1 L377.0 55.4 L373.3 53.7 L368.4 61.2 L366.2 60.3 L364.0 59.5 L365.3 50.7 L361.4 49.4 L357.3 57.3 L355.0 56.7 L352.7 56.1 L353.1 47.2 L349.2 46.3 L345.9 54.6 L343.5 54.3 L341.2 53.9 L340.7 45.0 L336.6 44.6 L334.2 53.2 L331.9 53.0 L329.5 52.9 L328.0 44.1 L324.0 44.1 L322.5 52.9 L320.1 53.0 L317.8 53.2 L315.4 44.6 L311.3 45.0 L310.8 53.9 L308.5 54.3 L306.1 54.6 L302.8 46.3 L298.9 47.2 L299.3 56.1 L297.0 56.7 L294.7 57.3 L290.6 49.4 L286.7 50.7 L288.0 59.5 L285.8 60.3 L283.6 61.2 L278.7 53.7 L275.0 55.4 L277.2 64.1 L275.1 65.1 L273.0 66.2 L267.3 59.3 L263.8 61.3 L266.9 69.7 L264.9 71.0 L263.0 72.3 L256.6 66.0 L253.3 68.4 L257.3 76.4 L255.4 77.9 L253.6 79.4 L246.6 73.8 L243.6 76.5 L248.4 84.1 L246.7 85.7 L245.1 87.4 L237.5 82.6 L234.8 85.6 L240.4 92.6 L238.9 94.4 L237.4 96.3 L229.4 92.3 L227.0 95.6 L233.3 102.0 L232.0 103.9 L230.7 105.9 L222.3 102.8 L220.3 106.3 L227.2 112.0 L226.1 114.1 L225.1 116.2 L216.4 114.0 L214.7 117.7 L222.2 122.6 L221.3 124.8 L220.5 127.0 L211.7 125.7 L210.4 129.6 L218.3 133.7 L217.7 136.0 L217.1 138.3 L208.2 137.9 L207.3 141.8 L215.6 145.1 L215.3 147.5 L214.9 149.8 L206.0 150.3 L205.6 154.4 L214.2 156.8 Z" fill="#e6eef7" stroke="#0b2545" stroke-width="1.2" />
+<circle cx="170" cy="165" r="39" stroke="#b42318" stroke-width="1" stroke-dasharray="4 3" />
+<circle cx="326" cy="165" r="117" stroke="#b42318" stroke-width="1" stroke-dasharray="4 3" />
+<circle cx="170" cy="165" r="3" fill="#0b2545" />
+<circle cx="326" cy="165" r="3" fill="#0b2545" />
+<circle cx="209" cy="165" r="3.5" fill="#b42318" />
+<path d="M178 80 L240 250" stroke="#13a89e" stroke-width="1.5" />
+<path d="M170 172 V310 M326 172 V310" stroke="#7b8794" stroke-width="1" stroke-dasharray="3 3" />
+<path d="M170 302 H326" stroke="#0b2545" stroke-width="1.2" />
+<path d="M178 298 L170 302 L178 306 M318 298 L326 302 L318 306" stroke="#0b2545" stroke-width="1.2" />
+<path d="M120 135 A58 58 0 0 1 150 110" stroke="#b38600" stroke-width="2" />
+<path d="M143 106 L152 109 L146 116" stroke="#b38600" stroke-width="2" />
+<path d="M457 130 A136 136 0 0 0 420 80" stroke="#0b2545" stroke-width="2" />
+<path d="M418 89 L418 78 L428 81" stroke="#0b2545" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="172" y="78" text-anchor="end" fill="#13a89e">Line of action (20°)</text>
+<text x="326" y="190" text-anchor="middle" font-weight="700">Driven gear</text>
+<text x="248" y="320" text-anchor="middle">a = 120 mm</text>
+<text x="475" y="60" font-weight="700">Spur gear pair</text>
+<text x="475" y="86">Pinion (driver): z1 = 20</text>
+<text x="475" y="106">Gear (driven): z2 = 60</text>
+<text x="475" y="126">Module m = 3 mm</text>
+<text x="475" y="146">d1 = 60 mm, d2 = 180 mm</text>
+<text x="475" y="166">Ratio i = 3</text>
+<text x="475" y="186">Pressure angle 20°</text>
+<text x="475" y="216" fill="#b42318">Dashed: pitch circles</text>
+<text x="475" y="236" fill="#b42318">Red dot: pitch point P</text>
+<text x="60" y="110" fill="#b38600" font-weight="700">Pinion</text>
+</g>
+</svg>
+<figcaption>A spur gear pair: the pitch circles roll on each other at the pitch point P, force acts along the line of action at the pressure angle, and the gears turn in opposite directions.</figcaption>
+</figure>
+
+## Comparison of the main types of gears
+
+| Type | Shaft layout | Typical single stage ratio | Noise | Notes |
+| --- | --- | --- | --- | --- |
+| Spur | Parallel | Low to moderate | Highest | Simple, no axial thrust, high efficiency |
+| Helical | Parallel | Low to moderate | Low | Axial thrust, smooth at high speed |
+| Herringbone | Parallel | Low to moderate | Low | Thrust cancels, heavy loads |
+| Bevel | Intersecting | Low to moderate | Medium (straight), low (spiral) | Right angle drives, differentials |
+| Hypoid | Offset, non-intersecting | Moderate | Low | Needs EP lubricant, vehicle axles |
+| Worm | Non-intersecting, usually 90° | High | Low | Sliding contact, lower efficiency, can self-lock |
+| Rack and pinion | Rotary to linear | Not applicable | Medium | Steering, slides, actuators |
+
+## Worked example: spur gear ratio, speed and forces
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A spur pinion with z1 = 20 teeth drives a gear with z2 = 60 teeth. Module m = 3 mm, pressure angle 20°. The pinion is driven by a 5 kW motor at 1440 rpm.</dd>
+<dt>Find</dt><dd>Pitch diameters, centre distance, gear ratio, output speed, pinion and output torque, tangential and radial tooth forces.</dd>
+<dt>Assumptions</dt><dd>Standard involute teeth with no profile shift; friction and bearing losses neglected, so output power equals input power.</dd>
+<dt>Solution</dt><dd>d1 = 3 × 20 = 60 mm; d2 = 3 × 60 = 180 mm<br />a = (60 + 180) / 2 = 120 mm<br />i = 60 / 20 = 3; n2 = 1440 / 3 = 480 rpm<br />T1 = P / ω = 5000 / (2π × 1440 / 60) = 33.2 N·m<br />T2 = 33.2 × 3 = 99.5 N·m<br />Ft = 2 T1 / d1 = 2 × 33.16 / 0.060 = 1105 N<br />Fr = Ft × tan 20° = 1105 × 0.364 = 402 N</dd>
+<dt>Answer</dt><dd><strong>d1 = 60 mm, d2 = 180 mm, a = 120 mm, i = 3, n2 = 480 rpm, T2 about 99.5 N·m, Ft about 1105 N, Fr about 402 N</strong></dd>
+<dt>Limitations</dt><dd>Real meshes have small losses, so output torque is slightly lower. Tooth bending and contact stresses must still be checked with the AGMA or ISO 6336 methods, including dynamic and load distribution factors.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/gear-ratio" title="Gear Ratio Calculator" />
+
+The tangential force is what transmits torque and bends the teeth. The radial force pushes the gears apart and is carried, together with the tangential force, by the shaft bearings. Gear teeth carry repeated load cycles, so their design also has to consider [fatigue failure](/materials-engineering/fatigue-failure/) and a suitable [factor of safety](/mechanical-engineering/factor-of-safety/).
+
+## How to choose among the types of gears
+
+1. **Shaft layout first.** Parallel shafts point to spur or helical gears; intersecting shafts to bevel gears; offset crossing shafts to worm or hypoid gears.
+2. **Ratio.** If a very high reduction is needed in one stage, consider a worm drive or a planetary train. Otherwise use several spur or helical stages.
+3. **Speed and noise.** For high pitch line speeds or quiet operation, choose helical or spiral bevel teeth.
+4. **Efficiency and heat.** Where energy cost or heat matters, avoid worm drives with low lead angles.
+5. **Thrust loads.** Helical and bevel gears create axial loads that the bearings must take; herringbone gears avoid this.
+6. **Cost and manufacture.** Spur gears are cheapest to cut and inspect; hypoid and spiral bevel sets need specialised machines.
+
+## Gear materials and lubrication
+
+Most power gears are made of steel, often case hardened or through hardened, as Budynas and Nisbett describe. Cast iron is used for large, lightly loaded gears and gives good damping. Bronze is common for worm wheels. Plastics such as nylon and acetal serve quiet, light duty drives. Correct lubrication, either splash, oil jet or grease, controls wear and removes heat, especially in worm and hypoid sets.
+
+## Related reading
+
+- [Stress and Strain](/mechanical-engineering/stress-and-strain/)
+- [Types of Lubrication](/mechanical-engineering/types-of-lubrication/)
+- [Tractor Power Transmission](/agricultural-engineering/tractor-power-transmission/)

@@ -1,0 +1,174 @@
+---
+title: "Types of Foundations and When to Use Them"
+description: "Types of foundations explained: isolated, combined, strip, strap and raft footings, piles and caissons, how to choose one, and a footing size example."
+pubDate: 2026-11-10
+reviewedDate: 2026-11-10
+discipline: civil-engineering
+subcategory: rcc-design
+focusKeyword: "types of foundations"
+image: { src: /images/featured/types-of-foundations.webp, alt: "Types of Foundations and When to Use Them: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [foundations, footing, raft-foundation, pile-foundation, shallow-foundation, deep-foundation]
+faq:
+  - q: "What is the difference between a footing and a foundation?"
+    a: "The foundation is the whole system that transfers the building load to the ground, including the soil or rock that supports it. A footing is one type of shallow foundation: a widened base under a column or wall that spreads the load over a larger area of soil. All footings are foundations, but piles, rafts and caissons are foundations that are not simple footings."
+  - q: "When is a pile foundation needed instead of a footing?"
+    a: "Piles are used when the soil near the surface is too weak or compressible to carry the load without excessive settlement, when loads are very heavy, when there are large uplift or lateral forces, or when scour or future excavation could undermine a shallow foundation. They carry load down to a stronger layer by end bearing, or into the soil along their length by skin friction."
+  - q: "How deep should a foundation be?"
+    a: "The depth depends on the soil, the load, the groundwater level, frost or seasonal moisture movement, and nearby structures. IS 1904 requires foundations to go at least 0.5 m below natural ground level, and the final depth is fixed from the soil investigation and bearing capacity calculations rather than a fixed rule."
+references:
+  - text: "B. M. Das and N. Sivakugan, Principles of Foundation Engineering, 9th ed., Cengage, 2018"
+  - text: "J. E. Bowles, Foundation Analysis and Design, 5th ed., McGraw-Hill, 1996"
+  - text: "IS 1904:1986 Code of practice for design and construction of foundations in soils: General requirements, Bureau of Indian Standards"
+  - text: "IS 456:2000 Plain and reinforced concrete, Code of practice, Bureau of Indian Standards"
+  - text: "IS 2950 (Part 1):1981 Code of practice for design and construction of raft foundations, Bureau of Indian Standards"
+  - text: "IS 2911 (Part 1/Sec 2):2010 Design and construction of pile foundations, Bored cast in-situ concrete piles, Bureau of Indian Standards"
+  - text: "EN 1997-1:2004 Eurocode 7: Geotechnical design, Part 1: General rules"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The main types of foundations are **shallow foundations**, which spread the load into soil close to the surface, and **deep foundations**, which carry it down to stronger layers. Shallow types are isolated, combined, strip, strap and raft (mat) footings. Deep types are piles, piers and caissons. The choice depends on the soil's bearing capacity and settlement behaviour, the size and spacing of the loads, groundwater, and cost.
+
+</Key>
+
+Every structure stands on soil or rock, and the foundation is the link between them. A foundation must do two things, as Das and Bowles both stress: it must not fail in shear (bearing capacity), and it must not settle by more than the structure can tolerate. The soil checks behind the first requirement are covered in [bearing capacity of soil](/civil-engineering/bearing-capacity-of-soil/).
+
+## Shallow vs deep: the two families of foundations
+
+A foundation is usually called **shallow** when its depth is small compared with its width. Terzaghi's classic bearing capacity theory, presented by Das, treats a foundation as shallow when the depth Df is no more than its width B. Shallow foundations rely on the soil just below them.
+
+**Deep** foundations are much longer than they are wide. They pass through weak upper layers and transfer the load by **end bearing** on a firm stratum, by **skin friction** along their sides, or both.
+
+IS 1904:1986 sets general requirements for foundations in India, including a minimum depth of 0.5 m below natural ground level, and Eurocode 7 (EN 1997-1) gives the European framework for geotechnical design.
+
+## Types of shallow foundations
+
+### Isolated (pad) footing
+
+An isolated footing is a square, rectangular or circular pad under a single column. It is the most common foundation for framed buildings on reasonably firm soil. The pad may be flat, stepped or sloped on top to save concrete. It is designed as an inverted cantilever slab under soil pressure, checked for bending, one way shear and punching shear following IS 456:2000. IS 456 also requires the thickness at the edge of a footing on soil to be at least 150 mm.
+
+### Combined footing
+
+When two columns are so close that their isolated footings would overlap, or when a column stands at a property line and its footing cannot extend beyond it, both columns are placed on one **combined footing**. It is usually rectangular or trapezoidal, proportioned so that the centre of the footing area lines up with the resultant of the column loads, giving uniform soil pressure.
+
+### Strap (cantilever) footing
+
+A **strap footing** joins the footing of an exterior column to that of an interior column with a stiff beam, the strap. The strap transfers the moment caused by the eccentric exterior footing to the interior one, so neither footing tilts. It is an alternative to a combined footing when the columns are far apart.
+
+### Strip (wall) footing
+
+A **strip footing** is a continuous footing under a load bearing wall or a closely spaced row of columns. It is common in masonry houses and low rise buildings.
+
+### Raft (mat) foundation
+
+A **raft** is a single thick slab, often with beams, covering the whole plan area of the building and supporting all columns and walls. IS 2950 (Part 1) covers its design. A raft is used when:
+
+- The soil has low bearing capacity, so individual footings would be very large and nearly touch each other.
+- Differential settlement must be limited, since the raft bridges over soft spots.
+- A basement is needed, where the raft also acts as the floor and resists water pressure.
+
+A **floating** or compensated raft is placed deep enough that the weight of soil excavated roughly balances the building load, reducing the net pressure on the soil.
+
+<figure>
+<svg viewBox="0 0 640 280" width="640" height="280" fill="none" role="img" aria-label="Cross sections of three types of foundations: an isolated footing under one column in firm soil, a raft slab under several columns on weak soil, and a pile foundation where a pile cap on piles passes through soft soil to a hard stratum.">
+<rect x="20" y="100" width="190" height="145" fill="#f3e6d3" />
+<rect x="225" y="100" width="190" height="145" fill="#efe3cf" />
+<rect x="430" y="100" width="190" height="115" fill="#efe3cf" />
+<rect x="430" y="215" width="190" height="30" fill="#c9b79c" />
+<g stroke="#8a5a3c" stroke-width="1.5"><path d="M20 100 H210 M225 100 H415 M430 100 H620" /></g>
+<g fill="#cfd6df" stroke="#0b2545" stroke-width="1.5">
+<rect x="105" y="40" width="20" height="110" />
+<path d="M70 150 H160 V170 H70 Z" />
+<rect x="255" y="40" width="16" height="100" />
+<rect x="312" y="40" width="16" height="100" />
+<rect x="369" y="40" width="16" height="100" />
+<rect x="240" y="140" width="160" height="24" />
+<rect x="515" y="40" width="20" height="80" />
+<rect x="480" y="120" width="90" height="24" />
+<rect x="490" y="144" width="12" height="78" />
+<rect x="548" y="144" width="12" height="78" />
+</g>
+<g stroke="#b42318" stroke-width="1.5">
+<path d="M80 176 V196 M100 176 V196 M115 176 V196 M130 176 V196 M150 176 V196" />
+<path d="M250 170 V188 M275 170 V188 M300 170 V188 M325 170 V188 M350 170 V188 M375 170 V188 M390 170 V188" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="115" y="26" font-weight="700">Isolated footing</text>
+<text x="320" y="26" font-weight="700">Raft (mat) foundation</text>
+<text x="525" y="26" font-weight="700">Pile foundation</text>
+<text x="115" y="232" font-size="11">Firm soil near surface</text>
+<text x="320" y="210" font-size="11">Weak soil, heavy or</text>
+<text x="320" y="226" font-size="11">closely spaced loads</text>
+<text x="525" y="241" font-size="11" font-weight="700">Hard stratum</text>
+<text x="115" y="268" font-size="11" fill="#7b8794">Shallow</text>
+<text x="320" y="268" font-size="11" fill="#7b8794">Shallow</text>
+<text x="525" y="268" font-size="11" fill="#7b8794">Deep</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545">
+<text x="486" y="185" text-anchor="end">Soft soil</text>
+<text x="168" y="164">Pad</text>
+<text x="575" y="136">Pile cap</text>
+<text x="565" y="180">Piles</text>
+<text x="166" y="94" fill="#8a5a3c">Ground</text>
+</g>
+</svg>
+<figcaption>Three common types of foundations. Red lines show the upward soil pressure under the shallow foundations; piles carry the load through soft soil to a hard stratum.</figcaption>
+</figure>
+
+## Types of deep foundations
+
+### Pile foundations
+
+Piles are long, slender members of concrete, steel or timber. A group of piles is joined at the top by a reinforced concrete **pile cap** that receives the column load. Piles can be classified in two ways:
+
+- **By load transfer:** end bearing piles rest on rock or a dense layer; friction piles carry load mainly by skin friction in deep soft or medium soil; many piles combine both.
+- **By installation:** **driven** piles (precast concrete, steel H sections or tubes, timber) are hammered or vibrated in and displace the soil; **bored cast in-situ** piles are formed by drilling a hole and filling it with reinforced concrete, as covered by IS 2911 (Part 1/Sec 2). Bored piles avoid driving vibration near existing buildings.
+
+Piles are also used to resist uplift, for example under towers and tanks, and lateral loads from wind, waves or earth pressure.
+
+### Piers and caissons
+
+A **pier** is a large diameter drilled shaft, often with an enlarged (belled) base, carrying a heavy column load to a firm stratum. A **caisson** is a hollow box or cylinder sunk into place, usually through water or very soft ground, and then filled with concrete. Caissons are used for bridge piers and marine structures, such as those described in [types of bridges](/civil-engineering/types-of-bridges/).
+
+## How to choose among the types of foundations
+
+1. **Soil investigation first.** Boreholes and tests give the soil profile, strength, groundwater level and settlement properties. No foundation decision should be made without them.
+2. **Firm soil near the surface:** isolated footings under columns, strip footings under walls. Use combined or strap footings where columns are close together or at a boundary.
+3. **Weak soil or heavy, closely spaced loads:** a raft, especially when footings would cover most of the plan area or when a basement is planned.
+4. **Very weak upper layers or very heavy loads:** piles or piers carried to a firm stratum.
+5. **Special conditions:** expansive clays, high water tables, scour near rivers, or sensitive neighbouring structures may push the choice towards deeper foundations.
+6. **Cost and construction:** compare excavation, dewatering, concrete, steel and equipment for the feasible options.
+
+## Worked example: sizing an isolated footing
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A column carries a service (unfactored) axial load of 900 kN. The soil investigation gives a safe bearing capacity of 200 kN/m² at the founding level.</dd>
+<dt>Find</dt><dd>Plan size of a square isolated footing, the actual soil pressure, and the factored net upward pressure for structural design.</dd>
+<dt>Assumptions</dt><dd>Self weight of the footing and backfill taken as 10 percent of the column load, a common preliminary allowance; concentric load with no moment; load factor 1.5 as in IS 456 for dead plus imposed load.</dd>
+<dt>Solution</dt><dd>Total load = 900 × 1.10 = 990 kN<br />Required area = 990 / 200 = 4.95 m²<br />Side = √4.95 = 2.22 m, so adopt 2.25 m × 2.25 m (area 5.0625 m²)<br />Actual pressure = 990 / 5.0625 = 195.6 kN/m², which is below 200 kN/m², so OK<br />Factored net upward pressure = 1.5 × 900 / 5.0625 = 266.7 kN/m²</dd>
+<dt>Answer</dt><dd><strong>Square footing 2.25 m × 2.25 m; gross soil pressure 195.6 kN/m²; design net upward pressure 266.7 kN/m²</strong></dd>
+<dt>Limitations</dt><dd>The depth and reinforcement must still be designed for bending, one way shear and punching shear to IS 456. Settlement must be checked separately, and any column moment makes the soil pressure non uniform.</dd>
+</dl>
+</Example>
+
+The net upward pressure excludes the footing's own weight because that weight acts directly on the soil and does not bend the footing. The bending and shear checks that follow use the methods in [limit state design of RCC](/civil-engineering/limit-state-design-rcc/) and the concrete quality depends on the [water cement ratio](/civil-engineering/water-cement-ratio/).
+
+## Common foundation problems
+
+- **Excessive or differential settlement** from soft or variable soil, causing cracks in walls and frames.
+- **Bearing failure** when loads exceed the soil's capacity, often after a change of use or added storeys.
+- **Swelling and shrinkage** of expansive clays with seasonal moisture changes.
+- **Scour** around bridge foundations in rivers.
+- **Durability problems** from sulphates or chlorides in soil and groundwater attacking concrete and reinforcement.
+
+## Related reading
+
+- [Bearing Capacity of Soil](/civil-engineering/bearing-capacity-of-soil/)
+- [Limit State Design of RCC](/civil-engineering/limit-state-design-rcc/)
+- [Types of Beams](/civil-engineering/types-of-beams/)

@@ -1,0 +1,201 @@
+---
+title: "Pulse Oximeter Working Principle: How SpO2 Is Measured"
+description: "Pulse oximeter working principle explained: red and infrared light, the PPG signal, ratio of ratios, calibration, accuracy limits and a worked example."
+pubDate: 2026-11-10
+reviewedDate: 2026-11-10
+discipline: biomedical-engineering
+subcategory: biomedical-sensors
+focusKeyword: "pulse oximeter working principle"
+image: { src: /images/featured/pulse-oximeter-working-principle.webp, alt: "Pulse Oximeter Working Principle: How SpO2 Is Measured: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [pulse-oximeter, spo2, photoplethysmography, ppg, medical-sensors]
+faq:
+  - q: "Why does a pulse oximeter use two wavelengths of light?"
+    a: "Oxygenated and deoxygenated haemoglobin absorb red and infrared light differently. Deoxygenated haemoglobin absorbs more red light, while oxygenated haemoglobin absorbs more infrared light. Comparing the pulsatile absorption at the two wavelengths lets the device estimate the fraction of haemoglobin that carries oxygen. One wavelength alone cannot separate the two forms."
+  - q: "What is the difference between SpO2 and SaO2?"
+    a: "SaO2 is arterial oxygen saturation measured directly on an arterial blood sample with a CO-oximeter, which is the reference method. SpO2 is the estimate of the same quantity made non invasively by a pulse oximeter. Pulse oximeters are calibrated against SaO2 data from controlled studies, so SpO2 is only as good as that calibration and the signal quality."
+  - q: "Can a pulse oximeter detect carbon monoxide poisoning?"
+    a: "A standard two wavelength pulse oximeter cannot. Carboxyhaemoglobin absorbs red light in a similar way to oxygenated haemoglobin, so the device can show a normal or high SpO2 while the blood carries much less oxygen. Detecting carboxyhaemoglobin needs a multi wavelength CO-oximeter."
+references:
+  - text: "ISO 80601-2-61:2017 Medical electrical equipment, Part 2-61: Particular requirements for basic safety and essential performance of pulse oximeter equipment"
+  - text: "J. G. Webster (ed.), Design of Pulse Oximeters, Institute of Physics Publishing, 1997"
+  - text: "J. G. Webster (ed.), Medical Instrumentation: Application and Design, 4th ed., Wiley, 2010"
+  - text: "World Health Organization, WHO Pulse Oximetry Training Manual, 2011"
+  - text: "U.S. Food and Drug Administration, Pulse Oximeter Accuracy and Limitations: FDA Safety Communication, 2021"
+  - text: "Texas Instruments, Application Report SLAA274, Single-Chip Pulse Oximeter Design Using the MSP430"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+The pulse oximeter working principle combines two ideas: **spectrophotometry** and **photoplethysmography**. Red light (about 660 nm) and infrared light (about 940 nm) are passed through a finger or earlobe, and a photodiode measures how much of each gets through. Only the part of the signal that pulses with each heartbeat comes from arterial blood, so the device compares the pulsatile absorption at the two wavelengths and converts that ratio into **SpO2**, the estimated arterial oxygen saturation, using an empirical calibration curve.
+
+</Key>
+
+Pulse oximetry is one of the most used monitoring methods in medicine. The WHO Pulse Oximetry Training Manual describes it as a standard monitor in anaesthesia and critical care, and small fingertip devices are now common in clinics and homes. For engineers, it is a neat example of an optical sensor, an analog front end and signal processing working together, and it builds directly on the ideas in [biopotential measurement basics](/biomedical-engineering/biopotential-measurement-basics/).
+
+## What a pulse oximeter measures
+
+Haemoglobin in red blood cells carries oxygen. Oxygen saturation is the fraction of haemoglobin that is oxygenated:
+
+$$
+S = \frac{[HbO_2]}{[HbO_2] + [Hb]} \times 100\%
+$$
+
+where HbO2 is oxygenated haemoglobin and Hb is deoxygenated (reduced) haemoglobin. When this is measured on an arterial blood sample with a laboratory CO-oximeter it is called **SaO2**. When it is estimated through the skin by a pulse oximeter it is called **SpO2**. The device also reports **pulse rate**, taken from the time between pulses in the optical signal.
+
+## Pulse oximeter working principle step by step
+
+### 1. Light absorption by haemoglobin
+
+The method rests on the Beer-Lambert law, which states that the absorbance of light passing through a medium is proportional to the concentration of the absorbing substance and the path length. The same law is used in a [spectrophotometer](/biomedical-engineering/spectrophotometer-working-principle/). Webster's Design of Pulse Oximeters explains that HbO2 and Hb have different absorption spectra:
+
+- At **red** wavelengths near 660 nm, deoxygenated haemoglobin absorbs much more light than oxygenated haemoglobin.
+- At **infrared** wavelengths near 940 nm, oxygenated haemoglobin absorbs slightly more than deoxygenated haemoglobin.
+
+Because the two forms behave in opposite ways at the two wavelengths, the ratio of red to infrared absorption changes strongly with saturation.
+
+### 2. Separating arterial blood from everything else
+
+Light passing through a finger is absorbed by skin, bone, tissue, venous blood and arterial blood. Most of these absorb a constant amount. Arterial blood volume, however, rises and falls with every heartbeat as the arteries expand. The detected light therefore has two parts:
+
+- A large, steady **DC** component from tissue, bone, venous blood and the non pulsatile part of arterial blood.
+- A small **AC** component that pulses at the heart rate. It comes only from the changing volume of arterial blood.
+
+This pulsatile optical signal is the **photoplethysmogram (PPG)**. By using only the AC part, the oximeter isolates arterial blood without knowing the absorption of the tissue.
+
+### 3. Time multiplexed LEDs and one detector
+
+A typical transmission probe has a red LED and an infrared LED on one side of the finger and a single silicon photodiode on the other. Webster describes how the LEDs are switched on in turn, with a dark period in which both are off. The dark period measures ambient light so it can be subtracted. A transimpedance amplifier turns the photodiode current into a voltage, which is filtered and digitised. Since a [photodiode](/electronics-engineering/what-is-a-diode/) has a broad spectral response, multiplexing in time is what lets one detector measure both wavelengths.
+
+<figure>
+<svg viewBox="0 0 640 300" width="640" height="300" fill="none" role="img" aria-label="Pulse oximeter block diagram: red 660 nanometre and infrared 940 nanometre LEDs shine through a finger onto a photodiode, which feeds a transimpedance amplifier, an ADC and processor, and a display of SpO2 and pulse rate. A plot shows the detected light signal with a large steady DC level and a small pulsatile AC component.">
+<rect x="40" y="40" width="78" height="36" rx="4" fill="#fde8e8" stroke="#b42318" stroke-width="1.5" />
+<rect x="124" y="40" width="78" height="36" rx="4" fill="#e6eef7" stroke="#0b2545" stroke-width="1.5" />
+<ellipse cx="121" cy="140" rx="92" ry="38" fill="#f6e3d4" stroke="#8a5a3c" stroke-width="1.5" />
+<path d="M79 76 V203" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" />
+<path d="M163 76 V203" stroke="#0b2545" stroke-width="2" stroke-dasharray="6 4" />
+<path d="M74 195 L79 205 L84 195" stroke="#b42318" stroke-width="2" />
+<path d="M158 195 L163 205 L168 195" stroke="#0b2545" stroke-width="2" />
+<rect x="56" y="207" width="130" height="38" rx="4" fill="#e7f6f5" stroke="#13a89e" stroke-width="1.5" />
+<path d="M186 226 H228" stroke="#0b2545" stroke-width="1.5" />
+<path d="M222 221 L230 226 L222 231" stroke="#0b2545" stroke-width="1.5" />
+<rect x="232" y="207" width="122" height="38" rx="4" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<path d="M354 226 H380" stroke="#0b2545" stroke-width="1.5" />
+<path d="M374 221 L382 226 L374 231" stroke="#0b2545" stroke-width="1.5" />
+<rect x="384" y="207" width="112" height="38" rx="4" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<path d="M496 226 H520" stroke="#0b2545" stroke-width="1.5" />
+<path d="M514 221 L522 226 L514 231" stroke="#0b2545" stroke-width="1.5" />
+<rect x="524" y="207" width="106" height="38" rx="4" fill="#fff6d6" stroke="#b38600" stroke-width="1.5" />
+<path d="M270 165 H625" stroke="#0b2545" stroke-width="1.5" />
+<path d="M270 165 V40" stroke="#0b2545" stroke-width="1.5" />
+<path d="M270 120 H615" stroke="#7b8794" stroke-width="1" stroke-dasharray="3 3" />
+<path d="M519 92 H620" stroke="#7b8794" stroke-width="1" stroke-dasharray="3 3" />
+<path d="M280 120 L282 119 L284 118 L286 116 L287 113 L289 109 L291 103 L293 98 L295 94 L297 92 L298 94 L300 98 L302 103 L304 109 L306 113 L308 116 L310 118 L313 119 L319 118 L321 117 L323 115 L324 113 L326 112 L328 111 L330 110 L332 111 L334 112 L336 113 L337 115 L339 117 L341 118 L345 119 L347 120 L391 120 L393 119 L395 118 L397 116 L398 113 L400 109 L402 103 L404 98 L406 94 L408 92 L410 94 L411 98 L413 103 L415 109 L417 113 L419 116 L421 118 L424 119 L430 118 L432 117 L434 115 L435 113 L437 112 L439 111 L441 110 L443 111 L445 112 L446 113 L448 115 L450 117 L452 118 L456 119 L458 120 L502 120 L504 119 L506 118 L508 116 L509 113 L511 109 L513 103 L515 98 L517 94 L519 92 L520 94 L522 98 L524 103 L526 109 L528 113 L530 116 L532 118 L535 119 L541 118 L543 117 L545 115 L546 113 L548 112 L550 111 L552 110 L554 111 L556 112 L558 113 L559 115 L561 117 L563 118 L567 119 L569 120 L613 120" stroke="#b42318" stroke-width="2.5" />
+<path d="M368 163 V122" stroke="#0b2545" stroke-width="1.2" />
+<path d="M364 128 L368 120 L372 128" stroke="#0b2545" stroke-width="1.2" />
+<path d="M364 157 L368 165 L372 157" stroke="#0b2545" stroke-width="1.2" />
+<path d="M612 94 V118" stroke="#0b2545" stroke-width="1.2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="79" y="56" text-anchor="middle" fill="#b42318" font-weight="700">Red LED</text>
+<text x="79" y="70" text-anchor="middle" fill="#b42318" font-size="11">660 nm</text>
+<text x="163" y="56" text-anchor="middle" font-weight="700">IR LED</text>
+<text x="163" y="70" text-anchor="middle" font-size="11">940 nm</text>
+<text x="121" y="137" text-anchor="middle" font-weight="700">Finger</text>
+<text x="121" y="152" text-anchor="middle" font-size="10">tissue and blood</text>
+<text x="121" y="231" text-anchor="middle">Photodiode</text>
+<text x="293" y="222" text-anchor="middle" font-size="11">Transimpedance</text>
+<text x="293" y="237" text-anchor="middle" font-size="11">amplifier</text>
+<text x="440" y="222" text-anchor="middle" font-size="11">ADC and</text>
+<text x="440" y="237" text-anchor="middle" font-size="11">processor</text>
+<text x="577" y="222" text-anchor="middle" font-size="11">SpO2 and</text>
+<text x="577" y="237" text-anchor="middle" font-size="11">pulse rate</text>
+<text x="276" y="34">Detected light (PPG)</text>
+<text x="625" y="182" text-anchor="end">Time</text>
+<text x="376" y="148" font-size="11">DC level</text>
+<text x="606" y="84" text-anchor="end" font-size="11">AC pulse</text>
+</g>
+<text x="320" y="285" text-anchor="middle" font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#7b8794">LEDs switch on in turn; the processor separates the red and infrared PPG signals</text>
+</svg>
+<figcaption>Transmission pulse oximeter: two LEDs, one photodiode and the signal chain, with the PPG signal split into a steady DC level and a small pulsatile AC component (AC exaggerated for clarity).</figcaption>
+</figure>
+
+### 4. The ratio of ratios
+
+For each wavelength the processor divides the AC amplitude by the DC level. This normalisation cancels the effect of LED brightness, skin thickness and detector gain. The two normalised values are then divided to give the **ratio of ratios** R:
+
+$$
+R = \frac{AC_{red} / DC_{red}}{AC_{IR} / DC_{IR}}
+$$
+
+As saturation falls, red absorption by Hb rises, so the red AC component grows relative to the infrared one and R increases.
+
+### 5. Calibration curve
+
+Light in tissue scatters, so the simple Beer-Lambert law does not give SpO2 directly from R. Webster explains that manufacturers build an **empirical calibration** curve by recording R from healthy volunteers while a CO-oximeter measures SaO2 on arterial samples as the inspired oxygen is lowered in controlled steps. The resulting curve, stored as a lookup table or polynomial, maps R to SpO2. Texas Instruments application report SLAA274 uses a simple linear approximation for a demonstration design:
+
+$$
+SpO_2 \approx 110 - 25R
+$$
+
+This is suitable only for learning. Clinical devices use their own validated curves.
+
+## Accuracy and limitations
+
+ISO 80601-2-61:2017 is the international safety and performance standard for pulse oximeter equipment. It requires manufacturers to state SpO2 accuracy as a root mean square difference (Arms) against SaO2 from controlled desaturation studies, and it sets a maximum Arms of 4 percent over the range 70 to 100 percent SpO2. Factors that reduce accuracy, described in the WHO manual and the FDA safety communication, include:
+
+- **Poor perfusion:** cold hands, shock or vasoconstriction make the AC signal very small.
+- **Motion artefact:** movement changes the optical path and can mimic a pulse.
+- **Dyshaemoglobins:** carboxyhaemoglobin and methaemoglobin are not separated by two wavelength devices.
+- **Skin pigmentation:** the FDA noted in 2021 that pulse oximeters may be less accurate in people with darker skin pigmentation.
+- **Nail polish and ambient light:** some dark nail polish absorbs light, and bright room light can saturate the detector.
+- **Low saturation:** calibration data are sparse below 70 percent, so readings there are less reliable.
+
+## Worked example: SpO2 from a PPG signal
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Red channel: AC = 12 mV peak to peak, DC = 1.20 V. Infrared channel: AC = 20 mV peak to peak, DC = 1.00 V. Pulses detected every 0.80 s.</dd>
+<dt>Find</dt><dd>Ratio of ratios R, estimated SpO2 and pulse rate.</dd>
+<dt>Assumptions</dt><dd>Clean signals after ambient light subtraction; the linear demonstration calibration SpO2 = 110 - 25R from TI SLAA274 applies.</dd>
+<dt>Solution</dt><dd>Red AC/DC = 0.012 / 1.20 = 0.0100<br />IR AC/DC = 0.020 / 1.00 = 0.0200<br />R = 0.0100 / 0.0200 = 0.50<br />SpO2 = 110 - 25 × 0.50 = 97.5 percent<br />Pulse rate = 60 / 0.80 = 75 beats per minute</dd>
+<dt>Answer</dt><dd><strong>R = 0.50, SpO2 about 97.5 percent, pulse rate 75 bpm</strong></dd>
+<dt>Limitations</dt><dd>The linear curve is a teaching approximation. A real device uses its own calibration from desaturation studies, averages over several seconds and rejects motion artefacts.</dd>
+</dl>
+</Example>
+
+Notice that the AC components are only about 1 to 2 percent of the DC levels. That is why the analog front end needs low noise and good ambient light rejection, and why the signal is filtered and averaged.
+
+## Types of pulse oximeter probes
+
+| Type | Arrangement | Typical sites | Notes |
+| --- | --- | --- | --- |
+| Transmission | LEDs and detector on opposite sides | Finger, toe, earlobe | Most common; strong signal through thin tissue |
+| Reflectance | LEDs and detector side by side on the skin | Forehead, wrist, chest | Used in wearables; smaller AC signal |
+| Disposable adhesive | Transmission sensor on a sticky strip | Neonatal foot, finger | Single patient use, good for long monitoring |
+| Reusable clip | Spring clip with soft pads | Adult finger | Spot checks and ward monitoring |
+
+## Design points for engineers
+
+- **LED drive:** constant current pulses, with adjustable intensity so the DC level sits in the ADC range for thin and thick fingers.
+- **Front end:** a transimpedance amplifier with a large feedback resistor converts nanoamp to microamp currents into volts. Ambient light is subtracted using the dark phase.
+- **Sampling:** the PPG has most of its energy at low frequencies, so moderate sampling rates are enough, but the [sampling theorem](/electronics-engineering/sampling-theorem/) still sets the minimum rate after filtering.
+- **Processing:** band pass filtering, peak detection, AC and DC estimation, averaging and signal quality checks before a value is displayed.
+- **Regulation:** pulse oximeters for clinical use are regulated medical devices. Their class depends on the market, as explained in [medical device classification](/biomedical-engineering/medical-device-classification/).
+
+## Applications
+
+- Continuous monitoring during anaesthesia, recovery and intensive care.
+- Spot checks in wards, clinics, ambulances and triage.
+- Home monitoring of people with lung or heart disease on medical advice.
+- Sleep studies, where SpO2 dips are recorded overnight.
+- Wearable fitness devices using reflectance sensors, which are generally not validated to clinical standards.
+
+## Related reading
+
+- [Biopotential Measurement Basics](/biomedical-engineering/biopotential-measurement-basics/)
+- [Spectrophotometer Working Principle](/biomedical-engineering/spectrophotometer-working-principle/)
+- [Medical Imaging Modalities](/biomedical-engineering/medical-imaging-modalities/)
