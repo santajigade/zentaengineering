@@ -3,6 +3,7 @@ title: "Satellite Subsystems Explained"
 description: "Satellite subsystems explained: payload, structure, power, thermal control, ADCS, propulsion, communications, onboard computer and a power budget example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-11
 discipline: aerospace-engineering
 subcategory: spacecraft
 focusKeyword: "satellite subsystems"
@@ -30,19 +31,20 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Satellite subsystems** are the functional building blocks of a spacecraft. The **payload** performs the mission (cameras, transponders, instruments). The **bus** supports it with: **structure and mechanisms**; **electrical power** (solar arrays, batteries, power conditioning); **thermal control** (insulation, radiators, heaters); **attitude determination and control (ADCS)** (sensors, reaction wheels, magnetorquers, thrusters); **propulsion** for orbit changes and station keeping; **telemetry, tracking and command (TT&C)** communications; and **command and data handling** (onboard computer and software). Each must survive launch loads, vacuum, radiation and extreme temperatures without repair.
+**Satellite subsystems** are the functional blocks of a spacecraft. The **payload** performs the mission, and the **bus** supports it with structure, electrical power, thermal control, attitude determination and control, propulsion, telemetry, tracking and command, and command and data handling. All must survive launch, vacuum, radiation and extreme temperatures for years without repair.
 
 </Key>
 
 A satellite is a small, self contained world that must provide its own power, temperature control, pointing and communications for years in an environment where no repair is possible. Designing it means balancing mass, power, volume, cost and reliability across all subsystems, guided by the mission and orbit, as discussed in [GEO vs MEO vs LEO satellites](/telecommunication-engineering/geo-meo-leo-satellites/).
 
-<figure>
+<figure class="anim">
 <svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Satellite block diagram: central bus box containing onboard computer connected to power, thermal, ADCS, propulsion and TT&C subsystems, plus the payload; solar arrays on both sides, antenna on top, star tracker and thrusters indicated">
 <rect x="210" y="60" width="180" height="170" rx="6" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
 <g stroke="#0b2545" stroke-width="1.5" fill="#0b2545" fill-opacity="0.85"><rect x="30" y="110" width="160" height="70" /><rect x="410" y="110" width="160" height="70" /></g>
 <g stroke="#7b8794" stroke-width="1"><path d="M70 110V180M110 110V180M150 110V180M450 110V180M490 110V180M530 110V180M30 145H190M410 145H570" /></g>
 <path d="M190 145H210M390 145H410" stroke="#0b2545" stroke-width="3" />
-<path d="M270 60V40M250 20Q270 50 290 20" stroke="#0b2545" stroke-width="2" fill="none" />
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M190 145H210" /><path class="anim-flow-rev" d="M390 145H410" /></g>
+<path class="anim-pulse" d="M270 60V40M250 20Q270 50 290 20" stroke="#0b2545" stroke-width="2" fill="none" />
 <g stroke="#0b2545" stroke-width="1.5">
 <rect x="250" y="125" width="100" height="40" rx="4" fill="#fff7e0" />
 <rect x="220" y="75" width="70" height="30" rx="4" fill="#e6f6f4" /><rect x="310" y="75" width="70" height="30" rx="4" fill="#e6f6f4" />
@@ -50,6 +52,7 @@ A satellite is a small, self contained world that must provide its own power, te
 <rect x="250" y="235" width="100" height="40" rx="4" fill="#ffe9e7" />
 </g>
 <g stroke="#13a89e" stroke-width="1.5"><path d="M255 105V125M345 105V125M255 165V185M345 165V185M300 165V235" /></g>
+<g stroke="#fff" stroke-width="1" fill="none"><path class="anim-flow" d="M255 105V125M345 105V125M255 165V185M345 165V185M300 165V235" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
 <text x="300" y="142" font-weight="700">Onboard</text><text x="300" y="156">computer (C&amp;DH)</text>
 <text x="255" y="94">Power</text><text x="345" y="94">TT&amp;C</text><text x="255" y="204">ADCS</text><text x="345" y="204">Thermal</text>
@@ -131,6 +134,16 @@ where P_e and P_d are loads in eclipse and daylight, T_e and T_d their durations
 </dl>
 </Example>
 
+## Key formulas for satellite subsystems
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Solar array power (end of life) | P_sa = [(P_e T_e ÷ X_e) + (P_d T_d ÷ X_d)] ÷ T_d | P loads (W), T durations (min), X path efficiencies |
+| Daylight duration | T_d = T_orbit − T_e | min |
+| Eclipse energy | E = P_e × T_e | Wh, with T_e in hours |
+| Battery capacity | C = E ÷ DoD | DoD = allowed depth of discharge |
+| Battery amp hours | Ah = Wh ÷ V_bus | V_bus = bus voltage (V) |
+
 ## Redundancy and reliability
 
 Because repair in orbit is almost never possible, critical units are duplicated or cross strapped so that a backup can take over. Typical examples are redundant onboard computers, two receivers and transmitters for TT&C, extra reaction wheels in a skewed arrangement, and redundant thruster branches. Components are selected for radiation tolerance, and fault detection, isolation and recovery software decides automatically how to respond to failures.
@@ -138,3 +151,11 @@ Because repair in orbit is almost never possible, critical units are duplicated 
 ## Integration and testing of satellite subsystems
 
 Subsystems are integrated and tested together through functional tests, vibration and acoustic tests that simulate launch, thermal vacuum cycling, electromagnetic compatibility checks and end to end communication tests with ground stations. Systems engineering, following standards such as ECSS, manages interfaces, budgets for mass, power and data, and risks across all satellite subsystems, so that the spacecraft works first time in orbit.
+
+## Satellite subsystems interview and viva questions
+
+1. **What is the difference between the payload and the bus?** The payload performs the mission, such as imaging or communications; the bus provides the structure, power, thermal control, pointing, propulsion, communications and computing that support it.
+2. **Why must all heat be radiated in space?** There is no air for convection, so heat can leave the spacecraft only by radiation from surfaces such as radiators.
+3. **How do reaction wheels control attitude?** They exchange angular momentum with the spacecraft: speeding a wheel up turns the satellite the opposite way.
+4. **Why are magnetorquers used in LEO?** They push against Earth's magnetic field to remove stored momentum from the reaction wheels without using propellant.
+5. **What happens in safe mode?** The onboard software detects a fault, switches to a simple, power positive attitude and waits for commands from the ground.

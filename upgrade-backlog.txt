@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/aerospace-engineering/aircraft-structural-components.mdx
-src/content/articles/aerospace-engineering/avionics-systems-overview.mdx
-src/content/articles/aerospace-engineering/drag-force-on-aircraft.mdx
-src/content/articles/aerospace-engineering/forces-of-flight-and-axes.mdx
-src/content/articles/aerospace-engineering/how-a-quadcopter-flies.mdx
-src/content/articles/aerospace-engineering/how-wings-generate-lift.mdx
-src/content/articles/aerospace-engineering/satellite-subsystems.mdx
-src/content/articles/aerospace-engineering/turbojet-vs-turbofan-vs-turboprop.mdx
 src/content/articles/agricultural-engineering/automated-irrigation-control.mdx
 src/content/articles/agricultural-engineering/cold-storage-design-basics.mdx
 src/content/articles/agricultural-engineering/drip-vs-sprinkler-irrigation.mdx

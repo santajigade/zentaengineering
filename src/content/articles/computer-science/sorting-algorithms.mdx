@@ -1,0 +1,169 @@
+---
+title: "Sorting Algorithms Compared with Examples"
+description: "Sorting algorithms compared: bubble, selection, insertion, merge, quick, heap, counting and radix sort, with time complexity, stability and a worked example."
+pubDate: 2026-11-11
+reviewedDate: 2026-11-11
+discipline: computer-science
+subcategory: algorithms
+focusKeyword: "sorting algorithms"
+image: { src: /images/featured/sorting-algorithms.webp, alt: "Sorting Algorithms Compared with Examples: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [sorting, merge-sort, quicksort, heapsort, time-complexity, algorithms]
+faq:
+  - q: "Which sorting algorithm is the fastest?"
+    a: "No single algorithm is fastest for every input. For general data in memory, well tuned quicksort, merge sort based hybrids such as Timsort and introsort all run in about n log n time. For integers in a small range, counting sort or radix sort can be faster because they do not compare elements. For small or nearly sorted arrays, insertion sort is often fastest."
+  - q: "What does it mean for a sort to be stable?"
+    a: "A stable sort keeps items with equal keys in the same relative order they had in the input. This matters when sorting records by one field after another, for example sorting employees by name and then by department so that names stay in order within each department."
+  - q: "Why is quicksort used so widely if its worst case is quadratic?"
+    a: "Its average case is n log n with a small constant factor, it sorts in place and it uses the cache well. Random or median of three pivot choice makes the worst case very unlikely, and hybrid versions such as introsort switch to heapsort if recursion gets too deep, which guarantees n log n."
+references:
+  - text: "T. H. Cormen, C. E. Leiserson, R. L. Rivest and C. Stein, Introduction to Algorithms, 4th ed., MIT Press, Part II Sorting and Order Statistics"
+  - text: "R. Sedgewick and K. Wayne, Algorithms, 4th ed., Addison-Wesley, Chapter 2 Sorting"
+  - text: "D. E. Knuth, The Art of Computer Programming, Vol. 3: Sorting and Searching, 2nd ed., Addison-Wesley"
+  - text: "Python Software Foundation, Python documentation: Sorting Techniques and the list.sort method"
+  - text: "Oracle, Java SE API documentation: java.util.Arrays sort methods"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Sorting algorithms** arrange items into order, such as ascending numbers or alphabetical names. Simple methods like bubble, selection and insertion sort take quadratic time, about n² steps. Merge sort, quicksort and heapsort take about n log n time. Counting and radix sort avoid comparisons and run in linear time for suitable keys.
+
+</Key>
+
+Sorting algorithms are among the first algorithms every programmer studies, and they are still used everywhere: in databases, search engines, spreadsheets, compilers and graphics. Sorted data makes searching, merging and finding duplicates much faster. Comparing the main algorithms also teaches the core ideas of algorithm analysis: time complexity, space use, stability and the effect of the input order.
+
+## How sorting algorithms are compared
+
+Four properties matter most:
+
+- **Time complexity:** how the number of steps grows with the number of items n, in the best, average and worst case. It is written in [Big O notation](/computer-science/big-o-notation/).
+- **Space complexity:** extra memory needed. An **in place** sort needs only a constant amount of extra memory (or a small stack).
+- **Stability:** whether equal keys keep their original relative order.
+- **Adaptivity:** whether the algorithm runs faster on input that is already partly sorted.
+
+A further distinction is between **comparison sorts**, which only compare pairs of keys, and **non comparison sorts**, which use the digits or values of the keys directly.
+
+## Simple quadratic sorting algorithms
+
+**Bubble sort** repeatedly steps through the list and swaps adjacent items that are out of order. Large items "bubble" to the end. With an early exit when a pass makes no swaps, it takes linear time on sorted input, but it is slow in general and is used mainly for teaching.
+
+**Selection sort** finds the smallest remaining item and swaps it into the next position. It always makes n(n − 1)/2 comparisons but at most n − 1 swaps, which can matter when writes are expensive. It is not stable in its usual array form.
+
+**Insertion sort** takes each item and inserts it into the correct place among the already sorted items to its left, like sorting playing cards in your hand. It is stable, in place and adaptive: on nearly sorted data it runs in close to linear time. That is why fast library sorts use it for small sub arrays.
+
+## Efficient n log n sorting algorithms
+
+**Merge sort** is a divide and conquer method. It splits the array into halves, sorts each half recursively and merges the two sorted halves in linear time. Its running time follows the recurrence below and is n log n in every case. It is stable but needs an extra array of size n for merging. It is the natural choice for sorting [linked lists](/computer-science/arrays-vs-linked-lists/) and for external sorting of files too large for memory.
+
+$$
+T(n) = 2\,T\!\left(\frac{n}{2}\right) + \Theta(n) \;\Rightarrow\; T(n) = \Theta(n \log n)
+$$
+
+<figure class="anim">
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Bottom up merge sort of the array 5, 2, 4, 7, 1, 3, 2, 6: pass 1 merges single items into sorted pairs 2 5, 4 7, 1 3, 2 6; pass 2 merges pairs into 2 4 5 7 and 1 2 3 6; pass 3 merges these into the sorted array 1 2 2 3 4 5 6 7">
+<g stroke="#13a89e" stroke-width="2.5">
+<path d="M58 58L76 100M108 58L76 100M158 58L176 100M208 58L176 100M258 58L276 100M308 58L276 100M358 58L376 100M408 58L376 100" />
+<path d="M76 128L133 170M176 128L133 170M276 128L333 170M376 128L333 170" />
+<path d="M133 198L233 240M333 198L233 240" />
+</g>
+<g stroke="#fff" stroke-width="1" fill="none">
+<path class="anim-flow-slow" d="M58 58L76 100M108 58L76 100M158 58L176 100M208 58L176 100M258 58L276 100M308 58L276 100M358 58L376 100M408 58L376 100" />
+<path class="anim-flow-slow" d="M76 128L133 170M176 128L133 170M276 128L333 170M376 128L333 170" />
+<path class="anim-flow-slow" d="M133 198L233 240M333 198L233 240" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5">
+<g fill="#eef1f6"><rect x="40" y="30" width="36" height="28" /><rect x="90" y="30" width="36" height="28" /><rect x="140" y="30" width="36" height="28" /><rect x="190" y="30" width="36" height="28" /><rect x="240" y="30" width="36" height="28" /><rect x="290" y="30" width="36" height="28" /><rect x="340" y="30" width="36" height="28" /><rect x="390" y="30" width="36" height="28" /></g>
+<g fill="#e6f6f4" class="anim-blink anim-d1"><rect x="40" y="100" width="72" height="28" /><rect x="140" y="100" width="72" height="28" /><rect x="240" y="100" width="72" height="28" /><rect x="340" y="100" width="72" height="28" /></g>
+<g fill="#fff7e0" class="anim-blink anim-d2"><rect x="61" y="170" width="144" height="28" /><rect x="261" y="170" width="144" height="28" /></g>
+<g fill="#ffe9e7" class="anim-blink anim-d3"><rect x="89" y="240" width="288" height="28" /></g>
+<path d="M76 100V128M176 100V128M276 100V128M376 100V128M97 170V198M133 170V198M169 170V198M297 170V198M333 170V198M369 170V198M125 240V268M161 240V268M197 240V268M233 240V268M269 240V268M305 240V268M341 240V268" stroke-width="1" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545" text-anchor="middle">
+<text x="58" y="49">5</text><text x="108" y="49">2</text><text x="158" y="49">4</text><text x="208" y="49">7</text><text x="258" y="49">1</text><text x="308" y="49">3</text><text x="358" y="49">2</text><text x="408" y="49">6</text>
+<text x="58" y="119">2</text><text x="94" y="119">5</text><text x="158" y="119">4</text><text x="194" y="119">7</text><text x="258" y="119">1</text><text x="294" y="119">3</text><text x="358" y="119">2</text><text x="394" y="119">6</text>
+<text x="79" y="189">2</text><text x="115" y="189">4</text><text x="151" y="189">5</text><text x="187" y="189">7</text><text x="279" y="189">1</text><text x="315" y="189">2</text><text x="351" y="189">3</text><text x="387" y="189">6</text>
+<text x="107" y="259">1</text><text x="143" y="259">2</text><text x="179" y="259">2</text><text x="215" y="259">3</text><text x="251" y="259">4</text><text x="287" y="259">5</text><text x="323" y="259">6</text><text x="359" y="259">7</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="450" y="49">Input, n = 8</text><text x="450" y="119">Pass 1: sorted pairs</text><text x="450" y="189">Pass 2: runs of 4</text><text x="450" y="259">Pass 3: sorted array</text>
+</g>
+</svg>
+<figcaption>Bottom up merge sort: log₂ 8 = 3 merge passes, each doing linear work, give n log n time.</figcaption>
+</figure>
+
+**Quicksort** picks a **pivot**, partitions the array so that smaller items go left and larger items go right, and then sorts the two parts recursively. On average it runs in n log n time with small constant factors and sorts in place, so it is often the fastest in practice. A poor pivot on every step, for example always taking the first item of an already sorted array, gives quadratic time. Random pivots or the median of three items make this very unlikely.
+
+**Heapsort** builds a binary max heap from the array, then repeatedly swaps the largest item to the end and restores the heap. It guarantees n log n time and sorts in place, but it is not stable and its memory access pattern is less cache friendly than quicksort.
+
+## Linear time non comparison sorts
+
+**Counting sort** counts how many times each key value occurs and uses those counts to place items directly. It runs in time proportional to n + k, where k is the range of key values, so it suits small integer ranges. **Radix sort** sorts numbers or strings digit by digit, using a stable sort such as counting sort for each digit, in time proportional to d(n + k) for d digits. **Bucket sort** spreads items into buckets by value and is fast when the input is uniformly distributed.
+
+These methods beat the n log n limit because they do not rely on comparisons.
+
+## Sorting algorithms comparison table
+
+| Algorithm | Best | Average | Worst | Extra space | Stable |
+| --- | --- | --- | --- | --- | --- |
+| Bubble sort | n | n² | n² | 1 | Yes |
+| Selection sort | n² | n² | n² | 1 | No |
+| Insertion sort | n | n² | n² | 1 | Yes |
+| Merge sort | n log n | n log n | n log n | n | Yes |
+| Quicksort | n log n | n log n | n² | log n (stack) | No |
+| Heapsort | n log n | n log n | n log n | 1 | No |
+| Counting sort | n + k | n + k | n + k | n + k | Yes |
+| Radix sort | d(n + k) | d(n + k) | d(n + k) | n + k | Yes |
+
+All entries are orders of growth (Big O).
+
+## The n log n lower bound
+
+Any comparison sort can be drawn as a decision tree in which each comparison has two outcomes and each leaf is one possible ordering. There are n! orderings, so the tree height, the worst case number of comparisons, is at least log₂(n!), which grows as n log n. No comparison sort can do better in the worst case, so merge sort and heapsort are asymptotically optimal.
+
+$$
+C_\text{worst}(n) \ge \lceil \log_2 n! \rceil \approx n \log_2 n
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An array of n = 1 000 000 numbers in random order.</dd>
+<dt>Find</dt><dd>The number of comparisons made by selection sort and the approximate number for an n log n sort, and the time for each on a machine doing 10⁸ comparisons per second.</dd>
+<dt>Assumptions</dt><dd>The comparison rate is an assumed round figure; only comparisons are counted, not swaps or memory effects. The n log n sort is taken as n log₂ n comparisons.</dd>
+<dt>Solution</dt><dd>Selection sort: n(n − 1)/2 = 1 000 000 × 999 999 ÷ 2 = 499 999 500 000 comparisons<br />n log₂ n = 1 000 000 × 19.93 = 19 931 569 comparisons<br />Ratio = 499 999 500 000 ÷ 19 931 569 ≈ 25 086<br />Times: 499 999 500 000 ÷ 10⁸ ≈ 5000 s; 19 931 569 ÷ 10⁸ ≈ 0.2 s</dd>
+<dt>Answer</dt><dd><strong>About 5 × 10¹¹ comparisons (about 83 minutes) for selection sort against about 2 × 10⁷ (about 0.2 s) for an n log n sort</strong></dd>
+<dt>Limitations</dt><dd>Real run time also depends on swaps, cache behaviour and the language, but the gap of about four orders of magnitude is what matters for large n.</dd>
+</dl>
+</Example>
+
+## Key formulas for sorting algorithms
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Selection sort comparisons | C = n(n − 1)/2 | n = number of items |
+| Merge sort recurrence | T(n) = 2T(n/2) + Θ(n) | Solves to Θ(n log n) |
+| Comparison sort lower bound | C_worst ≥ ⌈log₂ n!⌉ | About n log₂ n |
+| Counting sort time | Θ(n + k) | k = range of key values |
+| Radix sort time | Θ(d(n + k)) | d = number of digits, k = digit range |
+
+## Which sorting algorithm to use
+
+- **Use the language library sort** in almost every program. Python's list.sort and Java's sort for objects use Timsort, a stable hybrid of merge sort and insertion sort that is very fast on partly sorted data. Java sorts primitive arrays with a dual pivot quicksort.
+- **Small arrays or nearly sorted data:** insertion sort.
+- **Stability required:** merge sort or Timsort.
+- **Guaranteed worst case with little memory:** heapsort.
+- **Integers or fixed length keys in a known range:** counting or radix sort.
+- **Data larger than memory:** external merge sort, as used by [database](/computer-science/database-normalization/) engines.
+
+The choice of data structure also matters: the [stack and queue](/computer-science/stack-vs-queue/) used in recursion and in iterative versions of these algorithms affects memory use.
+
+## Sorting algorithms interview and viva questions
+
+1. **What is a stable sorting algorithm? Give two examples.** A stable sort keeps equal keys in their original relative order. Insertion sort and merge sort are stable.
+2. **Why is insertion sort fast on nearly sorted data?** Each item moves only a short distance to reach its place, so the inner loop stops early and the total work is close to linear.
+3. **What causes the worst case of quicksort?** Pivots that split the array very unevenly at every step, such as always choosing the first item of an already sorted array, give quadratic time.
+4. **Why can no comparison sort beat n log n in the worst case?** A decision tree with n! leaves must have height at least log₂(n!), which grows as n log n.
+5. **How does counting sort avoid the n log n limit?** It does not compare keys; it counts occurrences of each key value and places items directly, which takes time proportional to n + k.

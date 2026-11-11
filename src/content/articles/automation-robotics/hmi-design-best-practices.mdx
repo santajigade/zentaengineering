@@ -1,0 +1,154 @@
+---
+title: "HMI Design Best Practices for Operators"
+description: "HMI design best practices for operators: ISA-101 display hierarchy, grey backgrounds, colour for alarms only, trends, navigation and alarm rate targets."
+pubDate: 2026-11-11
+reviewedDate: 2026-11-11
+discipline: automation-robotics
+subcategory: scada-hmi
+focusKeyword: "hmi design"
+image: { src: /images/featured/hmi-design-best-practices.webp, alt: "HMI Design Best Practices for Operators: featured diagram" }
+format: explanation
+pillar: false
+math: false
+tags: [hmi, scada, isa-101, high-performance-hmi, alarm-management, control-room]
+faq:
+  - q: "What is a high performance HMI?"
+    a: "A high performance HMI is an operator interface designed to support situation awareness rather than to look like a detailed process drawing. It uses muted grey backgrounds, reserves bright colour for abnormal conditions and alarms, shows values in context with normal ranges and trends, and organises displays in a clear hierarchy. The approach is described in the High Performance HMI Handbook and is consistent with ISA-101."
+  - q: "Why are HMI backgrounds grey instead of black?"
+    a: "A light or medium grey background reduces glare and eye strain in a control room, and it lets alarm colours such as red and yellow stand out clearly. Black backgrounds with bright coloured lines and equipment make every object compete for attention, so a real abnormal condition is harder to spot."
+  - q: "Which standard covers HMI design?"
+    a: "ANSI/ISA-101.01-2015 Human Machine Interfaces for Process Automation Systems covers the HMI lifecycle, philosophy, style guide and display hierarchy. Alarm presentation and alarm rates are covered by ANSI/ISA-18.2 and EEMUA 191, and control room layout by the ISO 11064 series and EEMUA 201."
+references:
+  - text: "ANSI/ISA-101.01-2015, Human Machine Interfaces for Process Automation Systems, International Society of Automation"
+  - text: "ANSI/ISA-18.2-2016, Management of Alarm Systems for the Process Industries, International Society of Automation"
+  - text: "EEMUA Publication 191, Alarm Systems: A Guide to Design, Management and Procurement, 3rd ed., Engineering Equipment and Materials Users Association"
+  - text: "B. Hollifield, D. Oliver, I. Nimmo and E. Habibi, The High Performance HMI Handbook, PAS"
+  - text: "ISO 11064 series, Ergonomic design of control centres, International Organization for Standardization"
+  - text: "EEMUA Publication 201, Control Rooms: A Guide to their Specification, Design, Commissioning and Operation, 2nd ed., EEMUA"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**HMI design** is the planning of the screens operators use to monitor and control a process. Good practice, set out in ISA-101, uses a four level display hierarchy, muted grey backgrounds, colour only for abnormal conditions, values shown against normal ranges and trends, consistent navigation, and a well managed alarm system.
+
+</Key>
+
+A human machine interface (HMI) is the operator's window into a plant. Good HMI design helps an operator see at a glance whether the process is normal, notice problems early and act correctly under stress. Poor screens, crowded with bright colours, 3D pumps and raw numbers, have been identified as a contributing factor in industrial incidents. The guidance below follows ISA-101, the High Performance HMI Handbook and alarm management standards.
+
+## Why HMI design matters
+
+Operators spend most of their shift watching a process that is running normally. Their job is to detect small changes before they become upsets. A screen that looks like a colourful piping drawing gives data, but not information: the operator has to read each number and remember whether it is good or bad. High performance HMI design shifts this mental work to the display, showing values in context so that abnormal conditions stand out without reading every number.
+
+HMIs are part of the wider control system. Their place in a plant network is covered in [SCADA system architecture](/automation-robotics/scada-system-architecture/) and [DCS architecture](/automation-robotics/dcs-architecture/).
+
+## The HMI design lifecycle
+
+ISA-101 treats the HMI as a system with a lifecycle rather than a set of drawings:
+
+- **HMI philosophy:** the high level principles for the site, such as the purpose of each display level and the use of colour.
+- **Style guide:** detailed rules for colours, fonts, symbols, layouts, navigation and alarm presentation.
+- **Toolkit:** a library of approved objects (faceplates, indicators, trends) built to the style guide.
+- **Design, implementation and testing:** displays built from the toolkit, reviewed with operators and tested before use.
+- **Operation and management of change:** a controlled process for changes so that screens stay consistent over the life of the plant.
+
+## Display hierarchy in HMI design
+
+<figure class="anim">
+<svg width="600" height="265" viewBox="0 0 600 265" fill="none" role="img" aria-label="HMI display hierarchy as a four level pyramid: Level 1 area overview at the top, Level 2 process unit control, Level 3 process unit detail, and Level 4 support and diagnostic displays at the base; an arrow on the left shows navigation from overview down to detail">
+<g stroke="#0b2545" stroke-width="2">
+<path class="anim-blink" d="M170 30H230L260 80H140Z" fill="#e6f6f4" />
+<path class="anim-blink anim-d1" d="M140 80H260L290 130H110Z" fill="#eef1f6" />
+<path class="anim-blink anim-d2" d="M110 130H290L320 180H80Z" fill="#fff7e0" />
+<path class="anim-blink anim-d3" d="M80 180H320L350 230H50Z" fill="#f3f4f6" />
+</g>
+<path d="M30 40V222" stroke="#13a89e" stroke-width="3" />
+<path d="M30 40V222" class="anim-flow-slow" stroke="#fff" stroke-width="1.5" />
+<path d="M22 220L30 234L38 220Z" fill="#13a89e" />
+<g font-family="Open Sans Variable, Arial, sans-serif" fill="#0b2545" font-size="13" text-anchor="middle" font-weight="700">
+<text x="200" y="60">L1</text><text x="200" y="110">L2</text><text x="200" y="160">L3</text><text x="200" y="210">L4</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" fill="#0b2545" font-size="12">
+<text x="12" y="28">Overview</text><text x="12" y="252">Detail</text>
+<text x="370" y="52" font-weight="700">Level 1: Area overview</text><text x="370" y="68" font-size="11" fill="#4a5568">Whole span of control</text>
+<text x="370" y="102" font-weight="700">Level 2: Unit control</text><text x="370" y="118" font-size="11" fill="#4a5568">Normal operation of one unit</text>
+<text x="370" y="152" font-weight="700">Level 3: Unit detail</text><text x="370" y="168" font-size="11" fill="#4a5568">Equipment and subsystems</text>
+<text x="370" y="202" font-weight="700">Level 4: Support</text><text x="370" y="218" font-size="11" fill="#4a5568">Diagnostics, help, interlocks</text>
+</g>
+</svg>
+<figcaption>The four level display hierarchy described in ISA-101: operators navigate from the overview down to more detail.</figcaption>
+</figure>
+
+ISA-101 organises displays into four levels:
+
+- **Level 1, area overview:** the operator's whole span of control on one screen, often on a large wall display. It shows key performance indicators, major flows and any abnormal conditions, but is not used for control actions.
+- **Level 2, process unit control:** the main working displays for normal operation of one unit, such as a distillation column or a boiler, with the controllers and trends needed for routine tasks.
+- **Level 3, process unit detail:** detailed displays of equipment and subsystems used for non routine tasks, start up, shutdown and troubleshooting.
+- **Level 4, process unit support and diagnostic:** interlock logic, instrument diagnostics, help screens and procedures.
+
+Navigation should let the operator reach any Level 2 display in very few clicks, and should be the same on every screen.
+
+## Visual design best practices
+
+### Colour
+
+- Use a **light or medium grey background** and show equipment and piping in low contrast grey.
+- **Reserve bright, saturated colours for abnormal conditions and alarms**, and never reuse alarm colours for anything else. If red means a high priority alarm, a running pump should not also be red.
+- Do not rely on colour alone. Roughly 1 in 12 men has some form of colour vision deficiency, so alarm states should also differ in shape, text or position.
+
+### Showing values in context
+
+- Use **analog indicators** that show the current value against its normal operating range and alarm limits, so the operator can see "normal" without reading the number.
+- Show important variables as **trends** with fixed, sensible scales. The direction and speed of change often matter more than the current value.
+- Group related values and present calculated information, such as efficiency or margin to limit, where it helps decisions.
+
+### Layout and text
+
+- Arrange the display to match how the operator thinks about the process, usually left to right in the direction of flow.
+- Use plain fonts, consistent units and abbreviations, and avoid decorative 3D graphics and animation of normal states, such as spinning pumps, which add movement that hides real changes.
+- Keep the display uncluttered, with white space to separate groups.
+
+## Alarms and HMI design
+
+The HMI is where alarms are seen, so alarm management and HMI design go together. ANSI/ISA-18.2 and EEMUA 191 define three or four priorities, require each alarm to need an operator action, and give benchmark rates for one operator position:
+
+| Metric (per operator position) | Very likely acceptable | Maximum manageable |
+| --- | --- | --- |
+| Alarms per day | about 150 | about 300 |
+| Alarms per hour | about 6 | about 12 |
+| Alarms per 10 minutes | about 1 | about 2 |
+
+An **alarm flood** is defined as 10 or more alarms in 10 minutes for one operator. A typical priority distribution target is about 80% low, 15% medium and 5% high. Alarms should appear in a dedicated alarm list and as indicators on the process displays, with a consistent link from one to the other.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>The alarm log for one console shows 2016 annunciated alarms over 7 days of continuous operation.</dd>
+<dt>Find</dt><dd>The average alarm rate per day, per hour and per 10 minutes, compare it with the ISA-18.2 benchmarks, and find the reduction needed to reach about 150 alarms per day.</dd>
+<dt>Assumptions</dt><dd>One operator position; alarms evenly spread for the averages (floods are checked separately).</dd>
+<dt>Solution</dt><dd>Per day: 2016 ÷ 7 = 288<br />Per hour: 288 ÷ 24 = 12<br />Per 10 minutes: 12 ÷ 6 = 2<br />Required reduction: (288 − 150) ÷ 288 = 0.479, about 48%</dd>
+<dt>Answer</dt><dd><strong>288 alarms per day (12 per hour, 2 per 10 minutes), at the maximum manageable level; about 48% fewer alarms are needed to reach the very likely acceptable rate</strong></dd>
+<dt>Limitations</dt><dd>Averages hide floods; the log should also be checked for 10 minute periods with 10 or more alarms, chattering alarms and the most frequent alarms, which usually give the quickest reduction.</dd>
+</dl>
+</Example>
+
+## Applying HMI design on an existing plant
+
+Many plants have HMIs that grew over years without a style guide. A practical upgrade path is:
+
+1. Write an **HMI philosophy and style guide** with operators, engineers and management.
+2. Rationalise the **alarm system** first, because a good display cannot fix an alarm flood.
+3. Build a **toolkit** of standard objects in the [SCADA or HMI software](/automation-robotics/scada-system-architecture/).
+4. Redesign **Level 2** displays for the most important units, then Level 1 overviews.
+5. Test new displays with operators, ideally on a simulator or [digital twin](/automation-robotics/digital-twin-explained/), and train before switching over.
+6. Control later changes through management of change so that the style guide is followed.
+
+Field data reaches the HMI through the PLC or controller, often over protocols such as [Modbus RTU and TCP](/automation-robotics/modbus-rtu-vs-tcp/), so tag names and descriptions should be consistent from the [PLC program](/automation-robotics/plc-ladder-logic/) to the display.
+
+## HMI design interview and viva questions
+
+1. **What are the four display levels in ISA-101?** Level 1 area overview, Level 2 process unit control, Level 3 process unit detail and Level 4 support and diagnostic displays.
+2. **Why should colour be reserved for abnormal conditions?** If normal equipment is shown in bright colours, alarm colours lose their meaning and abnormal conditions do not stand out.
+3. **What is an analog indicator and why is it preferred to a plain number?** It shows the value against its normal range and alarm limits, so the operator can judge whether it is normal at a glance.
+4. **What is an alarm flood?** It is 10 or more alarms in 10 minutes for one operator position, a rate at which operators cannot respond properly to each alarm.
+5. **What is the role of an HMI style guide?** It sets detailed rules for colours, symbols, fonts, layouts and navigation so that every display in the plant is consistent.

@@ -3,6 +3,7 @@ title: "Drone (UAV) Components and How a Quadcopter Flies"
 description: "How a quadcopter flies: frame, motors, ESCs, propellers, flight controller, IMU, battery, GPS, thrust, roll, pitch, yaw control and a hover thrust example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-11
 discipline: aerospace-engineering
 subcategory: uav
 focusKeyword: "how a quadcopter flies"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**How a quadcopter flies:** four **propellers** on **brushless motors** produce thrust upward. Two spin clockwise and two counterclockwise so their reaction torques cancel. A **flight controller** reads an **IMU** (gyroscopes and accelerometers), barometer, magnetometer and **GPS**, and adjusts each motor's speed through **electronic speed controllers (ESCs)** hundreds of times a second. Raising all four speeds climbs; changing speeds of front versus rear motors **pitches**, left versus right **rolls**, and clockwise versus counterclockwise pairs **yaws**. Tilting the thrust vector moves the drone horizontally. A **LiPo or Li-ion battery** powers everything.
+**How a quadcopter flies:** four fixed pitch **propellers** on **brushless motors** push air downward to make thrust. Two spin clockwise and two counterclockwise so their reaction torques cancel. A **flight controller** reads gyroscopes, accelerometers and GPS and changes each motor's speed through **ESCs** to climb, pitch, roll and yaw.
 
 </Key>
 
@@ -38,12 +39,13 @@ Multirotor drones are used for photography, mapping, inspection of power lines a
 
 ## Main drone (UAV) components
 
-<figure>
+<figure class="anim">
 <svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Top view of an X configuration quadcopter: four arms with motors and propellers at the corners, front left and rear right spinning counterclockwise, front right and rear left spinning clockwise; central body contains flight controller, battery, ESCs and GPS; arrow indicates front">
 <g stroke="#0b2545" stroke-width="6" stroke-linecap="round"><path d="M200 70L400 230M400 70L200 230" /></g>
 <rect x="250" y="110" width="100" height="80" rx="10" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
 <g fill="#13a89e" fill-opacity="0.15" stroke="#13a89e" stroke-width="2"><circle cx="200" cy="70" r="50" /><circle cx="400" cy="230" r="50" /></g>
 <g fill="#f5b800" fill-opacity="0.15" stroke="#f5b800" stroke-width="2"><circle cx="400" cy="70" r="50" /><circle cx="200" cy="230" r="50" /></g>
+<g stroke="#0b2545" stroke-width="4" stroke-linecap="round"><path class="anim-spin-rev" d="M162 70H238" /><path class="anim-spin" d="M362 70H438" /><path class="anim-spin" d="M162 230H238" /><path class="anim-spin-rev" d="M362 230H438" /></g>
 <g fill="#0b2545"><circle cx="200" cy="70" r="12" /><circle cx="400" cy="70" r="12" /><circle cx="200" cy="230" r="12" /><circle cx="400" cy="230" r="12" /></g>
 <g fill="none" stroke-width="2"><path d="M168 46A40 40 0 0 0 176 104" stroke="#13a89e" /><path d="M432 46A40 40 0 0 1 424 104" stroke="#f5b800" /><path d="M168 254A40 40 0 0 1 176 196" stroke="#f5b800" /><path d="M432 254A40 40 0 0 0 424 196" stroke="#13a89e" /></g>
 <path d="M300 100V40" stroke="#b42318" stroke-width="2.5" /><path d="M293 48l7-12 7 12z" fill="#b42318" />
@@ -117,6 +119,17 @@ Flight modes range from **manual (acro)** to **stabilised**, **altitude hold**, 
 </dl>
 </Example>
 
+## Key formulas for how a quadcopter flies
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Propeller thrust | T = kω² | k = thrust constant, ω = rotational speed (rad/s), T in N |
+| Hover condition | 4T = mg | m = total mass (kg) |
+| Rotor disc area | A = πr² | r = propeller radius (m) |
+| Ideal hover power per rotor | P_ideal = √(T³ ÷ (2ρA)) | ρ air density (kg/m³), P in W |
+| Electrical hover power | P_elec = P_ideal ÷ (FM × η) | FM = figure of merit, η = motor and ESC efficiency |
+| Hover time | t = E_usable ÷ P_total | E in Wh, P in W, t in h |
+
 ## Safety and regulations
 
 Drones must be flown within national rules covering registration, pilot certification, maximum altitude, no fly zones near airports and sensitive areas, visual line of sight and operations over people. In India, the Drone Rules 2021 and the Digital Sky platform govern registration and permissions. Engineering safety features include geofencing, return to home on signal loss or low battery, redundant sensors and motors on larger drones, and parachutes for operations over people.
@@ -124,3 +137,11 @@ Drones must be flown within national rules covering registration, pilot certific
 ## Beyond the quadcopter
 
 Hexacopters and octocopters add redundancy and payload capacity. **Fixed wing** drones fly longer and faster using wing lift, as in [how wings generate lift](/aerospace-engineering/how-wings-generate-lift/), and **VTOL hybrids** combine vertical takeoff with efficient wing borne cruise. Applications in farming are covered in [precision agriculture technologies](/agricultural-engineering/precision-agriculture-technologies/). Understanding how a quadcopter flies, through thrust, torque balance and fast feedback control, is the foundation for all of these designs.
+
+## Quadcopter interview and viva questions
+
+1. **Why do two propellers spin clockwise and two counterclockwise?** So that the reaction torques of the motors cancel in hover; changing the balance between the pairs is how the drone yaws.
+2. **How does a quadcopter move forward?** The rear motors speed up and the front motors slow down, tilting the nose down so the tilted thrust vector pushes the drone forward.
+3. **What is the role of an ESC?** It drives the three phases of a brushless motor with fast MOSFET switching, following speed commands from the flight controller.
+4. **Why is a thrust to weight ratio of about 2:1 used?** Hover then needs only about 50% throttle, leaving margin for control, wind and climbing.
+5. **Why do long endurance drones use large propellers?** Momentum theory shows that a larger disc area needs less power for the same thrust.

@@ -3,6 +3,7 @@ title: "Four Forces of Flight and Aircraft Axes"
 description: "Four forces of flight explained: lift, weight, thrust and drag, steady flight, climbs and turns, the three aircraft axes, control surfaces and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-11
 discipline: aerospace-engineering
 subcategory: flight-mechanics
 focusKeyword: "forces of flight"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The four **forces of flight** are **lift** (produced by the wings, acting perpendicular to the flight path), **weight** (gravity acting on the aircraft's mass, through the centre of gravity), **thrust** (produced by engines or propellers, along the flight path) and **drag** (air resistance, opposing motion). In steady level flight, **lift equals weight** and **thrust equals drag**. An aircraft rotates about three **axes** through its centre of gravity: the **longitudinal** axis (**roll**, controlled by **ailerons**), the **lateral** axis (**pitch**, controlled by the **elevator**) and the **vertical** axis (**yaw**, controlled by the **rudder**).
+The four **forces of flight** are **lift**, which acts perpendicular to the flight path, **weight**, acting down through the centre of gravity, **thrust** along the flight path and **drag** opposing motion. In steady level flight, lift equals weight and thrust equals drag. An aircraft rolls, pitches and yaws about three axes using ailerons, elevator and rudder.
 
 </Key>
 
@@ -37,14 +38,14 @@ Understanding the four forces and three axes is the foundation of flight mechani
 
 ## The four forces of flight
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Side view of an aircraft in level flight with four force arrows: lift pointing up from the wing, weight pointing down from the centre of gravity, thrust pointing forward from the engine and drag pointing backward">
 <path d="M150 140Q160 120 200 118H420L480 128L490 140L480 152L420 162H200Q160 160 150 140Z" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
 <path d="M260 140L300 132H360L330 145Z" fill="#e6f6f4" stroke="#0b2545" stroke-width="1.5" />
 <path d="M430 118L465 80H485L470 120Z" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
 <circle cx="310" cy="140" r="6" fill="#ffffff" stroke="#0b2545" stroke-width="2" /><path d="M310 134V146M304 140H316" stroke="#0b2545" stroke-width="1.5" />
-<g stroke-width="4"><path d="M310 125V35" stroke="#13a89e" /><path d="M310 155V245" stroke="#b42318" /><path d="M150 140H50" stroke="#0b2545" /><path d="M490 140H580" stroke="#f5b800" /></g>
-<g><path d="M302 42l8-14 8 14z" fill="#13a89e" /><path d="M302 238l8 14 8-14z" fill="#b42318" /><path d="M57 132l-14 8 14 8z" fill="#0b2545" /><path d="M573 132l14 8-14 8z" fill="#f5b800" /></g>
+<g stroke-width="4"><path class="anim-blink" d="M310 125V35" stroke="#13a89e" /><path class="anim-blink anim-d1" d="M310 155V245" stroke="#b42318" /><path class="anim-blink anim-d2" d="M150 140H50" stroke="#0b2545" /><path class="anim-blink anim-d3" d="M490 140H580" stroke="#f5b800" /></g>
+<g><path class="anim-blink" d="M302 42l8-14 8 14z" fill="#13a89e" /><path class="anim-blink anim-d1" d="M302 238l8 14 8-14z" fill="#b42318" /><path class="anim-blink anim-d2" d="M57 132l-14 8 14 8z" fill="#0b2545" /><path class="anim-blink anim-d3" d="M573 132l14 8-14 8z" fill="#f5b800" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">
 <text x="350" y="40" fill="#13a89e">Lift</text><text x="355" y="250" fill="#b42318">Weight</text><text x="60" y="125" fill="#0b2545">Thrust</text><text x="560" y="125" fill="#b8860b">Drag</text>
 </g>
@@ -100,6 +101,17 @@ The speed for **minimum total drag** is where parasite and induced drag are equa
 </dl>
 </Example>
 
+## Key formulas for the forces of flight
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Lift | L = ½ρv²SC_L | ρ (kg/m³), v (m/s), S wing area (m²), L in N |
+| Weight | W = mg | m mass (kg), g = 9.81 m/s² |
+| Drag | D = ½ρv²SC_D, with C_D = C_D0 + C_L² ÷ (πe AR) | e span efficiency, AR aspect ratio |
+| Steady climb | T = D + W sin γ, L = W cos γ | γ = climb angle |
+| Glide angle | tan γ = D ÷ L | Best glide at maximum L/D |
+| Level turn load factor | n = L ÷ W = 1 ÷ cos φ | φ = bank angle; stall speed rises by √n |
+
 ## The three aircraft axes
 
 All three axes pass through the centre of gravity and are perpendicular to each other.
@@ -132,3 +144,11 @@ Pilots calculate weight and balance before every flight to keep the centre of gr
 ## The four forces of flight in other vehicles
 
 The same forces act on helicopters, where the rotor provides both lift and thrust by tilting, and on multirotor drones, described in [how a quadcopter flies](/aerospace-engineering/how-a-quadcopter-flies/). Even cars and sails can be understood with lift and drag. The structure that carries these forces is described in [aircraft structural components](/aerospace-engineering/aircraft-structural-components/).
+
+## Forces of flight interview and viva questions
+
+1. **What are the four forces of flight?** Lift, weight, thrust and drag; in steady level flight lift equals weight and thrust equals drag.
+2. **Why must lift increase in a level turn?** The lift vector is tilted, so only its vertical component balances weight; lift must rise to W ÷ cos φ, which is a load factor of 2 at 60° bank.
+3. **Which control surface controls each axis?** Ailerons control roll about the longitudinal axis, the elevator controls pitch about the lateral axis and the rudder controls yaw about the vertical axis.
+4. **What is adverse yaw?** The extra drag of the down going aileron yaws the nose away from the turn, so it is corrected with rudder.
+5. **Why must the centre of gravity stay within limits?** A CG too far forward makes the aircraft heavy in pitch and raises stall speed; too far aft reduces stability and can make stall recovery difficult.

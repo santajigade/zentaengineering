@@ -3,6 +3,7 @@ title: "Drag Force on Aircraft: Types and Equation"
 description: "Drag force on aircraft explained: drag equation, parasite and induced drag, wave drag, the drag polar, minimum drag speed and a worked light aircraft example."
 pubDate: 2026-11-09
 reviewedDate: 2026-11-09
+updatedDate: 2026-11-11
 discipline: aerospace-engineering
 subcategory: aerodynamics
 focusKeyword: "drag force"
@@ -32,7 +33,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**Drag force** is the aerodynamic force that opposes an aircraft's motion through the air, acting parallel to the relative wind. It is calculated with the drag equation D = ½ ρ v² S C_D. Total drag is the sum of **parasite drag**, which rises with the square of speed, and **induced drag**, which is the cost of producing lift and falls as speed rises. At high subsonic and supersonic speeds, **wave drag** from shock waves is added.
+**Drag force** is the aerodynamic force that opposes an aircraft's motion, acting parallel to the relative wind. It is found from D = ½ρv²SC_D. Total drag is **parasite drag**, which grows with the square of speed, plus **induced drag**, the cost of producing lift, which falls as speed rises. Near and above the speed of sound, **wave drag** is added.
 
 </Key>
 
@@ -97,7 +98,7 @@ $$
 
 Flying at the minimum drag speed gives the best glide ratio, and for propeller driven aircraft Anderson shows that maximum range is obtained at maximum L/D. Minimum power required occurs at a lower speed, where induced drag is three times parasite drag.
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 320" width="640" height="320" fill="none" role="img" aria-label="Graph of drag force against airspeed for a light aircraft: parasite drag curve rising with speed squared, induced drag curve falling with speed, and the total drag curve forming a U shape with its minimum where parasite and induced drag are equal, at about 39 metres per second">
 <path d="M80 270 H600" stroke="#0b2545" stroke-width="1.5" />
 <path d="M80 270 V40" stroke="#0b2545" stroke-width="1.5" />
@@ -110,7 +111,7 @@ Flying at the minimum drag speed gives the best glide ratio, and for propeller d
 <path d="M97 129 L114 151 L131 169 L148 183 L165 194 L182 203 L199 211 L216 217 L233 223 L250 227 L267 231 L284 235 L301 238 L318 240 L335 243 L352 245 L369 247 L386 248 L403 250 L420 251 L437 252 L454 253 L471 254 L488 255 L505 256 L522 257 L539 257 L556 258 L573 259 L590 259" stroke="#13a89e" stroke-width="2.5" />
 <path d="M97 114 L114 134 L131 149 L148 160 L165 167 L182 173 L199 177 L216 179 L233 180 L250 180 L267 179 L284 178 L301 175 L318 172 L335 169 L352 165 L369 161 L386 156 L403 151 L420 145 L437 139 L454 133 L471 126 L488 119 L505 112 L522 104 L539 96 L556 88 L573 79 L590 71" stroke="#0b2545" stroke-width="3" />
 <path d="M242 180 V270" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" />
-<circle cx="242" cy="180" r="4" fill="#b42318" />
+<circle class="anim-pulse" cx="242" cy="180" r="4" fill="#b42318" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
 <text x="20" y="30">Drag (N)</text>
 <text x="470" y="300">True airspeed (m/s)</text>
@@ -142,6 +143,18 @@ Flying at the minimum drag speed gives the best glide ratio, and for propeller d
 
 At cruise, parasite drag is about four fifths of the total, so cleaning up the airframe pays off most. At low speed, as in climb or approach, induced drag dominates.
 
+## Key formulas for drag force
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Drag force | D = ½ρv²SC_D | ρ air density (kg/m³), v true airspeed (m/s), S wing area (m²), D in N |
+| Dynamic pressure | q = ½ρv² | Pa |
+| Induced drag coefficient | C_D,i = C_L² ÷ (πe AR) | e = Oswald efficiency factor, AR = aspect ratio |
+| Aspect ratio | AR = b² ÷ S | b = wing span (m) |
+| Drag polar | C_D = C_D,0 + C_L² ÷ (πe AR) | C_D,0 = zero lift drag coefficient |
+| Maximum lift to drag ratio | (L/D)max = ½√(πe AR ÷ C_D,0) | At the minimum drag speed, where C_D,0 = C_D,i |
+| Power required | P = D × v | W |
+
 ## Reducing drag force
 
 - **Streamlining** fuselages, nacelles and landing gear fairings to delay separation.
@@ -152,3 +165,11 @@ At cruise, parasite drag is about four fifths of the total, so cleaning up the a
 - Fairings at wing roots and strut joints to cut interference drag.
 
 Engine installation drag also matters; the intake and nozzle design of [turbofan and turboprop engines](/aerospace-engineering/turbojet-vs-turbofan-vs-turboprop/) is shaped with this in mind. For small rotorcraft, body and arm drag limit forward speed, as discussed in [how a quadcopter flies](/aerospace-engineering/how-a-quadcopter-flies/).
+
+## Drag force interview and viva questions
+
+1. **What are the main types of drag on an aircraft?** Parasite drag (form, skin friction and interference drag), induced drag from producing lift, and wave drag near and above the speed of sound.
+2. **Why does induced drag fall as speed increases?** At higher speed the wing needs a lower lift coefficient to carry the same weight, and induced drag depends on the square of the lift coefficient.
+3. **At what condition is total drag a minimum?** Where parasite drag equals induced drag, which also gives the maximum lift to drag ratio and the best glide.
+4. **Why do gliders have long, slender wings?** A high aspect ratio reduces the induced drag coefficient, which is inversely proportional to aspect ratio.
+5. **How do swept wings reduce drag on jet airliners?** Sweep, together with thin and supercritical airfoils, delays the drag divergence Mach number, so wave drag rises at a higher speed.

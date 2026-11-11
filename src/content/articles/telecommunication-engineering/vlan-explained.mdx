@@ -1,0 +1,182 @@
+---
+title: "VLAN Explained: Types and Configuration Basics"
+description: "VLAN explained: IEEE 802.1Q tagging, access and trunk ports, native and voice VLANs, inter-VLAN routing and basic switch configuration, with an example."
+pubDate: 2026-11-11
+reviewedDate: 2026-11-11
+discipline: telecommunication-engineering
+subcategory: routing-and-switching
+focusKeyword: "vlan"
+image: { src: /images/featured/vlan-explained.webp, alt: "VLAN Explained: Types and Configuration Basics: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [vlan, ieee-802-1q, trunk, switching, ethernet, networking]
+faq:
+  - q: "Can two VLANs communicate with each other?"
+    a: "Not directly. Each VLAN is a separate broadcast domain and usually a separate IP subnet, so traffic between VLANs must be routed by a router or a Layer 3 switch. This is called inter-VLAN routing, and access lists or a firewall on that router can control which traffic is allowed."
+  - q: "What is the difference between a VLAN and a subnet?"
+    a: "A VLAN works at Layer 2 and groups switch ports into one broadcast domain. A subnet works at Layer 3 and groups IP addresses. In practice they are usually mapped one to one: each VLAN carries one IP subnet, and the router interface for that VLAN is the default gateway for the subnet."
+  - q: "What is VLAN hopping?"
+    a: "VLAN hopping is an attack in which a device sends traffic into a VLAN it should not reach. Common methods are switch spoofing, where an attacker negotiates a trunk, and double tagging, which abuses the native VLAN. Disabling trunk negotiation on access ports and using an unused VLAN as the native VLAN prevent both."
+references:
+  - text: "IEEE Std 802.1Q-2022, IEEE Standard for Local and Metropolitan Area Networks: Bridges and Bridged Networks"
+  - text: "IEEE Std 802.3-2022, IEEE Standard for Ethernet"
+  - text: "W. Odom, CCNA 200-301 Official Cert Guide, Volume 1, Cisco Press"
+  - text: "Cisco Systems, Catalyst Switch Software Configuration Guide: Configuring VLANs"
+  - text: "J. F. Kurose and K. W. Ross, Computer Networking: A Top-Down Approach, 8th ed., Pearson, Section 6.4 Switched Local Area Networks"
+  - text: "IETF RFC 7348, Virtual eXtensible Local Area Network (VXLAN), 2014"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **VLAN** (virtual local area network) splits one physical switched network into separate logical networks, each its own broadcast domain. Switches mark frames with an IEEE 802.1Q tag carrying a 12 bit VLAN ID. Access ports carry one untagged VLAN, trunk ports carry many tagged VLANs, and routers connect different VLANs.
+
+</Key>
+
+Without a VLAN, every device connected to a group of switches is in one broadcast domain: a broadcast from any computer reaches all the others. As networks grow, this wastes bandwidth and mixes traffic that should be kept apart, such as office PCs, IP phones, cameras and building controllers. VLANs solve this in software, letting engineers group ports by function rather than by physical location.
+
+## What a VLAN does
+
+A VLAN is a group of switch ports, and the devices on them, that behave as if they were on their own separate switch. A switch only forwards frames between ports in the same VLAN. Benefits include:
+
+- **Smaller broadcast domains:** broadcasts such as ARP requests stay within one VLAN.
+- **Security and segmentation:** sensitive systems are separated, and traffic between VLANs passes through a router or firewall where it can be filtered.
+- **Flexibility:** a user can move desks and stay in the same VLAN by changing one port setting.
+- **Traffic separation and priority:** voice, video and control traffic can be placed in their own VLANs and given quality of service treatment.
+
+Switching and routing roles are compared in [router vs switch](/telecommunication-engineering/router-vs-switch/). VLANs work at the data link layer (Layer 2) of the [OSI model](/telecommunication-engineering/osi-vs-tcp-ip-model/).
+
+## IEEE 802.1Q VLAN tagging
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Two switches joined by an 802.1Q trunk carrying VLAN 10 and VLAN 20; PC1 and PC3 are on VLAN 10 access ports, PC2 and PC4 on VLAN 20 access ports; below, an Ethernet frame with the 4 byte 802.1Q tag between the source MAC address and the type field, the tag made of TPID 0x8100, PCP 3 bits, DEI 1 bit and VLAN ID 12 bits">
+<g stroke="#13a89e" stroke-width="3"><path d="M90 45L150 80M450 80L510 45M250 86H350" /></g>
+<g stroke="#b42318" stroke-width="3"><path d="M90 125L150 100M450 100L510 125M250 94H350" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M90 45L150 80M250 86H350M450 80L510 45" /><path class="anim-flow-rev" d="M90 125L150 100M250 94H350M450 100L510 125" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="150" y="70" width="100" height="40" rx="5" fill="#eef1f6" /><rect x="350" y="70" width="100" height="40" rx="5" fill="#eef1f6" />
+<rect x="20" y="30" width="70" height="32" rx="4" fill="#e6f6f4" /><rect x="20" y="110" width="70" height="32" rx="4" fill="#ffe9e7" />
+<rect x="510" y="30" width="70" height="32" rx="4" fill="#e6f6f4" /><rect x="510" y="110" width="70" height="32" rx="4" fill="#ffe9e7" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="20" y="190" width="80" height="36" fill="#fff" /><rect x="100" y="190" width="80" height="36" fill="#fff" /><rect x="180" y="190" width="150" height="36" fill="#fff7e0" /><rect x="330" y="190" width="60" height="36" fill="#fff" /><rect x="390" y="190" width="130" height="36" fill="#fff" /><rect x="520" y="190" width="60" height="36" fill="#fff" />
+<rect x="150" y="256" width="100" height="36" fill="#fff7e0" /><rect x="250" y="256" width="60" height="36" fill="#fff7e0" /><rect x="310" y="256" width="45" height="36" fill="#fff7e0" /><rect x="355" y="256" width="75" height="36" fill="#e6f6f4" />
+</g>
+<path d="M180 226L150 256M330 226L430 256" stroke="#7b8794" stroke-width="1" stroke-dasharray="3 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" fill="#0b2545" font-size="12" text-anchor="middle">
+<text x="200" y="95" font-weight="700">Switch A</text><text x="400" y="95" font-weight="700">Switch B</text>
+<text x="55" y="51">PC1</text><text x="55" y="131">PC2</text><text x="545" y="51">PC3</text><text x="545" y="131">PC4</text>
+<text x="300" y="78" font-size="11">802.1Q trunk</text>
+<text x="55" y="80" font-size="11" fill="#13a89e">VLAN 10</text><text x="55" y="160" font-size="11" fill="#b42318">VLAN 20</text>
+<text x="545" y="80" font-size="11" fill="#13a89e">VLAN 10</text><text x="545" y="160" font-size="11" fill="#b42318">VLAN 20</text>
+<text x="300" y="120" font-size="11">tagged 10 and 20</text>
+<text x="60" y="206" font-size="11">Dest MAC</text><text x="60" y="220" font-size="11">6 B</text>
+<text x="140" y="206" font-size="11">Src MAC</text><text x="140" y="220" font-size="11">6 B</text>
+<text x="255" y="206" font-size="11" font-weight="700">802.1Q tag</text><text x="255" y="220" font-size="11">4 B</text>
+<text x="360" y="206" font-size="11">Type</text><text x="360" y="220" font-size="11">2 B</text>
+<text x="455" y="206" font-size="11">Payload</text><text x="455" y="220" font-size="11">up to 1500 B</text>
+<text x="550" y="206" font-size="11">FCS</text><text x="550" y="220" font-size="11">4 B</text>
+<text x="200" y="272" font-size="11">TPID 0x8100</text><text x="200" y="286" font-size="11">16 bits</text>
+<text x="280" y="272" font-size="11">PCP</text><text x="280" y="286" font-size="11">3 bits</text>
+<text x="332" y="272" font-size="11">DEI</text><text x="332" y="286" font-size="11">1 bit</text>
+<text x="392" y="272" font-size="11" font-weight="700">VLAN ID</text><text x="392" y="286" font-size="11">12 bits</text>
+<text x="20" y="180" text-anchor="start" font-size="11">Tagged Ethernet frame on the trunk</text>
+</g>
+</svg>
+<figcaption>Top: VLAN 10 and VLAN 20 share one trunk link between two switches. Bottom: the 4 byte 802.1Q tag inserted into the Ethernet frame.</figcaption>
+</figure>
+
+When frames for several VLANs share one link, the receiving switch must know which VLAN each frame belongs to. IEEE 802.1Q inserts a **4 byte tag** after the source MAC address:
+
+- **TPID (16 bits):** the value 0x8100, which identifies the frame as tagged.
+- **PCP (3 bits):** priority code point, a class of service from 0 to 7 used for quality of service.
+- **DEI (1 bit):** drop eligible indicator, marking frames that may be dropped first under congestion.
+- **VID (12 bits):** the VLAN identifier. Values 0 and 4095 are reserved, so VLAN IDs 1 to 4094 are usable.
+
+The tag raises the maximum Ethernet frame size from 1518 to 1522 bytes. The switch adds the tag when a frame enters a trunk and removes it before delivering the frame to an end device on an access port, so ordinary computers never see it.
+
+$$
+N_\text{VLAN} = 2^{12} - 2 = 4094
+$$
+
+## Access, trunk and native VLAN ports
+
+- **Access port:** belongs to one VLAN and carries untagged frames. Used for PCs, printers and most end devices.
+- **Trunk port:** carries frames for many VLANs, each tagged with its VLAN ID. Used between switches, and between a switch and a router, firewall or server that supports tagging.
+- **Native VLAN:** the one VLAN on a trunk whose frames are sent untagged. On Cisco switches it is VLAN 1 by default. Both ends of a trunk must agree on it.
+
+## Types of VLAN
+
+- **Default VLAN:** VLAN 1 on most switches; all ports start in it and it cannot be deleted.
+- **Data (user) VLAN:** carries normal user traffic, often one per department or function.
+- **Voice VLAN:** carries IP phone traffic. A phone and a PC can share one port, with the phone tagging its own traffic in the voice VLAN and the PC using the untagged data VLAN.
+- **Management VLAN:** used to reach switch management interfaces, kept separate from user traffic.
+- **Native VLAN:** the untagged VLAN on a trunk, best set to an unused VLAN rather than VLAN 1.
+
+VLAN membership is usually **static**, set per port. **Dynamic** assignment by MAC address or by IEEE 802.1X authentication places a device in a VLAN based on who it is.
+
+## Inter-VLAN routing
+
+Because each VLAN is a separate broadcast domain, normally with its own [IP subnet](/telecommunication-engineering/ip-addressing-and-subnetting/), traffic between VLANs must be routed:
+
+- **Router on a stick:** one physical router interface connects to a switch trunk and is split into subinterfaces, one per VLAN, each with its own IP address as the default gateway.
+- **Layer 3 switch:** a switched virtual interface (SVI) is created for each VLAN and the switch routes between them at hardware speed. This is the usual method in modern networks.
+
+A [firewall](/telecommunication-engineering/firewalls-explained/) can also act as the gateway for sensitive VLANs so that traffic between them is inspected.
+
+## VLAN configuration basics
+
+The example below uses Cisco IOS commands; other vendors use similar concepts with different syntax.
+
+```text
+! Create VLANs
+vlan 10
+ name SALES
+vlan 20
+ name ENGINEERING
+! Access port for a PC in VLAN 10
+interface GigabitEthernet0/1
+ switchport mode access
+ switchport access vlan 10
+! Trunk to the next switch
+interface GigabitEthernet0/24
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20
+ switchport trunk native vlan 999
+```
+
+Check the result with `show vlan brief` and `show interfaces trunk`. Good practice is to allow only the VLANs that are needed on each trunk, disable automatic trunk negotiation on access ports, shut down unused ports and place them in an unused VLAN.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An IEEE 802.1Q network carrying Ethernet frames with the maximum 1500 byte payload and the minimum 64 byte frame size.</dd>
+<dt>Find</dt><dd>The number of usable VLAN IDs, the size of a maximum length frame without and with the tag, and the tag overhead for the maximum and minimum frames.</dd>
+<dt>Assumptions</dt><dd>Standard Ethernet II framing: 14 byte header and 4 byte FCS; preamble and interframe gap not counted.</dd>
+<dt>Solution</dt><dd>Usable VLAN IDs = 2¹² − 2 = 4096 − 2 = 4094<br />Untagged maximum frame = 14 + 1500 + 4 = 1518 bytes<br />Tagged maximum frame = 1518 + 4 = 1522 bytes<br />Overhead on maximum frame = 4 ÷ 1518 = 0.26%<br />Overhead on minimum frame = 4 ÷ 64 = 6.25%</dd>
+<dt>Answer</dt><dd><strong>4094 usable VLANs; frames grow from 1518 to 1522 bytes; the tag adds about 0.26% to large frames and 6.25% to minimum size frames</strong></dd>
+<dt>Limitations</dt><dd>Real link efficiency also depends on preamble, interframe gap and the mix of frame sizes.</dd>
+</dl>
+</Example>
+
+## Key formulas for VLAN
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Usable VLAN IDs | N = 2¹² − 2 = 4094 | 12 bit VID; 0 and 4095 reserved |
+| Priority levels | 2³ = 8 | 3 bit PCP, values 0 to 7 |
+| Maximum tagged frame | 14 + 4 + 1500 + 4 = 1522 | bytes: header, tag, payload, FCS |
+| Tag overhead | 4 ÷ frame size | Fraction of frame length |
+
+## Beyond 4094 VLANs
+
+Service providers and large data centres can run out of 4094 VLAN IDs. **IEEE 802.1ad (Q-in-Q)** adds an outer service tag, with TPID 0x88A8, around the customer tag. **VXLAN**, defined in RFC 7348, carries Layer 2 frames inside UDP packets with a 24 bit network identifier, giving about 16 million segments across routed data centre networks.
+
+## VLAN interview and viva questions
+
+1. **What is a VLAN?** It is a logical group of switch ports that forms its own broadcast domain, separate from other VLANs on the same physical switches.
+2. **How many VLANs can 802.1Q support and why?** 4094, because the VLAN ID field is 12 bits (4096 values) and the values 0 and 4095 are reserved.
+3. **What is the difference between an access port and a trunk port?** An access port carries untagged frames for one VLAN; a trunk port carries tagged frames for many VLANs.
+4. **What is the native VLAN?** It is the VLAN whose frames cross a trunk without a tag; both ends must use the same native VLAN.
+5. **How do devices in different VLANs communicate?** Through inter-VLAN routing, using a router on a stick with subinterfaces or a Layer 3 switch with one SVI per VLAN.

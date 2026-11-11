@@ -1,0 +1,157 @@
+---
+title: "Convolutional Neural Networks (CNN) Explained"
+description: "Convolutional neural networks explained: convolution, kernels, stride, padding, pooling, CNN layers, output size and parameter count, with a worked example."
+pubDate: 2026-11-11
+reviewedDate: 2026-11-11
+discipline: ai-data-engineering
+subcategory: deep-learning
+focusKeyword: "convolutional neural networks"
+image: { src: /images/featured/convolutional-neural-networks.webp, alt: "Convolutional Neural Networks (CNN) Explained: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [cnn, deep-learning, convolution, computer-vision, neural-networks]
+faq:
+  - q: "Why are CNNs better than ordinary neural networks for images?"
+    a: "A fully connected layer links every pixel to every neuron, which needs a huge number of weights and ignores the fact that nearby pixels are related. A convolutional layer uses small kernels that look at local patches and reuses the same weights at every position. This needs far fewer parameters and detects a feature wherever it appears in the image."
+  - q: "What is the difference between a kernel and a feature map?"
+    a: "A kernel (or filter) is the small grid of learned weights, such as 3 by 3, that slides over the input. A feature map is the output produced by sliding one kernel over the whole input, showing where in the image that kernel's pattern was found. A layer with 64 kernels produces 64 feature maps."
+  - q: "Are CNNs used only for images?"
+    a: "No. One dimensional CNNs are used for audio, sensor signals and time series such as vibration data, and CNNs are also used on spectrograms, text and other grid like data. Images are simply the best known application."
+references:
+  - text: "I. Goodfellow, Y. Bengio and A. Courville, Deep Learning, MIT Press, 2016, Chapter 9 Convolutional Networks"
+  - text: "Y. LeCun, L. Bottou, Y. Bengio and P. Haffner, Gradient-based learning applied to document recognition, Proceedings of the IEEE, vol. 86, no. 11, 1998"
+  - text: "A. Krizhevsky, I. Sutskever and G. E. Hinton, ImageNet classification with deep convolutional neural networks, Advances in Neural Information Processing Systems 25, 2012"
+  - text: "K. He, X. Zhang, S. Ren and J. Sun, Deep residual learning for image recognition, IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016"
+  - text: "V. Dumoulin and F. Visin, A guide to convolution arithmetic for deep learning, arXiv:1603.07285, 2016"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Convolutional neural networks** (CNNs) are deep learning models built for grid data such as images. Small learned filters called kernels slide across the input to detect local patterns like edges and textures. Stacked convolution, activation and pooling layers build these into complex features, and final dense layers produce a classification or other output.
+
+</Key>
+
+Convolutional neural networks power image classification, face recognition, medical image analysis, defect detection on production lines and the vision systems of self driving cars. They are a special kind of [neural network](/ai-data-engineering/how-neural-networks-work/) whose structure matches the way images are organised: nearby pixels are related, and the same pattern can appear anywhere in the picture.
+
+## Why convolutional neural networks were needed
+
+A 224 × 224 colour image has 224 × 224 × 3 = 150 528 input values. A fully connected layer with just 64 neurons would need over 9.6 million weights, and it would have to learn the same edge detector separately for every location. Goodfellow, Bengio and Courville describe three ideas that make convolution better suited:
+
+- **Sparse interactions:** each output depends only on a small patch of the input, not on every pixel.
+- **Parameter sharing:** the same kernel weights are used at every position, so a feature is learned once.
+- **Equivariance to translation:** if the object moves in the image, its feature moves the same way in the feature map.
+
+## How a convolutional layer works
+
+A **kernel** is a small grid of weights, typically 3 × 3 or 5 × 5, extending through all input channels. It is placed on a patch of the input, each weight is multiplied by the value under it, the products are summed and a bias is added. The kernel then slides by a step called the **stride** and repeats. The grid of results is a **feature map**. Strictly, deep learning libraries compute cross correlation (the kernel is not flipped), but it is still called convolution.
+
+<figure class="anim">
+<svg width="600" height="285" viewBox="0 0 600 285" fill="none" role="img" aria-label="A 3 by 3 kernel slides across a 5 by 5 input with stride 1, producing a 3 by 3 feature map; three kernel positions along the top row map to the three top cells of the feature map; below, a CNN pipeline: input, convolution with ReLU, pooling, convolution with ReLU, pooling, dense layer, softmax output">
+<g stroke="#7b8794" stroke-width="1" fill="#eef1f6">
+<path d="M30 40H150V160H30Z" />
+<path d="M54 40V160M78 40V160M102 40V160M126 40V160M30 64H150M30 88H150M30 112H150M30 136H150" fill="none" />
+<path d="M230 64H302V136H230Z" fill="#e6f6f4" />
+<path d="M254 64V136M278 64V136M230 88H302M230 112H302" fill="none" />
+</g>
+<g fill="#13a89e">
+<rect class="anim-blink" x="231" y="65" width="22" height="22" />
+<rect class="anim-blink anim-d2" x="255" y="65" width="22" height="22" />
+<rect class="anim-blink anim-d4" x="279" y="65" width="22" height="22" />
+</g>
+<g stroke-width="3" fill="none">
+<rect class="anim-blink" x="31" y="41" width="70" height="70" stroke="#b42318" />
+<rect class="anim-blink anim-d2" x="55" y="41" width="70" height="70" stroke="#f5b800" />
+<rect class="anim-blink anim-d4" x="79" y="41" width="70" height="70" stroke="#0b2545" />
+</g>
+<path d="M162 100H218" stroke="#0b2545" stroke-width="2" />
+<path d="M218 94L228 100L218 106Z" fill="#0b2545" />
+<path d="M20 245H585" stroke="#13a89e" stroke-width="3" />
+<path class="anim-flow" d="M20 245H585" stroke="#fff" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="1.5" fill="#fff">
+<rect x="10" y="228" width="72" height="34" rx="5" /><rect x="94" y="228" width="72" height="34" rx="5" fill="#e6f6f4" /><rect x="178" y="228" width="72" height="34" rx="5" fill="#fff7e0" /><rect x="262" y="228" width="72" height="34" rx="5" fill="#e6f6f4" /><rect x="346" y="228" width="72" height="34" rx="5" fill="#fff7e0" /><rect x="430" y="228" width="72" height="34" rx="5" fill="#eef1f6" /><rect x="514" y="228" width="72" height="34" rx="5" fill="#ffe9e7" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" fill="#0b2545" font-size="11" text-anchor="middle">
+<text x="46" y="249">Input</text><text x="130" y="249">Conv+ReLU</text><text x="214" y="249">Pool</text><text x="298" y="249">Conv+ReLU</text><text x="382" y="249">Pool</text><text x="466" y="249">Dense</text><text x="550" y="249">Softmax</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" fill="#0b2545" font-size="12">
+<text x="90" y="180" text-anchor="middle">Input 5 × 5</text>
+<text x="266" y="156" text-anchor="middle">Feature map 3 × 3</text>
+<text x="190" y="90" text-anchor="middle" font-size="11">stride 1</text>
+<text x="350" y="62">Kernel 3 × 3 slides over the input</text>
+<text x="350" y="84">Each output = sum of (weight × pixel)</text>
+<text x="350" y="102">plus bias, then ReLU</text>
+<text x="350" y="124">Same 9 weights at every position</text>
+<text x="300" y="214" text-anchor="middle" font-weight="700">Typical CNN layer sequence</text>
+</g>
+</svg>
+<figcaption>Top: a 3 × 3 kernel sliding over a 5 × 5 input with stride 1 gives a 3 × 3 feature map. Bottom: the usual order of layers in a CNN.</figcaption>
+</figure>
+
+### Stride, padding and output size
+
+**Padding** adds a border of zeros around the input so that the kernel can be centred on edge pixels. With a 3 × 3 kernel, a padding of 1 and a stride of 1 keep the output the same size as the input ("same" padding). Without padding ("valid") the output shrinks. For input width W, kernel size K, padding P and stride S, the output width is:
+
+$$
+W_\text{out} = \left\lfloor \frac{W - K + 2P}{S} \right\rfloor + 1
+$$
+
+### Channels and parameters
+
+Each kernel spans all C_in input channels, so it has K × K × C_in weights plus one bias. A layer with C_out kernels produces C_out feature maps and has:
+
+$$
+N_\text{params} = (K \times K \times C_\text{in} + 1) \times C_\text{out}
+$$
+
+The number of parameters does not depend on the image size, which is the key saving compared with a dense layer.
+
+## Activation, pooling and dense layers
+
+- **Activation:** after each convolution a nonlinear function, usually **ReLU** (max(0, x)), is applied element by element. Without it, stacked layers would collapse into one linear operation.
+- **Pooling:** a **max pooling** layer takes the largest value in each small window, typically 2 × 2 with stride 2, halving the width and height. It reduces computation and makes features less sensitive to small shifts. Many modern networks use strided convolutions instead.
+- **Dense layers and output:** at the end, feature maps are flattened or averaged (global average pooling) and passed to fully connected layers. A **softmax** output gives class probabilities.
+
+Early layers learn simple features such as edges and colour blobs; deeper layers combine them into textures, parts and whole objects. Training uses backpropagation and gradient descent, like other neural networks, and needs care to avoid [overfitting](/ai-data-engineering/overfitting-and-underfitting/), usually with data augmentation, dropout and weight decay.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 224 × 224 × 3 colour image enters a convolutional layer with 64 kernels of size 3 × 3, stride 1 and padding 1, followed by 2 × 2 max pooling with stride 2.</dd>
+<dt>Find</dt><dd>The output size of the convolution, its number of parameters, the size after pooling, and the weights a dense layer of 64 neurons would need on the same input.</dd>
+<dt>Assumptions</dt><dd>One bias per kernel; no bias counted for the dense comparison.</dd>
+<dt>Solution</dt><dd>W_out = (224 − 3 + 2 × 1) ÷ 1 + 1 = 224, so output is 224 × 224 × 64<br />N_params = (3 × 3 × 3 + 1) × 64 = 28 × 64 = 1792<br />After pooling: (224 − 2) ÷ 2 + 1 = 112, so 112 × 112 × 64<br />Dense layer: 150 528 × 64 = 9 633 792 weights</dd>
+<dt>Answer</dt><dd><strong>Output 224 × 224 × 64 with only 1792 parameters, reduced to 112 × 112 × 64 by pooling; a dense layer would need about 9.6 million weights</strong></dd>
+<dt>Limitations</dt><dd>Parameters are few, but computation is not: the convolution still performs 224 × 224 × 64 × 27, about 86.7 million, multiply and add operations.</dd>
+</dl>
+</Example>
+
+## Key formulas for convolutional neural networks
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Output width (or height) | W_out = ⌊(W − K + 2P) ÷ S⌋ + 1 | W input size, K kernel size, P padding, S stride (pixels) |
+| Parameters per conv layer | (K × K × C_in + 1) × C_out | C_in input channels, C_out number of kernels |
+| Multiply and add operations | W_out × H_out × C_out × K × K × C_in | Per image, per layer |
+| ReLU activation | f(x) = max(0, x) | Applied element by element |
+| Pooling output (2 × 2, stride 2) | W_out = ⌊(W − 2) ÷ 2⌋ + 1 | Halves width and height |
+
+## Landmark CNN architectures
+
+- **LeNet-5 (1998):** LeCun and colleagues used convolution and subsampling layers to read handwritten digits, establishing the basic CNN pattern.
+- **AlexNet (2012):** trained on GPUs with ReLU and dropout, it won the ImageNet challenge with a top 5 error of 15.3%, against 26.2% for the next entry, and started the deep learning boom in vision.
+- **VGG (2014):** showed that deep stacks of simple 3 × 3 convolutions work well.
+- **ResNet (2015):** added **skip (residual) connections** that let the signal bypass layers, making networks of 152 layers trainable; it won the 2015 ImageNet challenge.
+
+## Applications of convolutional neural networks
+
+CNNs are used for image classification, object detection and segmentation (compared in [classification vs detection vs segmentation](/ai-data-engineering/classification-vs-detection-vs-segmentation/)), optical inspection in [machine vision systems](/automation-robotics/machine-vision-components/), medical imaging, satellite image analysis and, in one dimensional form, vibration and sensor signals for [predictive maintenance](/ai-data-engineering/predictive-maintenance-machine-learning/). In many vision tasks, transformer based models now compete with CNNs, and hybrid designs use both.
+
+## Convolutional neural networks interview and viva questions
+
+1. **What is parameter sharing in a CNN?** The same kernel weights are applied at every position of the input, so a feature is learned once and detected anywhere, with far fewer parameters.
+2. **How do you calculate the output size of a convolutional layer?** Use W_out = ⌊(W − K + 2P) ÷ S⌋ + 1, where W is input size, K kernel size, P padding and S stride.
+3. **What does max pooling do?** It keeps the largest value in each small window, reducing the spatial size and making features less sensitive to small shifts.
+4. **Why is ReLU used after convolution?** It adds nonlinearity so that stacked layers can learn complex functions, and it is cheap to compute.
+5. **What problem do residual connections in ResNet solve?** They let the signal and gradients bypass layers, which makes very deep networks easier to train.

@@ -3,6 +3,7 @@ title: "Turbojet vs Turbofan vs Turboprop Engines"
 description: "Turbojet vs turbofan vs turboprop compared: Brayton cycle, components, bypass ratio, propulsive efficiency, speed range, fuel use, noise and a thrust example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-11
 discipline: aerospace-engineering
 subcategory: propulsion
 focusKeyword: "turbojet vs turbofan vs turboprop"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In **turbojet vs turbofan vs turboprop** comparisons, all three are gas turbines working on the **Brayton cycle**: compress air, burn fuel, expand hot gas through turbines. A **turbojet** produces all its thrust from a fast exhaust jet: simple and good at high supersonic speed but thirsty and loud. A **turbofan** adds a large **fan** whose **bypass air** flows around the core, giving most of the thrust at lower jet velocity: efficient and quieter for airliners at about Mach 0.8. A **turboprop** uses the turbine to drive a **propeller** through a gearbox: most efficient at low speeds and altitudes, typical for regional aircraft below about 650 km/h.
+In **turbojet vs turbofan vs turboprop**, all three are gas turbines on the Brayton cycle. A **turbojet** makes all thrust from a fast exhaust jet and suits supersonic flight. A **turbofan** adds a large fan whose bypass air gives most thrust efficiently near Mach 0.8. A **turboprop** drives a propeller through a gearbox and is most efficient at low speed.
 
 </Key>
 
@@ -64,7 +65,7 @@ $$
 
 It is highest when exhaust velocity is only slightly above flight speed. Accelerating a **large mass a little** is more efficient than a **small mass a lot**: this is the fundamental reason for turbofans and propellers.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Three engine schematics stacked: turbojet with compressor, combustor, turbine and narrow hot jet; turbofan with large front fan, bypass duct around the core and two exhaust streams; turboprop with propeller driven through a reduction gearbox by the core turbine and a small exhaust">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545"><text x="10" y="45">Turbojet</text><text x="10" y="145">Turbofan</text><text x="10" y="222">Turboprop</text></g>
 <g stroke="#0b2545" stroke-width="2">
@@ -82,6 +83,7 @@ It is highest when exhaust velocity is only slightly above flight speed. Acceler
 <g stroke="#b42318" stroke-width="3"><path d="M465 50H580" /><path d="M455 145H560" /></g>
 <g stroke="#13a89e" stroke-width="3"><path d="M470 115H540M470 175H540" /><path d="M60 245H110" /></g>
 <path d="M455 245H500" stroke="#b42318" stroke-width="2" />
+<g stroke="#fff" stroke-width="1.2" fill="none"><path class="anim-flow" d="M465 50H580M455 145H560M455 245H500" /><path class="anim-flow-slow" d="M470 115H540M470 175H540M60 245H110" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545" text-anchor="middle">
 <text x="185" y="54">Compressor</text><text x="260" y="54">Burner</text><text x="315" y="54">Turbine</text>
 <text x="132" y="98">Fan</text><text x="300" y="117">Bypass air</text>
@@ -140,6 +142,14 @@ The core turbine drives a **propeller** through a **reduction gearbox**, because
 </dl>
 </Example>
 
+## Key formulas for turbojet vs turbofan vs turboprop
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Net thrust | F = ṁ(v_e − v₀) | ṁ mass flow (kg/s), v_e exhaust velocity, v₀ flight speed (m/s), F in N |
+| Propulsive efficiency | η_p = 2 ÷ (1 + v_e/v₀) | Highest when v_e is only slightly above v₀ |
+| Bypass ratio | BPR = ṁ_bypass ÷ ṁ_core | About 5 to 12 for high bypass turbofans |
+
 ## Engine monitoring
 
 Modern engines are monitored continuously for exhaust gas temperature, spool speeds, vibration, oil pressure and fuel flow, with data sent to the ground so maintenance can be planned before faults develop.
@@ -147,3 +157,11 @@ Modern engines are monitored continuously for exhaust gas temperature, spool spe
 ## Trends in aircraft propulsion
 
 Engine makers are pushing to ever higher bypass ratios, geared fans, higher pressure ratios and turbine temperatures using advanced materials and cooling, and exploring **open rotor** designs that combine turbofan speed with propeller efficiency. Sustainable aviation fuels, hybrid electric propulsion for small aircraft and hydrogen are being developed to cut emissions. Whatever the future, the same physics applies: produce thrust by moving air, and do it efficiently by moving more air more gently, as explained alongside lift in [how wings generate lift](/aerospace-engineering/how-wings-generate-lift/). The engines attach to the airframe through pylons described in [aircraft structural components](/aerospace-engineering/aircraft-structural-components/).
+
+## Turbojet vs turbofan vs turboprop interview and viva questions
+
+1. **What cycle do all three engines use?** The Brayton cycle: compression, constant pressure heat addition, expansion through turbines and constant pressure heat rejection.
+2. **Why is a turbofan more efficient than a turbojet at airliner speeds?** It accelerates a large mass of air by a small amount, so the exhaust velocity is closer to flight speed and propulsive efficiency is higher.
+3. **What is bypass ratio?** The ratio of air mass flow that bypasses the core to the mass flow through the core; high bypass airliner engines have ratios of about 5 to 12.
+4. **Why does a turboprop need a reduction gearbox?** Propellers must turn much slower than the turbine that drives them.
+5. **What limits the cruise speed of a turboprop?** Propeller tip speed, which limits cruise to about Mach 0.6 to 0.65.

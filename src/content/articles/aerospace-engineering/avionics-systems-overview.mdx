@@ -3,6 +3,7 @@ title: "Aircraft Avionics Systems Overview"
 description: "Avionics systems overview: flight displays, glass cockpit, navigation, communication, surveillance, autopilot, fly by wire, data buses and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-11
 discipline: aerospace-engineering
 subcategory: avionics
 focusKeyword: "avionics systems"
@@ -30,13 +31,13 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Avionics systems** are the electronic systems of an aircraft. They are grouped into **flight instruments and displays** (primary flight display, multifunction display, engine indication), **communication** (VHF and HF radios, SATCOM, data link), **navigation** (inertial reference, GNSS, VOR, DME, ILS, flight management system), **surveillance** (transponder, ADS-B, TCAS, weather radar, terrain awareness), **flight control and automation** (autopilot, autothrottle, fly by wire), and **monitoring and maintenance** systems, linked by data buses such as **ARINC 429** and **AFDX**. Development follows strict standards such as **DO-178C** for software and **DO-254** for hardware.
+**Avionics systems** are the electronic systems of an aircraft: flight displays, communication radios, navigation (inertial, GNSS, radio aids and the flight management system), surveillance (transponder, ADS-B, TCAS and weather radar) and flight control and automation. They are linked by data buses such as ARINC 429 and AFDX and certified to standards such as DO-178C.
 
 </Key>
 
 Avionics have transformed flying. Where early pilots navigated by compass, map and landmarks, modern aircraft can fly precise satellite based approaches in poor weather, avoid collisions automatically, and land themselves. Avionics can account for a large share of an aircraft's value and are essential for safety, efficiency and airspace capacity.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Avionics architecture: sensors such as air data computer, inertial reference unit, GNSS receiver, radio navigation and radar feed a data network; flight management and flight control computers process the data; cockpit displays and controls show information to the crew; communication and surveillance radios connect to air traffic control and other aircraft; actuators move control surfaces">
 <g stroke="#0b2545" stroke-width="2">
 <rect x="20" y="30" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="74" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="118" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="162" width="120" height="34" rx="5" fill="#eef1f6" /><rect x="20" y="206" width="120" height="34" rx="5" fill="#eef1f6" />
@@ -45,6 +46,7 @@ Avionics have transformed flying. Where early pilots navigated by compass, map a
 <rect x="460" y="30" width="125" height="50" rx="6" fill="#ffe9e7" /><rect x="460" y="110" width="125" height="50" rx="6" fill="#ffffff" /><rect x="460" y="190" width="125" height="50" rx="6" fill="#ffe9e7" />
 </g>
 <g stroke="#13a89e" stroke-width="2"><path d="M140 47h60M140 91h60M140 135h60M140 179h60M140 223h60M230 75h50M230 155h50M420 75h40M420 140h40M420 165H440V215h20" /></g>
+<g stroke="#fff" stroke-width="1" fill="none"><path class="anim-flow" d="M140 47h60M140 91h60M140 135h60M140 179h60M140 223h60M230 75h50M230 155h50M420 75h40M420 140h40M420 165H440V215h20" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
 <text x="80" y="51">Air data computer</text><text x="80" y="95">Inertial reference</text><text x="80" y="139">GNSS receiver</text><text x="80" y="183">VOR, DME, ILS</text><text x="80" y="227">Weather radar</text>
 <text x="215" y="260" font-size="10">Data bus</text><text x="215" y="272" font-size="10">(ARINC 429, AFDX)</text>
@@ -136,6 +138,23 @@ Reliability figures such as [MTBF and availability](/safety-engineering/mtbf-mtt
 
 Software is developed to **DO-178C** and hardware to **DO-254**, with assurance levels A (most critical) to E, and environmental qualification follows **DO-160** for temperature, vibration, electromagnetic compatibility and lightning.
 
+## Key formulas for avionics systems
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Failure probability of one unit in a flight | P ≈ λt | λ = failure rate per flight hour, t = flight time (h); valid for small λt |
+| Loss of all independent redundant channels | P_system ≈ P₁ × P₂ × … × P_n | Product of channel probabilities, assumes no common cause |
+| Average probability per flight hour | P_per hour = P_flight ÷ t | t = flight time (h) |
+| Catastrophic failure condition target | P less than about 10⁻⁹ per flight hour | Extremely improbable |
+
 ## The future of avionics systems
 
 Trends include more integrated and software defined avionics, synthetic and enhanced vision, satellite based air traffic management, increased automation including single pilot and autonomous operations research, cybersecurity for connected aircraft, and lighter, lower power electronics for electric aircraft and drones such as those described in [how a quadcopter flies](/aerospace-engineering/how-a-quadcopter-flies/).
+
+## Avionics systems interview and viva questions
+
+1. **What does a flight management system do?** It combines navigation sensor data, stores routes and performance data, computes the flight path and guides the autopilot.
+2. **What is the difference between ARINC 429 and AFDX?** ARINC 429 is a one way, point to point serial bus at 12.5 or 100 kbit/s; AFDX (ARINC 664 Part 7) is a deterministic, redundant switched Ethernet network.
+3. **How does TCAS help avoid collisions?** It interrogates nearby transponders and issues resolution advisories such as climb or descend when a conflict is predicted.
+4. **Why are avionics channels made redundant?** With independent channels, the probability that all fail in one flight is roughly the product of their individual probabilities, which can meet the extremely improbable target.
+5. **Which standards cover avionics software and hardware?** DO-178C for software and DO-254 for airborne electronic hardware, with environmental qualification to DO-160.

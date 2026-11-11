@@ -1,0 +1,175 @@
+---
+title: "Filtration Equipment in Chemical Engineering: Types"
+description: "Filtration equipment explained: cake and depth filtration, filter press, leaf, rotary drum, belt, cartridge and centrifugal filters, with a sizing example."
+pubDate: 2026-11-11
+reviewedDate: 2026-11-11
+discipline: chemical-engineering
+subcategory: mechanical-operations
+focusKeyword: "filtration equipment"
+image: { src: /images/featured/filtration-equipment.webp, alt: "Filtration Equipment in Chemical Engineering: Types: featured diagram" }
+format: equipment
+pillar: false
+math: true
+tags: [filtration, filter-press, rotary-drum-filter, solid-liquid-separation, unit-operations]
+faq:
+  - q: "What is the difference between cake filtration and depth filtration?"
+    a: "In cake filtration the solids build up as a layer on the surface of the filter medium, and that layer then does most of the filtering. In depth filtration the particles are captured inside a thick porous medium such as a cartridge or sand bed. Cake filtration suits slurries with a lot of solids; depth filtration suits clarifying liquids with very little solid."
+  - q: "What is a filter aid?"
+    a: "A filter aid is a fine, rigid, porous powder such as diatomaceous earth or perlite. It is used as a precoat on the filter medium or added to the slurry (body feed) to build a more open, permeable cake when the solids are fine, slimy or compressible and would otherwise blind the cloth."
+  - q: "Why does filtration rate fall with time at constant pressure?"
+    a: "As more filtrate passes, the cake grows thicker, so the total resistance to flow rises. With the pressure difference fixed, a higher resistance means a lower flow rate. That is why filters are cleaned or the cake is discharged at the end of each cycle."
+references:
+  - text: "W. L. McCabe, J. C. Smith and P. Harriott, Unit Operations of Chemical Engineering, 7th ed., McGraw-Hill, Chapter 29 Mechanical Separations"
+  - text: "J. F. Richardson, J. H. Harker and J. R. Backhurst, Coulson and Richardson's Chemical Engineering, Vol. 2: Particle Technology and Separation Processes, 5th ed., Butterworth-Heinemann"
+  - text: "D. W. Green and M. Z. Southard (eds.), Perry's Chemical Engineers' Handbook, 9th ed., McGraw-Hill, Section 18 Liquid-Solid Operations and Equipment"
+  - text: "R. J. Wakeman and E. S. Tarleton, Solid/Liquid Separation: Principles of Industrial Filtration, Elsevier"
+  - text: "L. Svarovsky (ed.), Solid-Liquid Separation, 4th ed., Butterworth-Heinemann"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Filtration equipment** separates solid particles from a liquid by forcing the slurry through a porous medium that retains the solids. The driving force is pressure, vacuum, gravity or centrifugal force. Common types are filter presses, leaf filters, rotary drum vacuum filters, belt filters, cartridge filters and centrifugal filters.
+
+</Key>
+
+Filtration is one of the most common mechanical operations in chemical plants. It recovers valuable crystals from mother liquor, removes catalyst fines from a product, dewaters sludge and polishes liquids before packaging. Choosing the right filtration equipment depends on the solids content, particle size, whether the cake or the liquid is the product, and whether the process is batch or continuous.
+
+## How filtration works
+
+A slurry is pushed against a **filter medium**, usually a woven cloth, felt, mesh, porous ceramic or membrane. The liquid that passes through is the **filtrate**. The solids retained form a **filter cake** on the medium. Two mechanisms are used:
+
+- **Cake filtration:** after the first layer of particles bridges the pores of the medium, the growing cake itself becomes the filter. This is the normal mode for slurries with appreciable solids.
+- **Depth (clarifying) filtration:** particles are trapped inside a thick porous bed or cartridge. It is used when the solid content is very low and a clear liquid is the product.
+
+The driving force can be a **pressure** above the slurry (filter presses, leaf filters), a **vacuum** below the medium (drum and belt filters), **gravity** (sand beds) or **centrifugal** force (basket centrifuges).
+
+## Filtration rate and cake resistance
+
+Flow through the cake is slow laminar flow through a packed bed, so the rate is proportional to the pressure difference and inversely proportional to viscosity and resistance. The total resistance is the cake resistance plus the medium resistance. For an incompressible cake the basic filtration equation is:
+
+$$
+\frac{dt}{dV} = \frac{\mu}{A\,\Delta P}\left(\frac{\alpha\,c\,V}{A} + R_m\right)
+$$
+
+where t is time, V the filtrate volume, μ the filtrate viscosity, A the filter area, ΔP the pressure difference, α the specific cake resistance, c the mass of dry cake per unit volume of filtrate and R_m the medium resistance.
+
+At **constant pressure**, integrating gives a straight line when t/V is plotted against V:
+
+$$
+\frac{t}{V} = \frac{K_c}{2}\,V + \frac{1}{q_0}, \quad K_c = \frac{\mu\,c\,\alpha}{A^2\,\Delta P}, \quad \frac{1}{q_0} = \frac{\mu\,R_m}{A\,\Delta P}
+$$
+
+Plotting laboratory test data this way gives α from the slope and R_m from the intercept, which are then used to size the full scale filter. Many real cakes are **compressible**, so α rises with pressure and raising ΔP gives a smaller gain in rate than the equation suggests.
+
+## Types of filtration equipment
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Rotary drum vacuum filter: a perforated drum covered with filter cloth rotates clockwise, partly submerged in a slurry trough; cake forms in the submerged zone, is washed by sprays and dried by air on the top of the drum, then removed by a scraper blade on the right side; filtrate and wash liquid are drawn through the drum centre to a vacuum receiver">
+<path d="M90 175V260H350V175" stroke="#0b2545" stroke-width="2" fill="#fff7e0" />
+<g class="anim-spin">
+<circle cx="220" cy="140" r="90" fill="#eef1f6" stroke="#0b2545" stroke-width="3" stroke-dasharray="14 6" />
+<path d="M220 55V225M135 140H305M160 80L280 200M280 80L160 200" stroke="#7b8794" stroke-width="1.5" />
+</g>
+<path d="M131 140A89 89 0 0 1 220 51" stroke="#7a5a2b" stroke-width="7" fill="none" />
+<path d="M220 51A89 89 0 0 1 300 100" stroke="#7a5a2b" stroke-width="7" fill="none" stroke-opacity="0.7" />
+<path d="M131 140A89 89 0 0 0 220 229A89 89 0 0 0 309 140" stroke="#7a5a2b" stroke-width="4" fill="none" stroke-opacity="0.6" />
+<circle cx="220" cy="140" r="12" fill="#0b2545" />
+<path d="M92 200H348V258H92Z" fill="#c9a66b" fill-opacity="0.55" />
+<g stroke="#13a89e" stroke-width="2"><path d="M104 44L146 78M118 42L158 70" /></g>
+<rect x="88" y="30" width="34" height="12" rx="3" fill="#13a89e" />
+<path d="M312 118L350 128" stroke="#b42318" stroke-width="4" />
+<path d="M345 148V175" stroke="#7a5a2b" stroke-width="2" />
+<path d="M345 175L339 165H351Z" fill="#7a5a2b" />
+<path d="M232 140H470V170" stroke="#0b2545" stroke-width="3" />
+<rect x="440" y="170" width="60" height="70" rx="8" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<path d="M500 190H560" stroke="#7b8794" stroke-width="2" />
+<path d="M30 230H90" stroke="#c9a66b" stroke-width="4" />
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M232 140H470V170" /><path class="anim-flow-slow" d="M30 230H90" /><path class="anim-flow" d="M500 190H560" /></g>
+<path d="M300 30A120 120 0 0 1 330 60" stroke="#0b2545" stroke-width="2" />
+<path d="M333 64L322 58L331 52Z" fill="#0b2545" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="18" y="22">Wash sprays</text>
+<text x="230" y="22">Drying zone</text>
+<text x="336" y="40">Clockwise</text>
+<text x="360" y="114">Scraper blade</text>
+<text x="355" y="172">Cake discharge</text>
+<text x="140" y="280">Slurry trough (cake forming zone)</text>
+<text x="20" y="220">Slurry in</text>
+<text x="400" y="262">Vacuum receiver</text>
+<text x="510" y="180">To pump</text>
+<text x="372" y="134" font-size="11">Filtrate and wash</text>
+</g>
+</svg>
+<figcaption>Rotary drum vacuum filter: each section of the drum passes through cake forming, washing, drying and discharge in every revolution.</figcaption>
+</figure>
+
+### Plate and frame and recessed chamber filter presses
+
+A **filter press** is a stack of plates clamped together in a frame, each covered with filter cloth. Slurry is pumped into the chambers between plates, filtrate passes through the cloth and drains along grooves in the plates, and the cake fills the chambers. When the chambers are full, the press is opened and the cake falls out. **Membrane (diaphragm) plates** can be inflated at the end of the cycle to squeeze more liquid out of the cake. Filter presses are batch machines, give dry cakes, handle high pressures and are cheap per unit area, but need labour or automation for opening and cloth cleaning.
+
+### Pressure leaf and Nutsche filters
+
+**Leaf filters** hold flat or tubular filter leaves inside a pressure vessel. Cake builds on the leaves and is removed by sluicing, vibration or blowback. The **Nutsche filter** (agitated filter dryer) is a closed vessel with a filter plate at the bottom and an agitator that smooths and washes the cake, and in many designs dries it in the same vessel. It is widely used in pharmaceutical and fine chemical plants where operators must not be exposed to toxic or solvent wet solids.
+
+### Rotary drum vacuum filters
+
+A **rotary drum vacuum filter** is a horizontal drum covered with cloth, partly submerged in a slurry trough. The drum surface is divided into sections connected through a rotary valve to vacuum. As the drum turns, each section forms cake under the slurry, rises out to be washed and dried by air drawn through it, and then reaches the discharge point where a scraper, belt or string removes the cake. It is continuous and handles large flows, but the pressure difference is limited by the vacuum, so it suits fast filtering solids. A **precoat** of filter aid, shaved by a slowly advancing knife, is used for fine or slimy solids.
+
+### Horizontal belt filters and disc filters
+
+A **horizontal belt filter** carries the cake on a moving cloth belt over vacuum boxes, which allows long, counter current washing. **Disc filters** use vertical discs on a shaft and give a large area in a small footprint, common in mineral processing.
+
+### Cartridge, bag and candle filters
+
+These depth or surface filters sit in pressure housings and remove small amounts of solids to give a clear liquid. Cartridges are disposable or cleanable; **candle filters** are backwashed automatically and are used for catalyst recovery and polishing.
+
+### Centrifugal filters and membrane filtration
+
+**Basket and peeler centrifuges** spin the slurry against a perforated basket lined with cloth, giving very dry crystalline cakes. **Membrane processes** (microfiltration and ultrafiltration) use pressure and usually **cross flow**, where the liquid sweeps along the membrane to limit cake build up.
+
+## Selecting filtration equipment
+
+| Factor | Points to consider |
+| --- | --- |
+| Solids content | High solids favour cake filters; very low solids favour cartridges or candles |
+| Filterability | Slow filtering, fine solids need pressure filters or filter aids |
+| Product | Dry cake product favours presses, Nutsche or centrifuges; clear liquid favours polishing filters |
+| Operation | Large continuous flows favour drum, belt or disc filters |
+| Washing | Thorough washing favours belt filters, Nutsche filters or presses with wash plates |
+| Containment | Toxic or flammable solvents need closed vessels such as Nutsche or candle filters |
+
+Laboratory leaf tests or pressure bomb tests on the real slurry are the normal basis for sizing, because α and the cake properties cannot be predicted reliably from particle size alone.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A slurry is filtered at a constant pressure difference of 100 kPa on a filter of area 2.0 m². Laboratory tests give specific cake resistance α = 1.0 × 10¹¹ m/kg and medium resistance R_m = 1.0 × 10¹⁰ m⁻¹. The slurry gives c = 20 kg of dry cake per m³ of filtrate, and the filtrate viscosity is 1.0 × 10⁻³ Pa·s.</dd>
+<dt>Find</dt><dd>The time to collect 1.0 m³ of filtrate.</dd>
+<dt>Assumptions</dt><dd>Incompressible cake, constant pressure from the start, constant temperature and viscosity.</dd>
+<dt>Solution</dt><dd>K_c = μcα ÷ (A²ΔP) = (1.0 × 10⁻³ × 20 × 1.0 × 10¹¹) ÷ (2.0² × 100 000) = 2.0 × 10⁹ ÷ 4.0 × 10⁵ = 5000 s/m⁶<br />1/q₀ = μR_m ÷ (AΔP) = (1.0 × 10⁻³ × 1.0 × 10¹⁰) ÷ (2.0 × 100 000) = 50 s/m³<br />t = (K_c ÷ 2)V² + V/q₀ = 2500 × 1.0² + 50 × 1.0 = 2550 s</dd>
+<dt>Answer</dt><dd><strong>About 2550 s, or 42.5 minutes, to collect 1.0 m³ of filtrate</strong></dd>
+<dt>Limitations</dt><dd>The cake term dominates (2500 of 2550 s), so the result is very sensitive to α. Compressible cakes, filling time and cake washing all add to the real cycle time.</dd>
+</dl>
+</Example>
+
+## Key formulas for filtration equipment
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Basic filtration equation | dt/dV = μ(αcV/A + R_m) ÷ (AΔP) | t in s, V in m³, μ in Pa·s, A in m², ΔP in Pa, α in m/kg, c in kg/m³, R_m in m⁻¹ |
+| Constant pressure form | t/V = (K_c/2)V + 1/q₀ | Straight line of t/V against V |
+| Cake constant | K_c = μcα ÷ (A²ΔP) | s/m⁶ |
+| Medium term | 1/q₀ = μR_m ÷ (AΔP) | s/m³ |
+
+## Operation and maintenance
+
+Good practice is to keep cloths clean and the right type for the solids, since **blinding** (pores plugged by fines) is the most common cause of falling capacity. Check plate seals and drum valve wear, watch filtrate clarity for cloth tears, and follow the pressure or vacuum trend through each cycle. Feed pumps for filter presses should deliver high flow at the start and high pressure at the end. Upstream steps such as thickening or flocculation often improve filtration more than changes to the filter itself. Related separation steps are covered in [size reduction equipment](/chemical-engineering/size-reduction-equipment/), and the filter must appear correctly in the [material balance](/chemical-engineering/material-balance/) and on the [PFD and P&ID](/chemical-engineering/pfd-vs-pid/). Closed pressure filters are also designed under the rules for [pressure vessels](/chemical-engineering/pressure-vessels-basics/).
+
+## Filtration equipment interview and viva questions
+
+1. **What is the difference between filtrate and filter cake?** Filtrate is the liquid that passes through the medium, and the filter cake is the layer of retained solids that builds up on it.
+2. **Why is t/V plotted against V for constant pressure test data?** The integrated filtration equation gives a straight line on these axes, so the slope gives the specific cake resistance and the intercept gives the medium resistance.
+3. **Why is a rotary drum vacuum filter limited to fast filtering solids?** Its driving force is a vacuum, so the pressure difference is limited to less than one atmosphere, which gives a low rate for fine or compressible solids.
+4. **What is the purpose of a filter aid?** It forms a rigid, porous layer that keeps the cake permeable and stops fine solids from blinding the cloth.
+5. **When would you choose a Nutsche filter?** When the solids must be filtered, washed and often dried in one closed vessel, for example with toxic materials or flammable solvents.
