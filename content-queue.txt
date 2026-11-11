@@ -24,12 +24,12 @@ mechanical-engineering|machine-design|Gear Types and Their Applications|types-of
 electrical-engineering|electrical-machines|DC Motor Working Principle and Types|dc-motor-working-principle|working-principle|dc motor working principle|2026-11-10
 electronics-engineering|analog-electronics|Active and Passive Filters Explained|active-vs-passive-filters|comparison|active vs passive filters|2026-11-10
 civil-engineering|rcc-design|Types of Foundations and When to Use Them|types-of-foundations|explanation|types of foundations|2026-11-10
-chemical-engineering|mechanical-operations|Filtration in Chemical Engineering: Types and Equipment|filtration-equipment|equipment|filtration equipment|todo
-computer-science|algorithms|Sorting Algorithms Compared with Examples|sorting-algorithms|comparison|sorting algorithms|todo
-automation-robotics|scada-hmi|HMI Design Best Practices for Operators|hmi-design-best-practices|explanation|hmi design|todo
-ai-data-engineering|deep-learning|Convolutional Neural Networks (CNN) Explained|convolutional-neural-networks|fundamentals|convolutional neural networks|todo
-telecommunication-engineering|routing-and-switching|VLAN Explained: Types and Configuration Basics|vlan-explained|explanation|vlan|todo
-petroleum-engineering|drilling|Drilling Fluid (Mud) Functions and Types|drilling-fluid-types|explanation|drilling fluid|todo
+chemical-engineering|mechanical-operations|Filtration in Chemical Engineering: Types and Equipment|filtration-equipment|equipment|filtration equipment|2026-11-11
+computer-science|algorithms|Sorting Algorithms Compared with Examples|sorting-algorithms|comparison|sorting algorithms|2026-11-11
+automation-robotics|scada-hmi|HMI Design Best Practices for Operators|hmi-design-best-practices|explanation|hmi design|2026-11-11
+ai-data-engineering|deep-learning|Convolutional Neural Networks (CNN) Explained|convolutional-neural-networks|fundamentals|convolutional neural networks|2026-11-11
+telecommunication-engineering|routing-and-switching|VLAN Explained: Types and Configuration Basics|vlan-explained|explanation|vlan|2026-11-11
+petroleum-engineering|drilling|Drilling Fluid (Mud) Functions and Types|drilling-fluid-types|explanation|drilling fluid|2026-11-11
 renewable-energy|wind-energy|Wind Turbine Power Curve and Capacity Factor|wind-turbine-power-curve|fundamentals|wind turbine power curve|todo
 environmental-engineering|wastewater-treatment|Sewage Treatment Plant Process Explained|sewage-treatment-plant-process|explanation|sewage treatment plant|todo
 mining-engineering|drilling-and-blasting|Explosives Used in Mining: Types and Properties|mining-explosives-types|explanation|mining explosives|todo
