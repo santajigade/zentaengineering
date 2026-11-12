@@ -35,7 +35,7 @@ export const SITE = {
   social: {
     linkedin: 'https://www.linkedin.com/company/zentaengineering',
     facebook: 'https://www.facebook.com/zentaengineering',
-    instagram: '',
+    instagram: 'https://www.instagram.com/zenta.engineering/',
     youtube: 'https://www.youtube.com/@ZentaEngineering',
   },
   // Sister sites: linked only inside content, never in menus.
