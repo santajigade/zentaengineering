@@ -30,12 +30,12 @@ automation-robotics|scada-hmi|HMI Design Best Practices for Operators|hmi-design
 ai-data-engineering|deep-learning|Convolutional Neural Networks (CNN) Explained|convolutional-neural-networks|fundamentals|convolutional neural networks|2026-11-11
 telecommunication-engineering|routing-and-switching|VLAN Explained: Types and Configuration Basics|vlan-explained|explanation|vlan|2026-11-11
 petroleum-engineering|drilling|Drilling Fluid (Mud) Functions and Types|drilling-fluid-types|explanation|drilling fluid|2026-11-11
-renewable-energy|wind-energy|Wind Turbine Power Curve and Capacity Factor|wind-turbine-power-curve|fundamentals|wind turbine power curve|todo
-environmental-engineering|wastewater-treatment|Sewage Treatment Plant Process Explained|sewage-treatment-plant-process|explanation|sewage treatment plant|todo
-mining-engineering|drilling-and-blasting|Explosives Used in Mining: Types and Properties|mining-explosives-types|explanation|mining explosives|todo
-manufacturing-engineering|cnc|CNC Turning vs Milling: Differences|cnc-turning-vs-milling|comparison|cnc turning vs milling|todo
-materials-engineering|metallurgy|Types of Steel and Their Uses|types-of-steel|explanation|types of steel|todo
-safety-engineering|risk-assessment|Layer of Protection Analysis (LOPA) Explained|lopa-explained|explanation|lopa|todo
+renewable-energy|wind-energy|Wind Turbine Power Curve and Capacity Factor|wind-turbine-power-curve|fundamentals|wind turbine power curve|2026-11-12
+environmental-engineering|wastewater-treatment|Sewage Treatment Plant Process Explained|sewage-treatment-plant-process|explanation|sewage treatment plant|2026-11-12
+mining-engineering|drilling-and-blasting|Explosives Used in Mining: Types and Properties|mining-explosives-types|explanation|mining explosives|2026-11-12
+manufacturing-engineering|cnc|CNC Turning vs Milling: Differences|cnc-turning-vs-milling|comparison|cnc turning vs milling|2026-11-12
+materials-engineering|metallurgy|Types of Steel and Their Uses|types-of-steel|explanation|types of steel|2026-11-12
+safety-engineering|risk-assessment|Layer of Protection Analysis (LOPA) Explained|lopa-explained|explanation|lopa|2026-11-12
 agricultural-engineering|farm-machinery|Combine Harvester Working Principle|combine-harvester-working-principle|working-principle|combine harvester|todo
 aerospace-engineering|aircraft-structures|Aircraft Materials: Aluminium, Titanium and Composites|aircraft-materials|explanation|aircraft materials|todo
 biomedical-engineering|medical-imaging|How an MRI Scanner Works|how-mri-works|working-principle|how mri works|todo
