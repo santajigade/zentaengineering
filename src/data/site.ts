@@ -39,7 +39,7 @@ export const SITE = {
     facebook: 'https://www.facebook.com/zentaengineering',
     instagram: 'https://www.instagram.com/zenta.engineering/',
     youtube: 'https://www.youtube.com/@ZentaEngineering',
-    pinterest: '', // e.g. 'https://www.pinterest.com/USERNAME/'
+    pinterest: 'https://www.pinterest.com/zentaengineering/',
   },
   // Sister sites: linked only inside content, never in menus.
   sister: {

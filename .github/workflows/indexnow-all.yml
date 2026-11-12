@@ -1,0 +1,25 @@
+# Manual: submit ALL sitemap URLs to IndexNow once (for example after the first deploy).
+name: IndexNow (submit all pages)
+on:
+  workflow_dispatch:
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: .og-cache
+          key: build-all-${{ github.run_id }}
+          restore-keys: build-
+      - run: npm run build
+      - name: Check the key file is live
+        run: |
+          K=$(ls public | grep -E '^[0-9a-f]{32}\.txt$')
+          curl -s -o /dev/null -w "key file HTTP %{http_code}\n" "https://zentaengineering.com/$K"
+      - run: python3 scripts/indexnow.py dist /tmp/all.json --all
