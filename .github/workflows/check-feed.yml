@@ -16,4 +16,4 @@ jobs:
           for img in $(grep -oE 'enclosure url="[^"]+"' /tmp/f.xml | cut -d'"' -f2 | head -5); do
             curl -s -o /tmp/p.jpg -A "Pinterestbot/1.0" -w "%{http_code} %{content_type} %{size_download}B  $img\n" "$img"
           done
-          python3 -c "import struct; d=open('/tmp/p.jpg','rb').read(); print('jpeg ok' if d[:2]==b'\xff\xd8' else 'NOT JPEG')"
+          if [ -f /tmp/p.jpg ]; then python3 -c "d=open('/tmp/p.jpg','rb').read(); print('jpeg ok' if d[:2]==b'\xff\xd8' else 'NOT JPEG')"; else echo "no pins released yet"; fi
