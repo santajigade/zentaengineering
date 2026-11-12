@@ -31,12 +31,15 @@ export const SITE = {
   ga4: '', // GA4 measurement ID, e.g. 'G-XXXXXXXXXX'. Leave empty while GA4 runs through Google Tag Manager.
   // Google Tag Manager container (GA4 is configured inside it). Loaded on the live site only, never on preview.
   gtm: 'GTM-WD669NV9',
+  // Pinterest site claim: the content value of <meta name="p:domain_verify">. Rendered on every page when set.
+  pinterestVerify: '559dc5df6e02381d1702578ed48e8e07',
   // Social profiles: icons show in the footer only when a URL is set.
   social: {
     linkedin: 'https://www.linkedin.com/company/zentaengineering',
     facebook: 'https://www.facebook.com/zentaengineering',
     instagram: 'https://www.instagram.com/zenta.engineering/',
     youtube: 'https://www.youtube.com/@ZentaEngineering',
+    pinterest: '', // e.g. 'https://www.pinterest.com/USERNAME/'
   },
   // Sister sites: linked only inside content, never in menus.
   sister: {
