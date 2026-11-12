@@ -1,0 +1,196 @@
+---
+title: "Sewage Treatment Plant Process Explained"
+description: "How a sewage treatment plant works: screening, grit removal, primary settling, activated sludge, disinfection and sludge handling, with a design example."
+pubDate: 2026-11-12
+reviewedDate: 2026-11-12
+discipline: environmental-engineering
+subcategory: wastewater-treatment
+focusKeyword: "sewage treatment plant"
+image: { src: /images/featured/sewage-treatment-plant-process.webp, alt: "Sewage Treatment Plant Process Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [wastewater-treatment, sewage-treatment-plant, primary-clarifier, disinfection, sludge-treatment]
+faq:
+  - q: "What is the difference between a sewage treatment plant and an effluent treatment plant?"
+    a: "A sewage treatment plant (STP) treats domestic and municipal wastewater from homes, offices and public buildings. An effluent treatment plant (ETP) treats industrial wastewater, whose composition depends on the process and may need chemical steps such as neutralisation, oil removal or heavy metal precipitation before or instead of biological treatment."
+  - q: "Why are both primary and secondary clarifiers needed?"
+    a: "The primary clarifier removes settleable solids from raw sewage before biological treatment, which cuts the organic load on the aeration tank. The secondary clarifier separates the biomass grown in the aeration tank from the treated water and returns most of it to the aeration tank. They separate different solids for different purposes."
+  - q: "What happens to the sludge from a sewage treatment plant?"
+    a: "Primary and waste activated sludge are thickened to remove water, usually stabilised by anaerobic or aerobic digestion, and then dewatered with centrifuges, belt presses or drying beds. The resulting biosolids may be used on land where regulations allow, composted, incinerated or landfilled. Anaerobic digestion also produces biogas for energy."
+references:
+  - text: "Metcalf & Eddy, Wastewater Engineering: Treatment and Resource Recovery, 5th ed., McGraw-Hill, 2014"
+  - text: "CPHEEO, Manual on Sewerage and Sewage Treatment Systems, Part A: Engineering, Ministry of Housing and Urban Affairs, Government of India, 2013"
+  - text: "Council Directive 91/271/EEC of 21 May 1991 concerning urban waste water treatment, Annex I"
+  - text: "US EPA, Secondary Treatment Regulation, 40 CFR Part 133"
+  - text: "M. Henze et al., Biological Wastewater Treatment: Principles, Modelling and Design, IWA Publishing"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **sewage treatment plant** is a facility that removes solids, organic matter and pathogens from municipal wastewater so it can be safely discharged or reused. Sewage passes through screens and grit chambers, primary clarifiers, a biological stage such as activated sludge with secondary clarifiers, and disinfection, while separated sludge is thickened, digested and dewatered.
+
+</Key>
+
+A sewage treatment plant (STP) takes the used water from toilets, kitchens, bathrooms and laundries, collected by the sewer network, and cleans it in a fixed sequence of physical, biological and sometimes chemical steps. Each unit removes a different kind of pollutant, and each one protects the units downstream. This article walks through the whole train from the inlet screen to the outfall, explains what every stage removes, and works through a primary clarifier sizing example. The biological stage itself is covered in depth in the [activated sludge process](/environmental-engineering/activated-sludge-process/) article, and drinking water plants, which treat much cleaner raw water, are covered in the [water treatment process](/environmental-engineering/water-treatment-process/).
+
+## What sewage contains
+
+Raw municipal sewage is more than 99% water. The remaining fraction is what the plant has to deal with:
+
+- **Coarse solids:** rags, plastics, sanitary products and debris that would block pumps and pipes.
+- **Grit:** sand, gravel and other heavy inorganic particles that wear pumps and fill tanks.
+- **Suspended solids (TSS):** organic and inorganic particles, part of which settle under gravity.
+- **Biodegradable organic matter:** measured as BOD (biochemical oxygen demand) or COD. If discharged untreated, it consumes dissolved oxygen in rivers and kills fish.
+- **Nutrients:** nitrogen and phosphorus, which cause algal blooms (eutrophication) in lakes and coastal water.
+- **Pathogens:** bacteria, viruses and parasites from human waste.
+
+Metcalf & Eddy classify medium strength untreated domestic wastewater as having BOD and TSS concentrations in the low hundreds of mg/L. The plant is designed to bring these down to the limits set by the discharge regulator.
+
+## Sewage treatment plant process flow
+
+<figure class="anim">
+<svg width="800" height="290" viewBox="0 0 800 290" fill="none" role="img" aria-label="Sewage treatment plant process flow diagram: raw sewage passes through screens, a grit chamber, a primary clarifier, an aeration tank with a surface aerator, a secondary clarifier and a disinfection unit before discharge to the outfall; return activated sludge is pumped from the secondary clarifier back to the aeration tank inlet, and primary sludge and waste activated sludge go to sludge treatment">
+<g transform="translate(40 0)">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#7b8794" text-anchor="middle">
+<text x="125" y="22">Preliminary</text><text x="280" y="22">Primary</text><text x="455" y="22">Secondary (biological)</text><text x="630" y="22">Tertiary</text>
+</g>
+<g stroke="#7b8794" stroke-width="1.5"><path d="M40 32H210M240 32H320M350 32H560M590 32H670" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="40" y="70" width="70" height="60" rx="4" fill="#eef1f6" />
+<rect x="140" y="70" width="70" height="60" rx="4" fill="#fff7e0" />
+<rect x="240" y="70" width="80" height="60" rx="4" fill="#eef1f6" />
+<rect x="350" y="70" width="100" height="60" rx="4" fill="#e6f6f4" />
+<rect x="480" y="70" width="80" height="60" rx="4" fill="#eef1f6" />
+<rect x="590" y="70" width="80" height="60" rx="4" fill="#e6f6f4" />
+<rect x="300" y="235" width="170" height="44" rx="6" fill="#fff7e0" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5"><path d="M104 75V125M96 75V125M88 75V125" stroke="#7b8794" /></g>
+<g class="anim-spin"><path d="M388 86H412M400 74V98M392 78L408 94M408 78L392 94" stroke="#0b2545" stroke-width="2" /></g>
+<g stroke="#13a89e" stroke-width="3"><path d="M-36 100H40M110 100H140M210 100H240M320 100H350M450 100H480M560 100H590M670 100H750" /></g>
+<g stroke="#8a6d3b" stroke-width="3"><path d="M520 130V175H365V130" /><path d="M520 175V257H470" /><path d="M280 130V257H300" /></g>
+<g stroke="#7b8794" stroke-width="2"><path d="M75 130V148M175 130V148" /></g>
+<g stroke="#fff" stroke-width="2.5" fill="none">
+<path class="anim-flow" d="M-36 100H40M110 100H140M210 100H240M320 100H350M450 100H480M560 100H590M670 100H750" />
+<path class="anim-flow" d="M520 130V175H365V130" />
+<path class="anim-flow-slow" d="M520 175V257H470" />
+<path class="anim-flow-slow" d="M280 130V257H300" />
+</g>
+<g fill="#13a89e"><path d="M740 94l10 6-10 6z" /></g>
+<g fill="#8a6d3b"><path d="M359 140l6-10 6 10z" /><path d="M290 251l10 6-10 6z" /><path d="M480 251l-10 6 10 6z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="-36" y="90" text-anchor="start">Raw sewage</text>
+<text x="60" y="98">Bar</text><text x="60" y="112">screens</text>
+<text x="175" y="98">Grit</text><text x="175" y="112">chamber</text>
+<text x="280" y="98">Primary</text><text x="280" y="112">clarifier</text>
+<text x="400" y="114">Aeration tank</text>
+<text x="520" y="98">Secondary</text><text x="520" y="112">clarifier</text>
+<text x="630" y="98">Disinfection</text><text x="630" y="112">(Cl2 or UV)</text>
+<text x="710" y="90">To outfall</text>
+<text x="75" y="162" fill="#7b8794">Screenings</text><text x="175" y="162" fill="#7b8794">Grit</text>
+<text x="442" y="165" fill="#8a6d3b">Return sludge (RAS)</text>
+<text x="272" y="200" text-anchor="end" fill="#8a6d3b">Primary</text><text x="272" y="214" text-anchor="end" fill="#8a6d3b">sludge</text>
+<text x="528" y="214" text-anchor="start" fill="#8a6d3b">Waste sludge</text><text x="528" y="228" text-anchor="start" fill="#8a6d3b">(WAS)</text>
+<text x="385" y="253">Sludge treatment</text><text x="385" y="268" font-size="10">thickening, digestion, dewatering</text>
+<text x="400" y="62" font-size="10">Aerator</text>
+</g>
+</g>
+</svg>
+<figcaption>Process flow of a conventional sewage treatment plant using activated sludge, with the return sludge loop and the sludge treatment line.</figcaption>
+</figure>
+
+### 1. Screening
+
+Sewage first passes through **bar screens**. Coarse screens with openings of several millimetres up to about 150 mm catch rags and large objects, and fine screens with openings below about 6 mm catch smaller debris (Metcalf & Eddy). Mechanically raked screens lift the **screenings** onto a conveyor for washing, compaction and disposal. Screening protects every pump and pipe downstream, which is why it always comes first.
+
+### 2. Grit removal
+
+In the **grit chamber**, the flow is slowed so that heavy sand and gravel settle while lighter organic solids stay in suspension and continue to the next stage. Horizontal flow channels hold the velocity near 0.3 m/s; aerated and vortex chambers use a spiral flow pattern for the same purpose. Removed grit is washed and sent to landfill. Without this step, grit abrades [centrifugal pumps](/mechanical-engineering/centrifugal-pump-working-principle/) and builds up in digesters.
+
+### 3. Primary sedimentation
+
+The **primary clarifier** is a large circular or rectangular tank where the sewage stands quietly for about 1.5 to 2.5 hours. Settleable solids sink to the floor as **primary sludge**, and grease and scum float and are skimmed off. Metcalf & Eddy report that well designed primary tanks remove about 50 to 70% of suspended solids and 25 to 40% of BOD. The main design parameter is the **surface overflow rate**, the flow divided by the tank's plan area.
+
+### 4. Secondary (biological) treatment
+
+The settled sewage still contains dissolved and colloidal organic matter that gravity cannot remove. In the **aeration tank**, a dense population of bacteria, the activated sludge, consumes this organic matter using oxygen supplied by diffusers or surface aerators. The mixed liquor then flows to the **secondary clarifier**, where the biomass settles. Most of it is pumped back to the aeration tank inlet as **return activated sludge (RAS)** to keep the bacterial population high, and the surplus is removed as **waste activated sludge (WAS)**.
+
+Activated sludge is the most common choice, but CPHEEO lists other secondary technologies used in Indian STPs, including sequencing batch reactors (SBR), moving bed biofilm reactors (MBBR), trickling filters, upflow anaerobic sludge blanket (UASB) reactors and waste stabilisation ponds.
+
+### 5. Tertiary treatment and disinfection
+
+Where the receiving water is sensitive or the effluent is reused, the secondary effluent is polished by sand or cloth filtration, nutrient removal or membranes. Before discharge, it is usually **disinfected** with chlorine in a contact tank or with ultraviolet (UV) lamps to reduce pathogens. Chlorinated effluent may need dechlorination to protect aquatic life. The treated water then flows to the **outfall** in a river, lake or sea, or to a reuse network for irrigation, cooling or flushing.
+
+### 6. Sludge treatment
+
+Primary sludge and WAS are mostly water. They are **thickened** by gravity or flotation, **stabilised** by anaerobic digestion (which produces methane rich biogas) or aerobic digestion, and **dewatered** in centrifuges, belt presses or drying beds. Liquid removed during sludge processing is returned to the head of the plant. Handling sludge is a large share of an STP's operating cost.
+
+## Sewage treatment plant effluent standards
+
+Plants are designed to meet a legal discharge limit. Two widely cited examples:
+
+| Parameter | US EPA, 40 CFR 133 (30 day average) | EU 91/271/EEC, Annex I |
+| --- | --- | --- |
+| BOD5 | 30 mg/L and at least 85% removal | 25 mg/L or 70 to 90% reduction |
+| COD | Not set | 125 mg/L or 75% reduction |
+| Suspended solids | 30 mg/L and at least 85% removal | 35 mg/L or 90% reduction (optional) |
+| pH | 6.0 to 9.0 | Not set |
+
+The EU directive adds nitrogen and phosphorus limits for discharges to sensitive areas. In India, the CPHEEO manual and the pollution control boards set the effluent norms that a new STP must meet. Monitoring of these parameters at the outlet, often with online analyzers, is how operators prove compliance.
+
+## Equations used in STP design
+
+The surface overflow rate of a clarifier and the hydraulic retention time of any tank are:
+
+$$
+SOR = \frac{Q}{A} \qquad t = \frac{V}{Q}
+$$
+
+The removal efficiency of a unit or the whole plant for BOD or TSS is:
+
+$$
+E = \frac{C_\text{in} - C_\text{out}}{C_\text{in}} \times 100
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A sewage treatment plant receives an average flow of 10,000 m³/d with a peak factor of 2.5. A circular primary clarifier is to be designed for a surface overflow rate of 40 m³/m²·d at average flow, within the Metcalf & Eddy range of 30 to 50 m³/m²·d for primary tanks followed by secondary treatment. Side water depth is 4 m.</dd>
+<dt>Find</dt><dd>The required surface area, the tank diameter, the detention time at average flow, and the overflow rate at peak flow.</dd>
+<dt>Assumptions</dt><dd>One clarifier; flow evenly distributed; the cylindrical volume is used and the sloping floor is ignored.</dd>
+<dt>Solution</dt><dd>A = Q ÷ SOR = 10,000 ÷ 40 = 250 m²<br />D = √(4A ÷ π) = √(4 × 250 ÷ 3.1416) = 17.84 m, so choose 18 m<br />Actual A = π × 18² ÷ 4 = 254.5 m², actual SOR = 10,000 ÷ 254.5 = 39.3 m³/m²·d<br />V = 254.5 × 4 = 1018 m³<br />t = V ÷ Q = 1018 ÷ 10,000 × 24 = 2.44 h<br />Peak flow = 2.5 × 10,000 = 25,000 m³/d, peak SOR = 25,000 ÷ 254.5 = 98.2 m³/m²·d</dd>
+<dt>Answer</dt><dd><strong>An 18 m diameter, 4 m deep clarifier: 2.44 h detention at average flow and 98.2 m³/m²·d at peak flow</strong>, both within the Metcalf & Eddy ranges of 1.5 to 2.5 h and 80 to 120 m³/m²·d.</dd>
+<dt>Limitations</dt><dd>Real designs use at least two clarifiers so one can be taken out for maintenance, check weir loading and local code limits such as those in the CPHEEO manual, and account for short circuiting, which makes actual settling time shorter than the theoretical value.</dd>
+</dl>
+</Example>
+
+
+## Key formulas for sewage treatment plant design
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Surface overflow rate | SOR = Q ÷ A | Q = flow in m³/d, A = tank plan area in m², SOR in m³/m²·d |
+| Hydraulic retention time | t = V ÷ Q | V = tank volume in m³, Q in m³/h gives t in h |
+| Circular tank diameter | D = √(4A ÷ π) | D in m, A in m² |
+| Removal efficiency | E = (C_in − C_out) ÷ C_in × 100 | C_in, C_out = inlet and outlet concentration in mg/L, E in % |
+| Peak flow | Q_peak = PF × Q_avg | PF = peak factor, dimensionless |
+
+## Operating a sewage treatment plant well
+
+Good performance depends on steady operation as much as on design. Operators check the screens and grit system daily, keep primary sludge pumped out before it turns septic, control dissolved oxygen in the aeration tank, adjust the RAS and WAS rates to hold the target sludge age, and watch the sludge blanket in the secondary clarifier. Flow and level measurement at the inlet, accurate [material balances](/chemical-engineering/material-balance/) across the plant, and regular laboratory BOD and TSS tests reveal problems early. Energy use is dominated by aeration, so blower control based on dissolved oxygen is one of the most effective savings measures.
+
+## Sewage treatment plant interview and viva questions
+
+1. **Why is screening the first stage of a sewage treatment plant?** Screens remove rags, plastics and large debris that would clog or damage pumps, pipes and valves in every later unit.
+2. **What is the purpose of a grit chamber?** It slows the flow so heavy inorganic particles such as sand settle while organic solids stay suspended, protecting pumps from abrasion and tanks from filling with grit.
+3. **What is surface overflow rate?** It is the flow divided by the plan area of a settling tank, in m³/m²·d, and it equals the settling velocity of the smallest particle that the tank removes completely.
+4. **Why is activated sludge returned to the aeration tank?** Returning settled biomass keeps a high concentration of microorganisms in the aeration tank, so organic matter is removed in a short retention time.
+5. **What does the US EPA secondary treatment regulation require for BOD5?** Under 40 CFR Part 133, the 30 day average effluent BOD5 must not exceed 30 mg/L and removal must be at least 85%.
+
+## Related reading
+
+- [Activated sludge process](/environmental-engineering/activated-sludge-process/)
+- [Water treatment process](/environmental-engineering/water-treatment-process/)
+- [Reverse osmosis](/environmental-engineering/reverse-osmosis/)
+- [Solid waste management](/environmental-engineering/solid-waste-management/)

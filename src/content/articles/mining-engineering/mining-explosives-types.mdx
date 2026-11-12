@@ -1,0 +1,194 @@
+---
+title: "Mining Explosives: Types and Properties"
+description: "Mining explosives explained: ANFO, emulsions, watergels, heavy ANFO, boosters and detonators, with VOD, density, water resistance and fume class."
+pubDate: 2026-11-12
+reviewedDate: 2026-11-12
+discipline: mining-engineering
+subcategory: drilling-and-blasting
+focusKeyword: "mining explosives"
+image: { src: /images/featured/mining-explosives-types.webp, alt: "Mining Explosives: Types and Properties: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [mining-explosives, anfo, emulsion, detonators, blasting]
+faq:
+  - q: "Why is ANFO not used in wet blastholes?"
+    a: "Ammonium nitrate dissolves in water, so ANFO loaded into a wet hole loses energy quickly and may fail to detonate or detonate poorly, producing toxic fumes. Wet holes are loaded with emulsion, watergel or a water resistant heavy ANFO blend, or the holes are dewatered and lined before loading."
+  - q: "What is the difference between a high explosive and a blasting agent?"
+    a: "Both detonate, but a blasting agent such as ANFO or a bulk emulsion is not cap sensitive: it cannot be initiated by a standard No. 8 detonator alone and needs a primer or booster. A cap sensitive high explosive such as dynamite or a packaged cap sensitive emulsion can be initiated directly by a detonator, so it is stored and handled under stricter rules."
+  - q: "Are electronic detonators safer than electric detonators?"
+    a: "Electronic detonators include circuitry that will only fire after receiving a coded command from the blasting machine, which gives much better protection against stray currents, static and radio frequency energy than plain electric detonators. They also give far more accurate delay times. They still require lightning precautions and trained, licensed blasters."
+references:
+  - text: "ISEE Blasters' Handbook, 18th ed., International Society of Explosives Engineers, 2011"
+  - text: "P. A. Persson, R. Holmberg and J. Lee, Rock Blasting and Explosives Engineering, CRC Press, 1994"
+  - text: "C. Lopez Jimeno, E. Lopez Jimeno and F. J. Ayala Carcedo, Drilling and Blasting of Rocks, A. A. Balkema, 1995"
+  - text: "W. A. Hustrulid, Blasting Principles for Open Pit Mining, Vols. 1 and 2, A. A. Balkema, 1999"
+  - text: "Institute of Makers of Explosives, Safety Library Publications (SLP series), IME, Washington DC"
+  - text: "U.S. Code of Federal Regulations, 30 CFR Part 56 and Part 57, Subpart E: Explosives, Mine Safety and Health Administration"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Mining explosives** are chemical energy sources that detonate in a blasthole to break rock. The main bulk products are **ANFO**, **emulsions**, **watergels** and **heavy ANFO**, initiated by **boosters** and **detonators**. They are selected by velocity of detonation, density, energy, water resistance, sensitivity and fume class to suit the rock and the hole conditions.
+
+</Key>
+
+Choosing mining explosives is one of the first decisions in any blast design. The same hole pattern can give good or poor fragmentation depending on the product, whether the hole is wet, and how the charge is initiated. Blast geometry, burden, spacing and timing are covered separately in [drilling and blasting basics](/mining-engineering/drilling-and-blasting-basics/).
+
+## Low and high explosives
+
+Explosives are classified first by how the reaction travels through them.
+
+- **Low explosives** **deflagrate**: the reaction front moves by burning, slower than the speed of sound in the material. Black powder is the classic example, now used mainly for dimension stone and in safety fuse.
+- **High explosives** **detonate**: a supersonic shock wave travels through the charge, sustained by the reaction directly behind it, giving very high pressure at the borehole wall.
+
+High explosives are further divided by **sensitivity**. Under US regulations and IME definitions, a **blasting agent** is a mixture that cannot be detonated by a No. 8 test detonator when unconfined. ANFO and most bulk emulsions fall in this group, so they need a primer. **Cap sensitive** explosives, such as dynamite and packaged cap sensitive emulsions, can be fired directly by a detonator.
+
+## Types of mining explosives
+
+### ANFO
+
+ANFO is porous ammonium nitrate prills coated with fuel oil. It is the lowest cost and most widely used bulk product in surface mines because it is safe to handle and easy to load. Poured density is about 0.8 to 0.85 g/cm³. Its velocity of detonation (VOD) depends strongly on hole diameter and confinement, rising from roughly 2500 m/s in small holes to around 4500 m/s in large diameter surface holes. Its weakness is water: ammonium nitrate dissolves, so ANFO has no water resistance.
+
+### Slurries and watergels
+
+Watergels (slurries) are ammonium nitrate based products in a thickened water gel. The gel gives good water resistance and a density of about 1.1 to 1.3 g/cm³. They were the first widely used water resistant bulk product and have largely been replaced by emulsions.
+
+### Emulsions
+
+An emulsion is a water in oil system: microscopic droplets of oxidiser solution are held in a thin continuous fuel phase. The fine structure gives intimate contact between oxidiser and fuel, which produces a high VOD, commonly about 4500 to 6000 m/s, and excellent water resistance. Density is adjusted with gassing or microballoons, usually within about 1.1 to 1.3 g/cm³, because an emulsion that is too dense becomes insensitive.
+
+### Heavy ANFO
+
+Heavy ANFO blends emulsion with ANFO. The emulsion fills the voids between prills, raising density and bulk energy above ANFO. Blends with a low emulsion share behave much like a denser ANFO, while blends rich in emulsion become water resistant.
+
+### Dynamite
+
+Dynamite is a nitroglycerine based, cap sensitive cartridge explosive with high density and strength. Because of its sensitivity and handling risks, it has been largely replaced by emulsion and watergel cartridges.
+
+### Boosters and primers
+
+A **primer** is a cartridge or cast **booster** holding a detonator, placed in the column to start the main charge. Cast boosters made of pentolite or similar high VOD compositions have velocities above 7000 m/s and high detonation pressure, which reliably brings a non cap sensitive column such as ANFO to its full steady detonation.
+
+<figure class="anim">
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" role="img" aria-label="Cross section of a loaded mining blasthole: crushed rock stemming at the top, a column charge of ANFO or emulsion below it, and a primer made of a cast booster with a detonator near the bottom; a shock tube downline runs from a surface connector down the hole to the detonator, and the detonation front travels upward from the primer through the column charge">
+<path d="M40 50H580V330H40Z" fill="#f5e6c8" fill-opacity="0.45" />
+<path d="M40 50H580" stroke="#0b2545" stroke-width="2.5" />
+<rect x="176" y="50" width="32" height="270" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect x="177" y="51" width="30" height="59" fill="#c9d2de" />
+<g fill="#f5b800">
+<rect class="anim-blink anim-d5" x="177" y="110" width="30" height="34" />
+<rect class="anim-blink anim-d4" x="177" y="144" width="30" height="34" />
+<rect class="anim-blink anim-d3" x="177" y="178" width="30" height="34" />
+<rect class="anim-blink anim-d2" x="177" y="212" width="30" height="34" />
+<rect class="anim-blink anim-d1" x="177" y="246" width="30" height="34" />
+</g>
+<rect class="anim-pulse" x="180" y="282" width="24" height="26" rx="3" fill="#b42318" />
+<rect x="225" y="24" width="24" height="16" rx="3" fill="#13a89e" stroke="#0b2545" stroke-width="1" />
+<path d="M225 32H198V290" stroke="#e0661c" stroke-width="3" />
+<path class="anim-flow" d="M225 32H198V290" stroke="#ffffff" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="1"><path d="M210 80H268" /><path d="M210 195H268" /><path d="M206 295H268" /><path d="M252 32H268" /></g>
+<g stroke="#b42318" stroke-width="2"><path d="M140 285V125" /><path d="M134 135L140 122L146 135" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="48" y="42">Bench top</text>
+<text x="274" y="36">Shock tube downline</text>
+<text x="274" y="84">Stemming</text>
+<text x="274" y="99" font-size="11">(crushed rock)</text>
+<text x="274" y="192">Column charge</text>
+<text x="274" y="207" font-size="11">(ANFO or emulsion)</text>
+<text x="274" y="292">Primer: booster</text>
+<text x="274" y="307" font-size="11">with detonator</text>
+<text x="48" y="196" fill="#b42318">Detonation</text>
+<text x="48" y="211" fill="#b42318">front moves</text>
+<text x="48" y="226" fill="#b42318">upward</text>
+<text x="430" y="140" font-size="11">Initiation signal runs</text>
+<text x="430" y="155" font-size="11">down the tube to the</text>
+<text x="430" y="170" font-size="11">detonator in the primer</text>
+</g>
+</svg>
+<figcaption>A bottom primed blasthole. The signal travels down the shock tube to the detonator, the booster fires, and detonation then runs up the column towards the stemming.</figcaption>
+</figure>
+
+## Initiation systems
+
+- **Safety fuse and plain detonator:** a black powder core burns at a controlled rate and fires a plain detonator. Timing is poor, so it is now rare in mining.
+- **Electric detonators:** a current heats a bridge wire that ignites a delay element and then the base charge. Circuits can be tested before firing, but the detonators are vulnerable to stray currents, static electricity, radio frequency energy and lightning.
+- **Shock tube (non electric, often called Nonel):** a thin plastic tube coated inside with a small amount of reactive powder carries a low energy shock wave at about 2000 m/s to the detonator. It is immune to stray electrical energy.
+- **Electronic detonators:** a microchip and capacitor replace the pyrotechnic delay element. Each detonator is programmed and fires only on a coded signal, giving delay accuracy to about 1 ms.
+
+## Key properties of mining explosives
+
+### Velocity of detonation
+
+VOD is the speed at which the detonation front travels through the column, measured in m/s. A higher VOD gives a sharper shock and higher borehole pressure, suited to hard, massive rock. Lower VOD products give more heave, which suits softer or heavily jointed rock. Every explosive has a **critical diameter** below which detonation cannot be sustained, and VOD falls as the hole diameter approaches it.
+
+### Density and detonation pressure
+
+Density sets how much explosive fits in a metre of hole and strongly affects detonation pressure, which is often estimated as
+
+$$
+P_D \approx \frac{\rho_e D^2}{4}
+$$
+
+For ANFO at 820 kg/m³ and 3500 m/s this gives about 2.5 GPa, while an emulsion at 1150 kg/m³ and 5000 m/s gives about 7.2 GPa.
+
+### Energy and strength
+
+Energy is reported as **relative weight strength (RWS)** and **relative bulk strength (RBS)**, both normally with ANFO set at 100. RBS compares energy per unit volume, so a dense emulsion can have a lower RWS than ANFO yet a higher RBS.
+
+### Water resistance
+
+Water resistance is the ability to stay detonable after exposure to water. ANFO has none, watergels and heavy ANFO rich in emulsion are good, and emulsions are excellent.
+
+### Fume class
+
+Detonation should produce mainly water vapour, carbon dioxide and nitrogen. A poorly balanced product, water contamination or poor confinement creates **carbon monoxide** and **nitrogen oxides**, the orange fumes seen after some ANFO blasts. IME fume classes rate the poisonous gases produced per 1.25 by 8 inch cartridge: Class 1 under 0.16 ft³, Class 2 0.16 to 0.33 ft³ and Class 3 0.33 to 0.67 ft³. Underground use needs good fume classes and adequate [mine ventilation](/mining-engineering/mine-ventilation-systems/).
+
+| Product | Typical density, g/cm³ | Typical VOD, m/s | Water resistance |
+| --- | --- | --- | --- |
+| ANFO | 0.8 to 0.85 | 2500 to 4500 | None |
+| Watergel | 1.1 to 1.3 | 3500 to 5500 | Good |
+| Emulsion | 1.1 to 1.3 | 4500 to 6000 | Excellent |
+| Heavy ANFO | 1.0 to 1.3 | 3500 to 5500 | Poor to good, rising with emulsion share |
+| Cast booster | about 1.6 | above 7000 | Excellent |
+
+Values vary by manufacturer, diameter and confinement.
+
+## Worked example: charge mass for mining explosives
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A surface bench 9 m high, holes 115 mm in diameter, burden 3.5 m, spacing 4.0 m, subdrill 1.0 m and stemming 2.5 m. Dry holes loaded with ANFO at 0.82 g/cm³; wet holes loaded with emulsion at 1.15 g/cm³.</dd>
+<dt>Find</dt><dd>Loading density, charge mass per hole and powder factor for each product.</dd>
+<dt>Assumptions</dt><dd>Vertical holes, full diameter loading below the stemming, primer mass ignored.</dd>
+<dt>Solution</dt><dd>Hole depth = 9 + 1.0 = 10 m, so charge length = 10 − 2.5 = 7.5 m<br />Hole area = π × 0.115² ÷ 4 = 0.01039 m²<br />ANFO loading density = 0.01039 × 820 = 8.52 kg/m<br />ANFO per hole = 8.52 × 7.5 = 63.9 kg<br />Rock volume per hole = 3.5 × 4.0 × 9 = 126 m³<br />ANFO powder factor = 63.9 ÷ 126 = 0.51 kg/m³<br />Emulsion loading density = 0.01039 × 1150 = 11.94 kg/m<br />Emulsion per hole = 11.94 × 7.5 = 89.6 kg, powder factor = 0.71 kg/m³</dd>
+<dt>Answer</dt><dd><strong>About 64 kg of ANFO per hole (0.51 kg/m³) in dry holes, or about 90 kg of emulsion per hole (0.71 kg/m³) in wet holes</strong></dd>
+<dt>Limitations</dt><dd>Powder factor in kg/m³ ignores the energy difference between products, so compare designs on energy factor or RBS as well. Real loading also allows for hole deviation, water, decking and the actual density in the hole.</dd>
+</dl>
+</Example>
+
+## Key formulas for mining explosives
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Loading density | q = ρ_e × π d² ÷ 4 | q in kg/m, ρ_e explosive density in kg/m³, d hole diameter in m |
+| Charge per hole | Q = q × L_c | Q in kg, L_c charge length in m |
+| Powder factor | PF = Q ÷ (B × S × H) | PF in kg/m³; B burden, S spacing, H bench height in m |
+| Detonation pressure | P_D ≈ ρ_e D² ÷ 4 | P_D in Pa, D velocity of detonation in m/s |
+| Relative bulk strength | RBS = RWS × ρ_e ÷ ρ_ANFO | RWS and RBS with ANFO = 100 |
+
+## Selecting mining explosives in practice
+
+Selection balances rock properties, hole conditions and cost. Hard, massive rock with high strength, assessed through [rock mass classification](/mining-engineering/rock-mass-classification/), benefits from dense, high VOD products, at least in the bottom of the hole where the toe is hardest to break. Wet holes call for emulsion or water resistant heavy ANFO. Large [open pit mines](/mining-engineering/open-pit-mine-design/) commonly load dry holes with ANFO and wet ones with emulsion or heavy ANFO.
+
+Safe practice follows the magazine, transport, loading and misfire rules in MSHA 30 CFR Part 56 and 57 Subpart E and the IME Safety Library Publications: keep detonators apart from explosives until priming, never force a primer down a hole, check for stray current risk, clear the blast area, and wait the required time before inspecting for misfires. The wider risk controls are covered in [mine hazards and controls](/mining-engineering/mine-hazards-and-controls/).
+
+## Mining explosives interview and viva questions
+
+1. **What is the difference between deflagration and detonation?** Deflagration is a subsonic burning reaction, as in black powder, while detonation is a supersonic shock wave sustained by the reaction behind it, as in ANFO and emulsions.
+2. **Why does ANFO need a booster?** ANFO is a blasting agent that is not cap sensitive, so a high VOD booster with a detonator is used to bring the column to steady detonation.
+3. **Why are emulsions preferred in wet holes?** Their oxidiser droplets are sealed in a continuous fuel phase, which gives excellent water resistance, and their density above 1.0 g/cm³ lets them displace water in the hole.
+4. **What is relative bulk strength?** It is the energy per unit volume of an explosive compared with ANFO at 100, found by multiplying relative weight strength by the density ratio.
+5. **What causes orange fumes after a blast?** Nitrogen oxides formed when the explosive is poorly balanced, contaminated with water or poorly confined, which is why fume class and good loading matter.

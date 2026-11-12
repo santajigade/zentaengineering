@@ -1,0 +1,191 @@
+---
+title: "Types of Steel and Their Uses"
+description: "Types of steel explained: carbon, alloy, HSLA, stainless and tool steels, AISI and SAE numbers, typical uses and a carbon equivalent weldability example."
+pubDate: 2026-11-12
+reviewedDate: 2026-11-12
+discipline: materials-engineering
+subcategory: metallurgy
+focusKeyword: "types of steel"
+image: { src: /images/featured/types-of-steel.webp, alt: "Types of Steel and Their Uses: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [steel, carbon-steel, alloy-steel, stainless-steel, tool-steel, aisi-sae]
+faq:
+  - q: "What is the difference between steel and cast iron?"
+    a: "Both are iron-carbon alloys. Steels contain less than about 2.14 wt% carbon and can be formed by rolling and forging, while cast irons contain more carbon (typically 3.0 to 4.5 wt%), melt at lower temperatures and are shaped mainly by casting. Cast irons are generally more brittle than steels."
+  - q: "Is stainless steel magnetic?"
+    a: "It depends on the type. Ferritic and martensitic stainless steels have body-centred cubic or body-centred tetragonal structures and are magnetic. Austenitic grades such as 304 and 316 have a face-centred cubic structure and are essentially nonmagnetic in the annealed condition, although cold working can make them slightly magnetic."
+  - q: "Which type of steel is used for building structures?"
+    a: "Most buildings and bridges use low carbon structural steels, such as IS 2062 grades E250 and E350 or EN 10025-2 grades S275 and S355, where the number is the minimum yield strength in MPa. They combine adequate strength with good ductility and weldability, and are supplied as plates and rolled sections."
+references:
+  - text: "W. D. Callister Jr. and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley, 2018"
+  - text: "ASM Handbook, Vol. 1: Properties and Selection: Irons, Steels, and High-Performance Alloys, ASM International, 1990"
+  - text: "EN 10020:2000 Definition and classification of grades of steel, CEN"
+  - text: "SAE J403, Chemical Compositions of SAE Carbon Steels, and SAE J404, Chemical Compositions of SAE Alloy Steels, SAE International"
+  - text: "ASTM A240/A240M, Standard Specification for Chromium and Chromium-Nickel Stainless Steel Plate, Sheet, and Strip for Pressure Vessels and for General Applications, ASTM International"
+  - text: "IS 2062:2011 Hot Rolled Medium and High Tensile Structural Steel, Specification, Bureau of Indian Standards"
+  - text: "ASM Handbook, Vol. 6: Welding, Brazing, and Soldering, ASM International, 1993"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Types of steel** are the families of iron-carbon alloys, containing less than about 2.14 wt% carbon, grouped by composition. The four main families are **plain carbon steels** (low, medium and high carbon), **alloy steels** including HSLA grades, **stainless steels** with at least 11 wt% chromium, and **tool steels** for cutting and forming other materials.
+
+</Key>
+
+Steel is the most widely used engineering metal, but "steel" covers thousands of grades with very different properties. Knowing the main types of steel, how they are named and what each one is good for helps engineers choose a material for a bridge girder, a crankshaft, a chemical tank or a cutting tool. This article explains the classification, the AISI and SAE numbering system and typical uses, then shows how carbon equivalent predicts weldability.
+
+## What makes a steel
+
+Callister defines steels as iron-carbon alloys that may contain appreciable concentrations of other alloying elements. On the [iron-carbon phase diagram](/materials-engineering/iron-carbon-phase-diagram/), steels lie below about 2.14 wt% carbon, the maximum solubility of carbon in austenite. Above that limit the alloys are cast irons. EN 10020:2000 gives a similar definition: a material in which iron is the predominant element and the carbon content is generally below 2%.
+
+EN 10020 then classifies steels by chemical composition into three classes:
+
+- **Non-alloy steels**, where every element stays below set limits (for example manganese below 1.65%).
+- **Stainless steels**, with at least 10.5% chromium and at most 1.2% carbon.
+- **Other alloy steels**, which exceed at least one non-alloy limit but are not stainless.
+
+Engineering textbooks such as Callister use a closely related practical grouping based on carbon content and alloying, shown in the diagram below.
+
+## Classification of the main types of steel
+
+<figure class="anim">
+<svg width="720" height="350" viewBox="0 0 720 350" fill="none" role="img" aria-label="Classification tree of steel: carbon steels divided into low, medium and high carbon with a carbon content scale from 0 to 1.4 wt% marked at 0.25 and 0.60; alloy steels divided into low alloy and HSLA; stainless steels divided into austenitic, ferritic, martensitic, duplex and precipitation hardening; tool steels divided into water hardening, cold work, hot work, high speed and shock resisting">
+<g stroke="#7b8794" stroke-width="1.5">
+<path d="M360 55V72M92 72H630M92 72V90M262 72V90M445 72V90M630 72V90" />
+<path d="M22 125V241M22 165H30M22 203H30M22 241H30" />
+<path d="M197 125V203M197 165H205M197 203H205" />
+<path d="M362 125V317M362 165H370M362 203H370M362 241H370M362 279H370M362 317H370" />
+<path d="M562 125V317M562 165H570M562 203H570M562 241H570M562 279H570M562 317H570" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="290" y="15" width="140" height="40" rx="6" fill="#0b2545" />
+<rect x="10" y="90" width="165" height="35" rx="5" fill="#e6f6f4" />
+<rect x="185" y="90" width="155" height="35" rx="5" fill="#eef1f6" />
+<rect x="350" y="90" width="190" height="35" rx="5" fill="#fff7e0" />
+<rect x="550" y="90" width="160" height="35" rx="5" fill="#ffe9e7" />
+</g>
+<g stroke="#9aa5b1" stroke-width="1" fill="#ffffff">
+<rect x="30" y="150" width="145" height="30" rx="4" /><rect x="30" y="188" width="145" height="30" rx="4" /><rect x="30" y="226" width="145" height="30" rx="4" />
+<rect x="205" y="150" width="135" height="30" rx="4" /><rect x="205" y="188" width="135" height="30" rx="4" />
+<rect x="370" y="150" width="170" height="30" rx="4" /><rect x="370" y="188" width="170" height="30" rx="4" /><rect x="370" y="226" width="170" height="30" rx="4" /><rect x="370" y="264" width="170" height="30" rx="4" /><rect x="370" y="302" width="170" height="30" rx="4" />
+<rect x="570" y="150" width="140" height="30" rx="4" /><rect x="570" y="188" width="140" height="30" rx="4" /><rect x="570" y="226" width="140" height="30" rx="4" /><rect x="570" y="264" width="140" height="30" rx="4" /><rect x="570" y="302" width="140" height="30" rx="4" />
+</g>
+<rect class="anim-blink anim-d1" x="30" y="282" width="25" height="12" fill="#13a89e" />
+<rect class="anim-blink anim-d2" x="55" y="282" width="35" height="12" fill="#f5b800" />
+<rect class="anim-blink anim-d3" x="90" y="282" width="80" height="12" fill="#b42318" />
+<path d="M30 280V296M55 280V296M90 280V296M170 280V296" stroke="#0b2545" stroke-width="1.2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" text-anchor="middle">
+<text x="360" y="40" font-size="14" font-weight="700" fill="#ffffff">Steel</text>
+<g font-size="12" font-weight="700" fill="#0b2545">
+<text x="92" y="112">Carbon steels</text><text x="262" y="112">Alloy steels</text><text x="445" y="112">Stainless steels</text><text x="630" y="112">Tool steels</text>
+</g>
+<g font-size="11" fill="#0b2545">
+<text x="102" y="169">Low (below 0.25% C)</text><text x="102" y="207">Medium (0.25 to 0.60)</text><text x="102" y="245">High (0.60 to 1.4)</text>
+<text x="272" y="169">Low alloy (41xx, 43xx)</text><text x="272" y="207">HSLA</text>
+<text x="455" y="169">Austenitic (304, 316)</text><text x="455" y="207">Ferritic (409, 430)</text><text x="455" y="245">Martensitic (410, 440A)</text><text x="455" y="283">Duplex (2205)</text><text x="455" y="321">Precipitation hardening</text>
+<text x="640" y="169">Water hardening (W)</text><text x="640" y="207">Cold work (O, A, D)</text><text x="640" y="245">Hot work (H)</text><text x="640" y="283">High speed (M, T)</text><text x="640" y="321">Shock resisting (S)</text>
+</g>
+<g font-size="10" fill="#52606d">
+<text x="30" y="310">0</text><text x="55" y="310">0.25</text><text x="90" y="310">0.60</text><text x="170" y="310">1.4</text>
+<text x="100" y="328">Carbon content, wt% C</text>
+</g>
+</g>
+</svg>
+<figcaption>The main types of steel. The scale under carbon steels shows the carbon ranges for low, medium and high carbon grades (after Callister and Rethwisch).</figcaption>
+</figure>
+
+## Plain carbon steels
+
+Plain carbon steels contain only residual amounts of elements other than carbon and a little manganese. Callister divides them by carbon content.
+
+### Low carbon steels (below about 0.25 wt% C)
+
+These are produced in the greatest quantity. Their microstructure is ferrite and pearlite, they do not respond to heat treatment intended to form martensite, and they are strengthened by cold work. They are relatively soft and weak but have outstanding ductility, toughness, machinability and weldability. Typical uses are automobile body panels, structural shapes, sheet for pipelines, buildings, bridges and tin cans. Structural grades such as IS 2062 E250 and E350 belong here; their designation gives the minimum yield strength in MPa. For rolled shapes, see [steel sections and their types](/civil-engineering/steel-sections-types/).
+
+### Medium carbon steels (0.25 to 0.60 wt% C)
+
+These can be austenitized, quenched and tempered, and are most often used as tempered martensite. Plain medium carbon grades have low hardenability, so only thin sections harden with rapid quenching; adding chromium, nickel and molybdenum improves this. They are stronger than low carbon steels at the cost of ductility and toughness. Uses include railway wheels and tracks, gears, crankshafts and machine parts. The processes involved are covered in [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+
+### High carbon steels (0.60 to 1.4 wt% C)
+
+These are the hardest, strongest and least ductile carbon steels, almost always used hardened and tempered. They are especially wear resistant and hold a sharp edge. Uses include knives, razors, hacksaw blades, springs and high strength wire.
+
+## Alloy steels and HSLA steels
+
+**Low alloy steels** add deliberate amounts of chromium, nickel, molybdenum, manganese or vanadium, usually to raise hardenability so that thicker parts harden through. Common examples are the chromium-molybdenum 41xx series and the nickel-chromium-molybdenum 43xx series, used for shafts, axles, gears and high strength bolts.
+
+**High strength low alloy (HSLA) steels** contain other alloying elements such as copper, vanadium, nickel and molybdenum in combined concentrations as high as about 10 wt%. Callister notes that they have higher strengths than plain low carbon steels, with yield strengths that may exceed 480 MPa, and they remain ductile, formable and machinable. They are used for bridges, towers, support columns in high rise buildings and pressure vessels.
+
+## Stainless steels
+
+Stainless steels resist corrosion in many environments because their chromium content (at least 11 wt% per Callister) forms a thin protective oxide film. Nickel and molybdenum improve corrosion resistance further. Plate and sheet grades are specified in ASTM A240. The families are:
+
+- **Austenitic** (304, 316): the most corrosion resistant because of high chromium and nickel, nonmagnetic and not hardenable by heat treatment. Used in chemical and food processing equipment and cryogenic vessels.
+- **Ferritic** (409, 430): magnetic, lower cost, not heat treatable. Grade 409 is used for automotive exhaust components.
+- **Martensitic** (410, 440A): can be hardened by quenching and tempering. Used for cutlery, surgical tools, bearings and jet engine parts.
+- **Duplex** (2205): a mixed ferrite and austenite structure that gives higher strength than austenitic grades and good resistance to chloride stress corrosion cracking.
+- **Precipitation hardening** (17-7PH): very high strength from fine precipitates formed during an ageing treatment. Used for springs, knives and pressure vessels.
+
+Corrosion mechanisms such as pitting and intergranular attack are explained in [types of corrosion](/materials-engineering/types-of-corrosion/).
+
+## Tool steels
+
+Tool steels are high carbon alloy steels, often containing chromium, vanadium, tungsten and molybdenum, which combine with carbon to form very hard, wear resistant carbides. The AISI letter shows the type: W for water hardening, O for oil hardening, A for air hardening, D for high carbon high chromium cold work, H for hot work, M and T for molybdenum and tungsten high speed steels, and S for shock resisting. They are used for cutting tools, drills, dies, punches and moulds.
+
+## Reading AISI and SAE numbers
+
+In the AISI and SAE four digit system, the first two digits identify the alloy family and the last two give the nominal carbon content in hundredths of a weight percent. A few common families (SAE J403 and J404, as tabulated by Callister):
+
+| Designation | Main alloying elements | Example |
+| --- | --- | --- |
+| 10xx | Plain carbon | 1020, 1045 |
+| 11xx | Resulfurized (free machining) | 1117 |
+| 41xx | Cr 0.80 to 1.10%, Mo 0.15 to 0.25% | 4140 |
+| 43xx | Ni 1.65 to 2.00%, Cr 0.40 to 0.90%, Mo 0.20 to 0.30% | 4340 |
+| 51xx | Cr 0.70 to 1.10% | 5160 |
+
+So 1045 is a plain carbon steel with about 0.45 wt% C (a medium carbon steel), and 4340 is a nickel-chromium-molybdenum steel with about 0.40 wt% C. Stainless steels use a separate three digit AISI series (2xx, 3xx, 4xx) and UNS numbers.
+
+## Weldability and carbon equivalent
+
+Carbon and alloying elements that raise hardenability also make the heat affected zone of a weld more likely to form hard martensite and crack. The International Institute of Welding (IIW) carbon equivalent combines them into one number:
+
+$$
+CE = C + \frac{Mn}{6} + \frac{Cr + Mo + V}{5} + \frac{Ni + Cu}{15}
+$$
+
+with all contents in wt%. As a general guide in the ASM welding handbook, steels with CE below about 0.40 are readily weldable, while higher values call for preheat, low hydrogen practice and, at high values, post weld heat treatment. Welding methods are compared in [types of welding processes](/materials-engineering/types-of-welding-processes/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An SAE 4140 bar with nominal composition C 0.40%, Mn 0.88%, Cr 0.95%, Mo 0.20%, with no Ni, Cu or V. For comparison, an SAE 1020 plate with C 0.20% and Mn 0.45%.</dd>
+<dt>Find</dt><dd>Decode the designations and compare weldability using the IIW carbon equivalent.</dd>
+<dt>Assumptions</dt><dd>Compositions are mid range values of the SAE J403 and J404 limits; residual elements are neglected.</dd>
+<dt>Solution</dt><dd>4140: 41 means a chromium-molybdenum alloy steel, 40 means about 0.40 wt% C.<br />CE = 0.40 + 0.88/6 + (0.95 + 0.20)/5 = 0.40 + 0.147 + 0.230 = 0.777<br />1020: 10 means plain carbon, 20 means about 0.20 wt% C (low carbon).<br />CE = 0.20 + 0.45/6 = 0.20 + 0.075 = 0.275</dd>
+<dt>Answer</dt><dd><strong>4140 has CE of about 0.78, well above 0.40, so it needs preheat, low hydrogen consumables and usually post weld heat treatment. 1020 has CE of about 0.28 and is readily weldable.</strong></dd>
+<dt>Limitations</dt><dd>CE is a screening index only. Actual preheat also depends on section thickness, joint restraint, heat input and hydrogen level, so a qualified welding procedure is still required.</dd>
+</dl>
+</Example>
+
+## Key formulas for types of steel
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| IIW carbon equivalent | CE = C + Mn/6 + (Cr + Mo + V)/5 + (Ni + Cu)/15 | Element contents in wt%; CE dimensionless (wt%) |
+| AISI and SAE carbon content | wt% C ≈ last two digits ÷ 100 | For 1045, 45 ÷ 100 = 0.45 wt% C |
+
+## Choosing between the types of steel
+
+Start from the main requirement. For welded structures and sheet, choose low carbon or HSLA steel. For shafts and gears that need strength and toughness after quenching and tempering, choose medium carbon or low alloy steel. For wear and edge retention, choose high carbon or tool steel. For corrosive service, choose a stainless family that matches the environment and strength need. Then check [mechanical properties](/materials-engineering/mechanical-properties-of-materials/), cost and availability in the required form.
+
+## Types of steel interview and viva questions
+
+1. **Why can low carbon steel not be hardened by quenching?** Its carbon content is too low to form enough hard martensite, so it is strengthened mainly by cold work instead.
+2. **What does the number 1045 mean?** It is a plain carbon steel (10xx family) with about 0.45 wt% carbon, which places it in the medium carbon range.
+3. **What makes a steel stainless?** A chromium content of at least about 11 wt%, which forms a thin, self-healing chromium oxide film on the surface.
+4. **How does HSLA steel differ from plain low carbon steel?** Small additions of elements such as copper, vanadium, nickel and molybdenum give higher strength while keeping good ductility and weldability.
+5. **What does a high carbon equivalent indicate?** It indicates high hardenability in the heat affected zone and a greater risk of cold cracking, so preheat and controlled welding procedures are needed.

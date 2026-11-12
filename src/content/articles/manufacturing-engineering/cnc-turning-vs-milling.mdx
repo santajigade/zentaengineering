@@ -1,0 +1,187 @@
+---
+title: "CNC Turning vs Milling: Differences"
+description: "CNC turning vs milling explained: which part rotates, tools, axes, part shapes, tolerances, speed and feed formulas, MRR and a worked example."
+pubDate: 2026-11-12
+reviewedDate: 2026-11-12
+discipline: manufacturing-engineering
+subcategory: cnc
+focusKeyword: "cnc turning vs milling"
+image: { src: /images/featured/cnc-turning-vs-milling.webp, alt: "CNC Turning vs Milling: Differences: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [cnc, turning, milling, machining, lathe, cutting-speed]
+faq:
+  - q: "Is CNC turning cheaper than CNC milling?"
+    a: "For round parts it usually is, because a lathe removes material continuously with a simple single point tool and short cycle times. For prismatic parts with pockets and flat faces, milling is the only practical choice, so cost depends mainly on part shape rather than on the process itself."
+  - q: "Can a CNC lathe do milling operations?"
+    a: "A turning centre with live (driven) tooling and a C axis that indexes or rotates the spindle under control can drill cross holes, mill flats and cut keyways. These mill-turn machines combine both processes so a part can be finished in one setup."
+  - q: "Which is more accurate, turning or milling?"
+    a: "Both reach tight tolerances on modern CNC machines. Turning generally holds roundness and concentricity better because all diameters are cut about the same spindle axis, while milling is better for flatness, positional accuracy of holes and features on several faces."
+references:
+  - text: "S. Kalpakjian and S. R. Schmid, Manufacturing Engineering and Technology, 7th ed., Pearson"
+  - text: "M. P. Groover, Fundamentals of Modern Manufacturing: Materials, Processes, and Systems, 6th ed., Wiley"
+  - text: "ISO 841:2001, Industrial automation systems and integration: Numerical control of machines, Coordinate system and motion nomenclature"
+  - text: "ISO 6983-1:2009, Automation systems and integration: Numerical control of machines, Program format and definitions of address words"
+  - text: "Sandvik Coromant, Metalcutting Technical Guide: Turning, Milling and formulas and definitions"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**CNC turning vs milling** is a comparison of two computer controlled machining processes. In turning, the workpiece rotates in a chuck while a stationary single point tool feeds along it, making round parts. In milling, a multi-tooth cutter rotates while the workpiece on the table feeds past it, making flat faces, slots and pockets.
+
+</Key>
+
+The question of **CNC turning vs milling** comes up whenever a part is planned for machining. Both processes remove material as chips under program control, and both use the same controller logic, G-code and servo driven axes described in [how a CNC machine works](/manufacturing-engineering/cnc-machine-working-principle/). The real difference is which element rotates and which element moves, and that single choice decides the part shapes each process makes well. Both belong to the material removal family in the [classification of manufacturing processes](/manufacturing-engineering/manufacturing-processes-classification/).
+
+## How CNC turning works
+
+Turning is done on a CNC lathe or turning centre. The workpiece is clamped in a chuck or collet and spun by the main spindle. A single point cutting tool, usually a carbide insert on a holder in a turret, is fed against the rotating work. Because every point of the cut surface passes the tool along a circle, turning naturally produces surfaces of revolution: cylinders, tapers, shoulders, grooves, threads and contoured profiles.
+
+Under ISO 841:2001, the Z axis of a machine is parallel to the main spindle axis. On a lathe, Z therefore runs along the length of the workpiece, and X is radial, controlling the diameter. Moving the tool along Z produces length, and moving it along X changes diameter, so most turning programs are written in only two axes. Common operations, as listed by Groover and by Kalpakjian and Schmid, are straight turning, facing, taper turning, contour turning, grooving, parting off, boring, drilling on centre and threading.
+
+## How CNC milling works
+
+Milling is done on a CNC milling machine or machining centre. A rotating cutter with several teeth, such as an end mill or face mill, is held in the spindle, and the workpiece is clamped to the table in a vise or fixture. The table (or in some designs the spindle head) moves along X, Y and Z so that the work feeds past the cutter. Each tooth takes a short, interrupted chip once per revolution, which is why milling is called an interrupted cutting process.
+
+On a vertical machining centre the spindle is vertical, so Z is vertical, while X and Y move the table in the horizontal plane. With three linear axes under simultaneous control, milling makes flat faces, steps, slots, pockets, holes and three dimensional surfaces. Adding rotary axes gives four and five axis machining for complex parts. The two main types are peripheral milling, where the teeth on the cutter's circumference cut, and face milling, where the cutter axis is perpendicular to the machined surface.
+
+## Motion in turning and milling
+
+<figure class="anim">
+<svg width="660" height="320" viewBox="0 0 660 320" fill="none" role="img" aria-label="Side by side comparison of CNC turning and CNC milling. Left: in turning the workpiece held in a chuck rotates about the Z axis while a single point tool feeds along Z toward the chuck. Right: in milling a multi-tooth end mill in the spindle rotates while the workpiece clamped on the table feeds horizontally past it.">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="160" y="20" font-size="14" font-weight="700" text-anchor="middle">CNC turning</text>
+<text x="490" y="20" font-size="14" font-weight="700" text-anchor="middle">CNC milling</text>
+</g>
+<path d="M330 30V310" stroke="#c9d1dc" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="105" width="30" height="100" rx="3" fill="#7b8794" />
+<path d="M50 130H200V138H250V172H200V180H50Z" fill="#dfe6ee" />
+<rect x="192" y="62" width="30" height="42" fill="#eef1f6" />
+<path d="M192 104L201 137L222 104Z" fill="#f5b800" />
+</g>
+<path d="M45 155H262" stroke="#7b8794" stroke-width="1" stroke-dasharray="6 4" />
+<g stroke="#b42318" stroke-width="2.5"><path d="M250 54H150" /><path d="M158 48L148 54L158 60" /></g>
+<path class="anim-flow" d="M250 54H158" stroke="#fff" stroke-width="2.5" />
+<g class="anim-spin">
+<circle cx="80" cy="262" r="28" fill="#dfe6ee" stroke="#0b2545" stroke-width="2" />
+<path d="M80 236V288M54 262H106M62 244L98 280M98 244L62 280" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="80" cy="240" r="4" fill="#b42318" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M255 300H295M255 300V262" /><path d="M289 295L296 300L289 305M250 268L255 261L260 268" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="200" y="44" text-anchor="middle" fill="#b42318">Tool feeds along Z</text>
+<text x="35" y="222" text-anchor="middle">Chuck</text>
+<text x="125" y="200" text-anchor="middle">Workpiece</text>
+<text x="252" y="84">Tool</text>
+<text x="120" y="258">Workpiece rotates</text>
+<text x="120" y="274">(end view)</text>
+<text x="301" y="304" fill="#13a89e">Z</text>
+<text x="255" y="254" text-anchor="middle" fill="#13a89e">X</text>
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="470" y="36" width="40" height="40" fill="#7b8794" />
+<path d="M370 140H505V130H610V180H370Z" fill="#dfe6ee" />
+<rect x="350" y="180" width="280" height="14" fill="#eef1f6" />
+<rect x="475" y="76" width="30" height="64" fill="#f5b800" />
+</g>
+<path d="M478 84L502 96M478 100L502 112M478 116L502 128" stroke="#0b2545" stroke-width="1.5" />
+<path d="M490 30V150" stroke="#7b8794" stroke-width="1" stroke-dasharray="6 4" />
+<g stroke="#b42318" stroke-width="2.5"><path d="M540 212H440" /><path d="M448 206L438 212L448 218" /></g>
+<path class="anim-flow" d="M540 212H448" stroke="#fff" stroke-width="2.5" />
+<g class="anim-spin">
+<circle cx="380" cy="268" r="22" fill="#f5b800" stroke="#0b2545" stroke-width="2" />
+<path d="M380 246L392 236L380 258ZM402 268L412 280L390 268ZM380 290L368 300L380 278ZM358 268L348 256L370 268Z" fill="#0b2545" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M585 300H625M585 300V262" /><path d="M619 295L626 300L619 305M580 268L585 261L590 268" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="520" y="60">Spindle</text>
+<text x="420" y="112" text-anchor="middle">End mill</text>
+<text x="560" y="160" text-anchor="middle">Workpiece</text>
+<text x="490" y="234" text-anchor="middle" fill="#b42318">Table and work feed</text>
+<text x="420" y="264">Cutter rotates</text>
+<text x="420" y="280">(top view)</text>
+<text x="631" y="304" fill="#13a89e">X</text>
+<text x="585" y="254" text-anchor="middle" fill="#13a89e">Z</text>
+</g>
+</svg>
+<figcaption>Turning: the workpiece rotates and the tool translates along Z. Milling: the cutter rotates and the workpiece on the table translates.</figcaption>
+</figure>
+
+## CNC turning vs milling comparison table
+
+| Feature | CNC turning | CNC milling |
+| --- | --- | --- |
+| Rotating element | Workpiece | Cutting tool |
+| Feed motion | Tool moves along Z and X | Table or head moves along X, Y and Z |
+| Cutting tool | Single point tool or insert | Multi-tooth cutter (end mill, face mill, drill) |
+| Cut type | Continuous chip | Interrupted chip, one per tooth per revolution |
+| Typical part shape | Shafts, pins, bushes, flanges, threaded parts | Plates, housings, brackets, moulds, pockets |
+| Main axes (basic machine) | 2 (X and Z) | 3 (X, Y and Z) |
+| Diameter in speed formula | Workpiece diameter | Cutter diameter |
+| Feed specified as | mm per revolution of the work | mm per tooth, converted to mm/min |
+| Typical workholding | Chuck, collet, centres | Vise, clamps, fixtures |
+| Strong point | Roundness and concentricity | Flat faces and features on several sides |
+
+## Differences explained
+
+**Kinematics.** In turning the primary cutting motion belongs to the work and the feed belongs to the tool. In milling the cutting motion belongs to the tool and the feed is usually applied to the work. This is the one difference from which all the others follow.
+
+**Speed and feed.** In both cases the cutting speed is the surface speed at the cutting diameter, so the same equation gives spindle speed:
+
+$$
+N = \frac{1000\,V_c}{\pi\,D}
+$$
+
+where N is in rpm, V_c is cutting speed in m/min and D is in mm. In turning D is the workpiece diameter; in milling it is the cutter diameter. Turning feed is given per revolution of the work (mm/rev). Milling feed is given per tooth and converted to a table feed rate:
+
+$$
+v_f = f_z \times z \times N
+$$
+
+**Material removal rate.** Following Groover and the Sandvik Coromant formulas, turning removes material at a rate equal to cutting speed times feed times depth of cut, while milling removes material at depth times width of cut times table feed:
+
+$$
+Q_\text{turn} = V_c \times f \times a_p \qquad Q_\text{mill} = \frac{a_p \times a_e \times v_f}{1000}
+$$
+
+**Chip formation.** A turning tool stays in the cut, so chips form continuously and long stringy chips need chip breaker geometry. A milling tooth enters and leaves the cut every revolution, so chip thickness varies and each tooth sees cyclic thermal and mechanical loading, as described by Kalpakjian and Schmid.
+
+**Programming.** Both use the word address program format of ISO 6983-1:2009. Lathe programs often use diameter values for X and canned turning cycles, while milling programs work in three axes with cutter radius compensation and canned drilling cycles.
+
+## When to use which
+
+Choose **turning** when the part is mainly round: shafts, axles, pins, bushes, pulleys, nozzles and threaded fittings. Choose **milling** when the part is mainly prismatic or has flat faces, slots, pockets or hole patterns off the axis. Many real parts need both, for example a shaft with a keyway. They are turned first and then milled, or made on a mill-turn centre with live tooling. For low volume plastic or complex internal shapes, additive processes covered in [3D printing technologies](/manufacturing-engineering/3d-printing-technologies/) may compete with both. Workpiece material properties such as hardness, covered in [mechanical properties of materials](/materials-engineering/mechanical-properties-of-materials/), set the cutting speed that both processes start from.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Turning: steel bar of diameter 50 mm, cutting speed 200 m/min, feed 0.25 mm/rev, depth of cut 2 mm. Milling: 20 mm diameter end mill with 4 teeth, cutting speed 150 m/min, feed per tooth 0.05 mm, axial depth 5 mm, radial width 10 mm.</dd>
+<dt>Find</dt><dd>Spindle speed for each process, the milling table feed rate, and the material removal rate for each.</dd>
+<dt>Assumptions</dt><dd>Cutting data are taken as given for the tool and material; the machines can reach the speeds and supply the power; diameter change in turning is ignored for speed.</dd>
+<dt>Solution</dt><dd>Turning: N = 1000 × 200 ÷ (π × 50) = 200 000 ÷ 157.08 = 1273 rpm<br />Q_turn = 200 × 0.25 × 2 = 100 cm³/min<br />Milling: N = 1000 × 150 ÷ (π × 20) = 150 000 ÷ 62.83 = 2387 rpm<br />v_f = 0.05 × 4 × 2387 = 477 mm/min<br />Q_mill = 5 × 10 × 477 ÷ 1000 = 23.9 cm³/min</dd>
+<dt>Answer</dt><dd><strong>Turning: 1273 rpm and 100 cm³/min. Milling: 2387 rpm, 477 mm/min table feed and about 24 cm³/min.</strong></dd>
+<dt>Limitations</dt><dd>Real cutting data come from the tool supplier for the specific grade and material. Machine power, rigidity, tool overhang and surface finish requirements may force lower values.</dd>
+</dl>
+</Example>
+
+## Key formulas for CNC turning vs milling
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Cutting speed | V_c = π × D × N ÷ 1000 | V_c in m/min, D in mm, N in rpm |
+| Spindle speed | N = 1000 × V_c ÷ (π × D) | D = work diameter (turning) or cutter diameter (milling), mm |
+| Milling table feed | v_f = f_z × z × N | f_z = feed per tooth in mm, z = number of teeth, v_f in mm/min |
+| Turning feed rate | v_f = f × N | f = feed in mm/rev, v_f in mm/min |
+| MRR, turning | Q = V_c × f × a_p | a_p = depth of cut in mm, Q in cm³/min |
+| MRR, milling | Q = a_p × a_e × v_f ÷ 1000 | a_e = radial width of cut in mm, Q in cm³/min |
+
+## CNC turning vs milling interview and viva questions
+
+1. **What is the basic difference between turning and milling?** In turning the workpiece rotates and a single point tool feeds along it. In milling the multi-tooth cutter rotates and the workpiece feeds past it.
+2. **Which diameter is used to find spindle speed in each process?** Turning uses the workpiece diameter at the cut, while milling uses the cutter diameter, both in N = 1000 V_c ÷ (π D).
+3. **Why is milling called an interrupted cut?** Each tooth engages the work for only part of a revolution, so it repeatedly enters and leaves the cut and produces separate chips.
+4. **How is the Z axis defined on a lathe and on a vertical mill?** Under ISO 841:2001 Z is parallel to the main spindle, so it runs along the work on a lathe and vertically on a vertical machining centre.
+5. **How is milling feed rate calculated?** Table feed equals feed per tooth times number of teeth times spindle speed, v_f = f_z × z × N, giving mm/min.

@@ -3,6 +3,7 @@ title: "Automated Irrigation Control with Soil Moisture Feedback"
 description: "Automated irrigation control with soil moisture sensors: sensor types, field capacity, thresholds, controller logic, valves, IoT and a scheduling example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-12
 discipline: agricultural-engineering
 subcategory: agricultural-automation
 focusKeyword: "automated irrigation control"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Automated irrigation control** with soil moisture feedback measures the water available to the crop and switches irrigation on and off automatically. **Soil moisture sensors** (capacitance, TDR, tensiometer or resistance types) in the root zone send readings to a **controller** (a PLC, dedicated irrigation controller or IoT node). When moisture falls to a set **lower threshold**, often based on **management allowed depletion**, the controller opens **solenoid valves** and starts the **pump**; when moisture reaches the **upper threshold** near **field capacity**, or a set volume is applied, it stops. Adding weather data, flow meters and remote monitoring makes the system smarter and safer.
+**Automated irrigation control** is a closed loop system that measures root zone soil moisture with sensors and switches irrigation automatically. A controller opens solenoid valves and starts the pump when moisture falls to a lower threshold set by management allowed depletion, then stops near field capacity, after a set volume, or at a maximum run time.
 
 </Key>
 
@@ -55,7 +56,7 @@ $$
 
 ## System architecture
 
-<figure>
+<figure class="anim">
 <svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Closed loop irrigation control: soil moisture sensors at two depths in the root zone send signals to a controller; the controller also receives rain and weather data and flow meter feedback; it commands the pump and solenoid valve which supply the drip lines; a cloud dashboard allows remote monitoring">
 <path d="M20 200H580" stroke="#8a6d3b" stroke-width="2" />
 <rect x="20" y="200" width="560" height="80" fill="#f5e6c8" fill-opacity="0.4" />
@@ -65,12 +66,14 @@ $$
 <rect x="30" y="110" width="70" height="40" rx="4" fill="#fff7e0" />
 <rect x="140" y="110" width="60" height="40" rx="4" fill="#ffe9e7" />
 </g>
-<g fill="#7b8794" stroke="#0b2545" stroke-width="1.5"><rect x="395" y="225" width="10" height="24" /><rect x="425" y="250" width="10" height="24" /></g>
+<g fill="#7b8794" stroke="#0b2545" stroke-width="1.5"><rect class="anim-pulse" x="395" y="225" width="10" height="24" /><rect class="anim-pulse" x="425" y="250" width="10" height="24" /></g>
 <path d="M330 150V200M330 170L310 150M330 165L350 145" stroke="#13a89e" stroke-width="3" fill="none" />
 <path d="M100 130H140M200 130H520" stroke="#13a89e" stroke-width="3" />
-<g fill="#13a89e"><circle cx="270" cy="134" r="3" /><circle cx="330" cy="134" r="3" /><circle cx="390" cy="134" r="3" /><circle cx="450" cy="134" r="3" /></g>
+<g stroke="#fff" stroke-width="3" fill="none"><path class="anim-flow" d="M100 130H140M200 130H520" /></g>
+<g fill="#13a89e"><circle class="anim-blink anim-d1" cx="270" cy="134" r="3" /><circle class="anim-blink anim-d2" cx="330" cy="134" r="3" /><circle class="anim-blink anim-d3" cx="390" cy="134" r="3" /><circle class="anim-blink anim-d4" cx="450" cy="134" r="3" /></g>
 <g fill="#8a6d3b" fill-opacity="0.3"><ellipse cx="330" cy="230" rx="45" ry="28" /></g>
 <g stroke="#b42318" stroke-width="1.8" stroke-dasharray="5 3" fill="none"><path d="M400 225V100H350V85" /><path d="M430 250V95H360V85" /><path d="M260 85V100H170V110" /><path d="M240 85V95H65V110" /><path d="M370 55H440" /></g>
+<g stroke="#fff" stroke-width="1.8" fill="none"><path class="anim-flow-slow" d="M400 225V100H350V85" /><path class="anim-flow-slow" d="M430 250V95H360V85" /><path class="anim-flow-slow" d="M260 85V100H170V110" /><path class="anim-flow-slow" d="M240 85V95H65V110" /><path class="anim-flow-slow" d="M370 55H440" /></g>
 <rect x="475" y="100" width="50" height="22" rx="3" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="300" y="54" font-weight="700">Controller</text><text x="300" y="70" font-size="10">PLC / IoT node</text>
@@ -125,6 +128,16 @@ Wireless links (LoRaWAN, NB-IoT, cellular or Wi-Fi) connect sensors and valves a
 </dl>
 </Example>
 
+## Key formulas for automated irrigation control
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Total available water | TAW = (θ_FC − θ_PWP) × Z_r | θ = volumetric water content in m³/m³, Z_r = root depth in mm, TAW in mm |
+| Readily available water | RAW = p × TAW | p = management allowed depletion fraction (often 0.3 to 0.5), RAW in mm |
+| Start threshold | θ_start = θ_FC − RAW ÷ Z_r | θ in m³/m³, RAW and Z_r in mm |
+| Gross depth per irrigation | d_gross = RAW ÷ E_a | E_a = application efficiency as a fraction, d_gross in mm |
+| Irrigation interval | Interval = RAW ÷ ET_c | ET_c = daily crop water use in mm/day, interval in days |
+
 ## Weather based control
 
 Soil sensors measure the result of crop water use; weather based controllers estimate it directly. They calculate reference evapotranspiration from temperature, humidity, wind and solar radiation, using the FAO Penman-Monteith method, multiply by the crop coefficient and subtract effective rain to keep a running soil water balance. Combining both approaches is most robust: the weather model predicts demand, and soil sensors correct the model and catch problems such as blocked emitters or unexpected drainage.
@@ -144,3 +157,11 @@ A well installed sensor network is worth more than an expensive controller on it
 ## Benefits of automated irrigation control
 
 Field studies commonly report water savings of 20 to 50%, energy savings from shorter pumping times, better yields and quality from steadier moisture, less nutrient leaching and reduced labour. Automated irrigation control is a building block of [precision agriculture](/agricultural-engineering/precision-agriculture-technologies/) and works with both systems compared in [drip vs sprinkler irrigation](/agricultural-engineering/drip-vs-sprinkler-irrigation/).
+
+## Automated irrigation control interview and viva questions
+
+1. **What is field capacity?** It is the water held in the soil after free drainage stops, usually a day or two after heavy irrigation, and it sets the upper threshold at which irrigation stops.
+2. **What does management allowed depletion control?** MAD is the fraction p of total available water the crop may use before irrigating, so it sets the start threshold; it is often 30 to 50%.
+3. **Why are sensors installed at two depths?** The shallow sensor triggers irrigation, while the deeper sensor shows whether water is draining below the roots so that future cycles can be shortened.
+4. **Why is hysteresis used in on-off irrigation control?** Separate start and stop thresholds prevent the valves and pump from switching rapidly around a single setpoint.
+5. **Why combine soil sensors with weather based control?** The weather model predicts crop demand from evapotranspiration, while soil sensors correct the model and catch problems such as blocked emitters or unexpected drainage.

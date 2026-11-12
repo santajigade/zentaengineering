@@ -3,6 +3,7 @@ title: "Cold Storage Refrigeration Design Basics"
 description: "Cold storage design basics: storage conditions, insulation, heat load calculation, refrigeration systems, humidity control and a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-12
 discipline: agricultural-engineering
 subcategory: cold-chain
 focusKeyword: "cold storage"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**Cold storage** keeps perishable products such as fruits, vegetables, dairy, meat, fish and pharmaceuticals at controlled low temperature and humidity to slow respiration, microbial growth and deterioration. Design starts with the **product's storage conditions**, then sizes the **insulated enclosure** and calculates the **refrigeration load**: **transmission** through walls, **product** cooling and **respiration** heat, **air infiltration**, and **internal loads** from lights, people, fans, forklifts and defrost. A **vapour compression refrigeration system** with compressors, condensers, expansion valves and **evaporators** removes this heat, with controls for temperature, humidity, defrost and sometimes **controlled atmosphere**.
+**Cold storage** is an insulated, refrigerated enclosure that holds perishable products at controlled low temperature and humidity to slow respiration, microbial growth and deterioration. Design sets storage conditions for the product, then sums transmission, product, respiration, infiltration and internal heat loads, and sizes a vapour compression refrigeration system to remove that heat with a safety margin.
 
 </Key>
 
@@ -82,7 +83,7 @@ $$
 
 plus latent heat of freezing and sensible heat below freezing for frozen products. **Respiration heat** from live produce is taken from tables, often 10 to 100 W per tonne depending on product and temperature. **Infiltration** depends on door openings and air exchanges. **Internal loads** include lights, people, forklifts, evaporator fan motors and defrost heat. A safety factor of about 10% is commonly added, and the refrigeration plant is sized to remove the daily load in about 16 to 20 hours of running.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Cold room cross section showing heat gains: transmission through insulated walls, roof and floor; infiltration through the door; product heat and respiration from stacked produce; internal loads from lights, people and evaporator fans; the evaporator unit cooler inside removes heat and the condensing unit outside rejects it">
 <rect x="100" y="50" width="340" height="180" fill="#e6f6f4" stroke="#0b2545" stroke-width="10" stroke-opacity="0.25" />
 <rect x="100" y="50" width="340" height="180" fill="none" stroke="#0b2545" stroke-width="2" />
@@ -93,7 +94,10 @@ plus latent heat of freezing and sensible heat below freezing for frozen product
 <g stroke="#b42318" stroke-width="2.5"><path d="M50 140H95M270 15V45M465 195H452" /></g>
 <g fill="#b42318"><path d="M88 135l9 5-9 5z" /><path d="M265 38l5 9 5-9z" /><path d="M459 190l-9 5 9 5z" /></g>
 <g stroke="#13a89e" stroke-width="2"><path d="M420 80H480M420 90H470V75H480" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M420 80H480" /><path class="anim-flow-rev" d="M420 90H470V75H480" /></g>
 <g stroke="#b42318" stroke-width="1.5" stroke-dasharray="3 3"><path d="M165 165V140M225 165V140M285 165V140" /></g>
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow-slow" d="M50 140H95M270 15V45M465 195H452" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow-slow" d="M165 165V140M225 165V140M285 165V140" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
 <text x="50" y="130">Transmission</text><text x="270" y="12">Roof gain</text><text x="515" y="205">Infiltration</text><text x="515" y="219">(door)</text>
 <text x="370" y="84">Evaporator</text><text x="530" y="62" font-weight="700">Condensing</text><text x="530" y="76">unit</text>
@@ -117,6 +121,16 @@ plus latent heat of freezing and sensible heat below freezing for frozen product
 
 <Calculator path="engineering/chiller-tonnage" title="Refrigeration Tonnage Calculator" />
 
+## Key formulas for cold storage
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Total refrigeration load | Q_total = Q_trans + Q_product + Q_resp + Q_infil + Q_internal | All terms in W or kW |
+| Transmission gain | Q_trans = U × A × ΔT | U in W/m²K, A = surface area in m², ΔT = outside minus inside temperature in K |
+| Product cooling | Q_product = m × c_p × ΔT ÷ t | m in kg, c_p in kJ/kgK, ΔT in K, t = cooling time in s, Q in kW |
+| Respiration heat | Q_resp = product mass × respiration rate | Mass in t, rate in W per tonne (often 10 to 100 W/t) |
+| Plant capacity | Q_plant = 1.1 × Q_total × 24 ÷ running hours | 10% safety factor, running time about 16 to 20 h per day |
+
 ## Refrigeration system
 
 Most cold stores use **vapour compression refrigeration**, explained in the [vapour compression refrigeration cycle](/mechanical-engineering/vapour-compression-refrigeration-cycle/):
@@ -139,3 +153,11 @@ Controllers maintain temperature with thermostats and pressure controls, schedul
 ## Energy efficiency in cold storage
 
 Insulation quality, door management, efficient compressors with variable speed drives, floating head pressure control, evaporative condensers, LED lighting, and heat recovery can cut energy use significantly. In rural areas, solar powered cold rooms with thermal storage (ice or phase change materials) support farmers without reliable grid power. Proper stacking with air gaps ensures cold air reaches all produce, and pre-cooling produce soon after harvest, for example in forced air pre-coolers, greatly improves storage life.
+
+## Cold storage interview and viva questions
+
+1. **What are the main components of a cold storage refrigeration load?** Transmission through walls, roof and floor, product cooling, respiration heat from live produce, air infiltration, and internal loads from lights, people, fans, forklifts and defrost.
+2. **Why is a vapour barrier fitted on the warm side of the insulation?** It prevents moisture from entering the insulation and freezing there, which would damage the panels and reduce their insulating value.
+3. **Why do evaporators for produce use a small air to refrigerant temperature difference?** A difference of about 4 to 6 K removes less moisture from the air as frost, so relative humidity stays high and produce loses less weight.
+4. **Why is the plant sized to remove the daily load in 16 to 20 hours?** Running for less than 24 hours leaves time for defrost and gives reserve capacity, which is why the daily load is divided by the running hours.
+5. **Why are chilling sensitive crops stored above 10 °C?** Crops such as bananas, mangoes and tomatoes are damaged below their safe temperature even though it is above freezing, so they are held at about 10 to 13 °C.

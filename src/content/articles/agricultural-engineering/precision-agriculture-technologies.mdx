@@ -3,6 +3,7 @@ title: "Precision Agriculture Technologies Explained"
 description: "Precision agriculture technologies explained: GNSS guidance, RTK, yield mapping, soil sampling, NDVI, variable rate application, drones and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-12
 discipline: agricultural-engineering
 subcategory: precision-agriculture
 focusKeyword: "precision agriculture"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Precision agriculture** uses data and technology to manage crops and soils according to the variation within each field. Core technologies are **GNSS positioning** (GPS with **RTK** corrections) for **auto-steering** and accurate mapping; **yield monitors** and **soil sampling** to map variability; **remote sensing** from satellites and **drones**, using indices such as **NDVI** to assess crop health; **variable rate technology (VRT)** to apply seed, fertiliser, lime, water and chemicals at different rates across a field; **sensors and IoT** for soil moisture and weather; and **farm management software** to combine data and make decisions.
+**Precision agriculture** is a management strategy that uses data and technology to manage crops and soils according to the variation within each field. GNSS guidance with RTK, yield and soil maps, satellite and drone imagery assessed with indices such as NDVI, and variable rate technology let farmers apply seed, fertiliser, water and chemicals only where needed.
 
 </Key>
 
@@ -38,12 +39,13 @@ No field is uniform. Soil texture, organic matter, nutrients, drainage, slope an
 
 ## The precision agriculture cycle
 
-<figure>
+<figure class="anim">
 <svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Precision agriculture cycle with four stages in a loop: collect data (GNSS, yield monitor, soil samples, satellites, drones, sensors), analyse and map (GIS, zones, prescriptions), apply variably (auto-steer, variable rate seeding, fertiliser, spraying, irrigation), evaluate results (yield maps, records), then back to collect">
 <g stroke="#0b2545" stroke-width="2">
-<rect x="210" y="15" width="180" height="60" rx="8" fill="#e6f6f4" /><rect x="420" y="115" width="170" height="60" rx="8" fill="#fff7e0" /><rect x="210" y="215" width="180" height="60" rx="8" fill="#ffe9e7" /><rect x="10" y="115" width="170" height="60" rx="8" fill="#eef1f6" />
+<rect class="anim-blink anim-d1" x="210" y="15" width="180" height="60" rx="8" fill="#e6f6f4" /><rect class="anim-blink anim-d2" x="420" y="115" width="170" height="60" rx="8" fill="#fff7e0" /><rect class="anim-blink anim-d3" x="210" y="215" width="180" height="60" rx="8" fill="#ffe9e7" /><rect class="anim-blink anim-d4" x="10" y="115" width="170" height="60" rx="8" fill="#eef1f6" />
 </g>
 <g stroke="#13a89e" stroke-width="2.5" fill="none"><path d="M390 45Q480 50 500 108" /><path d="M500 175Q480 240 396 245" /><path d="M210 245Q120 240 100 182" /><path d="M100 115Q120 50 204 45" /></g>
+<g stroke="#fff" stroke-width="2.5" fill="none" stroke-dasharray="6 12"><path class="anim-flow-slow" d="M390 45Q480 50 500 108" /><path class="anim-flow-slow" d="M500 175Q480 240 396 245" /><path class="anim-flow-slow" d="M210 245Q120 240 100 182" /><path class="anim-flow-slow" d="M100 115Q120 50 204 45" /></g>
 <g fill="#13a89e"><path d="M495 104l5 10 5-10z" /><path d="M400 240l-9 5 9 5z" /><path d="M95 186l5-10 5 10z" /><path d="M200 40l9 5-9 5z" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle">
 <text x="300" y="40">1. Collect data</text><text x="505" y="140">2. Analyse and map</text><text x="300" y="240">3. Apply variably</text><text x="95" y="140">4. Evaluate</text>
@@ -113,6 +115,14 @@ Drones scout fields, map crops and increasingly spray pesticides and fertilisers
 </dl>
 </Example>
 
+## Key formulas for precision agriculture
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Vegetation index | NDVI = (NIR - Red) ÷ (NIR + Red) | NIR, Red = reflectance in near infrared and red bands (fractions); NDVI from -1 to +1 |
+| Variable rate total input | Total = sum of (zone area × zone rate) | area in ha, rate in kg/ha, total in kg |
+| Input saving | Saving = uniform total - variable rate total | kg; divide by uniform total for percent |
+
 ## Benefits and challenges of precision agriculture
 
 **Benefits:** higher input efficiency, lower costs, better yields in responsive zones, reduced nutrient and pesticide losses to water and air, less soil compaction, better records for traceability and certification, and reduced operator fatigue.
@@ -125,3 +135,11 @@ The key is to start with a clear question, such as where yields are lowest and w
 
 
 Begin with guidance and section control, which pay back quickly through input savings, then add yield mapping and soil sampling to understand variability, and move to variable rate application once zones are reliable. Water management through efficient methods such as those in [drip vs sprinkler irrigation](/agricultural-engineering/drip-vs-sprinkler-irrigation/) is another high value area for precision agriculture.
+
+## Precision agriculture interview and viva questions
+
+1. **What does RTK add to standard GNSS?** Real time kinematic positioning corrects satellite signals with a nearby base station or network, improving accuracy from about 1 to 3 m standalone to about 2 cm.
+2. **Why does NDVI indicate crop health?** Healthy vegetation reflects strongly in near infrared and absorbs red light for photosynthesis, so dense, healthy crops give NDVI of about 0.6 to 0.9 while stressed crops and bare soil give lower values.
+3. **What is a prescription map?** It is a map of application rates by zone that a controller on an ISOBUS compatible tractor reads to adjust seed, fertiliser or spray rates in real time.
+4. **What is controlled traffic farming?** Machines always use the same wheel tracks, guided by accurate GNSS, which limits soil compaction to those tracks.
+5. **Why must low NDVI zones be ground truthed before applying more nitrogen?** Low NDVI can be caused by water stress, disease or soil problems rather than nitrogen shortage, so field checks are needed before changing the prescription.

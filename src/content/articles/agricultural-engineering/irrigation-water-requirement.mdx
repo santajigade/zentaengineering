@@ -3,6 +3,7 @@ title: "Irrigation Water Requirement Calculation"
 description: "Irrigation water requirement calculation using FAO-56: reference ET, crop coefficient, effective rainfall, efficiency, gross depth and pump flow example."
 pubDate: 2026-11-09
 reviewedDate: 2026-11-09
+updatedDate: 2026-11-12
 discipline: agricultural-engineering
 subcategory: irrigation-systems
 focusKeyword: "irrigation water requirement"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The **irrigation water requirement** is the water that must be supplied by irrigation, on top of rainfall, for a crop to meet its evapotranspiration. Following FAO-56, crop water use is ETc = Kc × ETo. The **net irrigation requirement** is ETc minus effective rainfall, and the **gross irrigation requirement** is the net value divided by the irrigation efficiency. Multiplying the gross depth by the area gives the volume, and dividing by the operating hours gives the required pump or canal flow.
+**Irrigation water requirement** is the depth of water that irrigation must supply, on top of effective rainfall, for a crop to meet its evapotranspiration. Following FAO-56, crop water use is ETc = Kc × ETo. The net requirement is ETc minus effective rainfall, and the gross requirement is the net value divided by the irrigation efficiency.
 
 </Key>
 
@@ -62,7 +63,7 @@ $$
 
 The crop coefficient Kc changes over four growth stages, as shown below. FAO-56 Table 12 gives typical values; for grain maize, for example, Kc ini is 0.30, Kc mid is 1.20 and Kc end is 0.60 or 0.35 depending on whether the crop is harvested at high grain moisture or dried in the field. These table values are adjusted for local climate, mainly wind speed and minimum relative humidity, for crops taller than the reference grass.
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 320" width="640" height="320" fill="none" role="img" aria-label="Crop coefficient curve for grain maize over the season: flat Kc initial of 0.30 during the initial stage, a straight rise during crop development, a flat Kc mid of 1.20 in mid-season, and a decline to Kc end of 0.35 to 0.60 during the late season stage">
 <path d="M80 270 H600" stroke="#0b2545" stroke-width="1.5" />
 <path d="M80 270 V30" stroke="#0b2545" stroke-width="1.5" />
@@ -73,6 +74,7 @@ The crop coefficient Kc changes over four growth stages, as shown below. FAO-56 
 <path d="M80 225 H90" /><path d="M80 90 H90" /><path d="M80 180 H90" />
 </g>
 <path d="M80 225 H190 L310 90 H480 L580 217.5" stroke="#13a89e" stroke-width="3" />
+<path class="anim-flow-slow" d="M80 225 H190 L310 90 H480 L580 217.5" stroke="#fff" stroke-dasharray="6 12" stroke-width="3" fill="none" />
 <path d="M480 90 L580 180" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
 <text x="135" y="52" text-anchor="middle">Initial</text>
@@ -129,6 +131,18 @@ $$
 V\,(\text{m}^3) = 10 \times IR_g\,(\text{mm}) \times A\,(\text{ha})
 $$
 
+## Key formulas for irrigation water requirement
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Crop evapotranspiration | ETc = Kc × ETo | ETc and ETo in mm/day, Kc = crop coefficient (dimensionless) |
+| Effective rainfall, P above 75 mm | Pe = 0.8P - 25 | P and Pe in mm/month, Pe taken as zero if negative |
+| Effective rainfall, P up to 75 mm | Pe = 0.6P - 10 | P and Pe in mm/month |
+| Net irrigation requirement | IRn = ETc - Pe | depths in mm for the period |
+| Gross irrigation requirement | IRg = IRn ÷ Ea | Ea = field application efficiency (fraction) |
+| Volume | V = 10 × IRg × A | V in m³, IRg in mm, A in ha |
+| System flow | Q = V ÷ operating hours | Q in m³/h; divide by 3.6 for L/s |
+
 ## Worked example: peak month irrigation water requirement
 
 <Example>
@@ -154,3 +168,11 @@ The monthly irrigation water requirement tells you how much water is needed; the
 - Use local Kc values and growth stage lengths where research data exist; FAO-56 tables are a starting point.
 - Check that the water source can supply the gross volume in the driest period.
 - Allow for salinity leaching where irrigation water or soils are saline.
+
+## Irrigation water requirement interview and viva questions
+
+1. **What is the difference between ETo and ETc?** ETo is the evapotranspiration of a well watered reference grass and depends only on weather. ETc is the crop's own water use, found by multiplying ETo by the crop coefficient Kc.
+2. **Why is the gross requirement larger than the net requirement?** No irrigation method is perfectly efficient, so the net depth is divided by the application efficiency to allow for deep percolation, runoff, evaporation and uneven application.
+3. **Why is Kc low in the initial stage and highest in mid-season?** Early on the soil is mostly bare and the crop small, so transpiration is low. At full cover in mid-season the canopy transpires most, giving the peak Kc, for example 1.20 for grain maize.
+4. **Why is not all rainfall counted as effective?** Part of it runs off, part percolates below the root zone and light showers evaporate from leaves and soil, so only the remainder, estimated with empirical formulas, is available to the crop.
+5. **Why should a design use the peak month rather than the seasonal average?** Monthly and seasonal averages hide periods of high demand, so a system sized on the average would leave crops stressed during the peak period.
