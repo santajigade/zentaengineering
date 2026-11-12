@@ -5,7 +5,7 @@ Pinterest bulk-upload CSV. Usage: python3 scripts/pins-bulk.py "BOARD NAME" [N=1
 import json, csv, re, sys, datetime, os
 BOARD = sys.argv[1]; N = int(sys.argv[2]) if len(sys.argv) > 2 else 10
 SITE = 'https://zentaengineering.com'
-today = (datetime.datetime.utcnow() + datetime.timedelta(hours=5, minutes=30)).date().isoformat()
+today = (datetime.datetime.now(datetime.UTC).replace(tzinfo=None) + datetime.timedelta(hours=5, minutes=30)).date().isoformat()
 sched = json.load(open('src/data/pins.json')); manual = json.load(open('src/data/pins-manual.json'))
 pick = [k for k, d in sorted(sched.items(), key=lambda x: (x[1], list(sched).index(x[0]))) if d > today and k not in manual][:N]
 clean = lambda s: re.sub(r'\s*[\[(][^\])]*[\])]', '', s).replace('—', ', ').replace('–', ', ')

@@ -1,1 +1,12 @@
-[]
+[
+"electrical-engineering/cable-sizing",
+"electronics-engineering/antenna-gain-and-directivity",
+"mechanical-engineering/bernoulli-equation",
+"automation-robotics/dcs-architecture",
+"renewable-energy/battery-energy-storage-systems",
+"chemical-engineering/cstr-vs-pfr",
+"civil-engineering/bearing-capacity-of-soil",
+"computer-science/arrays-vs-linked-lists",
+"ai-data-engineering/big-data-five-vs",
+"telecommunication-engineering/5g-network-architecture"
+]

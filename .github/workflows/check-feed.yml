@@ -6,6 +6,12 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: Manual (.csv) pin images
+        run: |
+          for id in $(python3 -c "import json;print(' '.join(json.load(open('src/data/pins-manual.json'))[-10:]))"); do
+            curl -s -o /dev/null -A "Pinterestbot/1.0" -w "%{http_code} %{content_type} %{size_download}B  $id\n" "https://zentaengineering.com/pins/$id.jpg"
+          done
       - run: |
           for ua in "Pinterestbot/1.0 (+http://www.pinterest.com/bot.html)" "Mozilla/5.0 (compatible; Pinterestbot/1.0; +http://www.pinterest.com/bot.html)"; do
             echo "== $ua"
