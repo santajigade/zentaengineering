@@ -3,6 +3,7 @@ title: "The Data Science Workflow from Data to Decision"
 description: "The data science workflow step by step: problem definition, data collection, cleaning, exploration, features, modelling, evaluation and deployment."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-13
 discipline: ai-data-engineering
 subcategory: data-science
 focusKeyword: "data science workflow"
@@ -30,17 +31,17 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The **data science workflow** turns raw data into decisions in repeatable steps: **define the problem**, **collect data**, **clean and prepare it**, **explore** it to understand patterns, **engineer features**, **build models**, **evaluate** them against the business goal, then **deploy and monitor** the result. The process is iterative: findings at any stage often send you back to an earlier one. Frameworks such as **CRISP-DM** formalise these phases.
+The **data science workflow** is the repeatable, iterative process that turns raw data into decisions: defining the problem, collecting and cleaning data, exploring it, engineering features, building and evaluating models against the business goal, then deploying and monitoring the result. Findings at any stage can send you back to an earlier one, as formalised in CRISP-DM.
 
 </Key>
 
 Data science combines statistics, programming and domain knowledge to answer questions with data. Projects fail far more often from a poorly defined question or bad data than from the wrong algorithm. A clear workflow keeps the work focused on the decision it is meant to support.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Data science workflow as eight connected steps in a loop: define problem, collect data, clean and prepare, explore, feature engineering, model, evaluate, deploy and monitor, with a feedback arrow back to define problem">
 <g stroke="#0b2545" stroke-width="2">
-<rect x="20" y="50" width="125" height="50" rx="6" fill="#eef1f6" /><rect x="165" y="50" width="125" height="50" rx="6" fill="#eef1f6" /><rect x="310" y="50" width="125" height="50" rx="6" fill="#e6f6f4" /><rect x="455" y="50" width="125" height="50" rx="6" fill="#e6f6f4" />
-<rect x="455" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect x="310" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect x="165" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect x="20" y="170" width="125" height="50" rx="6" fill="#ffe9e7" />
+<rect class="anim-blink" x="20" y="50" width="125" height="50" rx="6" fill="#eef1f6" /><rect class="anim-blink anim-d1" x="165" y="50" width="125" height="50" rx="6" fill="#eef1f6" /><rect class="anim-blink anim-d2" x="310" y="50" width="125" height="50" rx="6" fill="#e6f6f4" /><rect class="anim-blink anim-d3" x="455" y="50" width="125" height="50" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d4" x="455" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect class="anim-blink anim-d5" x="310" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect class="anim-blink anim-d2" x="165" y="170" width="125" height="50" rx="6" fill="#fff7e0" /><rect class="anim-blink anim-d3" x="20" y="170" width="125" height="50" rx="6" fill="#ffe9e7" />
 </g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="82" y="72">1. Define</text><text x="82" y="90">problem</text>
@@ -56,6 +57,7 @@ Data science combines statistics, programming and domain knowledge to answer que
 <g stroke="#13a89e" stroke-width="2"><path d="M145 75h14M290 75h14M435 75h14M517 100v64M455 195h-14M310 195h-14M165 195h-14" /></g>
 <g fill="#13a89e"><path d="M159 70l8 5-8 5z" /><path d="M304 70l8 5-8 5z" /><path d="M449 70l8 5-8 5z" /><path d="M512 164l5 8 5-8z" /><path d="M441 190l-8 5 8 5z" /><path d="M296 190l-8 5 8 5z" /><path d="M151 190l-8 5 8 5z" /></g>
 <path d="M50 170V108" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" /><path d="M45 110l5-9 5 9z" fill="#b42318" />
+<g stroke="#fff" stroke-width="1.5" stroke-dasharray="6 12" fill="none"><path class="anim-flow" d="M145 75h14M290 75h14M435 75h14M517 100v64M455 195h-14M310 195h-14M165 195h-14" /><path class="anim-flow-slow" d="M50 170V108" /></g>
 </svg>
 <figcaption>The eight steps of a typical data science workflow, with feedback from deployment back to the problem.</figcaption>
 </figure>
@@ -123,6 +125,15 @@ Technical metrics (accuracy, precision, recall, mean absolute error) must be tra
 </dl>
 </Example>
 
+## Key formulas for the data science workflow
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| z-score | z = (x − μ) ÷ σ | x = value, μ = mean, σ = standard deviation (same units as x); z is dimensionless |
+| Precision | TP ÷ (TP + FP) | TP = true positives, FP = false positives |
+| Recall | TP ÷ (TP + FN) | FN = false negatives |
+| Accuracy | (TP + TN) ÷ total predictions | TN = true negatives |
+
 ## 8. Deploy and monitor
 
 A model only creates value when it is used. Deployment can mean a dashboard, a scheduled report, an alert in a maintenance system or a real time API. After deployment:
@@ -141,3 +152,11 @@ A model only creates value when it is used. Deployment can mean a dashboard, a s
 - **Communicate:** a clear chart and a one paragraph conclusion usually matter more than the model details.
 
 The data science workflow is not a straight line but a cycle. Teams that keep the decision in view, invest in clean data and monitor results after deployment get far more value than those that focus only on algorithms. For large data volumes, see [the five Vs of big data](/ai-data-engineering/big-data-five-vs/).
+
+## Data science workflow interview and viva questions
+
+1. **Why should a project start with the decision rather than the data?** Projects fail far more often from a poorly defined question or bad data than from the wrong algorithm, so a measurable question and agreed success criteria keep the work focused.
+2. **Which step of the workflow usually takes the most time?** Cleaning and preparing data often takes more than half of the project time, and it has the biggest effect on the result.
+3. **What does a z-score tell you?** It measures how many standard deviations a value is from the mean, which makes it a common screening tool for unusual values during exploratory data analysis.
+4. **Why can a model with high accuracy still be useless?** When the event of interest is rare, a model can score high accuracy while missing most events or raising many false alarms, so precision and recall must be judged against the business cost.
+5. **Why must a deployed model be monitored?** Data drifts as processes, equipment and behaviour change, so performance must be tracked and the model retrained at a planned interval or when performance drops.

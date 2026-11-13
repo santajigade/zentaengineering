@@ -1,0 +1,195 @@
+---
+title: "Combine Harvester Working Principle and Parts"
+description: "Combine harvester working principle: cutting, threshing, separating, cleaning and grain handling, plus axial flow types and a field capacity example."
+pubDate: 2026-11-13
+reviewedDate: 2026-11-13
+discipline: agricultural-engineering
+subcategory: farm-machinery
+focusKeyword: "combine harvester"
+image: { src: /images/featured/combine-harvester-working-principle.webp, alt: "Combine Harvester Working Principle and Parts: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [combine-harvester, threshing, harvesting, farm-machinery, grain]
+faq:
+  - q: "Why is it called a combine harvester?"
+    a: "It combines operations that were once done by separate machines and gangs of workers: reaping (cutting) the crop, threshing the grain from the heads, and winnowing (cleaning) the grain from chaff. A combine does all of these in a single pass across the field."
+  - q: "What is the difference between a conventional and an axial flow combine?"
+    a: "A conventional combine threshes with a transverse cylinder and concave and separates with oscillating straw walkers. An axial flow combine uses one or two long rotors in line with the machine, where the crop spirals around the rotor several times, so threshing and separating happen in the same unit and centrifugal force replaces the walkers."
+  - q: "Can one combine harvest different crops?"
+    a: "Yes. By changing the header and adjusting cylinder or rotor speed, concave clearance, fan speed and sieve openings, the same combine can harvest wheat, rice, barley, soybean, maize and many other crops. Maize needs a special corn header with snapping rolls, and each crop has its own settings in the operator's manual."
+references:
+  - text: "R. Srivastava, C. E. Goering, R. P. Rohrbach and D. R. Buckmaster, Engineering Principles of Agricultural Machines, 2nd ed., ASABE, 2006"
+  - text: "ASAE EP496.3 FEB2006 (R2020), Agricultural Machinery Management, ASABE"
+  - text: "ASAE D497.7 MAR2011 (R2020), Agricultural Machinery Management Data, ASABE"
+  - text: "ISO 6689-1:1997, Equipment for harvesting: Combines and functional components, Part 1: Vocabulary"
+  - text: "ISO 8210:1989, Equipment for harvesting: Combine harvesters, Test procedure"
+  - text: "D. Hunt, Farm Power and Machinery Management, 10th ed., Iowa State University Press, 2001"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Combine harvester** is a self-propelled grain harvesting machine that cuts, threshes, separates, cleans and stores grain in one pass. The reel and cutterbar cut the crop, a rotating cylinder rubs grain from the heads against a concave, straw walkers or a rotor separate loose grain, and sieves with fan air remove chaff.
+
+</Key>
+
+A **combine harvester** turns a standing field of wheat, rice or soybean into clean grain in a tank and a swath of straw behind the machine, all in one pass. Its working principle is a chain of five functions: cutting and feeding, threshing, separating, cleaning, and grain handling. Each function is done by a separate group of components, and the operator tunes them to suit the crop and its moisture.
+
+## Combine harvester working principle in five stages
+
+The crop moves through the machine from front to rear. Grain and straw start together and are split step by step, with grain dropping down and straw and chaff leaving at the back.
+
+<figure class="anim">
+<svg width="720" height="380" viewBox="0 0 720 380" fill="none" role="img" aria-label="Side view of a conventional combine harvester moving to the left: the reel sweeps crop onto the cutterbar, the header auger and feeder chain carry it up to the threshing cylinder and concave, straw passes rearward over the straw walkers and leaves at the back, threshed grain falls onto the grain pan and sieves where fan air blows chaff out of the rear, and clean grain is carried by the clean grain auger and elevator up into the grain tank">
+<path d="M10 363H710" stroke="#7b8794" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2">
+<path d="M300 100H600V200L580 270H300Z" fill="#eef1f6" />
+<rect x="330" y="35" width="150" height="58" rx="6" fill="#fff7e0" />
+<path d="M118 160L208 112L228 140L136 186Z" fill="#e6f6f4" />
+<path d="M35 172H130V188H35Z" fill="#eef1f6" />
+<circle cx="117" cy="172" r="13" fill="#ffffff" />
+<path d="M208 150Q245 175 288 146" stroke-width="4" fill="none" />
+<circle cx="190" cy="325" r="38" fill="#0b2545" fill-opacity="0.85" />
+<circle cx="560" cy="340" r="23" fill="#0b2545" fill-opacity="0.85" />
+<circle cx="440" cy="300" r="10" fill="#fff7e0" />
+</g>
+<g class="anim-spin-rev"><circle cx="70" cy="110" r="38" stroke="#0b2545" stroke-width="2" fill="#ffffff" fill-opacity="0.01" />
+<path d="M32 110H108M70 72V148M43 83L97 137M97 83L43 137" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#0b2545"><circle cx="32" cy="110" r="4" /><circle cx="108" cy="110" r="4" /><circle cx="70" cy="72" r="4" /><circle cx="70" cy="148" r="4" /></g></g>
+<g class="anim-spin-rev"><circle cx="248" cy="118" r="30" stroke="#0b2545" stroke-width="2" fill="#ffe9e7" />
+<path d="M218 118H278M248 88V148M227 97L269 139M269 97L227 139" stroke="#b42318" stroke-width="3" /></g>
+<g class="anim-spin"><circle cx="275" cy="250" r="20" stroke="#0b2545" stroke-width="2" fill="#ffffff" />
+<path d="M255 250H295M275 230V270M261 236L289 264M289 236L261 264" stroke="#0b2545" stroke-width="2" /></g>
+<g stroke="#0b2545" stroke-width="2.5"><path d="M320 145L345 135L370 145L395 135L420 145L445 135L470 145L495 135L520 145L545 135L570 145" /><path d="M300 222L560 228M310 247L540 250" stroke-dasharray="8 4" /><path d="M215 200L320 214" /><path d="M330 255L430 292M540 255L452 294" stroke-width="1.5" /></g>
+<path d="M310 300V55H330" stroke="#a5790a" stroke-width="5" />
+<g stroke="#13a89e" stroke-width="4"><path d="M45 168H104L208 120L230 130" /><path d="M230 145L290 140L570 130L640 190" stroke="#c9a227" /></g>
+<g stroke="#a5790a" stroke-width="3"><path d="M245 165V198M330 214L330 245L440 292L320 300H310" /></g>
+<path d="M298 255L560 238L640 245" stroke="#4a90d9" stroke-width="3" />
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow" d="M45 168H104L208 120L230 130" /><path class="anim-flow-slow" d="M230 145L290 140L570 130L640 190" /><path class="anim-flow" d="M245 165V198M330 214L330 245L440 292L320 300H310" /><path class="anim-flow" d="M310 300V55H330" /><path class="anim-flow" d="M298 255L560 238L640 245" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="12" y="28" font-weight="700" class="anim-blink">1 Header</text><text x="12" y="44" font-size="11">reel, cutterbar, auger</text>
+<text x="245" y="58" font-weight="700" text-anchor="middle" class="anim-blink anim-d1">2 Threshing</text><text x="245" y="74" font-size="11" text-anchor="middle">cylinder, concave</text>
+<text x="405" y="60" text-anchor="middle" font-weight="700">Grain tank</text><text x="405" y="77" text-anchor="middle" font-size="11">clean grain</text>
+<text x="445" y="122" text-anchor="middle" font-weight="700" class="anim-blink anim-d2">3 Separating: straw walkers</text>
+<text x="612" y="168" font-size="11">Straw out</text>
+<text x="602" y="264" font-size="11">Chaff out</text>
+<text x="420" y="214" text-anchor="middle" font-weight="700" class="anim-blink anim-d3">4 Cleaning: sieves</text>
+<text x="275" y="292" text-anchor="middle" font-size="11">Fan</text>
+<text x="330" y="328" font-weight="700" class="anim-blink anim-d4">5 Grain handling</text><text x="330" y="344" font-size="11">auger and elevator</text>
+<text x="175" y="205" font-size="11" text-anchor="middle">Feeder</text>
+<text x="80" y="206" font-size="11" text-anchor="middle">Cutterbar</text>
+<text x="20" y="252" font-size="11">Travel direction: left</text>
+</g>
+</svg>
+<figcaption>Conventional combine harvester, side view (simplified). Green: crop, gold: straw, brown: grain, blue: cleaning air.</figcaption>
+</figure>
+
+1. **Cutting and feeding:** the reel pushes standing crop onto the cutterbar, the header auger gathers it to the centre, and the feeder chain lifts it to the threshing unit.
+2. **Threshing:** the rotating cylinder or rotor rubs and strikes the heads against the concave, detaching grain from the ears or pods.
+3. **Separating:** most threshed grain falls through the concave grate. Grain still trapped in the straw is shaken out on the straw walkers, or thrown out by centrifugal force in a rotary machine.
+4. **Cleaning:** grain, chaff and short straw fall onto a grain pan and then onto oscillating sieves. A fan blows air up through the sieves, carrying light chaff out of the rear while heavier grain falls through.
+5. **Grain handling:** a clean grain auger and elevator carry grain to the tank. An unloading auger empties the tank into a trailer, often while the combine keeps moving.
+
+## Main parts of a combine harvester
+
+The terms below follow the vocabulary of ISO 6689-1, which names the functional components of a combine.
+
+### Header
+
+The **header** (cutting platform) spans the full cutting width. A **reel** with bats or spring tines rotates so that its bats move rearward relative to the ground, holding the stalks against the knife and laying the cut crop onto the platform. The **cutterbar** is a reciprocating knife with sections sliding over stationary guards, the same scissor action as a mower. A cross auger with retractable fingers moves the crop to the centre opening. Draper headers use belts instead of an auger, and corn headers replace the reel and knife with gathering chains and snapping rolls that pull the ears from the stalk.
+
+### Feeder house
+
+The **feeder house** is an inclined chain and slat conveyor that carries the crop mat from the header up to the threshing unit. Hydraulic cylinders on the feeder house raise and lower the header to follow the ground.
+
+### Threshing cylinder and concave
+
+The **cylinder** is a drum fitted with rasp bars (or spikes for rice). It rotates at high peripheral speed above the **concave**, a curved grate of bars and wires. Grain is detached by impact and by rubbing as the crop is pulled through the narrowing gap. Two settings control threshing: **cylinder speed** and **concave clearance**. Higher speed or a smaller gap threshes more completely but cracks more grain and breaks straw into short pieces that load the cleaning shoe. The power for the cylinder and other drives comes from the engine through belts, chains and [gearboxes](/mechanical-engineering/types-of-gears/).
+
+### Straw walkers or separator rotor
+
+In a conventional combine a **beater** behind the cylinder delivers straw to several **straw walkers**, long stepped boxes driven by a crankshaft. Their tossing motion shakes loose grain down through the straw mat onto a return pan, while the straw moves rearward and drops out of the back, either in a swath for baling or through a chopper and spreader.
+
+### Cleaning shoe
+
+The **cleaning shoe** contains an upper sieve (chaffer) and a lower sieve with adjustable louvres, and a **cleaning fan** beneath them. The shoe oscillates to spread the material. Air from the fan lifts and carries chaff over the end of the chaffer. Unthreshed heads that do not pass the sieves but are too heavy to blow out collect in a **tailings** auger and return to the threshing unit for a second pass.
+
+### Grain tank and unloading
+
+Clean grain falls into a trough with the **clean grain auger** and rises by a paddle **elevator** to the **grain tank**. A swinging **unloading auger** transfers grain to a trailer. The grain then goes to storage or to a [grain drying system](/agricultural-engineering/grain-drying-methods/) if its moisture is too high for safe storage.
+
+## Types of combine harvester
+
+| Type | Threshing | Separating | Notes |
+| --- | --- | --- | --- |
+| Conventional (tangential) | Transverse cylinder and concave | Straw walkers | Gentle on straw, good where straw is baled |
+| Axial flow (rotary) | One or two longitudinal rotors | Same rotor, centrifugal force | Crop spirals around the rotor several times; fewer moving parts |
+| Hybrid | Transverse cylinder | Rotary separators instead of walkers | Combines a tangential threshing unit with rotors |
+| Self-propelled | Any of the above | Any | Engine, cab and header in one machine; the most common form |
+| Tractor-drawn or mounted | Usually tangential | Walkers | Driven from the tractor PTO, as covered in [tractor power transmission](/agricultural-engineering/tractor-power-transmission/) |
+
+Small self-propelled combines on tracks are widely used for paddy in wet fields, where wheels would sink.
+
+## Equations for combine harvester performance
+
+Two equations from the machinery management practice of ASAE EP496.3 and from Srivastava and co-authors describe combine performance. The peripheral speed of the threshing cylinder is:
+
+$$
+v_c = \frac{\pi D N}{60}
+$$
+
+The effective field capacity, the area actually harvested per hour, is:
+
+$$
+C_e = \frac{S \, W \, E_f}{10}
+$$
+
+Multiplying field capacity by crop yield gives the grain throughput the threshing and cleaning units must handle. Grain loss is expressed as a percentage of the total grain yield and is measured by the test procedures of ISO 8210.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A combine with a 4.2 m header works at 4.5 km/h with a field efficiency of 0.70 in wheat yielding 5.0 t/ha. The threshing cylinder is 0.6 m in diameter and turns at 900 rpm.</dd>
+<dt>Find</dt><dd>Theoretical and effective field capacity, grain throughput, area harvested in an 8 h day, and cylinder peripheral speed.</dd>
+<dt>Assumptions</dt><dd>Full header width is used; field efficiency includes turning and unloading time; yield is uniform across the field.</dd>
+<dt>Solution</dt><dd>Theoretical capacity = 4.5 × 4.2 ÷ 10 = 1.89 ha/h<br />Effective capacity = 4.5 × 4.2 × 0.70 ÷ 10 = 1.323 ha/h<br />Grain throughput = 1.323 × 5.0 = 6.615 t/h<br />Area per 8 h day = 1.323 × 8 = 10.58 ha<br />Cylinder speed = π × 0.6 × 900 ÷ 60 = 28.27 m/s</dd>
+<dt>Answer</dt><dd><strong>Effective field capacity about 1.32 ha/h, grain throughput about 6.6 t/h, about 10.6 ha per 8 h day, and cylinder peripheral speed about 28.3 m/s</strong></dd>
+<dt>Limitations</dt><dd>Real capacity is often limited by the threshing and cleaning units rather than the header, especially in heavy or damp straw, and field efficiency changes with field shape and how fast trailers arrive.</dd>
+</dl>
+</Example>
+
+## Key formulas for combine harvester performance
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Cylinder peripheral speed | v_c = π D N ÷ 60 | v_c in m/s, D = cylinder diameter in m, N = speed in rpm |
+| Theoretical field capacity | C_t = S W ÷ 10 | C_t in ha/h, S = forward speed in km/h, W = cutting width in m |
+| Effective field capacity | C_e = S W E_f ÷ 10 | E_f = field efficiency, a decimal |
+| Grain throughput | Q = C_e × Y | Q in t/h, Y = grain yield in t/ha |
+| Grain loss | L = (lost grain ÷ total grain) × 100 | L in percent of yield |
+
+## Adjustments and grain losses
+
+Combine losses occur at each stage, and each has a matching adjustment:
+
+- **Header loss:** shattered heads and uncut stalks. Adjust reel height, reel speed relative to ground speed and cutting height.
+- **Threshing loss:** unthreshed heads leaving with the straw. Increase cylinder speed or reduce concave clearance, one step at a time.
+- **Separation loss:** free grain carried out over the walkers or rotor, usually from feeding too much crop. Reduce forward speed.
+- **Cleaning loss:** grain blown out with chaff. Reduce fan speed or open the chaffer.
+- **Grain damage:** cracked kernels in the tank. Reduce cylinder speed or widen the concave gap.
+
+Modern combines measure losses with acoustic sensors behind the walkers and sieves and record yield with a grain flow sensor in the elevator. This yield data feeds the maps used in [precision agriculture](/agricultural-engineering/precision-agriculture-technologies/).
+
+## Maintenance of a combine harvester
+
+Before the season, check knife sections and guards for sharpness and alignment, inspect rasp bars and concave wires for wear, and check belt tension and chain condition. Grease bearings and drive points at the intervals in the operator's manual, using the lubricants described in [types of lubrication](/mechanical-engineering/types-of-lubrication/). Clean chaff from the engine compartment daily, because dry crop residue near hot surfaces is a fire risk. Always disengage drives and stop the engine before clearing a blockage.
+
+## Combine harvester interview and viva questions
+
+1. **What are the five functions of a combine harvester?** Cutting and feeding, threshing, separating, cleaning, and grain handling, done in one pass across the field.
+2. **What two settings control threshing?** Cylinder or rotor speed and concave clearance. Higher speed or a smaller gap threshes more completely but raises grain damage and straw breakage.
+3. **How do straw walkers separate grain?** A crankshaft gives the walkers a tossing motion that shakes loose grain down through the straw mat while the straw moves rearward and out of the machine.
+4. **What is the role of the cleaning fan?** It blows air up through the oscillating sieves so light chaff is carried out of the rear while heavier grain falls through to the clean grain auger.
+5. **How does an axial flow combine differ from a conventional one?** It uses a longitudinal rotor on which the crop spirals several times, so threshing and separating happen in one unit and centrifugal force replaces straw walkers.

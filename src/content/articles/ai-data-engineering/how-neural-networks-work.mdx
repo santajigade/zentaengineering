@@ -3,6 +3,7 @@ title: "How Neural Networks Work: Neurons, Layers and Training"
 description: "How neural networks work: artificial neurons, weights and biases, activation functions, layers, forward pass, loss, backpropagation and gradient descent."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-13
 discipline: ai-data-engineering
 subcategory: deep-learning
 focusKeyword: "how neural networks work"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**How neural networks work:** an artificial neural network is made of layers of simple units called neurons. Each neuron multiplies its inputs by **weights**, adds a **bias** and passes the sum through a non-linear **activation function**. Data flows forward from the input layer through hidden layers to the output layer. During **training**, a **loss function** measures how wrong the output is, **backpropagation** works out how each weight contributed to the error, and **gradient descent** adjusts the weights a little to reduce it. Repeating this over many examples teaches the network.
+**How neural networks work:** an artificial neural network is layers of simple neurons. Each neuron multiplies its inputs by **weights**, adds a **bias** and applies a non-linear **activation function**, and data flows forward from input to output. In training, a **loss function** measures the error, **backpropagation** finds each weight's gradient and **gradient descent** adjusts the weights.
 
 </Key>
 
@@ -56,18 +57,23 @@ Non-linear activations are essential: without them, many layers would behave lik
 
 ## Layers and architecture
 
-<figure>
+<figure class="anim">
 <svg width="580" height="290" viewBox="0 0 580 290" fill="none" role="img" aria-label="Feedforward neural network with an input layer of three neurons, two hidden layers of four neurons each, and an output layer of two neurons; every neuron connects to every neuron in the next layer">
 <g stroke="#c9d2de" stroke-width="1">
 <path d="M80 80L230 60M80 80L230 120M80 80L230 180M80 80L230 240M80 150L230 60M80 150L230 120M80 150L230 180M80 150L230 240M80 220L230 60M80 220L230 120M80 220L230 180M80 220L230 240" />
 <path d="M230 60L380 60M230 60L380 120M230 60L380 180M230 60L380 240M230 120L380 60M230 120L380 120M230 120L380 180M230 120L380 240M230 180L380 60M230 180L380 120M230 180L380 180M230 180L380 240M230 240L380 60M230 240L380 120M230 240L380 180M230 240L380 240" />
 <path d="M380 60L520 110M380 60L520 190M380 120L520 110M380 120L520 190M380 180L520 110M380 180L520 190M380 240L520 110M380 240L520 190" />
 </g>
+<g stroke="#13a89e" stroke-width="1" stroke-opacity="0.6" stroke-dasharray="6 12" fill="none">
+<path class="anim-flow" d="M80 80L230 60M80 80L230 120M80 80L230 180M80 80L230 240M80 150L230 60M80 150L230 120M80 150L230 180M80 150L230 240M80 220L230 60M80 220L230 120M80 220L230 180M80 220L230 240" />
+<path class="anim-flow anim-d1" d="M230 60L380 60M230 60L380 120M230 60L380 180M230 60L380 240M230 120L380 60M230 120L380 120M230 120L380 180M230 120L380 240M230 180L380 60M230 180L380 120M230 180L380 180M230 180L380 240M230 240L380 60M230 240L380 120M230 240L380 180M230 240L380 240" />
+<path class="anim-flow anim-d2" d="M380 60L520 110M380 60L520 190M380 120L520 110M380 120L520 190M380 180L520 110M380 180L520 190M380 240L520 110M380 240L520 190" />
+</g>
 <g stroke="#0b2545" stroke-width="2">
 <circle cx="80" cy="80" r="16" fill="#eef1f6" /><circle cx="80" cy="150" r="16" fill="#eef1f6" /><circle cx="80" cy="220" r="16" fill="#eef1f6" />
-<circle cx="230" cy="60" r="16" fill="#e6f6f4" /><circle cx="230" cy="120" r="16" fill="#e6f6f4" /><circle cx="230" cy="180" r="16" fill="#e6f6f4" /><circle cx="230" cy="240" r="16" fill="#e6f6f4" />
-<circle cx="380" cy="60" r="16" fill="#e6f6f4" /><circle cx="380" cy="120" r="16" fill="#e6f6f4" /><circle cx="380" cy="180" r="16" fill="#e6f6f4" /><circle cx="380" cy="240" r="16" fill="#e6f6f4" />
-<circle cx="520" cy="110" r="16" fill="#fff7e0" /><circle cx="520" cy="190" r="16" fill="#fff7e0" />
+<g class="anim-blink anim-d1"><circle cx="230" cy="60" r="16" fill="#e6f6f4" /><circle cx="230" cy="120" r="16" fill="#e6f6f4" /><circle cx="230" cy="180" r="16" fill="#e6f6f4" /><circle cx="230" cy="240" r="16" fill="#e6f6f4" /></g>
+<g class="anim-blink anim-d2"><circle cx="380" cy="60" r="16" fill="#e6f6f4" /><circle cx="380" cy="120" r="16" fill="#e6f6f4" /><circle cx="380" cy="180" r="16" fill="#e6f6f4" /><circle cx="380" cy="240" r="16" fill="#e6f6f4" /></g>
+<g class="anim-blink anim-d3"><circle cx="520" cy="110" r="16" fill="#fff7e0" /><circle cx="520" cy="190" r="16" fill="#fff7e0" /></g>
 </g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="80" y="275">Input layer</text><text x="305" y="282">Hidden layers</text><text x="520" y="240">Output layer</text>
@@ -140,3 +146,22 @@ The goal is good performance on new data, not just the training set. Engineers:
 - **Industry:** soft sensors, quality prediction and [predictive maintenance](/ai-data-engineering/predictive-maintenance-machine-learning/).
 
 Neural networks are one family of [supervised and unsupervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) methods. For small tabular datasets, simpler models such as gradient boosted trees often perform as well or better, so it is worth comparing before choosing a deep network.
+
+## Key formulas for how neural networks work
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Weighted sum of a neuron | z = Σ wᵢxᵢ + b (i = 1 to n) | xᵢ = inputs, wᵢ = weights, b = bias, n = number of inputs |
+| Neuron output | a = f(z) | f = activation function, a = activation passed to the next layer |
+| ReLU activation | f(z) = max(0, z) | Output is zero for negative z and equal to z otherwise |
+| Layer in matrix form | a = f(Wx + b) | W = weight matrix, x = input vector, b = bias vector |
+| Squared error loss | L = (a − y)² | a = prediction, y = target value |
+| Gradient descent update | w ← w − η ∂L/∂w | η = learning rate, ∂L/∂w = gradient of the loss with respect to the weight |
+
+## How neural networks work: interview and viva questions
+
+1. **What does a single artificial neuron compute?** It forms a weighted sum of its inputs plus a bias, then passes that sum through an activation function to give its output.
+2. **Why are non-linear activation functions needed?** Without them, any stack of layers collapses into one linear transformation. Non-linear functions such as ReLU let the network learn curved relationships.
+3. **What is backpropagation?** It applies the chain rule backwards through the network to find the gradient of the loss with respect to every weight. Gradient descent then uses those gradients to update the weights.
+4. **What is the vanishing gradient problem?** Sigmoid and tanh saturate for large inputs, so their gradients become tiny and learning in early layers slows. ReLU helps because its gradient does not shrink for positive inputs.
+5. **How can you tell a network is overfitting?** Training loss keeps falling while validation loss starts to rise. Plotting both losses after each epoch shows the point where this begins.

@@ -1,0 +1,213 @@
+---
+title: "Marine Propeller Types: FPP vs CPP"
+description: "Marine propeller types compared: fixed pitch (FPP) and controllable pitch (CPP) propellers, how they work, pitch, slip, advance ratio and selection."
+pubDate: 2026-11-13
+reviewedDate: 2026-11-13
+discipline: marine-engineering
+subcategory: marine-propulsion
+focusKeyword: "marine propeller types"
+image: { src: /images/featured/marine-propeller-types.webp, alt: "Marine Propeller Types: FPP vs CPP: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [marine-propeller, fixed-pitch-propeller, controllable-pitch-propeller, propeller-slip, advance-ratio]
+faq:
+  - q: "Can a ship with a fixed pitch propeller go astern?"
+    a: "Yes. On a ship with a fixed pitch propeller the shaft itself must turn the other way. A direct coupled slow speed two-stroke engine is stopped and restarted in the reverse direction, while geared installations use a reversing gearbox or a reversible engine."
+  - q: "Why do ships with shaft generators often use a controllable pitch propeller?"
+    a: "A shaft generator needs a near constant shaft speed to give a steady electrical frequency. With a CPP the engine and shaft can run at constant speed while ship speed and thrust are set by changing blade pitch, so the generator keeps working across the speed range."
+  - q: "What happens to a CPP if the hydraulic system fails?"
+    a: "Designs differ, but CPP systems are arranged so that the blades move to or stay at a safe pitch, and many have a mechanical locking or emergency arrangement to hold an ahead pitch so the ship can still get home. Classification rules require the pitch control system to be designed for such failures."
+references:
+  - text: "J. Carlton, Marine Propellers and Propulsion, 4th ed., Butterworth-Heinemann, 2018"
+  - text: "A. F. Molland, S. R. Turnock and D. A. Hudson, Ship Resistance and Propulsion, 2nd ed., Cambridge University Press, 2017"
+  - text: "D. A. Taylor, Introduction to Marine Engineering, 2nd revised ed., Butterworth-Heinemann, 1996"
+  - text: "E. V. Lewis (ed.), Principles of Naval Architecture, Vol. II: Resistance, Propulsion and Vibration, SNAME, 1988"
+  - text: "ITTC Recommended Procedures and Guidelines 7.5-02-03-02.1, Propulsion, Propulsor: Open Water Test, International Towing Tank Conference"
+  - text: "DNV Rules for Classification: Ships, DNV-RU-SHIP Pt.4 Ch.5 Rotating machinery, driven units, DNV, 2023"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Marine propeller types** are grouped mainly into the **fixed pitch propeller (FPP)**, whose blades are fixed to the hub at one pitch, and the **controllable pitch propeller (CPP)**, whose blades are turned on the hub by a hydraulic servo. An FPP is simpler and cheaper; a CPP gives thrust control and reversing without changing shaft rotation.
+
+</Key>
+
+Of all the marine propeller types used on ships, two dominate: the fixed pitch propeller and the controllable pitch propeller. Both are screw propellers that turn engine torque into thrust, but they differ in how thrust is controlled, how the ship goes astern, and how the propeller suits the engine. This comparison follows Carlton, Marine Propellers and Propulsion, and Taylor, Introduction to Marine Engineering.
+
+## How a screw propeller makes thrust
+
+A propeller blade is a rotating wing. As it turns, each blade section meets the water at a small angle of attack and produces lift. The forward component of that lift, summed over all blades, is the **thrust**; the rotational drag of the blades is resisted by the **torque** from the engine. Thrust pushes the ship forward through the thrust block, while the water is accelerated aft in the propeller slipstream.
+
+The geometry is described by the **pitch** P: the distance the propeller would advance in one revolution if it moved like a screw in a solid nut. Pitch divided by diameter, the **pitch ratio** P/D, is a key design parameter. In water the propeller advances less than its pitch each revolution, and the difference is the **slip**.
+
+The flow arriving at the propeller is slowed by the hull boundary layer, so the speed of advance Va is lower than ship speed V. This is described by the **wake fraction** w, covered with the rest of the powering chain in [ship resistance and powering](/marine-engineering/ship-resistance-and-powering/).
+
+$$
+V_a = V(1 - w), \qquad J = \frac{V_a}{nD}
+$$
+
+The **advance ratio** J is the non-dimensional speed used in open water charts. Model tests to the ITTC open water procedure plot thrust coefficient, torque coefficient and efficiency against J.
+
+## Marine propeller types: FPP and CPP compared
+
+<figure class="anim">
+<svg width="640" height="400" viewBox="0 0 640 400" fill="none" role="img" aria-label="Marine propeller types diagram: end views from aft of a four blade fixed pitch propeller with blades cast integral with a small hub and a four blade controllable pitch propeller with bolted blades on a larger hub, both turning clockwise for ahead as right-hand propellers; below, a side view of a CPP shaft line showing a hydraulic power unit feeding oil through an oil distribution box and a hollow shaft to a servo piston in the hub, with return oil flowing back, and water accelerated aft by the propeller">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="160" y="24">Fixed pitch propeller (FPP)</text>
+<text x="480" y="24">Controllable pitch propeller (CPP)</text>
+</g>
+<g transform="translate(160 118)">
+<g class="anim-spin">
+<circle r="74" fill="none" stroke="none" />
+<g fill="#c9a227" stroke="#0b2545" stroke-width="1.5">
+<ellipse cx="0" cy="-44" rx="17" ry="30" transform="rotate(12)" />
+<ellipse cx="0" cy="-44" rx="17" ry="30" transform="rotate(102)" />
+<ellipse cx="0" cy="-44" rx="17" ry="30" transform="rotate(192)" />
+<ellipse cx="0" cy="-44" rx="17" ry="30" transform="rotate(282)" />
+</g>
+<circle r="16" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<circle r="5" fill="#0b2545" />
+</g>
+</g>
+<g transform="translate(480 118)">
+<g class="anim-spin">
+<circle r="76" fill="none" stroke="none" />
+<g fill="#c9a227" stroke="#0b2545" stroke-width="1.5">
+<ellipse cx="0" cy="-48" rx="16" ry="28" transform="rotate(12)" />
+<ellipse cx="0" cy="-48" rx="16" ry="28" transform="rotate(102)" />
+<ellipse cx="0" cy="-48" rx="16" ry="28" transform="rotate(192)" />
+<ellipse cx="0" cy="-48" rx="16" ry="28" transform="rotate(282)" />
+</g>
+<circle r="25" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#eef1f6" stroke="#0b2545" stroke-width="1">
+<circle cx="0" cy="-17" r="5" transform="rotate(12)" />
+<circle cx="0" cy="-17" r="5" transform="rotate(102)" />
+<circle cx="0" cy="-17" r="5" transform="rotate(192)" />
+<circle cx="0" cy="-17" r="5" transform="rotate(282)" />
+</g>
+<circle r="5" fill="#0b2545" />
+</g>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="320" y="108">Viewed from aft:</text>
+<text x="320" y="124">right-hand, ahead</text>
+<text x="320" y="140">(clockwise)</text>
+<text x="160" y="210">Blades cast with small hub</text>
+<text x="160" y="225">Pitch fixed</text>
+<text x="480" y="210">Blades bolted to larger hub</text>
+<text x="480" y="225">Pitch set by servo in hub</text>
+</g>
+<line x1="10" y1="236" x2="630" y2="236" stroke="#d0d6de" stroke-width="1" />
+<g stroke="#9fd3f0" stroke-width="2"><path d="M260 268H15M260 372H15" /></g>
+<g stroke="#2b7bb9" stroke-width="2" fill="none"><path class="anim-flow" d="M260 268H15M260 372H15" /></g>
+<rect x="130" y="310" width="440" height="20" fill="#d0d6de" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#c9a227" stroke="#0b2545" stroke-width="1.5">
+<ellipse cx="100" cy="280" rx="9" ry="26" transform="rotate(-12 100 280)" />
+<ellipse cx="100" cy="360" rx="9" ry="26" transform="rotate(12 100 360)" />
+</g>
+<rect x="70" y="302" width="60" height="36" rx="10" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<rect x="84" y="308" width="30" height="24" fill="#eef1f6" stroke="#0b2545" stroke-width="1" />
+<rect x="94" y="309" width="6" height="22" fill="#0b2545" />
+<rect x="355" y="300" width="50" height="40" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<rect x="340" y="246" width="100" height="32" rx="4" fill="#e6f6f4" stroke="#0b2545" stroke-width="1.5" />
+<rect x="570" y="296" width="60" height="48" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#b42318" stroke-width="3" fill="none"><path d="M375 278V316H100" /></g>
+<g stroke="#13a89e" stroke-width="3" fill="none"><path d="M100 324H395V278" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M375 278V316H100" /><path class="anim-flow" d="M100 324H395V278" /></g>
+<g stroke="#0b2545" stroke-width="1.5"><path d="M560 262H615" /><path d="M609 257L617 262L609 267" fill="#0b2545" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="10" y="254" font-size="13" font-weight="700" text-anchor="start">CPP shaft line, side view</text>
+<text x="390" y="260">Hydraulic</text><text x="390" y="273">power unit</text>
+<text x="380" y="356">OD box</text>
+<text x="600" y="316">Engine</text><text x="600" y="331">or gear</text>
+<text x="588" y="254">Forward</text>
+<text x="500" y="304">Hollow shaft</text>
+<text x="240" y="305" fill="#b42318">Supply oil</text>
+<text x="260" y="346" fill="#13a89e">Return oil</text>
+<text x="100" y="396">Hub servo</text>
+<text x="190" y="388" fill="#2b7bb9">Water aft</text>
+</g>
+</svg>
+<figcaption>Fixed pitch and controllable pitch propellers seen from aft, and the CPP hydraulic oil path from the power unit through the OD box and hollow shaft to the servo piston in the hub.</figcaption>
+</figure>
+
+| Feature | Fixed pitch propeller (FPP) | Controllable pitch propeller (CPP) |
+| --- | --- | --- |
+| Blade attachment | Usually cast in one piece with the hub (monobloc) | Separate blades bolted to a rotatable blade palm in the hub |
+| Thrust control | Shaft speed only | Blade pitch, and shaft speed if wanted |
+| Going astern | Reverse shaft rotation (reversible engine or reversing gear) | Shaft keeps turning one way; blades move through zero to negative pitch |
+| Hub size | Small | Larger, to house the pitch mechanism |
+| Efficiency at design point | Higher | Slightly lower, mainly from the larger hub and blade root limits |
+| Off-design matching | Fixed by the chosen pitch | Pitch can be set to suit load, speed and sea state |
+| Shaft generator | Needs extra equipment for constant frequency | Easy, with constant shaft speed |
+| Complexity and cost | Low | Higher: hydraulics, OD box, hollow shaft, seals |
+| Blade damage | Whole propeller usually removed | Single blades can often be replaced |
+| Typical ships | Large cargo ships, tankers, bulk carriers | Ferries, tugs, offshore vessels, fishing vessels, naval ships |
+
+## Fixed pitch propellers explained
+
+A **fixed pitch propeller** is normally cast as a single piece, blades and hub together, in a copper alloy such as nickel aluminium bronze or manganese bronze, then machined and polished. Carlton notes that this simple, robust form makes the FPP the most common choice for merchant ships. With no moving parts, it has nothing to adjust and little to maintain apart from inspection and polishing at dry docking.
+
+Because pitch is fixed, the designer must pick one pitch that matches the engine at the chosen service condition. Thrust is changed only by changing shaft speed. On a large ship with a direct coupled [two-stroke marine diesel engine](/marine-engineering/two-stroke-marine-diesel-engine/), the engine itself is reversed to go astern, so the number of starts available from the air receivers matters during manoeuvring.
+
+The weakness of a fixed pitch is matching. As the hull fouls or the ship meets heavy weather, the propeller becomes "heavy running": it needs more torque for the same speed, and the engine may reach its torque limit before its rated speed. Designers allow for this with a light running margin when choosing pitch. Built-up FPPs with bolted blades also exist, but are less common.
+
+## Controllable pitch propellers explained
+
+A **controllable pitch propeller** has blades mounted on palms that can rotate in the hub. Taylor describes the usual arrangement shown in the diagram: a hydraulic power unit supplies oil to an **oil distribution (OD) box** on the shaft line. From there the oil passes along a bore in the hollow propeller shaft to a **servo piston** in the hub. The piston moves a crosshead linked to crank pins on each blade palm, turning all the blades together. Return oil flows back along the shaft. A feedback rod or sensor reports actual pitch to the control system.
+
+This gives several benefits:
+
+- **Thrust control at constant shaft speed:** the engine can run at a steady speed while the bridge changes pitch, which suits a [shaft generator](/marine-engineering/ship-electrical-power-system/) feeding the main switchboard.
+- **Fast reversing:** pitch moves through zero to astern without stopping the engine, giving quick stopping and fine manoeuvring for ferries and tugs.
+- **Good matching:** pitch can be set to absorb full power across different loads, such as a tug free running and towing, or a trawler on passage and fishing.
+- **Non-reversing machinery:** medium speed engines with a reduction gearbox (see [types of gears](/mechanical-engineering/types-of-gears/)) or gas turbines need no reversing gear.
+
+The costs are complexity and some efficiency. The hub must be larger to hold the mechanism, and blade root width is limited so blades can turn past each other without clashing. Molland, Turnock and Hudson note that this generally gives a CPP a slightly lower efficiency than an equivalent FPP at its design point. Seals at the blade palms and the stern tube must keep oil in and water out, and the hydraulic system adds machinery to maintain, much like other [ship auxiliary machinery](/marine-engineering/ship-auxiliary-machinery/).
+
+## When to use which
+
+Choose an **FPP** when the ship spends most of its life at one steady service condition, such as a large tanker, bulk carrier or container ship driven by a slow speed engine. It gives the best efficiency for that condition at the lowest cost and maintenance.
+
+Choose a **CPP** when the operating profile is varied or manoeuvring is frequent: ferries, tugs, supply vessels, dredgers, fishing vessels and naval ships. It is also the natural choice when a shaft generator must run at constant frequency or when the engine is non-reversing.
+
+Other propulsor types exist for special duties, including ducted propellers, contra-rotating propellers, waterjets and azimuthing thrusters, but FPP and CPP remain the two basic screw propeller choices.
+
+## Key formulas for marine propeller types
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Pitch ratio | P/D | P = pitch in m, D = diameter in m |
+| Speed of advance | Va = V (1 - w) | V = ship speed in m/s, w = Taylor wake fraction |
+| Advance ratio | J = Va / (n D) | n = shaft speed in rev/s |
+| Apparent slip | s_a = 1 - V / (P n) | Based on ship speed |
+| Real slip | s_r = 1 - Va / (P n) | Based on speed of advance |
+| Open water efficiency | η0 = J KT / (2π KQ) | KT = thrust coefficient, KQ = torque coefficient |
+
+$$
+s_a = 1 - \frac{V}{Pn}, \qquad s_r = 1 - \frac{V_a}{Pn}, \qquad \eta_0 = \frac{J}{2\pi}\frac{K_T}{K_Q}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A ship with a 6.0 m diameter propeller of 5.0 m pitch turning at 100 rpm, ship speed 15 knots, wake fraction 0.25.</dd>
+<dt>Find</dt><dd>Pitch ratio, apparent slip, real slip and advance ratio.</dd>
+<dt>Assumptions</dt><dd>1 knot = 0.5144 m/s; pitch is taken as a single effective value over the blade; steady straight running.</dd>
+<dt>Solution</dt><dd>P/D = 5.0 ÷ 6.0 = 0.833<br />V = 15 × 0.5144 = 7.716 m/s; n = 100 ÷ 60 = 1.667 rev/s<br />P n = 5.0 × 1.667 = 8.333 m/s<br />s_a = 1 - 7.716 ÷ 8.333 = 0.074<br />Va = 7.716 × (1 - 0.25) = 5.787 m/s<br />s_r = 1 - 5.787 ÷ 8.333 = 0.306<br />J = 5.787 ÷ (1.667 × 6.0) = 0.579</dd>
+<dt>Answer</dt><dd><strong>P/D = 0.83, apparent slip about 7.4%, real slip about 31%, advance ratio J = 0.58</strong></dd>
+<dt>Limitations</dt><dd>Real propellers have pitch varying with radius, and wake varies with draught and fouling. Thrust and efficiency at this J must be read from the open water chart of the actual design.</dd>
+</dl>
+</Example>
+
+For an FPP this J is fixed by speed and rpm. For a CPP, changing pitch moves the propeller to a different curve on its chart, which is how it keeps absorbing full power at different speeds.
+
+## Marine propeller types interview and viva questions
+
+1. **What is the main difference between an FPP and a CPP?** An FPP has blades fixed at one pitch, so thrust is controlled by shaft speed; a CPP turns its blades in the hub so thrust can be changed at constant shaft speed.
+2. **How is pitch changed on a CPP?** Hydraulic oil from a power unit passes through an OD box and the hollow shaft to a servo piston in the hub, which turns the blade palms through a crosshead and crank pins.
+3. **Why is a CPP slightly less efficient than an FPP at the design point?** Its larger hub and narrower blade roots, needed to house the mechanism and avoid blade clash, reduce efficiency a little.
+4. **What is the difference between apparent slip and real slip?** Apparent slip uses ship speed, while real slip uses the speed of advance, which is lower because of the wake, so real slip is larger.
+5. **What is the advance ratio?** J = Va / (n D) is the non-dimensional speed used to read thrust, torque and efficiency from open water charts.

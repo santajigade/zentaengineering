@@ -1,0 +1,188 @@
+---
+title: "Transformer Losses and Efficiency Explained"
+description: "Transformer losses explained: core and copper loss, efficiency, maximum efficiency, all-day efficiency and a worked example with clear formulas."
+pubDate: 2026-11-13
+reviewedDate: 2026-11-13
+discipline: electrical-engineering
+subcategory: transformers
+focusKeyword: "transformer losses"
+image: { src: /images/featured/transformer-losses-and-efficiency.webp, alt: "Transformer Losses and Efficiency Explained: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [transformer, transformer-losses, efficiency, core-loss, copper-loss]
+faq:
+  - q: "Why is core loss called a constant loss?"
+    a: "Core loss depends on the applied voltage and frequency, which stay almost fixed in normal service. It is therefore nearly the same from no load to full load, unlike copper loss, which changes with the square of the load current."
+  - q: "Which test measures the core loss and the copper loss of a transformer?"
+    a: "The open-circuit (no-load) test at rated voltage measures the core loss, and the short-circuit test at rated current measures the full load copper loss. Both tests use little energy because the transformer delivers no real output power."
+  - q: "Why are distribution transformers designed for maximum efficiency below full load?"
+    a: "Distribution transformers stay energised all day but are often lightly loaded. Designing them with low core loss places maximum efficiency at a lower load and improves the all-day (energy) efficiency."
+references:
+  - text: "IEC 60076-1:2011, Power transformers, Part 1: General"
+  - text: "IEEE Std C57.12.00-2015, IEEE Standard for General Requirements for Liquid-Immersed Distribution, Power, and Regulating Transformers"
+  - text: "S. J. Chapman, Electric Machinery Fundamentals, 5th ed., McGraw-Hill, 2012"
+  - text: "B. L. Theraja and A. K. Theraja, A Textbook of Electrical Technology, Vol. II: AC and DC Machines, S. Chand"
+  - text: "D. P. Kothari and I. J. Nagrath, Electric Machines, 4th ed., McGraw-Hill Education"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Transformer losses** are the power lost as heat inside a transformer while it transfers energy. They are mainly **core loss** (hysteresis and eddy current loss in the core, almost constant) and **copper loss** (I²R loss in the windings, varying with load squared). Efficiency is output over input, and it is highest when copper loss equals core loss.
+
+</Key>
+
+Transformer losses decide how much of the input power actually reaches the load and how hot the transformer runs. A large power transformer may be more than 99% efficient, yet the small percentage lost is still a large amount of energy over a lifetime of continuous service. This article explains where the losses occur, how efficiency is calculated, and why maximum efficiency and all-day efficiency matter when choosing a transformer.
+
+If you are new to the subject, start with the [transformer working principle](/electrical-engineering/transformer-working-principle/), which explains mutual induction, construction and the EMF equation.
+
+## Where transformer losses occur
+
+A transformer has no moving parts, so there is no friction or windage loss. All of its losses occur in two places: the magnetic core and the windings.
+
+<figure class="anim">
+<svg width="640" height="310" viewBox="0 0 640 310" fill="none" role="img" aria-label="Single-phase transformer with an AC supply feeding the primary winding on the left limb of a laminated core and a load on the secondary winding on the right limb. Power flows from primary to secondary. Core loss from hysteresis and eddy currents occurs in the core, and copper loss I squared R occurs in the primary and secondary windings.">
+<g stroke="#13a89e" stroke-width="2.5"><path d="M60 52H572" /><path d="M572 44L588 52L572 60Z" fill="#13a89e" /></g>
+<path class="anim-flow" d="M60 52H570" stroke="#fff" stroke-width="2.5" />
+<path d="M200 80H440V260H200Z M250 130V210H390V130Z" fill="#c9d1dc" fill-rule="evenodd" stroke="#0b2545" stroke-width="2" />
+<path d="M225 105H415V235H225Z" stroke="#0b2545" stroke-width="1.5" stroke-dasharray="6 4" />
+<path class="anim-flow-slow" d="M225 105H415V235H225Z" stroke="#fff" stroke-width="1.5" />
+<g stroke="#b45309" stroke-width="2">
+<rect x="188" y="125" width="74" height="90" rx="4" fill="#f6c58f" />
+<rect x="378" y="125" width="74" height="90" rx="4" fill="#f6c58f" />
+<path d="M188 143H262M188 161H262M188 179H262M188 197H262M378 143H452M378 161H452M378 179H452M378 197H452" />
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<circle cx="80" cy="170" r="22" fill="#eef1f6" />
+<path d="M68 170C72 160 76 160 80 170C84 180 88 180 92 170" />
+<path d="M80 148V135H188M80 192V205H188M452 135H550V145M452 205H550V195" />
+<rect x="520" y="145" width="60" height="50" rx="4" fill="#fff7e0" />
+</g>
+<circle class="anim-pulse" cx="320" cy="105" r="9" fill="#d92d20" />
+<circle class="anim-pulse" cx="225" cy="170" r="9" fill="#d92d20" />
+<circle class="anim-pulse" cx="415" cy="170" r="9" fill="#d92d20" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="320" y="36" fill="#13a89e" font-weight="700">Power flow: primary to secondary</text>
+<text x="320" y="73">Core loss: hysteresis and eddy currents</text>
+<text x="320" y="166">Mutual</text><text x="320" y="182">flux Φ</text>
+<text x="80" y="235">AC supply</text><text x="80" y="250">P_in</text>
+<text x="550" y="174">Load</text><text x="550" y="222">P_out</text>
+<text x="225" y="285">Copper loss I²R (primary)</text>
+<text x="415" y="285">Copper loss I²R (secondary)</text>
+</g>
+</svg>
+<figcaption>Where transformer losses occur: core loss in the laminated core and copper loss in both windings, while power flows from primary to secondary.</figcaption>
+</figure>
+
+### Core (iron) loss
+
+Core loss is caused by the alternating flux in the steel core. It has two parts:
+
+- **Hysteresis loss:** energy used each cycle to reverse the magnetic domains in the steel. It is proportional to frequency and to roughly the 1.6 power of peak flux density (the Steinmetz relation). Grain oriented silicon steel has a narrow hysteresis loop and keeps this loss low.
+- **Eddy current loss:** the changing flux induces circulating currents in the core itself. This loss is proportional to the square of frequency, flux density and lamination thickness, which is why cores are built from thin insulated laminations.
+
+Since flux depends on applied voltage and frequency, and both stay almost fixed in service, core loss is treated as a **constant loss** that is present whenever the transformer is energised, even at no load.
+
+### Copper (winding) loss
+
+Copper loss is the I²R heating in the primary and secondary winding resistances. It depends on load current, so it is a **variable loss**. At a fraction x of full load, copper loss is x² times the full load copper loss. Half load therefore produces only one quarter of the full load copper loss.
+
+### Stray and dielectric losses
+
+Leakage flux induces small eddy currents in the tank, clamps and winding conductors, producing **stray load loss**. Insulation also has a very small dielectric loss. IEC 60076-1 and IEEE C57.12.00 treat stray loss as part of the measured load loss, so in simple calculations it is included in the copper loss figure.
+
+## How transformer losses are measured
+
+Two standard tests give the loss values without loading the transformer with its full output power:
+
+1. **Open-circuit (no-load) test:** rated voltage is applied to one winding with the other open. The wattmeter reads the core loss, because the no-load current is small and its copper loss is negligible.
+2. **Short-circuit (load) test:** one winding is shorted and a reduced voltage is applied until rated current flows. Since flux is very low, the wattmeter reads the full load copper loss.
+
+Good [insulation resistance](/electrical-engineering/insulation-resistance-test/) readings are normally confirmed before these tests on site.
+
+## Efficiency and transformer losses
+
+Efficiency is the ratio of output power to input power. Input equals output plus all losses:
+
+$$
+\eta = \frac{P_\text{out}}{P_\text{out} + P_\text{i} + P_\text{cu}} \times 100\%
+$$
+
+At a load fraction x of the rated apparent power S, with load [power factor](/electrical-engineering/power-factor/) cos φ:
+
+$$
+\eta = \frac{x\,S\cos\varphi}{x\,S\cos\varphi + P_\text{i} + x^2 P_\text{cu,fl}} \times 100\%
+$$
+
+Here P_i is the core loss and P_cu,fl is the full load copper loss. A lower power factor reduces output for the same current, so efficiency falls even though the losses stay the same. This is also why transformers are rated in kVA rather than kW.
+
+### Condition for maximum efficiency
+
+For a fixed power factor, efficiency is highest when the variable loss equals the constant loss:
+
+$$
+x^2 P_\text{cu,fl} = P_\text{i} \quad\Rightarrow\quad x = \sqrt{\frac{P_\text{i}}{P_\text{cu,fl}}}
+$$
+
+The kVA at maximum efficiency is x times the rated kVA. Designers choose the ratio of core loss to copper loss so that this peak falls at the load the transformer will see most often.
+
+### All-day (energy) efficiency
+
+A distribution transformer stays energised for 24 hours, but its load varies. Its energy efficiency over a day is:
+
+$$
+\eta_\text{all-day} = \frac{E_\text{out,24h}}{E_\text{out,24h} + 24\,P_\text{i} + \sum x_k^2 P_\text{cu,fl}\, t_k} \times 100\%
+$$
+
+where t_k is the time in hours spent at load fraction x_k. Because the core loss runs all day, low core loss designs often give the best all-day efficiency for lightly loaded distribution transformers.
+
+## Worked example: transformer losses and efficiency
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 200 kVA single-phase transformer has a core loss of 1.5 kW (open-circuit test) and a full load copper loss of 3.0 kW (short-circuit test). The load power factor is 0.8 lagging.</dd>
+<dt>Find</dt><dd>(a) Efficiency at full load. (b) The load in kVA at which efficiency is maximum, and the maximum efficiency.</dd>
+<dt>Assumptions</dt><dd>Rated voltage and frequency, so core loss is constant. Stray loss is included in the measured copper loss. Power factor is the same at all loads.</dd>
+<dt>Solution</dt><dd>(a) Output = 1 × 200 × 0.8 = 160 kW<br />Total loss = 1.5 + 3.0 = 4.5 kW<br />η = 160 ÷ (160 + 4.5) = 0.97264, or 97.26%<br />(b) x = √(1.5 ÷ 3.0) = 0.7071<br />Load = 0.7071 × 200 = 141.4 kVA<br />Output = 141.4 × 0.8 = 113.14 kW<br />Copper loss = 0.7071² × 3.0 = 1.5 kW, equal to core loss, so total loss = 3.0 kW<br />η_max = 113.14 ÷ (113.14 + 3.0) = 0.97417, or 97.42%</dd>
+<dt>Answer</dt><dd><strong>Full load efficiency is about 97.26%. Maximum efficiency is about 97.42% at about 141 kVA (70.7% of rated load).</strong></dd>
+<dt>Limitations</dt><dd>Winding resistance rises with temperature, so copper loss should be corrected to the reference temperature given in the standard. Harmonic currents add extra stray loss that this simple model ignores.</dd>
+</dl>
+</Example>
+
+<Calculator path="electrical/transformer-efficiency" title="Transformer Efficiency Calculator" />
+
+## Reducing transformer losses
+
+- **Core material:** cold rolled grain oriented silicon steel or amorphous metal reduces hysteresis loss.
+- **Thin laminations:** thinner insulated sheets cut eddy current loss.
+- **Larger conductor section:** lowers winding resistance and copper loss, at the cost of more copper or aluminium.
+- **Correct sizing:** a transformer far larger than the load keeps a high core loss for little output, while an overloaded one has high copper loss. Sizing practice is similar to [cable sizing](/electrical-engineering/cable-sizing/), where current and heating set the limit.
+- **Good power factor:** correcting power factor lowers current for the same kW and reduces I²R loss in the transformer and the wider [power system](/electrical-engineering/generation-transmission-distribution/).
+
+## Key formulas for transformer losses
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Efficiency | η = P_out ÷ (P_out + P_i + P_cu) × 100% | P_out, P_i, P_cu in kW |
+| Copper loss at part load | P_cu = x² × P_cu,fl | x = load fraction of rated kVA, P_cu,fl = full load copper loss in kW |
+| Copper loss from current | P_cu = I1² R1 + I2² R2 | I in A, R in Ω |
+| Efficiency at load fraction | η = x S cos φ ÷ (x S cos φ + P_i + x² P_cu,fl) | S = rated kVA, cos φ = load power factor |
+| Load for maximum efficiency | x = √(P_i ÷ P_cu,fl) | dimensionless; kVA at η_max = x × S |
+| All-day efficiency | η_all-day = E_out ÷ (E_out + 24 P_i + Σ x_k² P_cu,fl t_k) | energy in kWh, t_k in h |
+
+## Transformer losses interview and viva questions
+
+1. **What are the main transformer losses?** Core loss (hysteresis and eddy current loss in the core) and copper loss (I²R loss in the windings), with small stray and dielectric losses.
+2. **Why are transformer cores laminated?** Thin insulated laminations break up the eddy current paths, and eddy current loss falls with the square of lamination thickness.
+3. **What is the condition for maximum efficiency?** Efficiency is maximum when copper loss equals core loss, which occurs at a load fraction equal to the square root of core loss divided by full load copper loss.
+4. **Why does efficiency fall at low power factor?** The losses depend on voltage and current, not on power factor, so a lower power factor reduces output power for the same losses.
+5. **What is all-day efficiency?** It is the ratio of energy output to energy input over 24 hours, and it matters most for distribution transformers that are energised all day at varying load.
+
+## Related reading
+
+- [Transformer Working Principle, Construction and EMF Equation](/electrical-engineering/transformer-working-principle/)
+- [Power Factor Explained: Causes, Effects and Correction](/electrical-engineering/power-factor/)
+- [Generation, Transmission and Distribution of Electricity](/electrical-engineering/generation-transmission-distribution/)

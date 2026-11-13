@@ -3,6 +3,7 @@ title: "Classification vs Detection vs Segmentation in Vision"
 description: "Classification vs detection vs segmentation in computer vision: outputs, labels, models such as ResNet, YOLO and U-Net, metrics like IoU and mAP, and use cases."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-13
 discipline: ai-data-engineering
 subcategory: computer-vision
 focusKeyword: "classification vs detection vs segmentation"
@@ -30,26 +31,26 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In **classification vs detection vs segmentation**, the difference is how much the model tells you about an image. **Image classification** gives one label for the whole image ("this is a cat"). **Object detection** finds each object and draws a **bounding box** with a label and confidence score. **Segmentation** labels every **pixel**, giving the exact shape of each object or region. Each step adds detail but also needs more labelling effort and more compute.
+**Classification vs detection vs segmentation** compares three computer vision tasks by how much detail they give about an image. Image classification assigns one label to the whole image, object detection draws a labelled bounding box with a confidence score around each object, and segmentation labels every pixel to give exact shapes, at rising labelling and compute cost.
 
 </Key>
 
 Computer vision teaches machines to understand images and video. Almost every practical vision system, from a phone camera to a factory inspection line, is built on one of three core tasks. Choosing the right one is the first design decision and drives the data you need, the model you train and how you measure success.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Three panels of the same scene with a car and a person. Panel one, classification, shows a single label for the whole image. Panel two, detection, shows a bounding box around the car and another around the person. Panel three, segmentation, shows the car and person filled with coloured pixel masks">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="100" y="24" font-weight="700">Classification</text><text x="300" y="24" font-weight="700">Detection</text><text x="500" y="24" font-weight="700">Segmentation</text>
 <text x="100" y="230">One label: "street scene"</text><text x="300" y="230">Box + label per object</text><text x="500" y="230">Class for every pixel</text>
 </g>
-<g stroke="#0b2545" stroke-width="2"><rect x="20" y="40" width="160" height="160" fill="#eef1f6" /><rect x="220" y="40" width="160" height="160" fill="#eef1f6" /><rect x="420" y="40" width="160" height="160" fill="#eef1f6" /></g>
+<g stroke="#0b2545" stroke-width="2"><rect class="anim-blink anim-d1" x="20" y="40" width="160" height="160" fill="#eef1f6" /><rect class="anim-blink anim-d2" x="220" y="40" width="160" height="160" fill="#eef1f6" /><rect class="anim-blink anim-d3" x="420" y="40" width="160" height="160" fill="#eef1f6" /></g>
 <g stroke="#7b8794" stroke-width="2" fill="none">
 <path d="M35 170h80v-22l-14-18h-46l-12 18h-8z" /><circle cx="52" cy="172" r="9" /><circle cx="100" cy="172" r="9" /><circle cx="145" cy="98" r="9" /><path d="M145 107v40M145 120l-12 14M145 120l12 14M145 147l-10 25M145 147l10 25" />
 <path d="M235 170h80v-22l-14-18h-46l-12 18h-8z" /><circle cx="252" cy="172" r="9" /><circle cx="300" cy="172" r="9" /><circle cx="345" cy="98" r="9" /><path d="M345 107v40M345 120l-12 14M345 120l12 14M345 147l-10 25M345 147l10 25" />
 </g>
-<g stroke-width="2.5" fill="none"><rect x="228" y="124" width="94" height="60" stroke="#13a89e" /><rect x="328" y="84" width="34" height="92" stroke="#f5b800" /></g>
+<g class="anim-blink anim-d2" stroke-width="2.5" fill="none"><rect x="228" y="124" width="94" height="60" stroke="#13a89e" /><rect x="328" y="84" width="34" height="92" stroke="#f5b800" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" font-weight="700"><text x="230" y="118" fill="#13a89e">car 0.94</text><text x="377" y="78" fill="#b8860b" text-anchor="end">person 0.91</text></g>
-<g stroke="#0b2545" stroke-width="1.5">
+<g class="anim-blink anim-d3" stroke="#0b2545" stroke-width="1.5">
 <path d="M435 170h80v-22l-14-18h-46l-12 18h-8z" fill="#13a89e" fill-opacity="0.6" /><circle cx="452" cy="172" r="9" fill="#13a89e" fill-opacity="0.6" /><circle cx="500" cy="172" r="9" fill="#13a89e" fill-opacity="0.6" />
 <circle cx="545" cy="98" r="9" fill="#f5b800" fill-opacity="0.7" /><path d="M541 107h8v40l8 25h-6l-7-20-7 20h-6l8-25z" fill="#f5b800" fill-opacity="0.7" />
 </g>
@@ -123,6 +124,14 @@ Metrics include pixel accuracy, mean IoU across classes and the Dice coefficient
 </dl>
 </Example>
 
+## Key formulas for classification vs detection vs segmentation
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Intersection over union | IoU = Area of overlap ÷ Area of union | Areas in px², IoU is dimensionless |
+| Box area | A = width × height | Width and height in px from the corner coordinates |
+| Area of union | Union = A_pred + A_true − Overlap | A_pred, A_true = predicted and ground truth box areas in px² |
+
 ## How to choose
 
 1. **Start with the business question.** Do you need a decision, a location and count, or an exact shape and size?
@@ -140,3 +149,11 @@ Tasks can also be chained: a detector finds each part, then a classifier grades 
 - Validate on images from the real production line, not only lab samples.
 
 All three tasks are [supervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) problems, so label quality limits model quality. A small, carefully labelled dataset often beats a large, noisy one.
+
+## Classification vs detection vs segmentation interview and viva questions
+
+1. **What does an image classifier output?** It outputs a probability for each class and takes the highest as the prediction, giving one label for the whole image.
+2. **How do one stage and two stage detectors differ?** Two stage detectors such as Faster R-CNN first propose candidate regions and then classify and refine them, which is accurate but slower. One stage detectors such as YOLO predict boxes and classes in a single pass, fast enough for real time video.
+3. **When does a detection count as correct?** Usually when its IoU with the ground truth box is at least 0.5 and the class matches.
+4. **What is the difference between semantic and instance segmentation?** Semantic segmentation gives each pixel a class without separating objects, while instance segmentation gives each object of the same class its own mask.
+5. **Which task suits measuring a defect area?** Segmentation, because only a pixel mask gives the exact shape and area of a defect. Classification or detection is cheaper when a pass or fail decision or a count is enough.

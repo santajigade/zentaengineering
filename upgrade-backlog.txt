@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/agricultural-engineering/tractor-power-transmission.mdx
-src/content/articles/ai-data-engineering/big-data-five-vs.mdx
-src/content/articles/ai-data-engineering/classification-vs-detection-vs-segmentation.mdx
-src/content/articles/ai-data-engineering/data-science-workflow.mdx
-src/content/articles/ai-data-engineering/etl-vs-elt.mdx
-src/content/articles/ai-data-engineering/how-large-language-models-work.mdx
-src/content/articles/ai-data-engineering/how-neural-networks-work.mdx
-src/content/articles/ai-data-engineering/overfitting-and-underfitting.mdx
 src/content/articles/ai-data-engineering/predictive-maintenance-machine-learning.mdx
 src/content/articles/ai-data-engineering/supervised-vs-unsupervised-learning.mdx
 src/content/articles/ai-data-engineering/tokenization-and-embeddings.mdx

@@ -1,0 +1,171 @@
+---
+title: "Aircraft Materials: Aluminium, Titanium and Composites"
+description: "Aircraft materials explained: aluminium alloys, titanium, steel and carbon fibre composites, where each is used, and a specific strength example."
+pubDate: 2026-11-13
+reviewedDate: 2026-11-13
+discipline: aerospace-engineering
+subcategory: aircraft-structures
+focusKeyword: "aircraft materials"
+image: { src: /images/featured/aircraft-materials.webp, alt: "Aircraft Materials: Aluminium, Titanium and Composites: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [aircraft-materials, aluminium-alloys, titanium, cfrp, specific-strength]
+faq:
+  - q: "Why is aluminium still used if composites are stronger for their weight?"
+    a: "Aluminium alloys are cheaper, well understood, easy to form, machine, join and repair, and have decades of certified design data. Their damage is visible and they behave in a ductile way. Composites save weight but need careful control of manufacture, inspection for hidden impact damage and approved repair schemes."
+  - q: "What is the difference between 2024-T3 and 7075-T6 aluminium?"
+    a: "2024 is an aluminium copper alloy valued for fatigue and damage tolerance, so it is used for fuselage skins and lower wing skins that work in tension. 7075 is an aluminium zinc alloy with higher strength, used for upper wing skins, spars and fittings that carry high compressive or static loads. T3 and T6 are heat treatment tempers."
+  - q: "Why do carbon fibre parts need special care next to aluminium?"
+    a: "Carbon fibre is electrically conductive and noble compared with aluminium. Where the two touch in the presence of moisture, a galvanic cell forms and the aluminium corrodes. Designers isolate them with glass fibre plies, sealants and fasteners of titanium or other compatible metals."
+references:
+  - text: "W. D. Callister and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley, 2018 (Appendix B property tables and Table 16.5)"
+  - text: "FAA, Aviation Maintenance Technician Handbook: Airframe, FAA-H-8083-31B, Volume 1, Chapter 1 Aircraft Structures and Chapter 7 Advanced Composite Materials"
+  - text: "Battelle Memorial Institute, MMPDS-17, Metallic Materials Properties Development and Standardization, 2022"
+  - text: "FAA Advisory Circular AC 20-107B, Composite Aircraft Structure, 2009"
+  - text: "T. H. G. Megson, Aircraft Structures for Engineering Students, 7th ed., Butterworth-Heinemann"
+  - text: "M. C. Y. Niu, Airframe Structural Design, 2nd ed., Hong Kong Conmilit Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Aircraft materials** are the alloys and composites chosen to give the highest strength and stiffness for the lowest weight while resisting fatigue and corrosion. **Aluminium alloys** such as 2024 and 7075 form most metal airframes, **titanium** serves hot or highly loaded fittings, **steel** carries landing gear loads, and **carbon fibre composites** save weight in modern structures.
+
+</Key>
+
+Aircraft materials decide how much an airframe weighs, how long it lasts and how it is inspected and repaired. Every kilogram of structure is a kilogram less of fuel or payload, so engineers compare materials not by strength alone but by strength and stiffness per unit mass, and then by fatigue life, damage tolerance, corrosion, cost and ease of manufacture. This article explains the main families and where each one is used in the [aircraft structural components](/aerospace-engineering/aircraft-structural-components/) of a typical transport aircraft.
+
+## What aircraft materials must do
+
+An airframe material is judged on several properties at once:
+
+- **Specific strength:** strength divided by density. It sets the mass needed to carry a given load.
+- **Specific stiffness:** Young's modulus divided by density. It controls deflection, buckling of thin skins and flutter margins.
+- **Fatigue and damage tolerance:** the structure sees a pressurisation cycle every flight plus gusts and manoeuvres, so slow crack growth and high fracture toughness matter as much as static strength. See [fatigue failure](/materials-engineering/fatigue-failure/).
+- **Corrosion resistance:** moisture, de-icing fluids and dissimilar metal contact attack airframes over decades. The mechanisms are covered in [types of corrosion](/materials-engineering/types-of-corrosion/).
+- **Temperature capability:** areas near engines and exhausts need materials that keep their strength when hot.
+- **Producibility and repair:** forming, machining, joining and field repair all affect cost over the aircraft life.
+
+The basic properties behind these terms are explained in [mechanical properties of materials](/materials-engineering/mechanical-properties-of-materials/).
+
+<figure class="anim">
+<svg width="600" height="320" viewBox="0 0 600 320" fill="none" role="img" aria-label="Top view schematic of a conventional airliner showing typical material zones: fuselage skin in 2024 aluminium, upper wing skin in 7075 aluminium, lower wing skin in 2024 aluminium, engine pylons and main landing gear fittings in titanium, and flaps, ailerons and tail surfaces in carbon fibre composite, with a colour legend">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M200 146L290 30H312L270 146Z" fill="#b8c7da" />
+<path d="M200 174L290 290H312L270 174Z" fill="#b8c7da" />
+<path d="M40 160Q45 146 80 146H430L470 156V164L430 174H80Q45 174 40 160Z" fill="#dfe6ef" />
+<rect x="210" y="84" width="30" height="14" rx="6" fill="#eef1f6" />
+<rect x="210" y="222" width="30" height="14" rx="6" fill="#eef1f6" />
+</g>
+<g class="anim-blink anim-d1" fill="#f5b800" stroke="#0b2545" stroke-width="1.5">
+<rect x="238" y="87" width="14" height="8" />
+<rect x="238" y="225" width="14" height="8" />
+<rect x="246" y="149" width="12" height="7" />
+<rect x="246" y="164" width="12" height="7" />
+</g>
+<g class="anim-blink anim-d3" fill="#13a89e" stroke="#0b2545" stroke-width="1.5">
+<path d="M266 130L276 130L305 50L295 50Z" />
+<path d="M266 190L276 190L305 270L295 270Z" />
+<path d="M410 146L455 100H468L455 146Z" />
+<path d="M410 174L455 220H468L455 174Z" />
+<rect x="420" y="157" width="48" height="6" />
+</g>
+<g stroke="#7b8794" stroke-width="1">
+<path d="M188 56H280M188 264H282M160 89H208M160 206H200L246 171M180 133V146M322 56L303 62M478 106L462 112" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="20" y="60">Wing upper surface: 7075 Al</text>
+<text x="20" y="268">Wing lower surface: 2024 Al</text>
+<text x="20" y="93">Engine pylon: titanium</text>
+<text x="20" y="210">Main gear fittings: Ti</text>
+<text x="45" y="130">Fuselage skin: 2024 Al</text>
+<text x="326" y="60">Flaps, ailerons: composite</text>
+<text x="482" y="110">Tail: composite</text>
+<rect x="360" y="232" width="16" height="12" fill="#b8c7da" stroke="#0b2545" />
+<text x="384" y="243">Aluminium alloys</text>
+<rect x="360" y="254" width="16" height="12" fill="#f5b800" stroke="#0b2545" />
+<text x="384" y="265">Titanium alloys</text>
+<rect x="360" y="276" width="16" height="12" fill="#13a89e" stroke="#0b2545" />
+<text x="384" y="287">Carbon fibre composites</text>
+</g>
+</svg>
+<figcaption>Typical material zones on a conventional aluminium airliner (schematic top view). Titanium and composite zones are highlighted in turn.</figcaption>
+</figure>
+
+## Aluminium alloys
+
+Aluminium alloys have been the main airframe metal for most of the history of powered flight. They combine low density with good strength after heat treatment, are easy to form, machine and rivet, and their behaviour in fatigue and corrosion is well documented. Design allowables for aerospace alloys are published in MMPDS, the handbook used for certification of metallic structure.
+
+The FAA Airframe Handbook describes the four digit alloy designation and temper codes. **T3** means solution heat treated and then cold worked; **T6** means solution heat treated and artificially aged.
+
+- **2024 (aluminium copper):** good fatigue resistance and fracture toughness. Used for fuselage skins and lower wing skins, which are loaded mainly in tension. Callister lists 2024-T3 with a density of 2.77 g/cm³, yield strength 345 MPa, tensile strength 485 MPa and modulus 72.4 GPa.
+- **7075 (aluminium zinc):** higher strength, used for upper wing skins, stringers, spars and machined fittings that carry high compressive and static loads. For 7075-T6 the values are 2.80 g/cm³, yield 505 MPa, tensile strength 570 MPa and modulus 71 GPa.
+- **Alclad sheet:** a thin layer of pure aluminium is rolled onto each face of the alloy sheet. It protects the stronger core alloy from corrosion.
+
+Weaknesses of aluminium include corrosion when protective coatings fail, loss of strength at elevated temperature and a modulus that is almost the same across all alloys, so stiffness cannot be raised by choosing a stronger alloy.
+
+## Titanium alloys
+
+Titanium alloys sit between aluminium and steel. The workhorse grade **Ti-6Al-4V** has a density of 4.43 g/cm³, about 1.6 times that of 2024, but an annealed yield strength of 830 MPa, tensile strength 900 MPa and modulus 114 GPa. It keeps its strength at higher temperatures than aluminium and resists corrosion very well.
+
+Typical uses are engine pylons and mounts, firewalls, landing gear beams and fittings, highly loaded wing to fuselage attachments and fasteners. Titanium is also chosen next to carbon fibre parts because it does not form a damaging galvanic couple with carbon. Its drawbacks are high raw material cost and difficult machining.
+
+## Steel
+
+High strength low alloy steels such as 4340 are used where loads are highest in a small volume: landing gear legs, actuator parts and some fittings. Steel has a density of about 7.85 g/cm³ and a modulus of 207 GPa, so it is used only where its very high strength makes the part compact. Corrosion protection by plating and paint is essential.
+
+## Composite aircraft materials
+
+A composite combines strong fibres with a polymer matrix, usually epoxy. The fibres carry the load along their length and the matrix holds them in place and transfers load between them. Matrix types are compared in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/).
+
+- **Carbon fibre reinforced polymer (CFRP):** for aligned high strength carbon fibre in epoxy at a fibre volume fraction of 0.60, Callister gives a specific gravity of 1.6, longitudinal tensile strength 1240 MPa and longitudinal modulus 145 GPa. Across the fibres the strength falls to only 41 MPa and the modulus to 10 GPa.
+- **Glass fibre composites:** cheaper and heavier, used for fairings, radomes and isolation plies. For the same fibre fraction the specific gravity is 2.1 and longitudinal strength 1020 MPa.
+- **Aramid fibre composites:** tough and light, with a specific gravity of 1.4, used where impact resistance matters.
+
+Because composites are so directional, engineers stack plies at several angles so that the laminate carries loads in every direction it will see. This lowers the in-plane strength below the one direction value, but it is still well above aluminium on a weight basis.
+
+The FAA Airframe Handbook and AC 20-107B describe the extra care composites need: impact damage may be barely visible from outside, moisture and temperature affect matrix properties, and every manufacturing process must be controlled and qualified. Lightning strike protection with metal mesh and galvanic isolation from aluminium are also required.
+
+## Specific strength and specific stiffness
+
+The two key ratios are:
+
+$$
+\text{Specific strength} = \frac{\sigma}{\rho} \qquad \text{Specific stiffness} = \frac{E}{\rho}
+$$
+
+Using the values above, specific stiffness is about 26 MN·m/kg for 2024-T3 (72.4 ÷ 2.77), about 26 for Ti-6Al-4V (114 ÷ 4.43) and about 91 for unidirectional CFRP along the fibres (145 ÷ 1.6). This is why the common metals offer almost identical stiffness for their weight, while carbon fibre stands apart.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A straight tension tie, 1.0 m long, must carry 50 kN. Candidates: 2024-T3 (yield 345 MPa, 2770 kg/m³), 7075-T6 (yield 505 MPa, 2800 kg/m³), Ti-6Al-4V annealed (yield 830 MPa, 4430 kg/m³) and unidirectional CFRP loaded along the fibres (tensile strength 1240 MPa, 1600 kg/m³).</dd>
+<dt>Find</dt><dd>The minimum cross-section area and mass of each tie, and each material's specific strength.</dd>
+<dt>Assumptions</dt><dd>Pure axial load; tie sized exactly at the quoted strength with no safety factor; end fittings ignored.</dd>
+<dt>Solution</dt><dd>A = F ÷ σ, m = A × L × ρ<br />2024-T3: A = 50 000 ÷ 345 = 144.9 mm², m = 0.401 kg, σ/ρ = 124.5 kN·m/kg<br />7075-T6: A = 99.0 mm², m = 0.277 kg, σ/ρ = 180.4 kN·m/kg<br />Ti-6Al-4V: A = 60.2 mm², m = 0.267 kg, σ/ρ = 187.4 kN·m/kg<br />CFRP: A = 40.3 mm², m = 0.065 kg, σ/ρ = 775 kN·m/kg</dd>
+<dt>Answer</dt><dd><strong>The CFRP tie is about 0.065 kg, roughly one sixth of the 2024-T3 tie (0.401 kg); 7075-T6 and Ti-6Al-4V are close at about 0.27 to 0.28 kg</strong></dd>
+<dt>Limitations</dt><dd>Real laminates have plies at several angles and much lower strength than the one direction value, design allowables include safety factors and environmental knockdowns, and fittings, joints, fatigue and cost often decide the choice.</dd>
+</dl>
+</Example>
+
+## Key formulas for aircraft materials
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Specific strength | σ ÷ ρ | σ = strength (Pa), ρ = density (kg/m³), result in N·m/kg |
+| Specific stiffness | E ÷ ρ | E = Young's modulus (Pa), result in N·m/kg |
+| Required tie area | A = F ÷ σ | F = axial load (N), A in m² |
+| Tie mass | m = A × L × ρ | L = length (m), m in kg |
+
+## Choosing aircraft materials for each zone
+
+Selection follows the load and environment of each area. Tension dominated fuselage and lower wing skins favour fatigue resistant 2024. Compression dominated upper wing skins favour stronger 7075. Hot or very highly loaded attachments near engines and landing gear use titanium or steel. Lightly loaded secondary structure such as fairings, and increasingly the primary wings, fuselage and tail of new designs, use composites where the weight saving justifies the manufacturing and inspection effort. The material families themselves are introduced in [classification of engineering materials](/materials-engineering/engineering-materials-classification/).
+
+## Aircraft materials interview and viva questions
+
+1. **Why is specific strength more important than strength for aircraft?** The mass of a member carrying a given load is proportional to density divided by strength, so the material with the highest strength to density ratio gives the lightest part.
+2. **Why is 2024 used for the lower wing skin and 7075 for the upper skin?** The lower skin is in tension and fatigue critical, which suits damage tolerant 2024, while the upper skin is in compression and benefits from the higher strength of 7075.
+3. **What is Alclad?** It is aluminium alloy sheet with a thin pure aluminium layer rolled onto each face to protect the core from corrosion.
+4. **Why is titanium used next to carbon fibre parts?** Carbon fibre causes galvanic corrosion of aluminium, while titanium is compatible with carbon, so titanium fasteners and fittings are used at those joints.
+5. **What is the main inspection concern with composite structure?** Impact can cause internal delamination with little visible surface damage, so composite parts need damage tolerance design and suitable non-destructive inspection.

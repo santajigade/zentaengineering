@@ -3,6 +3,7 @@ title: "Overfitting and Underfitting in Machine Learning"
 description: "Overfitting and underfitting explained: bias and variance, training versus validation error, learning curves, how to detect and fix each, with an example."
 pubDate: 2026-11-08
 reviewedDate: 2026-11-08
+updatedDate: 2026-11-13
 discipline: ai-data-engineering
 subcategory: machine-learning
 focusKeyword: "overfitting and underfitting"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Overfitting and underfitting** are the two ways a machine learning model fails to generalise. An overfitted model learns the noise in its training data, so it scores well in training but poorly on new data. An underfitted model is too simple to capture the real pattern, so it scores poorly on both. The goal is the model complexity between the two, found by comparing training error with validation error.
+**Overfitting and underfitting** are the two ways a machine learning model fails to generalise. An overfitted model learns noise in its training data, so it scores well in training but poorly on new data. An underfitted model is too simple for the real pattern, so it scores poorly on both. Comparing training and validation error finds the balance.
 
 </Key>
 
@@ -58,12 +59,13 @@ $$
 
 Increasing model complexity, for example more polynomial terms, deeper trees or more neural network parameters, usually lowers bias but raises variance. The total error therefore follows a U shape against complexity, and the best model sits near the bottom of the validation curve.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="280" viewBox="0 0 580 280" fill="none" role="img" aria-label="Error against model complexity. Training error falls steadily as complexity increases. Validation error falls, reaches a minimum at the best fit, then rises. The left region is underfitting with high bias and the right region is overfitting with high variance.">
 <g stroke="#0b2545" stroke-width="2"><path d="M60 40V230H520" /></g>
-<path d="M268 40V230" stroke="#4a5a70" stroke-width="1.5" stroke-dasharray="6 5" />
+<path class="anim-blink" d="M268 40V230" stroke="#4a5a70" stroke-width="1.5" stroke-dasharray="6 5" />
 <path d="M70 108C150 195 300 212 510 218" stroke="#13a89e" stroke-width="3" />
 <path d="M70 85C170 185 360 185 510 80" stroke="#e8590c" stroke-width="3" />
+<g stroke="#fff" stroke-width="1.5" stroke-dasharray="6 12" fill="none"><path class="anim-flow-slow" d="M70 108C150 195 300 212 510 218" /><path class="anim-flow-slow" d="M70 85C170 185 360 185 510 80" /></g>
 <path d="M330 88H360" stroke="#13a89e" stroke-width="3" />
 <path d="M330 108H360" stroke="#e8590c" stroke-width="3" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
@@ -140,6 +142,24 @@ where λ controls the strength of the penalty. Lasso (L1) uses the sum of absolu
 
 A model can look well fitted and still fail in service if information from the validation or test data leaked into training. Common causes are scaling or feature selection fitted on the whole dataset before splitting, duplicate records across splits, and random splits of time series that let the model see the future. Fit all preprocessing on the training folds only, and split time series by time. This is part of a disciplined [data science workflow](/ai-data-engineering/data-science-workflow/).
 
+## Key formulas for overfitting and underfitting
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Error decomposition (squared error loss) | Expected error = Bias² + Variance + Irreducible noise | All terms in the squared units of the target, for example kW² |
+| Ridge (L2) regularised loss | J(w) = (1/n) Σ (yᵢ − ŷᵢ)² + λ Σ wⱼ² | n = number of samples, yᵢ = true value, ŷᵢ = prediction, wⱼ = weights, λ = penalty strength |
+| Lasso (L1) penalty | λ Σ abs(wⱼ) | Replaces the squared weight penalty with the sum of absolute weights |
+| Generalisation gap | Gap = validation error − training error | Same units as the error, for example MSE in kW² |
+| k-fold cross validation estimate | CV error = (sum of the k fold errors) / k | k = number of folds, commonly 5 or 10 |
+
 ## Summary
 
 Overfitting and underfitting apply to every [supervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) method, from linear regression to large networks. Always judge a model on unseen data, read the gap between training and validation error, and adjust complexity, data and regularisation until both errors are low and close together.
+
+## Overfitting and underfitting interview and viva questions
+
+1. **What is the difference between overfitting and underfitting?** An overfitted model fits the noise in its training data, giving low training error but much higher validation error. An underfitted model is too simple, so both errors are high and close together.
+2. **How do bias and variance relate to these two problems?** Underfitting is high bias, caused by assumptions that are too rigid. Overfitting is high variance, meaning the model would change a lot if trained on a different sample.
+3. **What is early stopping?** Training is stopped at the epoch where validation error is lowest, before the model starts to memorise the training set. It is one of the most common forms of regularisation in deep learning.
+4. **How does L2 regularisation reduce overfitting?** It adds a penalty on the sum of squared weights to the training loss, with λ setting its strength. This pushes weights towards smaller values and makes the model less sensitive to noise.
+5. **What is data leakage and why does it matter?** Leakage is information from validation or test data reaching training, for example scaling fitted on the whole dataset before splitting. It makes a model look well fitted when it will fail on new data.

@@ -1,0 +1,183 @@
+---
+title: "Carnot Cycle: Efficiency and PV Diagram"
+description: "The Carnot cycle explained: its four reversible processes, PV and T-s diagrams, efficiency 1 minus TL/TH, a worked example and viva questions."
+pubDate: 2026-11-13
+reviewedDate: 2026-11-13
+discipline: mechanical-engineering
+subcategory: thermodynamics
+focusKeyword: "carnot cycle"
+image: { src: /images/featured/carnot-cycle.webp, alt: "Carnot Cycle: Efficiency and PV Diagram: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [thermodynamics, carnot-cycle, carnot-efficiency, second-law, heat-engine]
+faq:
+  - q: "Why is the Carnot cycle the most efficient heat engine cycle?"
+    a: "All four processes are reversible, so no entropy is generated inside the cycle. The second law then shows that no engine working between the same two reservoirs can have a higher efficiency, and every reversible engine between them has the same efficiency, 1 minus TL/TH."
+  - q: "Why must temperatures be in kelvin in the Carnot efficiency formula?"
+    a: "The formula comes from the ratio of absolute temperatures, QL/QH = TL/TH, which defines the thermodynamic (Kelvin) temperature scale. Using degrees Celsius gives a wrong ratio and can even give negative or infinite results."
+  - q: "Can a real engine run on the Carnot cycle?"
+    a: "Not in practice. Isothermal heat transfer needs an infinitely small temperature difference, so it is infinitely slow, and the gas cycle encloses very little net work for its size, so friction would consume most of it. The Carnot cycle is used as an upper limit and a benchmark."
+references:
+  - text: "Y. A. Cengel and M. A. Boles, Thermodynamics: An Engineering Approach, 9th ed., McGraw-Hill"
+  - text: "M. J. Moran, H. N. Shapiro, D. D. Boettner and M. B. Bailey, Fundamentals of Engineering Thermodynamics, 9th ed., Wiley"
+  - text: "P. K. Nag, Engineering Thermodynamics, 6th ed., McGraw-Hill Education"
+  - text: "G. F. C. Rogers and Y. R. Mayhew, Engineering Thermodynamics: Work and Heat Transfer, 4th ed., Longman"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The **Carnot cycle** is an ideal reversible heat engine cycle made of two isothermal and two adiabatic processes between a hot reservoir at TH and a cold reservoir at TL. It sets the maximum possible efficiency of any engine between those temperatures, **η = 1 − TL/TH**, with both temperatures in kelvin.
+
+</Key>
+
+The Carnot cycle, proposed by the French engineer Sadi Carnot in 1824, answers a basic question: how much of the heat supplied to an engine can ever become work? No real engine follows it, yet every steam plant, gas turbine and refrigerator is judged against it. This article explains the four processes, the P-V and T-s diagrams, the efficiency formula and how to use it, building on the [laws of thermodynamics](/mechanical-engineering/laws-of-thermodynamics/).
+
+## What is the Carnot cycle?
+
+A heat engine takes heat QH from a high temperature source, converts part of it to net work W and rejects the rest, QL, to a low temperature sink. The second law of thermodynamics (Kelvin Planck statement) says QL can never be zero.
+
+The Carnot cycle is the engine cycle that wastes nothing beyond what the second law demands. It uses a working fluid, often pictured as an ideal gas in a piston and cylinder, and every process is **internally and externally reversible**:
+
+- Heat is exchanged only while the fluid is at the reservoir temperature, so there is no heat transfer across a finite temperature difference.
+- There is no friction, no unrestrained expansion and no mixing.
+- Each process is quasi-static, so the fluid passes through equilibrium states that can be drawn as a line on a property diagram.
+
+Because the cycle is reversible, it can also run backwards as a refrigerator or heat pump.
+
+## The four processes of the Carnot cycle
+
+For a heat engine the cycle runs in this order:
+
+1. **Process 1 to 2, reversible isothermal expansion at TH.** The cylinder head touches the hot reservoir. The gas expands slowly and does work, while heat QH flows in to keep its temperature at TH.
+2. **Process 2 to 3, reversible adiabatic expansion.** The cylinder is insulated. The gas keeps expanding and doing work, and its temperature falls from TH to TL. There is no heat transfer, so entropy stays constant (isentropic).
+3. **Process 3 to 4, reversible isothermal compression at TL.** The cylinder touches the cold reservoir. The piston compresses the gas, and heat QL flows out to keep the temperature at TL.
+4. **Process 4 to 1, reversible adiabatic compression.** The cylinder is insulated again. Compression raises the gas temperature from TL back to TH, and the cycle closes.
+
+<figure class="anim">
+<svg width="600" height="380" viewBox="0 0 600 380" fill="none" role="img" aria-label="Carnot cycle P-V diagram for an ideal gas heat engine: state 1 to 2 isothermal expansion at the hot temperature TH with heat QH added, 2 to 3 adiabatic expansion, 3 to 4 isothermal compression at the cold temperature TL with heat QL rejected, and 4 to 1 adiabatic compression, traced clockwise; the adiabats are steeper than the hyperbolic isotherms and the enclosed area is the net work">
+<g stroke="#7b8794" stroke-width="1.5"><path d="M75 350V20M75 350H580" /></g>
+<g fill="#7b8794"><path d="M75 12L70 22H80Z" /><path d="M588 350L578 345V355Z" /></g>
+<path d="M102 44L107 65L113 83L118 98L123 112L128 125L134 136L139 146L144 155L149 163L155 171L160 178L165 184L170 190L176 196L181 201L186 205L192 210L197 214L202 218L207 222L223 235L238 246L254 255L269 262L284 269L300 275L315 279L331 284L346 288L361 291L377 294L392 297L408 299L423 301L438 304L454 305L469 307L485 309L500 310L515 311L501 311L486 310L472 309L457 307L443 306L428 305L414 304L399 302L385 301L370 299L356 297L341 295L327 293L312 291L298 288L283 285L269 282L254 278L240 273L225 268L219 265L213 261L207 258L201 253L194 249L188 244L182 238L176 232L170 225L164 217L157 209L151 199L145 189L139 176L133 162L127 146L121 127L114 104L108 77L102 44Z" fill="#e6f6f4" />
+<path class="anim-blink anim-d1" d="M102 44L107 65L113 83L118 98L123 112L128 125L134 136L139 146L144 155L149 163L155 171L160 178L165 184L170 190L176 196L181 201L186 205L192 210L197 214L202 218L207 222" stroke="#b42318" stroke-width="3" />
+<path class="anim-blink anim-d2" d="M207 222L223 235L238 246L254 255L269 262L284 269L300 275L315 279L331 284L346 288L361 291L377 294L392 297L408 299L423 301L438 304L454 305L469 307L485 309L500 310L515 311" stroke="#0b2545" stroke-width="3" />
+<path class="anim-blink anim-d3" d="M515 311L501 311L486 310L472 309L457 307L443 306L428 305L414 304L399 302L385 301L370 299L356 297L341 295L327 293L312 291L298 288L283 285L269 282L254 278L240 273L225 268" stroke="#13a89e" stroke-width="3" />
+<path class="anim-blink anim-d4" d="M225 268L219 265L213 261L207 258L201 253L194 249L188 244L182 238L176 232L170 225L164 217L157 209L151 199L145 189L139 176L133 162L127 146L121 127L114 104L108 77L102 44" stroke="#0b2545" stroke-width="3" />
+<path class="anim-flow-slow" d="M102 44L107 65L113 83L118 98L123 112L128 125L134 136L139 146L144 155L149 163L155 171L160 178L165 184L170 190L176 196L181 201L186 205L192 210L197 214L202 218L207 222L223 235L238 246L254 255L269 262L284 269L300 275L315 279L331 284L346 288L361 291L377 294L392 297L408 299L423 301L438 304L454 305L469 307L485 309L500 310L515 311L501 311L486 310L472 309L457 307L443 306L428 305L414 304L399 302L385 301L370 299L356 297L341 295L327 293L312 291L298 288L283 285L269 282L254 278L240 273L225 268L219 265L213 261L207 258L201 253L194 249L188 244L182 238L176 232L170 225L164 217L157 209L151 199L145 189L139 176L133 162L127 146L121 127L114 104L108 77L102 44Z" stroke="#fff" stroke-width="1.5" />
+<path d="M147 159L146 148L137 154Z" fill="#b42318" />
+<path d="M305 276L297 268L293 278Z" fill="#0b2545" />
+<path d="M423 305L433 311L434 300Z" fill="#13a89e" />
+<path d="M149 195L149 207L159 201Z" fill="#0b2545" />
+<g fill="#0b2545"><circle cx="102" cy="44" r="4" /><circle cx="207" cy="222" r="4" /><circle cx="515" cy="311" r="4" /><circle cx="225" cy="268" r="4" /></g>
+<g stroke="#b42318" stroke-width="2"><path d="M262 142L200 189" /></g><path d="M193 195L199 183L206 192Z" fill="#b42318" />
+<g stroke="#13a89e" stroke-width="2"><path d="M457 312V330" /></g><path d="M457 339L452 329H462Z" fill="#13a89e" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="92" y="44" font-weight="700" text-anchor="end">1</text>
+<text x="216" y="220" font-weight="700">2</text>
+<text x="524" y="306" font-weight="700">3</text>
+<text x="216" y="288" font-weight="700" text-anchor="end">4</text>
+<text x="68" y="22" text-anchor="end">P</text>
+<text x="586" y="370" text-anchor="end">V</text>
+<text x="160" y="62">1 to 2: isothermal expansion at T<tspan font-size="9" dy="3">H</tspan><tspan dy="-3"> </tspan></text>
+<text x="268" y="142" fill="#b42318">Q<tspan font-size="9" dy="3">H</tspan><tspan dy="-3"> </tspan>in from hot reservoir</text>
+<text x="300" y="250">2 to 3: adiabatic expansion</text>
+<text x="150" y="338">3 to 4: isothermal compression at T<tspan font-size="9" dy="3">L</tspan><tspan dy="-3"> </tspan></text>
+<text x="466" y="340" fill="#13a89e">Q<tspan font-size="9" dy="3">L</tspan><tspan dy="-3"> </tspan>out</text>
+<text x="84" y="292">4 to 1: adiabatic</text>
+<text x="84" y="307">compression</text>
+</g>
+</svg>
+<figcaption>Carnot cycle on the P-V diagram for an ideal gas, with curves computed for γ = 1.4 and TH/TL = 1.5. The cycle runs clockwise as a heat engine, and the shaded area enclosed by the four processes is the net work per cycle.</figcaption>
+</figure>
+## Carnot cycle on the P-V and T-s diagrams
+
+On a P-V diagram the isotherms of an ideal gas follow PV = constant, so they are rectangular hyperbolas. The adiabats follow PV^γ = constant, where γ is the ratio of specific heats (about 1.4 for air). At any point the slope of an adiabat is γ times the slope of the isotherm through it, so the adiabats are always steeper. The four curves enclose a thin, curved four sided shape traced clockwise. The enclosed area is the net work done per cycle, because net work equals the integral of P dV around the cycle.
+
+On a T-s diagram the same cycle is a rectangle. The two isotherms are horizontal lines at TH and TL, and the two reversible adiabats are vertical lines of constant entropy. The area under line 1 to 2 is QH, the area under line 3 to 4 is QL, and the rectangle between them is the net work. This picture shows clearly why the efficiency depends only on the two temperatures: widening the rectangle in entropy changes QH and W in the same proportion.
+
+## Carnot efficiency derivation
+
+For an ideal gas the internal energy depends only on temperature, so during an isothermal process the heat transferred equals the work. For mass m and gas constant R:
+
+$$
+Q_H = m R T_H \ln\frac{V_2}{V_1}, \qquad Q_L = m R T_L \ln\frac{V_3}{V_4}
+$$
+
+For the two reversible adiabats, TV^(γ−1) is constant, which gives:
+
+$$
+\frac{V_3}{V_2} = \frac{V_4}{V_1} = \left(\frac{T_H}{T_L}\right)^{1/(\gamma-1)} \quad\Rightarrow\quad \frac{V_2}{V_1} = \frac{V_3}{V_4}
+$$
+
+The logarithms cancel, so QL/QH = TL/TH, and the thermal efficiency is:
+
+$$
+\eta_{Carnot} = \frac{W_{net}}{Q_H} = 1 - \frac{Q_L}{Q_H} = 1 - \frac{T_L}{T_H}
+$$
+
+The result does not depend on the working fluid. Kelvin used exactly this ratio to define the thermodynamic temperature scale, which is why TH and TL must always be absolute temperatures.
+
+## Carnot principles
+
+Two statements, proved from the second law, follow from the cycle:
+
+- The efficiency of an irreversible heat engine is always less than that of a reversible engine operating between the same two reservoirs.
+- All reversible heat engines operating between the same two reservoirs have the same efficiency.
+
+So 1 − TL/TH is a hard ceiling. To raise it, either raise TH (limited by materials such as turbine blade alloys) or lower TL (limited by the ambient air or cooling water, the natural sink). This is why power stations, described in [generation, transmission and distribution](/electrical-engineering/generation-transmission-distribution/), push steam and gas temperatures as high as their metals allow.
+
+## Why no real engine uses the Carnot cycle
+
+- **Speed:** reversible isothermal heat transfer needs an infinitely small temperature difference, so it takes infinite time. Real heat exchangers need a finite difference, as covered in [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/).
+- **Low net work:** for a gas the P-V loop is very narrow, so the net work is small compared with the gross expansion and compression work. Small friction losses would wipe it out.
+- **Vapour cycles:** a Carnot cycle inside the wet steam dome would need a compressor handling a two phase mixture and a turbine handling very wet steam, both of which are impractical. Engineers use the Rankine cycle instead.
+
+Real cycles such as Rankine, Brayton, Otto and Diesel are compared with Carnot efficiency at the same temperature limits. Large slow speed engines such as the [two stroke marine diesel engine](/marine-engineering/two-stroke-marine-diesel-engine/) reach high efficiency for a real engine, but still well below the Carnot value for their peak gas temperature.
+
+## Worked example: Carnot engine efficiency
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A Carnot engine receives 500 kJ of heat per cycle from a reservoir at 527 °C and rejects heat to surroundings at 27 °C.</dd>
+<dt>Find</dt><dd>The thermal efficiency, the net work per cycle and the heat rejected per cycle.</dd>
+<dt>Assumptions</dt><dd>All processes reversible; reservoir temperatures constant; steady cyclic operation.</dd>
+<dt>Solution</dt><dd>TH = 527 + 273 = 800 K; TL = 27 + 273 = 300 K<br />η = 1 − 300/800 = 1 − 0.375 = 0.625<br />W = η × QH = 0.625 × 500 = 312.5 kJ<br />QL = QH − W = 500 − 312.5 = 187.5 kJ<br />Check: QH/TH = 500/800 = 0.625 kJ/K and QL/TL = 187.5/300 = 0.625 kJ/K, so the entropy change of the cycle is zero, as expected for a reversible cycle.</dd>
+<dt>Answer</dt><dd><strong>η = 62.5%, W = 312.5 kJ per cycle, QL = 187.5 kJ per cycle</strong></dd>
+<dt>Limitations</dt><dd>This is an upper limit. A real engine between the same temperatures has lower efficiency because of friction, finite temperature differences and other irreversibilities.</dd>
+</dl>
+</Example>
+
+<Calculator path="physics/carnot-efficiency" title="Carnot Efficiency Calculator" />
+
+## Reversed Carnot cycle: refrigerator and heat pump
+
+Run in reverse (counterclockwise on the P-V diagram), the cycle absorbs QL from the cold space, takes in net work and rejects QH to the warm surroundings. Its performance is expressed as a coefficient of performance (COP), which can be greater than 1:
+
+$$
+COP_R = \frac{T_L}{T_H - T_L}, \qquad COP_{HP} = \frac{T_H}{T_H - T_L}
+$$
+
+These are the highest COP values any refrigerator or heat pump can reach between TL and TH. A practical machine such as the [vapour compression refrigeration cycle](/mechanical-engineering/vapour-compression-refrigeration-cycle/) gets closer to them when the temperature lift is small.
+
+## Key formulas for the Carnot cycle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Thermal efficiency | η = 1 − TL/TH | TH, TL = hot and cold reservoir temperatures in K |
+| Net work | W = QH − QL = η × QH | W, QH, QL in kJ per cycle or kW for a rate |
+| Heat ratio | QL/QH = TL/TH | Valid for reversible cycles only |
+| Isothermal heat (ideal gas) | QH = m R TH ln(V2/V1) | m in kg, R in kJ/kg K, V in m³ |
+| Adiabatic relation | T V^(γ−1) = constant | γ = cp/cv, about 1.4 for air |
+| Refrigerator COP | COP_R = TL/(TH − TL) | Dimensionless |
+| Heat pump COP | COP_HP = TH/(TH − TL) | Dimensionless, COP_HP = COP_R + 1 |
+
+## Carnot cycle interview and viva questions
+
+1. **Name the four processes of the Carnot cycle.** Reversible isothermal expansion at TH, reversible adiabatic expansion, reversible isothermal compression at TL and reversible adiabatic compression back to the start.
+2. **Why are the adiabats steeper than the isotherms on a P-V diagram?** An isotherm follows PV = constant and an adiabat follows PV^γ = constant, so the adiabat slope is γ times the isotherm slope at the same point.
+3. **What shape does the Carnot cycle have on a T-s diagram?** A rectangle: two horizontal isotherms at TH and TL joined by two vertical isentropic lines, with the enclosed area equal to the net work.
+4. **Does Carnot efficiency depend on the working fluid?** No. All reversible engines between the same two reservoirs have the same efficiency, 1 − TL/TH.
+5. **How can Carnot efficiency be increased?** By raising the source temperature TH or lowering the sink temperature TL, since only the ratio TL/TH matters.
