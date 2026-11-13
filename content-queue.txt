@@ -36,12 +36,12 @@ mining-engineering|drilling-and-blasting|Explosives Used in Mining: Types and Pr
 manufacturing-engineering|cnc|CNC Turning vs Milling: Differences|cnc-turning-vs-milling|comparison|cnc turning vs milling|2026-11-12
 materials-engineering|metallurgy|Types of Steel and Their Uses|types-of-steel|explanation|types of steel|2026-11-12
 safety-engineering|risk-assessment|Layer of Protection Analysis (LOPA) Explained|lopa-explained|explanation|lopa|2026-11-12
-agricultural-engineering|farm-machinery|Combine Harvester Working Principle|combine-harvester-working-principle|working-principle|combine harvester|todo
-aerospace-engineering|aircraft-structures|Aircraft Materials: Aluminium, Titanium and Composites|aircraft-materials|explanation|aircraft materials|todo
-biomedical-engineering|medical-imaging|How an MRI Scanner Works|how-mri-works|working-principle|how mri works|todo
-marine-engineering|marine-propulsion|Marine Propeller Types: FPP vs CPP|marine-propeller-types|comparison|marine propeller types|todo
-mechanical-engineering|thermodynamics|Carnot Cycle: Efficiency and PV Diagram|carnot-cycle|fundamentals|carnot cycle|todo
-electrical-engineering|transformers|Transformer Losses and Efficiency Explained|transformer-losses-and-efficiency|fundamentals|transformer losses|todo
+agricultural-engineering|farm-machinery|Combine Harvester Working Principle|combine-harvester-working-principle|working-principle|combine harvester|2026-11-13
+aerospace-engineering|aircraft-structures|Aircraft Materials: Aluminium, Titanium and Composites|aircraft-materials|explanation|aircraft materials|2026-11-13
+biomedical-engineering|medical-imaging|How an MRI Scanner Works|how-mri-works|working-principle|how mri works|2026-11-13
+marine-engineering|marine-propulsion|Marine Propeller Types: FPP vs CPP|marine-propeller-types|comparison|marine propeller types|2026-11-13
+mechanical-engineering|thermodynamics|Carnot Cycle: Efficiency and PV Diagram|carnot-cycle|fundamentals|carnot cycle|2026-11-13
+electrical-engineering|transformers|Transformer Losses and Efficiency Explained|transformer-losses-and-efficiency|fundamentals|transformer losses|2026-11-13
 electronics-engineering|digital-electronics|Flip-Flops Explained: SR, JK, D and T|flip-flops-explained|fundamentals|flip-flops|todo
 civil-engineering|steel-structures|Bolted vs Welded Steel Connections|bolted-vs-welded-connections|comparison|bolted vs welded connections|todo
 chemical-engineering|heat-exchangers|Shell and Tube Heat Exchanger Design Basics|shell-and-tube-heat-exchanger-design|fundamentals|shell and tube heat exchanger|todo
