@@ -42,12 +42,12 @@ biomedical-engineering|medical-imaging|How an MRI Scanner Works|how-mri-works|wo
 marine-engineering|marine-propulsion|Marine Propeller Types: FPP vs CPP|marine-propeller-types|comparison|marine propeller types|2026-11-13
 mechanical-engineering|thermodynamics|Carnot Cycle: Efficiency and PV Diagram|carnot-cycle|fundamentals|carnot cycle|2026-11-13
 electrical-engineering|transformers|Transformer Losses and Efficiency Explained|transformer-losses-and-efficiency|fundamentals|transformer losses|2026-11-13
-electronics-engineering|digital-electronics|Flip-Flops Explained: SR, JK, D and T|flip-flops-explained|fundamentals|flip-flops|todo
-civil-engineering|steel-structures|Bolted vs Welded Steel Connections|bolted-vs-welded-connections|comparison|bolted vs welded connections|todo
-chemical-engineering|heat-exchangers|Shell and Tube Heat Exchanger Design Basics|shell-and-tube-heat-exchanger-design|fundamentals|shell and tube heat exchanger|todo
-computer-science|operating-systems|CPU Scheduling Algorithms Explained|cpu-scheduling-algorithms|explanation|cpu scheduling algorithms|todo
-automation-robotics|dcs|PLC vs DCS: Differences and How to Choose|plc-vs-dcs|comparison|plc vs dcs|todo
-ai-data-engineering|computer-vision|Image Preprocessing Techniques for Computer Vision|image-preprocessing-techniques|explanation|image preprocessing|todo
+electronics-engineering|digital-electronics|Flip-Flops Explained: SR, JK, D and T|flip-flops-explained|fundamentals|flip-flops|2026-11-14
+civil-engineering|steel-structures|Bolted vs Welded Steel Connections|bolted-vs-welded-connections|comparison|bolted vs welded connections|2026-11-14
+chemical-engineering|heat-exchangers|Shell and Tube Heat Exchanger Design Basics|shell-and-tube-heat-exchanger-design|fundamentals|shell and tube heat exchanger|2026-11-14
+computer-science|operating-systems|CPU Scheduling Algorithms Explained|cpu-scheduling-algorithms|explanation|cpu scheduling algorithms|2026-11-14
+automation-robotics|dcs|PLC vs DCS: Differences and How to Choose|plc-vs-dcs|comparison|plc vs dcs|2026-11-14
+ai-data-engineering|computer-vision|Image Preprocessing Techniques for Computer Vision|image-preprocessing-techniques|explanation|image preprocessing|2026-11-14
 telecommunication-engineering|fiber-optics|Optical Fiber Splicing: Fusion vs Mechanical|fiber-splicing-fusion-vs-mechanical|comparison|fiber splicing|todo
 petroleum-engineering|well-logging|Well Completion Types Explained|well-completion-types|explanation|well completion|todo
 renewable-energy|energy-storage|Lithium-Ion vs Lead Acid Batteries Compared|lithium-ion-vs-lead-acid|comparison|lithium-ion vs lead acid|todo
