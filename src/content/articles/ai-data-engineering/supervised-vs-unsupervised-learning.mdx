@@ -3,6 +3,7 @@ title: "Supervised vs Unsupervised Learning Explained"
 description: "Supervised vs unsupervised learning explained: labelled and unlabelled data, classification, regression, clustering, dimensionality reduction and examples."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: ai-data-engineering
 subcategory: machine-learning
 focusKeyword: "supervised vs unsupervised learning"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In **supervised vs unsupervised learning**, the difference is the data. **Supervised learning** trains on labelled examples, where each input has a known correct output, and learns to predict that output for new inputs: classification (spam or not) and regression (price, temperature). **Unsupervised learning** works on unlabelled data and finds hidden structure on its own: clustering similar items, reducing dimensions and detecting anomalies.
+**Supervised vs unsupervised learning** differ in the training data. Supervised learning uses labelled examples, where each input has a known correct output, and learns to predict it for new inputs through classification or regression. Unsupervised learning uses unlabelled data and finds hidden structure on its own, such as clusters, reduced dimensions or anomalies.
 
 </Key>
 
@@ -67,7 +68,7 @@ In unsupervised learning, there is only x. The algorithm looks for structure suc
 
 Evaluation is harder because there is no correct answer to compare with. Engineers use internal measures, such as how compact and separated clusters are, and, most importantly, whether the result is useful to domain experts.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="270" viewBox="0 0 580 270" fill="none" role="img" aria-label="Left: supervised learning plot with labelled points of two classes, circles and triangles, separated by a learned decision boundary. Right: unsupervised learning plot with unlabelled points forming three clusters found by the algorithm">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="140" y="24" font-weight="700">Supervised: labelled data</text>
@@ -75,11 +76,11 @@ Evaluation is harder because there is no correct answer to compare with. Enginee
 <text x="140" y="262">Learns a decision boundary</text><text x="430" y="262">Finds clusters</text>
 </g>
 <path d="M30 230H260M30 230V40M320 230H550M320 230V40" stroke="#0b2545" stroke-width="2" />
-<path d="M60 70L240 210" stroke="#b42318" stroke-width="2.5" stroke-dasharray="7 5" />
+<path class="anim-flow-slow" d="M60 70L240 210" stroke="#b42318" stroke-width="2.5" stroke-dasharray="7 5" />
 <g fill="#13a89e"><circle cx="60" cy="110" r="6" /><circle cx="80" cy="140" r="6" /><circle cx="70" cy="170" r="6" /><circle cx="100" cy="190" r="6" /><circle cx="110" cy="160" r="6" /><circle cx="130" cy="200" r="6" /><circle cx="95" cy="210" r="6" /></g>
 <g fill="#f5b800"><path d="M150 70l7 12h-14z" /><path d="M180 90l7 12h-14z" /><path d="M200 120l7 12h-14z" /><path d="M230 140l7 12h-14z" /><path d="M170 60l7 12h-14z" /><path d="M210 80l7 12h-14z" /><path d="M240 110l7 12h-14z" /></g>
 <g fill="#7b8794"><circle cx="360" cy="80" r="6" /><circle cx="380" cy="95" r="6" /><circle cx="370" cy="110" r="6" /><circle cx="390" cy="75" r="6" /><circle cx="490" cy="90" r="6" /><circle cx="510" cy="110" r="6" /><circle cx="500" cy="70" r="6" /><circle cx="520" cy="85" r="6" /><circle cx="420" cy="190" r="6" /><circle cx="440" cy="205" r="6" /><circle cx="455" cy="185" r="6" /><circle cx="430" cy="170" r="6" /></g>
-<g stroke-width="2" stroke-dasharray="5 4"><circle cx="376" cy="92" r="32" stroke="#13a89e" /><circle cx="505" cy="89" r="32" stroke="#f5b800" /><circle cx="437" cy="188" r="32" stroke="#b42318" /></g>
+<g stroke-width="2" stroke-dasharray="5 4"><circle class="anim-blink anim-d1" cx="376" cy="92" r="32" stroke="#13a89e" /><circle class="anim-blink anim-d2" cx="505" cy="89" r="32" stroke="#f5b800" /><circle class="anim-blink anim-d3" cx="437" cy="188" r="32" stroke="#b42318" /></g>
 </svg>
 <figcaption>Supervised learning separates known classes; unsupervised learning discovers groups on its own.</figcaption>
 </figure>
@@ -109,6 +110,17 @@ Evaluation is harder because there is no correct answer to compare with. Enginee
 
 This approach is developed further in [predictive maintenance with machine learning](/ai-data-engineering/predictive-maintenance-machine-learning/).
 
+## Key formulas for supervised vs unsupervised learning
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Linear regression prediction | ŷ = w₁x₁ + w₂x₂ + ... + wₙxₙ + b | x = features, w = weights, b = bias |
+| Mean squared error | MSE = (1/N) Σ (y_i − ŷ_i)² | y = true label, ŷ = prediction, N = number of examples |
+| Precision | P = TP ÷ (TP + FP) | TP = true positives, FP = false positives |
+| Recall | R = TP ÷ (TP + FN) | FN = false negatives |
+| F1 score | F1 = 2PR ÷ (P + R) | harmonic mean of precision and recall |
+| k-means objective | J = Σ_k Σ_(x in cluster k) ‖x − μ_k‖² | μ_k = centroid of cluster k; minimised by k-means |
+
 ## Other learning paradigms
 
 - **Semi-supervised learning:** a little labelled data plus a lot of unlabelled data.
@@ -133,3 +145,11 @@ Many real systems combine both: clustering to define groups, then supervised mod
 - Follow a disciplined [data science workflow](/ai-data-engineering/data-science-workflow/) from problem definition to deployment.
 
 Supervised and unsupervised learning are the foundation of nearly all practical machine learning, from image recognition in [computer vision](/ai-data-engineering/classification-vs-detection-vs-segmentation/) to monitoring industrial equipment.
+
+## Supervised vs unsupervised learning interview and viva questions
+
+1. **What is the key difference between supervised and unsupervised learning?** Supervised learning trains on inputs paired with known correct outputs, while unsupervised learning has only inputs and must find structure such as groups or unusual points by itself.
+2. **What is the difference between classification and regression?** Both are supervised tasks. Classification predicts a category, such as spam or not spam, and regression predicts a number, such as a price or remaining useful life.
+3. **Why is evaluating an unsupervised model harder?** There is no correct answer to compare with, so engineers rely on internal measures such as cluster compactness and separation, and on whether domain experts find the result useful.
+4. **Why should features be scaled before k-means?** k-means uses distances between points, so a feature with a large numeric range would dominate the distance and the clustering unless all features are put on a similar scale.
+5. **What is data leakage?** It is when information from the future or from the target itself enters the features, which makes the model look accurate in testing but fail in real use.

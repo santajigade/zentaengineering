@@ -3,6 +3,7 @@ title: "Predictive Maintenance with Machine Learning"
 description: "Predictive maintenance with machine learning: sensor data, vibration features, anomaly detection, failure classification, remaining useful life and ROI."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: ai-data-engineering
 subcategory: industrial-ai
 focusKeyword: "predictive maintenance"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Predictive maintenance with machine learning** uses sensor data such as vibration, temperature, current and pressure to detect early signs of equipment degradation and forecast failures before they happen. Three model types are common: **anomaly detection** (flag behaviour that differs from normal), **failure classification** (predict whether, or which, failure will occur within a time window) and **remaining useful life (RUL) regression** (estimate how long until failure). The goal is to schedule maintenance just in time, cutting unplanned downtime and unnecessary servicing.
+**Predictive maintenance** with machine learning uses sensor data such as vibration, temperature, current and pressure to detect early equipment degradation and forecast failures. Anomaly detection flags abnormal behaviour, failure classification predicts which fault is coming, and remaining useful life regression estimates time to failure, so maintenance is scheduled just in time.
 
 </Key>
 
@@ -38,7 +39,7 @@ Maintenance strategies have evolved from fixing machines after they break (**rea
 
 ## The predictive maintenance pipeline
 
-<figure>
+<figure class="anim">
 <svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Predictive maintenance pipeline: sensors on a motor and pump send data to data collection, then feature extraction, then machine learning models, then maintenance action in the CMMS, with feedback from maintenance records to the models">
 <g stroke="#0b2545" stroke-width="2">
 <rect x="15" y="80" width="100" height="70" rx="6" fill="#eef1f6" /><rect x="135" y="80" width="100" height="70" rx="6" fill="#e6f6f4" /><rect x="255" y="80" width="100" height="70" rx="6" fill="#e6f6f4" /><rect x="375" y="80" width="100" height="70" rx="6" fill="#fff7e0" /><rect x="495" y="80" width="95" height="70" rx="6" fill="#ffe9e7" />
@@ -54,6 +55,8 @@ Maintenance strategies have evolved from fixing machines after they break (**rea
 <g stroke="#13a89e" stroke-width="2"><path d="M115 115h14M235 115h14M355 115h14M475 115h14" /></g>
 <g fill="#13a89e"><path d="M129 110l8 5-8 5z" /><path d="M249 110l8 5-8 5z" /><path d="M369 110l8 5-8 5z" /><path d="M489 110l8 5-8 5z" /></g>
 <path d="M542 150v70H425v-62" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" /><path d="M420 160l5-9 5 9z" fill="#b42318" />
+<g stroke="#fff" stroke-width="2" stroke-dasharray="4 10" fill="none"><path class="anim-flow" d="M115 115h14M235 115h14M355 115h14M475 115h14" /><path class="anim-flow-slow" d="M542 150v70H425v-62" /></g>
+<circle class="anim-pulse" cx="65" cy="80" r="5" fill="#b42318" />
 <text x="300" y="40" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle">From sensor signal to maintenance decision</text>
 </svg>
 <figcaption>A typical predictive maintenance pipeline with feedback from maintenance records.</figcaption>
@@ -137,3 +140,21 @@ A regression model estimates the time or cycles left before failure. Approaches 
 - **Pilot purgatory:** a successful pilot that never scales because the pipeline and work process were not designed for it.
 
 Predictive maintenance is one of the most proven uses of industrial AI. Combined with physics knowledge in a [digital twin](/automation-robotics/digital-twin-explained/) and the large data volumes described in [the five Vs of big data](/ai-data-engineering/big-data-five-vs/), it turns sensor data into fewer breakdowns and lower maintenance cost.
+
+## Key formulas for predictive maintenance
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| RMS value | x_RMS = √[(1/N) Σ x_i²] | x_i = signal samples (for example mm/s or g), N = number of samples |
+| Crest factor | CF = x_peak ÷ x_RMS | dimensionless, rises with impulsive faults |
+| Kurtosis | K = [(1/N) Σ (x_i − x̄)⁴] ÷ σ⁴ | x̄ = mean, σ = standard deviation; about 3 for a healthy random signal |
+| Cost per failure | C = t_down × c_hour + C_repair | t_down in h, c_hour = production loss per hour |
+| Annual saving | S = C_without − (C_caught + C_missed + C_monitoring) | all in currency per year |
+
+## Predictive maintenance interview and viva questions
+
+1. **How does predictive maintenance differ from preventive maintenance?** Preventive maintenance is done at fixed intervals whatever the condition, while predictive maintenance uses measured condition to estimate when failure will occur and schedules work just before it.
+2. **Why is anomaly detection usually the first model deployed?** It learns only what normal operation looks like, so it needs no failure history, which most plants do not have when they start.
+3. **Why is kurtosis useful for bearing faults?** Early bearing damage produces sharp impacts that make the signal impulsive, and kurtosis rises well above its healthy value of about 3 in response.
+4. **What is class imbalance and how is it handled?** Failures are rare compared with normal data, so a naive classifier can ignore them. Careful labelling, resampling or class weighting, and precision and recall based evaluation address it.
+5. **What does a remaining useful life model predict?** It is a regression model that estimates the time or cycles left before failure, often by tracking a health indicator or learning from run to failure sequences such as the NASA C-MAPSS dataset.

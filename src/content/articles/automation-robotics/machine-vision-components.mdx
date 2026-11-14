@@ -3,6 +3,7 @@ title: "Machine Vision Components: Parts of a Vision System"
 description: "Machine vision components explained: lighting, lenses, cameras and sensors, processors, software and interfaces, with a camera resolution sizing example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: automation-robotics
 subcategory: machine-vision
 focusKeyword: "machine vision components"
@@ -29,26 +30,27 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The main **machine vision components** are **lighting**, which creates contrast on the part; a **lens**, which forms the image; a **camera** with an image sensor, which converts light to pixels; a **processor** (smart camera, PC or embedded system) running **vision software** that finds, measures, reads or classifies features; and **communication and I/O** that send results to a PLC or robot and trigger rejects. The application defines each choice, starting from field of view and smallest feature to detect.
+The main **machine vision components** are lighting, which creates contrast on the part; a lens, which forms the image; a camera sensor, which converts light into pixels; a processor running vision software that finds, measures, reads or classifies features; and communication and I/O that send results to a PLC or robot.
 
 </Key>
 
 Machine vision gives automated equipment the ability to see. It checks that labels are present and straight, reads barcodes and printed dates, measures dimensions, finds defects on surfaces and tells robots where to pick parts. A reliable system depends on all components working together, so each one must be chosen for the task.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="260" viewBox="0 0 580 260" fill="none" role="img" aria-label="Machine vision setup: a part on a conveyor lit by a ring light, a camera with lens above it, a trigger sensor beside the conveyor, a vision processor receiving images, and a PLC receiving pass or fail results that drives a reject device">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <rect x="20" y="200" width="300" height="16" rx="8" fill="#cfd8e3" stroke="#0b2545" stroke-width="1.5" />
 <rect x="150" y="174" width="50" height="26" rx="3" fill="#f5b800" /><text x="175" y="235">Part on conveyor</text>
 <rect x="155" y="40" width="40" height="50" rx="4" fill="#0b2545" /><text x="120" y="60" text-anchor="end">Camera</text>
 <rect x="163" y="90" width="24" height="24" fill="#3b3f46" /><text x="120" y="108" text-anchor="end">Lens</text>
-<ellipse cx="175" cy="132" rx="46" ry="9" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" /><text x="120" y="136" text-anchor="end">Ring light</text>
+<ellipse class="anim-blink" cx="175" cy="132" rx="46" ry="9" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" /><text x="120" y="136" text-anchor="end">Ring light</text>
 <rect x="250" y="160" width="20" height="20" fill="#0b2545" /><text x="300" y="166" text-anchor="start">Trigger</text><text x="300" y="180" text-anchor="start">sensor</text>
 <rect x="380" y="30" width="170" height="60" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="465" y="56">Vision processor</text><text x="465" y="74" font-size="11">software, tools, AI</text>
 <rect x="380" y="130" width="170" height="50" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="465" y="160">PLC</text>
 <text x="465" y="232">Reject device</text>
 </g>
 <g stroke="#0b2545" stroke-width="2" fill="none"><path d="M195 60H378M370 54L380 60L370 66" /><path d="M465 90V128M459 120L465 130L471 120" /><path d="M465 180V214M459 206L465 216L471 206" /><path d="M260 160V150H380" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M195 60H368" /><path class="anim-flow anim-d1" d="M465 90V120" /><path class="anim-flow anim-d2" d="M465 180V206" /><path class="anim-flow" d="M260 160V150H380" /></g>
 <g stroke="#f5b800" stroke-width="1.5" stroke-dasharray="4 3"><path d="M165 114L150 174M185 114L200 174" /></g>
 </svg>
 <figcaption>A typical inline machine vision inspection station.</figcaption>
@@ -128,6 +130,13 @@ $$
 </dl>
 </Example>
 
+## Key formulas for machine vision components
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Required pixels along one axis | pixels = (field of view ÷ smallest feature) × pixels per feature | field of view and smallest feature in mm; pixels per feature often at least 2 to 4 |
+| Size of one pixel on the part | pixel size = field of view ÷ pixels | mm per pixel |
+
 ## Typical applications
 
 Vision is used wherever human inspection would be too slow, too tiring or too inconsistent.
@@ -148,3 +157,11 @@ Vision is used wherever human inspection would be too slow, too tiring or too in
 5. Validate with large sample sets and track false rejects and escapes.
 
 Machine vision is a key sensing element in [mechatronic systems](/automation-robotics/mechatronic-system-elements/) and in smart factories, where inspection data feeds analytics and [digital twins](/automation-robotics/digital-twin-explained/). The image sensor itself works on the [sampling theorem](/electronics-engineering/sampling-theorem/) in space as well as time, which is why fine detail needs enough pixels.
+
+## Machine vision components interview and viva questions
+
+1. **What are the main machine vision components?** Lighting, lens, camera with image sensor, processor with vision software, and communication and I/O that pass results to a PLC or robot.
+2. **Why is lighting called the most important component?** The camera can only measure what the lighting makes visible, so good lighting maximises contrast of the feature of interest and makes the software simpler and more reliable.
+3. **When is a telecentric lens used?** For precise gauging, because it keeps magnification constant with distance and avoids perspective error.
+4. **Why is a global shutter preferred for moving parts?** A global shutter exposes all pixels at the same time, while a rolling shutter can distort fast moving parts.
+5. **How do you size camera resolution?** Divide the field of view by the smallest feature and multiply by the pixels each feature should cover; for 120 mm, 0.2 mm and 3 pixels this gives 1800 pixels.

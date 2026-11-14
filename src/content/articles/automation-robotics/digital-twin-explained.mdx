@@ -3,6 +3,7 @@ title: "Digital Twin Explained: Types and Industrial Uses"
 description: "Digital twin explained: what it is, how data flows between the physical asset and the virtual model, types, maturity levels, uses, benefits and challenges."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: automation-robotics
 subcategory: industry-4-0
 focusKeyword: "digital twin"
@@ -28,7 +29,7 @@ import Key from '../../../components/Key.astro';
 
 <Key title="Short answer">
 
-A **digital twin** is a virtual model of a specific physical asset, process or system that is kept up to date with data from its real counterpart. Sensors send operating data to the model; the model analyses, simulates and predicts; and the results feed decisions or controls back to the real asset. Digital twins are used to design products, commission machines virtually, predict failures, optimise processes and train operators.
+A **digital twin** is a virtual model of a specific physical asset, process or system that is kept up to date with data from its real counterpart. Sensors feed the model, the model analyses, simulates and predicts, and the results return as decisions or control actions for design, commissioning, maintenance and optimisation.
 
 </Key>
 
@@ -36,7 +37,7 @@ Industry 4.0 connects machines, sensors and software across factories and supply
 
 ## How a digital twin works
 
-<figure>
+<figure class="anim">
 <svg width="580" height="260" viewBox="0 0 580 260" fill="none" role="img" aria-label="Digital twin data loop: a physical asset with sensors sends data through connectivity to the digital twin, which contains models, simulation and analytics; the twin returns insights, predictions and optimised settings to operators and to the control system of the physical asset">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <rect x="20" y="60" width="170" height="130" rx="12" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="105" y="90" font-weight="700">Physical asset</text><text x="105" y="118" font-size="12">machine, line, plant</text><text x="105" y="140" font-size="12">sensors, PLC, DCS</text><text x="105" y="162" font-size="12">actuators</text>
@@ -46,6 +47,7 @@ Industry 4.0 connects machines, sensors and software across factories and supply
 <text x="290" y="246" font-size="12" fill="#0e7f78">Users: engineers, operators, maintenance planners</text>
 </g>
 <g stroke="#0b2545" stroke-width="2.5" fill="none"><path d="M190 105H388M380 98L390 105L380 112" /><path d="M390 160H192M200 153L190 160L200 167" stroke="#13a89e" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M190 105H378" /><path class="anim-flow anim-d2" d="M390 160H202" /></g>
 </svg>
 <figcaption>Data flows from the physical asset to its digital twin, and insights flow back.</figcaption>
 </figure>
@@ -118,3 +120,11 @@ Successful projects keep the model simple enough to maintain.
 4. Validate predictions against real events, then extend to more assets and closed loop use.
 
 Digital twins build on the basics of automation: well designed [PLC systems](/automation-robotics/plc-hardware-selection/), clean data from industrial networks such as [Modbus TCP](/automation-robotics/modbus-rtu-vs-tcp/), and good understanding of each [mechatronic system](/automation-robotics/mechatronic-system-elements/). Machine learning models inside data driven twins face the same risk of [overfitting and underfitting](/ai-data-engineering/overfitting-and-underfitting/) as any other model, so they must be validated on data they were not trained on.
+
+## Digital twin interview and viva questions
+
+1. **What is a digital twin?** It is a virtual model of a specific physical asset, process or system that is kept up to date with data from that real counterpart and is used to monitor, predict and optimise it.
+2. **How does a digital shadow differ from a digital twin?** In a digital shadow, data flows automatically from the asset to the model only, and people make the changes. In a digital twin, data flows automatically in both directions, so the model can influence the asset.
+3. **What is virtual commissioning?** The real PLC program is connected to a simulated machine or line so that logic errors are found in the office before site commissioning, which shortens start up.
+4. **Which standard gives a digital twin framework for manufacturing?** ISO 23247 describes a reference framework for manufacturing digital twins built around the physical entity, the virtual model and the data connection.
+5. **Why is cybersecurity important for digital twins?** Advanced twins have two way links to control systems, so those links must be protected according to standards such as IEC 62443.

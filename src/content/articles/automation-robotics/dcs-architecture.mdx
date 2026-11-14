@@ -3,6 +3,7 @@ title: "What Is a DCS? Architecture and Applications"
 description: "DCS architecture explained: controllers, I/O, control network, operator and engineering stations, redundancy, function blocks, DCS vs PLC and SCADA, and uses."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: automation-robotics
 subcategory: dcs
 focusKeyword: "DCS architecture"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-A **distributed control system (DCS)** controls a large continuous process using many controllers spread around the plant, all tied to a common control network, operator stations, engineering station and historian. The **DCS architecture** places control close to the process for reliability, while operators supervise everything from one integrated system. DCSs are standard in refineries, chemical plants, power stations, pharmaceuticals and pulp and paper mills.
+**DCS architecture** describes how a distributed control system controls a large continuous process using many redundant controllers spread around the plant, linked by a common control network to operator stations, an engineering station and a historian. Control sits close to the process for reliability, while operators supervise the whole plant from one integrated system.
 
 </Key>
 
@@ -37,7 +38,7 @@ Before DCSs, process plants were run from large panels of individual analog cont
 
 ## DCS architecture layers
 
-<figure>
+<figure class="anim">
 <svg width="580" height="330" viewBox="0 0 580 330" fill="none" role="img" aria-label="DCS architecture: operator stations, engineering station and historian on a redundant plant control network at the top; redundant controller pairs in the middle each with I/O modules; field instruments and control valves at the bottom; a separate safety system alongside">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <rect x="30" y="15" width="120" height="44" rx="6" fill="#0b2545" /><text x="90" y="42" fill="#ffffff">Operator stations</text>
@@ -45,8 +46,8 @@ Before DCSs, process plants were run from large panels of individual analog cont
 <rect x="310" y="15" width="110" height="44" rx="6" fill="#0b2545" /><text x="365" y="42" fill="#ffffff">Historian</text>
 <rect x="440" y="15" width="120" height="44" rx="6" fill="#0b2545" /><text x="500" y="38" fill="#ffffff">Plant business</text><text x="500" y="52" fill="#9fd9d4" font-size="11">via firewall</text>
 <text x="432" y="92" fill="#9a6b00">Network A + B</text>
-<rect x="40" y="130" width="150" height="62" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="115" y="155">Controller pair</text><text x="115" y="173" font-size="11">primary + standby</text>
-<rect x="215" y="130" width="150" height="62" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="290" y="155">Controller pair</text><text x="290" y="173" font-size="11">primary + standby</text>
+<rect class="anim-blink" x="40" y="130" width="150" height="62" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="115" y="155">Controller pair</text><text x="115" y="173" font-size="11">primary + standby</text>
+<rect class="anim-blink anim-d2" x="215" y="130" width="150" height="62" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="290" y="155">Controller pair</text><text x="290" y="173" font-size="11">primary + standby</text>
 <rect x="400" y="130" width="150" height="62" rx="8" fill="#fde2e2" stroke="#b42318" stroke-width="2" /><text x="475" y="155">Safety system (SIS)</text><text x="475" y="173" font-size="11">separate logic</text>
 <rect x="40" y="215" width="150" height="34" rx="6" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="115" y="237">I/O modules</text>
 <rect x="215" y="215" width="150" height="34" rx="6" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="290" y="237">I/O modules</text>
@@ -54,6 +55,7 @@ Before DCSs, process plants were run from large panels of individual analog cont
 <text x="290" y="305">Field: transmitters, analysers, control valves, motors, shutdown valves</text>
 </g>
 <g stroke="#f5b800" stroke-width="3"><path d="M20 100H560M20 110H560" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M20 100H560" /><path class="anim-flow-rev" d="M20 110H560" /></g>
 <g stroke="#0b2545" stroke-width="2"><path d="M90 59V100M230 59V100M365 59V100M500 59V100M115 110V130M290 110V130M475 110V130M115 192V215M290 192V215M475 192V215M115 249V285M290 249V285M475 249V285" /></g>
 </svg>
 <figcaption>Typical DCS architecture with redundant networks and controllers, and a separate safety system.</figcaption>
@@ -129,3 +131,11 @@ Migration projects often reuse field wiring and replace only controllers and wor
 - Water treatment works and large food and beverage plants.
 
 Process units such as [distillation columns](/chemical-engineering/distillation-column-working-principle/) and [CSTR reactors](/chemical-engineering/cstr-vs-pfr/) are classic examples of equipment run by a DCS, and plant data from the historian increasingly feeds a [digital twin](/automation-robotics/digital-twin-explained/) for optimisation and training.
+
+## DCS architecture interview and viva questions
+
+1. **Why is control distributed across many controllers in a DCS?** Each controller handles one process area, so a single failure affects only a small part of the plant instead of stopping everything, which was the weakness of one central computer.
+2. **How does controller redundancy work?** Controllers are supplied as primary and standby pairs. The standby tracks the primary and takes over without disturbing the process if the primary fails.
+3. **What is configurable or universal I/O?** Each I/O channel can be set in software as AI, AO, DI or DO, which simplifies design and makes late changes easier.
+4. **Why is the safety instrumented system kept separate from the DCS?** The SIS must take the process to a safe state independently of the basic control system, so its logic and hardware are kept separate to meet IEC 61511.
+5. **What standards guide DCS operator graphics and alarms?** ISA-101 covers human machine interface design, and ISA-18.2 and IEC 62682 cover alarm management, including cause, consequence, operator response and priority for each alarm.

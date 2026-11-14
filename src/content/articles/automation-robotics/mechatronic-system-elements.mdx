@@ -3,6 +3,7 @@ title: "What Is Mechatronics? Elements of a Mechatronic System"
 description: "Mechatronics explained: the elements of a mechatronic system, sensors, actuators, controllers, interfaces and mechanics, the design approach and examples."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: automation-robotics
 subcategory: mechatronics
 focusKeyword: "mechatronic system"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Mechatronics** is the integrated design of mechanical systems with electronics, control and software. A **mechatronic system** has five main elements: the **mechanical system** being controlled, **sensors** that measure its state, **signal conditioning and interfaces** that convert signals, a **controller** (microcontroller, PLC or computer) that decides what to do, and **actuators** that act on the mechanism. Together they form a feedback loop that makes a machine accurate, adaptive and smart.
+A **mechatronic system** integrates mechanics, electronics, control and software in one design. Its five elements are the mechanical system, sensors that measure its state, signal conditioning and interfaces, a controller such as a microcontroller or PLC, and actuators that move the mechanism, all working together in a feedback loop.
 
 </Key>
 
@@ -37,7 +38,7 @@ A modern car, a camera with autofocus, a 3D printer, an industrial robot and a h
 
 ## Elements of a mechatronic system
 
-<figure>
+<figure class="anim">
 <svg width="580" height="270" viewBox="0 0 580 270" fill="none" role="img" aria-label="Mechatronic system block diagram: a set point enters the controller, which drives an actuator through a power amplifier; the actuator moves the mechanical system; a sensor measures the output and feeds it back through signal conditioning to the controller">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <rect x="80" y="40" width="110" height="56" rx="8" fill="#0b2545" /><text x="135" y="66" fill="#ffffff">Controller</text><text x="135" y="82" fill="#9fd9d4" font-size="11">MCU, PLC, PC</text>
@@ -55,6 +56,7 @@ A modern car, a camera with autofocus, a 3D printer, an industrial robot and a h
 <path d="M400 195H342M350 189L340 195L350 201" />
 <path d="M190 195H135V98M129 106L135 96L141 106" stroke="#13a89e" />
 </g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow-slow" d="M50 68H70M190 68H210M320 68H340M440 68H460" /><path class="anim-flow-slow" d="M520 96V195H512" /><path class="anim-flow-slow" d="M400 195H350" /><path class="anim-flow-slow" d="M190 195H135V106" /></g>
 </svg>
 <figcaption>Closed loop structure of a mechatronic system.</figcaption>
 </figure>
@@ -113,6 +115,15 @@ where e(t) is the error between set point and measurement. Closed loop control c
 </dl>
 </Example>
 
+## Key formulas for a mechatronic system
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| PID controller output | u(t) = K_p e(t) + K_i ∫ e(t) dt + K_d de(t)/dt | e(t) = set point minus measurement; K_p, K_i, K_d = proportional, integral and derivative gains |
+| Encoder counts per motor revolution | counts = lines × 4 | quadrature decoding gives 4 counts per line |
+| Counts per output revolution | counts_out = counts × gear ratio | gear ratio of the gearbox, for example 10 for 10:1 |
+| Linear position resolution | resolution = travel per output revolution ÷ counts_out | mm per count |
+
 ## The mechatronic design approach
 
 Mechatronic design develops mechanics, electronics and software in parallel, with frequent integration and testing. Guidelines such as VDI 2206 describe a V model: define requirements, split them into domain specific designs, then integrate and verify step by step. Modelling and simulation, including model based design and [digital twins](/automation-robotics/digital-twin-explained/), let teams test control strategies before hardware exists.
@@ -145,3 +156,11 @@ Testing each element alone and then the complete loop, with hardware in the loop
 - **Consumer:** washing machines, camera autofocus and image stabilisation, printers, drones.
 - **Medical:** infusion pumps, surgical robots, prosthetic limbs.
 - **Aerospace:** fly-by-wire flight controls and landing gear systems.
+
+## Mechatronic system interview and viva questions
+
+1. **What are the five elements of a mechatronic system?** The mechanical system, sensors, signal conditioning and interfaces, the controller, and actuators with their power drivers.
+2. **What is the difference between open loop and closed loop control?** Open loop control sends commands without measuring the result, while closed loop control feeds back the actual output so the controller can correct the error continuously.
+3. **Why is signal conditioning needed?** Raw sensor signals are often small, noisy or in the wrong form, so they are amplified, filtered, isolated and converted by an ADC before the controller can use them.
+4. **What does VDI 2206 describe?** It gives guidelines for developing mechatronic and cyber-physical systems using a V model, from requirements through domain designs to step by step integration and verification.
+5. **Why can encoder resolution be finer than real positioning accuracy?** Backlash, belt elasticity and temperature limit the real accuracy, so mechanical and control design must be considered together.

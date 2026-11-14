@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/ai-data-engineering/predictive-maintenance-machine-learning.mdx
-src/content/articles/ai-data-engineering/supervised-vs-unsupervised-learning.mdx
-src/content/articles/ai-data-engineering/tokenization-and-embeddings.mdx
-src/content/articles/automation-robotics/dcs-architecture.mdx
-src/content/articles/automation-robotics/digital-twin-explained.mdx
-src/content/articles/automation-robotics/machine-vision-components.mdx
-src/content/articles/automation-robotics/mechatronic-system-elements.mdx
-src/content/articles/automation-robotics/modbus-rtu-vs-tcp.mdx
 src/content/articles/automation-robotics/plc-hardware-selection.mdx
 src/content/articles/automation-robotics/plc-ladder-logic.mdx
 src/content/articles/automation-robotics/scada-system-architecture.mdx

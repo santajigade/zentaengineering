@@ -1,0 +1,175 @@
+---
+title: "Image Preprocessing Techniques for Computer Vision"
+description: "Image preprocessing for computer vision: resizing, colour conversion, normalization, filtering, augmentation and tensor layout, with a worked example."
+pubDate: 2026-11-14
+reviewedDate: 2026-11-14
+discipline: ai-data-engineering
+subcategory: computer-vision
+focusKeyword: "image preprocessing"
+image: { src: /images/featured/image-preprocessing-techniques.webp, alt: "Image Preprocessing Techniques for Computer Vision: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [image-preprocessing, computer-vision, normalization, data-augmentation, opencv]
+faq:
+  - q: "Is image preprocessing still needed with deep learning?"
+    a: "Yes. A neural network does not need hand made features, but it still expects inputs of a fixed size, a fixed channel order and a known value range. Resizing, normalization and the same colour handling used during training are required, and augmentation is one of the most effective ways to reduce overfitting on small datasets."
+  - q: "Should I normalize images to 0 to 1 or use mean and standard deviation?"
+    a: "Use whatever the model was trained with. Pretrained torchvision ImageNet models expect pixels scaled to 0 to 1 and then standardized with the ImageNet channel means and standard deviations. A model trained from scratch works with either choice, as long as training and inference use exactly the same step."
+  - q: "Should data augmentation be applied to the test set?"
+    a: "No, not the random kind. Validation and test images get only the deterministic steps, such as resize, centre crop and normalization, so that measured accuracy is repeatable. Some systems use test time augmentation, averaging predictions over a few flipped or cropped copies, but that is a deliberate inference technique, not part of normal preprocessing."
+references:
+  - text: "R. C. Gonzalez and R. E. Woods, Digital Image Processing, 4th ed., Pearson, 2018"
+  - text: "R. Szeliski, Computer Vision: Algorithms and Applications, 2nd ed., Springer, 2022"
+  - text: "OpenCV documentation, Image Processing module (imgproc): Geometric Image Transformations, Color Space Conversions, Image Filtering, Histograms"
+  - text: "PyTorch torchvision documentation, Transforming and augmenting images, and Models and pre-trained weights"
+  - text: "ITU-R Recommendation BT.601, Studio encoding parameters of digital television for standard 4:3 and wide screen 16:9 aspect ratios"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Image preprocessing** is the set of operations that turn raw images into consistent model inputs for computer vision. Typical steps are resizing and cropping, colour conversion, scaling and normalizing pixel values, noise filtering, contrast adjustment and, during training only, random data augmentation, before the image becomes a tensor for the model.
+
+</Key>
+
+Image preprocessing decides what a computer vision model actually sees. Cameras deliver images of different sizes, lighting, colour orders and noise levels, while a model expects one fixed input format. Good preprocessing makes training faster and more stable, and a mismatch between training and deployment preprocessing is one of the most common reasons a model that scored well in testing fails in the field.
+
+## Why image preprocessing matters
+
+A digital image is a grid of pixels. A colour image stored as 8 bit integers holds three values per pixel, for red, green and blue, each from 0 to 255. A model such as a [convolutional neural network](/ai-data-engineering/convolutional-neural-networks/) needs every input to have the same height, width, channel count, channel order and value range. Preprocessing provides that consistency.
+
+It also serves three other purposes described by Gonzalez and Woods and by Szeliski:
+
+- **Enhancement:** improve contrast or reduce noise so useful detail is easier to detect.
+- **Standardization:** remove differences that do not matter for the task, such as overall brightness or image size.
+- **Regularization:** augmentation creates varied copies of training images, which helps the model generalize and reduces [overfitting](/ai-data-engineering/overfitting-and-underfitting/).
+
+## A typical image preprocessing pipeline
+
+<figure class="anim">
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Image preprocessing pipeline for training a computer vision model: raw image of 1920 by 1080 pixels in uint8, resize and crop to 224 by 224, random augmentation such as flips and colour jitter, scaling to 0 to 1 and normalizing with mean and standard deviation, then a float32 tensor of 3 by 224 by 224 sent to the model; at inference the augmentation step is skipped">
+<text x="300" y="30" font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle">Training pipeline</text>
+<g stroke="#0b2545" stroke-width="2">
+<rect class="anim-blink" x="14" y="55" width="96" height="80" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d1" x="130" y="55" width="96" height="80" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d2" x="246" y="55" width="96" height="80" rx="6" fill="#fff7e0" />
+<rect class="anim-blink anim-d3" x="362" y="55" width="96" height="80" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d4" x="478" y="55" width="96" height="80" rx="6" fill="#e6f6f4" />
+</g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M110 95H124M226 95H240M342 95H356M458 95H472" /></g>
+<g fill="#13a89e"><path d="M130 95L122 90V100Z" /><path d="M246 95L238 90V100Z" /><path d="M362 95L354 90V100Z" /><path d="M478 95L470 90V100Z" /></g>
+<g stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="3 4"><path class="anim-flow" d="M110 95H122M226 95H238M342 95H354M458 95H470" /></g>
+<path d="M178 135V180H410V135" stroke="#7b8794" stroke-width="2" stroke-dasharray="5 4" />
+<path d="M410 135L405 145H415Z" fill="#7b8794" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="62" y="80" font-weight="700">Raw image</text><text x="62" y="100" font-size="11">1920 × 1080</text><text x="62" y="116" font-size="11">uint8, 0 to 255</text>
+<text x="178" y="80" font-weight="700">Resize</text><text x="178" y="100" font-size="11">and crop to</text><text x="178" y="116" font-size="11">224 × 224</text>
+<text x="294" y="80" font-weight="700">Augment</text><text x="294" y="100" font-size="11">flip, rotate,</text><text x="294" y="116" font-size="11">colour jitter</text>
+<text x="410" y="80" font-weight="700">Normalize</text><text x="410" y="100" font-size="11">scale to 0 to 1,</text><text x="410" y="116" font-size="11">mean and std</text>
+<text x="526" y="80" font-weight="700">Tensor</text><text x="526" y="100" font-size="11">3 × 224 × 224</text><text x="526" y="116" font-size="11">float32 to model</text>
+<text x="294" y="200" font-size="11" fill="#7b8794">Inference path: skip random augmentation</text>
+<text x="294" y="232" font-size="11" fill="#7b8794">Same resize, crop and normalization in training and deployment</text>
+</g>
+</svg>
+<figcaption>A typical image preprocessing pipeline for training a CNN. At inference the random augmentation step is skipped, but every other step must match training.</figcaption>
+</figure>
+
+The exact order varies by library, but the stages above appear in almost every deep learning project. In torchvision, for example, a training pipeline often uses a random resized crop, a random horizontal flip, conversion to a tensor and normalization, while the evaluation pipeline uses a fixed resize and a centre crop.
+
+## Resizing, cropping and interpolation
+
+Models need a fixed input size, commonly 224 × 224 for ImageNet classifiers. Two ways to get there:
+
+- **Direct resize** to the target size. Simple, but if the aspect ratio changes, objects are stretched.
+- **Resize the shorter side, then crop.** The torchvision ImageNet models, for example, resize the shorter side to 256 pixels and take a 224 × 224 centre crop for evaluation. This keeps the aspect ratio but may cut off edges of the scene.
+- **Letterbox (pad).** Resize to fit inside the target and pad the remainder, common in object detection so that no part of the image is lost.
+
+Resizing needs **interpolation** to estimate new pixel values. Nearest neighbour is fastest but blocky, bilinear and bicubic give smoother results, and the OpenCV documentation recommends area interpolation (INTER_AREA) for shrinking images because it reduces aliasing. Shrinking without proper filtering can produce the aliasing patterns explained by the [sampling theorem](/electronics-engineering/sampling-theorem/). Label masks in segmentation must use nearest neighbour so class numbers are not blended.
+
+## Colour conversion and grayscale
+
+Channel order is a classic trap: OpenCV loads images in **BGR** order, while most deep learning libraries and pretrained weights assume **RGB**. Feeding BGR images to an RGB model silently swaps red and blue and lowers accuracy.
+
+When colour does not help the task, such as some document or surface inspection jobs, converting to grayscale cuts the data to one channel. OpenCV uses the luma weights of ITU-R BT.601:
+
+$$
+Y = 0.299R + 0.587G + 0.114B
+$$
+
+Green gets the largest weight because human vision is most sensitive to it. Other colour spaces are useful too: HSV separates hue from brightness, which helps colour based segmentation under changing light.
+
+## Normalization and standardization
+
+Raw 8 bit pixels range from 0 to 255. Neural networks train more reliably when inputs are small and centred near zero, so pixels are first **scaled** to 0 to 1 by dividing by 255, then often **standardized** per channel:
+
+$$
+x_{norm} = \frac{x/255 - \mu}{\sigma}
+$$
+
+For pretrained ImageNet models, the torchvision documentation gives channel means of 0.485, 0.456 and 0.406 and standard deviations of 0.229, 0.224 and 0.225 for R, G and B. For a model trained from scratch, the mean and standard deviation should be computed on the training set only, never on validation or test data, to avoid information leaking between them.
+
+Finally the image is rearranged from height, width, channels (HWC, as stored by OpenCV and image files) to channels, height, width (CHW, as PyTorch expects) and stacked into a batch.
+
+## Noise reduction and contrast enhancement
+
+Classical filters from Gonzalez and Woods are still widely used, especially in industrial [machine vision](/automation-robotics/machine-vision-components/):
+
+- **Gaussian blur:** a weighted average that smooths sensor noise; also used before downsampling.
+- **Median filter:** replaces each pixel with the median of its neighbours, very effective against salt and pepper noise while keeping edges sharper than averaging.
+- **Histogram equalization:** spreads intensity values over the full range to raise contrast in dull images.
+- **CLAHE** (contrast limited adaptive histogram equalization): equalizes small tiles separately with a clip limit, avoiding over amplified noise; available in OpenCV.
+- **Thresholding and morphology:** convert to binary and clean up shapes for simple measurement tasks.
+
+For deep learning, heavy filtering is often unnecessary, because the network learns its own filters. Apply it only if it is also applied identically at inference.
+
+## Data augmentation
+
+Augmentation applies random, label preserving changes to training images each epoch, so the model rarely sees the exact same picture twice:
+
+- **Geometric:** horizontal flips, small rotations, random crops, scaling and translation.
+- **Photometric:** brightness, contrast, saturation and hue jitter, blur and added noise.
+- **Advanced:** random erasing, and mixing methods that blend two images and their labels.
+
+Each change must keep the label valid. A horizontal flip is fine for cats but wrong for text recognition, and in detection or segmentation the boxes and masks must be transformed together with the image.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>One pixel of an RGB photo has values R = 200, G = 120, B = 50. The image will be fed to a pretrained ImageNet model at 224 × 224 in float32, in batches of 32.</dd>
+<dt>Find</dt><dd>(a) The normalized value of each channel. (b) The grayscale value of the pixel by BT.601. (c) The memory for one input batch.</dd>
+<dt>Assumptions</dt><dd>torchvision ImageNet means 0.485, 0.456, 0.406 and standard deviations 0.229, 0.224, 0.225; 4 bytes per float32 value; channel order is RGB.</dd>
+<dt>Solution</dt><dd>(a) R: 200 ÷ 255 = 0.7843; (0.7843 − 0.485) ÷ 0.229 = 1.307<br />G: 120 ÷ 255 = 0.4706; (0.4706 − 0.456) ÷ 0.224 = 0.065<br />B: 50 ÷ 255 = 0.1961; (0.1961 − 0.406) ÷ 0.225 = −0.933<br />(b) Y = 0.299 × 200 + 0.587 × 120 + 0.114 × 50 = 59.8 + 70.44 + 5.7 = 135.94, about 136<br />(c) Values per image = 3 × 224 × 224 = 150 528; bytes = 150 528 × 4 = 602 112; batch = 32 × 602 112 = 19 267 584 bytes</dd>
+<dt>Answer</dt><dd><strong>Normalized RGB about (1.307, 0.065, −0.933); grayscale about 136; one batch about 19.3 MB</strong></dd>
+<dt>Limitations</dt><dd>If the image had been loaded as BGR and not converted, the red and blue values would be swapped and the normalized inputs would be wrong. Memory for activations inside the network is much larger than the input batch.</dd>
+</dl>
+</Example>
+
+## Key formulas for image preprocessing
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Scaling | x_s = x ÷ 255 | x = 8 bit pixel value, 0 to 255 |
+| Standardization | x_norm = (x_s − μ) ÷ σ | μ, σ = channel mean and standard deviation of scaled pixels |
+| Min max normalization | x' = (x − x_min) ÷ (x_max − x_min) | Maps values to 0 to 1 |
+| Grayscale (BT.601) | Y = 0.299R + 0.587G + 0.114B | R, G, B = channel values |
+| Histogram equalization | s_k = (L − 1) × Σ p_r(r_j), j = 0 to k | L = number of grey levels, p_r = normalized histogram |
+| Input tensor memory | Bytes = N × C × H × W × b | N batch size, C channels, H × W pixels, b bytes per value (4 for float32) |
+
+## Common image preprocessing mistakes
+
+- **Training and inference mismatch:** different resize method, crop, channel order or normalization in deployment than in training.
+- **Normalizing twice** or forgetting to divide by 255, so inputs are far outside the expected range.
+- **Statistics from all data:** computing mean and standard deviation over test images leaks information.
+- **Augmenting validation data,** which makes accuracy noisy and not repeatable.
+- **Label breaking augmentation,** such as flipping digits or rotating images where orientation is the label.
+
+Image preprocessing is one stage of the wider [data science workflow](/ai-data-engineering/data-science-workflow/), and it should be versioned and tested like any other code. The choice of task, explained in [classification vs detection vs segmentation](/ai-data-engineering/classification-vs-detection-vs-segmentation/), also decides how labels must be transformed.
+
+## Image preprocessing interview and viva questions
+
+1. **Why are pixel values normalized before training a neural network?** Small, zero centred inputs keep activations and gradients in a good range, so training converges faster and more stably.
+2. **What is the difference between BGR and RGB, and why does it matter?** They store the same channels in opposite order; OpenCV loads BGR, while most pretrained models expect RGB, so a missing conversion swaps red and blue.
+3. **Which interpolation should be used to shrink an image?** The OpenCV documentation recommends area interpolation for shrinking because it reduces aliasing; label masks must use nearest neighbour.
+4. **Why is augmentation applied only to training data?** Random changes regularize training, but evaluation needs fixed, repeatable inputs so that measured accuracy is meaningful.
+5. **When is a median filter preferred over a Gaussian filter?** For salt and pepper noise, because the median removes isolated extreme pixels while keeping edges sharper.

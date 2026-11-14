@@ -3,6 +3,7 @@ title: "Tokenization and Embeddings in NLP Explained"
 description: "Tokenization and embeddings in NLP explained: word, character and subword tokens, BPE, one-hot vectors, Word2Vec, contextual embeddings and cosine similarity."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: ai-data-engineering
 subcategory: nlp
 focusKeyword: "tokenization and embeddings"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Tokenization and embeddings** are the first two steps of nearly every NLP system. **Tokenization** splits text into small units called **tokens** (words, characters or, most often today, **subwords**) and maps each to an integer ID. **Embeddings** turn each token ID into a dense vector of numbers, learned so that tokens with similar meanings have similar vectors. Neural networks then process these vectors instead of raw text.
+**Tokenization and embeddings** are the first two steps of nearly every NLP system. Tokenization splits text into tokens, usually subwords, and maps each to an integer ID. Embeddings turn each ID into a dense learned vector, placed so that tokens with similar meanings have similar vectors, which neural networks then process instead of raw text.
 
 </Key>
 
@@ -57,7 +58,7 @@ The standard for modern models. Common words stay whole, and rare words are spli
 
 Tokenizers also add **special tokens** that mark the start and end of sequences, padding, or separators between sentences.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Pipeline: input text 'Pumps overheat' is split into subword tokens Pump, s, over, heat; each token maps to an integer ID; each ID looks up a row in the embedding matrix to give a dense vector of numbers">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="300" y="24" font-weight="700">Text → tokens → IDs → embedding vectors</text>
@@ -65,7 +66,7 @@ Tokenizers also add **special tokens** that mark the start and end of sequences,
 </g>
 <rect x="150" y="50" width="380" height="32" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
 <text x="340" y="71" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545" text-anchor="middle">"Pumps overheat"</text>
-<g stroke="#0b2545" stroke-width="1.5" fill="#e6f6f4"><rect x="150" y="108" width="85" height="30" rx="4" /><rect x="248" y="108" width="85" height="30" rx="4" /><rect x="346" y="108" width="85" height="30" rx="4" /><rect x="444" y="108" width="85" height="30" rx="4" /></g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#e6f6f4"><rect class="anim-blink anim-d1" x="150" y="108" width="85" height="30" rx="4" /><rect class="anim-blink anim-d2" x="248" y="108" width="85" height="30" rx="4" /><rect class="anim-blink anim-d3" x="346" y="108" width="85" height="30" rx="4" /><rect class="anim-blink anim-d4" x="444" y="108" width="85" height="30" rx="4" /></g>
 <g stroke="#0b2545" stroke-width="1.5" fill="#fff7e0"><rect x="150" y="160" width="85" height="28" rx="4" /><rect x="248" y="160" width="85" height="28" rx="4" /><rect x="346" y="160" width="85" height="28" rx="4" /><rect x="444" y="160" width="85" height="28" rx="4" /></g>
 <g stroke="#0b2545" stroke-width="1.5" fill="#ffffff"><rect x="150" y="212" width="85" height="30" rx="4" /><rect x="248" y="212" width="85" height="30" rx="4" /><rect x="346" y="212" width="85" height="30" rx="4" /><rect x="444" y="212" width="85" height="30" rx="4" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
@@ -76,6 +77,7 @@ Tokenizers also add **special tokens** that mark the start and end of sequences,
 <text x="192" y="231">[0.12, −0.4, …]</text><text x="290" y="231">[0.03, 0.21, …]</text><text x="388" y="231">[−0.3, 0.08, …]</text><text x="486" y="231">[0.44, −0.1, …]</text>
 </g>
 <g stroke="#13a89e" stroke-width="1.5"><path d="M192 140v18M290 140v18M388 140v18M486 140v18M192 190v20M290 190v20M388 190v20M486 190v20" /></g>
+<g stroke="#fff" stroke-width="1" fill="none"><path class="anim-flow-slow" d="M192 140v18M290 140v18M388 140v18M486 140v18M192 190v20M290 190v20M388 190v20M486 190v20" /></g>
 </svg>
 <figcaption>A subword tokenizer splits text, maps tokens to IDs, and an embedding layer converts IDs to vectors. IDs are illustrative.</figcaption>
 </figure>
@@ -120,6 +122,16 @@ A value near 1 means very similar direction (similar meaning), near 0 means unre
 </dl>
 </Example>
 
+## Key formulas for tokenization and embeddings
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| One-hot vector | e_i = [0, ..., 1, ..., 0] | length V (vocabulary size), 1 at position i (token ID) |
+| Embedding lookup | v = E[i] | E = embedding matrix of size V × d, d = embedding dimension |
+| Dot product | a · b = Σ a_k b_k | sum over the d dimensions |
+| Vector length | ‖a‖ = √(Σ a_k²) | Euclidean norm |
+| Cosine similarity | cos θ = (a · b) ÷ (‖a‖ ‖b‖) | ranges from −1 (opposite) to 1 (same direction) |
+
 ## Where tokenization and embeddings are used
 
 - **Semantic search:** embed documents and queries, then return the documents with the highest cosine similarity, even when they share no exact words.
@@ -138,3 +150,11 @@ A value near 1 means very similar direction (similar meaning), near 0 means unre
 - For search, choose an embedding model trained for retrieval, and store vectors in a vector database or index.
 
 Tokenization and embeddings are where language becomes mathematics. Understanding them makes the behaviour of modern language models, including their limits, much easier to reason about.
+
+## Tokenization and embeddings interview and viva questions
+
+1. **What is subword tokenization and why is it preferred?** It keeps common words as single tokens and splits rare words into smaller known pieces, so any text can be represented without a huge vocabulary or unknown tokens.
+2. **How does Byte Pair Encoding build its vocabulary?** It starts from characters or bytes and repeatedly merges the most frequent adjacent pair into a new token until the vocabulary reaches the target size.
+3. **Why are token IDs not used directly as model inputs?** IDs are arbitrary labels with no meaning, so numerical closeness of two IDs says nothing about the words. An embedding layer maps each ID to a learned dense vector that does capture meaning.
+4. **What is the difference between static and contextual embeddings?** Static embeddings such as Word2Vec give one fixed vector per word, while contextual embeddings from transformers compute a different vector for each occurrence based on surrounding words.
+5. **Why is cosine similarity used to compare embeddings?** It measures the angle between vectors, so it compares direction, which reflects meaning, rather than vector length.

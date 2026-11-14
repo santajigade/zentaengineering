@@ -3,6 +3,7 @@ title: "Modbus RTU vs Modbus TCP Explained"
 description: "Modbus RTU vs Modbus TCP compared: physical layer, frame format, addressing, CRC and MBAP header, speed, distance, topology and when to use each, with examples."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-14
 discipline: automation-robotics
 subcategory: industrial-networks
 focusKeyword: "Modbus RTU vs Modbus TCP"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In **Modbus RTU vs Modbus TCP**, both use the same Modbus data model and function codes. **Modbus RTU** sends compact binary frames over serial lines, usually RS-485, with a slave address and a CRC check, one master polling up to 247 slaves in turn. **Modbus TCP** carries the same messages inside TCP/IP packets over Ethernet, with an MBAP header instead of the CRC, much higher speed and many simultaneous connections. RTU suits simple, long, low cost links; TCP suits plant networks and SCADA.
+**Modbus RTU vs Modbus TCP** compares two forms of the same Modbus protocol. Modbus RTU sends compact binary frames over RS-485 serial lines with a slave address and CRC, one master polling slaves in turn. Modbus TCP carries the same messages in TCP/IP packets over Ethernet with an MBAP header, higher speed and many connections.
 
 </Key>
 
@@ -70,21 +71,21 @@ Modbus TCP wraps the Modbus request in a TCP/IP packet on Ethernet.
 - **Distance:** 100 m per copper segment between switches; fibre for longer runs.
 - **Topology:** star, ring or line through Ethernet switches, shared with other plant traffic if designed carefully.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="230" viewBox="0 0 580 230" fill="none" role="img" aria-label="Frame comparison: a Modbus RTU frame with slave address, function code, data and CRC; and a Modbus TCP frame with a 7 byte MBAP header containing transaction ID, protocol ID, length and unit ID, followed by function code and data, carried inside a TCP/IP packet">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="20" y="24" text-anchor="start" font-weight="700">Modbus RTU frame</text>
-<rect x="20" y="36" width="90" height="40" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="65" y="61">Address 1 B</text>
-<rect x="110" y="36" width="100" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="160" y="61">Function 1 B</text>
-<rect x="210" y="36" width="200" height="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="310" y="61">Data (n bytes)</text>
-<rect x="410" y="36" width="90" height="40" fill="#fde2e2" stroke="#b42318" stroke-width="2" /><text x="455" y="61">CRC 2 B</text>
+<rect class="anim-blink" x="20" y="36" width="90" height="40" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="65" y="61">Address 1 B</text>
+<rect class="anim-blink anim-d1" x="110" y="36" width="100" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="160" y="61">Function 1 B</text>
+<rect class="anim-blink anim-d2" x="210" y="36" width="200" height="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="310" y="61">Data (n bytes)</text>
+<rect class="anim-blink anim-d3" x="410" y="36" width="90" height="40" fill="#fde2e2" stroke="#b42318" stroke-width="2" /><text x="455" y="61">CRC 2 B</text>
 <text x="20" y="124" text-anchor="start" font-weight="700">Modbus TCP frame (inside TCP/IP)</text>
-<rect x="20" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="55" y="154">Trans.</text><text x="55" y="169">ID 2 B</text>
-<rect x="90" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="125" y="154">Protocol</text><text x="125" y="169">ID 2 B</text>
-<rect x="160" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="195" y="154">Length</text><text x="195" y="169">2 B</text>
-<rect x="230" y="136" width="70" height="40" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="265" y="154">Unit</text><text x="265" y="169">ID 1 B</text>
-<rect x="300" y="136" width="100" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="350" y="161">Function 1 B</text>
-<rect x="400" y="136" width="160" height="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="480" y="161">Data (n bytes)</text>
+<rect class="anim-blink" x="20" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="55" y="154">Trans.</text><text x="55" y="169">ID 2 B</text>
+<rect class="anim-blink anim-d1" x="90" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="125" y="154">Protocol</text><text x="125" y="169">ID 2 B</text>
+<rect class="anim-blink anim-d2" x="160" y="136" width="70" height="40" fill="#e0ecfb" stroke="#1d4ed8" stroke-width="2" /><text x="195" y="154">Length</text><text x="195" y="169">2 B</text>
+<rect class="anim-blink anim-d3" x="230" y="136" width="70" height="40" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><text x="265" y="154">Unit</text><text x="265" y="169">ID 1 B</text>
+<rect class="anim-blink anim-d4" x="300" y="136" width="100" height="40" fill="#fff7e0" stroke="#f5b800" stroke-width="2" /><text x="350" y="161">Function 1 B</text>
+<rect class="anim-blink anim-d5" x="400" y="136" width="160" height="40" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="480" y="161">Data (n bytes)</text>
 <text x="160" y="200" fill="#1d4ed8">MBAP header, 7 bytes</text>
 </g>
 <path d="M20 186H300" stroke="#1d4ed8" stroke-width="1.5" /><path d="M20 182V190M300 182V190" stroke="#1d4ed8" stroke-width="1.5" />
@@ -133,3 +134,11 @@ Classic Modbus has no authentication or encryption: any device on the network ca
 - TCP: check IP address, subnet and gateway; port 502 open; unit ID required by gateways; register address offsets (some manuals count from 1, others from 0).
 
 The serial bit framing used by RTU is the same idea as UART communication, and choosing PLC communication ports is covered in [PLC hardware selection](/automation-robotics/plc-hardware-selection/).
+
+## Modbus RTU vs Modbus TCP interview and viva questions
+
+1. **What is the main difference between Modbus RTU and Modbus TCP?** Both use the same data model and function codes, but RTU sends binary frames over a serial line such as RS-485 with a CRC, while TCP carries the messages inside TCP/IP packets on Ethernet with an MBAP header.
+2. **Why does a Modbus TCP frame have no CRC?** Error checking is handled by the Ethernet and TCP layers, so the Modbus CRC is not needed.
+3. **What is the unit ID in the MBAP header used for?** It addresses a serial slave behind a Modbus gateway, so a TCP client can reach RTU devices.
+4. **How are Modbus RTU frames separated?** By a silence of at least 3.5 character times on the line.
+5. **Which function code reads holding registers?** Function code 03 reads holding registers, and 04 reads input registers.

@@ -1,0 +1,202 @@
+---
+title: "CPU Scheduling Algorithms Explained"
+description: "CPU scheduling algorithms explained: FCFS, SJF, SRTF, priority, round robin and multilevel queues, with criteria, Gantt charts and a worked example."
+pubDate: 2026-11-14
+reviewedDate: 2026-11-14
+discipline: computer-science
+subcategory: operating-systems
+focusKeyword: "cpu scheduling algorithms"
+image: { src: /images/featured/cpu-scheduling-algorithms.webp, alt: "CPU Scheduling Algorithms Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [cpu-scheduling, operating-systems, round-robin, sjf, fcfs]
+faq:
+  - q: "Which CPU scheduling algorithm is the best?"
+    a: "None is best for every workload. SJF gives the minimum average waiting time for a given set of jobs but needs burst lengths that are rarely known in advance. Round robin gives good response time for interactive users. Real operating systems combine ideas, for example multilevel feedback queues or fair share schedulers."
+  - q: "What is the difference between preemptive and non-preemptive scheduling?"
+    a: "In non-preemptive scheduling a process keeps the CPU until it finishes its burst or blocks for I/O. In preemptive scheduling the operating system can take the CPU away, for example when a timer interrupt ends a time slice or when a higher priority process becomes ready."
+  - q: "What is starvation and how is it prevented?"
+    a: "Starvation happens when a ready process waits indefinitely because others are always chosen first, which can occur with priority scheduling and SJF. Aging prevents it by gradually raising the priority of processes that have waited a long time."
+references:
+  - text: "A. Silberschatz, P. B. Galvin and G. Gagne, Operating System Concepts, 10th ed., Wiley, 2018, Chapter 5: CPU Scheduling"
+  - text: "A. S. Tanenbaum and H. Bos, Modern Operating Systems, 4th ed., Pearson, 2015, Section 2.4: Scheduling"
+  - text: "R. H. Arpaci-Dusseau and A. C. Arpaci-Dusseau, Operating Systems: Three Easy Pieces, Arpaci-Dusseau Books, chapters on scheduling, MLFQ and proportional share"
+  - text: "The Linux Kernel documentation, CFS Scheduler and EEVDF Scheduler, kernel.org"
+  - text: "W. Stallings, Operating Systems: Internals and Design Principles, 9th ed., Pearson, 2018, Chapter 9: Uniprocessor Scheduling"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**CPU scheduling algorithms** are the rules an operating system uses to choose which ready process or thread runs next on the processor. Common ones are first come first served, shortest job first, priority and round robin. Each trades off waiting time, response time, throughput and fairness differently, so real systems often combine them.
+
+</Key>
+
+CPU scheduling algorithms decide how a single processor core is shared among many ready programs. A modern computer keeps dozens or hundreds of processes alive at once, but each core can execute only one thread at a time. The scheduler picks the next one, and its choice shapes how fast programs finish, how responsive the desktop feels and whether any job is left waiting forever.
+
+## Why CPU scheduling is needed
+
+Most programs alternate between **CPU bursts** (computing) and **I/O bursts** (waiting for disk, network or user input). Silberschatz describes this as the CPU and I/O burst cycle. While one process waits for I/O, the CPU would sit idle unless another ready process is given the core. Scheduling keeps the CPU busy and is the basis of multiprogramming.
+
+Processes waiting for the CPU sit in the **ready queue**, which is usually a set of linked lists of process control blocks (see [process vs thread](/computer-science/process-vs-thread/) for what a PCB holds). The **short term scheduler** picks one, and the **dispatcher** performs the context switch, switches to user mode and jumps to the right instruction. The time this takes is the **dispatch latency**, pure overhead that every switch adds.
+
+A scheduling decision can occur when a process:
+
+1. Switches from running to waiting (for example, an I/O request).
+2. Switches from running to ready (for example, a timer interrupt).
+3. Switches from waiting to ready (I/O completes).
+4. Terminates.
+
+If scheduling happens only in cases 1 and 4, the scheme is **non-preemptive**. If it can also happen in cases 2 and 3, it is **preemptive**. Nearly all modern desktop and server operating systems, including Windows, macOS and Linux, use preemptive scheduling.
+
+## Scheduling criteria
+
+| Criterion | Meaning | Goal |
+| --- | --- | --- |
+| CPU utilization | Fraction of time the CPU is busy | Maximize |
+| Throughput | Processes completed per unit time | Maximize |
+| Turnaround time | Time from arrival to completion | Minimize |
+| Waiting time | Total time spent in the ready queue | Minimize |
+| Response time | Time from arrival to the first time the process runs | Minimize |
+
+Batch systems care most about throughput and turnaround. Interactive systems care about response time. Real time systems care about meeting deadlines. No algorithm wins on all criteria.
+
+## Main CPU scheduling algorithms
+
+### First come first served (FCFS)
+
+The process that requests the CPU first gets it first, using a simple FIFO queue like the one in [stack vs queue](/computer-science/stack-vs-queue/). FCFS is non-preemptive and easy to implement, but its average waiting time is often long. A long CPU bound job at the front makes many short jobs wait behind it, which Silberschatz calls the **convoy effect**.
+
+### Shortest job first (SJF)
+
+The scheduler picks the process with the shortest next CPU burst. For a given set of processes, SJF is provably optimal: it gives the minimum average waiting time, because moving a short job ahead of a long one reduces the short job's wait by more than it increases the long one's. The difficulty is that the next burst length is not known, so systems estimate it with an exponential average of previous bursts:
+
+$$
+\tau_{n+1} = \alpha \, t_n + (1 - \alpha)\, \tau_n
+$$
+
+where t_n is the length of the latest burst, τ_n is the previous prediction and α is between 0 and 1 (often 0.5).
+
+### Shortest remaining time first (SRTF)
+
+This is the preemptive version of SJF. When a new process arrives with a burst shorter than what is left of the running process, the running one is preempted. It further reduces average waiting time but causes more context switches.
+
+### Priority scheduling
+
+Each process has a priority number and the highest priority ready process runs. SJF is a special case where priority is the inverse of the predicted burst. Priority scheduling can be preemptive or not. Its main risk is **starvation** (indefinite blocking) of low priority processes, solved by **aging**, which slowly raises the priority of processes that have waited a long time.
+
+### Round robin (RR)
+
+Round robin is FCFS with preemption. Each process gets a small unit of CPU time called a **time quantum** or time slice, typically 10 to 100 ms according to Silberschatz. When the quantum expires, a timer interrupt moves the process to the tail of the ready queue. With n ready processes and quantum q, no process waits more than (n − 1) × q before its next turn, which gives good response time.
+
+The quantum size matters. A very large quantum makes RR behave like FCFS. A very small one wastes time on context switches. Silberschatz gives the rule of thumb that about 80% of CPU bursts should be shorter than the quantum.
+
+### Multilevel queue and multilevel feedback queue
+
+A **multilevel queue** splits the ready queue into separate queues, for example real time, system, interactive and batch, each with its own algorithm and a fixed priority between queues. A **multilevel feedback queue (MLFQ)** lets processes move between queues: a process that uses its whole quantum drops to a lower priority queue, while one that gives up the CPU early for I/O stays high. OSTEP explains that MLFQ learns from observed behaviour, favouring short interactive jobs without knowing burst lengths in advance, and uses a periodic priority boost to prevent starvation.
+
+## Worked example with Gantt charts
+
+<figure class="anim">
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Gantt charts for four processes P1 6 ms, P2 8 ms, P3 7 ms and P4 3 ms arriving at time 0. FCFS runs P1, P2, P3, P4 ending at 6, 14, 21 and 24. SJF runs P4, P1, P3, P2 ending at 3, 9, 16 and 24. Round robin with quantum 4 runs P1, P2, P3, P4, P1, P2, P3 with boundaries at 4, 8, 12, 15, 17, 21 and 24">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<text x="20" y="57" font-weight="700">FCFS</text>
+<text x="20" y="137" font-weight="700">SJF</text>
+<text x="20" y="217" font-weight="700">RR q=4</text>
+</g>
+<g stroke="#0b2545" stroke-width="1.5">
+<rect class="anim-blink" x="90" y="35" width="120" height="34" fill="#cfe3ff" />
+<rect class="anim-blink anim-d1" x="210" y="35" width="160" height="34" fill="#ffe2b8" />
+<rect class="anim-blink anim-d2" x="370" y="35" width="140" height="34" fill="#c9f0e8" />
+<rect class="anim-blink anim-d3" x="510" y="35" width="60" height="34" fill="#f6d0f0" />
+<rect class="anim-blink" x="90" y="115" width="60" height="34" fill="#f6d0f0" />
+<rect class="anim-blink anim-d1" x="150" y="115" width="120" height="34" fill="#cfe3ff" />
+<rect class="anim-blink anim-d2" x="270" y="115" width="140" height="34" fill="#c9f0e8" />
+<rect class="anim-blink anim-d3" x="410" y="115" width="160" height="34" fill="#ffe2b8" />
+<rect class="anim-blink" x="90" y="195" width="80" height="34" fill="#cfe3ff" />
+<rect class="anim-blink anim-d1" x="170" y="195" width="80" height="34" fill="#ffe2b8" />
+<rect class="anim-blink anim-d2" x="250" y="195" width="80" height="34" fill="#c9f0e8" />
+<rect class="anim-blink anim-d3" x="330" y="195" width="60" height="34" fill="#f6d0f0" />
+<rect class="anim-blink anim-d4" x="390" y="195" width="40" height="34" fill="#cfe3ff" />
+<rect class="anim-blink anim-d5" x="430" y="195" width="80" height="34" fill="#ffe2b8" />
+<rect class="anim-blink" x="510" y="195" width="60" height="34" fill="#c9f0e8" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle" font-weight="700">
+<text x="150" y="57">P1</text><text x="290" y="57">P2</text><text x="440" y="57">P3</text><text x="540" y="57">P4</text>
+<text x="120" y="137">P4</text><text x="210" y="137">P1</text><text x="340" y="137">P3</text><text x="490" y="137">P2</text>
+<text x="130" y="217">P1</text><text x="210" y="217">P2</text><text x="290" y="217">P3</text><text x="360" y="217">P4</text><text x="410" y="217">P1</text><text x="470" y="217">P2</text><text x="540" y="217">P3</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#52606d" text-anchor="middle">
+<text x="90" y="84">0</text><text x="210" y="84">6</text><text x="370" y="84">14</text><text x="510" y="84">21</text><text x="570" y="84">24</text>
+<text x="90" y="164">0</text><text x="150" y="164">3</text><text x="270" y="164">9</text><text x="410" y="164">16</text><text x="570" y="164">24</text>
+<text x="90" y="244">0</text><text x="170" y="244">4</text><text x="250" y="244">8</text><text x="330" y="244">12</text><text x="390" y="244">15</text><text x="430" y="244">17</text><text x="510" y="244">21</text><text x="570" y="244">24</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="90" y="275">Time in ms. Bursts: P1 = 6, P2 = 8, P3 = 7, P4 = 3, all arrive at t = 0</text>
+</g>
+</svg>
+<figcaption>Gantt charts for the worked example. Segments light up in the order the CPU runs them.</figcaption>
+</figure>
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Four processes arrive at time 0 in the order P1, P2, P3, P4 with CPU bursts of 6, 8, 7 and 3 ms.</dd>
+<dt>Find</dt><dd>Average waiting time and average turnaround time under FCFS, non-preemptive SJF and round robin with a 4 ms quantum.</dd>
+<dt>Assumptions</dt><dd>One CPU core, no I/O, context switch time ignored, ties broken by arrival order.</dd>
+<dt>Solution</dt><dd>Turnaround = completion time minus arrival time; waiting = turnaround minus burst.<br />FCFS: completions 6, 14, 21, 24. Waiting 0, 6, 14, 21, average 41 ÷ 4 = 10.25 ms. Turnaround average 65 ÷ 4 = 16.25 ms.<br />SJF: order P4, P1, P3, P2, completions P4 = 3, P1 = 9, P3 = 16, P2 = 24. Waiting P1 = 3, P2 = 16, P3 = 9, P4 = 0, average 28 ÷ 4 = 7 ms. Turnaround average 52 ÷ 4 = 13 ms.<br />RR q = 4: P1 0 to 4, P2 4 to 8, P3 8 to 12, P4 12 to 15, P1 15 to 17, P2 17 to 21, P3 21 to 24. Completions P1 = 17, P2 = 21, P3 = 24, P4 = 15. Waiting 11, 13, 17, 12, average 53 ÷ 4 = 13.25 ms. Turnaround average 77 ÷ 4 = 19.25 ms.</dd>
+<dt>Answer</dt><dd><strong>Average waiting time: FCFS 10.25 ms, SJF 7 ms, RR 13.25 ms. Average turnaround: 16.25 ms, 13 ms and 19.25 ms</strong></dd>
+<dt>Limitations</dt><dd>RR has the worst averages here but gives every process its first turn within 12 ms, while FCFS makes P4 wait 21 ms. Real systems add context switch overhead and I/O, and SJF needs burst lengths that must be predicted.</dd>
+</dl>
+</Example>
+
+This matches the textbook result that SJF minimizes average waiting time, and shows why round robin is still preferred for interactive work: its strength is response time, not turnaround.
+
+## Key formulas for CPU scheduling algorithms
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Turnaround time | TAT = completion time − arrival time | ms |
+| Waiting time | WT = TAT − burst time | ms, for a process with no I/O |
+| Response time | RT = first run time − arrival time | ms |
+| Average waiting time | WT_avg = (sum of WT) ÷ n | n = number of processes |
+| Throughput | X = n ÷ total time | processes per unit time |
+| Burst prediction | τ_(n+1) = α t_n + (1 − α) τ_n | t_n = last burst, τ_n = last prediction, 0 ≤ α ≤ 1 |
+| Round robin worst wait for next turn | (n − 1) × q | q = time quantum |
+
+$$
+\text{TAT} = t_\text{completion} - t_\text{arrival}, \qquad \text{WT} = \text{TAT} - t_\text{burst}
+$$
+
+## CPU scheduling algorithms compared
+
+| Algorithm | Preemptive | Strength | Weakness |
+| --- | --- | --- | --- |
+| FCFS | No | Simple, no starvation | Convoy effect, long average wait |
+| SJF | No | Minimum average waiting time | Needs burst prediction, starvation of long jobs |
+| SRTF | Yes | Even lower average wait | More context switches, starvation |
+| Priority | Either | Expresses importance | Starvation without aging |
+| Round robin | Yes | Fair, good response time | Higher turnaround, quantum tuning |
+| MLFQ | Yes | Adapts to behaviour | Complex to tune |
+
+## Scheduling in real operating systems
+
+Real kernels schedule threads rather than processes and must also handle multiple cores, keeping a thread on the same core where possible (processor affinity) and balancing load between cores. Tanenbaum describes Windows as using 32 priority levels with round robin inside each level and temporary priority boosts for threads that finish I/O.
+
+Linux used the **Completely Fair Scheduler (CFS)** from kernel 2.6.23. CFS tracks each task's virtual runtime and runs the task that has received the least, keeping tasks in a red black tree, so selection cost grows with the logarithm of the number of tasks (see [Big O notation](/computer-science/big-o-notation/)). Since kernel 6.6 the default fair class uses **EEVDF** (Earliest Eligible Virtual Deadline First), which keeps the fairness goal but chooses among eligible tasks by virtual deadline to improve latency. Embedded and real time systems, often running on the chips described in [microcontroller vs microprocessor](/electronics-engineering/microcontroller-vs-microprocessor/), use fixed priority preemptive scheduling so that deadlines can be analysed.
+
+## CPU scheduling algorithms interview and viva questions
+
+1. **Why is SJF called optimal?** For a given set of processes it gives the minimum average waiting time, because running shorter jobs first reduces their wait by more than it delays longer jobs.
+2. **What is the convoy effect?** In FCFS, a long CPU bound process at the front of the queue makes many short processes wait behind it, lowering CPU and device utilization.
+3. **How does the time quantum affect round robin?** A very large quantum turns RR into FCFS, while a very small one spends too much time on context switches; a common guideline is that about 80% of CPU bursts should be shorter than the quantum.
+4. **What is the difference between turnaround time and response time?** Turnaround runs from arrival to completion, while response time runs from arrival to the first time the process gets the CPU.
+5. **How does aging prevent starvation?** It gradually raises the priority of processes that have waited a long time, so even low priority processes eventually run.
+
+## Related reading
+
+- [Process vs thread](/computer-science/process-vs-thread/)
+- [Stack vs queue](/computer-science/stack-vs-queue/)
+- [Big O notation](/computer-science/big-o-notation/)
+- [Von Neumann vs Harvard architecture](/computer-science/von-neumann-vs-harvard-architecture/)
