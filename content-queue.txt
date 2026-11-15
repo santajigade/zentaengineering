@@ -48,12 +48,12 @@ chemical-engineering|heat-exchangers|Shell and Tube Heat Exchanger Design Basics
 computer-science|operating-systems|CPU Scheduling Algorithms Explained|cpu-scheduling-algorithms|explanation|cpu scheduling algorithms|2026-11-14
 automation-robotics|dcs|PLC vs DCS: Differences and How to Choose|plc-vs-dcs|comparison|plc vs dcs|2026-11-14
 ai-data-engineering|computer-vision|Image Preprocessing Techniques for Computer Vision|image-preprocessing-techniques|explanation|image preprocessing|2026-11-14
-telecommunication-engineering|fiber-optics|Optical Fiber Splicing: Fusion vs Mechanical|fiber-splicing-fusion-vs-mechanical|comparison|fiber splicing|todo
-petroleum-engineering|well-logging|Well Completion Types Explained|well-completion-types|explanation|well completion|todo
-renewable-energy|energy-storage|Lithium-Ion vs Lead Acid Batteries Compared|lithium-ion-vs-lead-acid|comparison|lithium-ion vs lead acid|todo
-environmental-engineering|air-pollution-control|Wet Scrubber Working Principle and Types|wet-scrubber-working-principle|working-principle|wet scrubber|todo
-mining-engineering|mine-ventilation|Mine Gases: Types, Hazards and Detection|mine-gases|explanation|mine gases|todo
-manufacturing-engineering|additive-manufacturing|Metal 3D Printing: Powder Bed Fusion Explained|metal-3d-printing|working-principle|metal 3d printing|todo
+telecommunication-engineering|fiber-optics|Optical Fiber Splicing: Fusion vs Mechanical|fiber-splicing-fusion-vs-mechanical|comparison|fiber splicing|2026-11-15
+petroleum-engineering|well-logging|Well Completion Types Explained|well-completion-types|explanation|well completion|2026-11-15
+renewable-energy|energy-storage|Lithium-Ion vs Lead Acid Batteries Compared|lithium-ion-vs-lead-acid|comparison|lithium-ion vs lead acid|2026-11-15
+environmental-engineering|air-pollution-control|Wet Scrubber Working Principle and Types|wet-scrubber-working-principle|working-principle|wet scrubber|2026-11-15
+mining-engineering|mine-ventilation|Mine Gases: Types, Hazards and Detection|mine-gases|explanation|mine gases|2026-11-15
+manufacturing-engineering|additive-manufacturing|Metal 3D Printing: Powder Bed Fusion Explained|metal-3d-printing|working-principle|metal 3d printing|2026-11-15
 materials-engineering|heat-treatment|Case Hardening Methods: Carburizing and Nitriding|case-hardening-methods|explanation|case hardening|todo
 safety-engineering|fmea|Fault Tree Analysis (FTA) Explained|fault-tree-analysis|explanation|fault tree analysis|todo
 agricultural-engineering|precision-agriculture|Soil Moisture Sensors: Types and Working|soil-moisture-sensors|working-principle|soil moisture sensors|todo
