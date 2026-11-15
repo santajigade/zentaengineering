@@ -3,6 +3,7 @@ title: "ECG Electrodes and Biopotential Measurement Basics"
 description: "Biopotential measurement basics: ECG, EEG and EMG signals, electrodes, skin interface, instrumentation amplifiers, CMRR, filtering, safety and a gain example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-15
 discipline: biomedical-engineering
 subcategory: biomedical-sensors
 focusKeyword: "biopotential measurement"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**Biopotential measurement** records the small electrical signals produced by cells in the heart (**ECG**), brain (**EEG**), muscles (**EMG**) and eyes (**EOG**). **Electrodes**, usually **silver/silver chloride** with gel, convert ionic currents in the body into electronic currents in wires. Because the signals are tiny (ECG about **1 mV**, EEG tens of **µV**) and buried in interference, they are amplified by a **differential instrumentation amplifier** with high input impedance and high **common mode rejection ratio (CMRR)**, then **filtered**, digitised and displayed. Patient **electrical safety** under **IEC 60601** is essential.
+**Biopotential measurement** is the recording of the small electrical signals produced by the heart (ECG), brain (EEG), muscles (EMG) and eyes (EOG). Silver/silver chloride electrodes convert ionic body currents into electronic currents, and a high CMRR instrumentation amplifier amplifies the millivolt or microvolt difference before filtering, isolation and digitisation under IEC 60601 safety rules.
 
 </Key>
 
@@ -58,7 +59,7 @@ Current in the body is carried by ions; current in wires by electrons. The **ele
 - Electrodes have a **half-cell potential** (DC offset of tens to hundreds of mV) that the amplifier must tolerate without saturating.
 - **Dry and textile electrodes** suit wearables; **needle electrodes** are used for intramuscular EMG; **cup electrodes** with paste for EEG.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Biopotential measurement chain: two electrodes on the body connected to an instrumentation amplifier with a right leg drive electrode; amplifier output passes through high pass filter, low pass filter and 50 or 60 hertz notch filter, then isolation barrier, ADC and display; common mode interference from mains shown coupling to the body">
 <ellipse cx="80" cy="150" rx="55" ry="95" fill="#ffe9e7" stroke="#0b2545" stroke-width="2" />
 <g fill="#7b8794" stroke="#0b2545" stroke-width="1.5"><circle cx="60" cy="100" r="9" /><circle cx="100" cy="150" r="9" /><circle cx="70" cy="220" r="9" /></g>
@@ -71,6 +72,7 @@ Current in the body is carried by ions; current in wires by electrons. The **ele
 <path d="M240 145h30M330 145h15M405 145h15M480 145h30" stroke="#13a89e" stroke-width="2" />
 <path d="M495 110V180" stroke="#b42318" stroke-width="2.5" stroke-dasharray="5 3" />
 <path d="M215 175V200" stroke="#0b2545" stroke-width="2" />
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M69 100H150V125H170M109 150H150V165H170" /><path class="anim-flow" d="M240 145h30M330 145h15M405 145h15M480 145h30" /><path class="anim-flow-slow" d="M215 175V200" /><path class="anim-flow-slow" d="M230 200V220H79" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
 <text x="80" y="40">Patient</text><text x="30" y="90">RA</text><text x="125" y="160">LA</text><text x="45" y="240">RL</text>
 <text x="200" y="98">In-amp</text><text x="200" y="215" font-size="10">Right leg drive</text>
@@ -78,7 +80,7 @@ Current in the body is carried by ions; current in wires by electrons. The **ele
 <text x="545" y="142">ADC</text><text x="545" y="156" font-size="9">display</text>
 <text x="495" y="100" fill="#b42318" font-size="10">Isolation</text>
 </g>
-<g stroke="#f5b800" stroke-width="1.5" fill="none"><path d="M150 30Q160 20 170 30T190 30T210 30" /></g>
+<g stroke="#f5b800" stroke-width="1.5" fill="none"><path class="anim-blink" d="M150 30Q160 20 170 30T190 30T210 30" /></g>
 <text x="250" y="34" font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#b8860b">Mains interference (common mode)</text>
 </svg>
 <figcaption>A typical ECG front end: electrodes, instrumentation amplifier with right leg drive, filters, isolation and digitisation.</figcaption>
@@ -133,9 +135,27 @@ Digital processing then detects QRS complexes, calculates heart rate and classif
 </dl>
 </Example>
 
+## Key formulas for biopotential measurement
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Three op-amp in-amp gain | G = 1 + 2R_1 ÷ R_G | R_1 = matched first stage resistors, R_G = gain setting resistor, both in Ω |
+| Common mode rejection ratio | CMRR_dB = 20 log10(A_d ÷ A_cm) | A_d = differential gain, A_cm = common mode gain (dimensionless) |
+| Common mode gain | A_cm = A_d ÷ 10^(CMRR_dB ÷ 20) | CMRR_dB in dB |
+| Required total gain | G = V_out ÷ V_in | V_out = target ADC level in V, V_in = signal amplitude in V |
+| Two stage gain | G = G_1 × G_2 | G_1 = in-amp stage gain, G_2 = second stage gain after the high pass filter |
+
 ## Patient safety
 
 Electrodes create a direct path into the body, so medical equipment must limit leakage current to microamp levels under **IEC 60601-1**. Measures include **isolated power supplies** and **isolation amplifiers or digital isolators** between the patient side and mains powered parts, **defibrillation protection** so the input survives shocks of several kV, and classification of applied parts (B, BF and CF, with CF for direct cardiac contact having the strictest limits). Good [electrical earthing](/electrical-engineering/electrical-earthing/) practice in hospitals adds further protection.
+
+## Biopotential measurement interview and viva questions
+
+1. **Why are Ag/AgCl electrodes standard for ECG?** They are almost non-polarisable, passing current with a small, stable half-cell potential and low noise.
+2. **Why must a biopotential amplifier have a very high input impedance?** So that unequal electrode impedances do not convert the common mode voltage into a differential error.
+3. **Why is the first stage gain of an ECG front end kept low?** Electrode half-cell offsets of hundreds of mV would saturate a high gain first stage, so a low gain in-amp is followed by a high pass filter and then most of the gain.
+4. **What does a driven right leg circuit do?** It senses the common mode voltage and feeds an inverted version back to the body through a third electrode, actively reducing mains interference.
+5. **What is a CF applied part?** It is the IEC 60601-1 classification for applied parts in direct cardiac contact, which have the strictest leakage current limits.
 
 ## Common problems and solutions in biopotential measurement
 

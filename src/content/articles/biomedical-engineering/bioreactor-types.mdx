@@ -3,6 +3,7 @@ title: "Bioreactor Types and How They Work"
 description: "Bioreactor types explained: stirred tank, airlift, bubble column, packed bed, membrane and single use bioreactors, operating modes, control and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-15
 discipline: biomedical-engineering
 subcategory: bioprocess-engineering
 focusKeyword: "bioreactor types"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-A bioreactor is a vessel that provides controlled conditions for cells or enzymes to grow and make products such as antibiotics, vaccines, antibodies, enzymes, biofuels and fermented foods. The main **bioreactor types** are the **stirred tank** (impeller mixing, the industry workhorse), **bubble column** and **airlift** (mixing by rising gas, gentle and low energy), **packed bed** and **fluidised bed** (cells or enzymes immobilised on solids), **membrane** and **hollow fibre** reactors (cells retained behind membranes), **photobioreactors** for algae, and **single use** bag reactors. They operate in **batch**, **fed-batch** or **continuous** mode with tight control of **temperature, pH, dissolved oxygen, agitation and feeding**.
+**Bioreactor types** are vessel designs that give cells or enzymes controlled conditions to grow and make products. The main ones are stirred tank, bubble column, airlift, packed and fluidised bed, membrane or hollow fibre, photobioreactor and single use bag reactors, run in batch, fed-batch or continuous mode with control of temperature, pH and dissolved oxygen.
 
 </Key>
 
@@ -39,20 +40,21 @@ Living cells are sensitive: they need the right temperature, pH, nutrients and o
 
 ## Stirred tank bioreactor
 
-<figure>
+<figure class="anim">
 <svg width="600" height="310" viewBox="0 0 600 310" fill="none" role="img" aria-label="Stirred tank bioreactor: cylindrical vessel with cooling jacket, motor driven shaft with two Rushton turbine impellers, baffles on the walls, air sparger at the bottom producing bubbles, probes for pH, dissolved oxygen and temperature, feed, acid and base inlets, exhaust gas outlet with filter and harvest outlet at the bottom">
 <rect x="180" y="60" width="200" height="220" rx="30" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
 <rect x="168" y="100" width="12" height="150" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" /><rect x="380" y="100" width="12" height="150" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
-<rect x="260" y="20" width="40" height="30" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<rect class="anim-pulse" x="260" y="20" width="40" height="30" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
 <path d="M280 50V250" stroke="#0b2545" stroke-width="3" />
 <g fill="#7b8794" stroke="#0b2545" stroke-width="1.5"><rect x="250" y="140" width="60" height="10" /><rect x="250" y="210" width="60" height="10" /></g>
 <g fill="#7b8794"><rect x="190" y="100" width="6" height="150" /><rect x="364" y="100" width="6" height="150" /></g>
 <path d="M240 262H320" stroke="#0b2545" stroke-width="3" />
-<g fill="#ffffff" stroke="#13a89e" stroke-width="1.2"><circle cx="255" cy="245" r="4" /><circle cx="300" cy="238" r="4" /><circle cx="235" cy="195" r="4" /><circle cx="330" cy="185" r="4" /><circle cx="250" cy="120" r="4" /><circle cx="320" cy="115" r="4" /></g>
+<g fill="#ffffff" stroke="#13a89e" stroke-width="1.2"><circle class="anim-blink" cx="255" cy="245" r="4" /><circle class="anim-blink" cx="300" cy="238" r="4" /><circle class="anim-blink anim-d2" cx="235" cy="195" r="4" /><circle class="anim-blink anim-d2" cx="330" cy="185" r="4" /><circle class="anim-blink anim-d4" cx="250" cy="120" r="4" /><circle class="anim-blink anim-d4" cx="320" cy="115" r="4" /></g>
 <path d="M240 262V295H140" stroke="#13a89e" stroke-width="2" />
 <g stroke="#b42318" stroke-width="2"><path d="M340 60V30H420" /><path d="M210 60V35H150" /></g>
 <g stroke="#0b2545" stroke-width="2"><path d="M350 130H430M350 170H430M350 230H430" /></g>
 <path d="M280 280V300H330" stroke="#8a6d3b" stroke-width="2" />
+<g stroke="#fff" stroke-width="1.2" fill="none"><path class="anim-flow" d="M140 295H240V262" /><path class="anim-flow" d="M340 60V30H420" /><path class="anim-flow-slow" d="M150 35H210V60" /><path class="anim-flow-slow" d="M280 280V300H330" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
 <text x="305" y="40">Motor</text><text x="425" y="34">Exhaust gas, filter</text><text x="60" y="39">Feed, acid, base</text>
 <text x="435" y="134">pH probe</text><text x="435" y="174">DO probe</text><text x="435" y="234">Temperature</text>
@@ -139,12 +141,31 @@ where k_La is the volumetric mass transfer coefficient, C* the saturation concen
 </dl>
 </Example>
 
+## Key formulas for bioreactor types
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Exponential growth | X = X_0 e^(μt) | X = cell concentration in g/L, μ = specific growth rate in h⁻¹, t = time in h |
+| Doubling time | t_d = ln 2 ÷ μ | t_d in h |
+| Monod equation | μ = μ_max S ÷ (K_S + S) | S = limiting substrate concentration, K_S = saturation constant in the same units as S |
+| Chemostat steady state | D = μ | D = dilution rate in h⁻¹ |
+| Oxygen transfer rate | OTR = k_La (C\* − C_L) | k_La in h⁻¹, C\* = saturation and C_L = actual dissolved oxygen in mmol/L |
+| Oxygen uptake rate | OUR = X × q_O2 | q_O2 = specific oxygen uptake in mmol O₂ per g cells per h |
+
 ## Control and monitoring
 
 Contamination control is as important as process control: every connection, sample port and gas line must keep the culture sterile for the whole run, sometimes weeks long.
 
 
 Typical control loops: temperature by jacket water, pH by acid and base addition, dissolved oxygen by cascading agitation speed, gas flow and oxygen enrichment, foam by antifoam addition, and feed rate by profiles or feedback from off-gas or glucose sensors. Accurate [temperature](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) and flow measurement and well tuned controllers keep conditions within tight ranges. Process analytical technology adds online sensors for biomass, metabolites and product quality.
+
+## Bioreactor types interview and viva questions
+
+1. **Why is the stirred tank the most widely used bioreactor type?** Impellers, baffles and a sparger give good mixing and oxygen transfer, and its behaviour approximates an ideal well mixed reactor suited to most microbial fermentations and mammalian cell cultures.
+2. **How does an airlift bioreactor differ from a bubble column?** An airlift adds a draft tube or external loop, so gassed liquid rises in the riser and degassed liquid falls in the downcomer, giving a defined, low shear circulation.
+3. **Why is fed-batch the most common industrial operating mode?** Feeding nutrients during the run extends growth and production while avoiding inhibition, overcoming the limited product titre of simple batch operation.
+4. **What holds in a chemostat at steady state?** The dilution rate D equals the specific growth rate μ, so the cells keep growing at a steady state.
+5. **How is dissolved oxygen usually controlled?** By cascading agitation speed, gas flow and oxygen enrichment so that the oxygen transfer rate keeps up with the oxygen uptake rate of the cells.
 
 ## Scale-up of bioreactor types
 

@@ -1,0 +1,199 @@
+---
+title: "Lithium-Ion vs Lead Acid Batteries Compared"
+description: "Lithium-ion vs lead acid batteries: chemistry, energy density, cycle life, depth of discharge, efficiency, cost, safety and a bank sizing example."
+pubDate: 2026-11-15
+reviewedDate: 2026-11-15
+discipline: renewable-energy
+subcategory: energy-storage
+focusKeyword: "lithium-ion vs lead acid"
+image: { src: /images/featured/lithium-ion-vs-lead-acid.webp, alt: "Lithium-Ion vs Lead Acid Batteries Compared: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [lithium-ion, lead-acid, battery-comparison, energy-storage, depth-of-discharge]
+faq:
+  - q: "Can I replace a lead acid battery with a lithium-ion battery directly?"
+    a: "Only if the charger, inverter and protection settings suit the lithium-ion chemistry. Lithium-ion packs need different charge voltages, no float or equalization stage and a battery management system. Many modern inverters have a lithium mode, but check the manufacturer data before swapping."
+  - q: "Why are lead acid batteries still used if lithium-ion is better on paper?"
+    a: "Lead acid batteries have a low purchase price, a long track record, simple charging, good surge capability and a very high recycling rate. For standby duty such as UPS and substation DC systems, where the battery sits on float and rarely cycles, these advantages often outweigh the lower energy density."
+  - q: "Which battery lasts longer in a solar system?"
+    a: "In daily cycling solar duty, a lithium-ion battery, especially lithium iron phosphate, usually lasts several times as many cycles as a lead acid battery and tolerates deeper discharge. Lead acid life falls quickly if it is often discharged deeply or left partly charged."
+references:
+  - text: "T. B. Reddy (ed.), Linden's Handbook of Batteries, 4th ed., McGraw-Hill, 2011"
+  - text: "IEC 62619:2022 Secondary cells and batteries containing alkaline or other non-acid electrolytes: Safety requirements for secondary lithium cells and batteries, for use in industrial applications"
+  - text: "IEC 60896-21:2004 Stationary lead-acid batteries, Part 21: Valve regulated types, Methods of test"
+  - text: "IEC 60896-22:2004 Stationary lead-acid batteries, Part 22: Valve regulated types, Requirements"
+  - text: "IEEE 1188-2005 IEEE Recommended Practice for Maintenance, Testing, and Replacement of Valve-Regulated Lead-Acid (VRLA) Batteries for Stationary Applications"
+  - text: "IEEE 450-2020 IEEE Recommended Practice for Maintenance, Testing, and Replacement of Vented Lead-Acid Batteries for Stationary Applications"
+  - text: "IEA, Batteries and Secure Energy Transitions, International Energy Agency, 2024"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Lithium-ion vs lead acid** is a comparison of two rechargeable battery chemistries. Lithium-ion cells shuttle lithium ions between a graphite anode and a metal oxide or phosphate cathode, giving higher energy density, deeper usable discharge, higher efficiency and longer cycle life. Lead acid cells cost less upfront, are simple to charge and recycle well.
+
+</Key>
+
+The **lithium-ion vs lead acid** choice comes up in every solar home system, UPS, telecom site, forklift and grid storage project. Both store energy chemically and both work, but they behave very differently in weight, usable capacity, lifetime, maintenance and safety. This article compares them side by side, explains why they differ, and shows how the differences change the size of a battery bank.
+
+## How each battery works
+
+Both batteries are electrochemical cells: two electrodes in an electrolyte, with a separator between them. During discharge, the negative electrode is oxidised and releases electrons into the external circuit, while ions move through the electrolyte to keep charge balanced.
+
+<figure class="anim">
+<svg width="600" height="310" viewBox="0 0 600 310" fill="none" role="img" aria-label="Lithium-ion vs lead acid cells during discharge: in the lithium-ion cell, lithium ions move through the electrolyte and separator from the graphite anode to the metal oxide cathode while electrons flow through the external load from anode to cathode; in the lead acid cell, electrons flow from the lead negative plate through the load to the lead dioxide positive plate, hydrogen ions move towards the positive plate and bisulfate ions move to both plates, forming lead sulfate on each">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="90" width="270" height="150" rx="6" fill="#eef6ff" />
+<rect x="310" y="90" width="270" height="150" rx="6" fill="#fff7e0" />
+<rect x="35" y="105" width="60" height="115" rx="3" fill="#d9dde3" />
+<rect x="215" y="105" width="60" height="115" rx="3" fill="#e6f6f4" />
+<rect x="325" y="105" width="60" height="115" rx="3" fill="#d9dde3" />
+<rect x="505" y="105" width="60" height="115" rx="3" fill="#ffe9e7" />
+<rect x="130" y="40" width="50" height="30" rx="4" fill="#ffffff" />
+<rect x="420" y="40" width="50" height="30" rx="4" fill="#ffffff" />
+</g>
+<path d="M155 95V220" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" />
+<path d="M445 95V180" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" />
+<g stroke="#0b2545" stroke-width="2.5"><path d="M65 105V55H130M180 55H245V105M355 105V55H420M470 55H535V105" /></g>
+<g stroke="#b42318" stroke-width="3"><path d="M100 145H205M100 190H205M390 150H495" /></g>
+<g stroke="#13a89e" stroke-width="3"><path d="M438 200H395M452 200H495" /></g>
+<g fill="#b42318"><path d="M211 145L203 140V150ZM211 190L203 185V195ZM501 150L493 145V155Z" /></g>
+<g fill="#13a89e"><path d="M389 200L397 195V205ZM501 200L493 195V205Z" /></g>
+<g fill="#0b2545"><path d="M245 105L240 97H250ZM535 105L530 97H540Z" /></g>
+<g stroke="#fff" stroke-width="2" fill="none">
+<path class="anim-flow" d="M65 105V55H130M180 55H245V97" />
+<path class="anim-flow" d="M355 105V55H420M470 55H535V97" />
+<path class="anim-flow-slow" d="M100 145H203M100 190H203M390 150H493" />
+<path class="anim-flow-slow" d="M438 200H397M452 200H493" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="155" y="20" font-weight="700">Lithium-ion cell</text>
+<text x="445" y="20" font-weight="700">Lead acid cell</text>
+<text x="155" y="60">Load</text><text x="445" y="60">Load</text>
+<text x="97" y="48">e⁻</text><text x="212" y="48">e⁻</text><text x="387" y="48">e⁻</text><text x="502" y="48">e⁻</text>
+<text x="65" y="155" font-size="11">Graphite</text><text x="65" y="170" font-size="11">anode</text><text x="65" y="186" font-size="11">(−)</text>
+<text x="245" y="155" font-size="11">Metal</text><text x="245" y="170" font-size="11">oxide</text><text x="245" y="186" font-size="11">(+)</text>
+<text x="355" y="155" font-size="11">Pb</text><text x="355" y="170" font-size="11">plate</text><text x="355" y="186" font-size="11">(−)</text>
+<text x="535" y="155" font-size="11">PbO₂</text><text x="535" y="170" font-size="11">plate</text><text x="535" y="186" font-size="11">(+)</text>
+<text x="127" y="137" fill="#b42318">Li⁺</text><text x="183" y="182" fill="#b42318">Li⁺</text>
+<text x="420" y="142" fill="#b42318">H⁺</text>
+<text x="445" y="218" fill="#13a89e" font-size="11">HSO₄⁻</text>
+<text x="155" y="234" font-size="10">electrolyte, separator</text>
+<text x="445" y="234" font-size="10">H₂SO₄ electrolyte</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10.5" fill="#0b2545" text-anchor="middle">
+<text x="155" y="260">(−): LiC₆ → C₆ + Li⁺ + e⁻</text>
+<text x="155" y="276">(+): CoO₂ + Li⁺ + e⁻ → LiCoO₂</text>
+<text x="155" y="292">Nominal about 3.2 to 3.7 V per cell</text>
+<text x="445" y="260">(−): Pb + HSO₄⁻ → PbSO₄ + H⁺ + 2e⁻</text>
+<text x="445" y="276">(+): PbO₂ + 3H⁺ + HSO₄⁻ + 2e⁻ → PbSO₄ + 2H₂O</text>
+<text x="445" y="292">Nominal 2.0 V per cell</text>
+</g>
+</svg>
+<figcaption>Discharge in a lithium-ion cell (left) and a lead acid cell (right). Electrons flow through the load from the negative to the positive electrode while ions move through the electrolyte.</figcaption>
+</figure>
+
+### Lithium-ion
+
+In a lithium-ion cell, lithium is stored between the graphite layers of the anode. On discharge, lithium ions leave the graphite, cross the organic electrolyte and separator, and slot into the cathode crystal structure, which may be a layered oxide such as NMC or LCO, or lithium iron phosphate (LFP). Electrons take the external path through the load. Charging reverses both flows. Because lithium simply moves in and out of host structures (intercalation), the electrodes change little and the cell survives many cycles.
+
+### Lead acid
+
+In a lead acid cell, the negative plate is sponge lead (Pb), the positive plate is lead dioxide (PbO₂) and the electrolyte is dilute sulfuric acid. On discharge, both plates turn into lead sulfate and the acid is consumed, so the electrolyte specific gravity falls. The overall reaction is:
+
+$$
+\text{Pb} + \text{PbO}_2 + 2\,\text{H}_2\text{SO}_4 \rightarrow 2\,\text{PbSO}_4 + 2\,\text{H}_2\text{O}
+$$
+
+Lead sulfate is bulkier than the original active materials, and if it is left on the plates it hardens (sulfation). This is the main reason lead acid life depends so strongly on depth of discharge and on recharging promptly.
+
+## Lithium-ion vs lead acid comparison table
+
+The values below are typical ranges from Linden's Handbook of Batteries. Exact figures depend on cell design, chemistry variant and test conditions, so always use the manufacturer datasheet for design.
+
+| Property | Lithium-ion (LFP, NMC) | Lead acid (flooded, VRLA) |
+| --- | --- | --- |
+| Nominal cell voltage | About 3.2 V (LFP) to 3.7 V (NMC) | 2.0 V |
+| Specific energy | Roughly 100 to 250 Wh/kg | Roughly 30 to 50 Wh/kg |
+| Cycle life | Thousands of cycles (LFP highest) | Hundreds to about 1000+ cycles, strongly DoD dependent |
+| Usable depth of discharge | Typically 80 to 90%+ | Often limited to about 50% for long life |
+| Round trip efficiency | About 90 to 95% | About 70 to 85% |
+| Upfront cost | Higher | Lower |
+| Cost per stored and delivered kWh over life | Often lower in daily cycling duty | Often higher in daily cycling, competitive in standby |
+| Safety | Risk of thermal runaway; needs BMS and IEC 62619 type safety design | Hydrogen gassing on charge, corrosive acid; needs ventilation |
+| Maintenance | Essentially none for the cells; BMS monitoring | Flooded: water top up and specific gravity checks; VRLA: periodic inspection and testing |
+| Temperature | Charging below about 0 °C restricted; high heat speeds ageing | Capacity drops in cold; life falls sharply above 25 °C |
+| Self-discharge | Low | Higher; needs float or periodic charge in storage |
+| Recycling | Growing, more complex | Very well established |
+
+## Differences explained
+
+### Energy density and weight
+
+Lithium is the lightest metal and lithium-ion cells run at about 3.2 to 3.7 V, nearly twice the 2.0 V of a lead acid cell. Higher voltage and lighter materials give several times the specific energy. That is why every modern electric vehicle and phone uses lithium-ion, while lead acid remains for applications where weight matters little, such as stationary standby or forklift counterweight.
+
+### Cycle life and depth of discharge
+
+Depth of discharge (DoD) is the fraction of rated capacity removed in a cycle. Lead acid plates suffer from sulfation and active material shedding during deep cycles, so designers usually limit regular DoD to around 50% to reach a useful cycle life. Lithium-ion intercalation causes far less mechanical stress, so cells routinely run at 80 to 90% DoD while still giving thousands of cycles. This alone means a lead acid bank needs roughly twice the nameplate capacity for the same usable energy.
+
+### Efficiency
+
+Lead acid batteries lose energy to gassing and to higher internal resistance, especially near full charge. Lithium-ion cells have high coulombic efficiency and low resistance, so more of the charging energy comes back out. In a solar system this means fewer panels are needed to refill the battery each day.
+
+### Safety and maintenance
+
+Lithium-ion cells contain a flammable organic electrolyte. Overcharge, internal short circuits, crushing or overheating can trigger **thermal runaway**, so packs need a battery management system that monitors cell voltage and temperature, and cells for industrial use are tested to IEC 62619. Lead acid cells cannot burn in the same way, but they release hydrogen and oxygen on charge, so battery rooms need ventilation, and the acid is corrosive. Stationary lead acid batteries are tested to IEC 60896-21 and IEC 60896-22, and maintained following IEEE 450 (vented) and IEEE 1188 (VRLA), which cover inspections, capacity tests and replacement criteria.
+
+## Sizing a battery bank: worked example
+
+The nominal capacity needed to deliver a given daily energy is:
+
+$$
+E_\text{nom} = \frac{E_\text{load} \times N}{\text{DoD} \times \eta}
+$$
+
+$$
+C_\text{Ah} = \frac{E_\text{nom}}{V_\text{sys}}
+$$
+
+where E_load is the daily load energy, N the days of autonomy, DoD the allowed depth of discharge, η the discharge path efficiency and V_sys the battery bank voltage.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An off-grid home uses 5 kWh per day from a 48 V battery bank. One day of autonomy. Lead acid: DoD 0.50, efficiency 0.85. Lithium-ion (LFP): DoD 0.90, efficiency 0.95.</dd>
+<dt>Find</dt><dd>The nominal energy and amp hour rating of each battery bank.</dd>
+<dt>Assumptions</dt><dd>Efficiency covers battery and wiring losses on discharge; operation near 25 °C; no ageing margin added.</dd>
+<dt>Solution</dt><dd>Lead acid: E_nom = 5 ÷ (0.50 × 0.85) = 11.76 kWh<br />C = 11 765 Wh ÷ 48 V = 245 Ah<br />Lithium-ion: E_nom = 5 ÷ (0.90 × 0.95) = 5.85 kWh<br />C = 5848 Wh ÷ 48 V = 122 Ah<br />Ratio: 11.76 ÷ 5.85 = 2.0</dd>
+<dt>Answer</dt><dd><strong>Lead acid bank about 11.8 kWh (245 Ah at 48 V); lithium-ion bank about 5.9 kWh (122 Ah at 48 V), roughly half the nameplate capacity.</strong></dd>
+<dt>Limitations</dt><dd>Real designs add margins for temperature, ageing and discharge rate (lead acid capacity falls at high current), and use datasheet values for DoD and efficiency.</dd>
+</dl>
+</Example>
+
+<Calculator path="electrical/battery-bank-size" title="Battery Bank Size Calculator" />
+
+## When to use which
+
+Choose **lithium-ion** (usually LFP for stationary use) when the battery cycles daily, weight or space is limited, efficiency matters, or maintenance access is poor. Typical cases are solar self consumption, [battery energy storage systems](/renewable-energy/battery-energy-storage-systems/), [microgrids](/renewable-energy/microgrid-explained/) and electric vehicles, as described in [EV charging levels and connectors](/renewable-energy/ev-charging-levels-and-connectors/).
+
+Choose **lead acid** when the battery mostly floats and rarely discharges, upfront cost is the main constraint, or the site already has trained staff and chargers for it. UPS systems, substation and telecom DC supplies, and engine starting are common examples. Note that a [solar PV system](/renewable-energy/how-solar-pv-systems-work/) inverter or charge controller must be set for the chemistry used. The IEA notes that lithium-ion now dominates new battery storage deployments, driven by falling costs and the shift towards LFP.
+
+## Key formulas for lithium-ion vs lead acid sizing
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Usable energy | E_use = E_nom × DoD | E in kWh, DoD as a fraction |
+| Required nominal energy | E_nom = E_load × N ÷ (DoD × η) | E_load in kWh per day, N = days of autonomy, η = efficiency |
+| Amp hour rating | C_Ah = E_nom ÷ V_sys | E_nom in Wh, V_sys in V |
+| Energy of a battery | E = V × C | V in V, C in Ah, E in Wh |
+| Cells in series | n = V_sys ÷ V_cell | V_cell = 2.0 V (lead acid), about 3.2 V (LFP) |
+
+## Lithium-ion vs lead acid interview and viva questions
+
+1. **Why does a lithium-ion cell have a higher voltage than a lead acid cell?** The electrode potential difference between lithiated graphite and a lithium metal oxide or phosphate cathode is larger, giving about 3.2 to 3.7 V versus 2.0 V for lead acid.
+2. **What happens to the electrolyte of a lead acid battery during discharge?** Sulfuric acid is consumed and water is produced, so specific gravity falls, which is why it can indicate state of charge in flooded cells.
+3. **Why is lead acid DoD usually limited to about 50%?** Deep discharge accelerates sulfation and active material shedding, which shortens cycle life sharply.
+4. **What is thermal runaway?** It is a self heating chain in a lithium-ion cell where rising temperature triggers exothermic reactions that raise temperature further, which the BMS and cell design must prevent.
+5. **Why does a lead acid bank need about twice the nameplate capacity of a lithium-ion bank for the same load?** Lead acid allows roughly half the DoD and has lower efficiency, so more nominal energy must be installed to deliver the same usable energy.

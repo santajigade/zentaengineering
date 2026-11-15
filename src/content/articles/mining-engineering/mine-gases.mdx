@@ -1,0 +1,194 @@
+---
+title: "Mine Gases: Types, Hazards and Detection"
+description: "Mine gases explained: methane, CO, CO2, H2S, NOx, SO2, hydrogen and oxygen deficiency, the damps, gas detectors and dilution by ventilation."
+pubDate: 2026-11-15
+reviewedDate: 2026-11-15
+discipline: mining-engineering
+subcategory: mine-ventilation
+focusKeyword: "mine gases"
+image: { src: /images/featured/mine-gases.webp, alt: "Mine Gases: Types, Hazards and Detection: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [mine-gases, methane, firedamp, gas-detection, mine-ventilation]
+faq:
+  - q: "Why is methane called firedamp?"
+    a: "Damp is an old miners' word for a gas or bad air, from the German Dampf meaning vapour. Firedamp is the flammable gas, mainly methane, released from coal seams, which can burn or explode when it mixes with air between about 5 and 15% by volume."
+  - q: "Can you smell dangerous mine gases?"
+    a: "Mostly no. Methane, carbon monoxide, carbon dioxide and nitrogen are odourless. Hydrogen sulfide smells of rotten eggs at low levels, but at higher concentrations it deadens the sense of smell, so odour is never a reliable warning. Only calibrated gas detectors give a dependable reading."
+  - q: "Does a methane detector also check oxygen?"
+    a: "A single methane sensor does not. Most miners carry a multigas detector with separate sensors, typically methane (catalytic or infrared), oxygen, carbon monoxide and often hydrogen sulfide, each with its own alarm setting. Catalytic methane sensors also need enough oxygen to read correctly."
+references:
+  - text: "H. L. Hartman, J. M. Mutmansky, R. V. Ramani and Y. J. Wang, Mine Ventilation and Air Conditioning, 3rd ed., Wiley, 1997"
+  - text: "M. J. McPherson, Subsurface Ventilation and Environmental Engineering, Chapman and Hall, 1993"
+  - text: "MSHA, 30 CFR Part 75, Mandatory Safety Standards, Underground Coal Mines (Subpart D Ventilation), U.S. Department of Labor"
+  - text: "MSHA, 30 CFR Part 57, Safety and Health Standards, Underground Metal and Nonmetal Mines, U.S. Department of Labor"
+  - text: "NIOSH Pocket Guide to Chemical Hazards, DHHS (NIOSH) Publication No. 2005-149, National Institute for Occupational Safety and Health"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Mine gases** are the harmful gases found in underground mine air: flammable methane and hydrogen, toxic carbon monoxide, hydrogen sulfide, nitrogen oxides and sulfur dioxide, and asphyxiating carbon dioxide and oxygen deficient air. They come from the rock, blasting, diesel engines and fires, and are controlled by continuous detection and dilution with ventilating air.
+
+</Key>
+
+Mine gases are among the oldest and deadliest hazards in mining. Some are released from the strata, others are produced by blasting, diesel equipment, oxidation and fires. This article explains each important gas, the traditional "damp" names, where the gases collect, how they are detected and how [mine ventilation systems](/mining-engineering/mine-ventilation-systems/) keep them below safe limits.
+
+## Normal air and oxygen deficiency
+
+Fresh air at the surface contains about 78% nitrogen, 20.9% oxygen, 0.9% argon and about 0.04% carbon dioxide by volume. Underground, oxygen can fall when it is consumed by oxidising coal, sulfide ores and timber, by people and engines, or when it is displaced by other gases such as methane or carbon dioxide.
+
+US regulations require at least **19.5% oxygen** in active workings (30 CFR 75.321 for coal, 30 CFR 57.5015 for metal and nonmetal mines). Oxygen deficiency gives no warning to the senses, so it must be measured.
+
+## Types of mine gases and their hazards
+
+The table summarises the main mine gases. Relative density is the molar mass divided by that of air (28.96 g/mol), which tells you whether a gas tends to rise to the roof or sink to the floor in still air. Exposure values are from the NIOSH Pocket Guide.
+
+| Gas | Relative density | Main sources | Main hazard | NIOSH REL and IDLH |
+| --- | --- | --- | --- | --- |
+| Methane, CH₄ | 0.55 | Coal seams, some evaporites and shales | Explosive at 5 to 15% in air | Not toxic; simple asphyxiant |
+| Carbon monoxide, CO | 0.97 | Fires, blasting, diesel exhaust, explosions | Toxic, also flammable | 35 ppm TWA; IDLH 1200 ppm |
+| Carbon dioxide, CO₂ | 1.52 | Oxidation, strata, engines, breathing | Asphyxiant, raises breathing rate | 5000 ppm TWA; IDLH 40000 ppm |
+| Hydrogen sulfide, H₂S | 1.18 | Sulfide ores, stagnant water, strata | Very toxic, flammable | 10 ppm ceiling; IDLH 100 ppm |
+| Nitrogen dioxide, NO₂ | 1.59 | Blasting fumes, diesel exhaust | Toxic, damages lungs | 1 ppm short term; IDLH 20 ppm |
+| Sulfur dioxide, SO₂ | 2.21 | Sulfide ore blasting and fires | Toxic, irritant | 2 ppm TWA; IDLH 100 ppm |
+| Hydrogen, H₂ | 0.07 | Battery charging, fires | Explosive at 4 to 75% in air | Simple asphyxiant |
+
+### Methane (firedamp)
+
+**Methane** is the main mine gas in coal mining. It is colourless, odourless and lighter than air, and it is held in the coal by adsorption and released when the seam is mined. Its explosive range in air is **5 to 15%** by volume, with the most violent explosions near 9.5%. Below 5% the mixture is too lean to burn and above 15% it is too rich, but rich mixtures become explosive again when diluted by fresh air.
+
+US coal mine rules in 30 CFR Part 75 set clear action levels. At **1.0% methane** in a working place, all work stops except correcting the ventilation, and at **1.5%** people are withdrawn and electric power is cut off. Methane monitors on face machines must give a warning at 1.0% and de-energise the machine at 2.0%.
+
+### Carbon monoxide
+
+Carbon monoxide is colourless, odourless and nearly the same density as air, so it mixes through the airstream. It binds to haemoglobin far more strongly than oxygen, starving the body of oxygen. CO is the main killer after mine fires and explosions, and a rising CO level on a conveyor belt or in a return airway is often the first sign of a developing fire.
+
+### Carbon dioxide (blackdamp)
+
+Carbon dioxide is heavier than air and collects in low areas, sumps and old workings. Miners called oxygen deficient air rich in carbon dioxide and nitrogen **blackdamp** or chokedamp.
+
+### Hydrogen sulfide (stinkdamp)
+
+Hydrogen sulfide is heavier than air, flammable and extremely toxic. Its rotten egg smell earned it the name **stinkdamp**, but high concentrations paralyse the sense of smell, so a fading smell can mean rising danger.
+
+### Nitrogen oxides, sulfur dioxide and hydrogen
+
+**Nitrogen oxides** (NO and NO₂) come from blasting and diesel engines. NO₂ attacks the lungs, sometimes with delayed effects hours after exposure, which is why re-entry after blasting waits until fumes clear. **Sulfur dioxide** forms when sulfide ores are blasted or burn, and is strongly irritating. **Hydrogen** is released at battery charging stations and in fires, and is the lightest gas of all, so charging stations are ventilated directly to the return.
+
+## The damps: firedamp, afterdamp, whitedamp and stinkdamp
+
+Traditional mining terms are still used in training and regulations:
+
+- **Firedamp:** flammable gas, mainly methane.
+- **Afterdamp:** the gas mixture left after an explosion or fire, low in oxygen and rich in carbon dioxide, nitrogen and carbon monoxide.
+- **Whitedamp:** carbon monoxide, or air containing it.
+- **Blackdamp:** oxygen deficient air rich in carbon dioxide and nitrogen.
+- **Stinkdamp:** hydrogen sulfide.
+
+## Where gases collect: layering
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Longitudinal section of an underground mine roadway: a light methane layer collects along the roof and heavy carbon dioxide and hydrogen sulfide collect along the floor, while ventilating air flows from left to right through the middle of the roadway and sweeps the layers away; a roof mounted methane detector and a floor level multigas monitor sample the air">
+<rect x="0" y="0" width="600" height="55" fill="#e8dcc8" />
+<rect x="0" y="240" width="600" height="60" fill="#e8dcc8" />
+<rect x="0" y="55" width="600" height="185" fill="#f4f8fb" />
+<path d="M0 55H600M0 240H600" stroke="#0b2545" stroke-width="2" />
+<path d="M0 55H600V84C540 90 480 80 420 88C360 95 300 82 240 90C180 97 120 84 60 92C30 95 10 90 0 88Z" fill="#f5b800" fill-opacity="0.35" />
+<path d="M0 240H600V212C540 206 480 216 420 208C360 202 300 214 240 207C180 200 120 212 60 205C30 202 10 207 0 209Z" fill="#b42318" fill-opacity="0.16" />
+<g stroke="#13a89e" stroke-width="4"><path d="M30 122H430M30 147H430M30 172H430" /></g>
+<g fill="#13a89e"><path d="M430 114L446 122L430 130Z" /><path d="M430 139L446 147L430 155Z" /><path d="M430 164L446 172L430 180Z" /></g>
+<g stroke="#fff" stroke-width="2.5"><path class="anim-flow" d="M30 122H428M30 147H428M30 172H428" /></g>
+<path d="M510 55V64" stroke="#0b2545" stroke-width="2" />
+<rect x="485" y="64" width="50" height="26" rx="4" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<circle class="anim-pulse" cx="525" cy="77" r="5" fill="#b42318" />
+<rect x="485" y="214" width="50" height="22" rx="4" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<circle class="anim-pulse anim-d2" cx="525" cy="225" r="5" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="300" y="34" text-anchor="middle" font-weight="700">Roof strata</text>
+<text x="300" y="276" text-anchor="middle" font-weight="700">Floor</text>
+<text x="215" y="76" text-anchor="middle">Methane layers at the roof (relative density 0.55)</text>
+<text x="215" y="230" text-anchor="middle">CO₂ and H₂S collect at the floor (1.52 and 1.18)</text>
+<text x="40" y="108">Ventilating air (intake side)</text>
+<text x="230" y="196" text-anchor="middle" fill="#13a89e">Air velocity and turbulence mix gas into the airstream</text>
+<text x="500" y="80" text-anchor="middle" font-size="11">CH₄</text>
+<text x="500" y="229" text-anchor="middle" font-size="10">multi</text>
+<text x="525" y="117" text-anchor="middle" font-size="11">Methane</text>
+<text x="525" y="131" text-anchor="middle" font-size="11">detector</text>
+<text x="525" y="196" text-anchor="middle" font-size="11">Multigas</text>
+<text x="525" y="208" text-anchor="middle" font-size="11">monitor</text>
+</g>
+</svg>
+<figcaption>Gas layering in a roadway: light methane at the roof, heavy gases at the floor, swept away by ventilating air and monitored by fixed and portable detectors.</figcaption>
+</figure>
+
+Once gases are thoroughly mixed with air, they do not separate again under gravity. Layering happens near the point of release, where air is slow or still. Methane emitted from the roof or a face can form a flammable layer along the roof, especially in high spots, cavities and the tops of dead-end headings. Heavy gases such as carbon dioxide and hydrogen sulfide pool in dips, sumps and abandoned areas. Good ventilation keeps the air velocity and turbulence high enough to break up layers, and detectors are placed where each gas is expected: methane sensors near the roof, CO₂ and H₂S checks low down.
+
+## How mine gases are detected
+
+- **Catalytic (pellistor) sensors:** methane burns on a heated catalyst bead, changing its resistance in a bridge circuit. They read in the 0 to 5% range, need oxygen to work, and can be poisoned by silicones and some sulfur compounds, so they are bump tested and calibrated regularly. Above the explosive range a catalytic sensor can give a falsely low reading.
+- **Infrared sensors:** gases such as methane and carbon dioxide absorb infrared light at specific wavelengths. Infrared sensors work without oxygen, are not poisoned, and can read up to 100% methane.
+- **Electrochemical cells:** the gas reacts at an electrode and produces a current proportional to concentration. They are standard for oxygen, carbon monoxide, hydrogen sulfide, nitrogen dioxide and sulfur dioxide in portable and fixed monitors.
+- **Flame safety lamp:** historically the main detector. A methane cap forms above the flame and grows as methane increases, while the flame dims or goes out in oxygen deficient air. It is now largely replaced by electronic instruments.
+- **Detector tubes:** a measured sample is drawn through a glass tube of reagent, and the length of the colour stain gives the concentration. They are simple spot checks for many gases.
+
+Modern mines combine portable multigas detectors carried by miners, machine mounted methane monitors and fixed sensors linked to a surface control room. Fixed CO sensors along conveyors work alongside the systems described in [types of fire detectors](/safety-engineering/types-of-fire-detectors/).
+
+## Controlling mine gases by ventilation
+
+The main control is dilution with enough fresh air, delivered where gas is released. Other controls include methane drainage before and during mining, sealing old workings, removing ignition sources with permissible electrical equipment, stone dusting, controlled blasting practice and diesel emission limits. These fit within the wider risk controls in [mine hazards and controls](/mining-engineering/mine-hazards-and-controls/).
+
+For a steady gas emission q mixed into an airflow Q, the gas concentration is
+
+$$
+c = \frac{q}{Q + q} \approx \frac{q}{Q}
+$$
+
+so the airflow needed to hold the concentration at a chosen limit is
+
+$$
+Q = \frac{q}{c}
+$$
+
+The exact fresh air needed, allowing for the gas volume itself, is
+
+$$
+Q_a = \frac{q\,(1 - c)}{c}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A coal heading emits methane at q = 0.15 m³/s. The design limit is c = 0.5% (0.005), half the 1.0% action level. Roadway cross section A = 12 m².</dd>
+<dt>Find</dt><dd>The airflow needed to dilute the methane, and the resulting air velocity.</dd>
+<dt>Assumptions</dt><dd>Intake air contains no methane, emission is steady and fully mixed into the airstream.</dd>
+<dt>Solution</dt><dd>Q = q ÷ c = 0.15 ÷ 0.005 = 30 m³/s<br />Exact fresh air: Q_a = 0.15 × (1 − 0.005) ÷ 0.005 = 29.85 m³/s<br />Check: c = 0.15 ÷ 30 = 0.005 = 0.5%, which is below the 1.0% action level<br />Velocity: v = Q ÷ A = 30 ÷ 12 = 2.5 m/s</dd>
+<dt>Answer</dt><dd><strong>About 30 m³/s of air, giving 0.5% methane and a mean air velocity of 2.5 m/s</strong></dd>
+<dt>Limitations</dt><dd>Emission rates vary with mining rate and geology, and poor mixing can still allow roof layers, so the design airflow must be confirmed with measurements and continuous monitoring.</dd>
+</dl>
+</Example>
+
+## Key formulas for mine gases
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Gas concentration | c = q ÷ (Q + q), about q ÷ Q | c as a fraction, q = gas emission in m³/s, Q = airflow in m³/s |
+| Dilution airflow | Q = q ÷ c | Q in m³/s |
+| Exact fresh air | Q_a = q (1 − c) ÷ c | Q_a in m³/s |
+| Air velocity | v = Q ÷ A | v in m/s, A = roadway area in m² |
+| Relative density | RD = M ÷ 28.96 | M = molar mass in g/mol |
+
+## Mine gases interview and viva questions
+
+1. **What is the explosive range of methane in air?** Methane is explosive between about 5 and 15% by volume in air, with the most violent explosions near 9.5%.
+2. **What is afterdamp and why is it dangerous?** Afterdamp is the gas left after an explosion or fire. It is low in oxygen and contains carbon monoxide, so it can kill miners who survive the blast itself.
+3. **Why can a catalytic methane sensor give a false reading?** It needs oxygen to oxidise methane on the bead, so it reads low in oxygen deficient air and above the explosive range, and it can be poisoned by silicones.
+4. **Where should you test for hydrogen sulfide and carbon dioxide?** Near the floor, in dips and sumps, because both are heavier than air and collect in low areas when air is still.
+5. **What airflow dilutes 0.15 m³/s of methane to 0.5%?** Q = q ÷ c = 0.15 ÷ 0.005 = 30 m³/s.
+
+## Related reading
+
+- [Mine ventilation systems](/mining-engineering/mine-ventilation-systems/)
+- [Mine hazards and controls](/mining-engineering/mine-hazards-and-controls/)
+- [Surface vs underground mining](/mining-engineering/surface-vs-underground-mining/)

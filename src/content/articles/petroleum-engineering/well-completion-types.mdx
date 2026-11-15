@@ -1,0 +1,203 @@
+---
+title: "Well Completion Types Explained: Open Hole to Cased"
+description: "Well completion types explained: open hole, cased and perforated, liners, gravel packs, single and multiple zone designs, plus a brine pressure example."
+pubDate: 2026-11-15
+reviewedDate: 2026-11-15
+discipline: petroleum-engineering
+subcategory: well-logging
+focusKeyword: "well completion"
+image: { src: /images/featured/well-completion-types.webp, alt: "Well Completion Types Explained: Open Hole to Cased: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [well-completion, perforation, gravel-pack, sand-control, completion-brine]
+faq:
+  - q: "What is the difference between drilling and well completion?"
+    a: "Drilling makes the hole and secures it with casing and cement. Well completion is the work that follows: connecting the well to the reservoir by perforating or leaving it open, installing sand control if needed, and running tubing, packers and safety valves so the well can produce safely."
+  - q: "Why is completion brine used instead of drilling mud?"
+    a: "Completion brines are solids free salt solutions. They provide hydrostatic pressure to control the well without leaving mud solids that could plug perforations, gravel packs or the formation near the wellbore, so they cause less damage to productivity."
+  - q: "Which well completion type is most common?"
+    a: "The cased and perforated completion is the most widely used, because cement and casing isolate zones, support the hole and allow selective perforating, testing and later recompletion. Open hole completions are mainly used in strong, single zone formations and in many horizontal wells."
+references:
+  - text: "L. W. Lake (ed.), Petroleum Engineering Handbook, Vol. IV: Production Operations Engineering, Society of Petroleum Engineers, 2007"
+  - text: "M. J. Economides, A. D. Hill, C. Ehlig-Economides and D. Zhu, Petroleum Production Systems, 2nd ed., Prentice Hall, 2013"
+  - text: "J. Bellarby, Well Completion Design, Developments in Petroleum Science 56, Elsevier, 2009"
+  - text: "M. J. Economides, L. T. Watters and S. Dunn-Norman, Petroleum Well Construction, Wiley, 1998"
+  - text: "API Specification 5CT, Specification for Casing and Tubing, 10th ed., American Petroleum Institute, 2018"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Well completion** is the set of equipment and operations that turn a drilled and cased hole into a safe producing or injection well. It defines how the reservoir connects to the wellbore, by leaving the hole open or by cementing casing and perforating it, and adds sand control, tubing, packers and safety valves as the reservoir requires.
+
+</Key>
+
+A well completion is the bridge between drilling and production. Once the hole reaches the reservoir, engineers must decide how fluids will enter the well, how the hole will be kept stable, how separate zones will be isolated and how oil or gas will travel to surface. Those choices affect productivity, safety and the cost of every later intervention, so completion design is one of the most important decisions in a well's life.
+
+## What a well completion has to do
+
+Every completion design balances the same set of jobs, described in detail by Bellarby and in the SPE handbook:
+
+- **Connect** the reservoir to the wellbore with as little damage and pressure loss as possible.
+- **Keep the hole stable** and stop formation sand from entering the well.
+- **Isolate zones** so that water, gas or a depleted layer does not interfere with the productive interval.
+- **Convey fluids** to surface through tubing sized for the expected flow rate.
+- **Provide safety barriers**, such as a packer and a subsurface safety valve, so the well can be shut in.
+- **Allow future work**: logging, stimulation, artificial lift and recompletion.
+
+Completions are usually grouped by the lower completion (the part across the reservoir) and the upper completion (tubing, packer and valves above it).
+
+## Open hole vs cased and perforated well completion
+
+<figure class="anim">
+<svg width="640" height="345" viewBox="0 0 640 345" fill="none" role="img" aria-label="Side by side well cross sections. Left: open hole completion with casing and cement set above the reservoir and the reservoir section left uncased, oil flowing from the rock face into the borehole, entering the tubing below the packer and rising to the wellhead and flowline. Right: cased and perforated completion with casing and cement across the reservoir and perforation tunnels through which oil flows into the casing, then up the tubing to the surface.">
+<rect x="10" y="50" width="620" height="285" fill="#eef1f6" />
+<rect x="20" y="215" width="280" height="80" fill="#fff7e0" stroke="#f5b800" stroke-width="1.5" />
+<rect x="340" y="215" width="280" height="80" fill="#fff7e0" stroke="#f5b800" stroke-width="1.5" />
+<path d="M10 50H630" stroke="#8a6d3b" stroke-width="2" />
+<g fill="#c3cad5">
+<rect x="135" y="50" width="7" height="150" /><rect x="178" y="50" width="7" height="150" />
+<rect x="455" y="50" width="7" height="255" /><rect x="498" y="50" width="7" height="255" />
+</g>
+<path d="M135 200L132 225L137 250L131 275L136 300L134 310H186L183 290L188 265L182 240L187 215L185 200Z" fill="#ffffff" stroke="#8a6d3b" stroke-width="1.5" />
+<rect x="462" y="50" width="36" height="255" fill="#ffffff" />
+<rect x="142" y="50" width="36" height="150" fill="#ffffff" />
+<g stroke="#7b8794" stroke-width="3">
+<path d="M142 50V200M178 50V200M462 50V305M498 50V305" />
+</g>
+<g stroke="#b42318" stroke-width="9">
+<path d="M455 235H425M455 255H425M455 275H425M505 235H535M505 255H535M505 275H535" />
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M154 38V188M166 38V188M474 38V188M486 38V188" />
+<rect x="143" y="178" width="10" height="10" fill="#0b2545" /><rect x="167" y="178" width="10" height="10" fill="#0b2545" />
+<rect x="463" y="178" width="10" height="10" fill="#0b2545" /><rect x="487" y="178" width="10" height="10" fill="#0b2545" />
+<rect x="146" y="30" width="28" height="16" fill="#eef1f6" /><rect x="466" y="30" width="28" height="16" fill="#eef1f6" />
+</g>
+<g stroke="#13a89e" stroke-width="4" fill="none">
+<path d="M160 298V40H250" /><path d="M480 298V40H570" />
+<path d="M40 240H132M40 270H134M282 240H184M282 270H186" />
+<path d="M360 235H462M360 275H462M600 235H498M600 275H498" />
+</g>
+<g stroke="#fff" stroke-width="3" fill="none">
+<path class="anim-flow" d="M160 298V40H250" /><path class="anim-flow" d="M480 298V40H570" />
+<path class="anim-flow-slow" d="M40 240H132M40 270H134M282 240H184M282 270H186" />
+<path class="anim-flow-slow" d="M360 235H462M360 275H462M600 235H498M600 275H498" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="160" y="18" font-size="13" font-weight="700" text-anchor="middle">Open hole</text>
+<text x="480" y="18" font-size="13" font-weight="700" text-anchor="middle">Cased and perforated</text>
+<text x="255" y="44">Flowline</text><text x="575" y="44">Flowline</text>
+<text x="200" y="100">Tubing</text><text x="520" y="100">Tubing</text>
+<text x="200" y="135">Casing and cement</text><text x="520" y="135">Casing and</text><text x="520" y="150">cement</text>
+<text x="200" y="186">Packer</text><text x="520" y="186">Packer</text>
+<text x="200" y="207">Casing shoe</text>
+<text x="40" y="288">Reservoir rock</text><text x="360" y="288">Reservoir rock</text>
+<text x="112" y="328">Uncased rock face</text><text x="420" y="328">Perforation tunnels</text>
+</g>
+<g stroke="#0b2545" stroke-width="1">
+<path d="M197 96H167M197 131H186M197 182H178M197 203H186M512 96H487M517 131H506M517 182H498" />
+</g>
+</svg>
+<figcaption>Open hole (left) and cased and perforated (right) completions. Oil flows from the reservoir into the wellbore, enters the tubing below the packer and rises to the wellhead.</figcaption>
+</figure>
+
+### Open hole completion
+
+In an **open hole completion**, production casing is set and cemented just above the reservoir, and the reservoir section is drilled and left without casing. Fluid enters along the whole exposed rock face, so there is no perforation pressure drop and the full formation thickness contributes. It is cheap and simple, and it suits strong, consolidated rock such as many carbonates, and long horizontal wells.
+
+The weaknesses are serious. There is no cement to isolate water or gas layers inside the open section, selective stimulation is difficult, and weak rock can collapse or produce sand. For this reason open hole sections are often fitted with screens or a slotted liner.
+
+### Cased and perforated completion
+
+Here casing is run through the reservoir and cemented in place. A **perforating gun** with shaped explosive charges is then fired to create tunnels through the casing, the cement and a short distance into the rock. Shot density is usually stated in shots per foot (spf), with typical designs of 4 to 12 spf, and phasing (the angle between charges, such as 60 or 90 degrees) spreads the holes around the casing.
+
+This is the most common well completion. Cement isolates zones, perforations can be placed only where logs show good pay, and the casing supports the hole for its whole life. The price is extra cost and a pressure drop through the perforations and the crushed zone around each tunnel. Log interpretation from [well logging methods](/petroleum-engineering/well-logging-methods/) is what tells the engineer where to shoot.
+
+## Liner completions
+
+A **liner** is a casing string that hangs from a liner hanger inside the previous casing instead of running all the way to surface. It saves steel and allows a larger casing size higher up.
+
+- **Cemented liner:** cemented and perforated like full casing, common in deeper wells.
+- **Slotted or pre-drilled liner:** an uncemented liner with slots or holes, used in open hole to stop large scale hole collapse. It gives little control of fine sand.
+- **Screened liner:** wire wrapped or premium mesh screens that hold back formation sand.
+
+## Sand control and gravel pack completions
+
+Weak, poorly consolidated sandstones can produce sand that erodes chokes and pipework and fills the well. Sand control options include:
+
+- **Standalone screens**, sized to the formation grain distribution.
+- **Gravel pack:** a screen is placed across the interval and the annulus between screen and casing (cased hole gravel pack) or screen and rock (open hole gravel pack) is filled with carefully sized gravel. A classic sizing rule chooses a median gravel size about 5 to 6 times the median formation grain size, so the gravel holds back the formation sand while the screen holds back the gravel.
+- **Frac pack:** a short, wide hydraulic fracture is created and packed with proppant, then the screen annulus is packed, which both bypasses damage and controls sand.
+
+The rock properties in [porosity and permeability](/petroleum-engineering/porosity-and-permeability/) decide whether sand control is needed and how much productivity it may cost.
+
+## Single zone and multiple zone completions
+
+A **single zone completion** produces one reservoir through one tubing string, with a packer sealing the annulus above the perforations. It is the simplest and most reliable arrangement.
+
+When a well penetrates several reservoirs, a **multiple zone completion** can produce them separately or together:
+
+- **Dual completion:** two tubing strings and two packers, each zone producing up its own string so pressures and fluids stay separate.
+- **Selective single string:** one tubing string with sliding sleeves or nipples so zones can be opened in turn.
+- **Commingled completion:** zones flow together into one string, simpler but harder to allocate and manage when pressures differ.
+
+The choice depends on regulations for commingling, the [drive mechanism](/petroleum-engineering/reservoir-drive-mechanisms/) and pressure of each zone, and the cost of the extra hardware.
+
+## Conventional vs tubingless completions
+
+A **conventional completion** runs production tubing inside the casing, normally with a packer. The tubing can be pulled and replaced, the annulus is protected from well fluids, and the packer and safety valve form barriers. It also gives a place for [artificial lift methods](/petroleum-engineering/artificial-lift-methods/) such as gas lift valves or pumps.
+
+A **tubingless completion** produces through small diameter casing with no separate tubing, sometimes with several small casing strings cemented in one hole. It costs less and is used for low rate gas wells, but there is no second barrier, corrosion acts directly on the casing and repairs are limited. API Spec 5CT covers the steel grades and dimensions of both casing and tubing.
+
+## Key formulas for well completion
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Hydrostatic pressure (SI) | P = ρ g h | ρ in kg/m³, g = 9.81 m/s², h = true vertical depth in m, P in Pa |
+| Hydrostatic pressure (field) | P = 0.052 × MW × TVD | MW in ppg, TVD in ft, P in psi |
+| Overbalance | ΔP = P_brine − P_res | pressures in MPa or psi |
+| Perforation count | N = SPF × L | SPF in shots per foot, L in ft |
+
+## Worked example: completion brine pressure and shot count
+
+Before perforating, the well is filled with completion brine heavy enough to hold back the reservoir. The hydrostatic pressure of a fluid column is:
+
+$$
+P = \rho \, g \, h
+$$
+
+In oilfield units this becomes $P = 0.052 \times MW \times TVD$. The derivation of the hydrostatic relation is covered in this [hydrostatic pressure formula](https://www.instrumentationblog.in/hydrostatic-pressure-formula/) guide.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Top of perforations at 2500 m TVD. Reservoir pressure 27.0 MPa. Calcium chloride brine density 1200 kg/m³ (about 10.0 ppg). Perforated interval 10 m long, shot density 6 spf.</dd>
+<dt>Find</dt><dd>Brine hydrostatic pressure at the perforations, the overbalance, and the number of perforations.</dd>
+<dt>Assumptions</dt><dd>Static, solids free brine of uniform density; g = 9.81 m/s²; 1 m = 3.281 ft.</dd>
+<dt>Solution</dt><dd>P = 1200 × 9.81 × 2500 = 29 430 000 Pa = 29.43 MPa<br />Overbalance = 29.43 − 27.0 = 2.43 MPa<br />Field check: TVD = 2500 × 3.281 = 8202 ft, P = 0.052 × 10.0 × 8202 = 4265 psi, about 29.4 MPa<br />Interval = 10 × 3.281 = 32.8 ft, N = 6 × 32.8 = 197 shots</dd>
+<dt>Answer</dt><dd><strong>Brine pressure about 29.4 MPa, overbalance about 2.4 MPa, and about 197 perforations</strong></dd>
+<dt>Limitations</dt><dd>Brine density falls with temperature and rises with pressure, so a deep hot well needs a downhole density correction. Many wells are perforated underbalanced instead to clean the tunnels, which needs a different pressure design.</dd>
+</dl>
+</Example>
+
+## Choosing a well completion type
+
+Selection starts from reservoir data and works up:
+
+1. **Rock strength:** strong rock allows open hole; weak sand needs screens, gravel or frac packs.
+2. **Number of zones and fluid contacts:** multiple layers or nearby water and gas favour cemented casing and selective perforating.
+3. **Expected rates and lift:** tubing size, and whether pumps or gas lift will be needed later.
+4. **Stimulation plans:** cased and cemented wells allow staged fracturing and acidizing.
+5. **Life cycle cost and access:** offshore and subsea wells justify more robust, low intervention designs.
+
+The drilling program, including the [drilling fluid](/petroleum-engineering/drilling-fluid-types/) used across the pay zone, also matters, because mud filtrate and solids damage the near wellbore rock that the completion must produce through.
+
+## Well completion interview and viva questions
+
+1. **What is the main advantage of an open hole completion?** The whole reservoir face is exposed, so there is no perforation pressure drop and cost is low, but there is no zonal isolation in the open section.
+2. **Why is a cased and perforated completion the most common?** Cement and casing give zonal isolation and hole support, and perforations can be placed selectively where logs show productive rock.
+3. **What does a gravel pack do?** Sized gravel placed around a screen holds back formation sand while letting fluids flow, and the screen holds back the gravel.
+4. **What is the purpose of a production packer?** It seals the annulus between tubing and casing, forcing flow up the tubing and protecting the casing from well fluids and pressure.
+5. **How do you calculate the hydrostatic pressure of completion brine?** Use P = ρgh in SI units, or P = 0.052 × MW × TVD with mud weight in ppg and depth in feet to get psi.

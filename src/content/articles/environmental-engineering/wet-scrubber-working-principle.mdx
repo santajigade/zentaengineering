@@ -1,0 +1,236 @@
+---
+title: "Wet Scrubber Working Principle and Types"
+description: "Wet scrubber working principle: gas and liquid contact, packed, spray, venturi, tray and cyclonic types, L/G ratio and a removal efficiency example."
+pubDate: 2026-11-15
+reviewedDate: 2026-11-15
+discipline: environmental-engineering
+subcategory: air-pollution-control
+focusKeyword: "wet scrubber"
+image: { src: /images/featured/wet-scrubber-working-principle.webp, alt: "Wet Scrubber Working Principle and Types: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [air-pollution-control, wet-scrubber, venturi-scrubber, packed-tower, gas-absorption, flue-gas-desulfurization]
+faq:
+  - q: "Can a wet scrubber remove both dust and gases?"
+    a: "Yes. A wet scrubber can capture particles and absorb soluble gases at the same time, which is one of its main advantages. In practice each design favours one job: venturi scrubbers are chosen mainly for fine particles, while packed towers are chosen mainly for gas absorption."
+  - q: "Why do wet scrubbers produce a visible plume?"
+    a: "Hot flue gas leaving a scrubber is cooled and saturated with water vapour. When it meets cooler outside air, part of that vapour condenses into tiny droplets, forming a white steam plume. It is mostly water, but a mist eliminator is still needed to stop larger droplets carrying pollutants out of the stack."
+  - q: "What happens to the used scrubbing liquid?"
+    a: "Most of the liquid is recirculated. A small bleed stream is removed to control dissolved and suspended solids, and it is replaced with make-up water. The bleed is treated by neutralisation, settling or filtration before discharge or reuse, so a scrubber shifts part of an air problem into a wastewater problem."
+references:
+  - text: "U.S. EPA, Air Pollution Control Technology Fact Sheets: Packed-Bed/Packed-Tower Wet Scrubber, Spray-Chamber/Spray-Tower Wet Scrubber, Venturi Scrubber, Impingement-Plate/Tray-Tower Scrubber and Cyclonic Spray Scrubber, EPA-452/F-03 series, 2003"
+  - text: "U.S. EPA, EPA Air Pollution Control Cost Manual, 7th ed., Section 5 (SO2 and Acid Gas Controls), Office of Air Quality Planning and Standards"
+  - text: "C. D. Cooper and F. C. Alley, Air Pollution Control: A Design Approach, 4th ed., Waveland Press"
+  - text: "D. W. Green and M. Z. Southard (eds.), Perry's Chemical Engineers' Handbook, 9th ed., McGraw-Hill"
+  - text: "N. de Nevers, Air Pollution Control Engineering, 3rd ed., Waveland Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **wet scrubber** is an air pollution control device that cleans a gas stream by bringing it into close contact with a liquid, usually water or an alkaline solution. Particles are captured by droplets or wetted surfaces, and soluble gases such as SO2 or HCl dissolve and react in the liquid, which is then collected and recirculated.
+
+</Key>
+
+A wet scrubber is one of the most flexible tools in air pollution control. The same basic idea, mixing dirty gas with liquid and then separating the two, is used to remove acid gases from incinerators, sulphur dioxide from power plant flue gas, dust from dryers and kilns, and odours from chemical plants. This article explains the working principle, the main parts, the five common types and the design equations engineers use first.
+
+## Wet scrubber working principle
+
+Every wet scrubber does three things in sequence:
+
+1. **Contact:** the gas and liquid are brought together with a large interfacial area. This can be droplets from spray nozzles, thin liquid films on packing, froth on trays, or liquid shattered by a high velocity gas stream.
+2. **Transfer:** pollutants move from the gas into the liquid.
+3. **Separation:** the cleaned gas is separated from the liquid, and entrained droplets are removed by a **mist eliminator** before the gas leaves.
+
+Particles and gases are transferred by different mechanisms, so the best scrubber for one is often not the best for the other.
+
+### Particle capture
+
+Particles are collected mainly by **inertial impaction**, where a particle cannot follow the gas streamlines around a droplet and hits it. Larger particles and higher relative velocity between gas and droplet increase impaction. Smaller particles are also caught by **interception** and, for submicron sizes, by **Brownian diffusion**. Fine particles are hard to impact, so scrubbers that target them must create high relative velocity, which costs pressure drop and fan power.
+
+### Gas absorption
+
+Gaseous pollutants are removed by **absorption**: the gas dissolves into the liquid across the gas and liquid interface. The driving force is the difference between the actual concentration in the gas and the concentration that would be in equilibrium with the liquid. Very soluble gases such as HCl and NH3 absorb readily in water. Less soluble acid gases such as SO2 are absorbed much better when an alkali (sodium hydroxide, lime or limestone slurry) reacts with the dissolved gas, keeping the equilibrium back pressure near zero. In limestone flue gas desulphurisation the overall reaction is:
+
+$$
+\mathrm{CaCO_3 + SO_2 \rightarrow CaSO_3 + CO_2}
+$$
+
+and air is often blown into the sump to oxidise the sulphite to gypsum (CaSO4·2H2O).
+
+## Construction of a packed tower wet scrubber
+
+The counter-current packed tower is the classic absorber, and its parts appear in most other scrubbers too.
+
+<figure class="anim">
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" role="img" aria-label="Counter-current packed tower wet scrubber: dirty gas enters near the bottom and rises up through a packed bed and a chevron mist eliminator before leaving at the top as clean gas; scrubbing liquid is sprayed from a distributor above the packing and trickles down to a sump; a recirculation pump returns sump liquid to the distributor, with make-up water added to the sump and a bleed stream sent to treatment">
+<g stroke="#0b2545" stroke-width="2.5">
+<rect x="220" y="60" width="120" height="240" rx="4" fill="#f4f7fb" />
+</g>
+<rect x="222" y="266" width="116" height="32" fill="#dbe9f7" />
+<rect x="222" y="125" width="116" height="88" fill="#eef1f6" />
+<g stroke="#7b8794" stroke-width="1.2" fill="none">
+<circle cx="234" cy="137" r="5" /><circle cx="256" cy="150" r="5" /><circle cx="278" cy="136" r="5" /><circle cx="300" cy="151" r="5" /><circle cx="324" cy="138" r="5" />
+<circle cx="234" cy="167" r="5" /><circle cx="256" cy="182" r="5" /><circle cx="278" cy="168" r="5" /><circle cx="300" cy="183" r="5" /><circle cx="324" cy="169" r="5" />
+<circle cx="236" cy="199" r="5" /><circle cx="278" cy="200" r="5" /><circle cx="324" cy="200" r="5" />
+</g>
+<path d="M222 215H338" stroke="#0b2545" stroke-width="3" />
+<path d="M222 79L231 71L240 87L249 71L258 87L267 71L276 87L285 71L294 87L303 71L312 87L321 71L330 87L338 79" stroke="#0b2545" stroke-width="2" />
+<g stroke="#2f6fb7" stroke-width="4">
+<path d="M340 285H402M438 285H470V100H340M340 100H232" />
+<path d="M120 290H220" />
+<path d="M470 240H570" />
+</g>
+<g fill="#2f6fb7"><path d="M246 103l4 8 4-8z" /><path d="M274 103l4 8 4-8z" /><path d="M302 103l4 8 4-8z" /></g>
+<g stroke="#2f6fb7" stroke-width="3" stroke-opacity="0.7"><path d="M264 112V264M292 112V264" /></g>
+<g stroke="#b42318" stroke-width="4"><path d="M40 245H220" /></g>
+<g stroke="#b42318" stroke-width="3"><path d="M240 238V92M320 238V92" /></g>
+<g stroke="#13a89e" stroke-width="4"><path d="M280 70V30H560" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none">
+<path class="anim-flow" d="M40 245H220" />
+<path class="anim-flow" d="M240 238V92M320 238V92" />
+<path class="anim-flow" d="M280 70V30H560" />
+<path class="anim-flow-slow" d="M264 112V264M292 112V264" />
+<path class="anim-flow" d="M340 285H402M438 285H470V100H340M340 100H232" />
+<path class="anim-flow-slow" d="M120 290H220" />
+<path class="anim-flow-slow" d="M470 240H570" />
+</g>
+<g fill="#b42318"><path d="M212 239l10 6-10 6z" /></g>
+<g fill="#13a89e"><path d="M552 24l10 6-10 6z" /></g>
+<g fill="#2f6fb7"><path d="M562 234l10 6-10 6z" /></g>
+<circle cx="420" cy="285" r="18" fill="#e6f6f4" stroke="#0b2545" stroke-width="2.5" />
+<g class="anim-spin">
+<circle cx="420" cy="285" r="12" fill="none" stroke="none" />
+<path d="M420 285L420 274M420 285L431 285M420 285L420 296M420 285L409 285" stroke="#0b2545" stroke-width="3" stroke-linecap="round" />
+<circle cx="420" cy="285" r="3" fill="#0b2545" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<g text-anchor="end">
+<text x="212" y="83">Mist eliminator</text>
+<text x="212" y="104">Liquid distributor</text>
+<text x="212" y="172">Packed bed</text>
+<text x="212" y="214">Support plate</text>
+</g>
+<text x="40" y="236" fill="#b42318">Dirty gas in</text>
+<text x="120" y="280" fill="#2f6fb7">Make-up water</text>
+<text x="280" y="288" text-anchor="middle">Sump</text>
+<text x="520" y="22" text-anchor="middle" fill="#13a89e">Clean gas out</text>
+<text x="478" y="160" fill="#2f6fb7">Recirculation</text>
+<text x="478" y="175" fill="#2f6fb7">line</text>
+<text x="520" y="232" text-anchor="middle" fill="#2f6fb7">Bleed to</text>
+<text x="520" y="258" text-anchor="middle" fill="#2f6fb7">treatment</text>
+<text x="420" y="322" text-anchor="middle">Recirculation pump</text>
+<text x="40" y="322" fill="#b42318">Gas rises</text>
+<text x="120" y="322" fill="#2f6fb7">Liquid falls</text>
+</g>
+</svg>
+<figcaption>Counter-current packed tower wet scrubber with liquid recirculation.</figcaption>
+</figure>
+
+- **Gas inlet:** dirty gas enters below the packing. A quench section is often added ahead of the tower to cool hot gas to its saturation temperature.
+- **Packed bed:** random packing (rings, saddles) or structured packing gives a large wetted surface. It sits on a **support plate** that lets gas pass upward and liquid drain downward.
+- **Liquid distributor:** spreads liquid evenly over the top of the packing. Poor distribution causes channelling and lost efficiency.
+- **Mist eliminator:** chevron blades or a mesh pad above the distributor that captures entrained droplets.
+- **Sump and recirculation pump:** liquid collects in the sump and a [centrifugal pump](/mechanical-engineering/centrifugal-pump-working-principle/) returns it to the distributor. pH and density are controlled by adding reagent and **make-up water** and by removing a **bleed** stream.
+
+## Operation step by step
+
+1. The fan pushes or pulls dirty gas into the bottom of the tower.
+2. Gas flows upward through the wet packing while liquid trickles down over it. This **counter-current** arrangement means the cleanest gas meets the freshest liquid at the top, giving the largest driving force for a given tower height.
+3. Pollutants dissolve and react in the liquid film on the packing.
+4. The cleaned gas passes through the mist eliminator and leaves through the stack.
+5. Spent liquid drains to the sump, is dosed with reagent, and is pumped back, while the bleed goes to wastewater treatment.
+
+Gas velocity is limited by **flooding**, the point where rising gas holds up the falling liquid and the bed fills. Packed towers are normally designed at a fraction of the flooding velocity, typically about 50 to 75%, using the generalised pressure drop correlations given in Perry's and Cooper and Alley.
+
+## Types of wet scrubber
+
+### Spray tower
+
+The simplest design: an empty chamber where liquid is sprayed through nozzles into rising gas. It has a low pressure drop, handles dusty or slurry streams without plugging, and is widely used for SO2 absorption with limestone slurry. Its weakness is fine particles, because droplet and gas relative velocities are low.
+
+### Packed bed scrubber
+
+Described above. It gives excellent gas absorption per unit height for soluble gases and acid gases, but packing can plug with heavy dust or scaling solids, so it is usually placed after a particulate collector.
+
+### Venturi scrubber
+
+Gas is accelerated through a narrow **throat**, and liquid injected there is shattered into fine droplets by the high velocity gas. The large relative velocity gives strong impaction, so venturis are the wet scrubber of choice for fine particles. Efficiency rises with pressure drop, and an adjustable throat keeps performance up when gas flow changes. A cyclonic separator follows to remove the droplets.
+
+### Tray or plate tower
+
+The tower contains horizontal sieve, valve or impingement trays. Liquid flows across each tray and gas bubbles up through it, forming froth. Each tray acts as a contact stage, similar to a [distillation column](/chemical-engineering/distillation-column-working-principle/). Trays tolerate some solids better than packing and suit gas absorption with moderate particulate.
+
+### Cyclonic spray scrubber
+
+Gas enters tangentially and spins, while sprays inject liquid. Centrifugal force throws wetted particles and droplets to the wall, where they drain away. It is more efficient than a plain spray tower for coarse particles at moderate pressure drop.
+
+| Type | Main target | Pressure drop | Notes |
+| --- | --- | --- | --- |
+| Spray tower | Soluble gases, coarse particles | Low | Simple, resists plugging |
+| Packed bed | Soluble and acid gases | Low to moderate | Plugs with heavy dust |
+| Venturi | Fine particles | High | Compact, high energy use |
+| Tray tower | Gases with some particles | Moderate | Staged contact |
+| Cyclonic spray | Coarse particles | Moderate | Centrifugal separation |
+
+## Design equations for a wet scrubber
+
+Removal (collection) efficiency is based on inlet and outlet concentration at the same flow conditions:
+
+$$
+\eta = \frac{C_{in} - C_{out}}{C_{in}} = 1 - Pt
+$$
+
+where Pt is the penetration, the fraction that escapes. For stages in series the penetrations multiply:
+
+$$
+\eta_{overall} = 1 - (1 - \eta_1)(1 - \eta_2)
+$$
+
+The **liquid-to-gas ratio** is the liquid flow divided by the gas flow, normally in litres per cubic metre of gas. For a packed absorber with a fast reaction and negligible back pressure, the packing height is:
+
+$$
+Z = H_{OG} \times N_{OG}, \qquad N_{OG} = \ln\frac{y_{in}}{y_{out}}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A packed tower treats 20,000 m³/h of gas containing 800 mg/m³ of HCl. The outlet concentration is 20 mg/m³. The recirculation pump delivers 40 m³/h of scrubbing liquid.</dd>
+<dt>Find</dt><dd>The removal efficiency, the liquid-to-gas ratio, the HCl removed per hour, and the overall efficiency if a second identical stage is added in series.</dd>
+<dt>Assumptions</dt><dd>Concentrations at the same reference conditions; gas flow constant through the tower; the second stage achieves the same fractional removal as the first.</dd>
+<dt>Solution</dt><dd>η = (800 − 20) ÷ 800 = 0.975 = 97.5%<br />L/G = 40,000 L/h ÷ 20,000 m³/h = 2.0 L/m³<br />HCl removed = (800 − 20) mg/m³ × 20,000 m³/h = 15,600,000 mg/h = 15.6 kg/h<br />Two stages: η = 1 − (0.025 × 0.025) = 1 − 0.000625 = 0.999375<br />Outlet after two stages = 800 × 0.000625 = 0.5 mg/m³</dd>
+<dt>Answer</dt><dd><strong>Efficiency 97.5%, L/G 2.0 L/m³, 15.6 kg/h of HCl removed; two stages in series give about 99.94% and an outlet of 0.5 mg/m³.</strong></dd>
+<dt>Limitations</dt><dd>Real second stages may perform differently, especially for particles, because the coarse fraction is already removed and the remaining dust is finer. Efficiency should be confirmed by stack testing.</dd>
+</dl>
+</Example>
+
+## Key formulas for wet scrubbers
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Removal efficiency | η = (C_in − C_out) ÷ C_in | C in mg/m³ at the same reference conditions |
+| Penetration | Pt = 1 − η = C_out ÷ C_in | dimensionless |
+| Stages in series | η_overall = 1 − (1 − η₁)(1 − η₂) | η as fractions |
+| Liquid-to-gas ratio | L/G = Q_L ÷ Q_G | Q_L in L/h, Q_G in m³/h, result in L/m³ |
+| Mass removed | m = (C_in − C_out) × Q_G | mg/h, divide by 10⁶ for kg/h |
+| Packing height | Z = H_OG × N_OG, N_OG = ln(y_in ÷ y_out) | H_OG in m; valid for negligible back pressure |
+
+## Advantages and limitations of a wet scrubber
+
+**Advantages:** removes particles and gases in one unit, handles hot, humid, sticky or flammable dusts safely, cools and quenches gas, neutralises acid gases, and has a relatively small footprint and capital cost.
+
+**Limitations:** creates a wastewater and sludge stream, causes corrosion so materials such as FRP, rubber lined steel or alloys are needed, gives a visible steam plume, needs freeze protection in cold climates, and fine particle removal requires high pressure drop and fan power. For very fine dry dust at high efficiency, an [electrostatic precipitator](/environmental-engineering/electrostatic-precipitator/) or fabric filter is often more economical.
+
+## Applications and monitoring
+
+Wet scrubbers are used for flue gas desulphurisation at coal fired boilers, acid gas control at waste incinerators, HCl and chlorine control at chemical and pickling plants, ammonia and odour control, and particulate control at dryers, kilns and foundries. Operators track pressure drop, liquid flow, sump pH and density, and fan current. Outlet emissions are confirmed by a [continuous emissions monitoring system](/environmental-engineering/cems-overview/), and scrubber choice is often fixed during [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/) and permitting.
+
+## Wet scrubber interview and viva questions
+
+1. **What are the main particle capture mechanisms in a wet scrubber?** Inertial impaction dominates for larger particles, with interception and Brownian diffusion contributing for smaller and submicron particles.
+2. **Why is counter-current flow preferred in packed towers?** The cleanest gas meets the freshest liquid at the top, so the concentration driving force stays high along the full tower height.
+3. **What is flooding?** It is the condition where gas velocity is high enough to hold up the falling liquid and fill the bed, so towers are designed at a fraction of the flooding velocity.
+4. **Why does a venturi scrubber suit fine particles?** The high throat velocity creates a large relative velocity between gas and atomised droplets, which strengthens impaction, at the cost of high pressure drop.
+5. **Why is a bleed stream needed?** Dissolved and suspended solids build up as pollutants are absorbed, so a bleed with make-up water keeps them within limits and prevents scaling and plugging.

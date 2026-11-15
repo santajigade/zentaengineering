@@ -1,0 +1,184 @@
+---
+title: "Metal 3D Printing: Powder Bed Fusion Explained"
+description: "Metal 3D printing by powder bed fusion: how L-PBF and EBM work, supports, post-processing, materials, defects and an energy density example."
+pubDate: 2026-11-15
+reviewedDate: 2026-11-15
+discipline: manufacturing-engineering
+subcategory: additive-manufacturing
+focusKeyword: "metal 3d printing"
+image: { src: /images/featured/metal-3d-printing.webp, alt: "Metal 3D Printing: Powder Bed Fusion Explained: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [metal-3d-printing, powder-bed-fusion, slm, dmls, ebm, additive-manufacturing]
+faq:
+  - q: "What is the difference between SLM and DMLS?"
+    a: "Both are trade names for laser powder bed fusion of metals. Early DMLS machines partly sintered powder, but modern SLM and DMLS systems fully melt it, so ISO/ASTM 52900 groups them as L-PBF and the names are now used interchangeably."
+  - q: "Why do metal 3D printed parts need supports when SLS polymer parts do not?"
+    a: "Loose metal powder cannot hold up an overhang or conduct heat away fast enough, and metal parts develop high residual stress. Supports anchor the part to the build plate, resist warping and carry heat from overhanging regions."
+  - q: "Is hot isostatic pressing always required?"
+    a: "No. Stress relief is almost always needed in L-PBF, but HIP is mainly used for fatigue critical parts such as aerospace and medical components, where closing internal porosity is worth the extra cost."
+references:
+  - text: "ISO/ASTM 52900:2021, Additive manufacturing: General principles, Fundamentals and vocabulary"
+  - text: "ISO/ASTM 52911-1:2019, Additive manufacturing: Design, Part 1: Laser-based powder bed fusion of metals"
+  - text: "I. Gibson, D. Rosen, B. Stucker and M. Khorasani, Additive Manufacturing Technologies, 3rd ed., Springer, 2021"
+  - text: "T. DebRoy et al., Additive manufacturing of metallic components: Process, structure and properties, Progress in Materials Science 92 (2018) 112 to 224"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Metal 3D printing** is additive manufacturing that builds dense metal parts layer by layer from CAD data. In the most common method, powder bed fusion, a laser or electron beam selectively melts thin layers of metal powder spread by a recoater, while the build platform lowers one layer at a time inside an inert or vacuum chamber.
+
+</Key>
+
+Metal 3D printing makes complex metal parts, such as conformally cooled moulds, lattice implants and lightweight brackets, directly from a digital model with no tooling. Powder bed fusion (PBF) dominates the field, so this article explains how laser and electron beam PBF machines work, what happens after printing, and which defects engineers must control. For polymer methods such as FDM, SLA and SLS, see [3D printing technologies](/manufacturing-engineering/3d-printing-technologies/).
+
+## Metal 3D printing processes in ISO/ASTM 52900
+
+ISO/ASTM 52900 sorts additive manufacturing into seven process categories. Three of them are used for metals:
+
+- **Powder bed fusion (PBF):** thermal energy selectively fuses regions of a powder bed. Laser based PBF (L-PBF) is sold under names such as SLM (selective laser melting) and DMLS (direct metal laser sintering). Electron beam PBF (EB-PBF) is often called EBM.
+- **Directed energy deposition (DED):** a focused laser, electron beam or arc melts powder or wire as it is fed into the melt pool. It builds large parts and repairs worn components, but with coarser resolution than PBF.
+- **Binder jetting:** a print head deposits a liquid binder onto metal powder to form a fragile green part, which is then debound and sintered in a furnace. It is fast and needs no supports, but parts shrink during sintering.
+
+Within the wider [classification of manufacturing processes](/manufacturing-engineering/manufacturing-processes-classification/), all three are additive, in contrast to subtractive [CNC machining](/manufacturing-engineering/cnc-machine-working-principle/) and formative casting.
+
+## How laser powder bed fusion works
+
+<figure class="anim">
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" role="img" aria-label="Laser powder bed fusion machine: a fibre laser beam is steered by a galvo scanner through a window onto the powder bed where it melts a spot on the part; a recoater blade spreads powder from the rising feed piston across the build piston, which lowers one layer at a time, with excess going to an overflow bin; argon gas flows across the bed from an inlet on the right to an outlet on the left">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="30" y="30" width="120" height="40" rx="5" fill="#ffe9e7" />
+<rect x="290" y="30" width="60" height="40" rx="5" fill="#eef1f6" />
+<rect x="150" y="110" width="370" height="130" fill="#f3f6fa" stroke="none" />
+<path d="M150 240V110H520V240M150 240H170M260 240H280M420 240H440M500 240H520" fill="none" />
+<path d="M170 240V320H260V240M280 240V320H420V240M440 240V300H500V240" fill="none" />
+<rect x="172" y="242" width="86" height="38" fill="#f5e6c8" stroke="none" />
+<rect x="282" y="242" width="136" height="48" fill="#f5e6c8" stroke="none" />
+<rect x="442" y="280" width="56" height="18" fill="#f5e6c8" stroke="none" />
+<rect x="172" y="280" width="86" height="8" fill="#7b8794" />
+<rect x="282" y="290" width="136" height="8" fill="#7b8794" />
+<path d="M215 288V320M350 298V320" />
+</g>
+<rect x="310" y="242" width="60" height="48" fill="#13a89e" fill-opacity="0.75" stroke="#0b2545" stroke-width="1.5" />
+<path d="M300 112H340" stroke="#13a89e" stroke-width="4" />
+<path d="M305 58L335 42" stroke="#0b2545" stroke-width="3" />
+<rect x="262" y="226" width="10" height="14" fill="#0b2545" />
+<g stroke="#b42318" stroke-width="3.5"><path d="M150 50H320M320 50L338 242" /></g>
+<g stroke="#13a89e" stroke-width="3.5"><path d="M520 205H155" /></g>
+<g stroke="#f5b800" stroke-width="3.5"><path d="M276 236H430" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M150 50H320M320 50L338 242" /><path class="anim-flow-slow" d="M520 205H155" /><path class="anim-flow-slow" d="M276 236H430" /></g>
+<circle class="anim-pulse" cx="338" cy="242" r="5" fill="#f5b800" stroke="#b42318" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="2" fill="#0b2545"><path d="M200 334V318" /><path d="M195 322L200 314L205 322Z" /><path d="M370 316V332" /><path d="M365 328L370 336L375 328Z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="90" y="55" font-weight="700">Fibre laser</text>
+<text x="400" y="48">Galvo scanner</text><text x="400" y="63" font-size="11">(x and y mirrors)</text>
+<text x="230" y="100" font-size="11">Window and f-theta lens</text>
+<text x="410" y="130" font-size="11">Build chamber, argon</text>
+<text x="370" y="160" fill="#b42318" font-size="11">Laser beam</text>
+<text x="470" y="198" fill="#13a89e" font-size="11">Argon flow</text>
+<text x="570" y="209" font-size="11">Gas inlet</text>
+<text x="105" y="209" font-size="11">Gas outlet</text>
+<text x="225" y="232" font-size="11">Recoater</text>
+<text x="390" y="226" font-size="11">Melt pool</text>
+<text x="340" y="272" fill="#fff" font-weight="700">Part</text>
+<text x="215" y="265" font-size="11">Feed powder</text>
+<text x="470" y="275" font-size="11">Overflow</text>
+<text x="180" y="352" font-size="11">Feed piston rises</text>
+<text x="390" y="352" font-size="11">Build piston lowers</text>
+</g>
+</svg>
+<figcaption>Laser powder bed fusion: the scanner steers the beam over each layer while the recoater spreads fresh powder and argon sweeps fumes and spatter away.</figcaption>
+</figure>
+
+An L-PBF machine has four main systems: a high power fibre laser, a galvanometer scanner with two fast mirrors and an f-theta lens, a powder handling system (feed supply, recoater blade or roller, build piston and overflow), and a sealed chamber filled with argon or nitrogen. The process repeats the same cycle for every layer:
+
+1. **Prepare the build.** The CAD model is oriented, given support structures and sliced into layers, typically 20 to 100 µm thick. A metal build plate is fixed to the build piston and the chamber is purged with inert gas to a very low oxygen level.
+2. **Spread a layer.** The feed piston rises slightly and the recoater sweeps a thin, even layer of powder across the build area. Surplus powder falls into the overflow.
+3. **Scan the layer.** The galvo mirrors move the focused laser spot along the contour and hatch lines of the cross section. Each track melts the powder and partly remelts the layer below, so the new material fuses metallurgically with the part.
+4. **Remove by-products.** A steady laminar gas flow across the bed carries away metal vapour, condensate and spatter so they do not absorb the beam or fall onto the part.
+5. **Lower and repeat.** The build piston drops by one layer thickness and the cycle repeats until the part is complete. The part is then cooled, unpacked from the powder cake and the unused powder is sieved for reuse.
+
+## Electron beam powder bed fusion (EBM)
+
+EB-PBF uses an electron beam steered by electromagnetic coils instead of mirrors, so it can deflect very quickly. Because electrons scatter in gas, the chamber runs under **vacuum**. Before melting, each layer is preheated by a defocused beam, which lightly sinters the powder so it does not scatter from electrostatic charging. The whole build stays hot during printing.
+
+| Feature | L-PBF (SLM, DMLS) | EB-PBF (EBM) |
+| --- | --- | --- |
+| Energy source | Fibre laser | Electron beam |
+| Atmosphere | Argon or nitrogen | Vacuum |
+| Build temperature | Low to moderate plate heating | High preheat of each layer |
+| Residual stress | High, stress relief needed | Low, because the bed stays hot |
+| Resolution and surface | Finer layers and detail | Coarser powder, rougher surface |
+| Materials | Steels, aluminium, titanium, nickel alloys, cobalt chrome | Conductive alloys, notably titanium and nickel alloys |
+
+## Supports and design rules
+
+In metal PBF, supports anchor the part to the build plate, hold up overhangs and conduct heat away from them. ISO/ASTM 52911-1 gives L-PBF design guidance: downward facing surfaces at a shallow angle to the plate need support, self-supporting angles are commonly around 45° from horizontal, and holes, channels and thin walls have practical minimum sizes. Designers also add powder escape holes to hollow regions and choose an orientation that limits support volume on functional surfaces.
+
+## Post-processing after metal 3D printing
+
+- **Stress relief heat treatment:** done while the part is still on the plate, to reduce residual stress before cutting so the part does not distort.
+- **Part removal:** wire EDM or a band saw separates parts from the build plate.
+- **Support removal:** supports are cut, broken off or machined away, which leaves witness marks.
+- **Hot isostatic pressing (HIP):** high temperature and high pressure inert gas close internal pores, improving fatigue life for critical parts.
+- **Heat treatment and finishing:** solution and ageing treatments, as in [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/), then machining of critical faces, bead blasting or polishing.
+- **Inspection:** CT scanning and other [NDT methods](/materials-engineering/ndt-methods/) check for internal defects.
+
+## Materials for powder bed fusion
+
+Common alloys include stainless steels such as 316L and 17-4 PH, maraging tool steel, aluminium alloys such as AlSi10Mg, titanium alloy Ti-6Al-4V, nickel superalloys such as Inconel 625 and 718, and cobalt chrome. Powders are usually gas atomised and spherical so they flow and pack well. Rapid solidification gives a very fine microstructure, so as-built strength often equals or exceeds that of castings, but ductility and fatigue depend strongly on defects and post-processing.
+
+## Defects in metal 3D printing
+
+DebRoy et al. relate most defects to the melt pool and the thermal cycles:
+
+- **Lack of fusion porosity:** too little energy leaves irregular voids with unmelted powder between tracks or layers.
+- **Keyhole porosity:** too much energy creates a deep vapour cavity that collapses and traps round pores.
+- **Gas porosity:** gas trapped in the powder or picked up from the atmosphere forms small spherical pores.
+- **Residual stress and distortion:** steep thermal gradients and repeated heating and cooling lock in stress, causing warping, cracking or detachment from supports.
+- **Balling, spatter and roughness:** unstable melt tracks and partly fused particles on surfaces.
+
+Pores act as crack starters and cut [fatigue life](/materials-engineering/fatigue-failure/), which is why parameter control and HIP matter.
+
+## Volumetric energy density
+
+A widely used first indicator for choosing L-PBF parameters is the volumetric energy density:
+
+$$
+E = \frac{P}{v \, h \, t}
+$$
+
+where P is laser power (W), v scan speed (mm/s), h hatch spacing (mm) and t layer thickness (mm), giving E in J/mm³. Too low an E tends towards lack of fusion; too high an E tends towards keyholing. It is only a guide, because the same E can give different melt pools.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An L-PBF build uses laser power 200 W, scan speed 1000 mm/s, hatch spacing 0.1 mm and layer thickness 0.03 mm. The part is 60 mm tall with an average scanned area of 400 mm² per layer. Recoating takes 8 s per layer.</dd>
+<dt>Find</dt><dd>The volumetric energy density and an estimate of build time.</dd>
+<dt>Assumptions</dt><dd>One part on the plate; scan time = area ÷ (v × h); contour scans, jumps and gas purging ignored.</dd>
+<dt>Solution</dt><dd>E = 200 ÷ (1000 × 0.1 × 0.03) = 200 ÷ 3 = 66.7 J/mm³<br />Number of layers = 60 ÷ 0.03 = 2000<br />Scan time per layer = 400 ÷ (1000 × 0.1) = 4 s<br />Time per layer = 4 + 8 = 12 s<br />Build time = 2000 × 12 = 24 000 s = 6.7 h</dd>
+<dt>Answer</dt><dd><strong>E ≈ 66.7 J/mm³ and a build time of about 6.7 hours</strong></dd>
+<dt>Limitations</dt><dd>Energy density does not capture melt pool physics, and real build times include contours, supports and multiple parts, so machine software gives better estimates.</dd>
+</dl>
+</Example>
+
+Note that recoating takes twice the scan time here, which is why machines nest many parts on one plate.
+
+## Key formulas for metal 3D printing
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Volumetric energy density | E = P ÷ (v × h × t) | P in W, v in mm/s, h and t in mm, E in J/mm³ |
+| Number of layers | N = H ÷ t | H = part height in mm, t = layer thickness in mm |
+| Scan time per layer | t_scan = A ÷ (v × h) | A = scanned area in mm², t_scan in s |
+| Build time | T = N × (t_scan + t_recoat) | t_recoat = recoating time per layer in s |
+
+## Metal 3D printing interview and viva questions
+
+1. **What is the difference between L-PBF and EB-PBF?** L-PBF melts powder with a fibre laser in an argon or nitrogen atmosphere, while EB-PBF uses an electron beam in vacuum with a hot preheated bed, giving lower residual stress but coarser detail.
+2. **Why is inert gas used in L-PBF?** It prevents oxidation of the hot metal, and its flow across the bed removes vapour and spatter that would otherwise disturb the beam and the part.
+3. **What is the role of the recoater?** It spreads a thin, uniform layer of powder from the feed supply over the build area before each layer is scanned.
+4. **What causes lack of fusion and keyhole porosity?** Lack of fusion comes from too little energy input, and keyhole porosity from too much, which creates an unstable vapour cavity that traps pores.
+5. **Why is HIP applied to some printed parts?** Hot isostatic pressing closes internal pores using high temperature and gas pressure, improving fatigue performance of critical parts.

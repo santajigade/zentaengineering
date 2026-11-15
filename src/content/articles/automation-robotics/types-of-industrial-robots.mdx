@@ -3,6 +3,7 @@ title: "Types of Industrial Robots and Their Applications"
 description: "Types of industrial robots explained: articulated, SCARA, Cartesian, cylindrical, delta and collaborative robots, their work envelopes, payload, speed and uses."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-15
 discipline: automation-robotics
 subcategory: industrial-robotics
 focusKeyword: "types of industrial robots"
@@ -29,7 +30,7 @@ import Key from '../../../components/Key.astro';
 
 <Key title="Short answer">
 
-The main **types of industrial robots** are classified by their mechanical structure: **articulated** (rotary jointed arms, usually 6 axes), **SCARA** (fast, rigid vertically, compliant horizontally), **Cartesian or gantry** (three linear axes), **cylindrical**, **polar (spherical)**, **delta (parallel)** and **collaborative robots (cobots)** that can work alongside people. The choice depends on reach, payload, speed, accuracy, work envelope and the task.
+**Types of industrial robots** are the main mechanical designs of programmable, multi-axis manipulators, classified by how their joints are arranged. Articulated arms use rotary joints, usually six axes, SCARA robots suit fast assembly, Cartesian gantries move on three linear axes, delta robots pick light parts at high speed, and cobots work safely near people.
 
 </Key>
 
@@ -44,7 +45,7 @@ Industrial robots are programmable, multi-axis manipulators that move parts or t
 - **Repeatability:** how closely the robot returns to the same taught point, often a few hundredths of a millimetre for small robots.
 - **End effector:** the gripper, welding torch, spray gun, suction cup or tool at the end of the arm.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="270" viewBox="0 0 580 270" fill="none" role="img" aria-label="Simplified side views of four robot types: an articulated arm with rotary joints, a SCARA robot with two horizontal arms and a vertical quill, a Cartesian gantry with three linear axes, and a delta robot with three parallel arms carrying a small platform">
 <g stroke="#0b2545" stroke-width="5" stroke-linecap="round" fill="none">
 <path d="M40 210H110" /><path d="M75 210V170L115 110L150 140" /><path d="M150 140L160 160" stroke-width="3" />
@@ -52,7 +53,8 @@ Industrial robots are programmable, multi-axis manipulators that move parts or t
 <path d="M350 210V90M470 210V90M350 90H470" /><path d="M410 90V160" stroke-width="3" />
 <path d="M490 80H570" /><path d="M500 80L520 140M530 80L530 140M560 80L540 140" stroke-width="3" /><path d="M515 145H545" />
 </g>
-<g fill="#13a89e"><circle cx="75" cy="170" r="7" /><circle cx="115" cy="110" r="7" /><circle cx="150" cy="140" r="6" /><circle cx="225" cy="100" r="7" /><circle cx="285" cy="100" r="7" /><circle cx="410" cy="90" r="7" /></g>
+<g stroke="#fff" stroke-width="2" stroke-linecap="butt" fill="none"><path class="anim-flow-slow" d="M325 100V150" /><path class="anim-flow-slow" d="M350 90H470" /><path class="anim-flow-slow" d="M410 90V160" /><path class="anim-flow" d="M500 80L520 140M530 80L530 140M560 80L540 140" stroke-width="1.5" /></g>
+<g fill="#13a89e"><circle class="anim-pulse" cx="75" cy="170" r="7" /><circle class="anim-pulse anim-d1" cx="115" cy="110" r="7" /><circle class="anim-pulse anim-d2" cx="150" cy="140" r="6" /><circle class="anim-pulse" cx="225" cy="100" r="7" /><circle class="anim-pulse anim-d1" cx="285" cy="100" r="7" /><circle cx="410" cy="90" r="7" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="95" y="240">Articulated</text><text x="255" y="240">SCARA</text><text x="410" y="240">Cartesian (gantry)</text><text x="530" y="240">Delta</text>
 </g>
@@ -125,6 +127,14 @@ Most robot makers also offer simulation software for checking reach and cycle ti
 5. **Consider the environment:** clean room, food grade, washdown, explosive atmospheres.
 6. **Plan safety:** guarding, light curtains, safety rated controllers and a risk assessment to ISO 10218.
 7. **Consider integration:** controller, communication with the line [PLC](/automation-robotics/plc-hardware-selection/), vision, tools and programming effort.
+
+## Types of industrial robots interview and viva questions
+
+1. **How does ISO 8373 define an industrial robot?** As an automatically controlled, reprogrammable, multipurpose manipulator programmable in three or more axes.
+2. **Why do most articulated robots have six axes?** Six degrees of freedom let the tool reach a point in space (three) with any orientation (three).
+3. **Why is a SCARA robot well suited to inserting parts into holes?** It is stiff vertically but slightly compliant sideways, which helps pins and parts align as they are inserted, and it is fast and accurate within its cylindrical work area.
+4. **What makes a delta robot so fast?** Its motors are fixed on the base, so the moving mass of the arms and platform is tiny, allowing very high speeds and accelerations for light parts.
+5. **What safety functions let a cobot work near people?** Power and force limiting, speed and separation monitoring, hand guiding and safety rated stops, applied only after a risk assessment guided by ISO 10218 and ISO/TS 15066.
 
 ## What drives the axes
 

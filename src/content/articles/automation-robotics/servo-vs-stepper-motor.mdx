@@ -3,6 +3,7 @@ title: "Servo Motor vs Stepper Motor: Differences Explained"
 description: "Servo motor vs stepper motor compared: how each works, open and closed loop control, torque and speed, accuracy, cost and how to choose for an application."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-15
 discipline: automation-robotics
 subcategory: motion-control
 focusKeyword: "servo motor vs stepper motor"
@@ -30,7 +31,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-In **servo motor vs stepper motor**, a **stepper** moves in fixed angular steps (commonly 1.8°, 200 steps per revolution) for each pulse it receives, usually without feedback, so it is simple and cheap but can lose steps and loses torque at higher speed. A **servo** is a motor with an encoder and a drive that constantly corrects position and speed in a closed loop, giving high speed, high dynamic torque and confirmed accuracy at higher cost and complexity.
+**Servo motor vs stepper motor** is a comparison of two motion control motors. A stepper moves a fixed step, commonly 1.8°, per pulse, usually in open loop, so it is simple and cheap but can lose steps. A servo uses an encoder and drive in a closed loop, giving higher speed, dynamic torque and confirmed position.
 
 </Key>
 
@@ -54,7 +55,7 @@ Key characteristics:
 
 An industrial servo system has three parts: a motor (usually a permanent magnet synchronous AC motor), a **feedback device** (encoder or resolver) and a **servo drive**. The drive compares the commanded position and speed with the feedback and adjusts motor current in nested control loops: current (torque), velocity and position. Any error, from load changes or disturbances, is corrected within milliseconds.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="260" viewBox="0 0 580 260" fill="none" role="img" aria-label="Top: open loop stepper system where a controller sends step and direction pulses to a driver that powers the stepper motor with no feedback. Bottom: closed loop servo system where a controller sends a command to a servo drive that powers the motor, and an encoder on the motor feeds position back to the drive">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="20" y="26" text-anchor="start" font-weight="700">Stepper (open loop)</text>
@@ -72,6 +73,7 @@ An industrial servo system has three parts: a motor (usually a permanent magnet 
 </g>
 <g stroke="#0b2545" stroke-width="2" fill="none"><path d="M140 65H218M210 59L220 65L210 71M340 65H418M410 59L420 65L410 71M140 185H218M210 179L220 185L210 191M340 185H418M410 179L420 185L410 191" /></g>
 <g stroke="#13a89e" stroke-width="2" fill="none"><path d="M540 200V236H280V212" /><path d="M274 220L280 210L286 220" /></g>
+<g stroke="#ffffff" stroke-width="1.2" fill="none"><path class="anim-flow" d="M140 65H208M340 65H408M140 185H208M340 185H408" /><path class="anim-flow" d="M540 200V236H280V214" /></g>
 </svg>
 <figcaption>Stepper systems usually run open loop; servo systems close the loop with an encoder.</figcaption>
 </figure>
@@ -125,6 +127,15 @@ with T in N·m, N in rpm and P in watts. Because stepper torque falls with speed
 
 Gearboxes let a smaller motor run at higher speed with more output torque, matching either motor type to the load.
 
+## Key formulas for servo and stepper motors
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Angular speed | ω = 2πN / 60 | ω in rad/s, N in rpm |
+| Mechanical power | P = Tω | P in W, T in N·m, ω in rad/s |
+| Pulses per revolution | full steps per revolution × microsteps per step | dimensionless |
+| Step pulse frequency | pulses per revolution × N / 60 | pulses per second (Hz), N in rpm |
+
 ## How to choose
 
 **Choose a stepper motor when:**
@@ -151,5 +162,13 @@ Accurate sizing prevents both overheating and wasted cost.
 - Size for the peak torque during acceleration and the RMS torque over the duty cycle.
 - Check speed against the motor's torque speed curve, not just its rated values.
 - Add a brake for vertical axes.
+
+## Servo motor vs stepper motor interview and viva questions
+
+1. **Why does stepper torque fall as speed rises?** Winding inductance limits how quickly the current can build up at each step, so at higher step rates the current, and therefore the torque, is lower.
+2. **What happens when an open loop stepper is overloaded?** It loses steps: the rotor slips behind the field, and the controller does not know because there is no feedback.
+3. **What are the three nested control loops in a servo drive?** The current (torque) loop inside, the velocity loop around it and the position loop outermost, all closed using the encoder or resolver feedback.
+4. **What does microstepping improve, and what does it not?** It smooths motion and reduces resonance by driving the phase currents in finer increments, but the positional accuracy of each microstep under load is lower than the resolution suggests.
+5. **Why do vertical servo axes need a holding brake?** A servo holds position actively only while powered, so when power is removed a brake is needed to stop the load from falling.
 
 Both motors are controlled by a PLC or motion controller; see [PLC hardware selection](/automation-robotics/plc-hardware-selection/). They are core elements of every [mechatronic system](/automation-robotics/mechatronic-system-elements/). The electromagnetic principles behind them are shared with the [induction motor](/electrical-engineering/induction-motor-working-principle/), and motor nameplate data is explained in [motor nameplate details](https://www.instrumentationblog.in/motor-nameplate-details-explained/) on InstrumentationBlog.in.

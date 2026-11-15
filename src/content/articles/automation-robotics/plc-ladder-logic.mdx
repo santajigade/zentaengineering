@@ -3,6 +3,7 @@ title: "PLC Ladder Logic Basics with Examples"
 description: "PLC ladder logic basics: rails, rungs, contacts and coils, the scan cycle, AND and OR logic, seal-in circuits, timers, counters and a worked example."
 pubDate: 2026-11-08
 reviewedDate: 2026-11-08
+updatedDate: 2026-11-15
 discipline: automation-robotics
 subcategory: plc
 focusKeyword: "PLC ladder logic"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**PLC ladder logic** is a graphical programming language that looks like a relay wiring diagram. Two vertical rails carry imaginary power, and each horizontal rung holds input conditions (contacts) on the left and an output instruction (coil, timer or counter) on the right. Contacts in series form AND logic, contacts in parallel form OR logic, and the PLC evaluates every rung from top to bottom on each scan.
+**PLC ladder logic** is a graphical programming language, defined in IEC 61131-3, that looks like a relay wiring diagram. Each rung between two power rails holds contacts on the left and an output coil, timer or counter on the right. Series contacts give AND logic, parallel contacts give OR logic, solved rung by rung each scan.
 
 </Key>
 
@@ -78,7 +79,7 @@ More complex Boolean expressions are built by combining series and parallel bran
 
 The most important ladder pattern is the three-wire motor control circuit, also called a **seal-in** or **holding** circuit. A momentary start push button energises the motor coil, and a contact of the motor bit in parallel with the start button keeps the rung true after the button is released.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="250" viewBox="0 0 580 250" fill="none" role="img" aria-label="Two ladder rungs. Rung 1: START contact in parallel with a motor M seal-in contact, in series with STOP and overload OL contacts, driving the MOTOR coil. Rung 2: M contact enabling an on delay timer TON T1 with preset 5 seconds, whose output drives the FAN coil.">
 <g stroke="#0b2545" stroke-width="2">
 <path d="M30 20V240M550 20V240" stroke-width="4" />
@@ -88,8 +89,9 @@ The most important ladder pattern is the three-wire motor control circuit, also 
 <path d="M30 200H90M104 200H220M340 200H466M494 200H550" />
 <path d="M90 188V212M104 188V212" />
 </g>
-<circle cx="480" cy="60" r="14" fill="#ffffff" stroke="#13a89e" stroke-width="2" />
-<circle cx="480" cy="200" r="14" fill="#ffffff" stroke="#13a89e" stroke-width="2" />
+<g stroke="#ffffff" stroke-width="1.2" fill="none"><path class="anim-flow" d="M30 60H90M104 60H180M194 60H250M264 60H466" /><path class="anim-flow" d="M60 60V110H90M104 110H140V60" /><path class="anim-flow-slow" d="M30 200H90M104 200H220M340 200H466" /></g>
+<circle class="anim-pulse" cx="480" cy="60" r="14" fill="#ffffff" stroke="#13a89e" stroke-width="2" />
+<circle class="anim-pulse anim-d3" cx="480" cy="200" r="14" fill="#ffffff" stroke="#13a89e" stroke-width="2" />
 <rect x="220" y="175" width="120" height="50" rx="4" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="97" y="40">START</text>
@@ -147,5 +149,13 @@ Rung 2 in the figure uses a TON block: the fan starts only after the motor bit h
 - Comment every rung with what it does and why, not just the tag names.
 - Use interlocks for opposing outputs, such as forward and reverse contactors, both in the program and in hardware.
 - Test with forced inputs or a simulator before connecting real actuators.
+
+## PLC ladder logic interview and viva questions
+
+1. **How are AND and OR functions built in ladder logic?** AND is made by placing contacts in series on a rung, and OR by placing contacts in parallel branches. A normally closed contact gives NOT.
+2. **What are the stages of the PLC scan cycle?** The PLC reads inputs into an input image table, solves the rungs from top to bottom, writes the output image table to the output modules, then performs communication and diagnostics before repeating.
+3. **What is a seal-in circuit?** It is a start and stop rung in which a contact of the motor bit is placed in parallel with the momentary start button, so the rung stays true after the button is released until STOP or an overload breaks the series path.
+4. **Why should an output coil be written in only one rung?** Rungs are solved in order, so a later rung writing the same coil overwrites the earlier result and the actual output follows only the last rung, which makes the logic hard to follow.
+5. **What is the difference between TON and TOF timers?** A TON output turns on after its input has been true for the preset time, while a TOF output turns on with the input and stays on for the preset time after the input turns off.
 
 Ladder programs run on the CPU and I/O chosen during [PLC hardware selection](/automation-robotics/plc-hardware-selection/), and the internal CPU is a dedicated [microcontroller or microprocessor](/electronics-engineering/microcontroller-vs-microprocessor/) running the scan. Operators usually monitor the logic through an HMI or a [SCADA system](/automation-robotics/scada-system-architecture/). More PLC programming topics are collected in the [PLC category](https://www.instrumentationblog.in/category/automation/plc-programmable-logic-controller/) on InstrumentationBlog.in.

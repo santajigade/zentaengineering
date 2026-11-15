@@ -3,6 +3,7 @@ title: "Biomaterials: Types, Properties and Biocompatibility"
 description: "Biomaterials explained: metals, ceramics, polymers, composites and natural materials, properties, biocompatibility, ISO 10993 testing and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-15
 discipline: biomedical-engineering
 subcategory: biomaterials
 focusKeyword: "biomaterials"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Biomaterials** are materials designed to interact with biological systems in medical devices and implants. The main types are **metals** (titanium alloys, cobalt chromium, 316L stainless steel) for load bearing implants; **ceramics** (alumina, zirconia, hydroxyapatite, bioactive glass) for joint bearings, dental and bone repair; **polymers** (UHMWPE, PEEK, silicone, PMMA, PLA and PLGA) for bearings, soft tissue devices and degradable implants; **composites**; and **natural materials** (collagen, chitosan, decellularised tissue). Key requirements are **biocompatibility**, appropriate **mechanical properties**, **corrosion and wear resistance**, **sterilisability** and, for some, **controlled degradation**, evaluated under **ISO 10993**.
+**Biomaterials** are natural or synthetic materials designed to interact with biological systems in medical devices and implants. The main types are metals, ceramics, polymers, composites and natural materials, chosen for biocompatibility, suitable stiffness and strength, corrosion and wear resistance, sterilisability and, where needed, controlled degradation, with biological safety evaluated under ISO 10993.
 
 </Key>
 
@@ -44,7 +45,7 @@ From dental fillings and contact lenses to hip replacements, heart valves and st
 
 ## Types of biomaterials
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Total hip replacement showing biomaterials: titanium alloy femoral stem in the femur, cobalt chromium or ceramic femoral head, UHMWPE liner inside a titanium acetabular cup in the pelvis, hydroxyapatite coating on the stem surface; labels for each material">
 <path d="M150 40Q220 30 260 70Q290 100 280 130L240 130Q230 100 200 90Q170 80 150 90Z" fill="#f5e6c8" stroke="#0b2545" stroke-width="2" />
 <path d="M300 140L330 270H390L360 150Z" fill="#f5e6c8" stroke="#0b2545" stroke-width="2" />
@@ -53,6 +54,7 @@ From dental fillings and contact lenses to hip replacements, heart valves and st
 <circle cx="267" cy="140" r="22" fill="#c9d2de" stroke="#0b2545" stroke-width="2" />
 <path d="M275 160L320 175L345 250L332 252L312 185Z" fill="#7b8794" stroke="#0b2545" stroke-width="2" />
 <path d="M318 180L343 250" stroke="#13a89e" stroke-width="3" stroke-dasharray="3 3" />
+<path class="anim-flow-slow" d="M267 122V150L300 176L336 246" stroke="#fff" stroke-width="2.5" fill="none" />
 <g stroke="#0b2545" stroke-width="1"><path d="M240 60L400 40M300 112L420 85M267 140L420 130M330 200L440 185M340 230L440 230" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
 <text x="405" y="44">Pelvis (bone)</text><text x="425" y="89">Titanium shell + UHMWPE liner</text><text x="425" y="134">CoCr or ceramic head</text>
@@ -134,6 +136,22 @@ When a material is implanted, proteins adsorb within seconds, followed by an inf
 ## Manufacturing biomaterials
 
 Processing changes properties. Titanium implants may be machined, forged or 3D printed by powder bed fusion, which allows porous lattice structures that encourage bone ingrowth and lower stiffness. UHMWPE is cross-linked by radiation and then heat treated to improve wear resistance while controlling oxidation. Ceramics are pressed and sintered with tight control of grain size and porosity, since small flaws cause brittle fracture. Surface treatments such as grit blasting, acid etching, plasma spraying of hydroxyapatite and anodising tune how cells and proteins interact with the implant.
+
+## Key formulas for biomaterials
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Load sharing ratio | F_implant ÷ F_bone = (E_i × A_i) ÷ (E_b × A_b) | E = elastic modulus in GPa, A = cross-sectional area in mm² |
+| Bone share of load | F_bone ÷ F = E_b A_b ÷ (E_b A_b + E_i A_i) | F = total axial load in N shared in parallel |
+| Load carried by bone | F_bone = F × bone share | F_bone in N |
+
+## Biomaterials interview and viva questions
+
+1. **What is biocompatibility?** It is the ability of a material to perform with an appropriate host response in a specific application, so it depends on the material, device design, site and duration of contact rather than on the material alone.
+2. **What is stress shielding and how is it reduced?** A much stiffer implant carries most of the load, leaving surrounding bone under-loaded so it can lose density; lower modulus materials, porous structures and load sharing implant shapes reduce it.
+3. **Why is UHMWPE cross-linked for joint liners?** Radiation cross-linking improves wear resistance, and the heat treatment that follows controls oxidation.
+4. **How do bioinert, bioactive and bioresorbable materials differ?** Bioinert materials such as titanium and alumina cause minimal reaction and end up encapsulated in a thin fibrous layer, bioactive materials such as hydroxyapatite bond to tissue, and bioresorbable materials such as PLA dissolve as tissue heals.
+5. **Which standard guides the biological evaluation of a medical device?** ISO 10993-1, which sets out a risk based evaluation according to the nature and duration of body contact, with endpoints such as cytotoxicity, sensitisation, irritation and genotoxicity.
 
 ## Choosing biomaterials
 

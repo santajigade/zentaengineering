@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/automation-robotics/plc-hardware-selection.mdx
-src/content/articles/automation-robotics/plc-ladder-logic.mdx
-src/content/articles/automation-robotics/scada-system-architecture.mdx
-src/content/articles/automation-robotics/servo-vs-stepper-motor.mdx
-src/content/articles/automation-robotics/types-of-industrial-robots.mdx
-src/content/articles/biomedical-engineering/biomaterials-types.mdx
-src/content/articles/biomedical-engineering/biopotential-measurement-basics.mdx
-src/content/articles/biomedical-engineering/bioreactor-types.mdx
 src/content/articles/biomedical-engineering/medical-device-classification.mdx
 src/content/articles/biomedical-engineering/medical-imaging-modalities.mdx
 src/content/articles/biomedical-engineering/prosthetic-limbs.mdx

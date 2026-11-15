@@ -3,6 +3,7 @@ title: "PLC Hardware Selection: CPU, I/O Modules and Power Supply"
 description: "PLC hardware selection step by step: I/O count, digital and analog modules, CPU sizing, communication, power supply, environment, spares and a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-15
 discipline: automation-robotics
 subcategory: plc
 focusKeyword: "PLC hardware selection"
@@ -30,7 +31,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**PLC hardware selection** starts from the I/O list: count every digital and analog input and output, add 10 to 20 percent spare, then choose modules that match the signal types (24 V DC, 230 V AC, 4 to 20 mA, RTD, thermocouple). Next size the **CPU** for program memory, scan time, special functions and communication ports, then size the **power supply** from the total current of modules and field devices. Finally check environment, redundancy, certifications and spare parts support.
+**PLC hardware selection** is the process of choosing the CPU, I/O modules and power supply for a control system. Start from the I/O list, add 10 to 20 percent spare, match modules to each signal type, size the CPU for memory, scan time and communication, then size the power supply with margin.
 
 </Key>
 
@@ -38,7 +39,7 @@ A programmable logic controller (PLC) is an industrial computer that reads senso
 
 ## Parts of a PLC system
 
-<figure>
+<figure class="anim">
 <svg width="580" height="250" viewBox="0 0 580 250" fill="none" role="img" aria-label="Modular PLC on a rack: power supply module, CPU module with communication ports, digital input, digital output, analog input and analog output modules, connected to field sensors and actuators below and to an HMI or SCADA network above">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <rect x="20" y="70" width="540" height="110" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
@@ -52,6 +53,7 @@ A programmable logic controller (PLC) is an industrial computer that reads senso
 <text x="248" y="228">Switches, sensors</text><text x="336" y="244">Relays, lamps</text><text x="424" y="228">4 to 20 mA, RTD</text><text x="512" y="244">Valves, drives</text>
 </g>
 <g stroke="#0b2545" stroke-width="2"><path d="M155 36V80" /><path d="M248 180V214M336 180V230M424 180V214M512 180V230" /></g>
+<g stroke="#ffffff" stroke-width="1.2" fill="none"><path class="anim-flow-slow" d="M155 80V36" /><path class="anim-flow" d="M248 214V180M424 214V180" /><path class="anim-flow" d="M336 180V230M512 180V230" /></g>
 </svg>
 <figcaption>A modular PLC: power supply, CPU and I/O modules connected to the field and to the supervisory network.</figcaption>
 </figure>
@@ -131,5 +133,13 @@ Once installed, each analog input must be scaled from raw counts to engineering 
 - Standardise on one product family across the plant to reduce spares and training.
 - Check lifecycle status: avoid products near end of life.
 - Order recommended spares: at least one of each module type and a spare CPU for critical systems.
+
+## PLC hardware selection interview and viva questions
+
+1. **What is the first step in PLC hardware selection?** Build the I/O list: every field device with its tag, signal type and range, grouped by type and voltage. Spare capacity of 10 to 20 percent is then added before modules are chosen.
+2. **When would you choose a transistor output instead of a relay output?** For DC loads such as 24 V solenoids and for fast pulses, because transistor outputs are fast and have long life. Relay outputs suit mixed AC or DC voltages but have limited switching life and speed.
+3. **Which sensor type needs a sinking input module?** A PNP sensor is sourcing, so it must be wired to a sinking input card. An NPN sensor is sinking and needs a sourcing input card.
+4. **How is the PLC power supply sized?** Add the backplane current of the CPU and all modules, plus any 24 V DC field loads fed from the same supply, then select a unit with about 20 to 30 percent margin.
+5. **Why are separate power supplies often used for field devices?** So that a short circuit in field wiring does not pull down the supply feeding the CPU and stop the whole controller.
 
 The PLC is usually supervised by an HMI or a [SCADA system](/automation-robotics/scada-system-architecture/), while large continuous processes may use a [DCS](/automation-robotics/dcs-architecture/) instead. The electronics inside the CPU are related to a [microcontroller](/electronics-engineering/microcontroller-vs-microprocessor/).
