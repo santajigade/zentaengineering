@@ -3,6 +3,7 @@ title: "Medical Imaging Modalities: X-Ray, CT, MRI and Ultrasound"
 description: "Medical imaging modalities compared: X-ray, CT, MRI, ultrasound and nuclear imaging, physical principles, uses, radiation dose, resolution, cost and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-16
 discipline: biomedical-engineering
 subcategory: medical-imaging
 focusKeyword: "medical imaging modalities"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The main **medical imaging modalities** are **X-ray radiography**, which shows dense structures such as bone by differential X-ray absorption; **computed tomography (CT)**, which rotates an X-ray source to build cross-sectional 3D images; **magnetic resonance imaging (MRI)**, which uses strong magnetic fields and radio waves to image soft tissue with excellent contrast and no ionising radiation; **ultrasound**, which uses high frequency sound echoes for real time, portable imaging; and **nuclear medicine (SPECT and PET)**, which images function using radioactive tracers. Each differs in physics, contrast, resolution, speed, safety and cost.
+The main **medical imaging modalities** are X-ray radiography, computed tomography (CT), magnetic resonance imaging (MRI), ultrasound and nuclear medicine (SPECT and PET). X-ray and CT use X-ray attenuation, MRI uses magnetic fields and radio waves, ultrasound uses sound echoes and nuclear medicine uses radioactive tracers. They differ in contrast, resolution, speed, radiation dose and cost.
 
 </Key>
 
@@ -88,25 +89,28 @@ A radioactive tracer is injected, swallowed or inhaled and accumulates in tissue
 - **Strengths:** functional and molecular information.
 - **Limits:** lower resolution, radiation dose, tracer production logistics.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Four schematics: X-ray tube sending beam through patient to detector; CT with source and detector rotating around patient in a ring gantry; MRI with patient inside a cylindrical magnet with RF coil; ultrasound probe on skin sending pulses and receiving echoes from an organ">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="75" y="20">X-ray</text><text x="225" y="20">CT</text><text x="375" y="20">MRI</text><text x="525" y="20">Ultrasound</text></g>
 <rect x="55" y="35" width="40" height="22" rx="4" fill="#ffe9e7" stroke="#0b2545" stroke-width="1.5" />
 <path d="M75 57L45 210H105Z" fill="#f5b800" fill-opacity="0.2" stroke="#f5b800" stroke-width="1" />
 <ellipse cx="75" cy="150" rx="30" ry="18" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
 <rect x="35" y="215" width="80" height="12" fill="#0b2545" />
+<path class="anim-flow" d="M75 57V215" stroke="#b38600" stroke-width="1.5" stroke-dasharray="6 12" />
 <circle cx="225" cy="140" r="70" fill="none" stroke="#0b2545" stroke-width="8" stroke-opacity="0.3" />
 <ellipse cx="225" cy="140" rx="30" ry="18" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
 <rect x="210" y="62" width="30" height="16" rx="3" fill="#ffe9e7" stroke="#0b2545" stroke-width="1.5" />
 <path d="M190 205H260" stroke="#0b2545" stroke-width="6" />
 <path d="M225 78L195 200M225 78L255 200" stroke="#f5b800" stroke-width="1" />
 <path d="M250 50A90 90 0 0 1 300 100" stroke="#13a89e" stroke-width="2" fill="none" /><path d="M296 92l5 10 3-11z" fill="#13a89e" />
+<circle class="anim-flow-slow" cx="225" cy="140" r="70" fill="none" stroke="#ffffff" stroke-width="2" />
 <rect x="320" y="70" width="110" height="140" rx="20" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
-<rect x="340" y="120" width="70" height="40" rx="15" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<rect class="anim-blink" x="340" y="120" width="70" height="40" rx="15" fill="#ffffff" stroke="#13a89e" stroke-width="2" />
+<rect x="340" y="120" width="70" height="40" rx="15" fill="none" stroke="#0b2545" stroke-width="1.5" />
 <ellipse cx="375" cy="140" rx="25" ry="14" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
 <path d="M480 60H570" stroke="#0b2545" stroke-width="2" />
 <rect x="505" y="40" width="40" height="22" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
-<g stroke="#13a89e" stroke-width="1.5" fill="none"><path d="M510 80Q525 74 540 80" /><path d="M505 100Q525 92 545 100" /><path d="M500 120Q525 110 550 120" /></g>
+<g stroke="#13a89e" stroke-width="1.5" fill="none"><path class="anim-blink" d="M510 80Q525 74 540 80" /><path class="anim-blink anim-d1" d="M505 100Q525 92 545 100" /><path class="anim-blink anim-d2" d="M500 120Q525 110 550 120" /></g>
 <ellipse cx="525" cy="160" rx="35" ry="20" fill="#ffe9e7" stroke="#0b2545" stroke-width="1.5" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545" text-anchor="middle">
 <text x="75" y="246">Projection image</text><text x="75" y="260">ionising</text>
@@ -142,6 +146,14 @@ A radioactive tracer is injected, swallowed or inhaled and accumulates in tissue
 </dl>
 </Example>
 
+## Key formulas for medical imaging modalities
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| X-ray attenuation | I = I₀ e^(−μx) | I₀ = incident intensity, μ = linear attenuation coefficient in 1/cm, x = thickness in cm |
+| Larmor frequency | f = γ B₀ | γ = 42.58 MHz/T for hydrogen, B₀ = static field in T, f in MHz |
+| Ultrasound echo depth | d = c t ÷ 2 | c = about 1540 m/s in soft tissue, t = echo return time in s, d in m |
+
 ## Image quality basics
 
 All modalities trade off three things: spatial resolution (smallest detail), contrast (difference between tissues) and noise. Reducing dose or scan time usually raises noise, so engineers develop better detectors and reconstruction to keep images diagnostic at lower dose.
@@ -149,3 +161,11 @@ All modalities trade off three things: spatial resolution (smallest detail), con
 ## Choosing among medical imaging modalities
 
 Clinicians follow appropriateness guidelines: start with the safest, cheapest test that answers the question, such as X-ray for a suspected fracture or ultrasound for gallstones, and escalate to CT or MRI when needed. Radiation protection follows the **ALARA** principle (as low as reasonably achievable). Engineers contribute through detector physics, image reconstruction, AI image analysis ([classification, detection and segmentation](/ai-data-engineering/classification-vs-detection-vs-segmentation/)), quality assurance, equipment safety under [medical device regulation](/biomedical-engineering/medical-device-classification/), and maintenance. Together, these medical imaging modalities form the backbone of modern diagnosis.
+
+## Medical imaging modalities interview and viva questions
+
+1. **Which medical imaging modalities avoid ionising radiation?** MRI and ultrasound do not use ionising radiation. X-ray radiography, CT and nuclear medicine all involve ionising radiation.
+2. **Why does bone appear bright on an X-ray image?** Dense, high atomic number tissue such as bone has a higher attenuation coefficient, so it absorbs more X-rays and less radiation reaches the detector behind it.
+3. **What are Hounsfield units?** They are the CT pixel value scale in which water is 0, air is about −1000 and bone is about +1000.
+4. **Why is the ultrasound echo time divided by two to find depth?** The pulse travels to the reflecting boundary and back, so the measured time covers twice the depth.
+5. **What does the Larmor frequency of an MRI scanner depend on?** It is proportional to the static field strength, so a 3 T scanner imaging hydrogen works at about 128 MHz, twice the frequency of a 1.5 T scanner.

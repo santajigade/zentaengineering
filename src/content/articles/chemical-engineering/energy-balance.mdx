@@ -3,6 +3,7 @@ title: "Energy Balance in Chemical Processes Explained"
 description: "Energy balance in chemical processes explained: first law for closed and open systems, enthalpy, heat duty, reference states and a solved steam heater example."
 pubDate: 2026-11-07
 reviewedDate: 2026-11-07
+updatedDate: 2026-11-16
 discipline: chemical-engineering
 subcategory: process-fundamentals
 focusKeyword: "energy balance"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-An **energy balance** applies the first law of thermodynamics to a process: energy entering a system, minus energy leaving, equals the energy accumulated. For a steady flow process with negligible kinetic and potential energy changes it reduces to Q − W<sub>s</sub> = ΔH, where Q is heat added, W<sub>s</sub> is shaft work done by the system and ΔH is the enthalpy of the outlet streams minus that of the inlet streams.
+An **energy balance** applies the first law of thermodynamics to a process: energy in minus energy out equals energy accumulated. For a steady flow unit with negligible kinetic and potential energy changes it becomes Q − W<sub>s</sub> = ΔH, the heat added minus shaft work done equals outlet minus inlet enthalpy.
 
 </Key>
 
@@ -77,7 +78,7 @@ $$
 
 Ĥ is specific enthalpy (kJ/kg or kJ/mol). For heat exchangers, heaters, mixers and most reactors, shaft work and the kinetic and potential terms are negligible, so Q̇ = ΔḢ. For an adiabatic unit Q̇ = 0 and the balance gives the outlet temperature.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="300" viewBox="0 0 580 300" fill="none" role="img" aria-label="A dashed system boundary around a process unit. Feed streams with mass flow and specific enthalpy enter from the left, product streams leave on the right. Heat Q enters from below and shaft work Ws leaves from the top.">
 <rect x="190" y="80" width="200" height="130" stroke="#0b2545" stroke-width="2" stroke-dasharray="7 5" />
 <rect x="230" y="110" width="120" height="70" fill="#e6f6f5" stroke="#13a89e" stroke-width="2.5" />
@@ -87,6 +88,7 @@ $$
 <path d="M350 165H520M508 158L520 165L508 172" stroke="#0b2545" stroke-width="2.5" />
 <path d="M290 265V180M283 192L290 180L297 192" stroke="#f5b800" stroke-width="3" />
 <path d="M290 110V30M283 42L290 30L297 42" stroke="#0e7f78" stroke-width="3" />
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M60 125H218" /><path class="anim-flow" d="M60 165H218" /><path class="anim-flow" d="M350 125H508" /><path class="anim-flow" d="M350 165H508" /><path class="anim-flow-slow" d="M290 265V192" /><path class="anim-flow-slow" d="M290 110V42" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
 <text x="290" y="150" text-anchor="middle">Process unit</text>
 <text x="70" y="115">Feed 1: m, Ĥ</text>
@@ -136,6 +138,18 @@ A useful approach is to build a **hypothetical path**: take each species from th
 
 The equipment that carries out this duty is described in [heat exchanger types and how they work](/chemical-engineering/heat-exchanger-types/). On a plant, the duty is often checked from measured flow and temperatures; see the [temperature measurement](https://www.instrumentationblog.in/category/process-instrumentation/temperature-measurements/) and flow measurement articles on InstrumentationBlog.in.
 
+## Key formulas for the energy balance
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Closed system | Q − W = ΔU + ΔE_k + ΔE_p | Q = heat to system (kJ), W = work by system (kJ), U = internal energy (kJ) |
+| Open system, steady state | Q̇ − Ẇ_s = ΔḢ + ΔĖ_k + ΔĖ_p | rates in kW; Ẇ_s = shaft work by system |
+| Enthalpy change of streams | ΔḢ = Σ out ṁ Ĥ − Σ in ṁ Ĥ | ṁ in kg/s, Ĥ in kJ/kg |
+| Enthalpy | H = U + PV | P = pressure, V = volume; PV is the flow work |
+| Sensible heat | Q = ṁ c_p (T₂ − T₁) | c_p in kJ/(kg·K), T in °C or K |
+| Latent heat | Q = ṁ ΔĤ_v | ΔĤ_v = heat of vaporization (kJ/kg) |
+| Kinetic and potential energy | E_k = ½ m v², E_p = m g z | m in kg, v in m/s, g = 9.81 m/s², z in m |
+
 ## Applications of the energy balance
 
 - **Utility sizing:** steam, cooling water, refrigeration and fuel demand for each unit.
@@ -149,6 +163,14 @@ The equipment that carries out this duty is described in [heat exchanger types a
 - Using different reference states for the same species in inlet and outlet streams.
 - Forgetting latent heat when a stream changes phase.
 - Solving the energy balance before the material balance is complete.
+
+## Energy balance interview and viva questions
+
+1. **What does the first law say for a steady state open system?** Heat added minus shaft work done by the system equals the change in enthalpy, kinetic energy and potential energy of the streams, outlet minus inlet.
+2. **Why is flow work not written separately for flowing streams?** It is included in enthalpy, H = U + PV, so using stream enthalpies accounts for the work of pushing material across the boundary.
+3. **What is a reference state and does its choice matter?** It is a phase, temperature and pressure where specific enthalpy is taken as zero; any reference works if the same one is used for a species in every stream.
+4. **When can kinetic and potential energy terms be neglected?** For heat exchangers, reactors and columns, where they are small compared with enthalpy changes, but not for turbines, nozzles, high velocity gases or large elevation changes.
+5. **Why is the material balance solved first?** The stream flows and compositions from the material balance are the inputs needed to calculate the enthalpy of every stream.
 
 ## Related reading
 

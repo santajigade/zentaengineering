@@ -3,6 +3,7 @@ title: "Pulse Oximeter Working Principle: How SpO2 Is Measured"
 description: "Pulse oximeter working principle explained: red and infrared light, the PPG signal, ratio of ratios, calibration, accuracy limits and a worked example."
 pubDate: 2026-11-10
 reviewedDate: 2026-11-10
+updatedDate: 2026-11-16
 discipline: biomedical-engineering
 subcategory: biomedical-sensors
 focusKeyword: "pulse oximeter working principle"
@@ -31,7 +32,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The pulse oximeter working principle combines two ideas: **spectrophotometry** and **photoplethysmography**. Red light (about 660 nm) and infrared light (about 940 nm) are passed through a finger or earlobe, and a photodiode measures how much of each gets through. Only the part of the signal that pulses with each heartbeat comes from arterial blood, so the device compares the pulsatile absorption at the two wavelengths and converts that ratio into **SpO2**, the estimated arterial oxygen saturation, using an empirical calibration curve.
+The **pulse oximeter working principle** combines spectrophotometry and photoplethysmography. Red light near 660 nm and infrared light near 940 nm pass through a finger to a photodiode. The device uses only the pulsatile part of each signal, from arterial blood, and converts the red to infrared ratio of ratios into SpO2 with an empirical calibration curve.
 
 </Key>
 
@@ -71,13 +72,14 @@ This pulsatile optical signal is the **photoplethysmogram (PPG)**. By using only
 
 A typical transmission probe has a red LED and an infrared LED on one side of the finger and a single silicon photodiode on the other. Webster describes how the LEDs are switched on in turn, with a dark period in which both are off. The dark period measures ambient light so it can be subtracted. A transimpedance amplifier turns the photodiode current into a voltage, which is filtered and digitised. Since a [photodiode](/electronics-engineering/what-is-a-diode/) has a broad spectral response, multiplexing in time is what lets one detector measure both wavelengths.
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 300" width="640" height="300" fill="none" role="img" aria-label="Pulse oximeter block diagram: red 660 nanometre and infrared 940 nanometre LEDs shine through a finger onto a photodiode, which feeds a transimpedance amplifier, an ADC and processor, and a display of SpO2 and pulse rate. A plot shows the detected light signal with a large steady DC level and a small pulsatile AC component.">
-<rect x="40" y="40" width="78" height="36" rx="4" fill="#fde8e8" stroke="#b42318" stroke-width="1.5" />
-<rect x="124" y="40" width="78" height="36" rx="4" fill="#e6eef7" stroke="#0b2545" stroke-width="1.5" />
+<rect class="anim-blink" x="40" y="40" width="78" height="36" rx="4" fill="#fde8e8" stroke="#b42318" stroke-width="1.5" />
+<rect class="anim-blink anim-d2" x="124" y="40" width="78" height="36" rx="4" fill="#e6eef7" stroke="#0b2545" stroke-width="1.5" />
 <ellipse cx="121" cy="140" rx="92" ry="38" fill="#f6e3d4" stroke="#8a5a3c" stroke-width="1.5" />
 <path d="M79 76 V203" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" />
 <path d="M163 76 V203" stroke="#0b2545" stroke-width="2" stroke-dasharray="6 4" />
+<g stroke="#ffffff" stroke-width="1.2"><path class="anim-flow" d="M79 76 V195" /><path class="anim-flow" d="M163 76 V195" /><path class="anim-flow" d="M186 226 H222" /><path class="anim-flow" d="M354 226 H374" /><path class="anim-flow" d="M496 226 H514" /></g>
 <path d="M74 195 L79 205 L84 195" stroke="#b42318" stroke-width="2" />
 <path d="M158 195 L163 205 L168 195" stroke="#0b2545" stroke-width="2" />
 <rect x="56" y="207" width="130" height="38" rx="4" fill="#e7f6f5" stroke="#13a89e" stroke-width="1.5" />
@@ -143,6 +145,15 @@ $$
 
 This is suitable only for learning. Clinical devices use their own validated curves.
 
+## Key formulas for pulse oximeter working principle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Oxygen saturation | S = [HbO₂] ÷ ([HbO₂] + [Hb]) × 100% | HbO₂ = oxygenated, Hb = deoxygenated haemoglobin concentration |
+| Ratio of ratios | R = (AC_red ÷ DC_red) ÷ (AC_IR ÷ DC_IR) | AC and DC in the same units for each channel, R dimensionless |
+| Demonstration calibration | SpO₂ ≈ 110 − 25R | TI SLAA274 teaching approximation, SpO₂ in percent |
+| Pulse rate | PR = 60 ÷ T | T = time between pulses in s, PR in beats per minute |
+
 ## Accuracy and limitations
 
 ISO 80601-2-61:2017 is the international safety and performance standard for pulse oximeter equipment. It requires manufacturers to state SpO2 accuracy as a root mean square difference (Arms) against SaO2 from controlled desaturation studies, and it sets a maximum Arms of 4 percent over the range 70 to 100 percent SpO2. Factors that reduce accuracy, described in the WHO manual and the FDA safety communication, include:
@@ -193,6 +204,14 @@ Notice that the AC components are only about 1 to 2 percent of the DC levels. Th
 - Home monitoring of people with lung or heart disease on medical advice.
 - Sleep studies, where SpO2 dips are recorded overnight.
 - Wearable fitness devices using reflectance sensors, which are generally not validated to clinical standards.
+
+## Pulse oximeter interview and viva questions
+
+1. **Why does a pulse oximeter need two wavelengths?** Oxygenated and deoxygenated haemoglobin absorb red and infrared light differently, so comparing the two wavelengths separates the two forms; one wavelength cannot.
+2. **How does the device isolate arterial blood?** It uses only the AC component of the detected light, which pulses with the heartbeat and comes from the changing arterial blood volume, while tissue, bone and venous blood give a steady DC level.
+3. **Why is each AC value divided by its DC value?** The normalisation cancels the effects of LED brightness, skin thickness and detector gain before the ratio of ratios is formed.
+4. **Why are the LEDs switched on in turn with a dark period?** A single broadband photodiode can then measure each wavelength separately, and the dark period measures ambient light so it can be subtracted.
+5. **What accuracy does ISO 80601-2-61 require?** It sets a maximum Arms of 4 percent against SaO2 over the range 70 to 100 percent SpO2.
 
 ## Related reading
 

@@ -3,6 +3,7 @@ title: "Spectrophotometer Working Principle and Beer-Lambert Law"
 description: "Spectrophotometer working principle: light source, monochromator, cuvette, detector, transmittance, absorbance, Beer-Lambert law and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-16
 discipline: biomedical-engineering
 subcategory: laboratory-instrumentation
 focusKeyword: "spectrophotometer working principle"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The **spectrophotometer working principle** is to pass light of a selected **wavelength** through a sample and measure how much is absorbed. A **light source** (deuterium lamp for UV, tungsten halogen for visible, or a xenon flash lamp) produces broad spectrum light; a **monochromator** (diffraction grating and slits) selects a narrow wavelength band; the beam passes through a **cuvette** holding the sample; and a **detector** (photodiode, photodiode array or photomultiplier) measures transmitted intensity. **Transmittance** T = I/I₀ and **absorbance** A = −log₁₀T. The **Beer-Lambert law**, **A = ε l c**, relates absorbance to concentration, so unknown concentrations can be found from a calibration curve.
+The **spectrophotometer working principle** is to pass light of one selected wavelength through a sample and measure how much is absorbed. A lamp, a monochromator, a cuvette and a detector give transmittance T = I/I₀ and absorbance A = −log₁₀T, and the Beer-Lambert law A = εlc converts absorbance into concentration.
 
 </Key>
 
@@ -45,9 +46,9 @@ Examples: nucleic acids at **260 nm**, proteins at **280 nm** (from tryptophan a
 
 ## Spectrophotometer working principle: main components
 
-<figure>
+<figure class="anim">
 <svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Single beam spectrophotometer: light source emits white light through an entrance slit to a diffraction grating that disperses wavelengths; an exit slit selects one wavelength which passes through the sample cuvette with path length l; transmitted light of intensity I reaches the detector, connected to electronics and display showing absorbance">
-<circle cx="50" cy="120" r="22" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<circle class="anim-pulse" cx="50" cy="120" r="22" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
 <g stroke="#0b2545" stroke-width="3"><path d="M110 95V112M110 128V145M290 95V112M290 128V145" /></g>
 <path d="M200 70L230 170" stroke="#0b2545" stroke-width="5" />
 <g stroke="#f5b800" stroke-width="2"><path d="M72 120H110L215 115" /></g>
@@ -56,6 +57,7 @@ Examples: nucleic acids at **260 nm**, proteins at **280 nm** (from tryptophan a
 <rect x="360" y="90" width="40" height="60" fill="#e6f6f4" fill-opacity="0.7" stroke="#0b2545" stroke-width="2" />
 <path d="M400 120H460" stroke="#13a89e" stroke-width="1.5" />
 <rect x="460" y="100" width="30" height="40" fill="#0b2545" />
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M72 120H110L215 115" /><path class="anim-flow" d="M290 120H360" /><path class="anim-flow" d="M400 120H460" /></g>
 <rect x="510" y="95" width="75" height="50" rx="6" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
 <path d="M490 120H510" stroke="#0b2545" stroke-width="2" />
 <path d="M360 165H400" stroke="#7b8794" stroke-width="1.5" /><path d="M360 160V170M400 160V170" stroke="#7b8794" stroke-width="1.5" />
@@ -117,6 +119,16 @@ The law holds best for dilute solutions, monochromatic light and non-scattering 
 </dl>
 </Example>
 
+## Key formulas for the spectrophotometer working principle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Transmittance | T = I ÷ I₀ | I = transmitted intensity, I₀ = incident intensity (dimensionless, often shown as %) |
+| Absorbance | A = −log₁₀T = log₁₀(I₀ ÷ I) | A in absorbance units (dimensionless) |
+| Beer-Lambert law | A = ε l c | ε in L mol⁻¹ cm⁻¹, l in cm, c in mol/L |
+| Concentration | c = A ÷ (ε l) | mol/L |
+| Purity ratio for nucleic acids | A₂₆₀ ÷ A₂₈₀ | about 1.8 for clean double stranded DNA |
+
 ## Applications
 
 - **Clinical chemistry:** glucose, cholesterol, creatinine, enzymes and haemoglobin, often in automated analysers using colour forming reactions.
@@ -136,3 +148,11 @@ Record the instrument, wavelength, bandwidth, path length and blank used with ev
 
 
 Warm up lamps, use matched and clean cuvettes, handle them by the frosted sides, check for bubbles, use the correct blank, verify wavelength accuracy and photometric accuracy with certified reference materials such as holmium oxide filters and potassium dichromate solutions, and keep absorbance readings in the linear range. Following the spectrophotometer working principle and these practices gives fast, accurate and reliable measurements.
+
+## Spectrophotometer interview and viva questions
+
+1. **What is the function of the monochromator?** It uses an entrance slit, a diffraction grating and an exit slit to select a narrow wavelength band from the broad spectrum of the lamp, so the sample is measured at one chosen wavelength such as λmax.
+2. **Why is the measurement usually made at λmax?** The wavelength of maximum absorbance gives the highest sensitivity and the least error from small wavelength shifts.
+3. **What is the difference between single beam and double beam instruments?** A single beam instrument measures the blank and then the sample in sequence, while a double beam instrument measures sample and reference at the same time and so compensates for lamp and detector drift.
+4. **Why must quartz cuvettes be used in the UV region?** Glass and most plastics absorb UV light below about 300 to 340 nm, while quartz transmits down to about 190 nm.
+5. **When does the Beer-Lambert law deviate from linearity?** At high concentrations, with chemical changes such as pH dependent equilibria, with stray light, with wide spectral bandwidth and with turbid samples that scatter light.

@@ -3,6 +3,7 @@ title: "Medical Device Classification and Regulation Basics"
 description: "Medical device classification explained: risk classes under EU MDR, US FDA and India CDSCO, classification rules, ISO 13485, ISO 14971 and examples."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-16
 discipline: biomedical-engineering
 subcategory: medical-devices
 focusKeyword: "medical device classification"
@@ -31,7 +32,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Medical device classification** groups devices by **risk** to patients and users, which decides how strictly they are regulated before and after sale. The **EU MDR** uses **Class I, IIa, IIb and III**; the **US FDA** uses **Class I, II and III**; and **India's Medical Devices Rules 2017** use **Class A, B, C and D**, all rising in risk. Classification depends on **intended purpose**, **duration of contact**, **invasiveness**, whether the device is **active** or **implantable**, and the **body part** affected. Higher classes need more evidence, such as clinical data and third party review by a **notified body** or regulator, under quality systems such as **ISO 13485** and risk management to **ISO 14971**.
+**Medical device classification** groups devices by their risk to patients and users, which sets how strictly they are regulated. The EU MDR uses Classes I, IIa, IIb and III, the US FDA uses Classes I, II and III, and India uses Classes A to D. Intended purpose, contact duration, invasiveness and the body part affected decide the class.
 
 </Key>
 
@@ -43,14 +44,14 @@ A medical device is any instrument, apparatus, software, implant, material or ot
 
 ## Classification systems compared
 
-<figure>
+<figure class="anim">
 <svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Risk ladder comparing classification systems: from low to high risk, EU classes I, IIa, IIb, III; US FDA classes I, II, III; India classes A, B, C, D; examples at each level: bandages and stethoscopes, hearing aids and infusion sets, ventilators and bone screws, pacemakers and heart valves">
-<path d="M40 240L570 240" stroke="#0b2545" stroke-width="2" /><path d="M560 234l12 6-12 6z" fill="#0b2545" />
+<path d="M40 240L570 240" stroke="#0b2545" stroke-width="2" /><path d="M560 234l12 6-12 6z" fill="#0b2545" /><path class="anim-flow-slow" d="M40 240L560 240" stroke="#ffffff" stroke-width="1.2" />
 <g stroke="#0b2545" stroke-width="1.5">
-<rect x="60" y="180" width="115" height="50" fill="#13a89e" fill-opacity="0.35" />
-<rect x="185" y="140" width="115" height="90" fill="#f5b800" fill-opacity="0.35" />
-<rect x="310" y="100" width="115" height="130" fill="#e8822a" fill-opacity="0.45" />
-<rect x="435" y="60" width="115" height="170" fill="#b42318" fill-opacity="0.45" />
+<rect class="anim-blink" x="60" y="180" width="115" height="50" fill="#13a89e" fill-opacity="0.35" />
+<rect class="anim-blink anim-d1" x="185" y="140" width="115" height="90" fill="#f5b800" fill-opacity="0.35" />
+<rect class="anim-blink anim-d2" x="310" y="100" width="115" height="130" fill="#e8822a" fill-opacity="0.45" />
+<rect class="anim-blink anim-d3" x="435" y="60" width="115" height="170" fill="#b42318" fill-opacity="0.45" />
 </g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="117" y="200" font-weight="700">EU I / US I</text><text x="117" y="218">India A</text>
@@ -127,3 +128,11 @@ Higher classes need more:
 ## Practical tips for engineers
 
 Define the intended purpose and indications precisely early in design, since changing them later can change the class. Build regulatory requirements into the design process from the start, keep a living risk management file, plan clinical evidence needs, and design for usability (IEC 62366), because many incidents come from use errors. Choosing a slightly narrower intended purpose can sometimes lower the class and shorten time to market, but claims must then match the labelling. Medical device classification is not paperwork at the end of a project: it shapes the whole development, from [biopotential measurement](/biomedical-engineering/biopotential-measurement-basics/) front ends to [prosthetic limbs](/biomedical-engineering/prosthetic-limbs/) and imaging systems.
+
+## Medical device classification interview and viva questions
+
+1. **What is the main basis of medical device classification?** Devices are grouped by risk to patients and users, judged from the intended purpose, duration of contact, invasiveness, whether the device is active or implantable, and the body part affected.
+2. **How many classification rules does the EU MDR contain?** Annex VIII of the EU MDR has 22 rules, grouped into non-invasive, invasive, active and special rules. When several rules apply, the highest class applies.
+3. **What is the difference between a 510(k) and a PMA?** A 510(k) shows that a Class II device is substantially equivalent to a legally marketed predicate. A premarket approval (PMA) for Class III devices needs clinical evidence of safety and effectiveness.
+4. **Which standards cover the quality system and risk management of medical devices?** ISO 13485 sets the quality management system requirements, and ISO 14971 sets the risk management process across the device life cycle.
+5. **When is software regulated as a medical device?** Software is a medical device when its intended purpose is medical, such as diagnosis, monitoring or treatment decisions. In the EU, Rule 11 often places it in Class IIa or higher.

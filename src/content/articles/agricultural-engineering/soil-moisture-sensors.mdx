@@ -1,0 +1,188 @@
+---
+title: "Soil Moisture Sensors: Types and Working"
+description: "Soil moisture sensors explained: TDR, capacitance, resistance blocks, tensiometers, neutron probes, calibration, installation and a worked TDR example."
+pubDate: 2026-11-16
+reviewedDate: 2026-11-16
+discipline: agricultural-engineering
+subcategory: precision-agriculture
+focusKeyword: "soil moisture sensors"
+image: { src: /images/featured/soil-moisture-sensors.webp, alt: "Soil Moisture Sensors: Types and Working: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [soil-moisture-sensor, tdr, capacitance-sensor, tensiometer, precision-agriculture, irrigation-scheduling]
+faq:
+  - q: "Which soil moisture sensor is most accurate?"
+    a: "Properly installed TDR probes and neutron probes calibrated for the site are generally regarded as the most accurate field methods for volumetric water content, with the gravimetric oven drying method used as the reference for calibrating all of them. Low cost capacitance sensors can also be accurate if they are calibrated for the specific soil."
+  - q: "Do cheap resistive soil moisture sensors work?"
+    a: "Bare two prong resistive sensors respond to moisture, but their reading also depends strongly on salt content and temperature, and the exposed metal corrodes when powered continuously. They suit hobby projects and simple wet or dry indication rather than quantitative irrigation scheduling."
+  - q: "How deep should soil moisture sensors be installed?"
+    a: "Sensors are placed in the active root zone of the crop, usually at two or more depths, for example one in the upper root zone to trigger irrigation and one near the bottom of the roots to detect deep drainage. Good contact with undisturbed soil and no air gaps around the sensor are essential."
+references:
+  - text: "G. C. Topp, J. L. Davis and A. P. Annan, Electromagnetic determination of soil water content: Measurements in coaxial transmission lines, Water Resources Research, 16(3), 1980"
+  - text: "International Atomic Energy Agency, Field Estimation of Soil Water Content: A Practical Guide to Methods, Instrumentation and Sensor Technology, Training Course Series 30, IAEA, 2008"
+  - text: "USDA Natural Resources Conservation Service, National Engineering Handbook Part 652, Irrigation Guide, Chapter 9: Irrigation water management"
+  - text: "D. Hillel, Introduction to Environmental Soil Physics, Academic Press, 2004"
+  - text: "FAO Irrigation and Drainage Paper 56, Crop Evapotranspiration: Guidelines for Computing Crop Water Requirements, 1998"
+  - text: "ASTM D2216-19, Standard Test Methods for Laboratory Determination of Water (Moisture) Content of Soil and Rock by Mass"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Soil moisture sensors** are instruments that measure how much water the soil holds, either as volumetric water content or as soil water tension. TDR and capacitance sensors infer water content from the soil dielectric permittivity, while tensiometers and resistance blocks measure how tightly water is held, which tells growers when to irrigate.
+
+</Key>
+
+Soil moisture sensors are the eyes of a modern irrigation system. This article explains how each type of soil moisture sensor works, what it actually measures, how to calibrate and install it, and how to turn a reading into an irrigation decision.
+
+## What soil moisture sensors measure
+
+Soil water can be described in two different ways, and every sensor measures one of them.
+
+- **Water content** is the amount of water present. **Gravimetric water content** θg is the mass of water divided by the mass of oven dry soil. **Volumetric water content** θv is the volume of water per unit volume of soil (m³/m³), which is what irrigation calculations need.
+- **Soil water potential** (also called tension or suction) is the energy with which the soil holds the water, in kPa. Plants feel tension, not content. Field capacity is commonly taken near 33 kPa of suction and the permanent wilting point near 1500 kPa.
+
+The two are linked by the **soil water retention curve**, which differs for sand, loam and clay. The same 0.20 m³/m³ can be comfortably wet in a sand and severely dry in a clay, so content readings must always be interpreted against soil specific limits.
+
+The reference method is **gravimetric sampling**: a sample is weighed, dried in an oven at 110 ± 5 °C to constant mass (ASTM D2216) and weighed again. It is used mainly to calibrate field sensors. Volumetric content follows from the dry bulk density:
+
+$$
+\theta_v = \theta_g \times \frac{\rho_b}{\rho_w}
+$$
+
+## How soil moisture sensors work: the main types
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Three soil moisture sensors in a soil cross-section: a TDR probe with a voltage pulse travelling down one rod and reflecting back from the rod ends, a capacitance probe with two ring electrodes and a fringing electric field into the soil, and a tensiometer with a water filled tube, vacuum gauge on top and porous ceramic cup in the root zone from which water moves out into drier soil">
+<rect x="10" y="100" width="580" height="160" fill="#c9a66b" fill-opacity="0.35" />
+<path d="M10 100H590" stroke="#8a6d3b" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="60" y="36" width="100" height="40" rx="5" fill="#eef1f6" />
+<rect x="290" y="56" width="20" height="170" rx="4" fill="#eef1f6" />
+<rect x="486" y="70" width="18" height="150" fill="#e6f6f4" />
+<circle cx="495" cy="48" r="20" fill="#fff7e0" />
+<ellipse cx="495" cy="232" rx="16" ry="18" fill="#f5e6c8" />
+</g>
+<path d="M495 48L507 38" stroke="#b42318" stroke-width="2" />
+<path d="M95 76V100M125 76V100" stroke="#0b2545" stroke-width="2" />
+<g stroke="#7b8794" stroke-width="4"><path d="M95 100V230M125 100V230" /></g>
+<g stroke="#b42318" stroke-width="2.5" fill="none"><path class="anim-flow" d="M95 100V230" /><path class="anim-flow" d="M125 230V100" /></g>
+<g fill="#13a89e"><rect x="288" y="150" width="24" height="12" /><rect x="288" y="192" width="24" height="12" /></g>
+<g stroke="#13a89e" stroke-width="1.5" fill="none" stroke-dasharray="4 3"><path class="anim-pulse" d="M288 162C255 168 255 186 288 192M312 162C345 168 345 186 312 192" /><path class="anim-pulse" d="M288 158C235 165 235 189 288 196M312 158C365 165 365 189 312 196" /></g>
+<g stroke="#2b6cb0" stroke-width="2" fill="none"><path class="anim-flow-slow" d="M512 232H548M478 232H442M495 250V262" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="110" y="54" font-weight="700">TDR unit</text><text x="110" y="69" font-size="10">pulse and timer</text>
+<text x="110" y="20" font-weight="700">Time domain reflectometry</text>
+<text x="300" y="20" font-weight="700">Capacitance (FDR)</text>
+<text x="495" y="20" font-weight="700">Tensiometer</text>
+<text x="60" y="160" font-size="10" text-anchor="end">Pulse</text><text x="60" y="173" font-size="10" text-anchor="end">down</text>
+<text x="132" y="160" font-size="10" text-anchor="start">Echo</text><text x="132" y="173" font-size="10" text-anchor="start">up</text>
+<text x="282" y="80" font-size="10" text-anchor="end">Probe</text>
+<text x="390" y="172" font-size="10" text-anchor="start">Fringing</text><text x="390" y="185" font-size="10" text-anchor="start">field</text>
+<text x="235" y="215" font-size="10" text-anchor="end">Ring</text><text x="235" y="228" font-size="10" text-anchor="end">electrodes</text>
+<text x="548" y="52" font-size="10" text-anchor="start">Vacuum</text><text x="548" y="65" font-size="10" text-anchor="start">gauge</text>
+<text x="515" y="150" font-size="10" text-anchor="start">Water</text><text x="515" y="163" font-size="10" text-anchor="start">column</text>
+<text x="555" y="206" font-size="10" text-anchor="start">Ceramic</text><text x="555" y="219" font-size="10" text-anchor="start">cup</text>
+<text x="110" y="250" font-size="10">Travel time gives Ka</text>
+<text x="300" y="250" font-size="10">Capacitance gives θv</text>
+<text x="300" y="284" font-size="11" fill="#8a6d3b">Soil root zone</text>
+</g>
+</svg>
+<figcaption>Time domain reflectometry, capacitance and tensiometer soil moisture sensors installed in the root zone.</figcaption>
+</figure>
+
+### Dielectric sensors: why they work
+
+Most electronic soil moisture sensors exploit one physical fact: the relative permittivity (dielectric constant) of liquid water is about 80, while dry soil minerals are about 3 to 5 and air is 1. The bulk or apparent permittivity Ka of moist soil is therefore dominated by its water content. Measuring Ka gives θv with a calibration equation.
+
+### Time domain reflectometry (TDR)
+
+A TDR probe has two or three parallel steel rods acting as a transmission line. The instrument sends a fast rising voltage pulse along the cable; the pulse travels down the rods, reflects at their open ends and returns. The propagation velocity is v = c ÷ √Ka, so the round trip time over rods of length L gives the permittivity:
+
+$$
+K_a = \left(\frac{c\,t}{2L}\right)^2
+$$
+
+Topp, Davis and Annan (1980) fitted a widely used empirical equation relating Ka to volumetric water content for many mineral soils:
+
+$$
+\theta_v = -5.3\times10^{-2} + 2.92\times10^{-2}K_a - 5.5\times10^{-4}K_a^2 + 4.3\times10^{-6}K_a^3
+$$
+
+TDR is accurate, needs little soil specific calibration in mineral soils and also measures bulk electrical conductivity from the signal attenuation. Its drawbacks are cost and signal loss in very saline or heavy clay soils. Organic and volcanic soils need their own calibration.
+
+### Capacitance and FDR sensors
+
+Capacitance sensors place two electrodes (rings on an access tube, or flat plates or prongs) in the soil, which forms the dielectric of a capacitor. The capacitor is part of an oscillator circuit, so the oscillation frequency shifts as water content changes; such devices are often called **frequency domain reflectometry (FDR)** sensors. They are cheaper, use little power and suit data loggers and wireless nodes, which is why they dominate [precision agriculture](/agricultural-engineering/precision-agriculture-technologies/) networks. Their sensing volume is small and concentrated near the electrodes, so air gaps cause large errors, and readings are more affected by salinity and temperature than TDR. A soil specific calibration against gravimetric samples is recommended.
+
+### Electrical resistance blocks
+
+**Gypsum blocks** and **granular matrix sensors** contain two electrodes embedded in a porous material that comes into water equilibrium with the surrounding soil. As the soil dries, the block dries, and resistance between the electrodes rises. The reading is converted to soil water tension. They are cheap and suit the drier range but respond slowly. Bare metal prong sensors sold for hobby use measure soil resistance directly, which depends strongly on salt content, so they only give a rough wet or dry indication.
+
+### Tensiometers
+
+A tensiometer is a sealed water filled tube with a porous ceramic cup at the bottom and a vacuum gauge or pressure transducer at the top. As the soil dries, water is drawn out through the cup into the soil, creating suction in the tube that equals the soil water tension. When the soil is wetted, water flows back in and the reading falls. Tensiometers measure what the plant feels and need no soil calibration, but they only work up to about 80 kPa of suction because the water column breaks (cavitates) beyond that.
+
+### Neutron probes
+
+A neutron moisture meter lowers a radioactive source of fast neutrons into an access tube. Collisions with hydrogen nuclei, mostly in soil water, slow the neutrons, and a detector counts the slow (thermal) neutrons returning. The count rate rises with water content. It requires a radiation licence, so it is used mainly in research.
+
+## Comparison of soil moisture sensors
+
+| Sensor | Measures | Strengths | Limitations |
+| --- | --- | --- | --- |
+| TDR | θv via Ka | Accurate, little calibration in mineral soils | Cost, signal loss in saline soils |
+| Capacitance / FDR | θv via capacitance | Low cost, low power, easy logging | Small sensing volume, needs soil calibration |
+| Resistance block | Tension via resistance | Cheap, durable, dry range | Slow response, gypsum dissolves |
+| Tensiometer | Tension in kPa | Direct plant relevant reading, no calibration | Only to about 80 kPa, maintenance |
+| Neutron probe | θv via hydrogen | Large sampling volume, accurate | Radiation licence, manual readings |
+| Gravimetric | θg by mass | Reference method | Destructive, slow |
+
+## Worked example: TDR reading to irrigation depth
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A TDR probe with rods 0.20 m long measures a round trip travel time of 6.0 ns. The sensor represents a 300 mm root zone layer of a loam whose field capacity is θv = 0.40 m³/m³.</dd>
+<dt>Find</dt><dd>The apparent permittivity, the volumetric water content using the Topp equation, the water stored in the layer and the depth needed to refill it to field capacity.</dd>
+<dt>Assumptions</dt><dd>c = 3 × 10⁸ m/s; the Topp equation applies to this mineral soil; the reading is uniform over the layer.</dd>
+<dt>Solution</dt><dd>Ka = (c t ÷ 2L)² = (3 × 10⁸ × 6.0 × 10⁻⁹ ÷ 0.40)² = 4.5² = 20.25<br />θv = −0.053 + 0.0292 × 20.25 − 0.00055 × 20.25² + 0.0000043 × 20.25³<br />θv = −0.053 + 0.5913 − 0.2255 + 0.0357 = 0.348 m³/m³<br />Stored water = 0.348 × 300 mm = 104.5 mm<br />Deficit = (0.40 − 0.348) × 300 mm = 15.5 mm</dd>
+<dt>Answer</dt><dd><strong>Ka ≈ 20.3, θv ≈ 0.35 m³/m³, about 105 mm of water stored, and a net irrigation of about 15 mm refills the layer to field capacity</strong></dd>
+<dt>Limitations</dt><dd>The Topp equation can be off for clay, organic or saline soils; a single probe does not capture field variability, and gross irrigation must allow for application efficiency.</dd>
+</dl>
+</Example>
+
+The deficit then feeds straight into an irrigation schedule, as shown in [irrigation water requirement](/agricultural-engineering/irrigation-water-requirement/).
+
+## Key formulas for soil moisture sensors
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Gravimetric water content | θg = (m_wet − m_dry) ÷ m_dry | m in g, θg in g/g |
+| Volumetric water content | θv = θg × ρb ÷ ρw | ρb = dry bulk density, ρw = water density, both in g/cm³ |
+| TDR permittivity | Ka = (c t ÷ 2L)² | c = 3 × 10⁸ m/s, t = round trip time in s, L = rod length in m |
+| Topp equation | θv = −0.053 + 0.0292 Ka − 0.00055 Ka² + 0.0000043 Ka³ | θv in m³/m³, Ka dimensionless |
+| Stored water depth | D = θv × Z | Z = layer depth in mm, D in mm |
+| Deficit to field capacity | d = (θ_FC − θv) × Z | θ_FC = field capacity in m³/m³, d in mm |
+
+## Installation and calibration
+
+- **Location:** choose a spot representative of the irrigation zone, avoiding wheel tracks, low wet spots and field edges. Use at least two locations per zone.
+- **Depth:** install in the active root zone, typically one sensor in the upper root zone and one near the bottom of the roots. For drip irrigation, place sensors in the wetted bulb near an emitter.
+- **Contact:** sensors must touch undisturbed soil with no air gaps. Use the manufacturer's installation tool or a slurry of native soil, and backfill carefully.
+- **Calibration:** take gravimetric samples near the sensor at a wet and a dry state, convert to θv using bulk density, and fit a correction line to the sensor output.
+- **Signals:** field sensors usually output an analogue voltage, 4 to 20 mA, SDI-12 or Modbus RS-485 for a logger or [PLC](/automation-robotics/plc-hardware-selection/), and many connect through LoRaWAN or cellular nodes.
+- **Checks:** confirm readings rise after every irrigation or rain.
+
+## Using soil moisture sensors for irrigation
+
+Readings are compared with soil limits. Irrigation starts when the root zone has used the **management allowed depletion**, a fraction of the available water between field capacity and wilting point, and stops before the soil passes field capacity, which would only cause drainage and nutrient leaching. With tensiometers, the trigger is a tension value suited to the crop and soil. This closed loop logic is described in [automated irrigation control](/agricultural-engineering/automated-irrigation-control/), and the trade-offs between delivery methods in [drip vs sprinkler irrigation](/agricultural-engineering/drip-vs-sprinkler-irrigation/). FAO Paper 56 explains how the depletion fraction varies with crop and evaporative demand.
+
+## Soil moisture sensors interview and viva questions
+
+1. **Why can permittivity be used to measure soil water content?** Liquid water has a relative permittivity of about 80, far higher than dry soil minerals at about 3 to 5 and air at 1, so the bulk permittivity of soil depends mainly on its water content.
+2. **What does a TDR instrument actually time?** It times the round trip of a voltage pulse along the probe rods; the velocity equals c divided by the square root of Ka, so travel time gives the apparent permittivity.
+3. **What is the difference between water content and water potential?** Water content is how much water the soil holds, while water potential or tension is how strongly the soil holds it, which is what the plant roots must overcome.
+4. **Why does a tensiometer stop working in dry soil?** Beyond about 80 kPa of suction the water column in the tube cavitates and air enters through the ceramic cup, so the reading is lost until the instrument is refilled.
+5. **Why must capacitance sensors be installed without air gaps?** Their sensing volume is small and concentrated near the electrodes, and air has a permittivity of 1, so even a thin gap makes the soil appear much drier than it is.

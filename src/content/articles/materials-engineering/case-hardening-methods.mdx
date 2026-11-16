@@ -1,0 +1,179 @@
+---
+title: "Case Hardening Methods: Carburizing and Nitriding"
+description: "Case hardening methods explained: carburizing, carbonitriding, nitriding and induction hardening, case depth, Fick's law and a worked carburizing example."
+pubDate: 2026-11-16
+reviewedDate: 2026-11-16
+discipline: materials-engineering
+subcategory: heat-treatment
+focusKeyword: "case hardening"
+image: { src: /images/featured/case-hardening-methods.webp, alt: "Case Hardening Methods: Carburizing and Nitriding: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [case-hardening, carburizing, nitriding, heat-treatment, surface-hardening]
+faq:
+  - q: "What is the difference between case depth and effective case depth?"
+    a: "Total case depth is the depth to which carbon or nitrogen from the process has changed the steel, often down to where the composition equals the core. Effective case depth is the distance from the surface to a specified hardness, commonly 550 HV (about 50 HRC) for carburized parts under ISO 2639. Drawings usually specify effective case depth because it relates directly to load capacity."
+  - q: "Why is nitriding done without quenching?"
+    a: "Nitriding is carried out at about 495 to 565 °C, below the temperature at which steel transforms to austenite. Hardness comes from fine alloy nitrides formed by nitrogen diffusion, not from martensite, so no quench is needed. This is why nitrided parts show very little distortion."
+  - q: "Can any steel be case hardened?"
+    a: "Carburizing suits low carbon steels, typically about 0.1 to 0.25% carbon, including alloy grades. Nitriding needs nitride forming elements such as aluminium, chromium, molybdenum or vanadium to reach high hardness, so plain carbon steels respond poorly. Induction and flame hardening need medium carbon steel, because they only harden carbon already present."
+references:
+  - text: "ASM Handbook, Vol. 4A: Steel Heat Treating Fundamentals and Processes, ASM International, 2013"
+  - text: "J. R. Davis (ed.), Surface Hardening of Steels: Understanding the Basics, ASM International, 2002"
+  - text: "W. D. Callister Jr. and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley"
+  - text: "G. Krauss, Steels: Processing, Structure, and Performance, 2nd ed., ASM International"
+  - text: "ISO 2639:2002 Steels: Determination and verification of the depth of carburized and hardened cases"
+  - text: "F. E. Harris, Case depth: an attempt at a practical definition, Metal Progress, Vol. 44, 1943"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Case hardening** is a heat treatment that makes only the surface layer of a steel part hard and wear resistant while the core stays tough. Carburizing diffuses carbon into low carbon steel at about 900 to 950 °C, then quenches it. Nitriding diffuses nitrogen into alloy steel at about 500 to 550 °C without quenching.
+
+</Key>
+
+Case hardening gives a steel part two sets of properties at once: a hard skin that resists wear, pitting and surface fatigue, and a softer, tougher core that absorbs shock without cracking. Gears, camshafts and crankshafts rely on it. This article explains the main methods, carburizing and nitriding first, then carbonitriding, nitrocarburizing and the selective hardening processes, and shows how diffusion controls case depth.
+
+## Why case hardening is needed
+
+A through hardened high carbon steel is hard everywhere but brittle, so a gear tooth may resist wear yet crack under impact. A low carbon steel is tough but wears quickly. Case hardening solves this by changing the chemistry or the structure of only a thin surface layer, the **case**, leaving the **core** as it was.
+
+A compressive residual stress usually forms in the case as well. Because fatigue cracks start at the surface under tension, this compressive layer improves bending and contact fatigue life, which is why case hardened parts resist [fatigue failure](/materials-engineering/fatigue-failure/) much better than untreated ones.
+
+Case hardening methods fall into two groups:
+
+- **Diffusion methods** add an element to the surface: carbon (carburizing), nitrogen (nitriding), or both (carbonitriding and nitrocarburizing).
+- **Selective hardening methods** add nothing; they heat only the surface of a medium carbon steel and quench it (induction, flame, laser and electron beam hardening).
+
+## How carburizing works
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Carburizing diagram: on the left, carbon from a hot carbon rich gas atmosphere at 900 to 950 degrees Celsius diffuses into the surface of a low carbon steel part, forming a high carbon case over a tough low carbon core; on the right, a graph of carbon content versus depth falls from the surface carbon Cs to the core carbon C0, with the case depth marked">
+<rect x="20" y="20" width="260" height="60" rx="6" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<g fill="#0b2545"><circle class="anim-pulse" cx="45" cy="68" r="4" /><circle class="anim-pulse anim-d1" cx="105" cy="68" r="4" /><circle class="anim-pulse anim-d2" cx="195" cy="68" r="4" /><circle class="anim-pulse anim-d3" cx="255" cy="68" r="4" /></g>
+<rect x="20" y="100" width="260" height="55" fill="#f2c9a8" stroke="#0b2545" stroke-width="2" />
+<rect x="20" y="155" width="260" height="105" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<g stroke="#b42318" stroke-width="2.5"><path d="M75 82V114M150 82V114M225 82V114" /></g>
+<g stroke="#fff" stroke-width="2.5"><path class="anim-flow-slow" d="M75 82V114M150 82V114M225 82V114" /></g>
+<g fill="#b42318"><path d="M69 112L75 122L81 112Z" /><path d="M144 112L150 122L156 112Z" /><path d="M219 112L225 122L231 112Z" /></g>
+<path d="M340 40V250H575" stroke="#0b2545" stroke-width="2" />
+<path d="M340 220H570" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="5 4" />
+<path d="M340 70L351 88L362 105L373 121L384 137L395 151L406 164L417 175L428 184L439 193L450 199L461 204L472 209L483 212L494 214L505 216L516 217L527 218L538 219L549 219L560 220" stroke="#b42318" stroke-width="2.5" fill="none" />
+<path class="anim-blink" d="M406 164V250" stroke="#13a89e" stroke-width="2" stroke-dasharray="4 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="150" y="40" text-anchor="middle" font-weight="700">Carbon rich gas atmosphere</text>
+<text x="150" y="56" text-anchor="middle">900 to 950 °C</text>
+<text x="150" y="143" text-anchor="middle">Case (high C): carbon diffuses in</text>
+<text x="150" y="205" text-anchor="middle">Core (low C, tough)</text>
+<text x="150" y="285" text-anchor="middle">Low carbon steel part</text>
+<text x="350" y="64">Cs (surface)</text>
+<text x="565" y="212" text-anchor="end" fill="#7b8794">C0 (core)</text>
+<text x="412" y="242" fill="#13a89e" font-size="11">case depth</text>
+<text x="458" y="275" text-anchor="middle">Depth from surface</text>
+<text x="325" y="145" text-anchor="middle" transform="rotate(-90 325 145)">Carbon (wt%)</text>
+</g>
+</svg>
+<figcaption>Carburizing: carbon diffuses from the hot atmosphere into the steel surface, giving a carbon profile that falls from the surface value to the core value.</figcaption>
+</figure>
+
+**Carburizing** is the most widely used case hardening process. A low carbon steel, typically about 0.1 to 0.25% C, is heated into the austenite range, usually 850 to 950 °C, in contact with a carbon rich medium. Austenite dissolves far more carbon than ferrite, so carbon atoms diffuse inward from the surface. The surface carbon is commonly raised to about 0.8 to 1.0%.
+
+The part is then quenched, either directly from the carburizing temperature or after cooling and reheating. The high carbon case transforms to hard martensite, while the low carbon core forms a much softer, tougher structure. A low temperature temper, typically 150 to 200 °C, relieves stresses with little loss of surface hardness. Surface hardness of about 58 to 62 HRC is typical, and effective case depths for gears are often 0.5 to 1.5 mm.
+
+Carburizing variants differ in the carbon source:
+
+- **Gas carburizing:** an endothermic carrier gas enriched with natural gas or propane, with carbon potential controlled by dew point or oxygen probes. It is the standard production method.
+- **Pack carburizing:** parts are packed in a box with charcoal and an energiser. It is simple but slow and hard to control.
+- **Liquid (salt bath) carburizing:** parts are immersed in molten salt; heating is fast, but cyanide based salts need strict safety controls.
+- **Vacuum (low pressure) carburizing:** hydrocarbon gas pulses at low pressure, often followed by high pressure gas quenching. It gives clean surfaces and no intergranular oxidation.
+
+Carburizing is a high temperature process followed by a quench, so distortion is its main drawback. Gears often need grinding after treatment.
+
+## Diffusion and case depth
+
+Case depth is controlled mainly by temperature and time. Carbon transport follows Fick's second law. For a constant surface concentration and a semi infinite solid, the solution is:
+
+$$
+\frac{C_x - C_0}{C_s - C_0} = 1 - \operatorname{erf}\left(\frac{x}{2\sqrt{Dt}}\right)
+$$
+
+The diffusion coefficient rises steeply with temperature according to the Arrhenius relation:
+
+$$
+D = D_0 \exp\left(-\frac{Q_d}{RT}\right)
+$$
+
+For carbon in austenite (gamma iron), Callister lists D0 = 2.3 × 10⁻⁵ m²/s and Qd = 148 kJ/mol. A practical consequence of the error function solution is that case depth grows with the square root of time: doubling the depth needs about four times the time. Harris summarised this for total case depth as x = k√t, with k about 0.635 mm per square root hour at 925 °C.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A steel with 0.20% C is gas carburized at 925 °C (1198 K). The atmosphere holds the surface at 1.00% C. Diffusion data for carbon in austenite: D0 = 2.3 × 10⁻⁵ m²/s, Qd = 148 kJ/mol, R = 8.314 J/mol K.</dd>
+<dt>Find</dt><dd>The time needed for the carbon content to reach 0.50% at a depth of 0.6 mm.</dd>
+<dt>Assumptions</dt><dd>Constant surface carbon, semi infinite part, D independent of carbon content.</dd>
+<dt>Solution</dt><dd>Qd ÷ RT = 148000 ÷ (8.314 × 1198) = 14.86<br />D = 2.3 × 10⁻⁵ × exp(−14.86) = 8.10 × 10⁻¹² m²/s<br />(0.50 − 0.20) ÷ (1.00 − 0.20) = 0.375, so erf(z) = 1 − 0.375 = 0.625<br />From erf tables, z = 0.627<br />x ÷ (2√(Dt)) = 0.627, so √(Dt) = 0.0006 ÷ (2 × 0.627) = 4.78 × 10⁻⁴ m<br />t = (4.78 × 10⁻⁴)² ÷ 8.10 × 10⁻¹² = 28 240 s</dd>
+<dt>Answer</dt><dd><strong>About 28 200 s, or roughly 7.8 hours at 925 °C</strong></dd>
+<dt>Limitations</dt><dd>Real cycles use boost and diffuse stages, D varies with carbon content, and heating time is extra. Production cycles are set from furnace data and confirmed by hardness traverses.</dd>
+</dl>
+</Example>
+
+## How nitriding works
+
+**Nitriding** diffuses nitrogen into the steel surface at about 495 to 565 °C, which is below the lower critical temperature, so the steel stays ferritic and never becomes austenite. Nitrogen combines with alloying elements such as aluminium, chromium, molybdenum and vanadium to form very fine, hard nitrides. Hardness comes from these precipitates, so no quench is needed.
+
+A nitrided case has two zones:
+
+- **Compound layer (white layer):** a thin outer layer of iron nitrides, epsilon (Fe2-3N) and gamma prime (Fe4N). It improves wear and corrosion resistance but can be brittle if too thick.
+- **Diffusion zone:** below it, nitrogen in solution and fine alloy nitrides provide the hardened depth and the compressive stress.
+
+Parts are normally hardened and tempered before nitriding, with a tempering temperature above the nitriding temperature so the core stays stable. Because the process is slow and the temperature low, nitrided cases are shallower than carburized ones, usually well under 1 mm even after cycles lasting tens of hours. Aluminium bearing nitriding steels reach very high surface hardness, around 900 to 1100 HV.
+
+Nitriding variants:
+
+- **Gas nitriding:** dissociating ammonia supplies nitrogen. The nitriding potential is controlled to manage the white layer.
+- **Salt bath (liquid) nitriding:** molten salts at similar temperatures; short cycles, mostly used as nitrocarburizing.
+- **Plasma (ion) nitriding:** a glow discharge in a nitrogen and hydrogen mixture under vacuum. It allows masking of areas, lower temperatures and close control of the compound layer.
+
+With no phase change and no quench, distortion is very small, so nitriding is often a final operation on finished parts such as crankshafts and dies.
+
+## Other case hardening methods
+
+**Carbonitriding** is a modified gas carburizing process that adds ammonia, so both carbon and nitrogen enter the surface. It runs at lower temperatures, typically 760 to 870 °C, and produces shallower cases, about 0.075 to 0.75 mm. Nitrogen increases hardenability of the case, allowing oil quenching of plain carbon steels with less distortion.
+
+**Ferritic nitrocarburizing** adds nitrogen and some carbon at about 550 to 580 °C, below the austenite range. It forms a thin compound layer with good wear and scuffing resistance and is widely used on mass produced low carbon parts.
+
+**Induction and flame hardening** heat only the surface of a medium carbon steel above its transformation temperature and quench it at once. No element is added, so the steel must already hold enough carbon, typically 0.3 to 0.6%. Induction coils give fast, repeatable, localised hardening of shafts, gear teeth and rails. These follow the same principles described in [heat treatment of steel](/materials-engineering/heat-treatment-of-steel/).
+
+## Comparison of case hardening methods
+
+| Method | Element added | Typical temperature | Typical case depth | Quench | Distortion |
+| --- | --- | --- | --- | --- | --- |
+| Carburizing | Carbon | 850 to 950 °C | 0.5 to 1.5 mm effective | Yes | Moderate to high |
+| Carbonitriding | Carbon and nitrogen | 760 to 870 °C | 0.075 to 0.75 mm | Yes, often oil | Moderate |
+| Nitriding | Nitrogen | 495 to 565 °C | Usually under 1 mm | No | Very low |
+| Ferritic nitrocarburizing | Nitrogen and carbon | 550 to 580 °C | Thin compound layer | No | Low |
+| Induction or flame | None | Above Ac3, surface only | Set by power and time | Yes | Low to moderate |
+
+Choice depends on the steel, the load and the allowable distortion. Heavily loaded gears are usually carburized; precision parts that must stay dimensionally stable are nitrided; large shafts made of medium carbon steel are induction hardened. The choice of steel grade is covered in [types of steel](/materials-engineering/types-of-steel/), and the carbon ranges come from the [iron-carbon phase diagram](/materials-engineering/iron-carbon-phase-diagram/).
+
+## Measuring case depth
+
+ISO 2639 defines effective case depth for carburized parts as the distance from the surface to the point where hardness falls to 550 HV. It is measured with a microhardness traverse on a sectioned test piece cut from the part or a witness coupon processed in the same load. Surface hardness is also checked on the part, and metallography looks for defects such as carbide networks. These checks sit alongside the wider [mechanical properties of materials](/materials-engineering/mechanical-properties-of-materials/) tests used in quality control.
+
+## Key formulas for case hardening
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Concentration profile (Fick's second law) | (Cx − C0) ÷ (Cs − C0) = 1 − erf(x ÷ 2√(Dt)) | Cx, C0, Cs in wt%; x in m; D in m²/s; t in s |
+| Diffusion coefficient | D = D0 exp(−Qd ÷ RT) | D0 in m²/s; Qd in J/mol; R = 8.314 J/mol K; T in K |
+| Case depth versus time | x = k√t | k is a temperature dependent constant; about 0.635 mm per square root hour at 925 °C for total case depth |
+
+## Case hardening interview and viva questions
+
+1. **What is case hardening?** It is a heat treatment that hardens only the surface layer of a steel part, giving wear and fatigue resistance, while the core remains softer and tougher.
+2. **Why is carburizing done in the austenite range?** Austenite can dissolve much more carbon than ferrite, and diffusion is faster at 850 to 950 °C, so carbon can enter the surface in practical times.
+3. **Why does nitriding cause less distortion than carburizing?** Nitriding runs at about 495 to 565 °C with no phase change and no quench, so thermal and transformation stresses are small.
+4. **How does case depth depend on time?** Diffusion depth is proportional to the square root of time, so doubling the case depth needs roughly four times the carburizing time at the same temperature.
+5. **What is effective case depth?** It is the depth from the surface to a specified hardness, 550 HV for carburized cases under ISO 2639, measured by a microhardness traverse.

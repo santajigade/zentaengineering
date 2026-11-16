@@ -3,6 +3,7 @@ title: "Distillation Column Working Principle and Parts"
 description: "Distillation column working principle explained: relative volatility, trays, packing, condenser, reflux and reboiler, plus Fenske and McCabe-Thiele."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-16
 discipline: chemical-engineering
 subcategory: mass-transfer
 focusKeyword: "distillation column working principle"
@@ -30,7 +31,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**Distillation column working principle:** a liquid mixture is separated by repeatedly vaporising and condensing it. Vapour rising from a reboiler at the bottom meets liquid flowing down from a condenser at the top. On every tray or section of packing, the more volatile component moves into the vapour and the less volatile into the liquid. The top product (distillate) is rich in the light component, and the bottom product in the heavy component.
+The **distillation column working principle** is repeated vaporisation and condensation. Vapour rising from the reboiler meets liquid reflux falling from the condenser, and on every tray or packed section the more volatile component moves into the vapour. The distillate leaving the top is rich in the light component; the bottoms is rich in the heavy component.
 
 </Key>
 
@@ -52,7 +53,7 @@ For a binary mixture this gives the equilibrium curve y = αx / (1 + (α − 1)x
 
 ## Parts of a distillation column
 
-<figure>
+<figure class="anim">
 <svg width="540" height="380" viewBox="0 0 540 380" fill="none" role="img" aria-label="Distillation column with trays; feed enters at the middle; vapour from the top goes to a condenser and reflux drum, part of the liquid returns as reflux and the rest leaves as distillate; liquid at the bottom goes to a reboiler which returns vapour to the column, and bottoms product leaves">
 <rect x="200" y="30" width="80" height="320" rx="38" fill="#eef1f6" stroke="#0b2545" stroke-width="2.5" />
 <path d="M206 80H262M218 110H274M206 140H262M218 170H274M206 230H262M218 260H274M206 290H262" stroke="#13a89e" stroke-width="3" />
@@ -75,6 +76,7 @@ For a binary mixture this gives the equilibrium curve y = αx / (1 + (α − 1)x
 <text x="296" y="252" font-size="13" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Vapour</text>
 <path d="M390 320H500" stroke="#0b2545" stroke-width="2.5" /><path d="M492 313L502 320L492 327" stroke="#0b2545" stroke-width="2.5" />
 <text x="430" y="344" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Bottoms</text>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M120 200H190" /><path class="anim-flow" d="M240 30V14H380V40" /><path class="anim-flow" d="M380 76V100" /><path class="anim-flow" d="M360 134V158H290" /><path class="anim-flow" d="M400 134V170H492" /><path class="anim-flow-slow" d="M240 350V366H360V330" /><path class="anim-flow" d="M360 290V262H290" /><path class="anim-flow" d="M390 320H492" /></g>
 <text x="100" y="110" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Rectifying</text>
 <text x="100" y="128" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">section</text>
 <text x="100" y="270" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Stripping</text>
@@ -125,6 +127,18 @@ $$
 </dl>
 </Example>
 
+## Key formulas for the distillation column working principle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Raoult's law | pᵢ = xᵢ Pᵢˢᵃᵗ | pᵢ = partial pressure (kPa), xᵢ = liquid mole fraction, Pᵢˢᵃᵗ = pure component vapour pressure (kPa) |
+| Dalton's law | yᵢ = pᵢ ÷ P | yᵢ = vapour mole fraction, P = total pressure (kPa) |
+| Relative volatility | α = (y_A ÷ x_A) ÷ (y_B ÷ x_B) ≈ P_Aˢᵃᵗ ÷ P_Bˢᵃᵗ | dimensionless |
+| Binary equilibrium curve | y = α x ÷ [1 + (α − 1) x] | mole fractions of the light component |
+| Reflux ratio | R = L ÷ D | L = reflux flow, D = distillate flow (mol/h) |
+| Overall material balance | F = D + B and F z_F = D x_D + B x_B | F, D, B in mol/h; z_F, x_D, x_B mole fractions |
+| Fenske equation | N_min = ln[(x_D ÷ (1 − x_D)) × ((1 − x_B) ÷ x_B)] ÷ ln α | minimum theoretical stages at total reflux |
+
 ## Types of distillation
 
 - **Batch distillation:** a charge is boiled and products taken off over time; flexible for small multiproduct plants.
@@ -136,3 +150,11 @@ $$
 ## Operation and control
 
 Columns are controlled by managing the energy balance (reboiler duty), material balance (distillate and bottoms flows) and pressure. Key measurements include column pressure and differential pressure across the trays, which warns of flooding, tray temperatures, which indicate composition, and the levels of the reflux drum and column base. [DP transmitters](https://www.instrumentationblog.in/dp-transmitter-level-measurement/) are widely used for those levels. Common problems are flooding (too much vapour or liquid), weeping (too little vapour), foaming and fouling of trays and reboilers. Overall energy use can be reduced by heat integration with [pinch analysis](/chemical-engineering/pinch-analysis/).
+
+## Distillation column interview and viva questions
+
+1. **Why does temperature fall from the bottom to the top of a column?** The top is rich in the lighter, lower boiling component and the bottom in the heavier, higher boiling component.
+2. **What happens at total reflux and at minimum reflux?** Total reflux, with no product taken, needs the minimum number of stages given by the Fenske equation, while minimum reflux would need an infinite number of stages.
+3. **What reflux ratio is used in practice?** About 1.2 to 1.5 times the minimum reflux, as a trade off between capital cost for more stages and energy cost for more reflux and reboiler duty.
+4. **How are ideal stages converted into real trays or packed height?** Actual trays equal ideal stages divided by the overall tray efficiency, and packed height equals ideal stages multiplied by the HETP.
+5. **What are flooding and weeping?** Flooding is caused by too much vapour or liquid traffic and is warned of by rising differential pressure, while weeping occurs when vapour flow is too low to hold liquid on the trays.

@@ -1,0 +1,193 @@
+---
+title: "Marine Boiler Types and Working: Fire Tube and Water Tube"
+description: "Marine boiler types explained: fire tube, water tube, exhaust gas and composite boilers, how each works, mountings, water treatment and an example."
+pubDate: 2026-11-16
+reviewedDate: 2026-11-16
+discipline: marine-engineering
+subcategory: auxiliary-systems
+focusKeyword: "marine boiler"
+image: { src: /images/featured/marine-boiler-types.webp, alt: "Marine Boiler Types and Working: Fire Tube and Water Tube: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [marine-engineering, marine-boiler, steam, exhaust-gas-economiser, engine-room]
+faq:
+  - q: "Why does a motor ship need a boiler if it has a diesel engine?"
+    a: "The diesel engine drives the propeller, but the ship still needs steam for heating heavy fuel oil in tanks, settling and service tanks and purifier heaters, for heating cargo on many tankers, for driving cargo pump turbines on crude carriers, and for accommodation services. An oil fired auxiliary boiler, an exhaust gas economiser or a composite boiler supplies this steam."
+  - q: "What is the difference between a fire tube and a water tube marine boiler?"
+    a: "In a fire tube boiler the hot combustion gases pass through tubes surrounded by water inside a large shell. In a water tube boiler the water and steam flow inside the tubes and the hot gases pass over the outside. Water tube boilers suit higher pressures and outputs, while fire tube boilers hold a large water volume and are simple and tolerant of load changes."
+  - q: "Why is boiler water treatment so important on ships?"
+    a: "Hardness salts form scale that insulates tube surfaces, causing overheating and tube failure, while dissolved oxygen and low alkalinity cause corrosion and pitting. Seawater contamination from condenser leaks makes this worse. Regular tests, chemical dosing and blowdown keep the water within the limits set by the boiler maker and the chemical supplier."
+references:
+  - text: "H. D. McGeorge, Marine Auxiliary Machinery, 7th ed., Butterworth-Heinemann"
+  - text: "D. A. Taylor, Introduction to Marine Engineering, 2nd ed., Butterworth-Heinemann"
+  - text: "J. Cowley (ed.), The Running and Maintenance of Marine Machinery, 6th ed., Institute of Marine Engineers"
+  - text: "L. Jackson and T. D. Morton, Reed's Marine Engineering and Technology, Volume 8: General Engineering Knowledge for Marine Engineers, Adlard Coles Nautical"
+  - text: "IMO SOLAS Consolidated Edition, Chapter II-1, Part C, Regulation 32: Steam boilers and boiler feed systems"
+  - text: "G. F. C. Rogers and Y. R. Mayhew, Thermodynamic and Transport Properties of Fluids (SI units), 5th ed., Blackwell"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+A **marine boiler** is a closed pressure vessel on a ship that burns fuel or uses engine exhaust heat to turn feed water into steam. The two main types are **fire tube boilers**, with hot gas inside water surrounded tubes, and **water tube boilers**, with water inside gas heated tubes. Exhaust gas boilers recover engine waste heat.
+
+</Key>
+
+A marine boiler supplies the steam a ship needs for heating fuel, cargo and accommodation, and on steam turbine ships for propulsion itself. This article explains the main types, their mountings, water treatment and efficiency.
+
+## Why ships need a marine boiler
+
+Most merchant ships today are driven by a [two-stroke marine diesel engine](/marine-engineering/two-stroke-marine-diesel-engine/), yet nearly all of them still carry a boiler. Heavy fuel oil is too viscous to pump or burn cold, so storage, settling and service tanks are steam heated, and the fuel is heated again before the purifiers and the engine. Tankers heat viscous cargoes, and crude carriers often drive their cargo pumps with steam turbines, which needs a large boiler plant.
+
+On steam turbine ships, such as many older LNG carriers, large water tube boilers raise high pressure superheated steam for the main turbines. On motor ships the boiler is an auxiliary, one of the items of [ship auxiliary machinery](/marine-engineering/ship-auxiliary-machinery/) in the engine room, and much of its steam can come free from the main engine exhaust while at sea.
+
+## Fire tube vs water tube marine boiler
+
+All marine boilers transfer heat from hot combustion gas to water by radiation in the furnace and by convection over tube surfaces, as described in [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/). The difference between the two families is which side of the tube wall carries the water.
+
+<figure class="anim">
+<svg width="640" height="280" viewBox="0 0 640 280" fill="none" role="img" aria-label="Fire tube boiler and water tube boiler compared: in the fire tube boiler hot gas flows from the burner through the furnace to the combustion chamber, back through tubes surrounded by water to the smoke box and up the funnel, with steam leaving the steam space at the top; in the water tube boiler gas rises from the burner in the furnace and flows across a bank of tubes to the uptake, while water circulates down the cooler downcomer tubes to the water drum and up the heated riser tubes to the steam drum, where steam leaves">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="160" y="22">Fire tube boiler</text><text x="475" y="22">Water tube boiler</text></g>
+<rect x="40" y="70" width="240" height="150" rx="30" fill="#e3effb" stroke="#0b2545" stroke-width="2" />
+<path d="M48 105H272" stroke="#2f6fb5" stroke-width="1.5" />
+<rect x="45" y="71" width="230" height="33" rx="20" fill="#f4f6f9" />
+<rect x="60" y="172" width="185" height="28" rx="12" fill="#fde7d9" stroke="#0b2545" stroke-width="1.5" />
+<rect x="245" y="115" width="25" height="90" rx="4" fill="#fde7d9" stroke="#0b2545" stroke-width="1.5" />
+<rect x="15" y="112" width="25" height="50" fill="#e4e7eb" stroke="#0b2545" stroke-width="1.5" />
+<rect x="19" y="48" width="17" height="64" fill="#e4e7eb" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="1.2"><path d="M40 125H245M40 140H245M40 155H245" /></g>
+<path d="M160 70V45" stroke="#0b2545" stroke-width="3" />
+<circle class="anim-pulse" cx="78" cy="186" r="9" fill="#f08c00" />
+<path d="M85 186H257V140H28V52" stroke="#d9480f" stroke-width="2.5" />
+<path class="anim-flow" d="M85 186H257V140H28V52" stroke="#fff" stroke-width="2.5" />
+<path class="anim-flow-slow" d="M160 70V45" stroke="#fff" stroke-width="2" />
+<rect x="340" y="110" width="130" height="130" fill="#fde7d9" stroke="#0b2545" stroke-width="1.5" />
+<rect x="440" y="60" width="150" height="40" rx="20" fill="#e3effb" stroke="#0b2545" stroke-width="2" />
+<rect x="470" y="210" width="110" height="30" rx="15" fill="#e3effb" stroke="#0b2545" stroke-width="2" />
+<g stroke="#2f6fb5" stroke-width="3"><path d="M485 210V100M505 210V100M545 100V210M562 100V210" /></g>
+<g stroke="#fff" stroke-width="2"><path class="anim-flow-slow" d="M485 210V100M505 210V100" /><path class="anim-flow-slow" d="M545 100V210M562 100V210" /></g>
+<path d="M470 60V35" stroke="#0b2545" stroke-width="3" />
+<path class="anim-flow-slow" d="M470 60V35" stroke="#fff" stroke-width="2" />
+<circle class="anim-pulse" cx="365" cy="222" r="9" fill="#f08c00" />
+<path d="M365 212V135H605V32" stroke="#d9480f" stroke-width="2.5" />
+<path class="anim-flow" d="M365 212V135H605V32" stroke="#fff" stroke-width="2.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="168" y="52">Steam out</text><text x="42" y="58">Funnel</text>
+<text x="160" y="94" text-anchor="middle">Steam space</text>
+<text x="150" y="168" text-anchor="middle" fill="#2f6fb5">Water around tubes</text>
+<text x="150" y="214" text-anchor="middle" font-size="10">Furnace tube</text>
+<text x="160" y="242" text-anchor="middle">Hot gas inside tubes,</text><text x="160" y="257" text-anchor="middle">water outside</text>
+<text x="478" y="42">Steam out</text><text x="598" y="26" text-anchor="middle">Uptake</text>
+<text x="515" y="84" text-anchor="middle">Steam drum</text>
+<text x="525" y="229" text-anchor="middle" font-size="10">Water drum</text>
+<text x="415" y="185" text-anchor="middle">Furnace</text>
+<text x="462" y="160" text-anchor="end" fill="#2f6fb5">Risers</text>
+<text x="568" y="175" fill="#2f6fb5">Down</text><text x="568" y="188" fill="#2f6fb5">comers</text>
+<text x="475" y="262" text-anchor="middle">Water and steam inside tubes, hot gas outside</text>
+</g>
+</svg>
+<figcaption>Fire tube and water tube marine boilers (schematic). Orange lines show hot gas flow; blue tubes show natural water circulation in the water tube boiler.</figcaption>
+</figure>
+
+### Fire tube boilers
+
+In a fire tube boiler a large cylindrical shell is mostly filled with water. Fuel burns in a furnace tube near the bottom, the hot gas turns in a combustion chamber at the back, and then returns through many small tubes to a smoke box at the front before leaving up the funnel. Steam collects in the space above the water.
+
+The classic example is the horizontal **Scotch marine boiler**. On modern motor ships, **vertical fire tube boilers**, such as the Cochran type, are common for auxiliary duty because they take little floor space.
+
+Their large water volume rides out sudden load changes, but the thick shell limits pressure and output, and they are slow to raise steam from cold.
+
+### Water tube boilers
+
+In a water tube boiler the water and steam flow inside tubes and the hot gas passes over the outside. A typical two drum design has a **steam drum** at the top and a **water drum** at the bottom, joined by a bank of tubes. Furnace walls are lined with water cooled tubes that absorb radiant heat.
+
+Circulation is usually **natural**. Tubes nearest the flame (risers) are heated strongly, so the water in them partly turns to steam and the less dense mixture rises to the steam drum. Cooler tubes further along the gas path (downcomers) carry denser water down to the water drum. This density difference drives continuous circulation without a pump.
+
+Small diameter tubes withstand high pressure with thin walls, and steam is raised quickly. Large marine designs, such as the D type, often add a **superheater** to raise the steam temperature above saturation for turbines, and an **economiser** to preheat feed water using the leaving gas. The price is a small water content, so water level control must be fast and accurate.
+
+## Exhaust gas and composite marine boilers
+
+A large diesel engine rejects a great deal of heat in its exhaust. An **exhaust gas economiser** (also called an exhaust gas boiler) is a bank of finned or plain tubes in the engine uptake. Feed water is pumped through the tubes, usually from the oil fired boiler's drum, and returns as a steam and water mixture, so at sea the oil fired burner can often stay off.
+
+A **composite boiler** combines an oil fired furnace and an exhaust gas section in one shell, so either heat source, or both, can raise steam. It saves space and cost on smaller ships.
+
+Two problems need attention in exhaust gas units. Soot from the diesel exhaust builds up on tube surfaces, reducing heat transfer and, if it ignites, causing a **soot fire** that can melt tubes. Regular soot blowing or water washing prevents this. Also, the gas must not be cooled below the acid dew point, or sulphuric acid condenses and corrodes the cold end.
+
+## Main types of marine boiler at a glance
+
+| Type | Water and gas sides | Typical use | Main strength | Main limitation |
+| --- | --- | --- | --- | --- |
+| Scotch fire tube | Gas in tubes, water in shell | Older ships, auxiliary steam | Large water volume, simple | Heavy, slow to raise steam |
+| Vertical fire tube | Gas in tubes, water in shell | Auxiliary boiler on motor ships | Compact footprint | Limited pressure and output |
+| Two drum water tube (D type) | Water in tubes, gas outside | Steam turbine ships, large tankers | High pressure, fast steaming | Needs careful water control |
+| Exhaust gas economiser | Water in tubes, exhaust outside | Waste heat recovery at sea | Free steam from exhaust | Soot fires, acid corrosion |
+| Composite | Oil fired and exhaust sections | Smaller motor ships | One unit, two heat sources | Compromise design |
+
+## Boiler mountings and safety
+
+SOLAS Chapter II-1, Regulation 32 requires every boiler and unfired steam generator to have at least two safety valves of adequate capacity, unless the Administration accepts one, and requires oil fired boilers intended to run without manual supervision to shut off fuel and give an alarm on low water level, air supply failure or flame failure. Typical mountings described by McGeorge and Reed's include:
+
+- **Safety valves**, set to lift at or below the design pressure.
+- **Water level gauge glasses** and remote level indicators.
+- **Main steam stop valve** and auxiliary stop valves.
+- **Feed check valves**, a non return valve on each feed line.
+- **Blowdown valves**, surface and bottom, to remove dissolved solids and sludge.
+- **Pressure gauge**, air vent, sampling cock and salinometer connection.
+
+Like other [pressure vessels](/chemical-engineering/pressure-vessels-basics/), boilers are built and surveyed under classification society rules.
+
+## Feed water treatment
+
+Feed water quality decides boiler life. Hardness salts form **scale** that insulates tubes, so the metal runs hotter and may bulge or rupture. Dissolved oxygen and low alkalinity cause **corrosion** and pitting. Even a small seawater leak in a condenser contaminates the system. Ships therefore use distilled make up water, degasification, chemical dosing (alkalinity builders, phosphates, oxygen scavengers) and regular **blowdown**, with daily tests for chloride, alkalinity and treatment chemical levels. The general ideas mirror shore [water treatment processes](/environmental-engineering/water-treatment-process/).
+
+## Marine boiler efficiency and equations
+
+Boiler efficiency is the useful heat given to the steam divided by the heat released by the fuel:
+
+$$
+\eta_b = \frac{\dot m_s\,(h_s - h_{fw})}{\dot m_f \times GCV}
+$$
+
+where the steam flow and fuel flow are in kg/h, the steam and feed water enthalpies are in kJ/kg from steam tables, and GCV is the gross calorific value of the fuel in kJ/kg. This follows from the steady flow energy equation in the [laws of thermodynamics](/mechanical-engineering/laws-of-thermodynamics/).
+
+Different boilers are compared by **equivalent evaporation from and at 100 °C**: the mass of water at 100 °C that the same heat would evaporate to dry saturated steam at 100 °C, using a latent heat of 2257 kJ/kg:
+
+$$
+m_e = \frac{\dot m_s\,(h_s - h_{fw})}{2257}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An oil fired auxiliary boiler produces 2000 kg/h of dry saturated steam at 8 bar absolute. Feed water enters at 60 °C. Fuel consumption is 150 kg/h with a gross calorific value of 42 700 kJ/kg.</dd>
+<dt>Find</dt><dd>Boiler efficiency and equivalent evaporation from and at 100 °C.</dd>
+<dt>Assumptions</dt><dd>Steady operation; steam tables give h_s = 2768.3 kJ/kg at 8 bar dry saturated and h_fw = 251.2 kJ/kg for water at 60 °C; blowdown losses ignored.</dd>
+<dt>Solution</dt><dd>Heat to steam = 2000 × (2768.3 − 251.2) = 2000 × 2517.1 = 5 034 200 kJ/h<br />Heat from fuel = 150 × 42 700 = 6 405 000 kJ/h<br />Efficiency = 5 034 200 ÷ 6 405 000 = 0.786<br />Equivalent evaporation = 5 034 200 ÷ 2257 = 2230 kg/h</dd>
+<dt>Answer</dt><dd><strong>Boiler efficiency about 78.6%; equivalent evaporation about 2230 kg/h from and at 100 °C</strong></dd>
+<dt>Limitations</dt><dd>The fuel figures are illustrative; real efficiency depends on excess air, flue gas temperature, fouling and blowdown, and should be checked against measured data.</dd>
+</dl>
+</Example>
+
+## Key formulas for marine boiler
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Heat to steam | Q = ṁ_s × (h_s − h_fw) | ṁ_s in kg/h, enthalpies in kJ/kg, Q in kJ/h |
+| Heat from fuel | Q_f = ṁ_f × GCV | ṁ_f in kg/h, GCV in kJ/kg |
+| Boiler efficiency | η_b = ṁ_s (h_s − h_fw) ÷ (ṁ_f × GCV) | dimensionless, often given in % |
+| Equivalent evaporation | m_e = ṁ_s (h_s − h_fw) ÷ 2257 | kg/h from and at 100 °C; 2257 kJ/kg latent heat at 100 °C |
+| Evaporation ratio | ṁ_s ÷ ṁ_f | kg of steam per kg of fuel |
+
+## Operation and maintenance points
+
+Before firing, the furnace is purged with air to clear any fuel vapour, then the burner lights under flame monitoring. Water level is held in the gauge glass range by the feed control system. During operation, engineers watch steam pressure, water level, flue gas appearance and water test results. Maintenance includes cleaning burner tips, soot blowing, inspecting refractory, testing safety valves and low level cut outs, and internal inspection at survey. As in other [heat exchanger types](/chemical-engineering/heat-exchanger-types/), fouling cuts output.
+
+## Marine boiler interview and viva questions
+
+1. **What is the basic difference between fire tube and water tube boilers?** In a fire tube boiler hot gas flows inside tubes surrounded by water; in a water tube boiler water flows inside tubes and hot gas passes outside.
+2. **How does natural circulation work in a water tube boiler?** Heated riser tubes contain a less dense steam and water mixture that rises to the steam drum, while cooler downcomers carry denser water down, so density difference drives the flow.
+3. **Why is an exhaust gas economiser fitted on a motor ship?** It recovers heat from the main engine exhaust to produce steam at sea, so the oil fired boiler can often be shut down, saving fuel.
+4. **What causes a soot fire in an exhaust gas boiler?** Unburnt carbon and oil deposits collect on the tubes and can ignite; regular soot blowing or washing prevents the build up.
+5. **Why is boiler blowdown carried out?** Blowdown removes concentrated dissolved solids and sludge from the boiler water, keeping it within treatment limits and reducing scale and carry over.
+

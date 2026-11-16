@@ -3,6 +3,7 @@ title: "CSTR vs PFR: Ideal Reactors Compared"
 description: "CSTR vs PFR compared: mixing assumptions, design equations, residence time, reactor volume for first order reactions, reactors in series and when to use each."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-16
 discipline: chemical-engineering
 subcategory: reaction-engineering
 focusKeyword: "CSTR vs PFR"
@@ -29,7 +30,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-In the **CSTR vs PFR** comparison, a **continuous stirred tank reactor (CSTR)** is perfectly mixed, so its contents and outlet have the same uniform composition. A **plug flow reactor (PFR)** is a tube in which fluid moves as plugs with no back-mixing, so concentration falls steadily along its length. For most reactions a PFR reaches a given conversion in a smaller volume; a CSTR offers better temperature control and simpler operation.
+In the **CSTR vs PFR** comparison, a continuous stirred tank reactor is perfectly mixed, so its uniform contents equal the outlet composition, while a plug flow reactor is a tube with no back-mixing, so concentration falls along its length. For most reactions a PFR needs less volume; a CSTR gives easier temperature control.
 
 </Key>
 
@@ -37,7 +38,7 @@ Reactor design starts with two idealised models. Real reactors fall between them
 
 ## The two ideal reactors
 
-<figure>
+<figure class="anim">
 <svg width="560" height="270" viewBox="0 0 560 270" fill="none" role="img" aria-label="Left: a stirred tank reactor with feed in, an agitator and product out, uniform composition throughout. Right: a tubular plug flow reactor with concentration falling along its length from inlet to outlet">
 <rect x="50" y="60" width="140" height="150" rx="14" fill="#e6f6f4" stroke="#0b2545" stroke-width="2.5" />
 <path d="M120 30V170M90 170H150" stroke="#0b2545" stroke-width="3" />
@@ -51,6 +52,7 @@ Reactor design starts with two idealised models. Real reactors fall between them
 <path d="M262 125H288" stroke="#0b2545" stroke-width="2.5" /><path d="M280 118L290 125L280 132" stroke="#0b2545" stroke-width="2.5" />
 <path d="M520 125H548" stroke="#0b2545" stroke-width="2.5" /><path d="M540 118L550 125L540 132" stroke="#0b2545" stroke-width="2.5" />
 <path d="M340 100V150M390 100V150M440 100V150M490 100V150" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4 4" />
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M20 80H40" /><path class="anim-flow" d="M190 190H222" /><path class="anim-flow" d="M262 125H280" /><path class="anim-flow" d="M520 125H540" /></g>
 <text x="405" y="80" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Reactant concentration falls along length</text>
 <text x="405" y="236" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">PFR</text>
 <text x="405" y="256" text-anchor="middle" font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">No mixing along the flow direction</text>
@@ -95,6 +97,17 @@ Plotting FA0 / (−rA) against X gives a curve that rises with X for normal kine
 
 <Calculator path="engineering/residence-time" title="Residence Time Calculator" />
 
+## Key formulas for CSTR vs PFR
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Space time | τ = V ÷ v₀ | V = reactor volume (L), v₀ = inlet volumetric flow (L/min), τ in min |
+| CSTR design equation | V = F_A0 X ÷ (−r_A) at exit | F_A0 in mol/min, X = conversion, −r_A in mol L⁻¹ min⁻¹ |
+| PFR design equation | V = F_A0 ∫ dX ÷ (−r_A), from 0 to X | same symbols, rate integrated along the tube |
+| First order CSTR | τ = X ÷ [k (1 − X)] | k = rate constant (min⁻¹) |
+| First order PFR | τ = −ln(1 − X) ÷ k | constant density, isothermal |
+| N equal CSTRs in series, first order | 1 − X = 1 ÷ (1 + k τᵢ)ᴺ | τᵢ = space time of each tank |
+
 ## CSTRs in series
 
 Splitting the CSTR volume into several tanks in series lets the early tanks run at higher concentration, so the total volume falls. With N equal tanks, a first order reaction gives 1 − X = 1 / (1 + kτᵢ)ᴺ, where τᵢ is the space time of each tank. As N increases, the train approaches PFR behaviour. In the example above, two equal tanks need a total space time of about 8.6 min instead of 18. This is why industrial liquid phase processes often use a cascade of stirred tanks.
@@ -128,3 +141,11 @@ A batch reactor is filled, reacted and emptied. Every element of fluid spends th
 ## Real reactors
 
 Real reactors show dead zones, channelling and partial back-mixing. Engineers measure the **residence time distribution** with tracer tests and describe it with models such as tanks in series or axial dispersion. The heat removed or added is calculated with an energy balance and transferred through jackets, coils or external [heat exchangers](/chemical-engineering/heat-exchanger-types/). Flows and compositions entering and leaving come from the plant [material balance](/chemical-engineering/material-balance/), and reactor vessels are designed as [pressure vessels](/chemical-engineering/pressure-vessels-basics/). Temperature, pressure, level and flow loops keep the reactor at its design point; see [process instrumentation](https://www.instrumentationblog.in/category/process-instrumentation/) on InstrumentationBlog.in.
+
+## CSTR vs PFR interview and viva questions
+
+1. **What does perfect mixing mean in an ideal CSTR?** Every point in the tank has the same composition and temperature, equal to the outlet stream, so feed is diluted the moment it enters.
+2. **Why is the CSTR rate evaluated at exit conditions?** Because the whole tank is at the outlet composition, the reaction proceeds everywhere at the exit rate, which for positive order kinetics is the lowest rate in the process.
+3. **How does the Levenspiel plot compare the two reactors?** With F_A0 ÷ (−r_A) plotted against X, the PFR volume is the area under the curve and the CSTR volume is the rectangle at the exit value, which is larger for normal kinetics.
+4. **Why are CSTRs often used in series?** Early tanks operate at higher concentration and rate, so the total volume falls, and as the number of tanks increases the train approaches PFR behaviour.
+5. **Which reactor gives a higher yield of an intermediate in series reactions A to R to S?** Usually the PFR, because every fluid element has the same residence time and can be stopped at the optimum for R.

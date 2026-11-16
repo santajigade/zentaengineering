@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/biomedical-engineering/medical-device-classification.mdx
-src/content/articles/biomedical-engineering/medical-imaging-modalities.mdx
-src/content/articles/biomedical-engineering/prosthetic-limbs.mdx
-src/content/articles/biomedical-engineering/pulse-oximeter-working-principle.mdx
-src/content/articles/biomedical-engineering/spectrophotometer-working-principle.mdx
-src/content/articles/chemical-engineering/cstr-vs-pfr.mdx
-src/content/articles/chemical-engineering/distillation-column-working-principle.mdx
-src/content/articles/chemical-engineering/energy-balance.mdx
 src/content/articles/chemical-engineering/haber-bosch-ammonia-process.mdx
 src/content/articles/chemical-engineering/heat-exchanger-types.mdx
 src/content/articles/chemical-engineering/material-balance.mdx

@@ -3,6 +3,7 @@ title: "How Prosthetic Limbs Work: Body-Powered vs Myoelectric"
 description: "How prosthetic limbs work: sockets, suspension, body-powered and myoelectric upper limbs, lower limb knees and feet, EMG control, pros and cons and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-16
 discipline: biomedical-engineering
 subcategory: prosthetics
 focusKeyword: "prosthetic limbs"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Prosthetic limbs** replace missing arms or legs. Every prosthesis has a **socket** that fits the residual limb, a **suspension** system that holds it on, structural components (**pylons**, joints) and a **terminal device** (hand, hook or foot). Upper limb prostheses are mainly **body-powered**, where a **harness and cable** transfer shoulder movement to open or close a hook or hand, or **myoelectric**, where **EMG sensors** detect residual muscle signals that control **battery powered motors**. Lower limb prostheses use **mechanical, hydraulic or microprocessor knees** and energy storing **feet**. The best choice depends on amputation level, function needed, lifestyle, environment and cost.
+**Prosthetic limbs** are artificial arms or legs with a socket, suspension, structural parts and a terminal device such as a hand, hook or foot. Upper limb devices are body-powered, using a harness and cable moved by the shoulders, or myoelectric, using EMG signals from residual muscles to drive battery powered motors. Lower limbs use mechanical, hydraulic or microprocessor knees.
 
 </Key>
 
@@ -49,7 +50,7 @@ Materials such as titanium, aluminium and carbon composites keep weight low, and
 
 ## Upper limb prostheses
 
-<figure>
+<figure class="anim">
 <svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Two transradial prostheses compared. Left: body-powered with a figure of eight harness across the shoulders, a control cable running along the arm to a split hook terminal device; shoulder movement pulls the cable to open the hook. Right: myoelectric with EMG electrodes inside the socket over residual muscles, a battery and controller in the forearm, and a motorised hand">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="150" y="22">Body-powered</text><text x="450" y="22">Myoelectric</text></g>
 <path d="M60 60Q120 40 200 60" stroke="#0b2545" stroke-width="3" fill="none" />
@@ -58,11 +59,12 @@ Materials such as titanium, aluminium and carbon composites keep weight low, and
 <rect x="110" y="180" width="18" height="40" fill="#c9d2de" stroke="#0b2545" stroke-width="1.5" />
 <path d="M112 220Q100 250 115 262M126 220Q140 250 125 262" stroke="#0b2545" stroke-width="3" fill="none" />
 <path d="M200 60Q190 140 132 225" stroke="#b42318" stroke-width="2" stroke-dasharray="6 3" fill="none" />
+<path class="anim-flow" d="M200 60Q190 140 132 225" stroke="#ffffff" stroke-width="1.2" fill="none" />
 <rect x="420" y="80" width="60" height="110" rx="22" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
-<g fill="#13a89e"><rect x="424" y="110" width="8" height="18" /><rect x="468" y="110" width="8" height="18" /></g>
-<rect x="435" y="145" width="30" height="30" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#13a89e"><rect class="anim-pulse" x="424" y="110" width="8" height="18" /><rect class="anim-pulse" x="468" y="110" width="8" height="18" /></g>
+<rect class="anim-blink anim-d1" x="435" y="145" width="30" height="30" rx="4" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
 <path d="M425 190H475L470 240H430Z" fill="#c9d2de" stroke="#0b2545" stroke-width="2" />
-<g stroke="#0b2545" stroke-width="2"><path d="M435 240V268M445 240V272M455 240V272M465 240V268" /></g>
+<g class="anim-blink anim-d2" stroke="#0b2545" stroke-width="2"><path d="M435 240V268M445 240V272M455 240V272M465 240V268" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
 <text x="210" y="56">Harness</text><text x="205" y="150" fill="#b42318">Control cable</text><text x="35" y="140">Socket</text><text x="140" y="270">Split hook</text>
 <text x="300" y="115">EMG electrodes</text><text x="300" y="165">Battery and controller</text><text x="485" y="258">Motorised hand</text><text x="490" y="100">Socket</text>
@@ -125,6 +127,15 @@ Surface **electrodes** in the socket pick up **EMG** signals from residual muscl
 </dl>
 </Example>
 
+## Key formulas for prosthetic limbs
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Charge used | Q = I × t | Q in Ah, I = average current in A, t = time in h |
+| Daily charge | Q_day = I_move × t_move + I_idle × t_idle | currents in A, times in h |
+| Usable capacity | Q_usable = k × Q_rated | k = usable fraction (0.8 assumed in the example), Q in mAh |
+| Days per charge | N = Q_usable ÷ Q_day | N in days |
+
 ## Fitting and rehabilitation
 
 A prosthesis is a medical device fitted by a **prosthetist** within a team including physicians, therapists and the user. Steps include assessment, casting or 3D scanning, test sockets, alignment, training and follow-up. Many users stop wearing upper limb prostheses when comfort, weight or function do not meet their needs, so user centred design and training are critical. Devices must meet standards such as ISO 10328 for lower limb structural testing and the regulatory class requirements in [medical device classification](/biomedical-engineering/medical-device-classification/).
@@ -132,3 +143,11 @@ A prosthesis is a medical device fitted by a **prosthetist** within a team inclu
 ## The future of prosthetic limbs
 
 Research is advancing **sensory feedback** through vibration or nerve stimulation, **osseointegrated** and **implanted electrode** interfaces, **targeted muscle reinnervation**, powered ankles and knees, and low cost **3D printed** prostheses for low resource settings. Each step brings prosthetic limbs closer to restoring natural, intuitive function.
+
+## Prosthetic limbs interview and viva questions
+
+1. **What is the most important factor in prosthesis comfort?** Socket fit, because the socket is the interface that transfers load between the residual limb and the prosthesis.
+2. **How does a body-powered prosthesis open a split hook?** A figure of eight harness anchors a Bowden cable; moving the shoulders apart or flexing the shoulder pulls the cable and opens the hook, and a spring or rubber band closes it again.
+3. **How is an EMG signal turned into hand movement?** Socket electrodes pick up residual muscle signals, which the controller amplifies, filters and rectifies into an envelope; when it crosses a threshold or proportional level, motors move the hand.
+4. **What does a microprocessor controlled knee adjust?** It adjusts swing and stance damping in real time from sensor data, which improves stability on stairs and slopes and reduces falls.
+5. **What is osseointegration?** A titanium implant anchored in the bone connects directly to the prosthesis, removing the socket and improving control and comfort for some users.
