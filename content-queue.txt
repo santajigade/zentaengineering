@@ -54,12 +54,12 @@ renewable-energy|energy-storage|Lithium-Ion vs Lead Acid Batteries Compared|lith
 environmental-engineering|air-pollution-control|Wet Scrubber Working Principle and Types|wet-scrubber-working-principle|working-principle|wet scrubber|2026-11-15
 mining-engineering|mine-ventilation|Mine Gases: Types, Hazards and Detection|mine-gases|explanation|mine gases|2026-11-15
 manufacturing-engineering|additive-manufacturing|Metal 3D Printing: Powder Bed Fusion Explained|metal-3d-printing|working-principle|metal 3d printing|2026-11-15
-materials-engineering|heat-treatment|Case Hardening Methods: Carburizing and Nitriding|case-hardening-methods|explanation|case hardening|todo
-safety-engineering|fmea|Fault Tree Analysis (FTA) Explained|fault-tree-analysis|explanation|fault tree analysis|todo
-agricultural-engineering|precision-agriculture|Soil Moisture Sensors: Types and Working|soil-moisture-sensors|working-principle|soil moisture sensors|todo
-aerospace-engineering|propulsion|Rocket Propulsion Basics and Thrust Equation|rocket-propulsion-basics|fundamentals|rocket propulsion|todo
-biomedical-engineering|medical-devices|Infusion Pump Working Principle and Types|infusion-pump-working-principle|working-principle|infusion pump|todo
-marine-engineering|auxiliary-systems|Marine Boiler Types and Working|marine-boiler-types|explanation|marine boiler|todo
+materials-engineering|heat-treatment|Case Hardening Methods: Carburizing and Nitriding|case-hardening-methods|explanation|case hardening|2026-11-16
+safety-engineering|fmea|Fault Tree Analysis (FTA) Explained|fault-tree-analysis|explanation|fault tree analysis|2026-11-16
+agricultural-engineering|precision-agriculture|Soil Moisture Sensors: Types and Working|soil-moisture-sensors|working-principle|soil moisture sensors|2026-11-16
+aerospace-engineering|propulsion|Rocket Propulsion Basics and Thrust Equation|rocket-propulsion-basics|fundamentals|rocket propulsion|2026-11-16
+biomedical-engineering|medical-devices|Infusion Pump Working Principle and Types|infusion-pump-working-principle|working-principle|infusion pump|2026-11-16
+marine-engineering|auxiliary-systems|Marine Boiler Types and Working|marine-boiler-types|explanation|marine boiler|2026-11-16
 mechanical-engineering|fluid-mechanics|Reynolds Number: Laminar and Turbulent Flow|reynolds-number|fundamentals|reynolds number|todo
 electrical-engineering|power-systems|Power Transmission Line Losses Explained|transmission-line-losses|fundamentals|transmission line losses|todo
 electronics-engineering|power-electronics|Boost Converter Working Principle and Design|boost-converter|working-principle|boost converter|todo
