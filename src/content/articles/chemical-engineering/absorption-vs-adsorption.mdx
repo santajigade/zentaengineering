@@ -1,0 +1,178 @@
+---
+title: "Absorption vs Adsorption: Differences"
+description: "Absorption vs adsorption explained: bulk vs surface uptake, Henry law and Langmuir isotherm, equipment, regeneration, uses and a worked example."
+pubDate: 2026-11-17
+reviewedDate: 2026-11-17
+discipline: chemical-engineering
+subcategory: mass-transfer
+focusKeyword: "absorption vs adsorption"
+image: { src: /images/featured/absorption-vs-adsorption.webp, alt: "Absorption vs Adsorption: Differences: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [absorption, adsorption, mass-transfer, langmuir-isotherm, henrys-law, separation-processes]
+faq:
+  - q: "What is sorption?"
+    a: "IUPAC uses sorption as a general term for the uptake of a substance by another when absorption and adsorption occur together or cannot be told apart. Water taken up by a porous solid that both coats the pore walls and fills the pores is a common case."
+  - q: "What is the difference between physisorption and chemisorption?"
+    a: "Physisorption is held by weak intermolecular (van der Waals) forces, is reversible and can build up several molecular layers. Chemisorption forms chemical bonds with surface atoms, is limited to a single layer and releases more heat, so it is often harder to reverse."
+  - q: "Why are gas absorbers operated counter-current?"
+    a: "With gas flowing up and liquid flowing down, the leanest gas meets the freshest solvent at the top and the richest gas meets the most loaded solvent at the bottom. This keeps a concentration driving force along the whole column, so less solvent and a shorter packed height are needed for the same removal."
+references:
+  - text: "R. E. Treybal, Mass-Transfer Operations, 3rd ed., McGraw-Hill, 1980"
+  - text: "W. L. McCabe, J. C. Smith and P. Harriott, Unit Operations of Chemical Engineering, 7th ed., McGraw-Hill, 2005"
+  - text: "D. W. Green and M. Z. Southard (eds.), Perry's Chemical Engineers' Handbook, 9th ed., McGraw-Hill, 2019, Sections 14 (Gas absorption) and 16 (Adsorption and ion exchange)"
+  - text: "J. D. Seader, E. J. Henley and D. K. Roper, Separation Process Principles, 3rd ed., Wiley, 2011"
+  - text: "IUPAC, Compendium of Chemical Terminology (the Gold Book), entries for absorption, adsorption and sorption"
+  - text: "M. Thommes et al., Physisorption of gases, with special reference to the evaluation of surface area and pore size distribution (IUPAC Technical Report), Pure and Applied Chemistry 87 (2015) 1051"
+  - text: "I. Langmuir, The adsorption of gases on plane surfaces of glass, mica and platinum, Journal of the American Chemical Society 40 (1918) 1361"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+In **absorption vs adsorption**, absorption is the uptake of a substance into the whole volume of another phase, such as a gas dissolving into a liquid solvent. Adsorption is the accumulation of molecules on the surface of a solid or liquid, usually inside porous solids. Absorption is a bulk process; adsorption is a surface process.
+
+</Key>
+
+The two words differ by one letter, and both remove a component from a gas or liquid stream, so they are easy to confuse. The absorption vs adsorption distinction matters because it decides the equipment, the equilibrium model, the way the separating agent is regenerated and the scale at which each process makes sense. This article compares them side by side, then works a Langmuir isotherm example.
+
+## What absorption and adsorption mean
+
+IUPAC defines **absorption** as a process in which one material (the absorbate) is retained by another (the absorbent) and penetrates its bulk. In chemical engineering the usual case is **gas absorption**: a soluble gas such as ammonia, carbon dioxide or hydrogen sulphide passes into a liquid solvent. The solute spreads through the liquid by diffusion and mixing until it reaches its solubility limit.
+
+**Adsorption** is the enrichment of one or more components at an interface. The solid is the **adsorbent**, and the molecules held on it are the **adsorbate**. Industrial adsorbents such as activated carbon, silica gel, activated alumina and zeolites are highly porous, so almost all of their surface lies inside the pores. IUPAC classifies pores as micropores (below 2 nm wide), mesopores (2 to 50 nm) and macropores (above 50 nm).
+
+<figure class="anim">
+<svg width="740" height="320" viewBox="0 0 740 320" fill="none" role="img" aria-label="Absorption vs adsorption: left panel shows solute molecules passing from a gas through the interface into the bulk of a liquid solvent; middle panel shows molecules from a fluid collecting as a layer on the surface of a solid adsorbent; right panel shows a counter-current packed absorber with gas entering at the bottom and leaving at the top while solvent enters at the top and leaves rich at the bottom">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="120" y="40">Absorption</text><text x="350" y="40">Adsorption</text><text x="615" y="40">Absorber column</text>
+</g>
+<rect x="20" y="60" width="200" height="80" fill="#eef1f6" />
+<rect x="20" y="140" width="200" height="120" fill="#cdeeea" />
+<rect x="20" y="60" width="200" height="200" rx="6" stroke="#0b2545" stroke-width="2" />
+<path d="M20 140H220" stroke="#13a89e" stroke-width="2" />
+<g stroke="#b42318" stroke-width="2"><path d="M60 82V196M120 76V226M180 92V184" /></g>
+<g fill="#b42318"><path d="M54 194L60 204L66 194Z" /><path d="M114 224L120 234L126 224Z" /><path d="M174 182L180 192L186 182Z" /></g>
+<g stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="6 12"><path class="anim-flow-slow" d="M60 82V194" /><path class="anim-flow-slow" d="M120 76V224" /><path class="anim-flow-slow" d="M180 92V182" /></g>
+<g fill="#b42318"><circle cx="40" cy="100" r="5" /><circle cx="92" cy="90" r="5" /><circle cx="150" cy="112" r="5" /><circle cx="204" cy="84" r="5" /><circle cx="42" cy="172" r="5" /><circle cx="90" cy="214" r="5" /><circle cx="150" cy="178" r="5" /><circle cx="200" cy="232" r="5" /><circle cx="96" cy="160" r="5" /><circle cx="152" cy="240" r="5" /></g>
+<rect x="250" y="60" width="200" height="155" fill="#eef1f6" />
+<rect x="250" y="215" width="200" height="45" fill="#c9ced6" />
+<rect x="250" y="60" width="200" height="200" rx="6" stroke="#0b2545" stroke-width="2" />
+<path d="M250 215H450" stroke="#0b2545" stroke-width="2" />
+<g stroke="#b42318" stroke-width="2"><path d="M300 86V188M350 80V188M400 92V188" /></g>
+<g fill="#b42318"><path d="M294 186L300 196L306 186Z" /><path d="M344 186L350 196L356 186Z" /><path d="M394 186L400 196L406 186Z" /></g>
+<g stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="6 12"><path class="anim-flow-slow" d="M300 86V186" /><path class="anim-flow-slow" d="M350 80V186" /><path class="anim-flow-slow" d="M400 92V186" /></g>
+<g fill="#b42318"><circle cx="272" cy="112" r="5" /><circle cx="328" cy="132" r="5" /><circle cx="376" cy="104" r="5" /><circle cx="428" cy="150" r="5" /><circle cx="324" cy="170" r="5" /></g>
+<g fill="#b42318"><circle class="anim-blink" cx="270" cy="209" r="5" /><circle class="anim-blink anim-d1" cx="290" cy="209" r="5" /><circle class="anim-blink anim-d2" cx="310" cy="209" r="5" /><circle class="anim-blink anim-d3" cx="330" cy="209" r="5" /><circle class="anim-blink anim-d4" cx="370" cy="209" r="5" /><circle class="anim-blink anim-d5" cx="390" cy="209" r="5" /><circle class="anim-blink anim-d1" cx="410" cy="209" r="5" /><circle class="anim-blink anim-d3" cx="430" cy="209" r="5" /></g>
+<rect x="588" y="115" width="54" height="110" fill="#f4f6f8" stroke="#7b8794" stroke-width="1" stroke-dasharray="3 3" />
+<g stroke="#c9ced6" stroke-width="1"><path d="M588 135L608 115M588 165L638 115M588 195L642 141M588 225L642 171M612 225L642 195" /></g>
+<rect x="585" y="70" width="60" height="190" rx="10" stroke="#0b2545" stroke-width="2.5" />
+<g stroke="#13a89e" stroke-width="2.5"><path d="M510 100H585M600 105V250M615 260V285H512" /></g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M730 240H645M630 238V80M615 70V55H728" /></g>
+<g fill="#13a89e"><path d="M577 94L587 100L577 106Z" /><path d="M594 244L600 254L606 244Z" /><path d="M520 279L510 285L520 291Z" /></g>
+<g fill="#b42318"><path d="M653 234L643 240L653 246Z" /><path d="M624 86L630 76L636 86Z" /><path d="M720 49L730 55L720 61Z" /></g>
+<g stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="6 12"><path class="anim-flow" d="M510 100H577" /><path class="anim-flow" d="M600 105V244" /><path class="anim-flow" d="M615 260V285H520" /><path class="anim-flow" d="M730 240H653" /><path class="anim-flow" d="M630 238V86" /><path class="anim-flow" d="M615 70V55H720" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="28" y="76">Gas</text><text x="28" y="253">Liquid solvent</text>
+<text x="258" y="76">Gas or liquid</text><text x="350" y="243" text-anchor="middle">Solid adsorbent</text>
+<text x="120" y="284" text-anchor="middle" font-size="12">Solute dissolves into the</text><text x="120" y="300" text-anchor="middle" font-size="12">whole liquid volume</text>
+<text x="350" y="284" text-anchor="middle" font-size="12">Solute collects as a layer</text><text x="350" y="300" text-anchor="middle" font-size="12">on the solid surface</text>
+<text x="510" y="92">Solvent in</text><text x="652" y="76">Clean gas out</text><text x="660" y="230">Gas in</text><text x="530" y="304">Rich solvent out</text>
+<text x="578" y="180" text-anchor="end" fill="#13a89e">Liquid down</text><text x="652" y="180" fill="#b42318">Gas up</text>
+</g>
+</svg>
+<figcaption>Absorption takes solute into the bulk of the liquid; adsorption holds it on the solid surface. In a counter-current absorber the gas rises through the packing while the solvent flows down.</figcaption>
+</figure>
+
+## Absorption vs adsorption: comparison table
+
+| Feature | Absorption | Adsorption |
+| --- | --- | --- |
+| Where the solute goes | Into the bulk of the absorbent | Onto the surface of the adsorbent |
+| Separating agent | Liquid solvent (water, amines, oils) | Porous solid (activated carbon, zeolites, silica gel, activated alumina) |
+| Nature | Bulk phenomenon, solute distributed through volume | Surface phenomenon, capacity set by surface area |
+| Equilibrium model | Henry's law for dilute physical absorption | Adsorption isotherms such as Langmuir and Freundlich |
+| Heat effect | Heat of solution, plus heat of reaction in chemical absorption | Exothermic; chemisorption releases more heat than physisorption |
+| Typical operation | Continuous, steady state counter-current column | Cyclic fixed beds, adsorb then regenerate |
+| Regeneration | Stripping or distillation of the rich solvent | Temperature swing, pressure swing or purge, or replacement |
+| Best suited to | Large gas flows with moderate to high solute content | Low concentrations, deep purification, drying |
+| Typical equipment | Packed or tray absorber with a stripper | Fixed bed adsorbers in pairs or sets |
+
+## Differences explained
+
+### Equilibrium
+
+For dilute physical absorption, equilibrium follows **Henry's law**: the partial pressure of the solute over the liquid is proportional to its mole fraction in the liquid. Solubility rises as temperature falls and as pressure rises, which is why absorbers run cool and often at elevated pressure.
+
+Adsorption equilibrium is described by an **isotherm**, the loading on the solid at a fixed temperature as a function of fluid concentration or pressure. The **Langmuir isotherm** assumes a uniform surface, one molecule per site, a single layer and no interaction between adsorbed molecules. At low pressure it reduces to a straight line, similar to Henry's law. At high pressure the loading levels off at the monolayer capacity, because the surface is full. A liquid can keep dissolving solute up to its solubility limit, but a surface has a fixed number of sites.
+
+### Mass transfer
+
+In absorption, the solute crosses a gas film and a liquid film at the interface, as described by the **two film theory**. Column packing or trays create a large gas and liquid contact area. In adsorption the solute travels from the bulk fluid to the outer surface of the particle, then diffuses into the pores before attaching to the wall. In a fixed bed this creates a **mass transfer zone** that moves down the bed. When it reaches the outlet, the solute concentration rises, giving the **breakthrough curve**, and the bed must be switched and regenerated.
+
+### Physical and chemical uptake
+
+Both processes have a physical and a chemical form. **Physical absorption** dissolves the gas without reaction, while **chemical absorption** uses a reactive solvent, such as aqueous amines for carbon dioxide and hydrogen sulphide, which raises capacity at low partial pressures. Likewise, **physisorption** relies on van der Waals forces and is readily reversed, while **chemisorption** forms surface bonds and is limited to a monolayer.
+
+### Regeneration and operation
+
+An absorber usually runs continuously. The rich solvent goes to a **stripper**, where heat, steam or reduced pressure releases the solute, and the lean solvent returns to the top of the absorber. Adsorbers are batch units in a cyclic process. **Temperature swing adsorption** heats the bed to release the adsorbate, while **pressure swing adsorption** lowers the pressure. Two or more beds alternate so that one adsorbs while another regenerates.
+
+## Equations for absorption and adsorption
+
+Henry's law for a dilute solute A:
+
+$$
+p_A = H\,x_A
+$$
+
+Langmuir isotherm and fractional coverage:
+
+$$
+q = \frac{q_m K p}{1 + K p} \qquad \theta = \frac{q}{q_m}
+$$
+
+Solute balance for a counter-current absorber on a solute free basis, with Y the gas phase and X the liquid phase mole ratio, subscript 1 at the bottom and 2 at the top:
+
+$$
+G_s\,(Y_1 - Y_2) = L_s\,(X_1 - X_2)
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A gas adsorbs on an activated carbon that follows the Langmuir isotherm with monolayer capacity q_m = 4.0 mol/kg and constant K = 0.25 kPa⁻¹ at the operating temperature. The solute partial pressure in the feed is 12 kPa. The bed must hold 45 mol of solute per cycle.</dd>
+<dt>Find</dt><dd>The equilibrium loading, the fractional coverage, the minimum mass of carbon, and the gain in loading if the partial pressure were doubled.</dd>
+<dt>Assumptions</dt><dd>Isothermal bed; Langmuir model valid; the whole bed reaches equilibrium with the feed (no mass transfer zone left unused); no competing adsorbates.</dd>
+<dt>Solution</dt><dd>K p = 0.25 × 12 = 3.0<br />θ = 3.0 ÷ (1 + 3.0) = 0.75<br />q = 4.0 × 0.75 = 3.0 mol/kg<br />Carbon mass = 45 ÷ 3.0 = 15 kg<br />At 24 kPa: K p = 6.0, θ = 6.0 ÷ 7.0 = 0.857, q = 3.43 mol/kg, a rise of about 14 percent</dd>
+<dt>Answer</dt><dd><strong>Loading 3.0 mol/kg at 75 percent coverage, so at least 15 kg of carbon is needed. Doubling the partial pressure raises loading by only about 14 percent, because the surface is close to saturation.</strong></dd>
+<dt>Limitations</dt><dd>A real bed needs extra length for the mass transfer zone, and heat released on adsorption raises the bed temperature and lowers capacity. Real carbons have uneven surfaces, so other isotherms may fit data better.</dd>
+</dl>
+</Example>
+
+## Key formulas for absorption vs adsorption
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Henry's law | p_A = H x_A | p_A = solute partial pressure (kPa), x_A = liquid mole fraction, H = Henry's constant (kPa) |
+| Langmuir isotherm | q = q_m K p ÷ (1 + K p) | q = loading (mol/kg), q_m = monolayer capacity (mol/kg), K = Langmuir constant (kPa⁻¹), p in kPa |
+| Fractional coverage | θ = q ÷ q_m | θ dimensionless, 0 to 1 |
+| Absorber solute balance | G_s (Y_1 − Y_2) = L_s (X_1 − X_2) | G_s, L_s = solute free gas and liquid flows (mol/s), Y, X = mole ratios |
+| Adsorbent mass (equilibrium) | m = n ÷ q | n = solute to be held (mol), m in kg |
+
+## When to use absorption or adsorption
+
+- **Choose absorption** for large gas flows that carry a significant amount of soluble gas, where a solvent can be circulated continuously. Examples are acid gas removal from natural gas and synthesis gas, recovery of ammonia, and control of soluble pollutants in a [wet scrubber](/environmental-engineering/wet-scrubber-working-principle/).
+- **Choose adsorption** when the impurity is dilute and very low outlet levels are required, or when the target is water vapour or an organic vapour. Examples are drying gases with silica gel, alumina or molecular sieves, solvent vapour recovery on activated carbon, hydrogen purification and air separation by pressure swing adsorption, and activated carbon polishing in the [water treatment process](/environmental-engineering/water-treatment-process/).
+- **Combine them** when a bulk cut by absorption is followed by adsorption for final purification.
+
+Absorbers and strippers share their tray and packing hardware with the [distillation column](/chemical-engineering/distillation-column-working-principle/), and the solvent circulation rate comes from the plant [material balance](/chemical-engineering/material-balance/). Rich and lean solvent streams are usually cross exchanged in [heat exchangers](/chemical-engineering/heat-exchanger-types/) to save stripper steam.
+
+## Absorption vs adsorption interview and viva questions
+
+1. **What is the basic difference between absorption and adsorption?** Absorption takes the solute into the bulk of the absorbent, while adsorption holds it only on the surface, so adsorption capacity depends on surface area.
+2. **Why do industrial adsorbents have high porosity?** Nearly all the usable surface lies inside the pores, so a porous structure gives a very large surface per unit mass and therefore a high capacity.
+3. **What does the Langmuir isotherm assume?** A uniform surface with a fixed number of identical sites, one molecule per site, a single layer and no interaction between adsorbed molecules.
+4. **What is breakthrough in a fixed bed adsorber?** It is the point when the mass transfer zone reaches the bed outlet and the solute concentration in the outlet starts to rise, signalling that the bed must be regenerated.
+5. **How is the solvent from an absorber regenerated?** The rich solvent is sent to a stripper, where heat, steam or lower pressure drives the solute out, and the lean solvent is returned to the absorber.

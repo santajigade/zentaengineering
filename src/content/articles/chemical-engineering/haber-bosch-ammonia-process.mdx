@@ -3,6 +3,7 @@ title: "Haber-Bosch Process: Ammonia Production Explained"
 description: "The Haber Bosch process explained: ammonia synthesis chemistry, catalyst, syngas preparation and the synthesis loop with recycle and purge."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-17
 discipline: chemical-engineering
 subcategory: process-industries
 focusKeyword: "Haber Bosch process"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The **Haber-Bosch process** makes ammonia by reacting nitrogen with hydrogen over an iron catalyst at high pressure (typically about 150 to 300 bar) and roughly 400 to 500 °C: N₂ + 3H₂ ⇌ 2NH₃. Only part of the gas reacts in each pass, so ammonia is condensed out and the unreacted gas is recycled. Hydrogen usually comes from natural gas by steam reforming, and nitrogen from air.
+**Haber Bosch process** is the industrial ammonia route in which nitrogen and hydrogen react over a promoted iron catalyst at about 150 to 300 bar and 400 to 500 °C: N₂ + 3H₂ ⇌ 2NH₃. Only 15 to 25 percent ammonia forms per pass, so it is condensed out, unreacted gas is recycled and a small purge removes inerts.
 
 </Key>
 
@@ -55,7 +56,7 @@ The catalyst is mainly **iron**, made from magnetite and promoted with small amo
 
 ## Haber Bosch process steps in a natural gas plant
 
-<figure>
+<figure class="anim">
 <svg width="580" height="300" viewBox="0 0 580 300" fill="none" role="img" aria-label="Block flow diagram of an ammonia plant: natural gas and steam go to desulphurisation and reforming, with air added in the secondary reformer; then shift conversion, CO2 removal, methanation and compression feed the synthesis loop, where a converter, cooler and separator produce liquid ammonia while unreacted gas is recycled and a small purge is removed">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <rect x="20" y="40" width="110" height="46" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="75" y="60">Desulphurise</text><text x="75" y="76">and reform</text>
@@ -77,6 +78,7 @@ The catalyst is mainly **iron**, made from magnetite and promoted with small amo
 <path d="M200 160Q240 120 300 120Q400 120 420 160" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" fill="none" />
 <path d="M413 152L420 162L427 154" stroke="#13a89e" stroke-width="2" fill="none" />
 <path d="M180 196L230 236" stroke="#b42318" stroke-width="2" fill="none" />
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M75 26V38" /><path class="anim-flow" d="M130 63H158M260 63H288M390 63H418M475 86V148M420 173H372M250 173H202M140 196V250" /><path class="anim-flow-slow" d="M200 160Q240 120 300 120Q400 120 420 160" /><path class="anim-flow" d="M180 196L230 236" /></g>
 </svg>
 <figcaption>Simplified block flow diagram of a natural gas based ammonia plant.</figcaption>
 </figure>
@@ -104,6 +106,17 @@ The loop is a textbook case of recycle and purge in a [material balance](/chemic
 </dl>
 </Example>
 
+## Key formulas for the Haber Bosch process
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Ammonia synthesis | N₂ + 3H₂ ⇌ 2NH₃, ΔH ≈ −92 kJ | ΔH per mole of N₂ reacted; exothermic, four gas moles become two |
+| Primary reforming | CH₄ + H₂O ⇌ CO + 3H₂ | Nickel catalyst, strongly endothermic |
+| Water gas shift | CO + H₂O ⇌ CO₂ + H₂ | High and low temperature stages |
+| Nitrogen consumed | m_N₂ = m_NH₃ × 28 / 34 | Masses in t/day; molar masses N₂ = 28, NH₃ = 17 kg/kmol |
+| Hydrogen consumed | m_H₂ = m_NH₃ × 6 / 34 | H₂ = 2 kg/kmol, three moles per mole of N₂ |
+| Hydrogen through converter | m_H₂,conv ≈ m_H₂ / X | X = single pass conversion of hydrogen (fraction) |
+
 ## Key equipment and engineering challenges
 
 - **High pressure equipment:** converters, separators and piping are thick walled [pressure vessels](/chemical-engineering/pressure-vessels-basics/) designed against hydrogen attack, which can embrittle ordinary steels at high temperature.
@@ -118,3 +131,11 @@ Most ammonia is turned into fertilisers: urea (made by reacting ammonia with the
 ## Energy and environment
 
 Ammonia production is energy intensive, and plants based on natural gas or coal emit large amounts of CO₂, mostly from making hydrogen. Efficiency gains over the decades have come from better reformers, catalysts, heat recovery and compressor drives. Current efforts include carbon capture from reforming ("blue" ammonia) and hydrogen from renewable powered electrolysis ("green" ammonia), which keeps the Haber-Bosch synthesis loop but removes the reforming steps.
+
+## Haber Bosch process interview and viva questions
+
+1. **Why is the Haber Bosch process run at high pressure?** Four moles of gas form two moles of ammonia, so by Le Chatelier's principle high pressure shifts the equilibrium towards ammonia and also raises the reaction rate.
+2. **Why is a moderate temperature of about 400 to 500 °C used for an exothermic reaction?** Lower temperature gives a better equilibrium yield, but the reaction becomes too slow even with the iron catalyst, so the temperature is a compromise between rate and conversion.
+3. **Why is methanation needed before the synthesis loop?** Oxygen compounds such as CO, CO₂ and water poison the iron catalyst, so methanation converts the last traces of CO and CO₂ back to methane.
+4. **Why does the synthesis loop need both recycle and purge?** Only about 15 to 25 percent of the gas becomes ammonia per pass, so unreacted gas is recycled, while a small purge stops inerts such as methane and argon from building up.
+5. **Where does the nitrogen come from in a natural gas based plant?** Air is added in the secondary reformer, where its oxygen burns part of the gas and its nitrogen is set to give a hydrogen to nitrogen ratio of about 3 to 1.

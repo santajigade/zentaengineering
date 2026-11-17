@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/chemical-engineering/haber-bosch-ammonia-process.mdx
-src/content/articles/chemical-engineering/heat-exchanger-types.mdx
-src/content/articles/chemical-engineering/material-balance.mdx
-src/content/articles/chemical-engineering/pfd-vs-pid.mdx
-src/content/articles/chemical-engineering/pinch-analysis.mdx
-src/content/articles/chemical-engineering/pressure-vessels-basics.mdx
-src/content/articles/chemical-engineering/size-reduction-equipment.mdx
-src/content/articles/civil-engineering/bearing-capacity-of-soil.mdx
 src/content/articles/civil-engineering/flexible-vs-rigid-pavement.mdx
 src/content/articles/civil-engineering/levelling-in-surveying.mdx
 src/content/articles/civil-engineering/limit-state-design-rcc.mdx

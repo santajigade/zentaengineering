@@ -1,0 +1,187 @@
+---
+title: "SQL vs NoSQL Databases Compared"
+description: "SQL vs NoSQL databases compared: data models, schemas, ACID and BASE, scaling, CAP trade-offs, quorum reads and when to choose each type."
+pubDate: 2026-11-17
+reviewedDate: 2026-11-17
+discipline: computer-science
+subcategory: databases
+focusKeyword: "sql vs nosql"
+image: { src: /images/featured/sql-vs-nosql.webp, alt: "SQL vs NoSQL Databases Compared: featured diagram" }
+format: comparison
+pillar: false
+math: false
+tags: [sql, nosql, relational-database, cap-theorem, distributed-databases]
+faq:
+  - q: "Is NoSQL faster than SQL?"
+    a: "Not in general. Speed depends on the workload, the data model and how the database is tuned. A key-value store answers a lookup by key very quickly, while a relational database is often better at ad hoc queries and joins across many tables. Measure with your own data and queries."
+  - q: "Can a NoSQL database support transactions?"
+    a: "Many can, within limits. Most key-value and document stores guarantee atomic updates to a single record or document, and several now offer multi-document transactions. Distributed transactions across many partitions cost extra coordination, so NoSQL designs usually try to keep related data in one record."
+  - q: "Can I use SQL and NoSQL databases together?"
+    a: "Yes. This is called polyglot persistence. A common design keeps orders and payments in a relational database as the system of record, and uses a key-value store for sessions or caching and a search or graph store for features that need those access patterns."
+references:
+  - text: "A. Silberschatz, H. F. Korth and S. Sudarshan, Database System Concepts, 7th ed., McGraw-Hill"
+  - text: "ISO/IEC 9075-1:2023 Information technology, Database languages SQL, Part 1: Framework (SQL/Framework)"
+  - text: "S. Gilbert and N. Lynch, Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services, ACM SIGACT News, 2002"
+  - text: "P. J. Sadalage and M. Fowler, NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence, Addison-Wesley, 2012"
+  - text: "M. Kleppmann, Designing Data-Intensive Applications, O'Reilly Media, 2017"
+  - text: "G. DeCandia et al., Dynamo: Amazon's Highly Available Key-value Store, Proceedings of ACM SOSP, 2007"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**SQL vs NoSQL** is a choice between relational databases, which store data in tables with a fixed schema, joins and ACID transactions queried in SQL, and non-relational databases (key-value, document, column-family and graph), which use flexible data models, usually scale out across many servers and often relax consistency for availability.
+
+</Key>
+
+Every application needs somewhere to keep its data, and the first design decision is often SQL vs NoSQL. Relational databases have been the default since the 1980s, while NoSQL systems grew in the 2000s when large web services needed to spread data across clusters of commodity servers. Neither is better in every case. This article compares their data models, guarantees and scaling, then shows how to reason about consistency with a worked quorum example.
+
+## What SQL and NoSQL mean
+
+A **SQL database** is a relational database management system (RDBMS). It follows the relational model proposed by Edgar Codd in 1970: data lives in tables (relations) of rows and columns, every table has a key, and tables are linked by foreign keys. SQL is the standard language for defining and querying this data, published by ISO as ISO/IEC 9075. Good relational design follows the rules of [database normalization](/computer-science/database-normalization/) so that each fact is stored once.
+
+**NoSQL** is not one technology. Sadalage and Fowler describe it as a loose group of non-relational, mostly open source, cluster friendly databases with flexible schemas. They group NoSQL stores into four families by data model:
+
+- **Key-value:** a value, opaque to the database, stored and fetched by a unique key. Amazon's Dynamo is the classic design.
+- **Document:** each record is a self-describing document, typically JSON or a binary form of it, which can hold nested fields and arrays and can be queried by its contents.
+- **Column-family (wide column):** rows identified by a key, with columns grouped into families, and different rows free to hold different columns. Google Bigtable and Apache Cassandra follow this model.
+- **Graph:** nodes and edges with properties, built for queries that follow relationships, such as social networks or route finding.
+
+## SQL vs NoSQL comparison table
+
+| Feature | SQL (relational) | NoSQL (non-relational) |
+| --- | --- | --- |
+| Data model | Tables of rows and columns | Key-value, document, column-family or graph |
+| Schema | Defined before data is written (schema on write) | Flexible; structure often read by the application (schema on read) |
+| Query language | Standard SQL, ISO/IEC 9075 | Product specific APIs and query languages |
+| Relationships | Foreign keys and joins | Embedding, references in application code, or graph edges |
+| Transactions | ACID across many rows and tables | Often atomic per record; multi-record support varies |
+| Consistency | Strong consistency is the norm | Often tunable, with eventual consistency common |
+| Scaling | Traditionally vertical (bigger server) | Designed for horizontal scaling (more servers) |
+| Typical use | Banking, orders, ERP, reporting | Sessions, catalogues, event logs, social graphs |
+
+<figure class="anim">
+<svg width="640" height="320" viewBox="0 0 640 320" fill="none" role="img" aria-label="SQL vs NoSQL diagram: an application sends queries along two paths. The upper path goes to a relational SQL database holding a table with id, name and city columns, which scales up on one bigger server. The lower path goes to the four NoSQL families, key-value, document, column-family and graph, which scale out by partitioning data across many nodes.">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="120" width="100" height="60" rx="8" fill="#eef1f6" />
+<rect x="200" y="20" width="220" height="120" rx="8" fill="#e6f6f4" />
+<rect x="440" y="20" width="180" height="120" rx="8" fill="#fff7e0" />
+<rect x="200" y="160" width="420" height="130" rx="8" fill="#ffffff" />
+<rect x="212" y="192" width="90" height="82" rx="6" fill="#eef1f6" />
+<rect x="314" y="192" width="90" height="82" rx="6" fill="#eef1f6" />
+<rect x="416" y="192" width="90" height="82" rx="6" fill="#eef1f6" />
+<rect x="518" y="192" width="90" height="82" rx="6" fill="#eef1f6" />
+</g>
+<g stroke="#0b2545" stroke-width="1.2" fill="#ffffff">
+<rect x="225" y="52" width="170" height="60" />
+<path d="M225 72H395M225 92H395M280 52V112M335 52V112" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5" fill="#ffffff">
+<rect x="510" y="86" width="40" height="14" /><rect x="500" y="66" width="60" height="18" /><rect x="490" y="42" width="80" height="22" />
+</g>
+<path class="anim-pulse" d="M590 98V54M584 62L590 52L596 62" stroke="#b42318" stroke-width="2.5" fill="none" />
+<g stroke="#13a89e" stroke-width="1.5" fill="none">
+<rect x="430" y="222" width="12" height="40" /><rect x="446" y="232" width="12" height="30" /><rect x="462" y="216" width="12" height="46" /><rect x="478" y="238" width="12" height="24" />
+<path d="M540 230L585 220M540 230L560 262M585 220L560 262" stroke="#7b8794" />
+<circle cx="540" cy="230" r="6" fill="#13a89e" /><circle cx="585" cy="220" r="6" fill="#13a89e" /><circle cx="560" cy="262" r="6" fill="#13a89e" />
+</g>
+<g stroke="#13a89e" stroke-width="2.5" fill="none"><path d="M120 140H160V80H200" /><path d="M120 160H160V232H212" /></g>
+<g stroke="#ffffff" stroke-width="2.5" fill="none"><path class="anim-flow" d="M120 140H160V80H200" /><path class="anim-flow" d="M120 160H160V232H212" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="70" y="147" font-weight="700">Application</text><text x="70" y="164">query</text>
+<text x="310" y="42" font-weight="700">Relational (SQL)</text>
+<text x="252" y="66" font-size="11">id</text><text x="307" y="66" font-size="11">name</text><text x="365" y="66" font-size="11">city</text>
+<text x="252" y="86" font-size="11">1</text><text x="307" y="86" font-size="11">Asha</text><text x="365" y="86" font-size="11">Pune</text>
+<text x="252" y="106" font-size="11">2</text><text x="307" y="106" font-size="11">Ravi</text><text x="365" y="106" font-size="11">Goa</text>
+<text x="310" y="130" font-size="11">fixed schema, joins, ACID</text>
+<text x="530" y="128" font-size="11">Scale up: one bigger server</text>
+<text x="420" y="182" font-weight="700">NoSQL families</text>
+<text x="257" y="210" font-size="11" font-weight="700">Key-value</text>
+<text x="257" y="234" font-size="11">k1 : v1</text><text x="257" y="252" font-size="11">k2 : v2</text>
+<text x="359" y="210" font-size="11" font-weight="700">Document</text>
+<text x="359" y="234" font-size="11">&#123; name,</text><text x="359" y="252" font-size="11">items: [ ] &#125;</text>
+<text x="461" y="210" font-size="11" font-weight="700">Column</text>
+<text x="563" y="210" font-size="11" font-weight="700">Graph</text>
+<text x="420" y="308" font-size="11">Scale out: data partitioned and replicated across many nodes</text>
+</g>
+</svg>
+<figcaption>An application can send its queries to a relational database that scales up on one larger server, or to one of the four NoSQL families that scale out across a cluster.</figcaption>
+</figure>
+
+## SQL vs NoSQL differences explained
+
+### Schema and data modeling
+
+A relational schema is declared with CREATE TABLE before any row is stored, and the database rejects data that breaks types or constraints. Related data is split across tables and recombined with joins at query time. A document or key-value store accepts records of varying shape, so new fields can appear without a schema migration. Kleppmann calls this schema on read: the structure still exists, but the application code interprets it. The cost is that checks the database used to enforce now move into the application.
+
+NoSQL stores also favour **aggregates**, the term Sadalage and Fowler borrow from domain driven design: a cluster of related data that is read and written as one unit. An order with its line items is a natural aggregate, so a document database stores it as one document, while a relational design splits it into several tables.
+
+### Transactions: ACID and BASE
+
+Relational databases provide **ACID** transactions: atomicity (all or nothing), consistency (constraints hold before and after), isolation (concurrent transactions do not see each other's partial work) and durability (committed data survives a crash). Silberschatz and colleagues treat these as the core guarantees of a transaction processing system.
+
+Many NoSQL systems follow the **BASE** style instead: basically available, soft state, eventually consistent. Replicas may briefly disagree after a write, but if writes stop they converge on the same value. This makes it easier to stay available when nodes or links fail.
+
+### Scaling and the CAP theorem
+
+Scaling **vertically** means moving to a server with more CPU, memory and disk. It is simple but has an upper limit. Scaling **horizontally** means **sharding** (partitioning) data across many machines and **replicating** each partition. Aggregate oriented NoSQL stores fit this well because each aggregate can live on one node.
+
+Once data is replicated across a network, the **CAP theorem** applies. Eric Brewer conjectured in 2000, and Gilbert and Lynch proved in 2002, that a distributed system cannot guarantee consistency, availability and partition tolerance at the same time. Since network partitions cannot be ruled out, the real choice during a partition is between staying consistent (refusing some requests) and staying available (possibly serving stale data). Kleppmann notes that CAP is narrow and does not describe behaviour when the network is healthy, so it should guide thinking rather than label products.
+
+## Quorum reads and writes
+
+Dynamo style stores keep N copies of each key and let the client set how many replicas must answer. A write succeeds after W replicas acknowledge it, and a read waits for R replicas. If R + W > N, every read set overlaps every write set in at least one replica, so a read sees the latest acknowledged write. DeCandia et al. report (N, R, W) = (3, 2, 2) as the common Dynamo configuration.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A key-value store with replication factor N = 3, read quorum R = 2 and write quorum W = 2.</dd>
+<dt>Find</dt><dd>Whether reads are guaranteed to overlap the latest write, the minimum overlap, and how many replica failures reads and writes can each tolerate.</dd>
+<dt>Assumptions</dt><dd>Strict quorums (no sloppy quorum or hinted handoff); a replica either responds or has failed; clocks and conflict resolution are ignored.</dd>
+<dt>Solution</dt><dd>R + W = 2 + 2 = 4, which is greater than N = 3, so the quorum condition holds<br />Minimum overlap = R + W minus N = 4 minus 3 = 1 replica<br />Write failures tolerated = N minus W = 3 minus 2 = 1<br />Read failures tolerated = N minus R = 3 minus 2 = 1<br />Check: R = 1 and W = 1 give 2, not greater than 3, so a read could miss the latest write</dd>
+<dt>Answer</dt><dd><strong>Yes: at least 1 replica is shared by every read and write quorum, and both reads and writes keep working with 1 of the 3 replicas down</strong></dd>
+<dt>Limitations</dt><dd>Kleppmann shows that even with R + W greater than N, edge cases such as concurrent writes, sloppy quorums and failed partial writes can still return stale values, so quorums are not the same as full linearizable consistency.</dd>
+</dl>
+</Example>
+
+## Modeling the same order both ways
+
+Take one order by one customer with three line items. A normalized relational design stores 1 row in Customer, 1 row in Orders and 3 rows in OrderLine, that is 5 rows in 3 tables, and showing the order needs a query that joins the three tables. A document database stores one order document with the customer summary and an array of three items embedded:
+
+```json
+{
+  "orderId": 5001,
+  "customer": { "id": 17, "name": "Asha" },
+  "items": [
+    { "sku": "A1", "qty": 2 },
+    { "sku": "B7", "qty": 1 },
+    { "sku": "C3", "qty": 4 }
+  ]
+}
+```
+
+The document is read in one lookup, but if Asha changes her name, every order document that copies it must be updated or accepted as a historical snapshot. The relational version changes one row. This is the classic trade-off between read locality and update anomalies.
+
+## When to use SQL vs NoSQL
+
+Choose a **relational database** when:
+
+- Data is highly structured and its relationships matter, as in accounting, inventory and booking systems.
+- You need multi-row ACID transactions and strong integrity constraints.
+- Users run ad hoc queries and reports that join data in ways not known in advance.
+
+Choose a **NoSQL database** when:
+
+- Access is mostly by key or by whole aggregate, such as user profiles, carts and sessions.
+- Data volume or write rate needs horizontal scaling across many nodes.
+- The record structure varies or changes often, or the data is naturally a graph.
+
+Many systems use both, an approach Sadalage and Fowler call **polyglot persistence**. Services usually expose either kind of store through a [REST API](/computer-science/rest-api-basics/) carried over [HTTP](/computer-science/how-http-works/), and index choice still decides lookup cost in [Big O](/computer-science/big-o-notation/) terms whichever model you pick.
+
+## SQL vs NoSQL interview and viva questions
+
+1. **What is the main difference between SQL and NoSQL databases?** SQL databases store data in related tables with a fixed schema and ACID transactions, while NoSQL databases use key-value, document, column-family or graph models with flexible schemas and are usually built to scale out.
+2. **What does ACID stand for?** Atomicity, consistency, isolation and durability, the guarantees a relational database gives every transaction.
+3. **State the CAP theorem.** A distributed data store cannot guarantee consistency, availability and partition tolerance at once; during a network partition it must give up either consistency or availability.
+4. **What is the quorum condition in a Dynamo style store?** R + W must be greater than N, so every read quorum overlaps every write quorum in at least one replica.
+5. **What is an aggregate in NoSQL design?** A group of related data, such as an order with its line items, that is stored and retrieved as one unit, which lets it live on a single node of a cluster.

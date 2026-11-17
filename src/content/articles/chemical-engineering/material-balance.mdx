@@ -3,6 +3,7 @@ title: "Material Balance in Chemical Engineering with Examples"
 description: "Material balance explained: the general balance equation, steady and unsteady state, systems with and without reaction, degrees of freedom and worked examples."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-17
 discipline: chemical-engineering
 subcategory: process-fundamentals
 focusKeyword: "material balance"
@@ -28,7 +29,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-A **material balance** applies conservation of mass to a process: **input + generation − output − consumption = accumulation**. At steady state accumulation is zero. Balances are written for total mass and for each component, and solving them gives the unknown flow rates and compositions of every stream. It is the first calculation in almost every chemical engineering problem.
+**Material balance** is the application of conservation of mass to a process system: input plus generation minus output minus consumption equals accumulation. At steady state accumulation is zero. Balances written for total mass and for each component give the unknown flow rates and compositions of every stream, making it the first calculation in most chemical engineering problems.
 
 </Key>
 
@@ -55,7 +56,7 @@ The equation can be written as a **differential balance** (rates, such as kg/h, 
 - **Total mass:** reactions do not create or destroy mass, so total mass in = total mass out at steady state, even with reaction.
 - **Batch process:** initial content + generation = final content + consumption.
 
-<figure>
+<figure class="anim">
 <svg width="560" height="260" viewBox="0 0 560 260" fill="none" role="img" aria-label="Mixer block with two inlet streams and one outlet: stream 1 is 100 kg/h of 20 percent NaOH solution, stream 2 is water of unknown flow, and stream 3 is the 5 percent NaOH product of unknown flow">
 <rect x="230" y="80" width="110" height="90" rx="10" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" />
 <text x="285" y="131" text-anchor="middle" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Mixer</text>
@@ -65,6 +66,7 @@ The equation can be written as a **differential balance** (rates, such as kg/h, 
 <text x="60" y="88" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">1: 100 kg/h, 20% NaOH</text>
 <text x="60" y="176" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">2: water, W kg/h</text>
 <text x="360" y="113" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">3: P kg/h, 5% NaOH</text>
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow" d="M60 100H218M60 150H218" /><path class="anim-flow" d="M343 125H500" /></g>
 <path d="M214 50H356V200H214Z" stroke="#f5b800" stroke-width="1.5" stroke-dasharray="6 5" />
 <text x="290" y="242" text-anchor="middle" font-size="13" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">System boundary</text>
 </svg>
@@ -94,6 +96,18 @@ For several connected units, balances can be written on each unit, on mixing and
 <dt>Limitations</dt><dd>Mixing NaOH with water releases heat; an energy balance is needed to find the outlet temperature.</dd>
 </dl>
 </Example>
+
+## Key formulas for material balance
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| General balance | Input + Generation − Output − Consumption = Accumulation | Rates in kg/h or kmol/h (differential), or amounts in kg or kmol (integral) |
+| Steady state | Input + Generation = Output + Consumption | Accumulation = 0 |
+| No reaction, steady state | Σ inputs = Σ outputs, for each component | Mass or mole flow rates |
+| Tie component balance | x₁ F₁ = x₃ F₃ | x = mass fraction of the tie component, F = stream flow in kg/h |
+| Degrees of freedom | DOF = unknowns − independent equations | Zero means the problem is solvable |
+| Percent excess | (fed − stoichiometric) / stoichiometric × 100 | Moles of the excess reactant |
+| Conversion | X = moles reacted / moles fed | Fraction of a reactant fed that reacts |
 
 ## Material balance with chemical reaction
 
@@ -129,3 +143,11 @@ Recycle problems are solved by writing balances around the overall process (wher
 - Forgetting generation and consumption terms for reacting species.
 - Writing dependent equations (for example, all component balances plus the total balance) and thinking more information is available than there is.
 - Leaving out inert components such as nitrogen in combustion air.
+
+## Material balance interview and viva questions
+
+1. **State the general material balance equation.** Input plus generation minus output minus consumption equals accumulation, applied to a defined system boundary for total mass or for any component.
+2. **Why are generation and consumption terms not needed in a total mass or element balance?** Reactions rearrange atoms but do not create or destroy mass or atoms, so only individual species balances need reaction terms.
+3. **What does a degrees of freedom count tell you?** It is the number of unknowns minus the number of independent equations; zero means the problem can be solved, positive means information is missing and negative means it is over specified.
+4. **What is a tie component?** A component that enters and leaves in only a few streams, like NaOH in the dilution example, so its balance involves the fewest unknowns and is solved first.
+5. **Why is a purge stream used in a recycle loop?** It removes inert or unwanted species that would otherwise accumulate in the loop until the plant could no longer run.

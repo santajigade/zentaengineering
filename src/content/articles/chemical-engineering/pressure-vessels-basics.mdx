@@ -3,6 +3,7 @@ title: "Pressure Vessels: Types, Parts and Design Basics"
 description: "Pressure vessels explained: types, shells, heads, nozzles and supports, hoop stress, the ASME thickness formula, testing and safety, with an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-17
 discipline: chemical-engineering
 subcategory: process-equipment
 focusKeyword: "pressure vessels"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Pressure vessels** are closed containers designed to hold gases or liquids at a pressure substantially different from the surroundings. They are usually cylinders closed by curved heads, fitted with nozzles, manways and supports. Wall thickness is set by the hoop stress σ = PD / 2t, using code formulas such as those in ASME Section VIII, plus a corrosion allowance. Every vessel is pressure tested and protected by a relief device.
+**Pressure vessels** are closed containers designed to hold gases or liquids at a pressure substantially different from the surroundings. Most are cylindrical shells closed by curved heads, with nozzles and supports. Wall thickness comes from hoop stress and code formulas such as ASME Section VIII, plus a corrosion allowance, and every vessel is pressure tested.
 
 </Key>
 
@@ -46,7 +47,7 @@ Reactors, distillation columns, separators, receivers, storage bullets and heat 
 
 ## Main parts of a pressure vessel
 
-<figure>
+<figure class="anim">
 <svg width="560" height="270" viewBox="0 0 560 270" fill="none" role="img" aria-label="Horizontal pressure vessel with cylindrical shell, ellipsoidal heads at both ends, inlet and outlet nozzles on top, a manway, a drain nozzle at the bottom and two saddle supports">
 <path d="M130 70H430C500 70 500 190 430 190H130C60 190 60 70 130 70Z" fill="#eef1f6" stroke="#0b2545" stroke-width="3" />
 <path d="M130 70V190M430 70V190" stroke="#0b2545" stroke-width="1.5" stroke-dasharray="5 4" />
@@ -57,6 +58,7 @@ Reactors, distillation columns, separators, receivers, storage bullets and heat 
 <path d="M150 190L135 235H215L200 190" fill="#cfd8e3" stroke="#0b2545" stroke-width="2" />
 <path d="M360 190L345 235H425L410 190" fill="#cfd8e3" stroke="#0b2545" stroke-width="2" />
 <path d="M40 235H520" stroke="#0b2545" stroke-width="2" />
+<g stroke="#1d4ed8" stroke-width="3" fill="none"><path class="anim-flow" d="M182 40V96" /><path class="anim-flow-slow" d="M196 100H358" /><path class="anim-flow" d="M372 96V40" /></g>
 <g font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">
 <text x="182" y="24" text-anchor="middle">Inlet</text><text x="372" y="24" text-anchor="middle">Outlet</text><text x="280" y="20" text-anchor="middle">Manway</text>
 <text x="280" y="134" text-anchor="middle">Cylindrical shell</text><text x="104" y="134" text-anchor="middle">Head</text><text x="456" y="134" text-anchor="middle">Head</text>
@@ -106,6 +108,16 @@ R is the inside radius, S the maximum allowable stress of the material at design
 
 The code approach builds in a margin through the allowable stress, which is a fraction of the material's tensile and yield strength. This is the same idea as the [factor of safety](/mechanical-engineering/factor-of-safety/) in machine design.
 
+## Key formulas for pressure vessels
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Hoop stress, thin cylinder | σ_hoop = P D / 2t | P = internal pressure in MPa, D = diameter in mm, t = wall thickness in mm, σ in MPa |
+| Longitudinal stress, thin cylinder | σ_long = P D / 4t | same symbols, σ in MPa |
+| Membrane stress, thin sphere | σ = P D / 4t | same in every direction, σ in MPa |
+| ASME shell thickness (internal pressure) | t = P R / (S E − 0.6 P) | R = inside radius in mm, S = allowable stress in MPa, E = joint efficiency (dimensionless) |
+| Thickness with corrosion allowance | t_total = t + CA | CA = corrosion allowance in mm |
+
 ## Vacuum and external pressure
 
 Vessels under vacuum or external pressure fail by buckling, not by yielding. Their wall thickness depends on the diameter, the length between stiffeners and the material's elastic modulus, and the code provides charts for the allowable external pressure. Stiffening rings are a cheaper way to resist buckling than a much thicker shell. Many vessels see vacuum during steam out or draining, so this case should always be checked.
@@ -126,3 +138,11 @@ Vessels under vacuum or external pressure fail by buckling, not by yielding. The
 - **Changes:** never weld, modify or re-rate a vessel without engineering approval.
 
 Pressure vessels appear throughout the plant: reactors such as [CSTRs and PFRs](/chemical-engineering/cstr-vs-pfr/), [distillation columns](/chemical-engineering/distillation-column-working-principle/) and [heat exchanger](/chemical-engineering/heat-exchanger-types/) shells are all designed this way.
+
+## Pressure vessels interview and viva questions
+
+1. **Why is the longitudinal weld seam more critical than the circumferential seam?** The hoop stress PD/2t is twice the longitudinal stress PD/4t, and the longitudinal seam carries the hoop stress.
+2. **Why do hemispherical heads need about half the shell thickness?** A sphere carries the stress PD/4t equally in every direction, which is half the hoop stress in a cylinder of the same diameter.
+3. **What is joint efficiency E in the ASME formula?** It is a factor that reduces the allowable stress according to the weld type and the extent of radiography, so less examination leads to a thicker shell.
+4. **How do vessels under vacuum fail, and how is this prevented?** They fail by buckling rather than yielding, so thickness is checked with code charts for external pressure and stiffening rings are often added.
+5. **Why is a hydrostatic test preferred to a pneumatic test?** Liquids store very little energy under pressure, so a failure during a hydrotest leaks rather than bursts, while compressed gas can release a large amount of energy.

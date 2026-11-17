@@ -3,6 +3,7 @@ title: "Size Reduction Equipment: Crushing and Grinding Explained"
 description: "Size reduction equipment explained: crushers, grinders and ultrafine mills, how they break particles, Rittinger, Kick and Bond laws, with an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-17
 discipline: chemical-engineering
 subcategory: mechanical-operations
 focusKeyword: "size reduction equipment"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Size reduction equipment** breaks solids into smaller pieces using compression, impact, attrition (rubbing) and cutting. **Crushers** (jaw, gyratory, cone, roll) handle coarse feed; **grinders** (hammer, ball, rod and roller mills) produce intermediate and fine powders; **ultrafine mills** (jet and stirred media mills) reach micrometre sizes. The energy needed is estimated with Rittinger's, Kick's or Bond's law.
+**Size reduction equipment** is the group of machines that break solids into smaller pieces by compression, impact, attrition and cutting. Crushers handle coarse lumps, grinding mills produce intermediate and fine powders, and ultrafine mills reach micrometre sizes. The energy needed for a given size change is estimated with Rittinger's, Kick's or Bond's law.
 
 </Key>
 
@@ -51,15 +52,15 @@ Every machine uses one or more of four mechanisms:
 - **Jaw crusher:** a fixed jaw and a swinging jaw form a V shaped chamber. Material is nipped and crushed as the moving jaw closes, then falls lower as it opens, leaving through the gap at the bottom. Simple and robust for primary crushing of hard rock.
 - **Gyratory crusher:** a conical head gyrates inside a conical bowl, crushing continuously around its circumference. High capacity primary crusher for large mines.
 
-<figure>
+<figure class="anim">
 <svg width="540" height="300" viewBox="0 0 540 300" fill="none" role="img" aria-label="Jaw crusher: a fixed jaw on the left and a swinging jaw on the right driven by an eccentric shaft form a V shaped chamber; large feed lumps enter at the top and crushed product leaves through the narrow discharge gap at the bottom">
 <path d="M170 40L235 250" stroke="#0b2545" stroke-width="10" stroke-linecap="round" />
 <path d="M370 40L285 250" stroke="#13a89e" stroke-width="10" stroke-linecap="round" />
-<circle cx="390" cy="40" r="16" stroke="#0b2545" stroke-width="3" /><circle cx="394" cy="38" r="4" fill="#0b2545" />
+<g class="anim-spin-rev"><circle cx="390" cy="40" r="16" stroke="#0b2545" stroke-width="3" /><circle cx="394" cy="38" r="4" fill="#0b2545" /></g>
 <path d="M300 255L360 280" stroke="#0b2545" stroke-width="3" /><path d="M360 272V292" stroke="#0b2545" stroke-width="3" />
 <path d="M392 120Q420 135 392 150" stroke="#f5b800" stroke-width="3" fill="none" /><path d="M396 146L390 152L398 156" stroke="#f5b800" stroke-width="3" />
-<g fill="#cfd8e3" stroke="#0b2545" stroke-width="1.5"><path d="M230 70L260 62L275 85L250 100L228 90Z" /><path d="M265 105L290 98L300 118L278 128Z" /><path d="M248 160L262 156L268 170L254 174Z" /><circle cx="256" cy="215" r="7" /><circle cx="266" cy="232" r="5" /></g>
-<g fill="#cfd8e3"><circle cx="252" cy="268" r="3" /><circle cx="262" cy="276" r="3" /><circle cx="258" cy="286" r="2.5" /></g>
+<g fill="#cfd8e3" stroke="#0b2545" stroke-width="1.5"><path class="anim-blink anim-d1" d="M230 70L260 62L275 85L250 100L228 90Z" /><path class="anim-blink anim-d2" d="M265 105L290 98L300 118L278 128Z" /><path class="anim-blink anim-d3" d="M248 160L262 156L268 170L254 174Z" /><circle class="anim-blink anim-d4" cx="256" cy="215" r="7" /><circle class="anim-blink anim-d4" cx="266" cy="232" r="5" /></g>
+<g class="anim-blink anim-d5" fill="#cfd8e3"><circle cx="252" cy="268" r="3" /><circle cx="262" cy="276" r="3" /><circle cx="258" cy="286" r="2.5" /></g>
 <text x="100" y="140" text-anchor="middle" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Fixed jaw</text>
 <text x="440" y="200" text-anchor="middle" font-size="13" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Swing jaw</text>
 <text x="425" y="44" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Eccentric shaft</text>
@@ -128,6 +129,17 @@ $$
 
 with mill and ball diameters D and d in metres. Mills run at about 65 to 80 percent of critical speed so that the balls cascade and cataract effectively.
 
+## Key formulas for size reduction equipment
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Reduction ratio | R = D₁ / D₂ | D₁ = feed size, D₂ = product size, same length units |
+| Rittinger's law | E = K_R (1/D₂ − 1/D₁) | E = energy per unit mass, K_R = Rittinger constant for the material |
+| Kick's law | E = K_K ln(D₁/D₂) | E = energy per unit mass, K_K = Kick constant for the material |
+| Bond's law | W = 10 W_i (1/√P80 − 1/√F80) | W and W_i in kWh/t, F80 and P80 in µm |
+| Mill power | P = W × feed rate | P in kW, W in kWh/t, feed rate in t/h |
+| Ball mill critical speed | N_c = 42.3 / √(D − d) | N_c in rpm, D = mill diameter in m, d = ball diameter in m |
+
 ## Selecting size reduction equipment
 
 - **Feed and product size:** reduction ratios per stage are limited, so coarse to fine reduction uses several stages.
@@ -138,3 +150,11 @@ with mill and ball diameters D and d in metres. Mills run at about 65 to 80 perc
 - **Contamination:** media wear can contaminate products; ceramic linings or jet mills reduce it.
 
 Dust control, noise enclosures and safe guarding of moving parts are essential for all size reduction equipment. Size reduction is usually followed by screening or classification, and the solids are then conveyed, mixed or fed to reactors and separators. Its throughput and product splits enter the plant [material balance](/chemical-engineering/material-balance/). Mill motors and drives are [induction motors](/electrical-engineering/induction-motor-working-principle/), and bearings and gears need correct [lubrication](/mechanical-engineering/types-of-lubrication/). Mill power and feed rate are monitored with standard process instrumentation.
+
+## Size reduction equipment interview and viva questions
+
+1. **Name the four mechanisms used to break particles.** Compression, impact, attrition and cutting; most machines combine more than one, for example a ball mill uses impact and attrition.
+2. **Which energy law suits coarse crushing and which suits fine grinding?** Kick's law fits coarse crushing because energy depends only on the reduction ratio, while Rittinger's law, based on new surface, fits fine grinding best.
+3. **What is the Bond work index?** It is the energy in kWh per tonne needed to reduce a material from very large size to 80 percent passing 100 µm, measured in standard laboratory tests.
+4. **Why does a ball mill run below its critical speed?** At the critical speed the balls centrifuge with the shell and stop grinding, so mills run at about 65 to 80 percent of it to make the balls cascade and cataract.
+5. **Why is closed circuit grinding used?** A classifier returns oversize to the mill and removes finished product, which avoids overgrinding and saves energy.

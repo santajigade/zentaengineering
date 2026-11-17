@@ -3,6 +3,7 @@ title: "Pinch Analysis for Heat Recovery Explained"
 description: "Pinch analysis explained: composite curves, minimum approach temperature, problem table method, utility targets and the three pinch rules."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-17
 discipline: chemical-engineering
 subcategory: process-optimization
 focusKeyword: "pinch analysis"
@@ -28,7 +29,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Pinch analysis** is a method for designing heat recovery in a process. Hot streams that need cooling and cold streams that need heating are combined into composite curves. Where the curves come closest, separated by the minimum approach temperature ΔTmin, is the **pinch**. The method gives the minimum hot and cold utility the process can possibly use before any equipment is designed, and three rules show how to achieve it: no heat transfer across the pinch, no hot utility below it and no cold utility above it.
+**Pinch analysis** is a systematic method for setting energy targets in a process by combining hot and cold streams into composite curves. The pinch is where the curves come closest, separated by the minimum approach temperature ΔTmin. The method gives the minimum hot and cold utility before any heat exchanger network is designed.
 
 </Key>
 
@@ -47,13 +48,14 @@ The analysis starts from the heat and [material balance](/chemical-engineering/m
 
 All hot streams are combined into a single **hot composite curve** on a temperature versus enthalpy (heat load) plot, by adding their CP values over each temperature interval. The same is done for the cold streams. The cold composite is then slid horizontally until, at its closest point, it is exactly ΔTmin below the hot composite.
 
-<figure>
+<figure class="anim">
 <svg width="560" height="320" viewBox="0 0 560 320" fill="none" role="img" aria-label="Temperature against enthalpy plot with a hot composite curve above a cold composite curve; they overlap in the middle where heat is recovered, approach most closely at the pinch separated by delta T min, the cold curve extends beyond the hot curve on the right showing minimum hot utility, and the hot curve extends beyond the cold curve on the left showing minimum cold utility">
 <path d="M70 270H530M70 270V30" stroke="#0b2545" stroke-width="2" />
 <path d="M90 230L200 170L300 120L430 50" stroke="#b42318" stroke-width="3.5" fill="none" />
 <path d="M170 250L300 145L400 95L500 60" stroke="#1d4ed8" stroke-width="3.5" fill="none" />
-<path d="M300 120V145" stroke="#f5b800" stroke-width="2.5" />
-<circle cx="300" cy="132" r="18" stroke="#f5b800" stroke-width="2" stroke-dasharray="4 3" />
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow-rev" d="M90 230L200 170L300 120L430 50" /><path class="anim-flow" d="M170 250L300 145L400 95L500 60" /></g>
+<path class="anim-blink" d="M300 120V145" stroke="#f5b800" stroke-width="2.5" />
+<circle class="anim-pulse" cx="300" cy="132" r="18" stroke="#f5b800" stroke-width="2" stroke-dasharray="4 3" />
 <text x="326" y="160" font-size="13" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Pinch (ΔTmin)</text>
 <path d="M430 36H500" stroke="#0b2545" stroke-width="1.5" /><path d="M430 30V42M500 30V42" stroke="#0b2545" stroke-width="1.5" />
 <text x="465" y="26" text-anchor="middle" font-size="13" fill="#b42318" font-family="Open Sans Variable, Arial, sans-serif">Q hot, min</text>
@@ -108,6 +110,17 @@ To achieve the minimum utility targets, a heat exchanger network must obey:
 
 Designers then build the network starting at the pinch, where matches are most constrained, using rules on the number of streams and CP values to make feasible matches. Each match becomes an exchanger chosen from the available [heat exchanger types](/chemical-engineering/heat-exchanger-types/).
 
+## Key formulas for pinch analysis
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Heat capacity flow rate | CP = m × cp | m = mass flow in kg/s, cp = specific heat in kJ/(kg K), CP in kW/K |
+| Stream heat load | Q = CP × (T_supply − T_target) | Q in kW, temperatures in °C or K (magnitude of the change) |
+| Shifted hot temperature | T* = T − ΔTmin/2 | T* = shifted temperature, ΔTmin in K |
+| Shifted cold temperature | T* = T + ΔTmin/2 | T* = shifted temperature, ΔTmin in K |
+| Interval surplus or deficit | ΔH_i = (ΣCP_hot − ΣCP_cold) × ΔT_i | ΔH_i in kW, ΔT_i = shifted interval width in K |
+| Overall energy balance | QC,min − QH,min = ΣQ_hot − ΣQ_cold | Q values in kW |
+
 ## Applications and extensions
 
 - **Heat exchanger network design** for new plants and retrofits of existing plants.
@@ -117,3 +130,11 @@ Designers then build the network starting at the pinch, where matches are most c
 - **Water and hydrogen pinch:** the same targeting logic for minimum fresh water or hydrogen use.
 
 Large plants such as the [Haber-Bosch ammonia process](/chemical-engineering/haber-bosch-ammonia-process/) are highly heat integrated in this way. Pinch analysis rests on the energy balance from the [laws of thermodynamics](/mechanical-engineering/laws-of-thermodynamics/), and reliable temperature measurement is needed to collect good stream data from operating plants.
+
+## Pinch analysis interview and viva questions
+
+1. **What is the pinch in pinch analysis?** It is the point where the hot and cold composite curves come closest, separated by exactly ΔTmin. It divides the process into a heat sink above and a heat source below.
+2. **Why are stream temperatures shifted in the problem table method?** Subtracting ΔTmin/2 from hot streams and adding ΔTmin/2 to cold streams places them on one scale, so any interval where hot is above cold allows feasible heat transfer.
+3. **What happens if heat is transferred across the pinch?** Every kilowatt moved from above to below the pinch adds a kilowatt to both the hot utility and the cold utility.
+4. **How does ΔTmin affect the design?** A larger ΔTmin raises both utility targets but needs less exchanger area, while a smaller ΔTmin saves energy but needs more area, so the best value minimises total cost.
+5. **Where should a heat pump be placed relative to the pinch?** A heat pump should work across the pinch, taking heat from below and delivering it above, while a heat engine should not cross the pinch.

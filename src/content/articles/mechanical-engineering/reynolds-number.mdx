@@ -1,0 +1,212 @@
+---
+title: "Reynolds Number: Laminar and Turbulent Flow"
+description: "The Reynolds number explained: formula, laminar, transitional and turbulent pipe flow limits, flat plate values, and a worked water pipe example."
+pubDate: 2026-11-17
+reviewedDate: 2026-11-17
+discipline: mechanical-engineering
+subcategory: fluid-mechanics
+focusKeyword: "reynolds number"
+image: { src: /images/featured/reynolds-number.webp, alt: "Reynolds Number: Laminar and Turbulent Flow: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [reynolds-number, fluid-mechanics, laminar-flow, turbulent-flow, pipe-flow]
+faq:
+  - q: "Is the Reynolds number dimensionless?"
+    a: "Yes. Density times velocity times length, divided by dynamic viscosity, has no units because all the units cancel. That is why the same limits apply to water, oil and air in pipes of any size, as long as consistent units are used."
+  - q: "What Reynolds number is laminar flow in a pipe?"
+    a: "For flow in a smooth circular pipe, engineering texts take flow as laminar below a Reynolds number of about 2300, transitional between about 2300 and 4000, and turbulent above about 4000. Very careful lab rigs can delay transition to higher values."
+  - q: "Why does turbulent flow need more pumping power?"
+    a: "Turbulent eddies carry fast fluid towards the wall and slow fluid away from it, which raises the velocity gradient and shear stress at the wall. The friction factor and the pressure drop per metre are therefore higher than a laminar flow would give at the same Reynolds number."
+references:
+  - text: "O. Reynolds, An experimental investigation of the circumstances which determine whether the motion of water shall be direct or sinuous, and of the law of resistance in parallel channels, Philosophical Transactions of the Royal Society of London, vol. 174, 1883"
+  - text: "Y. A. Cengel and J. M. Cimbala, Fluid Mechanics: Fundamentals and Applications, 4th ed., McGraw-Hill"
+  - text: "F. M. White, Fluid Mechanics, 8th ed., McGraw-Hill"
+  - text: "R. W. Fox, A. T. McDonald and J. W. Mitchell, Introduction to Fluid Mechanics, 10th ed., Wiley"
+  - text: "L. F. Moody, Friction factors for pipe flow, Transactions of the ASME, vol. 66, 1944"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The **Reynolds number** is a dimensionless ratio of inertial forces to viscous forces in a moving fluid, Re = ρVD/μ. It predicts the flow regime. In a circular pipe, flow is laminar below about 2300, transitional from about 2300 to 4000 and turbulent above about 4000, which sets friction, pressure drop and heat transfer.
+
+</Key>
+
+The Reynolds number is the first quantity an engineer calculates for almost any flow problem. It tells you whether fluid in a pipe, duct or around a body moves in smooth layers or in chaotic eddies, and that single answer decides which friction factor, heat transfer correlation and drag coefficient to use. This article explains the definition, the physical meaning, the critical values and how to use it in practice.
+
+## What the Reynolds number means
+
+Osborne Reynolds published his classic pipe experiments in 1883. He injected a thin filament of dye into water flowing through a glass tube. At low speed the dye stayed as a straight, sharp line. As the speed increased, the filament began to waver and then suddenly broke up and mixed across the whole tube. Reynolds showed that the change did not depend on velocity, diameter or viscosity alone, but on one combination of them.
+
+That combination is:
+
+$$
+Re = \frac{\rho V D}{\mu} = \frac{V D}{\nu}
+$$
+
+where ρ is fluid density (kg/m³), V is the mean velocity (m/s), D is a characteristic length such as pipe diameter (m), μ is dynamic viscosity (Pa·s) and ν = μ/ρ is kinematic viscosity (m²/s).
+
+Physically, the numerator measures the momentum the fluid carries (inertia), which tends to amplify small disturbances. The denominator measures viscous friction, which damps them out. At low Re, viscosity wins and any disturbance dies away, giving orderly **laminar flow**. At high Re, inertia wins, disturbances grow and the flow becomes **turbulent**.
+
+## Laminar, transitional and turbulent flow
+
+<figure class="anim">
+<svg width="640" height="330" viewBox="0 0 640 330" fill="none" role="img" aria-label="Reynolds number flow regimes in a pipe: the upper pipe shows laminar flow at Re below about 2300 with straight parallel streamlines moving left to right and a parabolic velocity profile at the outlet; the lower pipe shows turbulent flow at Re above about 4000 with wavy mixing streamlines, rotating eddies near the walls and a flatter velocity profile">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" font-weight="700">
+<text x="30" y="36">Laminar flow: Re below about 2300</text>
+<text x="30" y="196">Turbulent flow: Re above about 4000</text>
+</g>
+<g stroke="#0b2545" stroke-width="3">
+<path d="M30 50H450M30 140H450" />
+<path d="M30 210H450M30 300H450" />
+</g>
+<g stroke="#13a89e" stroke-width="2.5">
+<path d="M40 65H440M40 80H440M40 95H440M40 110H440M40 125H440" />
+</g>
+<g stroke="#fff" stroke-width="2.5" stroke-dasharray="6 12">
+<path class="anim-flow-slow" d="M40 65H440M40 125H440" />
+<path class="anim-flow" d="M40 80H440M40 95H440M40 110H440" />
+</g>
+<g stroke="#b42318" stroke-width="2.5">
+<path d="M40 245C80 235 100 258 140 247S200 236 240 250S300 262 340 244S400 236 440 246" />
+<path d="M40 258C75 266 110 248 150 259S210 270 250 255S320 246 360 262S420 266 440 257" />
+<path d="M40 268C80 260 120 276 160 266S230 258 270 271S330 276 370 265S420 262 440 270" />
+</g>
+<g stroke="#fff" stroke-width="2.5" stroke-dasharray="6 12">
+<path class="anim-flow" d="M40 245C80 235 100 258 140 247S200 236 240 250S300 262 340 244S400 236 440 246" />
+<path class="anim-flow" d="M40 258C75 266 110 248 150 259S210 270 250 255S320 246 360 262S420 266 440 257" />
+<path class="anim-flow" d="M40 268C80 260 120 276 160 266S230 258 270 271S330 276 370 265S420 262 440 270" />
+</g>
+<g stroke="#b42318" stroke-width="2">
+<g class="anim-spin-rev"><circle cx="120" cy="226" r="12" stroke="none" /><path d="M124.5 218.2A9 9 0 1 0 129 226" /><path d="M126 229L129 226L132 229" /></g>
+<g class="anim-spin-rev"><circle cx="260" cy="226" r="12" stroke="none" /><path d="M264.5 218.2A9 9 0 1 0 269 226" /><path d="M266 229L269 226L272 229" /></g>
+<g class="anim-spin-rev"><circle cx="380" cy="226" r="12" stroke="none" /><path d="M384.5 218.2A9 9 0 1 0 389 226" /><path d="M386 229L389 226L392 229" /></g>
+<g class="anim-spin"><circle cx="190" cy="285" r="12" stroke="none" /><path d="M194.5 292.8A9 9 0 1 1 199 285" /><path d="M196 282L199 285L202 282" /></g>
+<g class="anim-spin"><circle cx="320" cy="285" r="12" stroke="none" /><path d="M324.5 292.8A9 9 0 1 1 329 285" /><path d="M326 282L329 285L332 282" /></g>
+</g>
+<g stroke="#0b2545" stroke-width="1.5">
+<path d="M470 50V140M470 210V300" />
+<path d="M470 55H479 M470 65H503 M470 80H527 M470 95H535 M470 110H527 M470 125H503 M470 135H479 M470 215H516 M470 225H525 M470 240H531 M470 255H535 M470 270H531 M470 285H525 M470 295H516" />
+<path d="M478 51.5L484 55L478 58.5Z M502 61.5L508 65L502 68.5Z M526 76.5L532 80L526 83.5Z M534 91.5L540 95L534 98.5Z M526 106.5L532 110L526 113.5Z M502 121.5L508 125L502 128.5Z M478 131.5L484 135L478 138.5Z M515 211.5L521 215L515 218.5Z M524 221.5L530 225L524 228.5Z M530 236.5L536 240L530 243.5Z M534 251.5L540 255L534 258.5Z M530 266.5L536 270L530 273.5Z M524 281.5L530 285L524 288.5Z M515 291.5L521 295L515 298.5Z" fill="#0b2545" stroke-width="1" />
+</g>
+<g stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3">
+<path d="M470.0 50 L484.7 55 L497.7 60 L508.9 65 L518.4 70 L526.2 75 L532.2 80 L536.5 85 L539.1 90 L540.0 95 L539.1 100 L536.5 105 L532.2 110 L526.2 115 L518.4 120 L508.9 125 L497.7 130 L484.7 135 L470.0 140" />
+<path d="M470.0 210 L521.1 215 L526.5 220 L529.8 225 L532.3 230 L534.4 235 L536.1 240 L537.5 245 L538.8 250 L540.0 255 L538.8 260 L537.5 265 L536.1 270 L534.4 275 L532.3 280 L529.8 285 L526.5 290 L521.1 295 L470.0 300" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="455" y="162">Parabolic profile</text>
+<text x="455" y="322">Flatter profile</text>
+<text x="40" y="162">Smooth parallel layers, no mixing</text>
+<text x="40" y="322">Eddies mix fluid across the pipe</text>
+<text x="300" y="162">Flow direction left to right</text>
+</g>
+</svg>
+<figcaption>Laminar flow moves in straight parallel layers with a parabolic velocity profile; turbulent flow mixes through eddies and has a flatter profile.</figcaption>
+</figure>
+
+For fully developed flow in a smooth circular pipe, standard textbooks such as Cengel and Cimbala use these engineering limits:
+
+| Pipe flow regime | Reynolds number | Behaviour |
+| --- | --- | --- |
+| Laminar | below about 2300 | Smooth layers, dye stays as a line, parabolic profile |
+| Transitional | about 2300 to 4000 | Flow switches between laminar and turbulent bursts |
+| Turbulent | above about 4000 | Random eddies, strong mixing, flatter profile |
+
+These limits are not sharp physical constants. Reynolds himself, and later researchers, kept pipe flow laminar to much higher values by using very smooth inlets and vibration free rigs. In real piping, with rough walls, fittings, pumps and vibration, flow usually becomes turbulent close to the lower value.
+
+### Laminar flow characteristics
+
+In laminar pipe flow the velocity profile is a parabola. The centreline velocity is twice the mean velocity, and momentum moves across the pipe only by molecular viscosity. The Darcy friction factor is known exactly:
+
+$$
+f = \frac{64}{Re}
+$$
+
+so pressure drop is directly proportional to velocity. Laminar flow is common with viscous oils, in small tubes, in blood capillaries and in lubrication films, discussed in [types of lubrication](/mechanical-engineering/types-of-lubrication/).
+
+### Turbulent flow characteristics
+
+Turbulent flow carries swirling eddies of many sizes. They transport momentum and heat across the pipe far faster than viscosity alone, so the mean profile is flatter, often approximated by a one seventh power law, with a steep gradient in a thin layer near the wall. The friction factor depends on both Re and the relative roughness ε/D and is read from the Moody chart or the Colebrook equation:
+
+$$
+\frac{1}{\sqrt{f}} = -2.0 \log_{10}\left(\frac{\varepsilon/D}{3.7} + \frac{2.51}{Re\sqrt{f}}\right)
+$$
+
+Most water, steam and air flows in industrial pipes and ducts are turbulent.
+
+## Choosing the characteristic length
+
+The value of Re depends on the length you choose, so each geometry has its own convention and its own critical value:
+
+- **Circular pipe:** D is the inside diameter.
+- **Non circular duct:** use the hydraulic diameter D_h = 4A/P, where A is flow area and P is wetted perimeter. For a circular pipe D_h equals D.
+- **Flat plate boundary layer:** use distance x from the leading edge. Transition on a smooth plate is usually taken at Re_x of about 5 × 10⁵.
+- **Flow around a sphere or cylinder:** use the body diameter. This governs drag and vortex shedding, as covered in [drag force on aircraft](/aerospace-engineering/drag-force-on-aircraft/).
+
+Never compare a Reynolds number calculated with one length against a critical value defined with another.
+
+## Entrance length
+
+Flow entering a pipe needs some distance before the velocity profile stops changing. This is the hydrodynamic entrance length. Cengel and Cimbala give approximately:
+
+$$
+L_h \approx 0.05\,Re\,D \quad \text{(laminar)}
+$$
+
+For turbulent flow the entrance length is much shorter and is often taken as about 10 pipe diameters. This is why flowmeters need straight runs of pipe upstream, and why laminar flow in a long oil line may never become fully developed in a short heat exchanger tube.
+
+## Why the Reynolds number matters in design
+
+- **Pressure drop and pump sizing:** Re selects the friction factor for the Darcy-Weisbach equation, which gives the head loss a pump must overcome. See the [centrifugal pump working principle](/mechanical-engineering/centrifugal-pump-working-principle/) and the [Bernoulli equation](/mechanical-engineering/bernoulli-equation/) energy balance.
+- **Heat transfer:** convection coefficients are given as Nusselt number correlations in terms of Re and Prandtl number. Turbulent flow transfers far more heat, which is why exchanger tubes are designed for turbulent velocities; see [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/) and [heat exchanger types](/chemical-engineering/heat-exchanger-types/).
+- **Flow measurement:** discharge coefficients of orifice plates and venturis, and the K factor of many meters, vary with Re.
+- **Model testing:** two geometrically similar flows behave the same way when their Reynolds numbers match. This **dynamic similarity** lets wind tunnel and water channel models predict full size results.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Water at 20 °C flows at a mean velocity of 1.5 m/s in a smooth pipe of 50 mm inside diameter. Properties at 20 °C: ρ = 998 kg/m³, μ = 1.002 × 10⁻³ Pa·s.</dd>
+<dt>Find</dt><dd>The Reynolds number and flow regime, and the highest mean velocity that would keep the flow laminar.</dd>
+<dt>Assumptions</dt><dd>Fully developed, steady, incompressible flow; laminar limit taken as Re = 2300.</dd>
+<dt>Solution</dt><dd>Re = ρVD / μ = 998 × 1.5 × 0.05 / 0.001002 = 74,700<br />74,700 is far above 4000, so the flow is turbulent.<br />ν = μ / ρ = 0.001002 / 998 = 1.004 × 10⁻⁶ m²/s<br />V_max laminar = 2300 × ν / D = 2300 × 1.004 × 10⁻⁶ / 0.05 = 0.046 m/s</dd>
+<dt>Answer</dt><dd><strong>Re is about 74,700, so the flow is turbulent. The water would need to move slower than about 0.046 m/s (46 mm/s) to stay laminar.</strong></dd>
+<dt>Limitations</dt><dd>Viscosity changes strongly with temperature, so recalculate Re at the actual fluid temperature. The 2300 limit is an engineering value; disturbances and fittings can trigger turbulence earlier.</dd>
+</dl>
+</Example>
+
+The result is typical: water at ordinary pipe velocities is almost always turbulent, while laminar flow needs very low speed, a small tube or a much more viscous fluid.
+
+<Calculator path="engineering/reynolds-number" title="Reynolds Number Calculator" />
+
+## Key formulas for the Reynolds number
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Reynolds number | Re = ρVD / μ = VD / ν | ρ in kg/m³, V in m/s, D in m, μ in Pa·s, ν in m²/s |
+| Kinematic viscosity | ν = μ / ρ | m²/s |
+| Hydraulic diameter | D_h = 4A / P | A = flow area in m², P = wetted perimeter in m |
+| Laminar friction factor | f = 64 / Re | Darcy friction factor, dimensionless |
+| Laminar entrance length | L_h ≈ 0.05 Re D | L_h and D in m |
+| Flat plate Reynolds number | Re_x = ρVx / μ | x = distance from leading edge in m; transition near 5 × 10⁵ |
+
+## Common mistakes
+
+- Using the pipe outside diameter instead of the inside diameter.
+- Mixing dynamic viscosity (Pa·s) with kinematic viscosity (m²/s), or using centipoise without converting (1 cP = 0.001 Pa·s).
+- Taking viscosity at the wrong temperature, especially for oils, whose viscosity can change several times over a modest temperature range.
+- Applying the pipe limit of 2300 to a flat plate, a sphere or an open channel.
+
+## Reynolds number interview and viva questions
+
+1. **What does the Reynolds number physically represent?** It is the ratio of inertial forces to viscous forces in a flow. A high value means inertia dominates and disturbances grow into turbulence.
+2. **What are the laminar and turbulent limits for pipe flow?** Flow in a circular pipe is usually laminar below about 2300, transitional from 2300 to 4000 and turbulent above about 4000.
+3. **What is the friction factor for laminar pipe flow?** The Darcy friction factor is f = 64/Re, independent of wall roughness.
+4. **What length is used for a non circular duct?** The hydraulic diameter, four times the flow area divided by the wetted perimeter.
+5. **Why is Reynolds number matching important in model testing?** Geometrically similar flows with the same Reynolds number are dynamically similar, so forces and flow patterns measured on a model scale correctly to the full size object.
+
+## Related reading
+
+- [Bernoulli Equation: Derivation, Assumptions and Applications](/mechanical-engineering/bernoulli-equation/)
+- [Centrifugal Pump Working Principle](/mechanical-engineering/centrifugal-pump-working-principle/)
