@@ -66,12 +66,12 @@ electronics-engineering|power-electronics|Boost Converter Working Principle and 
 civil-engineering|concrete-technology|Concrete Mix Design Steps Explained|concrete-mix-design|fundamentals|concrete mix design|2026-11-17
 chemical-engineering|mass-transfer|Absorption vs Adsorption: Differences|absorption-vs-adsorption|comparison|absorption vs adsorption|2026-11-17
 computer-science|databases|SQL vs NoSQL Databases Compared|sql-vs-nosql|comparison|sql vs nosql|2026-11-17
-automation-robotics|industrial-robotics|Robot End Effectors: Grippers and Tools|robot-end-effectors|explanation|robot end effectors|todo
-ai-data-engineering|nlp|Sentiment Analysis Explained: Methods and Uses|sentiment-analysis|explanation|sentiment analysis|todo
-telecommunication-engineering|cellular-networks|4G vs 5G: Key Differences Explained|4g-vs-5g|comparison|4g vs 5g|todo
-petroleum-engineering|production-engineering|Oil and Gas Separators: Types and Working|oil-gas-separators|equipment|oil and gas separators|todo
-renewable-energy|hydrogen-fuel-cells|Fuel Cell Working Principle and Types|fuel-cell-working-principle|working-principle|fuel cell working principle|todo
-environmental-engineering|waste-management|Landfill Design: Liners, Leachate and Gas|landfill-design|explanation|landfill design|todo
+automation-robotics|industrial-robotics|Robot End Effectors: Grippers and Tools|robot-end-effectors|explanation|robot end effectors|2026-11-18
+ai-data-engineering|nlp|Sentiment Analysis Explained: Methods and Uses|sentiment-analysis|explanation|sentiment analysis|2026-11-18
+telecommunication-engineering|cellular-networks|4G vs 5G: Key Differences Explained|4g-vs-5g|comparison|4g vs 5g|2026-11-18
+petroleum-engineering|production-engineering|Oil and Gas Separators: Types and Working|oil-gas-separators|equipment|oil and gas separators|2026-11-18
+renewable-energy|hydrogen-fuel-cells|Fuel Cell Working Principle and Types|fuel-cell-working-principle|working-principle|fuel cell working principle|2026-11-18
+environmental-engineering|waste-management|Landfill Design: Liners, Leachate and Gas|landfill-design|explanation|landfill design|2026-11-18
 mining-engineering|rock-mechanics|Rock Bolting and Ground Support Methods|rock-bolting-ground-support|explanation|rock bolting|todo
 manufacturing-engineering|lean-manufacturing|5S Methodology Explained with Examples|5s-methodology|explanation|5s methodology|todo
 materials-engineering|welding|Welding Defects: Causes and Remedies|welding-defects|troubleshooting|welding defects|todo
