@@ -3,6 +3,7 @@ title: "Types of Beams and Supports in Structures"
 description: "Types of beams explained: simply supported, cantilever, overhanging, fixed, propped and continuous beams, support types, and moments compared."
 pubDate: 2026-11-07
 reviewedDate: 2026-11-07
+updatedDate: 2026-11-18
 discipline: civil-engineering
 subcategory: structural-analysis
 focusKeyword: "types of beams"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The main **types of beams** are classified by how they are supported: **simply supported** (pin at one end, roller at the other), **cantilever** (fixed at one end, free at the other), **overhanging**, **fixed** (both ends built in), **propped cantilever** and **continuous** (more than two supports). The support type decides the reactions, the bending moment pattern and the deflection, so it is the first choice in any beam design.
+The **types of beams** are classified by their supports: simply supported, cantilever, overhanging, fixed, propped cantilever and continuous. A beam carries loads across its length by bending and shear, and its support type decides the reactions, the bending moment pattern and the deflection, so choosing it is the first step in beam design.
 
 </Key>
 
@@ -49,23 +50,23 @@ Real supports only approximate these ideals. A steel beam bolted through its web
 
 ## Common types of beams
 
-<figure>
+<figure class="anim">
 <svg width="600" height="340" viewBox="0 0 600 340" fill="none" role="img" aria-label="Four beam types. Top left: simply supported beam with a pin at the left and a roller at the right. Top right: cantilever beam fixed into a wall at the left and free at the right. Bottom left: overhanging beam on a pin and a roller with one end extending beyond the roller. Bottom right: fixed beam built into walls at both ends.">
 <g stroke="#0b2545" stroke-width="2">
 <path d="M40 70H260" stroke-width="6" stroke="#13a89e" />
-<path d="M40 73L28 97H52Z" fill="#fde9a8" />
-<path d="M260 73L248 93H272Z" fill="#fde9a8" />
+<path class="anim-pulse" d="M40 73L28 97H52Z" fill="#fde9a8" />
+<path class="anim-pulse" d="M260 73L248 93H272Z" fill="#fde9a8" />
 <circle cx="252" cy="98" r="4" fill="#ffffff" />
 <circle cx="268" cy="98" r="4" fill="#ffffff" />
-<path d="M330 40V110" />
+<path class="anim-blink anim-d1" d="M330 40V110" />
 <path d="M330 45L320 55M330 60L320 70M330 75L320 85M330 90L320 100" stroke-width="1.5" />
 <path d="M330 70H560" stroke-width="6" stroke="#13a89e" />
 <path d="M40 230H280" stroke-width="6" stroke="#13a89e" />
-<path d="M40 233L28 257H52Z" fill="#fde9a8" />
-<path d="M200 233L188 253H212Z" fill="#fde9a8" />
+<path class="anim-pulse anim-d2" d="M40 233L28 257H52Z" fill="#fde9a8" />
+<path class="anim-pulse anim-d2" d="M200 233L188 253H212Z" fill="#fde9a8" />
 <circle cx="192" cy="258" r="4" fill="#ffffff" />
 <circle cx="208" cy="258" r="4" fill="#ffffff" />
-<path d="M330 200V270M560 200V270" />
+<path class="anim-blink anim-d3" d="M330 200V270M560 200V270" />
 <path d="M330 205L320 215M330 220L320 230M330 235L320 245M330 250L320 260" stroke-width="1.5" />
 <path d="M560 205L570 215M560 220L570 230M560 235L570 245M560 250L570 260" stroke-width="1.5" />
 <path d="M330 230H560" stroke-width="6" stroke="#13a89e" />
@@ -157,6 +158,24 @@ The same load gives a moment four times larger as a cantilever than as a simply 
 - **Construction method:** cast in place concrete is naturally continuous; precast units are usually simply supported.
 - **Movement:** determinate beams accommodate settlement and thermal movement without extra stress, which is valuable on poor soil and in bridges. See [types of bridges](/civil-engineering/types-of-bridges/).
 - **Design method:** concrete beams are sized by the limit state approach described in [limit state design of RCC](/civil-engineering/limit-state-design-rcc/).
+
+## Key formulas for types of beams
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Simply supported, full UDL | Mmax = wL²/8, δmax = 5wL⁴/384EI | w = load in kN/m, L = span in m, E = elastic modulus, I = second moment of area |
+| Cantilever, full UDL | Mmax = wL²/2, δmax = wL⁴/8EI | Moment at the fixed end, deflection at the free end |
+| Fixed at both ends, full UDL | M = wL²/12 at supports, wL²/24 at midspan, δmax = wL⁴/384EI | End moments hogging, midspan moment sagging |
+| Equilibrium of a plane beam | ΣFx = 0, ΣFy = 0, ΣM = 0 | Three independent equations |
+| Degree of indeterminacy | r − 3 | r = number of reaction components (beam with no internal hinges) |
+
+## Types of beams interview and viva questions
+
+1. **How many reaction components does each support type provide?** A roller provides one force, a pin provides two forces and a fixed support provides two forces and a moment.
+2. **Which types of beams are statically determinate?** Simply supported, cantilever and overhanging beams, because their three reaction components can be found from the three equations of equilibrium.
+3. **What is the degree of indeterminacy of a fixed beam?** It has six reaction components, so its degree of indeterminacy is six minus three, which is three.
+4. **Why does an overhang reduce the span moment?** The overhang creates a hogging moment over the support, which reduces the sagging moment in the main span, with a point of contraflexure between them.
+5. **Why are bridge bearings often designed as rollers?** Rollers allow horizontal movement so the deck can expand and contract with temperature without extra stress.
 
 ## Related reading
 

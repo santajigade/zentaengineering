@@ -3,6 +3,7 @@ title: "Flexible vs Rigid Pavement: Differences Explained"
 description: "Flexible vs rigid pavement compared: layers, how each carries load, design basis, cost, life, maintenance and where each is used, with IRC references."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-18
 discipline: civil-engineering
 subcategory: transportation
 focusKeyword: "flexible vs rigid pavement"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In the **flexible vs rigid pavement** comparison, the difference is how load reaches the soil. A **flexible pavement** (bituminous) is a stack of granular and bituminous layers that spread the wheel load gradually, so the subgrade strength governs its thickness. A **rigid pavement** (cement concrete) is a stiff slab that bends and spreads the load over a wide area, so the concrete's flexural strength governs. Flexible pavements are cheaper to build; rigid pavements last longer with less maintenance.
+In the **flexible vs rigid pavement** comparison, a **flexible pavement** is a stack of bituminous and granular layers that spread wheel load gradually, so subgrade strength governs thickness. A **rigid pavement** is a stiff concrete slab that bends and spreads load widely, so flexural strength governs. Flexible pavements cost less initially; rigid ones last longer.
 
 </Key>
 
@@ -37,7 +38,7 @@ Roads, runways, ports and industrial yards all need a pavement that carries repe
 
 ## How each pavement carries load
 
-<figure>
+<figure class="anim">
 <svg width="560" height="280" viewBox="0 0 560 280" fill="none" role="img" aria-label="Side by side cross sections: a flexible pavement with bituminous surface, base, sub-base and subgrade, where wheel load spreads in a narrow cone; and a rigid pavement with concrete slab and dry lean concrete over subgrade, where load spreads over a wide area">
 <g font-size="12" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">
 <rect x="20" y="70" width="240" height="22" fill="#3b3f46" />
@@ -49,7 +50,8 @@ Roads, runways, ports and industrial yards all need a pavement that carries repe
 <text x="30" y="156">Granular sub-base</text>
 <text x="30" y="222">Subgrade soil</text>
 <path d="M205 38V64" stroke="#b42318" stroke-width="2.5" /><path d="M198 56L205 66L212 56" stroke="#b42318" stroke-width="2.5" />
-<path d="M198 70L172 200M212 70L238 200" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" fill="none" />
+<path class="anim-flow-slow" d="M198 70L172 200M212 70L238 200" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" fill="none" />
+<path class="anim-flow" d="M205 38V56" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 12" />
 <text x="140" y="258" text-anchor="middle" font-size="13">Flexible pavement</text>
 <rect x="300" y="70" width="240" height="50" fill="#d8dee8" stroke="#0b2545" stroke-width="1" />
 <rect x="300" y="120" width="240" height="30" fill="#eef1f6" stroke="#0b2545" stroke-width="1" />
@@ -59,6 +61,8 @@ Roads, runways, ports and industrial yards all need a pavement that carries repe
 <text x="420" y="222" text-anchor="middle">Subgrade soil</text>
 <path d="M420 38V64" stroke="#b42318" stroke-width="2.5" /><path d="M413 56L420 66L427 56" stroke="#b42318" stroke-width="2.5" />
 <path d="M310 150Q420 175 530 150" stroke="#b42318" stroke-width="1.5" stroke-dasharray="5 4" fill="none" />
+<path class="anim-flow" d="M420 38V56" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 12" />
+<path class="anim-flow-slow" d="M420 162.5Q475 162.5 530 150M420 162.5Q365 162.5 310 150" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 12" fill="none" />
 <text x="420" y="190" text-anchor="middle" fill="#b42318">Load spread wide</text>
 <text x="420" y="258" text-anchor="middle" font-size="13">Rigid pavement</text>
 </g>
@@ -151,3 +155,11 @@ Flexible pavements are laid in layers with graders, pavers and rollers, and each
 The decision is usually made on **life cycle cost**: construction cost plus discounted maintenance, rehabilitation and user delay costs over the analysis period. Other factors include traffic volume and axle loads, subgrade strength, drainage, availability of aggregates, bitumen and cement, construction speed and the agency's maintenance capacity.
 
 Concrete quality for rigid pavements depends heavily on a low [water cement ratio](/civil-engineering/water-cement-ratio/) and the right [type of cement](/civil-engineering/types-of-cement/). Road levels and gradients are set out by [levelling in surveying](/civil-engineering/levelling-in-surveying/), and pavement quantities come from [quantity estimation methods](/civil-engineering/quantity-estimation-methods/).
+
+## Flexible vs rigid pavement interview and viva questions
+
+1. **What governs the thickness of a flexible pavement?** Mainly the subgrade strength, expressed as CBR or resilient modulus, and the cumulative traffic in million standard axles (msa), as in IRC:37-2018.
+2. **Why is a rigid pavement less sensitive to weak subgrade?** The concrete slab has high flexural stiffness and acts like a plate on an elastic foundation, spreading the wheel load over a wide area so subgrade pressures stay low.
+3. **What is the purpose of dowel bars and tie bars?** Dowel bars transfer load across transverse joints between slabs, while tie bars hold adjacent slabs together across longitudinal joints.
+4. **What is pumping in rigid pavements?** Water and fine soil are squeezed out at joints under traffic, leaving voids beneath the slab that lead to cracking and faulting.
+5. **On what basis is the choice between flexible and rigid pavement made?** Usually on life cycle cost, which includes construction, maintenance, rehabilitation and user delay costs, along with traffic, subgrade, drainage and material availability.

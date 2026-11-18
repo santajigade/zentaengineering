@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/civil-engineering/flexible-vs-rigid-pavement.mdx
-src/content/articles/civil-engineering/levelling-in-surveying.mdx
-src/content/articles/civil-engineering/limit-state-design-rcc.mdx
-src/content/articles/civil-engineering/quantity-estimation-methods.mdx
-src/content/articles/civil-engineering/shear-force-and-bending-moment.mdx
-src/content/articles/civil-engineering/steel-sections-types.mdx
-src/content/articles/civil-engineering/types-of-beams.mdx
-src/content/articles/civil-engineering/types-of-bridges.mdx
 src/content/articles/civil-engineering/types-of-cement.mdx
 src/content/articles/civil-engineering/types-of-foundations.mdx
 src/content/articles/civil-engineering/water-cement-ratio.mdx

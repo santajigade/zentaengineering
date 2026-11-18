@@ -1,0 +1,176 @@
+---
+title: "Sentiment Analysis Explained: Methods and Uses"
+description: "Sentiment analysis explained: lexicon, machine learning and transformer methods, aspect level analysis, evaluation with precision, recall and F1, and uses."
+pubDate: 2026-11-18
+reviewedDate: 2026-11-18
+discipline: ai-data-engineering
+subcategory: nlp
+focusKeyword: "sentiment analysis"
+image: { src: /images/featured/sentiment-analysis.webp, alt: "Sentiment Analysis Explained: Methods and Uses: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [nlp, sentiment-analysis, text-classification, opinion-mining, bert]
+faq:
+  - q: "Is sentiment analysis the same as opinion mining?"
+    a: "The two terms are usually used as synonyms. Bing Liu describes sentiment analysis, also called opinion mining, as the field that analyses people's opinions, sentiments, evaluations, attitudes and emotions towards entities such as products, services, organisations, events and their attributes."
+  - q: "Can sentiment analysis detect sarcasm?"
+    a: "Only partly. Sarcasm often uses positive words to express a negative opinion, so lexicon methods usually get it wrong. Models trained on large amounts of context, such as fine tuned transformers, do better, but sarcasm remains one of the hardest cases and errors are common."
+  - q: "Do I need labelled data for sentiment analysis?"
+    a: "Lexicon based tools such as VADER work without labelled training data. Machine learning and fine tuned transformer models need labelled examples, ideally from the same domain as the target text, plus a separate labelled test set to measure accuracy honestly."
+references:
+  - text: "D. Jurafsky and J. H. Martin, Speech and Language Processing, 3rd ed. draft, Stanford University"
+  - text: "B. Liu, Sentiment Analysis and Opinion Mining, Morgan and Claypool, 2012"
+  - text: "B. Pang and L. Lee, Opinion Mining and Sentiment Analysis, Foundations and Trends in Information Retrieval, 2008"
+  - text: "B. Pang, L. Lee and S. Vaithyanathan, Thumbs up? Sentiment Classification using Machine Learning Techniques, EMNLP, 2002"
+  - text: "C. J. Hutto and E. Gilbert, VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text, ICWSM, 2014"
+  - text: "J. Devlin et al., BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, NAACL, 2019"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Sentiment analysis** is the natural language processing task of identifying the opinion or emotional tone in text, usually labelling it positive, negative or neutral. It uses word lexicons, machine learning classifiers or transformer models, and is applied to product reviews, social media, surveys and support tickets to measure opinion at scale.
+
+</Key>
+
+Sentiment analysis lets a computer read thousands of reviews, posts or survey comments and report how people feel. Instead of reading every line, a company can see that complaints about delivery doubled last week, or that a new feature is praised. Bing Liu describes the field as the study of opinions, sentiments, evaluations, attitudes and emotions expressed in text. This article covers how it works, the main methods, how to measure accuracy and where it is used.
+
+## What sentiment analysis does
+
+At its simplest, sentiment analysis is a **text classification** problem. The input is a piece of text and the output is a class label:
+
+- **Polarity:** positive, negative or neutral.
+- **Fine grained scale:** for example very negative to very positive on five levels, as in the Stanford Sentiment Treebank.
+- **Score:** a continuous value, such as a compound score between minus 1 and plus 1.
+- **Emotion:** labels such as joy, anger, fear or sadness.
+
+### Levels of analysis
+
+Liu distinguishes three levels:
+
+1. **Document level:** one label for a whole review or post.
+2. **Sentence level:** a label for each sentence, which also separates subjective sentences from objective facts.
+3. **Aspect level:** the opinion about each feature or aspect of an entity. "The camera is great but the battery dies fast" is positive about the camera and negative about the battery. Aspect based sentiment analysis is the most useful for product teams but also the hardest.
+
+## How a sentiment analysis pipeline works
+
+<figure class="anim">
+<svg width="600" height="200" viewBox="0 0 600 200" fill="none" role="img" aria-label="Sentiment analysis pipeline: raw text such as a product review flows through preprocessing and tokenization, then feature extraction or embeddings, then a classifier that may be lexicon based, machine learning or transformer, and finally an output label of positive, neutral or negative">
+<g stroke="#0b2545" stroke-width="2">
+<rect class="anim-blink" x="10" y="70" width="95" height="60" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d1" x="130" y="70" width="95" height="60" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d2" x="250" y="70" width="95" height="60" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d3" x="370" y="70" width="95" height="60" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d4" x="490" y="55" width="100" height="90" rx="6" fill="#fff7e0" />
+</g>
+<g stroke="#13a89e" stroke-width="3"><path d="M105 100H130M225 100H250M345 100H370M465 100H490" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M105 100H130M225 100H250M345 100H370M465 100H490" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="10" y="30" text-anchor="start" font-style="italic">Review: "Battery lasts all day, love it"</text>
+<text x="57" y="96">Raw text</text><text x="57" y="112">input</text>
+<text x="177" y="96">Preprocess</text><text x="177" y="112">and tokenize</text>
+<text x="297" y="96">Features or</text><text x="297" y="112">embeddings</text>
+<text x="417" y="96" font-weight="700">Classifier</text><text x="417" y="112">model</text>
+<text x="540" y="80" fill="#13a89e" font-weight="700">Positive</text><text x="540" y="104">Neutral</text><text x="540" y="128" fill="#b42318">Negative</text>
+<text x="417" y="165" font-size="11">Lexicon, machine</text><text x="417" y="180" font-size="11">learning or transformer</text>
+<text x="297" y="165" font-size="11">Bag of words,</text><text x="297" y="180" font-size="11">TF-IDF or vectors</text>
+<text x="540" y="165" font-size="11">Label or score</text>
+</g>
+</svg>
+<figcaption>A typical sentiment analysis pipeline. Text flows from left to right and each stage is highlighted in turn.</figcaption>
+</figure>
+
+1. **Collect text:** reviews, posts, emails, chat logs or survey answers.
+2. **Preprocess:** clean markup, normalise case, handle emojis and split the text into tokens, as described in [tokenization and embeddings](/ai-data-engineering/tokenization-and-embeddings/).
+3. **Represent:** convert tokens to numbers, using word counts, TF-IDF weights or dense embedding vectors.
+4. **Classify:** apply a lexicon, a trained classifier or a neural model.
+5. **Aggregate and report:** count labels by product, date or topic and show trends on a dashboard.
+
+## Sentiment analysis methods
+
+### Lexicon based methods
+
+A **sentiment lexicon** lists words with a polarity or strength, such as "excellent" strongly positive and "awful" strongly negative. The text score is built from the scores of its words, with rules for negation ("not good"), intensifiers ("very good") and contrast words ("but").
+
+VADER, by Hutto and Gilbert, is a widely used rule based tool tuned for social media. It handles capitals, exclamation marks and emoticons, and returns a compound score from minus 1 to plus 1. Lexicon methods need no training data and are easy to explain, but they miss domain meaning. "Unpredictable" is negative for a car's steering and positive for a film plot.
+
+### Machine learning methods
+
+Pang, Lee and Vaithyanathan showed in 2002 that standard classifiers trained on labelled movie reviews, namely **Naive Bayes**, **maximum entropy** (logistic regression) and **support vector machines**, outperformed simple word list baselines. These models learn which words and word pairs predict each class from bag of words features. They are fast and work well with a few thousand labelled examples from the target domain. This is a [supervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/) problem, so the usual care about [overfitting](/ai-data-engineering/overfitting-and-underfitting/) and held out test sets applies.
+
+Multinomial Naive Bayes, described by Jurafsky and Martin, chooses the class c that maximises the prior times the product of word likelihoods:
+
+$$
+\hat{c} = \arg\max_{c} \; P(c) \prod_{i} P(w_i \mid c)
+$$
+
+### Deep learning and transformer methods
+
+Neural models learn features directly from text. Recurrent networks and later **transformers** read words in context, so they can capture negation scope and contrast better than bag of words models. A pretrained model such as **BERT** is fine tuned on labelled sentiment data by adding a small classification layer on top of its output for the whole sentence. The same idea underlies [large language models](/ai-data-engineering/how-large-language-models-work/), which can also classify sentiment from a written instruction with few or no examples.
+
+| Method | Training data | Strengths | Weaknesses |
+| --- | --- | --- | --- |
+| Lexicon and rules | None | Fast, transparent, no labels | Misses context and domain meaning |
+| Classical machine learning | Labelled set | Simple, fast, good in domain | Weak on negation and word order |
+| Fine tuned transformer | Labelled set, pretrained model | Best context handling | Needs GPU, harder to explain |
+
+## Evaluating sentiment analysis
+
+Model quality is measured on a labelled test set that was not used in training. For the positive class, with TP true positives, FP false positives and FN false negatives:
+
+$$
+P = \frac{TP}{TP + FP}, \quad R = \frac{TP}{TP + FN}, \quad F_1 = \frac{2PR}{P + R}
+$$
+
+Accuracy alone can mislead when classes are unbalanced, so precision, recall and F1 are reported per class, often with a macro average across classes.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A binary sentiment classifier is tested on 200 labelled reviews. For the positive class it gives TP = 80, FP = 20, FN = 10 and TN = 90.</dd>
+<dt>Find</dt><dd>Precision, recall, F1 and accuracy.</dd>
+<dt>Assumptions</dt><dd>Each review has exactly one true label, positive or negative. The test set was not used for training.</dd>
+<dt>Solution</dt><dd>P = 80 ÷ (80 + 20) = 0.800<br />R = 80 ÷ (80 + 10) = 0.889<br />F1 = 2 × 0.800 × 0.889 ÷ (0.800 + 0.889) = 0.842<br />Accuracy = (80 + 90) ÷ 200 = 0.850</dd>
+<dt>Answer</dt><dd><strong>Precision 0.80, recall 0.89, F1 0.84 and accuracy 0.85.</strong></dd>
+<dt>Limitations</dt><dd>These numbers are illustrative. A real evaluation should also report the negative class, use a test set from the target domain and check results on hard cases such as negation and sarcasm.</dd>
+</dl>
+</Example>
+
+## Key formulas for sentiment analysis
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Naive Bayes decision | ĉ = argmax over c of P(c) × Π P(wᵢ given c) | c = class, wᵢ = words in the text |
+| Precision | P = TP ÷ (TP + FP) | counts of predictions, dimensionless |
+| Recall | R = TP ÷ (TP + FN) | dimensionless |
+| F1 score | F1 = 2PR ÷ (P + R) | harmonic mean of P and R |
+| Accuracy | (TP + TN) ÷ total | fraction of correct labels |
+
+## Challenges in sentiment analysis
+
+- **Negation:** "not bad at all" is positive although it contains "bad".
+- **Sarcasm and irony:** positive words with negative intent.
+- **Domain dependence:** a model trained on movie reviews may perform poorly on hotel or finance text.
+- **Comparisons:** "Phone A is better than phone B" is positive for one entity and negative for another.
+- **Mixed opinions:** one review can praise and criticise different aspects, which needs aspect level analysis.
+- **Language and code mixing:** slang, emojis and posts that mix two languages.
+- **Bias:** models can absorb biases from training data, so outputs should be checked across groups.
+
+## Applications of sentiment analysis
+
+- **Product and service reviews:** find which features customers like or dislike.
+- **Brand and social media monitoring:** track reaction to launches, campaigns and incidents.
+- **Customer support:** route angry tickets to senior staff first.
+- **Surveys and employee feedback:** summarise open text answers.
+- **Engineering and maintenance:** mine operator logs and service reports for recurring complaints, which can support [predictive maintenance](/ai-data-engineering/predictive-maintenance-machine-learning/) work.
+
+A sentiment model is usually one step inside a larger [data science workflow](/ai-data-engineering/data-science-workflow/) that also covers data collection, cleaning, deployment and monitoring.
+
+## Sentiment analysis interview and viva questions
+
+1. **What is sentiment analysis?** It is the NLP task of identifying the opinion or emotional tone expressed in text, usually as positive, negative or neutral.
+2. **What is aspect based sentiment analysis?** It finds the sentiment towards each feature of an entity, such as camera and battery in a phone review, instead of one label for the whole text.
+3. **How does a lexicon based method work?** It sums the polarity scores of words from a sentiment lexicon and applies rules for negation, intensifiers and contrast words.
+4. **Why is F1 often preferred to accuracy?** F1 combines precision and recall, so it reflects performance on a class even when classes are unbalanced and accuracy looks high.
+5. **Why do transformer models handle negation better than bag of words models?** They encode each word in the context of the whole sentence, so the effect of "not" on nearby words is captured.

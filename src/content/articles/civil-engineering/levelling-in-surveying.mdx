@@ -3,6 +3,7 @@ title: "Levelling in Surveying: Methods and Calculations"
 description: "Levelling in surveying explained: terms, instruments, height of instrument and rise and fall methods, arithmetic checks, errors and a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-18
 discipline: civil-engineering
 subcategory: surveying
 focusKeyword: "levelling in surveying"
@@ -28,7 +29,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Levelling in surveying** finds the height of points relative to a datum. A level gives a horizontal line of sight; readings on a graduated staff held on each point show how far below that line the point lies. Starting from a benchmark of known reduced level (RL), the levels of all other points are worked out by the **height of instrument** method or the **rise and fall** method, with an arithmetic check: ΣBS − ΣFS = last RL − first RL.
+**Levelling in surveying** is finding the height of points relative to a datum. A level gives a horizontal line of sight, and staff readings show how far below it each point lies. Starting from a benchmark of known reduced level, levels are worked out by the **height of instrument** or **rise and fall** method, with an arithmetic check.
 
 </Key>
 
@@ -52,7 +53,7 @@ Levelling is used to set out floor levels, road and drain gradients, foundations
 - **Digital levels:** read a bar-coded staff electronically and store the readings.
 - **Levelling staff:** graduated usually in 5 mm or 10 mm divisions; telescopic or folding.
 
-<figure>
+<figure class="anim">
 <svg width="560" height="270" viewBox="0 0 560 270" fill="none" role="img" aria-label="Levelling setup: an automatic level on a tripod between two staffs; the horizontal line of sight cuts the backsight staff on the benchmark and the foresight staff on point A, which is lower on sloping ground">
 <path d="M20 170L200 175L360 195L540 215" stroke="#0b2545" stroke-width="2" />
 <rect x="80" y="40" width="12" height="132" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
@@ -60,6 +61,7 @@ Levelling is used to set out floor levels, road and drain gradients, foundations
 <path d="M272 182L280 110L288 184M280 110V186" stroke="#0b2545" stroke-width="2" />
 <rect x="262" y="88" width="36" height="18" rx="3" fill="#0b2545" />
 <path d="M86 97H456" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" />
+<path class="anim-flow-slow" d="M262 97H86M298 97H450" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 12" />
 <text x="140" y="90" font-size="12" fill="#0e7f78" font-family="Open Sans Variable, Arial, sans-serif">Line of sight (HI)</text>
 <path d="M104 97V170" stroke="#0b2545" stroke-width="1" />
 <path d="M99 104L104 96L109 104M99 163L104 171L109 163" stroke="#0b2545" stroke-width="1" />
@@ -117,6 +119,16 @@ The check covers only BS and FS readings, not intermediate sights, which is why 
 | C | | | 2.430 | | 0.670 | 97.930 | |
 | Sum | 2.510 | | 4.580 | 0 | 2.070 | | Checks agree |
 
+## Key formulas for levelling in surveying
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Height of instrument | HI = RL + BS | RL of the point sighted with the backsight, BS in m |
+| Reduced level | RL = HI − IS or HI − FS | IS, FS = staff readings in m |
+| Rise or fall | Rise = previous reading − current reading (positive); otherwise a fall | readings from the same setup, m |
+| Arithmetic check | ΣBS − ΣFS = ΣRise − ΣFall = last RL − first RL | sums in m |
+| Curvature and refraction | c = 0.0673 d² (subtractive) | c in m, d in km |
+
 ## Good field practice
 
 - Start and finish every levelling run on a benchmark, or close a loop back to the starting point.
@@ -139,3 +151,11 @@ The permissible closing error depends on the class of work and is usually expres
 ## Where levelling is used
 
 Levels set out formation levels for [flexible and rigid pavements](/civil-engineering/flexible-vs-rigid-pavement/), foundation depths where [bearing capacity of soil](/civil-engineering/bearing-capacity-of-soil/) has been tested, and bridge bearing levels in [bridge engineering](/civil-engineering/types-of-bridges/). Spot levels on a grid give earthwork volumes for [quantity estimation](/civil-engineering/quantity-estimation-methods/). In process plants, the same idea of reading a liquid height against a datum underlies DP transmitter level measurement.
+
+## Levelling in surveying interview and viva questions
+
+1. **What is a reduced level?** It is the height of a point above or below the chosen datum, usually mean sea level.
+2. **What is the difference between a backsight and a foresight?** A backsight is the first reading after setting up, taken on a point of known level; a foresight is the last reading before the instrument is moved.
+3. **Why is the rise and fall method considered more rigorous?** Its check ΣBS − ΣFS = ΣRise − ΣFall covers every reading, including intermediate sights, while the height of instrument check covers only backsights and foresights.
+4. **How is collimation error eliminated in the field?** By keeping backsight and foresight distances equal, so the same error appears in both readings and cancels in their difference.
+5. **What does the arithmetic check not prove?** It confirms the calculations only, not the field readings, so the run should be closed on a benchmark to check fieldwork.

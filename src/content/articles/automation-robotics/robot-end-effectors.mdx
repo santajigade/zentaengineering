@@ -1,0 +1,201 @@
+---
+title: "Robot End Effectors: Grippers and Tools"
+description: "Robot end effectors explained: mechanical, vacuum and magnetic grippers, process tools, tool changers, gripping force equations and a sizing example."
+pubDate: 2026-11-18
+reviewedDate: 2026-11-18
+discipline: automation-robotics
+subcategory: industrial-robotics
+focusKeyword: "robot end effectors"
+image: { src: /images/featured/robot-end-effectors.webp, alt: "Robot End Effectors: Grippers and Tools: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [end-effector, robot-gripper, vacuum-gripper, tool-changer, robotics]
+faq:
+  - q: "What is the difference between an end effector and a gripper?"
+    a: "End effector is the general term for any device fitted to the robot wrist to let it do its task. A gripper is one kind of end effector that holds and releases parts. Welding torches, spray guns, spindles and screwdrivers are end effectors that are tools, not grippers."
+  - q: "When should a vacuum gripper be used instead of a finger gripper?"
+    a: "Vacuum grippers suit parts with a smooth, flat or gently curved surface that can seal against a cup, such as sheet metal, glass, cartons and panels, especially when only one face is accessible. Finger grippers suit parts with features to grasp, porous parts that leak air, and heavy parts that need a positive hold."
+  - q: "Does the end effector mass reduce the robot payload?"
+    a: "Yes. The rated payload of a robot is the total mass it can carry at the wrist, so the gripper, tool changer, adapter plates and the part all count against it. The position of their combined centre of gravity and their inertia must also stay within the load diagram published by the robot maker."
+references:
+  - text: "ISO 8373:2021 Robotics, Vocabulary"
+  - text: "ISO 9409-1:2004 Manipulating industrial robots, Mechanical interfaces, Part 1: Plates"
+  - text: "ISO/TS 15066:2016 Robots and robotic devices, Collaborative robots"
+  - text: "G. J. Monkman, S. Hesse, R. Steinmann and H. Schunk, Robot Grippers, Wiley-VCH, 2007"
+  - text: "M. P. Groover, Automation, Production Systems, and Computer-Integrated Manufacturing, 5th ed., Pearson"
+  - text: "J. J. Craig, Introduction to Robotics: Mechanics and Control, 4th ed., Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Robot end effectors** are the devices mounted on a robot's wrist flange that let it interact with the work. They are either grippers, which hold parts using fingers, vacuum, magnets or adhesion, or process tools such as welding torches, spray guns, spindles and screwdrivers. The end effector largely decides what a robot can do.
+
+</Key>
+
+Robot end effectors turn a general purpose arm into a machine for a specific job. The same six axis robot can weld car bodies, pack biscuits or tend a lathe, and the main difference is the device bolted to its wrist. ISO 8373 defines the end effector as the device specifically designed for attachment to the mechanical interface to enable the robot to perform its task. Choosing and sizing it correctly is often the hardest part of a robot cell design.
+
+## What robot end effectors do
+
+An end effector has three jobs:
+
+- **Interface:** fix securely to the robot wrist and carry air, power and signals to the tool.
+- **Function:** grip, hold, release or process the workpiece.
+- **Feedback:** tell the controller what happened, for example jaw open, jaw closed, part present or vacuum reached.
+
+The robot itself only positions the flange in space. Whether the cell succeeds depends on the gripper holding the part securely through every acceleration, releasing it accurately, and doing so for millions of cycles.
+
+### The mechanical interface
+
+The wrist ends in a **mechanical interface plate**, usually a circular flange with a bolt circle, a locating spigot and a dowel pin hole. ISO 9409-1 standardises the main dimensions of these plates so that end effectors from different makers can be fitted to different robots, often through a simple adapter plate.
+
+Between the flange and the gripper many cells use a **tool changer**. The robot side half stays on the robot and the tool side half sits on each tool. A pneumatic or electric locking mechanism couples them, and built in modules pass compressed air, electrical power and signals across the joint. This lets one robot switch between grippers or between a gripper and a tool during a cycle.
+
+## Types of grippers
+
+Monkman and co-authors classify grippers by the way they create holding force.
+
+### Mechanical (impactive) grippers
+
+Fingers or jaws close on the part and hold it by friction or by shape.
+
+- **Parallel grippers:** two jaws move in a straight line towards each other. They are the most common general purpose design.
+- **Angular grippers:** jaws pivot open and closed. They are simpler and can open wide to clear the part.
+- **Three jaw grippers:** three jaws centre round or cylindrical parts, similar to a lathe chuck.
+
+Holding can be **force closure**, where clamping force and friction stop the part slipping, or **form closure**, where shaped fingers wrap around features of the part so it cannot move even with low clamping force. Form closure fingers are more secure but must be made for each part.
+
+Mechanical grippers are driven by pneumatic cylinders, which are simple and fast, or by **electric servo motors**, which allow programmable stroke, speed and gripping force. Motor choice is covered in [servo vs stepper motor](/automation-robotics/servo-vs-stepper-motor/).
+
+### Vacuum (astrictive) grippers
+
+Suction cups seal against a smooth surface. Air is removed from the cup, and atmospheric pressure on the far side of the part pushes it against the cup. Vacuum is made either by a **venturi ejector**, where compressed air flows through a nozzle and draws air out of the cup, or by an electric vacuum pump. Vacuum grippers handle sheet metal, glass, cartons and panels, but struggle with porous, oily or very rough surfaces.
+
+### Magnetic grippers
+
+Electromagnets or switchable permanent magnets hold **ferromagnetic** parts such as steel sheet and blanks. They grip quickly and need only one face, but cannot handle aluminium, plastics or other non magnetic materials, and residual magnetism can make thin sheets stick together.
+
+### Other gripping methods
+
+- **Soft grippers:** flexible fingers that conform to delicate or irregular items, used for food and fruit.
+- **Needle grippers:** small needles pierce textiles and composite fabrics.
+- **Adhesive and electroadhesive grippers:** hold light items through surface attraction.
+
+<figure class="anim">
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Two robot end effectors. Left: a pneumatic two-finger parallel gripper on a tool changer and wrist flange, with compressed air flowing from a valve into the gripper and the fingers closing on a part. Right: a vacuum gripper, with compressed air flowing into a venturi ejector that draws air out of a suction cup holding a sheet part and releases it as exhaust">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="130" y="10" width="40" height="25" fill="#eef1f6" />
+<rect x="105" y="35" width="90" height="10" fill="#0b2545" />
+<rect x="115" y="45" width="70" height="20" fill="#e6f6f4" />
+<rect x="95" y="65" width="110" height="40" rx="4" fill="#eef1f6" />
+<rect x="111" y="105" width="14" height="60" fill="#7b8794" />
+<rect x="175" y="105" width="14" height="60" fill="#7b8794" />
+<rect x="125" y="135" width="50" height="30" fill="#fff7e0" />
+<rect x="20" y="70" width="40" height="30" rx="3" fill="#fff7e0" />
+<rect x="420" y="10" width="40" height="25" fill="#eef1f6" />
+<rect x="395" y="35" width="90" height="10" fill="#0b2545" />
+<path d="M415 150L425 120H455L465 150Z" fill="#e6f6f4" />
+<rect x="370" y="150" width="140" height="10" fill="#fff7e0" />
+<rect x="500" y="60" width="70" height="30" rx="3" fill="#eef1f6" />
+<path d="M440 45V75" stroke-width="4" />
+</g>
+<path d="M300 15V215" stroke="#d0d5dd" stroke-width="1.5" />
+<g stroke="#13a89e" stroke-width="3"><path d="M60 85H95" /><path d="M440 120V75H500" /><path d="M535 20V60" /><path d="M535 90V125" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M60 85H95" /><path class="anim-flow" d="M440 120V75H500" /><path class="anim-flow" d="M535 20V60" /><path class="anim-flow" d="M535 90V125" /></g>
+<g stroke="#b42318" stroke-width="2.5" fill="#b42318"><path class="anim-pulse" d="M92 120H104L100 116M104 120L100 124" /><path class="anim-pulse" d="M208 120H196L200 116M196 120L200 124" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="215" y="43">Wrist flange</text><text x="215" y="59">Tool changer</text>
+<text x="150" y="89" text-anchor="middle">Pneumatic gripper</text>
+<text x="40" y="89" text-anchor="middle">Valve</text><text x="77" y="78" text-anchor="middle">Air</text>
+<text x="150" y="154" text-anchor="middle">Part</text><text x="198" y="150">Fingers</text>
+<text x="410" y="140" text-anchor="end">Vacuum cup</text><text x="440" y="178" text-anchor="middle">Sheet part</text>
+<text x="470" y="70" text-anchor="middle">Vacuum</text><text x="535" y="79" text-anchor="middle">Ejector</text>
+<text x="545" y="33">Air in</text><text x="545" y="118">Exhaust</text>
+<text x="150" y="215" text-anchor="middle" font-size="13" font-weight="700">Two-finger gripper</text>
+<text x="440" y="215" text-anchor="middle" font-size="13" font-weight="700">Vacuum gripper</text>
+</g>
+</svg>
+<figcaption>A pneumatic parallel gripper (left) and a venturi vacuum gripper (right), with air flow shown by the moving dashes.</figcaption>
+</figure>
+
+## Process tools as end effectors
+
+Many robots never pick up a part. Instead the end effector is a tool that works on the part:
+
+- **Welding torches and spot welding guns** for arc and resistance welding.
+- **Spray guns** for painting, coating and sealing.
+- **Spindles** for drilling, deburring, routing and grinding.
+- **Nut runners and screwdrivers** with torque control for assembly.
+- **Dispensers** for adhesive and sealant beads.
+- **Inspection heads** such as cameras, described in [machine vision components](/automation-robotics/machine-vision-components/).
+
+Process tools often need a **compliance device** so the tool can follow small position errors. A remote centre compliance device lets a peg or shaft shift and tilt slightly as it enters a hole, which reduces jamming during assembly.
+
+## Gripping force for robot end effectors
+
+A friction gripper must hold the part against its weight plus the inertia force from robot acceleration. For a part lifted vertically and held by friction between n jaws, the required clamping force is:
+
+$$
+F = \frac{m (g + a) S}{\mu n}
+$$
+
+where m is the part mass, g gravitational acceleration, a the maximum acceleration of the robot, S a safety factor, μ the coefficient of friction between finger and part, and n the number of contact jaws.
+
+A vacuum cup produces a holding force equal to the pressure difference times the effective cup area:
+
+$$
+F_v = \Delta p \, A = \Delta p \, \frac{\pi d^2}{4}
+$$
+
+Real cups give somewhat less, because the effective area shrinks as the lip compresses, so makers' catalogue values and safety factors should be used for final selection.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Part A: a 2 kg steel block lifted vertically by a two-jaw parallel gripper, friction coefficient 0.3, maximum robot acceleration 5 m/s², safety factor 2. Part B: a 5 kg sheet held flat by 4 vacuum cups of 40 mm diameter at a vacuum of 60 kPa below atmospheric.</dd>
+<dt>Find</dt><dd>The clamping force for Part A and the theoretical holding force and safety margin for Part B.</dd>
+<dt>Assumptions</dt><dd>g = 9.81 m/s². Part A is held by friction only. Cup force acts on the full cup area. Part B is lifted with its surface horizontal.</dd>
+<dt>Solution</dt><dd>Part A: m (g + a) = 2 × (9.81 + 5) = 29.62 N<br />F = 29.62 × 2 ÷ (0.3 × 2) = 98.7 N<br />Part B: A = π × 0.02² = 0.001257 m² per cup<br />F per cup = 60 000 × 0.001257 = 75.4 N<br />Total = 4 × 75.4 = 301.6 N<br />Weight = 5 × 9.81 = 49.05 N, ratio = 301.6 ÷ 49.05 = 6.1</dd>
+<dt>Answer</dt><dd><strong>Part A needs about 99 N of clamping force. Part B has about 302 N of theoretical holding force, roughly 6 times its weight.</strong></dd>
+<dt>Limitations</dt><dd>Friction coefficients vary with surface, oil and wear. Real cup force is lower than theoretical, and horizontal acceleration loads the cups in shear, which needs separate checks from catalogue data.</dd>
+</dl>
+</Example>
+
+## Key formulas for robot end effectors
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Friction grip force | F = m (g + a) S ÷ (μ n) | F in N, m in kg, g and a in m/s², S safety factor, μ friction coefficient, n jaws |
+| Weight of part | W = m g | W in N, g = 9.81 m/s² |
+| Vacuum cup force | F_v = Δp × A | Δp in Pa, A in m² |
+| Cup area | A = π d² ÷ 4 | d = cup diameter in m |
+
+## Selecting robot end effectors
+
+Good selection starts with the part and the process, not the robot:
+
+1. **Part properties:** mass, size, material, surface finish, porosity, temperature and fragility.
+2. **Gripping surfaces:** which faces are accessible at pick and at place, and whether features allow form closure.
+3. **Forces:** weight plus acceleration loads, with a safety factor; check the gripper force rating at the actual finger length.
+4. **Payload budget:** the gripper, tool changer and part together must stay within the robot load diagram, as explained in [types of industrial robots](/automation-robotics/types-of-industrial-robots/).
+5. **Cycle time:** jaw stroke and closing time add directly to every cycle.
+6. **Energy and utilities:** compressed air supply, or electrical power for electric grippers.
+7. **Sensing:** jaw position switches, vacuum switches or force sensors that confirm a good grip before the robot moves.
+8. **Changeover:** quick change fingers or a tool changer when part types vary.
+
+Sensors and actuators in the gripper are part of the wider [mechatronic system](/automation-robotics/mechatronic-system-elements/), and their signals are usually wired to the robot controller or a [PLC](/automation-robotics/plc-hardware-selection/).
+
+## Safety and reliability
+
+A dropped part is a hazard, so grippers should fail safe. Pneumatic grippers can use spring assisted jaws or check valves that keep the grip if air pressure is lost, and vacuum systems can use non return valves or switchable permanent magnets. On collaborative robots the end effector is often the most dangerous part: sharp fingers, hot tools or a swinging part can exceed the contact limits that ISO/TS 15066 sets for human body regions, so the risk assessment must include the tool.
+
+Common reliability issues include worn finger pads, leaking cups, blocked ejector silencers and loose fittings. Planned inspection of these items keeps grip forces at their design values.
+
+## Robot end effectors interview and viva questions
+
+1. **What is an end effector?** It is the device attached to the robot's mechanical interface that enables the robot to perform its task, such as a gripper or a welding torch.
+2. **What is the difference between force closure and form closure?** Force closure holds a part by clamping force and friction, while form closure uses finger shapes that enclose part features so the part cannot move.
+3. **How does a venturi vacuum ejector work?** Compressed air flows at high speed through a nozzle, which lowers the pressure in a side port connected to the suction cup and draws air out of it.
+4. **Why is a safety factor used in gripping force calculations?** It covers uncertainty in friction coefficient, acceleration peaks, wear and contamination so the part does not slip.
+5. **What does ISO 9409-1 cover?** It standardises the main dimensions of robot mechanical interface plates so end effectors can be mounted on different robots.

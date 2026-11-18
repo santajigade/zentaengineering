@@ -3,6 +3,7 @@ title: "Types of Steel Sections Used in Structures"
 description: "Types of steel sections explained: I-beams, columns, channels, angles, tees and hollow sections, their designations, properties, uses and how to choose one."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-18
 discipline: civil-engineering
 subcategory: steel-structures
 focusKeyword: "types of steel sections"
@@ -33,7 +34,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The main **types of steel sections** used in structures are **I-sections** (beams), **H-sections** (columns), **channels**, **angles**, **tees**, **hollow sections** (circular, square and rectangular tubes) and **plates and flats**. Each shape puts material where it is most useful for a particular load: I-sections for bending, hollow sections for compression and torsion, angles for bracing and truss members.
+The **types of steel sections** used in structures are I-sections for beams, H-sections for columns, channels, angles, tees, hollow sections and plates. Each shape places steel where it works hardest: I-sections resist bending, hollow sections resist compression and torsion, and angles serve as bracing and truss members.
 
 </Key>
 
@@ -140,3 +141,21 @@ With Z known, the bending stress for a given moment from the [shear force and be
 6. **Allow for protection:** corrosion protection and fire protection add cost and depend on exposed surface area.
 
 Steel design to IS 800 uses limit state principles very similar to [limit state design of RCC](/civil-engineering/limit-state-design-rcc/), with partial safety factors on loads and materials. The underlying material behaviour is covered in [stress and strain](/mechanical-engineering/stress-and-strain/).
+
+## Key formulas for types of steel sections
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Major axis second moment of area (I-section) | Ixx = [b D³ − (b − tw) h³] / 12 | b = flange width, D = overall depth, tw = web thickness, h = clear depth between flanges, all in mm; Ixx in mm⁴ |
+| Elastic section modulus | Zxx = Ixx / (D/2) | Zxx in mm³ |
+| Bending stress | σ = M / Z | M in N·mm, σ in MPa |
+| Mass per metre | m = A × ρ | A = area in m², ρ = 7850 kg/m³ for steel, m in kg/m |
+| Slenderness ratio | λ = KL / r | K = effective length factor, L = length, r = radius of gyration |
+
+## Types of steel sections interview and viva questions
+
+1. **Why is an I-section efficient as a beam?** Most of its material sits in the flanges, far from the neutral axis, so it gives a high second moment of area and section modulus for its weight when bent about the major axis.
+2. **What is the main weakness of a long unbraced I-beam?** Its low minor axis and torsional stiffness make it prone to lateral torsional buckling.
+3. **Why does a channel tend to twist under load through its web?** Its shear centre lies outside the section, so a load through the web causes twisting unless the channel is restrained or used in pairs.
+4. **Why are hollow sections good for columns?** They have equal or near equal stiffness about both axes, a large radius of gyration and high torsional stiffness, so they resist buckling well.
+5. **How do cold formed sections differ from hot rolled sections?** Cold formed sections are bent from thin sheet at room temperature, so they are light but buckle locally and are designed to separate codes such as IS 801.

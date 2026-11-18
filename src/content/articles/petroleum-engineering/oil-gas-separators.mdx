@@ -1,0 +1,178 @@
+---
+title: "Oil and Gas Separators: Types and Working"
+description: "Oil and gas separators explained: inlet diverter, settling, mist extractor, two and three phase, vertical and horizontal types, controls and sizing."
+pubDate: 2026-11-18
+reviewedDate: 2026-11-18
+discipline: petroleum-engineering
+subcategory: production-engineering
+focusKeyword: "oil and gas separators"
+image: { src: /images/featured/oil-gas-separators.webp, alt: "Oil and Gas Separators: Types and Working: featured diagram" }
+format: equipment
+pillar: false
+math: true
+tags: [separator, production-engineering, three-phase-separator, souders-brown, surface-facilities]
+faq:
+  - q: "What is the difference between a two phase and a three phase separator?"
+    a: "A two phase separator splits the well stream into gas and total liquid. A three phase separator also separates the liquid into oil and free water, using extra retention time, an interface level control and usually a weir or bucket so each liquid leaves through its own outlet."
+  - q: "Why are horizontal separators used for three phase service?"
+    a: "A horizontal vessel gives a large liquid surface area and a long path for droplets to settle, which helps oil and water separate and gas bubbles escape from foamy crude. Vertical vessels suit high gas to liquid ratios and small footprints, but offer less interface area for oil and water separation."
+  - q: "What does the mist extractor do?"
+    a: "The mist extractor, often a wire mesh pad or vane pack near the gas outlet, catches small liquid droplets that the gravity section cannot settle. Droplets collide with the wires or vanes, coalesce into larger drops and drain back to the liquid section, so the outlet gas carries very little liquid."
+references:
+  - text: "API Specification 12J, Specification for Oil and Gas Separators, American Petroleum Institute"
+  - text: "M. Stewart and K. Arnold, Surface Production Operations, Vol. 1: Design of Oil Handling Systems and Facilities, 3rd ed., Gulf Professional Publishing"
+  - text: "GPSA Engineering Data Book, Section 7: Separation Equipment, Gas Processors Suppliers Association"
+  - text: "API RP 14C, Analysis, Design, Installation and Testing of Safety Systems for Offshore Production Facilities"
+  - text: "J. D. Clegg (ed.), Petroleum Engineering Handbook, Vol. III: Facilities and Construction Engineering, SPE"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Oil and gas separators** are pressure vessels that split a well stream into gas, oil and often water. An inlet diverter removes bulk liquid, gravity settles droplets and bubbles, and a mist extractor cleans the outlet gas. They are built as vertical, horizontal or spherical vessels, in two phase or three phase designs.
+
+</Key>
+
+Oil and gas separators are the first major equipment a well stream meets at the surface. Fluid arrives from the wellhead as a mixture of gas, oil, water and sometimes sand, and nothing downstream (compressors, pipelines, storage tanks or the [LNG process](/petroleum-engineering/lng-process/)) works well until the phases are split. A separator does this mostly with gravity, time and a few well chosen internals, inside a vessel designed to the same principles as other [pressure vessels](/chemical-engineering/pressure-vessels-basics/).
+
+## What oil and gas separators do
+
+API Specification 12J describes the separator as a vessel that removes liquid from gas and gas from liquid. In practice it must:
+
+- Remove nearly all liquid droplets from the gas, so compressors and gas lines stay dry.
+- Release gas bubbles trapped in the oil, so the oil is stable when it reaches tanks.
+- In three phase service, split free water from oil.
+- Hold a steady pressure and liquid levels, and absorb slugs of liquid arriving from the flowline.
+
+Separation relies on density difference. Gas is much lighter than oil, and oil is lighter than water, so with enough time and calm flow each phase rises or falls into its own zone.
+
+## Parts of a separator
+
+Stewart and Arnold divide a separator into four functional sections:
+
+1. **Inlet diverter:** a baffle plate, half pipe or cyclone at the inlet. The sudden change of momentum knocks out most of the liquid and starts the gas and liquid split.
+2. **Gravity settling section:** the gas space where the gas velocity is kept low enough for liquid droplets to fall out.
+3. **Liquid collecting section:** the lower part of the vessel, which gives retention time for gas to leave the liquid and, in three phase vessels, for oil and water to separate.
+4. **Mist extractor:** a wire mesh pad, vane pack or cyclone bank before the gas outlet that coalesces the small droplets that gravity alone would not catch.
+
+Other internals include vortex breakers on liquid outlets, wave breakers and baffles in long horizontal vessels, sand jets for solids removal and, in three phase designs, a **weir** or oil bucket that sets the oil and water levels.
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Horizontal three phase oil and gas separator: well fluid enters on the left and hits an inlet diverter; gas flows through the upper settling space and a mist extractor to the gas outlet at the top right; water settles below oil in the left section and leaves through a bottom outlet under interface level control; oil flows over a weir into an oil chamber and leaves through a bottom outlet under level control">
+<g stroke="#0b2545" stroke-width="2.5">
+<rect x="80" y="70" width="440" height="160" rx="70" fill="#eef1f6" />
+</g>
+<defs><clipPath id="sep-clip"><rect x="80" y="70" width="440" height="160" rx="70" /></clipPath></defs>
+<g clip-path="url(#sep-clip)">
+<rect x="80" y="160" width="320" height="70" fill="#fff0c2" />
+<rect x="80" y="195" width="320" height="35" fill="#cfe3f7" />
+<rect x="402" y="200" width="118" height="30" fill="#fff0c2" />
+</g>
+<rect x="80" y="70" width="440" height="160" rx="70" stroke="#0b2545" stroke-width="2.5" fill="none" />
+<path d="M400 230V175" stroke="#0b2545" stroke-width="3" />
+<path d="M115 85V140" stroke="#0b2545" stroke-width="4" />
+<rect x="425" y="85" width="50" height="40" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#7b8794" stroke-width="1"><path d="M430 90L470 120M430 105L460 125M440 85L475 110M455 85L475 97" /></g>
+<g stroke="#0b2545" stroke-width="1" stroke-dasharray="4 3"><path d="M90 160H395M85 195H395M406 200H512" /></g>
+<g stroke="#b42318" stroke-width="3"><path d="M10 100H110" /></g>
+<g stroke="#13a89e" stroke-width="3"><path d="M150 110H425M450 85V30H560" /></g>
+<g stroke="#c98a00" stroke-width="3"><path d="M300 166H398Q408 166 414 205M470 229V280H560" /></g>
+<g stroke="#2a6fb0" stroke-width="3"><path d="M260 229V280H160" /></g>
+<g stroke="#fff" stroke-width="2.5" fill="none">
+<path class="anim-flow" d="M10 100H110" />
+<path class="anim-flow" d="M150 110H425M450 85V30H560" />
+<path class="anim-flow-slow" d="M300 166H398Q408 166 414 205M470 229V280H560" />
+<path class="anim-flow-slow" d="M260 229V280H160" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="50" y="90">Well fluid</text>
+<text x="130" y="62">Inlet diverter</text>
+<text x="290" y="100">Gravity settling (gas)</text>
+<text x="450" y="143">Mist extractor</text>
+<text x="520" y="22">Gas outlet</text>
+<text x="230" y="183">Oil</text>
+<text x="230" y="218">Water</text>
+<text x="372" y="152">Weir</text>
+<text x="455" y="218">Oil</text>
+<text x="515" y="272">Oil outlet</text>
+<text x="205" y="272">Water outlet</text>
+</g>
+</svg>
+<figcaption>A horizontal three phase separator: gas rises and leaves at the top, water settles below the oil, and oil spills over the weir to its own outlet.</figcaption>
+</figure>
+
+## How oil and gas separators work
+
+1. **Primary separation:** the well stream strikes the inlet diverter. Liquid falls to the bottom and gas turns into the upper space.
+2. **Gas settling:** gas flows slowly along the vessel. Droplets settle when their terminal velocity exceeds the vertical velocity component of the gas (vertical vessel) or when they fall below the liquid surface before reaching the outlet (horizontal vessel).
+3. **Mist removal:** the mist extractor catches remaining fine droplets, which drain back to the liquid.
+4. **Liquid retention:** gas bubbles rise out of the liquid. In three phase service, water droplets fall through the oil layer and oil droplets rise through the water.
+5. **Discharge:** a pressure control valve on the gas line holds vessel pressure, a level controller and dump valve remove oil, and an interface level controller removes water. Interface and level measurement is often done with differential pressure, as explained in this guide to [DP transmitter level measurement](https://www.instrumentationblog.in/dp-transmitter-level-measurement/).
+
+Safety devices follow API RP 14C practice: a pressure safety valve, high and low pressure shutdowns, and high and low level shutdowns that close the inlet or outlet valves.
+
+## Types of oil and gas separators
+
+### By shape
+
+| Type | Strengths | Limitations | Typical use |
+| --- | --- | --- | --- |
+| Vertical | Small footprint, handles sand, level control less sensitive | Less gas liquid interface area, taller | High gas to liquid ratio, scrubbers, compressor suction |
+| Horizontal | Large interface area, good for foaming crude and oil and water separation | Larger plot area, harder to remove sand | High liquid loads, three phase service |
+| Spherical | Compact, cheap for small duty | Very limited liquid surge capacity | Small high pressure gas wells |
+
+### By function
+
+- **Two phase separators:** gas and total liquid.
+- **Three phase separators:** gas, oil and water.
+- **Test separators:** measure the production of individual wells, with meters on each outlet.
+- **Production separators:** handle the combined flow of several wells, often in high, intermediate and low pressure stages to stabilise the oil.
+- **Free water knockouts:** remove large volumes of free water ahead of the main separation train.
+- **Scrubbers and knockout drums:** vertical vessels for gas with small amounts of liquid, for example upstream of compressors.
+- **Slug catchers:** vessels or pipe fingers at the end of long multiphase pipelines that absorb liquid slugs, often after [pipeline pigging](/petroleum-engineering/pipeline-pigging/).
+
+## Equations used in separator sizing
+
+Gas capacity is set by the **Souders-Brown equation**, which gives the maximum allowable gas velocity for droplets to separate:
+
+$$
+V_\text{max} = K \sqrt{\frac{\rho_L - \rho_G}{\rho_G}}
+$$
+
+The GPSA Engineering Data Book gives K values of about 0.055 to 0.107 m/s (0.18 to 0.35 ft/s) for vertical separators with a wire mesh mist extractor, and 0.12 to 0.15 m/s (0.40 to 0.50 ft/s) for horizontal ones, with derating for high pressure or difficult service. Liquid capacity is set by retention time: liquid volume equals liquid flow rate multiplied by the required time. API 12J suggests two phase retention times of about 1 minute for oil above 35 °API, 1 to 2 minutes for 20 to 30 °API and 2 to 4 minutes for 10 to 20 °API. Three phase vessels need longer, ideally based on laboratory or field data.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A vertical two phase separator with a wire mesh pad. Actual gas flow at operating conditions 0.50 m³/s, gas density 50 kg/m³, oil density 800 kg/m³, K = 0.107 m/s. Liquid flow 0.020 m³/s with 1 minute retention time.</dd>
+<dt>Find</dt><dd>Maximum gas velocity, minimum vessel diameter for gas capacity, and the liquid retention volume.</dd>
+<dt>Assumptions</dt><dd>Clean service, no derating of K; gas flows upward through the full vessel cross section.</dd>
+<dt>Solution</dt><dd>V_max = 0.107 × √((800 − 50) ÷ 50) = 0.107 × √15 = 0.107 × 3.873 = 0.414 m/s<br />A = 0.50 ÷ 0.414 = 1.207 m²<br />D = √(4 × 1.207 ÷ π) = 1.24 m<br />Liquid volume = 0.020 × 60 = 1.2 m³</dd>
+<dt>Answer</dt><dd><strong>Gas velocity at most 0.414 m/s, a minimum internal diameter of about 1.24 m, and 1.2 m³ of liquid retention volume below the normal liquid level</strong></dd>
+<dt>Limitations</dt><dd>A full design also adds surge volume, height for the inlet, disengagement space and mist pad, checks slenderness ratio, and derates K for high pressure, foaming or fouling service.</dd>
+</dl>
+</Example>
+
+## Key formulas for oil and gas separators
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Maximum gas velocity (Souders-Brown) | V_max = K √((ρ_L − ρ_G) ÷ ρ_G) | V_max and K in m/s, densities in kg/m³ |
+| Required gas flow area | A = Q_G ÷ V_max | Q_G = actual gas flow, m³/s; A in m² |
+| Vertical vessel diameter | D = √(4A ÷ π) | D in m |
+| Liquid retention volume | V_L = Q_L × t | Q_L in m³/s, t = retention time in s |
+| Droplet settling velocity (Stokes law) | V_t = g Δρ d² ÷ (18 μ) | d = droplet diameter, m; μ = continuous phase viscosity, Pa·s |
+
+## Selection points and maintenance
+
+When selecting a separator, engineers look at the gas to liquid ratio, expected slugging, foaming tendency, emulsions, sand production, operating pressure, available plot space and whether water must be removed. Downstream, the lift method matters too: gas lift wells, covered in [artificial lift methods](/petroleum-engineering/artificial-lift-methods/), send large volumes of gas to the separator.
+
+Maintenance focuses on keeping the internals and controls healthy: inspect and clean mist pads that plug with wax or scale, flush sand from the bottom, test pressure safety valves and shutdown functions, calibrate level and interface instruments, and inspect the vessel for corrosion and erosion near the inlet.
+
+## Oil and gas separators interview and viva questions
+
+1. **What are the four sections of a separator?** The inlet diverter, gravity settling section, liquid collecting section and mist extractor, each handling a different stage of separation.
+2. **What does the Souders-Brown equation determine?** It gives the maximum gas velocity at which liquid droplets can still settle, which sets the minimum vessel cross section for gas capacity.
+3. **When is a vertical separator preferred?** When the gas to liquid ratio is high, plot space is limited or sand is present, as in scrubbers and compressor suction drums.
+4. **How is water removed in a three phase separator?** Water settles below the oil, and an interface level controller opens the water dump valve to hold the oil and water interface at its set point.
+5. **Why are mist extractor pads inspected regularly?** Wax, scale or solids can plug the mesh, raising pressure drop and causing liquid carryover into the gas outlet.

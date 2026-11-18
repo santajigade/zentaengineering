@@ -1,0 +1,175 @@
+---
+title: "4G vs 5G: Key Differences Explained"
+description: "4G vs 5G compared: radio waveform, numerology, bandwidth, spectrum, core network, latency and peak rate targets, with a resource block worked example."
+pubDate: 2026-11-18
+reviewedDate: 2026-11-18
+discipline: telecommunication-engineering
+subcategory: cellular-networks
+focusKeyword: "4g vs 5g"
+image: { src: /images/featured/4g-vs-5g.webp, alt: "4G vs 5G: Key Differences Explained: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [4g, 5g, lte, nr, cellular-networks]
+faq:
+  - q: "Is 5G always faster than 4G?"
+    a: "Not always. 5G NR supports wider channels and more flexible scheduling, so its peak rates are higher, but the speed a user sees depends on the spectrum the operator uses, the distance to the cell and the number of users sharing it. A 5G phone on a narrow low band channel can perform close to a good 4G connection."
+  - q: "Can a 5G phone use 4G networks?"
+    a: "Yes. 5G devices support LTE as well, and in non-standalone (NSA) 5G the phone is connected to an LTE anchor cell and a 5G NR cell at the same time through dual connectivity. When no 5G coverage is available the phone simply stays on LTE."
+  - q: "Will 4G be switched off when 5G arrives?"
+    a: "LTE remains part of the 3GPP family and NSA 5G depends on it, so 4G networks continue to run alongside 5G. Operators decide locally when to refarm LTE spectrum to NR, often gradually using dynamic spectrum sharing, so there is no single global switch off date."
+references:
+  - text: "3GPP TS 36.300, Evolved Universal Terrestrial Radio Access (E-UTRA) and E-UTRAN: Overall description"
+  - text: "3GPP TS 38.300, NR and NG-RAN Overall description"
+  - text: "3GPP TS 38.211, NR: Physical channels and modulation"
+  - text: "3GPP TS 38.101-1, NR: User Equipment radio transmission and reception, Part 1: Range 1 Standalone"
+  - text: "ITU-R M.2410-0 (2017), Minimum requirements related to technical performance for IMT-2020 radio interface(s)"
+  - text: "ITU-R M.2134 (2008), Requirements related to technical performance for IMT-Advanced radio interface(s)"
+  - text: "E. Dahlman, S. Parkvall and J. Sköld, 5G NR: The Next Generation Wireless Access Technology, 2nd ed., Academic Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**4G vs 5G** compares two mobile network generations. 4G LTE uses fixed 15 kHz OFDM subcarriers, carriers up to 20 MHz and the EPC core. 5G NR adds flexible numerology, carriers up to 400 MHz, millimetre wave bands and a cloud based 5G core, targeting 20 Gbit/s peak rates and 1 ms latency.
+
+</Key>
+
+The 4G vs 5G question comes up whenever an operator plans a network, a factory considers private wireless, or a student studies cellular systems. Both generations come from 3GPP and both use OFDM, so the difference is not a completely new radio. 5G New Radio (NR) generalises the LTE design, stretches it to much wider bandwidths and higher frequencies, and pairs it with a redesigned core network built for services beyond the smartphone.
+
+## 4G vs 5G comparison table
+
+| Feature | 4G LTE (LTE-Advanced) | 5G NR |
+| --- | --- | --- |
+| ITU family | IMT-Advanced | IMT-2020 |
+| First 3GPP release | Release 8 (LTE), Release 10 (LTE-Advanced) | Release 15 |
+| Downlink waveform | OFDMA | CP-OFDM |
+| Uplink waveform | SC-FDMA (DFT-spread OFDM) | CP-OFDM or DFT-s-OFDM |
+| Subcarrier spacing | 15 kHz fixed | 15, 30, 60, 120 kHz for data (2^μ × 15 kHz) |
+| Maximum carrier bandwidth | 20 MHz | 100 MHz in FR1, 400 MHz in FR2 |
+| Frequency ranges | Mostly below 6 GHz | FR1 410 MHz to 7125 MHz, FR2 24.25 GHz to 52.6 GHz and above |
+| Data channel coding | Turbo codes | LDPC codes |
+| Control channel coding | Convolutional codes | Polar codes |
+| Base station | eNB | gNB |
+| Core network | EPC (MME, S-GW, P-GW) | 5GC (AMF, SMF, UPF and other functions) |
+| ITU peak data rate requirement | 1 Gbit/s downlink at low mobility | 20 Gbit/s downlink, 10 Gbit/s uplink |
+| ITU user plane latency requirement | 10 ms | 4 ms for eMBB, 1 ms for URLLC |
+| ITU connection density requirement | Not specified | 1 000 000 devices per km² |
+
+The ITU figures are minimum requirements that a radio technology must be able to meet in evaluation, not speeds that every user sees in the field.
+
+<figure class="anim">
+<svg width="600" height="330" viewBox="0 0 600 330" fill="none" role="img" aria-label="4G vs 5G diagram: in 4G LTE user equipment connects to an eNB base station and the EPC core with MME, S-GW and P-GW before the internet; in 5G NR user equipment connects to a gNB and the 5G core with AMF, SMF and UPF before the data network; below, slot lengths compare a 0.5 ms LTE slot with 0.5 ms and 0.125 ms NR slots at 30 kHz and 120 kHz subcarrier spacing">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" font-weight="700">
+<text x="20" y="22">4G LTE</text><text x="20" y="132">5G NR</text>
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="35" width="80" height="60" rx="6" fill="#eef1f6" />
+<rect x="160" y="35" width="90" height="60" rx="6" fill="#e6f6f4" />
+<rect x="310" y="35" width="140" height="60" rx="6" fill="#fff7e0" />
+<rect x="500" y="35" width="80" height="60" rx="6" fill="#eef1f6" />
+<rect x="20" y="145" width="80" height="60" rx="6" fill="#eef1f6" />
+<rect x="160" y="145" width="90" height="60" rx="6" fill="#e6f6f4" />
+<rect x="310" y="145" width="140" height="60" rx="6" fill="#fff7e0" />
+<rect x="500" y="145" width="80" height="60" rx="6" fill="#eef1f6" />
+</g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M100 65H160M250 65H310M450 65H500" /></g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M100 175H160M250 175H310M450 175H500" /></g>
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow-slow" d="M100 65H160M250 65H310M450 65H500" /><path class="anim-flow" d="M100 175H160M250 175H310M450 175H500" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="60" y="62">UE</text><text x="60" y="78">(phone)</text>
+<text x="205" y="62" font-weight="700">eNB</text><text x="205" y="78">20 MHz max</text>
+<text x="380" y="58" font-weight="700">EPC core</text><text x="380" y="76">MME, S-GW, P-GW</text>
+<text x="540" y="70">Internet</text>
+<text x="60" y="172">UE</text><text x="60" y="188">(device)</text>
+<text x="205" y="172" font-weight="700">gNB</text><text x="205" y="188">400 MHz max</text>
+<text x="380" y="168" font-weight="700">5G core</text><text x="380" y="186">AMF, SMF, UPF</text>
+<text x="540" y="172">Data</text><text x="540" y="188">network</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="20" y="235" font-weight="700">Slot length (bars drawn to scale)</text>
+<text x="20" y="262">LTE, 15 kHz</text><text x="20" y="287">NR, 30 kHz</text><text x="20" y="312">NR, 120 kHz</text>
+</g>
+<g stroke="#0b2545" stroke-width="1.5">
+<rect x="150" y="250" width="200" height="16" fill="#ffe9e7" />
+<rect class="anim-blink" x="150" y="275" width="200" height="16" fill="#e6f6f4" />
+<rect class="anim-blink anim-d1" x="150" y="300" width="50" height="16" fill="#e6f6f4" />
+<rect class="anim-blink anim-d2" x="200" y="300" width="50" height="16" fill="#e6f6f4" />
+<rect class="anim-blink anim-d3" x="250" y="300" width="50" height="16" fill="#e6f6f4" />
+<rect class="anim-blink anim-d4" x="300" y="300" width="50" height="16" fill="#e6f6f4" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="365" y="262">0.5 ms</text><text x="365" y="287">0.5 ms</text><text x="365" y="312">0.125 ms per slot</text>
+</g>
+</svg>
+<figcaption>4G and 5G side by side: radio access and core network on top, slot length for different subcarrier spacings below.</figcaption>
+</figure>
+
+## Differences explained
+
+### Radio waveform and numerology
+
+LTE uses OFDMA in the downlink with a fixed 15 kHz subcarrier spacing, and SC-FDMA in the uplink to lower the peak to average power ratio of the phone transmitter. A 1 ms subframe holds two 0.5 ms slots of seven symbols each with normal cyclic prefix.
+
+NR keeps OFDM but makes the subcarrier spacing scalable as 15 kHz × 2^μ. Each slot always has 14 symbols, so a wider spacing gives shorter symbols and shorter slots. Narrow spacing suits large cells and low bands; wide spacing suits high bands, where phase noise is greater, and short transmissions for low latency. NR also adds mini slots of a few symbols, so urgent data does not need to wait for a full slot. The uplink can use plain CP-OFDM for high throughput, or DFT-s-OFDM, the LTE style option, for coverage limited devices.
+
+### Bandwidth and spectrum
+
+An LTE carrier is at most 20 MHz, and LTE-Advanced reaches higher rates by aggregating carriers. NR allows up to 100 MHz per carrier in FR1 and up to 400 MHz in FR2. FR2 is millimetre wave spectrum, which offers wide channels but short range and poor penetration through walls, so it relies on **beamforming** with large antenna arrays. Mid band spectrum around 3.5 GHz is the common 5G compromise between coverage and capacity. For how radio bits are mapped onto these carriers, see [modulation techniques](/telecommunication-engineering/modulation-techniques/).
+
+### Channel coding
+
+LTE uses turbo codes for data. NR replaced them with low density parity check (LDPC) codes, which decode efficiently at very high throughputs, and uses polar codes for control information.
+
+### Core network
+
+The LTE core, the Evolved Packet Core, is built from fixed network elements: MME for mobility and signalling, S-GW and P-GW for user data. The 5G core uses a **service based architecture** in which functions such as AMF, SMF and UPF talk to each other through standard interfaces and can run as cloud software. Separating control from user plane lets operators place the UPF close to users for edge computing and create **network slices** with different performance for different customers. The full structure is covered in [5G network architecture](/telecommunication-engineering/5g-network-architecture/).
+
+### Deployment: NSA and SA
+
+Early 5G was mostly **non-standalone (NSA)**: NR cells added to an LTE network, with the LTE eNB as anchor and the EPC as core. **Standalone (SA)** 5G uses NR with the 5G core and unlocks slicing and the lowest latencies. This is why many "5G" connections still depend on 4G equipment.
+
+## Key formulas for 4G vs 5G
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| NR subcarrier spacing | Δf = 15 × 2^μ | Δf in kHz, μ = numerology index (0 to 4) |
+| NR slot duration | T_slot = 1 ms ÷ 2^μ | 14 OFDM symbols per slot (normal cyclic prefix) |
+| Slots per 10 ms frame | N = 10 × 2^μ | dimensionless |
+| Occupied bandwidth | B_occ = N_RB × 12 × Δf | N_RB = resource blocks, 12 subcarriers per block |
+
+The relations above are given in TS 38.211:
+
+$$
+\Delta f = 2^{\mu} \times 15\ \text{kHz}, \qquad T_\text{slot} = \frac{1\ \text{ms}}{2^{\mu}}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An LTE carrier of 20 MHz with 100 resource blocks at 15 kHz spacing, and an NR FR1 carrier of 100 MHz with 273 resource blocks at 30 kHz spacing (transmission bandwidth configuration from TS 38.101-1).</dd>
+<dt>Find</dt><dd>The occupied bandwidth and number of subcarriers of each carrier, and the NR slot duration.</dd>
+<dt>Assumptions</dt><dd>12 subcarriers per resource block; normal cyclic prefix.</dd>
+<dt>Solution</dt><dd>LTE: 100 × 12 = 1200 subcarriers; B_occ = 1200 × 15 kHz = 18.0 MHz<br />NR: 273 × 12 = 3276 subcarriers; B_occ = 3276 × 30 kHz = 98.28 MHz<br />NR at 30 kHz has μ = 1, so T_slot = 1 ms ÷ 2 = 0.5 ms and there are 20 slots per 10 ms frame</dd>
+<dt>Answer</dt><dd><strong>LTE uses 18.0 MHz with 1200 subcarriers; NR uses 98.28 MHz with 3276 subcarriers, about 5.5 times the occupied bandwidth, with 0.5 ms slots</strong></dd>
+<dt>Limitations</dt><dd>Occupied bandwidth is not throughput. Actual data rate also depends on MIMO layers, modulation order, coding rate, overhead and how the carrier is shared between users.</dd>
+</dl>
+</Example>
+
+## When to use which
+
+- **Wide area coverage and voice:** LTE remains mature and widely deployed, and VoLTE runs on it. In many places LTE carries the bulk of traffic and is the fallback layer for 5G devices.
+- **High capacity in busy areas:** mid band and millimetre wave NR give far more spectrum per cell, which raises both peak rates and the number of users served.
+- **Fixed wireless access:** NR's wide carriers make home broadband over radio practical.
+- **Industrial and private networks:** standalone 5G with URLLC features, network slicing and local UPF suits mobile robots, remote control and dense sensor networks, where 4G latency and device density limits are harder to work around. For local area alternatives on the factory floor compare [Wi-Fi standards and bands](/telecommunication-engineering/wi-fi-standards-and-bands/).
+- **Low power IoT:** LTE-M and NB-IoT, introduced as part of the LTE family, are carried forward into 5G as the massive IoT technologies, so existing IoT devices stay supported.
+
+In practice the choice is rarely 4G or 5G alone. Operators run both generations on shared sites and backhaul, often fed by fibre (see [single mode vs multimode fiber](/telecommunication-engineering/single-mode-vs-multimode-fiber/)), and devices move between them automatically.
+
+## 4G vs 5G interview and viva questions
+
+1. **Which waveforms do 4G and 5G use?** LTE uses OFDMA in the downlink and SC-FDMA in the uplink. NR uses CP-OFDM in both directions, with DFT-s-OFDM as an uplink option for coverage.
+2. **What is numerology in 5G NR?** It is the choice of subcarrier spacing, 15 kHz × 2^μ. Higher μ gives wider spacing, shorter symbols and shorter slots.
+3. **Why does NR use LDPC instead of turbo codes?** LDPC codes support efficient parallel decoding at very high data rates, which suits the multi gigabit throughputs targeted by NR. Polar codes are used for control channels.
+4. **What is the difference between NSA and SA 5G?** NSA adds NR radios to an LTE network and uses the 4G EPC core, while SA uses NR with the 5G core, enabling slicing and the lowest latency.
+5. **What are the IMT-2020 peak data rate and latency requirements?** ITU-R M.2410 requires 20 Gbit/s downlink and 10 Gbit/s uplink peak rates, and user plane latency of 4 ms for eMBB and 1 ms for URLLC.
