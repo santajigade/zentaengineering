@@ -1,0 +1,108 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:'Open Sans';font-weight:500;src:url(../../node_modules/@fontsource/open-sans/files/open-sans-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Open Sans';font-weight:700;src:url(../../node_modules/@fontsource/open-sans/files/open-sans-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Open Sans';font-weight:800;src:url(../../node_modules/@fontsource/open-sans/files/open-sans-latin-800-normal.woff2) format('woff2')}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100vw;height:100vh;overflow:hidden}
+body{font-family:'Open Sans',sans-serif;color:#fff;background:#0b2545;position:relative}
+.grid{position:absolute;inset:0;background-image:
+ linear-gradient(rgba(127,211,255,.16) 2px,transparent 2px),linear-gradient(90deg,rgba(127,211,255,.16) 2px,transparent 2px),
+ linear-gradient(rgba(127,211,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(127,211,255,.07) 1px,transparent 1px);
+ background-size:180px 180px,180px 180px,36px 36px,36px 36px}
+.glow{position:absolute;left:50%;width:1100px;height:900px;margin-left:-550px;border-radius:50%;background:radial-gradient(closest-side,rgba(19,168,158,.32),rgba(19,168,158,0))}
+.top{position:absolute;left:60px;right:60px;top:60px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:18px;font-size:40px;font-weight:700}.brand span{color:#cfe6f5;font-weight:500}
+.pill{border:3px solid #F5B800;color:#F5B800;border-radius:999px;padding:8px 26px;font-size:28px;font-weight:700;letter-spacing:2px}
+.title{position:absolute;left:60px;right:60px;top:200px;font-size:92px;font-weight:800;line-height:1.12}
+.title em{font-style:normal;color:#F5B800}
+.draw{position:absolute;left:40px;top:500px;width:1000px;height:760px}
+.draw svg{width:100%;height:100%;overflow:visible}
+.cap{position:absolute;left:60px;right:60px;top:1330px;display:flex;gap:28px;align-items:flex-start;background:rgba(6,22,48,.92);border:2px solid rgba(127,211,255,.25);border-radius:28px;padding:36px 40px;opacity:0}
+.num{flex:none;width:84px;height:84px;border-radius:50%;background:#13a89e;color:#0b2545;font-size:46px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.ctext{font-size:46px;line-height:1.38;font-weight:500}.ctext b{color:#F5B800;font-weight:700}
+.fact{position:absolute;left:60px;right:60px;top:1330px;background:rgba(6,22,48,.95);border:5px solid #F5B800;border-radius:28px;padding:36px 44px;opacity:0}
+.fact .k{font-size:34px;font-weight:800;color:#F5B800;letter-spacing:2px}
+.fact .f{font-size:54px;font-weight:800;line-height:1.3;margin-top:14px}
+.fact .s{font-size:36px;font-weight:500;line-height:1.4;margin-top:16px;color:#cfe6f5}
+.foot{position:absolute;left:0;right:0;bottom:56px;text-align:center;font-size:30px;font-weight:700;color:#7fd3ff;letter-spacing:1px}
+.end{position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 40%,#17b5aa 0%,#13a89e 45%,#0e7f78 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px;opacity:0}
+.end .h{font-size:84px;font-weight:800;line-height:1.1;color:#fff;margin-top:40px}
+.end .c{font-size:44px;font-weight:500;line-height:1.4;color:#eafffd;margin-top:34px}
+.end .btn{margin-top:60px;background:#fff;color:#0b2545;font-size:56px;font-weight:800;border-radius:999px;padding:22px 60px}
+/* label style */
+.lbl{font-family:'Open Sans';font-weight:700;font-size:26px;fill:#F5B800;paint-order:stroke;stroke:#061630;stroke-width:9px;stroke-linejoin:round}
+.lead{stroke:#F5B800;stroke-width:2.5;fill:none}
+.dot{fill:#F5B800}
+/* continuous physics loops */
+.spin-cw{transform-box:fill-box;transform-origin:center;animation:spin var(--p,3s) linear infinite}
+.spin-ccw{transform-box:fill-box;transform-origin:center;animation:spin var(--p,3s) linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.flow{stroke-dasharray:16 14;animation:dash var(--p,.9s) linear infinite}
+@keyframes dash{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
+.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.12);opacity:.75}}
+.finger{transform-box:fill-box;animation:press 1.2s ease-in-out infinite}
+@keyframes press{0%,70%,100%{transform:translateY(0)}35%{transform:translateY(12px)}}
+/* 1080x1350 */
+.s .top{top:36px;left:50px;right:50px}.s .brand{font-size:34px}.s .brand svg{width:64px;height:64px}.s .pill{font-size:24px;padding:6px 20px}
+.s .title{top:128px;left:50px;right:50px;font-size:64px}
+.s .draw{left:145px;top:330px;width:790px;height:600px}
+.s .cap,.s .fact{left:50px;right:50px;top:968px;padding:26px 32px;gap:22px}
+.s .num{width:66px;height:66px;font-size:36px}.s .ctext{font-size:36px}
+.s .fact .k{font-size:28px}.s .fact .f{font-size:42px}.s .fact .s{font-size:30px}
+.s .foot{bottom:28px;font-size:26px}
+.s .end .h{font-size:66px;margin-top:28px}.s .end .c{font-size:36px}.s .end .btn{font-size:46px;margin-top:44px}.s .end svg{width:200px;height:200px}
+
+/* 1920x1080 landscape */
+.w .top{top:44px;left:70px;right:70px}
+.w .title{top:150px;left:70px;width:800px;right:auto;font-size:80px}
+.w .draw{left:870px;top:170px;width:1000px;height:760px}
+.w .cap,.w .fact{left:70px;right:auto;width:760px;top:520px}
+.w .ctext{font-size:42px}
+.w .fact .f{font-size:50px}
+.w .foot{left:70px;right:auto;bottom:50px;text-align:left}
+</style><script src="lib.js" charset="utf-8"></script>
+<script>document.write('<script src="specs/'+new URLSearchParams(location.search).get('v')+'.js" charset="utf-8"><\/script>')</script></head><body>
+<div class="grid" id="grid"></div><div class="glow" id="glow"></div>
+<div class="top" id="top"><div class="brand"><svg viewBox="0 0 64 64" width="80" height="80"><circle cx="32" cy="32" r="30" fill="#0b2545" stroke="#F5B800" stroke-width="4"/><path d="M18 20H46L18 44H46" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round"/><circle cx="18" cy="20" r="5" fill="#13a89e"/><circle cx="46" cy="44" r="5" fill="#13a89e"/></svg><div>Zenta <span>Engineering</span></div></div><div class="pill" id="pill"></div></div>
+<div class="title" id="title"></div>
+<div class="draw"><svg id="svg" viewBox="0 0 1000 760"></svg></div>
+<div id="caps"></div>
+<div class="fact" id="fact"><div class="k">KEY FACT</div><div class="f" id="ff"></div><div class="s" id="fs"></div></div>
+<div class="foot" id="foot">zentaengineering.com</div>
+<div class="end" id="end"><svg viewBox="0 0 64 64" width="250" height="250"><circle cx="32" cy="32" r="30" fill="#0b2545" stroke="#F5B800" stroke-width="4"/><path d="M18 20H46L18 44H46" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round"/><circle cx="18" cy="20" r="5" fill="#13a89e"/><circle cx="46" cy="44" r="5" fill="#13a89e"/></svg>
+ <div class="h">Read the full article</div><div class="c" id="ec"></div><div class="btn">zentaengineering.com</div></div>
+<script>
+const W=innerWidth>innerHeight; const S=!W&&innerHeight<1500; if(S)document.body.classList.add('s'); if(W)document.body.classList.add('w');
+const T=BLUE[new URLSearchParams(location.search).get('v')];
+pill.textContent=T.pill; title.innerHTML=T.title; ff.innerHTML=T.fact[0]; fs.innerHTML=T.fact[1]||''; ec.innerHTML=T.end;
+// auto-fit long titles to 2 lines
+document.fonts.ready.then(()=>{});
+window.fitTitle=()=>{title.style.fontSize='';let fs=parseFloat(getComputedStyle(title).fontSize);const lh=()=>parseFloat(getComputedStyle(title).lineHeight);while(title.offsetHeight>lh()*2.2&&fs>40){fs-=3;title.style.fontSize=fs+'px'}};fitTitle();
+glow.style.top=(W?110:S?330:520)+'px'; if(S){glow.style.width='900px';glow.style.height='700px';glow.style.marginLeft='-450px'} if(W){glow.style.left='1370px'}
+// drawing: parts + labels with leader lines
+svg.innerHTML=`<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker>
+ <marker id="ahw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#fff"/></marker></defs>`+T.svg+
+ `<g id="labels">${T.labels.map(([tx,ty,txt,ax,ay,anc],i)=>`<g class="lb" id="lb${i}"><path class="lead" d="M${ax} ${ay} L${tx+(anc=='end'?6:anc=='middle'?0:-6)} ${ty-8}"/><circle class="dot" cx="${ax}" cy="${ay}" r="5"/><text class="lbl" x="${tx}" y="${ty}" text-anchor="${anc||'start'}">${txt}</text></g>`).join('')}</g>`;
+T.steps.forEach(([txt],i)=>caps.insertAdjacentHTML('beforeend',`<div class="cap" id="c${i}"><div class="num">${i+1}</div><div class="ctext">${txt}</div></div>`));
+const WEB=new URLSearchParams(location.search).get('web')==='1'; const DUR=WEB?18.5:22; window.DUR=DUR;
+const E='cubic-bezier(.2,.7,.2,1)';
+const A=(el,kf,s,d,e=E,fill='both')=>(typeof el==='string'?document.querySelector(el):el).animate(kf,{delay:s*1000,duration:d*1000,fill,easing:e});
+const up=(el,s,d=.5,y=40)=>A(el,[{opacity:0,transform:`translateY(${y}px)`},{opacity:1,transform:'none'}],s,d);
+A('#grid',[{opacity:0},{opacity:1}],0,.6,'linear'); A('#glow',[{opacity:0},{opacity:1}],.3,1.2,'linear');
+up('#top',.1,.5,-30); up('#title',.35,.6); A('#foot',[{opacity:0},{opacity:1}],.5,.6,'linear');
+const parts=[...svg.querySelectorAll(':scope > g.part')];
+parts.forEach((g,i)=>A(g,[{opacity:0,transform:'scale(.96)'},{opacity:1,transform:'none'}],.6+i*.18,.55));
+[...svg.querySelectorAll('.lb')].forEach((g,i,a)=>A(g,[{opacity:0},{opacity:1}],1.6+i*(1.3/a.length),.3,'linear'));
+const cs=[3,6.6,10.2], CD=3.6;
+T.steps.forEach(([,hl],i)=>{
+ A('#c'+i,[{opacity:0,transform:'translateY(30px)'},{opacity:1,transform:'none',offset:.08},{opacity:1,transform:'none',offset:.93},{opacity:0,transform:'translateY(-14px)'}],cs[i],CD,'linear');
+ hl.forEach(id=>{const el=svg.getElementById(id);if(!el)return;
+  A(el,[{filter:'none'},{filter:'drop-shadow(0 0 6px #F5B800) drop-shadow(0 0 16px #F5B800)',offset:.08},{filter:'drop-shadow(0 0 6px #F5B800) drop-shadow(0 0 16px #F5B800)',offset:.92},{filter:'none'}],cs[i],CD,'linear','forwards')});
+});
+if(WEB){A('#fact',[{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none'}],14,.45,'linear');}
+else{A('#fact',[{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none',offset:.1},{opacity:1,transform:'none',offset:.93},{opacity:0}],14,4.5,'linear');
+A('#end',[{opacity:0},{opacity:1}],18.5,.5,'linear');
+const ec_=document.querySelectorAll('#end > *');[...ec_].forEach((e,i)=>up(e,18.7+i*.25,.5,30));}
+window.seek=t=>document.getAnimations().forEach(a=>{a.pause();a.currentTime=t*1000});
+</script></body></html>
