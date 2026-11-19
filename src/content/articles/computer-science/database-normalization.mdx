@@ -3,6 +3,7 @@ title: "Database Normalization: 1NF, 2NF and 3NF Explained"
 description: "Database normalization explained: anomalies, functional dependencies, keys, first, second and third normal form and BCNF, with a step-by-step worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-19
 discipline: computer-science
 subcategory: databases
 focusKeyword: "database normalization"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Database normalization** organises relational tables so that each fact is stored in exactly one place. It removes redundancy and the update, insert and delete anomalies it causes. **1NF** requires atomic values and no repeating groups. **2NF** removes attributes that depend on only part of a composite key. **3NF** removes attributes that depend on other non-key attributes. Most transactional databases are designed to 3NF or BCNF.
+**Database normalization** organises relational tables so each fact is stored in exactly one place, removing redundancy and update, insert and delete anomalies. **1NF** requires atomic values. **2NF** removes attributes depending on only part of a composite key. **3NF** removes attributes depending on other non-key attributes. Most transactional databases target 3NF or BCNF.
 
 </Key>
 
@@ -82,7 +83,7 @@ A table is in 3NF when it is in 2NF and **no non-prime attribute depends transit
 
 In the Course table, CourseID → Instructor and Instructor → InstructorPhone, so the phone depends on the key only through Instructor. Moving instructors to their own table removes this transitive dependency.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="250" viewBox="0 0 580 250" fill="none" role="img" aria-label="Normalized design with four tables: Student with StudentID and StudentName; Enrolment with StudentID and CourseID as composite key; Course with CourseID, CourseTitle and InstructorID; Instructor with InstructorID, Name and Phone; lines show foreign keys from Enrolment to Student and Course, and from Course to Instructor">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
 <rect x="20" y="30" width="140" height="84" rx="8" fill="#ffffff" stroke="#0b2545" stroke-width="2" /><rect x="20" y="30" width="140" height="26" rx="8" fill="#0b2545" /><text x="90" y="48" text-anchor="middle" fill="#ffffff" font-weight="700">Student</text>
@@ -95,8 +96,9 @@ In the Course table, CourseID → Instructor and Instructor → InstructorPhone,
 <text x="422" y="194" font-weight="700">InstructorID (PK)</text><text x="422" y="212">Name</text><text x="422" y="230">Phone</text>
 </g>
 <g stroke="#13a89e" stroke-width="2.5"><path d="M160 74H210" /><path d="M285 114V150" /><path d="M360 226H410" /></g>
+<g stroke="#ffffff" stroke-width="2" fill="none"><path class="anim-flow-slow" d="M210 74H160" /><path class="anim-flow-slow" d="M285 114V150" /><path class="anim-flow-slow" d="M360 226H410" /></g>
 </svg>
-<figcaption>The enrolment data in third normal form. Each fact is stored once; foreign keys (FK) link the tables.</figcaption>
+<figcaption>The enrolment data in third normal form. Each fact is stored once; foreign keys (FK) link the tables. Moving dashes run from each foreign key to the table it references.</figcaption>
 </figure>
 
 ## Boyce-Codd normal form (BCNF) and beyond
@@ -134,3 +136,11 @@ Joins have a cost. Reporting databases, data warehouses (star schemas) and cache
 - Test schema changes and queries with realistic data as part of [software testing](/computer-science/types-of-software-testing/).
 
 Databases normally sit behind an application layer that exposes data through a [REST API](/computer-science/rest-api-basics/), and good normalization makes that API simpler because each resource maps to clean, consistent tables. The way rows are stored and scanned in memory links back to [arrays vs linked lists](/computer-science/arrays-vs-linked-lists/).
+
+## Database normalization interview and viva questions
+
+1. **What is the purpose of database normalization?** It stores each fact in exactly one place, which removes redundancy and the update, insert and delete anomalies that redundancy causes.
+2. **What does first normal form require?** Every column holds atomic values and there are no repeating groups.
+3. **When is a table in second normal form?** It is in 1NF and no non-key attribute depends on only part of a composite primary key.
+4. **What does third normal form remove?** It removes transitive dependencies, where a non-key attribute depends on another non-key attribute instead of directly on the key.
+5. **Why might a designer denormalize?** To speed up read heavy workloads such as reporting, accepting some redundancy that must then be kept consistent.

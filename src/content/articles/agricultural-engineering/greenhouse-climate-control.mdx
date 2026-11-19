@@ -1,0 +1,173 @@
+---
+title: "Greenhouse Climate Control Systems: How They Work"
+description: "Greenhouse climate control explained: sensors, controllers, fan and pad cooling, heating, CO2, humidity and VPD, with a ventilation sizing example."
+pubDate: 2026-11-19
+reviewedDate: 2026-11-19
+discipline: agricultural-engineering
+subcategory: agricultural-automation
+focusKeyword: "greenhouse climate control"
+image: { src: /images/featured/greenhouse-climate-control.webp, alt: "Greenhouse Climate Control Systems: How They Work: featured diagram" }
+format: application
+pillar: false
+math: true
+tags: [greenhouse, climate-control, evaporative-cooling, ventilation, agricultural-automation]
+faq:
+  - q: "What is the difference between natural and mechanical greenhouse ventilation?"
+    a: "Natural ventilation uses roof and side vents, driven by wind and by warm air rising, and needs no fan energy. Mechanical ventilation uses exhaust fans that pull air through inlets or wet pads, giving a controlled air exchange rate even on still days and allowing evaporative cooling."
+  - q: "Why is vapour pressure deficit used instead of relative humidity?"
+    a: "Relative humidity on its own does not say how strongly air pulls water from leaves, because that also depends on temperature. Vapour pressure deficit combines temperature and humidity into one value that relates directly to the drying power of the air and therefore to plant transpiration."
+  - q: "Does evaporative pad cooling work in humid climates?"
+    a: "It works less well. The lowest temperature the pad can reach is the wet bulb temperature of the outside air, and in humid weather the wet bulb is close to the dry bulb, so the possible temperature drop is small. Pad cooling performs best in hot, dry conditions."
+references:
+  - text: "ANSI/ASAE EP406.4, Heating, Venting and Cooling Greenhouses, ASABE, 2003 (reaffirmed)"
+  - text: "R. A. Aldrich and J. W. Bartok, Greenhouse Engineering, NRAES-33, Natural Resource, Agriculture and Engineering Service, 1994"
+  - text: "ASHRAE Handbook, HVAC Systems and Equipment, chapter on Evaporative Air Coolers, ASHRAE"
+  - text: "FAO Irrigation and Drainage Paper 56, Crop Evapotranspiration: Guidelines for Computing Crop Water Requirements, 1998"
+  - text: "Ontario Ministry of Agriculture, Food and Rural Affairs (OMAFRA), Carbon Dioxide in Greenhouses, Factsheet"
+  - text: "IEC 61131-3, Programmable controllers: Programming languages"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Greenhouse climate control** is the automatic regulation of air temperature, humidity, carbon dioxide and light inside a greenhouse. Sensors measure the indoor climate, and a controller compares readings with crop setpoints and runs fans, vents, evaporative pads, heaters, screens and CO2 dosing to keep conditions in the target range day and night.
+
+</Key>
+
+Greenhouse climate control lets growers produce crops out of season and in climates that would otherwise be too hot, too cold or too dry. A glazed structure traps solar energy, so without control it overheats on sunny days and loses heat quickly on cold nights. An automated control system keeps the crop in its ideal range, saves energy and labour, and records data for later analysis. This article explains the variables, the equipment, the control logic and how to size the main ventilation and cooling plant.
+
+## What greenhouse climate control regulates
+
+- **Air temperature:** the main driver of crop development rate. Growers set separate day and night setpoints, and often a ramp between them at sunrise and sunset.
+- **Humidity:** too high and fungal diseases such as grey mould spread; too low and plants close their stomata and growth slows.
+- **Carbon dioxide (CO2):** plants use CO2 for photosynthesis. In a closed greenhouse on a bright day the level can fall below outdoor levels, so many growers enrich it, often to about 1000 ppm according to OMAFRA guidance.
+- **Light:** shade screens reduce excess radiation, and supplementary lamps add light in short winter days.
+- **Air movement:** horizontal airflow fans keep temperature and humidity uniform and reduce condensation on leaves.
+
+These variables interact. Venting to remove heat also removes CO2 and humidity, and heating dries the air. Good greenhouse climate control therefore coordinates every actuator rather than running each one on its own thermostat.
+
+## Greenhouse climate control system layout
+
+<figure class="anim">
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Greenhouse climate control with fan and pad cooling: hot outside air enters through a wet evaporative pad on one end wall, cooled air flows across the crop to an exhaust fan on the opposite wall, a heating pipe runs along the floor, and a temperature, humidity and CO2 sensor sends readings to a climate controller that commands the fan">
+<circle class="anim-pulse" cx="40" cy="42" r="18" fill="#f5b800" />
+<g stroke="#f5b800" stroke-width="2"><path class="anim-flow-slow" d="M62 52L120 100M50 66L92 120" /></g>
+<path d="M30 250H560" stroke="#7b8794" stroke-width="2" />
+<path d="M100 250V130L270 70L440 130V250" stroke="#0b2545" stroke-width="2.5" fill="#f3f8fc" />
+<rect x="86" y="150" width="20" height="90" fill="#cfe8f7" stroke="#1f6fb2" stroke-width="2" />
+<g stroke="#1f6fb2" stroke-width="1" stroke-dasharray="3 3"><path class="anim-flow-slow" d="M91 152V238M96 152V238M101 152V238" /></g>
+<path d="M130 226H410" stroke="#7b8794" stroke-width="3" />
+<g fill="#2e7d32"><ellipse cx="160" cy="214" rx="12" ry="10" /><ellipse cx="210" cy="214" rx="12" ry="10" /><ellipse cx="260" cy="214" rx="12" ry="10" /><ellipse cx="310" cy="214" rx="12" ry="10" /><ellipse cx="360" cy="214" rx="12" ry="10" /></g>
+<path class="anim-pulse" d="M115 242H425" stroke="#b42318" stroke-width="4" />
+<g stroke="#13a89e" stroke-width="3"><path d="M15 196H84M110 168H408M110 192H408" /></g>
+<g stroke="#fff" stroke-width="3"><path class="anim-flow" d="M15 196H84M110 168H408M110 192H408" /></g>
+<g fill="#13a89e"><path d="M84 191L84 201L92 196Z" /><path d="M408 163L408 173L416 168Z" /><path d="M408 187L408 197L416 192Z" /></g>
+<circle cx="440" cy="180" r="26" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<g class="anim-spin" fill="#0b2545"><path d="M440 180L436 158H444Z" /><path d="M440 180L459 191L455 198Z" /><path d="M440 180L421 191L425 198Z" /><circle cx="440" cy="180" r="4" /></g>
+<rect x="255" y="138" width="30" height="16" rx="3" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5" />
+<rect x="475" y="40" width="115" height="50" rx="6" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<path d="M285 146L475 70" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" />
+<path class="anim-flow" d="M285 146L475 70" stroke="#7b8794" stroke-width="1.5" />
+<path d="M532 90V180H468" stroke="#13a89e" stroke-width="1.5" stroke-dasharray="4 3" />
+<path class="anim-flow" d="M532 90V180H468" stroke="#13a89e" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="45" y="168">Outside</text><text x="45" y="183">air in</text>
+<text x="96" y="268">Wet pad</text>
+<text x="440" y="268">Exhaust fan</text>
+<text x="270" y="268" fill="#b42318">Heating pipe</text>
+<text x="260" y="186" fill="#13a89e">Cooled air</text>
+<text x="270" y="130">T, RH, CO2 sensor</text>
+<text x="532" y="61" font-weight="700">Climate</text><text x="532" y="77" font-weight="700">controller</text>
+<text x="560" y="140" font-size="11">fan</text><text x="560" y="154" font-size="11">command</text>
+<text x="128" y="62" font-size="11" text-anchor="start">Solar gain</text>
+</g>
+</svg>
+<figcaption>Fan and pad cooled greenhouse: the controller reads the indoor sensor and runs the exhaust fan, which pulls outside air through the wet pad and across the crop. Heating pipes supply heat on cold nights.</figcaption>
+</figure>
+
+A typical system has four layers:
+
+1. **Sensors:** aspirated (fan ventilated) and shaded boxes at crop height for dry bulb temperature and relative humidity, plus CO2, outdoor weather station (temperature, radiation, wind speed and direction, rain) and sometimes leaf temperature. Placement matters as much as accuracy; a sensor in direct sun reads far too high.
+2. **Controller:** a dedicated greenhouse climate computer or a PLC programmed in an IEC 61131-3 language, as in [PLC ladder logic](/automation-robotics/plc-ladder-logic/). It holds setpoints, schedules and alarms.
+3. **Actuators:** vent motors, exhaust and circulation fans, pad pumps, heaters or boiler valves, screen motors, CO2 valves, fogging nozzles and lamps.
+4. **Supervision:** a PC or cloud dashboard for trends, alarms and remote setpoint changes, often shared with [automated irrigation control](/agricultural-engineering/automated-irrigation-control/) and fertigation.
+
+## Cooling and ventilation
+
+### Natural ventilation
+
+Roof and side vents open in steps as the temperature rises above the ventilation setpoint. Warm air leaves through the ridge vents and cooler air enters lower down. Controllers limit vent opening on the windward side and close vents in high wind or rain to protect the structure.
+
+### Fan and pad evaporative cooling
+
+Exhaust fans on one end wall pull outside air through a wet cellulose pad on the opposite wall. Water evaporating in the pad absorbs heat, so the air leaving the pad is cooler and more humid. The air then warms as it crosses the crop towards the fans. ANSI/ASAE EP406 gives a base summer ventilation rate of about 0.04 m³/s per m² of floor area, with corrections for elevation, light level and allowed temperature rise. It also gives pad face velocities of about 1.27 m/s for 100 mm pads and 1.78 m/s for 150 mm pads.
+
+The temperature leaving the pad depends on the outside wet bulb temperature and on the pad saturation efficiency. ASHRAE gives saturation effectiveness of about 70 to 95% for direct evaporative coolers.
+
+### Fogging and shading
+
+High pressure fog nozzles produce fine droplets that evaporate in the air, cooling and humidifying without wet pads. Shade screens or whitewash on the glazing cut the solar load that the ventilation system must remove.
+
+## Heating and energy saving
+
+Heat is lost by conduction through the glazing, by air leakage and by radiation to a clear night sky. The conduction term is estimated from the overall heat transfer coefficient U, covered in [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/). Aldrich and Bartok give U values of about 6.2 W/m²K for single glass and about 4.0 W/m²K for double polyethylene film. Heating options include hot water pipes near the floor or crop, unit heaters and infrared heaters.
+
+Energy saving measures include thermal screens drawn at night, double glazing or inflated double film, sealing leaks, and heating to a lower temperature at night where the crop allows it.
+
+## Humidity, VPD and CO2 control
+
+Many controllers regulate **vapour pressure deficit (VPD)**, the difference between the saturation vapour pressure at air temperature and the actual vapour pressure. Saturation vapour pressure follows the Tetens form used in FAO 56:
+
+$$
+e_s = 0.6108 \exp\left(\frac{17.27\,T}{T + 237.3}\right)
+$$
+
+$$
+VPD = e_s \left(1 - \frac{RH}{100}\right)
+$$
+
+At 25 °C, e_s is about 3.17 kPa, so at 70% RH the VPD is about 0.95 kPa. If VPD is too low, the controller heats and vents slightly to dry the air. If it is too high, fogging or misting raises humidity.
+
+CO2 is dosed from liquid CO2 or burner flue gas when vents are closed. When vents open wide, dosing is reduced or stopped because most of the gas would be lost outside.
+
+## Control strategies
+
+- **Staged on and off control:** fans and pads switch on in stages as temperature rises, with a deadband between stages to stop short cycling.
+- **Proportional and PID control:** vent position and heating valve output change smoothly with the error, giving tighter control.
+- **Priority and interlocks:** heating and venting must not fight each other, so the heating setpoint is kept below the ventilation setpoint by a margin. Pads run only when fans run.
+- **Weather compensation:** outdoor radiation raises the ventilation setpoint in bright light, and wind speed limits vent opening.
+- **Alarms and fail safe:** high and low temperature alarms, power failure alarms and vents that open by default on controller failure protect the crop.
+
+Sensor and controller quality matter. See [soil moisture sensors](/agricultural-engineering/soil-moisture-sensors/) for root zone measurement and [precision agriculture technologies](/agricultural-engineering/precision-agriculture-technologies/) for related data systems.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A fan and pad greenhouse with a floor of 30 m × 50 m, pads on the 30 m end wall. 100 mm cellulose pads. Outside air at 35 °C dry bulb and 24 °C wet bulb. Pad saturation efficiency 0.80. Exhaust fans rated 11 m³/s each at the working static pressure.</dd>
+<dt>Find</dt><dd>Required ventilation rate, pad area and height, number of fans and air temperature leaving the pad.</dd>
+<dt>Assumptions</dt><dd>EP406 base rate of 0.04 m³/s per m² applies (elevation and light correction factors taken as 1). Pad face velocity 1.27 m/s.</dd>
+<dt>Solution</dt><dd>Floor area A = 30 × 50 = 1500 m²<br />Q = 1500 × 0.04 = 60 m³/s<br />Pad area = 60 ÷ 1.27 = 47.2 m²<br />Pad height = 47.2 ÷ 30 = 1.57 m<br />Fans = 60 ÷ 11 = 5.45, so 6 fans<br />T_pad = 35 − 0.80 × (35 − 24) = 35 − 8.8 = 26.2 °C</dd>
+<dt>Answer</dt><dd><strong>About 60 m³/s of ventilation, a pad of about 47 m² (1.6 m high along 30 m), 6 fans, and air leaving the pad at about 26 °C</strong></dd>
+<dt>Limitations</dt><dd>Real designs apply EP406 correction factors for elevation, light and temperature rise, use fan ratings at the actual static pressure, and check the pad to fan distance. Air warms as it crosses the house.</dd>
+</dl>
+</Example>
+
+## Key formulas for greenhouse climate control
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Summer ventilation rate | Q = q × A | q = about 0.04 m³/s per m² (EP406 base rate), A = floor area in m² |
+| Pad area | A_pad = Q ÷ v_pad | v_pad = pad face velocity in m/s (about 1.27 for 100 mm pads) |
+| Pad leaving temperature | T_out = T_db − η (T_db − T_wb) | η = saturation efficiency, temperatures in °C |
+| Conduction heat loss | q_c = U × A_s × (T_i − T_o) | U in W/m²K, A_s = glazing area in m², temperatures in °C |
+| Saturation vapour pressure | e_s = 0.6108 exp[17.27 T ÷ (T + 237.3)] | e_s in kPa, T in °C |
+| Vapour pressure deficit | VPD = e_s (1 − RH/100) | VPD in kPa, RH in % |
+
+## Greenhouse climate control interview and viva questions
+
+1. **What variables does a greenhouse climate controller regulate?** Mainly air temperature, humidity or VPD, CO2 concentration and light, plus air movement, using vents, fans, pads, heaters, screens, CO2 dosing and lamps.
+2. **Why must the heating setpoint be lower than the ventilation setpoint?** If they overlap, the heater and vents run at the same time and waste energy fighting each other; a margin between them prevents this.
+3. **What limits the cooling from an evaporative pad?** The outside wet bulb temperature and the pad saturation efficiency; air cannot be cooled below the wet bulb temperature by evaporation alone.
+4. **Why are greenhouse temperature sensors aspirated and shaded?** Direct sun and still air make an unshielded sensor read higher than the true air temperature, so a fan and shield give a representative reading.
+5. **Why is CO2 dosing reduced when vents open?** With large vent openings most of the added CO2 escapes outside, so dosing gives little benefit for its cost.
+

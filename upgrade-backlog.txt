@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/civil-engineering/types-of-cement.mdx
-src/content/articles/civil-engineering/types-of-foundations.mdx
-src/content/articles/civil-engineering/water-cement-ratio.mdx
-src/content/articles/computer-science/arrays-vs-linked-lists.mdx
-src/content/articles/computer-science/big-o-notation.mdx
-src/content/articles/computer-science/compiled-vs-interpreted-languages.mdx
-src/content/articles/computer-science/database-normalization.mdx
-src/content/articles/computer-science/how-http-works.mdx
 src/content/articles/computer-science/process-vs-thread.mdx
 src/content/articles/computer-science/rest-api-basics.mdx
 src/content/articles/computer-science/solid-principles.mdx

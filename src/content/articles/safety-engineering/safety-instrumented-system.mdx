@@ -1,0 +1,187 @@
+---
+title: "Safety Instrumented System (SIS) Basics"
+description: "Safety instrumented system basics: sensors, logic solver, final elements, voting, IEC 61511 lifecycle, proof testing and a PFDavg worked example."
+pubDate: 2026-11-19
+reviewedDate: 2026-11-19
+discipline: safety-engineering
+subcategory: functional-safety
+focusKeyword: "safety instrumented system"
+image: { src: /images/featured/safety-instrumented-system.webp, alt: "Safety Instrumented System (SIS) Basics: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [functional-safety, sis, iec-61511, sif, pfd, voting]
+faq:
+  - q: "Can the basic process control system also act as the SIS?"
+    a: "Normally no. IEC 61511 expects the SIS to be independent of the basic process control system so that a single failure cannot both cause the hazard and disable the protection. Limited sharing is allowed only when it is analysed and justified, and the BPCS itself is usually credited as a separate protection layer in LOPA."
+  - q: "What is the difference between a SIS and a SIF?"
+    a: "A safety instrumented function (SIF) is one specific protective action, such as closing an inlet valve on high-high pressure, with its own required SIL. The safety instrumented system (SIS) is the whole set of hardware and software, sensors, logic solvers and final elements, that carries out one or more SIFs."
+  - q: "Why are most SIS circuits de-energise to trip?"
+    a: "In a de-energise to trip design, loss of power, a broken wire or a failed output removes the signal and moves the final element to its safe state. Common failures therefore become safe failures. Energise to trip designs exist, for example some fire and gas systems, but then line monitoring and power supply integrity become critical."
+references:
+  - text: "IEC 61511-1:2016+A1:2017, Functional safety: Safety instrumented systems for the process industry sector, Part 1: Framework, definitions, system, hardware and application programming requirements"
+  - text: "IEC 61508-6:2010, Functional safety of electrical/electronic/programmable electronic safety-related systems, Part 6: Guidelines on the application of IEC 61508-2 and IEC 61508-3"
+  - text: "ISA-TR84.00.02-2015, Safety Integrity Level (SIL) Verification of Safety Instrumented Functions, International Society of Automation"
+  - text: "P. Gruhn and H. Cheddie, Safety Instrumented Systems: Design, Analysis, and Justification, 2nd ed., ISA, 2006"
+  - text: "CCPS, Guidelines for Safe and Reliable Instrumented Protective Systems, AIChE and Wiley, 2007"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+A **safety instrumented system** (SIS) is an independent automatic protection system that detects a dangerous process condition with sensors, decides in a safety logic solver and drives final elements such as shutdown valves to a safe state. It implements one or more safety instrumented functions, each designed to a required SIL under IEC 61511.
+
+</Key>
+
+A safety instrumented system is the last automatic layer that stops a process before a hazard such as overpressure, overfilling or a runaway reaction becomes an accident. It sits behind the basic process control system (BPCS) and the operator, and in front of mechanical devices such as relief valves. This article explains what an SIS is made of, how it is designed and tested, and how its reliability is calculated.
+
+## What a safety instrumented system does
+
+The BPCS keeps the process at its normal operating point. The SIS does nothing during normal operation. It watches for one specific abnormal condition per function, and when that condition is reached it takes a fixed action that brings the process to a defined **safe state**, for example closing a feed valve, stopping a pump or depressurising a vessel.
+
+IEC 61511-1 defines three related terms:
+
+- **Safety instrumented system (SIS):** the complete system of sensors, logic solvers and final elements.
+- **Safety instrumented function (SIF):** one protective action with a stated trip point, response time and safe state, such as "close XV-101 when PT-101 exceeds 18 barg".
+- **Safety integrity level (SIL):** the required reliability of each SIF, explained in detail in [safety integrity level (SIL)](/safety-engineering/safety-integrity-level/).
+
+The need for each SIF and its target SIL usually come from a hazard study such as a [HAZOP](/safety-engineering/hazop-study/) followed by [layer of protection analysis (LOPA)](/safety-engineering/lopa-explained/).
+
+## Parts of a safety instrumented system
+
+<figure class="anim">
+<svg width="640" height="290" viewBox="0 0 640 290" fill="none" role="img" aria-label="Safety instrumented system: three pressure transmitters on a vessel send signals to a safety PLC logic solver with 2oo3 voting, which de-energises a solenoid valve so the actuator closes the shutdown valve on the inlet line feeding the vessel">
+<rect x="40" y="40" width="90" height="210" rx="30" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2"><path d="M130 60H162M130 120H162M130 180H162" /></g>
+<g stroke="#0b2545" stroke-width="2" fill="#e6f6f4"><circle class="anim-pulse" cx="180" cy="60" r="18" /><circle class="anim-pulse" cx="180" cy="120" r="18" /><circle class="anim-pulse" cx="180" cy="180" r="18" /></g>
+<rect x="270" y="70" width="130" height="100" rx="6" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<circle class="anim-blink" cx="385" cy="84" r="5" fill="#b42318" />
+<g stroke="#b42318" stroke-width="2"><path d="M198 60H230V100H270M198 120H270M198 180H230V140H270M400 120H550V135" /></g>
+<g stroke="#fff" stroke-width="1" stroke-dasharray="6 12" fill="none"><path class="anim-flow" d="M198 60H230V100H270M198 120H270M198 180H230V140H270M400 120H550V135" /></g>
+<path d="M620 225H130" stroke="#0b2545" stroke-width="4" />
+<path class="anim-flow-slow" d="M620 225H130" stroke="#9fb3c8" stroke-width="2" stroke-dasharray="6 12" />
+<g stroke="#0b2545" stroke-width="2" fill="#ffe9e7"><path d="M485 210L505 225L485 240Z" /><path d="M525 210L505 225L525 240Z" /><rect x="490" y="165" width="30" height="20" /><rect x="530" y="135" width="40" height="24" /></g>
+<path d="M505 185V210" stroke="#0b2545" stroke-width="2" />
+<path d="M550 159V175H520" stroke="#7b8794" stroke-width="2" stroke-dasharray="4 3" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="180" y="64" font-weight="700">PT</text><text x="180" y="124" font-weight="700">PT</text><text x="180" y="184" font-weight="700">PT</text>
+<text x="85" y="150">Vessel</text>
+<text x="335" y="105" font-weight="700">Safety PLC</text><text x="335" y="122">logic solver</text><text x="335" y="139">2oo3 voting</text>
+<text x="180" y="25">Sensors</text><text x="335" y="55">Logic solver</text><text x="560" y="95">Final element</text>
+<text x="550" y="151">SOV</text><text x="448" y="179">Actuator</text><text x="505" y="262">Shutdown valve</text><text x="590" y="215">Inlet</text>
+<text x="320" y="283" font-size="11">Trip signal: de-energise to trip (red); process flow into vessel (grey)</text>
+</g>
+</svg>
+<figcaption>A safety instrumented function with 2oo3 voted pressure transmitters, a safety PLC and a shutdown valve on the inlet.</figcaption>
+</figure>
+
+### Sensors
+
+Transmitters or switches measure the hazardous variable: pressure, level, temperature, flow, gas concentration or flame. SIS sensors are separate from the BPCS sensors, are selected as suitable for the SIL (by certification to IEC 61508 or by documented prior use), and are often redundant. Good [pressure measurement](https://www.instrumentationblog.in/category/process-instrumentation/pressure-measurement/) practice, such as correct impulse lines and range selection, matters as much as the device rating.
+
+### Logic solver
+
+The logic solver is usually a safety PLC certified to IEC 61508, with internal diagnostics, redundant processors and a protected application program. Relay and solid state logic are also used for simple systems. It compares inputs with trip points, applies voting, and drives outputs. It must be separate from the control system; the differences between a control system and a safety system are explained in [PLC vs DCS](/automation-robotics/plc-vs-dcs/).
+
+### Final elements
+
+Final elements do the physical work: a solenoid valve vents the actuator air and a spring return shutdown valve closes, or a contactor or breaker stops a motor. In most SIS reliability studies the final element contributes the largest share of the probability of failure on demand, because valves can stick after long periods in one position.
+
+## Design principles
+
+### Independence and separation
+
+The SIS should not share sensors, logic or valves with the BPCS unless the sharing has been analysed. A failed BPCS transmitter can be the cause of the upset, and the same transmitter cannot then be trusted to detect it.
+
+### Fail safe action
+
+Most SIS loops are **de-energise to trip**: the healthy state is energised, and loss of signal, power or air moves the final element to the safe position. Broken wires and power failures therefore cause a spurious trip rather than a hidden loss of protection.
+
+### Voting architectures
+
+Redundant devices are combined by voting, written MooN (M out of N must vote to trip):
+
+| Architecture | Trips when | Strength | Weakness |
+| --- | --- | --- | --- |
+| 1oo1 | the single device trips | simple, cheap | one dangerous failure disables the function |
+| 1oo2 | either of two trips | lower PFDavg | more spurious trips |
+| 2oo2 | both of two trip | fewer spurious trips | higher PFDavg than 1oo2 |
+| 2oo3 | any two of three trip | low PFDavg and few spurious trips | more devices to buy and test |
+
+Redundancy is limited by **common cause failures**, such as plugged impulse lines or the same software fault in identical devices. The beta factor model in IEC 61508-6 represents this as a fraction β of dangerous failures that affect all channels at once.
+
+## The IEC 61511 safety lifecycle
+
+IEC 61511 manages the SIS through a lifecycle so that errors in specification, which cause many failures, are caught early:
+
+1. Hazard and risk assessment, giving the list of SIFs and their target SILs.
+2. **Safety requirements specification (SRS):** trip points, safe states, response times, voting, bypass rules, proof test intervals and spurious trip targets.
+3. Design and engineering, including SIL verification of each SIF.
+4. Installation, commissioning and validation (site acceptance testing of every function end to end).
+5. Operation and maintenance, including proof testing, bypass control and management of change.
+6. Modification and decommissioning under the same discipline.
+
+Functional safety assessments and audits at defined stages confirm the work was done as planned.
+
+## Reliability of a safety instrumented system
+
+A low demand SIF is judged by its **average probability of failure on demand (PFDavg)**. Dangerous undetected failures (rate λDU) stay hidden until a proof test finds them, so the probability grows during each test interval TI. The simplified equations in IEC 61508-6 and ISA-TR84.00.02, ignoring repair time and diagnostics, are:
+
+$$
+PFD_{avg,1oo1} = \frac{\lambda_{DU}\,TI}{2}
+$$
+
+$$
+PFD_{avg,1oo2} = \frac{(\lambda_{DU}\,TI)^2}{3} + \frac{\beta\,\lambda_{DU}\,TI}{2}
+$$
+
+$$
+PFD_{avg,SIF} = PFD_{sensor} + PFD_{logic} + PFD_{final}
+$$
+
+The risk reduction factor is RRF = 1 ÷ PFDavg. A SIF must also meet architectural constraints (hardware fault tolerance) and systematic capability, not just the PFDavg number. Failure rate data often comes from the same reliability concepts used in [MTBF, MTTR and availability](/safety-engineering/mtbf-mttr-availability/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A high pressure SIF uses two transmitters voted 1oo2, each with λDU = 0.005 per year and β = 0.05; a certified safety PLC with PFDavg = 1.0 × 10⁻⁴ from the vendor; and one shutdown valve assembly with λDU = 0.02 per year. All devices are proof tested every year (TI = 1 year). The target is SIL 2.</dd>
+<dt>Find</dt><dd>PFDavg and RRF of the SIF, and the effect of testing the valve every 6 months.</dd>
+<dt>Assumptions</dt><dd>Simplified equations above; perfect proof tests; repair time and diagnostic coverage ignored; failure rates are illustrative, not vendor data.</dd>
+<dt>Solution</dt><dd>Sensors: (0.005 × 1)² ÷ 3 + 0.05 × 0.005 × 1 ÷ 2 = 8.3 × 10⁻⁶ + 1.25 × 10⁻⁴ = 1.33 × 10⁻⁴<br />Logic solver: 1.0 × 10⁻⁴<br />Valve: 0.02 × 1 ÷ 2 = 0.010<br />Total PFDavg = 0.000133 + 0.0001 + 0.010 = 0.0102, RRF = 1 ÷ 0.0102 = 97.7<br />With valve TI = 0.5 year: valve = 0.02 × 0.5 ÷ 2 = 0.005; total = 0.00523, RRF = 191</dd>
+<dt>Answer</dt><dd><strong>With annual testing PFDavg ≈ 0.0102 (RRF ≈ 98), which is only SIL 1. Testing the valve every 6 months gives PFDavg ≈ 0.0052 (RRF ≈ 191), which meets SIL 2.</strong></dd>
+<dt>Limitations</dt><dd>Real verification uses vendor or industry failure data, diagnostic coverage, repair time, imperfect proof test coverage and architectural constraints. A second valve (1oo2) is another option.</dd>
+</dl>
+</Example>
+
+The example shows a typical result: the common cause term dominates the redundant sensors, and the single valve dominates the whole function.
+
+<Calculator path="engineering/pfd-avg" title="PFDavg Calculator" />
+
+## Key formulas for safety instrumented system design
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| PFDavg, 1oo1 | λDU × TI ÷ 2 | λDU = dangerous undetected failure rate per year, TI = proof test interval in years |
+| PFDavg, 1oo2 | (λDU × TI)² ÷ 3 + β × λDU × TI ÷ 2 | β = common cause fraction (dimensionless) |
+| PFDavg of a SIF | PFD_sensor + PFD_logic + PFD_final | sum of subsystem PFDavg values |
+| Risk reduction factor | RRF = 1 ÷ PFDavg | dimensionless |
+
+## Operation, testing and bypasses
+
+An SIS degrades silently, so operation matters as much as design:
+
+- **Proof tests** at the interval in the SRS find dangerous undetected failures. A full test moves the valve and checks stroke time; partial stroke testing can find some valve faults between full tests.
+- **Bypasses and overrides** are controlled by permit, time limited, alarmed and logged, with compensating measures during the bypass.
+- **Demand and trip records** are reviewed to compare actual failure rates with design assumptions.
+- **Management of change** applies to trip points, logic and device replacements.
+
+Failure logic for complex systems can be checked with [fault tree analysis](/safety-engineering/fault-tree-analysis/).
+
+## Safety instrumented system interview and viva questions
+
+1. **What are the three subsystems of a safety instrumented function?** Sensors that detect the hazardous condition, a logic solver that decides to trip, and final elements such as shutdown valves that bring the process to a safe state.
+2. **Why must the SIS be independent of the BPCS?** A BPCS failure may be the initiating cause of the hazard, so a protection layer that shares the failed component cannot be relied on to stop it.
+3. **What is the advantage of 2oo3 voting?** It tolerates one dangerous failure and also avoids a trip from one spurious signal, giving low PFDavg and a low spurious trip rate.
+4. **How does the proof test interval affect PFDavg?** For a 1oo1 device PFDavg is λDU × TI ÷ 2, so halving the test interval halves the average probability of failure on demand.
+5. **What is a safety requirements specification?** It is the IEC 61511 document that defines each SIF: trip point, safe state, response time, voting, required SIL, test interval and bypass rules.

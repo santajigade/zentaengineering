@@ -3,6 +3,7 @@ title: "Big O Notation Explained with Examples"
 description: "Big O notation explained with examples: what it measures, common complexity classes from O(1) to O(2^n), rules for simplifying, space complexity and pitfalls."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-19
 discipline: computer-science
 subcategory: algorithms
 focusKeyword: "Big O notation"
@@ -28,7 +29,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Big O notation** describes how the running time or memory of an algorithm grows as the input size n grows, ignoring constant factors and smaller terms. O(1) means constant time, O(log n) logarithmic, O(n) linear, O(n log n) typical of efficient sorting, O(n²) quadratic and O(2ⁿ) exponential. It lets engineers compare algorithms independently of hardware and predict how a program will scale.
+**Big O notation** describes how an algorithm's running time or memory grows as the input size n grows, ignoring constant factors and lower order terms. Common classes are O(1) constant, O(log n) logarithmic, O(n) linear, O(n log n), O(n²) quadratic and O(2ⁿ) exponential. It compares algorithms independently of hardware.
 
 </Key>
 
@@ -48,7 +49,7 @@ Related notations are **Big Omega** (Ω, a lower bound) and **Big Theta** (Θ, a
 
 ## Common complexity classes
 
-<figure>
+<figure class="anim">
 <svg width="560" height="320" viewBox="0 0 560 320" fill="none" role="img" aria-label="Graph of number of operations against input size n for common complexity classes: O(1) flat, O(log n) slowly rising, O(n) straight line, O(n log n) slightly steeper, and O(n squared) rising steeply">
 <path d="M60 280H530M60 280V20" stroke="#0b2545" stroke-width="2" />
 <path d="M60.0 276.1 L67.7 276.1 L75.3 276.1 L83.0 276.1 L90.7 276.1 L98.3 276.1 L106.0 276.1 L113.7 276.1 L121.3 276.1 L129.0 276.1 L136.7 276.1 L144.3 276.1 L152.0 276.1 L159.7 276.1 L167.3 276.1 L175.0 276.1 L182.7 276.1 L190.3 276.1 L198.0 276.1 L205.7 276.1 L213.3 276.1 L221.0 276.1 L228.7 276.1 L236.3 276.1 L244.0 276.1 L251.7 276.1 L259.3 276.1 L267.0 276.1 L274.7 276.1 L282.3 276.1 L290.0 276.1 L297.7 276.1 L305.3 276.1 L313.0 276.1 L320.7 276.1 L328.3 276.1 L336.0 276.1 L343.7 276.1 L351.3 276.1 L359.0 276.1 L366.7 276.1 L374.3 276.1 L382.0 276.1 L389.7 276.1 L397.3 276.1 L405.0 276.1 L412.7 276.1 L420.3 276.1 L428.0 276.1 L435.7 276.1 L443.3 276.1 L451.0 276.1 L458.7 276.1 L466.3 276.1 L474.0 276.1 L481.7 276.1 L489.3 276.1 L497.0 276.1 L504.7 276.1 L512.3 276.1 L520.0 276.1" stroke="#13a89e" stroke-width="3" fill="none" />
@@ -56,8 +57,9 @@ Related notations are **Big Omega** (Ω, a lower bound) and **Big Theta** (Θ, a
 <path d="M60.0 276.1 L67.7 275.1 L75.3 274.1 L83.0 273.2 L90.7 272.2 L98.3 271.2 L106.0 270.2 L113.7 269.3 L121.3 268.3 L129.0 267.3 L136.7 266.3 L144.3 265.4 L152.0 264.4 L159.7 263.4 L167.3 262.4 L175.0 261.4 L182.7 260.5 L190.3 259.5 L198.0 258.5 L205.7 257.5 L213.3 256.6 L221.0 255.6 L228.7 254.6 L236.3 253.6 L244.0 252.7 L251.7 251.7 L259.3 250.7 L267.0 249.7 L274.7 248.8 L282.3 247.8 L290.0 246.8 L297.7 245.8 L305.3 244.8 L313.0 243.9 L320.7 242.9 L328.3 241.9 L336.0 240.9 L343.7 240.0 L351.3 239.0 L359.0 238.0 L366.7 237.0 L374.3 236.1 L382.0 235.1 L389.7 234.1 L397.3 233.1 L405.0 232.1 L412.7 231.2 L420.3 230.2 L428.0 229.2 L435.7 228.2 L443.3 227.3 L451.0 226.3 L458.7 225.3 L466.3 224.3 L474.0 223.4 L481.7 222.4 L489.3 221.4 L497.0 220.4 L504.7 219.5 L512.3 218.5 L520.0 217.5" stroke="#f5b800" stroke-width="3" fill="none" />
 <path d="M60.0 280.0 L67.7 278.4 L75.3 276.6 L83.0 274.5 L90.7 272.2 L98.3 269.7 L106.0 267.1 L113.7 264.3 L121.3 261.4 L129.0 258.4 L136.7 255.3 L144.3 252.1 L152.0 248.8 L159.7 245.3 L167.3 241.9 L175.0 238.3 L182.7 234.6 L190.3 230.9 L198.0 227.2 L205.7 223.3 L213.3 219.4 L221.0 215.5 L228.7 211.4 L236.3 207.4 L244.0 203.2 L251.7 199.1 L259.3 194.8 L267.0 190.6 L274.7 186.2 L282.3 181.9 L290.0 177.5 L297.7 173.0 L305.3 168.6 L313.0 164.0 L320.7 159.5 L328.3 154.9 L336.0 150.2 L343.7 145.6 L351.3 140.9 L359.0 136.1 L366.7 131.4 L374.3 126.5 L382.0 121.7 L389.7 116.8 L397.3 112.0 L405.0 107.0 L412.7 102.1 L420.3 97.1 L428.0 92.1 L435.7 87.1 L443.3 82.0 L451.0 76.9 L458.7 71.8 L466.3 66.6 L474.0 61.5 L481.7 56.3 L489.3 51.1 L497.0 45.8 L504.7 40.6 L512.3 35.3 L520.0 30.0" stroke="#b42318" stroke-width="3" fill="none" />
 <path d="M60.0 276.1 L67.7 273.9 L75.3 271.2 L83.0 268.0 L90.7 264.4 L98.3 260.2 L106.0 255.6 L113.7 250.5 L121.3 244.8 L129.0 238.7 L136.7 232.1 L144.3 225.1 L152.0 217.5 L159.7 209.4 L167.3 200.9 L175.0 191.9 L182.7 182.3 L190.3 172.3 L198.0 161.8 L205.7 150.8 L213.3 139.4 L221.0 127.4 L228.7 115.0 L236.3 102.0 L244.0 88.6 L251.7 74.7 L259.3 60.3 L267.0 45.4 L274.7 30.0 L282.3 30.0" stroke="#7c3aed" stroke-width="3" fill="none" />
+<g stroke="#ffffff" stroke-width="1.5" fill="none"><path class="anim-flow-slow" d="M60.0 276.1 L67.7 276.1 L75.3 276.1 L83.0 276.1 L90.7 276.1 L98.3 276.1 L106.0 276.1 L113.7 276.1 L121.3 276.1 L129.0 276.1 L136.7 276.1 L144.3 276.1 L152.0 276.1 L159.7 276.1 L167.3 276.1 L175.0 276.1 L182.7 276.1 L190.3 276.1 L198.0 276.1 L205.7 276.1 L213.3 276.1 L221.0 276.1 L228.7 276.1 L236.3 276.1 L244.0 276.1 L251.7 276.1 L259.3 276.1 L267.0 276.1 L274.7 276.1 L282.3 276.1 L290.0 276.1 L297.7 276.1 L305.3 276.1 L313.0 276.1 L320.7 276.1 L328.3 276.1 L336.0 276.1 L343.7 276.1 L351.3 276.1 L359.0 276.1 L366.7 276.1 L374.3 276.1 L382.0 276.1 L389.7 276.1 L397.3 276.1 L405.0 276.1 L412.7 276.1 L420.3 276.1 L428.0 276.1 L435.7 276.1 L443.3 276.1 L451.0 276.1 L458.7 276.1 L466.3 276.1 L474.0 276.1 L481.7 276.1 L489.3 276.1 L497.0 276.1 L504.7 276.1 L512.3 276.1 L520.0 276.1" /><path class="anim-flow-slow" d="M60.0 280.0 L67.7 278.7 L75.3 277.7 L83.0 276.8 L90.7 276.1 L98.3 275.4 L106.0 274.8 L113.7 274.3 L121.3 273.8 L129.0 273.4 L136.7 272.9 L144.3 272.6 L152.0 272.2 L159.7 271.8 L167.3 271.5 L175.0 271.2 L182.7 270.9 L190.3 270.7 L198.0 270.4 L205.7 270.1 L213.3 269.9 L221.0 269.7 L228.7 269.5 L236.3 269.2 L244.0 269.0 L251.7 268.8 L259.3 268.6 L267.0 268.5 L274.7 268.3 L282.3 268.1 L290.0 267.9 L297.7 267.8 L305.3 267.6 L313.0 267.5 L320.7 267.3 L328.3 267.2 L336.0 267.0 L343.7 266.9 L351.3 266.7 L359.0 266.6 L366.7 266.5 L374.3 266.4 L382.0 266.2 L389.7 266.1 L397.3 266.0 L405.0 265.9 L412.7 265.8 L420.3 265.7 L428.0 265.5 L435.7 265.4 L443.3 265.3 L451.0 265.2 L458.7 265.1 L466.3 265.0 L474.0 264.9 L481.7 264.8 L489.3 264.7 L497.0 264.6 L504.7 264.6 L512.3 264.5 L520.0 264.4" /><path class="anim-flow-slow" d="M60.0 276.1 L67.7 275.1 L75.3 274.1 L83.0 273.2 L90.7 272.2 L98.3 271.2 L106.0 270.2 L113.7 269.3 L121.3 268.3 L129.0 267.3 L136.7 266.3 L144.3 265.4 L152.0 264.4 L159.7 263.4 L167.3 262.4 L175.0 261.4 L182.7 260.5 L190.3 259.5 L198.0 258.5 L205.7 257.5 L213.3 256.6 L221.0 255.6 L228.7 254.6 L236.3 253.6 L244.0 252.7 L251.7 251.7 L259.3 250.7 L267.0 249.7 L274.7 248.8 L282.3 247.8 L290.0 246.8 L297.7 245.8 L305.3 244.8 L313.0 243.9 L320.7 242.9 L328.3 241.9 L336.0 240.9 L343.7 240.0 L351.3 239.0 L359.0 238.0 L366.7 237.0 L374.3 236.1 L382.0 235.1 L389.7 234.1 L397.3 233.1 L405.0 232.1 L412.7 231.2 L420.3 230.2 L428.0 229.2 L435.7 228.2 L443.3 227.3 L451.0 226.3 L458.7 225.3 L466.3 224.3 L474.0 223.4 L481.7 222.4 L489.3 221.4 L497.0 220.4 L504.7 219.5 L512.3 218.5 L520.0 217.5" /><path class="anim-flow-slow" d="M60.0 280.0 L67.7 278.4 L75.3 276.6 L83.0 274.5 L90.7 272.2 L98.3 269.7 L106.0 267.1 L113.7 264.3 L121.3 261.4 L129.0 258.4 L136.7 255.3 L144.3 252.1 L152.0 248.8 L159.7 245.3 L167.3 241.9 L175.0 238.3 L182.7 234.6 L190.3 230.9 L198.0 227.2 L205.7 223.3 L213.3 219.4 L221.0 215.5 L228.7 211.4 L236.3 207.4 L244.0 203.2 L251.7 199.1 L259.3 194.8 L267.0 190.6 L274.7 186.2 L282.3 181.9 L290.0 177.5 L297.7 173.0 L305.3 168.6 L313.0 164.0 L320.7 159.5 L328.3 154.9 L336.0 150.2 L343.7 145.6 L351.3 140.9 L359.0 136.1 L366.7 131.4 L374.3 126.5 L382.0 121.7 L389.7 116.8 L397.3 112.0 L405.0 107.0 L412.7 102.1 L420.3 97.1 L428.0 92.1 L435.7 87.1 L443.3 82.0 L451.0 76.9 L458.7 71.8 L466.3 66.6 L474.0 61.5 L481.7 56.3 L489.3 51.1 L497.0 45.8 L504.7 40.6 L512.3 35.3 L520.0 30.0" /><path class="anim-flow-slow" d="M60.0 276.1 L67.7 273.9 L75.3 271.2 L83.0 268.0 L90.7 264.4 L98.3 260.2 L106.0 255.6 L113.7 250.5 L121.3 244.8 L129.0 238.7 L136.7 232.1 L144.3 225.1 L152.0 217.5 L159.7 209.4 L167.3 200.9 L175.0 191.9 L182.7 182.3 L190.3 172.3 L198.0 161.8 L205.7 150.8 L213.3 139.4 L221.0 127.4 L228.7 115.0 L236.3 102.0 L244.0 88.6 L251.7 74.7 L259.3 60.3 L267.0 45.4 L274.7 30.0 L282.3 30.0" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700">
-<text x="420" y="270" fill="#0e7f78">O(1)</text>
+<text x="525" y="281" fill="#0e7f78">O(1)</text>
 <text x="470" y="250" fill="#1d4ed8">O(log n)</text>
 <text x="490" y="210" fill="#9a6b00">O(n)</text>
 <text x="300" y="40" fill="#b42318">O(n log n)</text>
@@ -68,7 +70,7 @@ Related notations are **Big Omega** (Ω, a lower bound) and **Big Theta** (Θ, a
 <text x="30" y="150" text-anchor="middle" transform="rotate(-90 30 150)">Operations</text>
 </g>
 </svg>
-<figcaption>How common complexity classes grow (n from 1 to 16; curves above the top are cut off).</figcaption>
+<figcaption>How common complexity classes grow (n from 1 to 16; curves above the top are cut off). Moving dashes trace each curve as n increases.</figcaption>
 </figure>
 
 | Big O | Name | Example |
@@ -139,6 +141,17 @@ Big O also describes memory. The set based duplicate check above uses O(n) extra
 
 Some operations are usually cheap but occasionally expensive. Appending to a dynamic array is O(1) most of the time, but O(n) when the array must grow and copy. Because growth doubles the capacity, the total cost of n appends is O(n), so each append is **amortised O(1)**.
 
+## Key formulas for Big O notation
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Definition of Big O | f(n) ≤ c · g(n) for all n ≥ n₀ | f(n) = step count, g(n) = bounding function, c and n₀ = positive constants |
+| Sequential parts | O(f) + O(g) = O(max(f, g)) | Keep the faster growing term |
+| Nested parts | O(f) × O(g) = O(f · g) | An O(log n) step inside an O(n) loop gives O(n log n) |
+| Binary search comparisons | about log₂ n | n = number of sorted items |
+| Pairwise comparisons | n(n − 1)/2 | Grows as O(n²) |
+| Merge sort recurrence | T(n) = 2T(n/2) + O(n) = O(n log n) | T(n) = time for n items |
+
 ## Common mistakes
 
 - Treating Big O as exact running time; it hides constants that matter for small n.
@@ -147,3 +160,11 @@ Some operations are usually cheap but occasionally expensive. Appending to a dyn
 - Quoting the average case when inputs may be adversarial; quicksort is O(n²) in the worst case.
 
 Big O thinking applies across computer science: from choosing data structures to designing database queries, where good [normalization](/computer-science/database-normalization/) and indexes avoid scanning whole tables. Language implementation affects only constant factors, as explained in [compiled vs interpreted languages](/computer-science/compiled-vs-interpreted-languages/), while the choice of algorithm changes the growth rate itself. Writing [unit tests](/computer-science/types-of-software-testing/) for edge cases helps confirm that a faster algorithm still gives correct results.
+
+## Big O notation interview and viva questions
+
+1. **What does Big O notation describe?** It describes an upper bound on how an algorithm's running time or memory grows with input size n, for large n, ignoring constants and lower order terms.
+2. **Why is 3n² + 5n + 20 written as O(n²)?** For large n the n² term dominates, and the formal definition allows any constant multiple, so constants and smaller terms are dropped.
+3. **What is the difference between Big O, Big Omega and Big Theta?** Big O is an upper bound, Big Omega a lower bound and Big Theta a tight bound that is both at once.
+4. **Why is binary search O(log n)?** Each comparison halves the remaining sorted range, so about log₂ n comparisons are needed in the worst case.
+5. **What does amortised O(1) mean for dynamic array appends?** Most appends are cheap, and because the array doubles its capacity when full, the total cost of n appends is O(n), so each append averages O(1).

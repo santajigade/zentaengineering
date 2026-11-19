@@ -3,6 +3,7 @@ title: "Arrays vs Linked Lists: Differences and Use Cases"
 description: "Arrays vs linked lists compared: memory layout, access, insertion and deletion costs, cache behaviour, memory overhead and when to use each, with examples."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-19
 discipline: computer-science
 subcategory: data-structures
 focusKeyword: "arrays vs linked lists"
@@ -28,7 +29,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In **arrays vs linked lists**, an **array** stores elements side by side in one block of memory, so any element can be read by index in constant time, but inserting or deleting in the middle means shifting elements. A **linked list** stores each element in a separate node that points to the next, so inserting or deleting at a known node is fast, but reaching the i-th element means walking the list. Arrays are usually faster in practice because of better cache use.
+In **arrays vs linked lists**, an array stores elements side by side in one memory block, giving constant time access by index but costly middle insertions. A linked list chains separate nodes with pointers, so inserting at a known node is fast but reaching the i-th element needs a walk. Arrays are usually faster thanks to cache locality.
 
 </Key>
 
@@ -36,7 +37,7 @@ Arrays and linked lists are the two basic ways to store a sequence of items. Alm
 
 ## Memory layout
 
-<figure>
+<figure class="anim">
 <svg width="580" height="240" viewBox="0 0 580 240" fill="none" role="img" aria-label="Top: an array of five elements stored in adjacent memory cells with indices 0 to 4. Bottom: a singly linked list of four nodes scattered in memory, each node holding a value and a pointer to the next node, with the last pointer null">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545" text-anchor="middle">
 <text x="20" y="30" text-anchor="start" font-weight="700">Array (contiguous)</text>
@@ -55,6 +56,8 @@ Arrays and linked lists are the two basic ways to store a sequence of items. Alm
 <text x="545" y="205" font-size="12">null</text>
 </g>
 <g stroke="#0b2545" stroke-width="2" fill="none"><path d="M85 185L148 203M215 205L288 182M355 180L428 198M495 200H522" /><path d="M140 196L150 204L139 208M281 177L290 181L282 188M420 191L430 199L419 203" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M85 185L148 203M215 205L288 182M355 180L428 198M495 200H522" /></g>
+<g stroke="#0b2545" stroke-width="3" fill="none"><rect class="anim-blink" x="20" y="45" width="70" height="44" /><rect class="anim-blink anim-d1" x="90" y="45" width="70" height="44" /><rect class="anim-blink anim-d2" x="160" y="45" width="70" height="44" /><rect class="anim-blink anim-d3" x="230" y="45" width="70" height="44" /><rect class="anim-blink anim-d4" x="300" y="45" width="70" height="44" /></g>
 </svg>
 <figcaption>An array stores elements contiguously; a linked list chains nodes that can sit anywhere in memory.</figcaption>
 </figure>
@@ -126,6 +129,14 @@ Modern processors load memory into caches in lines of typically 64 bytes. Walkin
 In most languages the standard advice is the same: start with the dynamic array and switch only when profiling shows a real need.
 
 When a program needs both fast indexing and cheap insertion, hybrid structures such as gap buffers, ropes or skip lists are worth considering.
+
+## Arrays vs linked lists interview and viva questions
+
+1. **Why is array indexing O(1)?** Elements are contiguous and equal in size, so the address of element i is the base address plus i times the element size, computed in one step.
+2. **When is linked list insertion O(1)?** Only when a reference to the insertion point, such as the head or a node found earlier, is already held; finding the position first takes O(n).
+3. **Why are arrays usually faster than linked lists for a linear search?** Consecutive array elements share cache lines and are prefetched, while scattered list nodes can cause a cache miss at every step.
+4. **What advantage does a doubly linked list have over a singly linked list?** Each node also points to the previous node, allowing backward traversal and easy removal of a given node.
+5. **How does a dynamic array achieve amortised O(1) appends?** When full it allocates a larger block, usually a constant multiple of the old size, and copies the elements, so the occasional copy cost is spread over many appends.
 
 ## Related structures
 

@@ -1,0 +1,188 @@
+---
+title: "Rock Bolting and Ground Support Methods Explained"
+description: "Rock bolting explained: suspension, beam and keying action, bolt types, mesh, shotcrete, cable bolts, bolt length rules and a worked support example."
+pubDate: 2026-11-19
+reviewedDate: 2026-11-19
+discipline: mining-engineering
+subcategory: rock-mechanics
+focusKeyword: "rock bolting"
+image: { src: /images/featured/rock-bolting-ground-support.webp, alt: "Rock Bolting and Ground Support Methods Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [rock-mechanics, rock-bolting, ground-support, shotcrete, cable-bolts]
+faq:
+  - q: "What is the difference between active and passive rock bolts?"
+    a: "An active bolt is tensioned at installation, so it applies a compressive load to the rock straight away, as with a tensioned mechanically anchored bolt. A passive bolt, such as an untensioned fully grouted rebar or a friction bolt, carries load only when the rock starts to move and stretches the bolt."
+  - q: "Why are rock bolts installed in a pattern rather than one by one?"
+    a: "A regular pattern makes the bolted rock act as a reinforced unit and makes sure every potentially loose block is crossed by at least one bolt. Individual spot bolts are still used to pin specific wedges identified by mapping, but pattern bolting is the normal approach for roofs and walls of mine openings."
+  - q: "Can rock bolts be used without mesh or shotcrete?"
+    a: "In good, massive rock with widely spaced joints, bolts alone may be enough. In jointed or broken rock, small pieces can ravel out between the bolt plates, so surface support such as welded mesh or shotcrete is added to hold the rock between bolts and transfer its load back to the bolts."
+references:
+  - text: "E. Hoek, P. K. Kaiser and W. F. Bawden, Support of Underground Excavations in Hard Rock, A. A. Balkema, 1995"
+  - text: "E. Hoek, Practical Rock Engineering, RocScience, 2007"
+  - text: "B. H. G. Brady and E. T. Brown, Rock Mechanics for Underground Mining, 3rd ed., Springer, 2004"
+  - text: "N. Barton, R. Lien and J. Lunde, Engineering classification of rock masses for the design of tunnel support, Rock Mechanics, 6, 189-236, 1974"
+  - text: "NGI, Using the Q-system: Rock mass classification and support design, Norwegian Geotechnical Institute, 2015"
+  - text: "ASTM F432, Standard Specification for Roof and Rock Bolts and Accessories, ASTM International"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**Rock bolting** is the installation of steel bars or tubes into drilled holes around an underground opening to reinforce the rock mass. Bolts suspend loose layers from stable rock, clamp thin beds into a stiffer beam and key blocks together. Mesh, shotcrete, straps and cable bolts complete the ground support system.
+
+</Key>
+
+Rock bolting is the most widely used method of ground support in underground mines and tunnels. When an opening is excavated, the rock around it loses confinement, joints open and blocks can loosen and fall. Rock bolts, together with surface support such as mesh and shotcrete, help the rock carry its own load so that the opening stays safe for people and equipment.
+
+Choosing the right support starts with understanding the rock. Rating systems described in [rock mass classification](/mining-engineering/rock-mass-classification/) are the usual first step, followed by mapping of joints and wedges in the opening.
+
+## How rock bolting works
+
+Rock bolts do not hold a mine up like columns. They work with the rock in three main ways, described in Hoek, Kaiser and Bawden and in Brady and Brown.
+
+- **Suspension:** a weak or loosened layer is hung from stronger rock above. Each bolt carries the dead weight of the rock in its tributary area and transfers it to the anchorage.
+- **Beam building:** in thinly bedded roofs, bolts clamp several thin layers together so they act as one thicker beam. A thicker beam is much stiffer and stronger in bending than the separate layers sliding past each other.
+- **Keying and arching:** in jointed rock, bolts hold blocks together and keep the interlock between them, so the rock around the opening forms a self supporting arch in compression.
+
+The diagram shows the suspension idea in a typical arched roof. The loosened zone around the opening is held by a pattern of bolts that reach well into stable rock.
+
+<figure class="anim">
+<svg width="600" height="320" viewBox="0 0 600 320" fill="none" role="img" aria-label="Cross section of an arched underground opening with a dashed loosened rock zone around the roof; five rock bolts with face plates at the opening surface run radially through the loosened zone into competent rock, where their anchored ends carry the load; shotcrete lines the opening surface">
+<rect x="0" y="0" width="600" height="320" fill="#f4f1ea" />
+<path d="M115 210A185 125 0 0 1 485 210V300H115Z" fill="#e8dcc6" />
+<path d="M115 210A185 125 0 0 1 485 210" stroke="#b42318" stroke-width="1.5" stroke-dasharray="6 4" />
+<path d="M150 300V210A150 90 0 0 1 450 210V300Z" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<path d="M156 300V210A144 84 0 0 1 444 210V300" stroke="#7b8794" stroke-width="5" fill="none" />
+<path d="M150 300H450" stroke="#0b2545" stroke-width="3" />
+<g stroke="#0b2545" stroke-width="3" stroke-linecap="round">
+<path d="M441 179L511 154M396 141L445 84M300 120V45M204 141L155 84M159 179L89 154" />
+</g>
+<g stroke="#13a89e" stroke-width="6" stroke-linecap="round">
+<path d="M490 161L511 154M430 101L445 84M300 66V45M170 101L155 84M110 161L89 154" />
+</g>
+<g stroke="#fff" stroke-width="1.5" fill="none">
+<path class="anim-flow-slow" d="M441 179L511 154M396 141L445 84M300 120V45M204 141L155 84M159 179L89 154" />
+</g>
+<g stroke="#0b2545" stroke-width="4" stroke-linecap="round">
+<path d="M436 173L446 185M391 136L401 146M292 120H308M199 146L209 136M154 185L164 173" />
+</g>
+<g fill="#13a89e">
+<circle class="anim-pulse" cx="511" cy="154" r="5" /><circle class="anim-pulse" cx="445" cy="84" r="5" /><circle class="anim-pulse" cx="300" cy="45" r="5" /><circle class="anim-pulse" cx="155" cy="84" r="5" /><circle class="anim-pulse" cx="89" cy="154" r="5" />
+</g>
+<g stroke="#b42318" stroke-width="2"><path d="M300 160V190" /><path d="M293 182L300 192L307 182" fill="#b42318" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="20" y="28" font-weight="700">Competent rock (anchorage zone)</text>
+<text x="300" y="250" text-anchor="middle" font-weight="700">Opening</text>
+<text x="300" y="206" text-anchor="middle" fill="#b42318">Weight of loose rock</text>
+<text x="525" y="200" fill="#b42318">Loosened</text><text x="525" y="215" fill="#b42318">zone</text>
+<text x="470" y="60">Anchored end</text>
+<text x="20" y="260">Face plate</text><text x="20" y="275">and nut</text>
+<text x="465" y="255">Shotcrete</text><text x="465" y="270">lining</text>
+</g>
+<g stroke="#7b8794" stroke-width="1"><path d="M75 255L152 185M462 252L446 240M468 64L447 80" /></g>
+</svg>
+<figcaption>Suspension action: each rock bolt transfers the weight of the loosened zone to its anchored end in competent rock.</figcaption>
+</figure>
+
+## Types of rock bolts
+
+Bolts are grouped by how they grip the rock along the hole. Hoek, Kaiser and Bawden describe each type and its typical use.
+
+### Mechanically anchored bolts
+
+An expansion shell at the end of the bolt is wedged against the hole wall when the bolt is turned, and the bolt is then tensioned against a face plate. These are quick to install and give immediate active support, but the anchor can slip in soft rock and the ungrouted steel is exposed to corrosion. They are often grouted later for long term use.
+
+### Fully grouted rebar bolts
+
+A deformed steel bar is bonded along its whole length with resin cartridges or cement grout. Resin sets in minutes and allows early tensioning; cement grout is cheaper but needs curing time. Full bonding makes the bolt stiff and resistant to corrosion, and it is the standard choice for permanent openings.
+
+### Friction bolts
+
+Friction bolts grip the hole wall over their full length by radial pressure. **Split set** bolts are slotted steel tubes driven into a slightly smaller hole. **Inflatable bolts** (such as Swellex) are folded tubes expanded by high pressure water. They install fast and tolerate rock movement, which suits short term mining support, but their capacity depends on hole diameter and they are prone to corrosion.
+
+### Cable bolts
+
+Cable bolts are steel strands, usually grouted with cement, installed in long holes. They reach much deeper than rebar bolts and are used for wide spans, intersections, stope hanging walls and crown pillars.
+
+| Bolt type | Grip mechanism | Typical use |
+| --- | --- | --- |
+| Mechanically anchored | Expansion shell at end | Quick active support, temporary roofs |
+| Resin or cement grouted rebar | Bond along full length | Permanent openings, development drives |
+| Split set or inflatable | Friction along full length | Fast short term mining support |
+| Cable bolt | Grouted strand | Long spans, stopes, intersections |
+
+## Surface support and other ground support methods
+
+Bolts reinforce the rock in depth, but small pieces can still fall between bolt plates. Surface support holds this rock:
+
+- **Welded wire mesh or chain link mesh:** pinned by the bolt plates, it catches small pieces and transfers their load to the bolts.
+- **Shotcrete:** sprayed concrete, often fibre reinforced, applied soon after excavation. It seals the surface, prevents ravelling and supports wedges between bolts.
+- **Straps and lacing:** steel straps link bolt heads across weak bands or around corners.
+- **Steel sets and lattice girders:** used in very poor ground where bolts cannot find good anchorage, often with shotcrete.
+
+Ground support is a system. Bolts, mesh and shotcrete are only as strong as their connections, so plates, nuts and mesh overlaps matter. Support should also follow controlled [drilling and blasting](/mining-engineering/drilling-and-blasting-basics/), because poor blasting damages the rock and increases the load on support.
+
+## Design rules for rock bolting
+
+### Dead weight suspension
+
+For a loose layer of known thickness, the load on each bolt equals the weight of rock in its tributary area:
+
+$$
+W = \gamma \, h \, s_1 \, s_2
+$$
+
+where γ is the unit weight of rock, h the thickness of the loose layer and s1, s2 the bolt spacings along and across the opening. The [factor of safety](/mechanical-engineering/factor-of-safety/) is the bolt capacity divided by W.
+
+### Empirical rules from the Q-system
+
+Barton, Lien and Lunde related the Q value to support needs. The maximum span that can stand without support is:
+
+$$
+\text{Span}_\text{max} = 2 \, \text{ESR} \, Q^{0.4}
+$$
+
+and a guide for roof bolt length in metres is:
+
+$$
+L = 2 + \frac{0.15 \, B}{\text{ESR}}
+$$
+
+where B is the span or height in metres and ESR is the excavation support ratio, which reflects how critical the opening is. The NGI handbook gives ESR values of about 1.6 for permanent mine openings and lower values for road tunnels and caverns where safety demands are higher.
+
+## Key formulas for rock bolting
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Load per bolt (suspension) | W = γ h s1 s2 | γ in kN/m³, h, s1, s2 in m, W in kN |
+| Factor of safety | FS = P_bolt ÷ W | P_bolt = bolt capacity in kN |
+| Maximum unsupported span | Span_max = 2 ESR Q^0.4 | Span in m, Q dimensionless, ESR from Q-system tables |
+| Roof bolt length | L = 2 + 0.15 B ÷ ESR | L and B in m |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A permanent mine drive 5 m wide in rock with Q = 2, so ESR = 1.6. Mapping shows a loosened roof layer 1.2 m thick with unit weight 26 kN/m³. Proposed pattern 1.2 m by 1.2 m. Bolt capacity 120 kN, as stated by the supplier.</dd>
+<dt>Find</dt><dd>Whether support is needed, the guide bolt length, the load per bolt and the factor of safety.</dd>
+<dt>Assumptions</dt><dd>The loose layer acts as dead weight only; bolts are fully anchored beyond the loose zone; no load from high stress or blasting damage.</dd>
+<dt>Solution</dt><dd>Span_max = 2 × 1.6 × 2^0.4 = 4.22 m, less than 5 m, so support is needed<br />L = 2 + 0.15 × 5 ÷ 1.6 = 2.47 m, and the bolt must also pass the 1.2 m loose layer with enough anchorage length<br />W = 26 × 1.2 × 1.2 × 1.2 = 44.9 kN<br />FS = 120 ÷ 44.9 = 2.67</dd>
+<dt>Answer</dt><dd><strong>Support is required; bolts about 2.5 m long on a 1.2 m by 1.2 m pattern give a factor of safety of about 2.7 against dead weight</strong></dd>
+<dt>Limitations</dt><dd>Dead weight design ignores stress driven failure, wedge geometry and dynamic loads. Wedge analysis and site experience should confirm the design.</dd>
+</dl>
+</Example>
+
+## Installation, testing and monitoring
+
+Good bolting depends on good installation. Holes should be drilled to the correct diameter and length, cleaned, and filled with the right amount of resin or grout. Plates must sit flat against the rock. Pull tests check anchorage on a sample of bolts, and ASTM F432 sets material and dimension requirements for roof and rock bolts and their accessories.
+
+Mines also monitor support performance with extensometers, convergence measurements and regular visual inspection, as part of managing [mine hazards](/mining-engineering/mine-hazards-and-controls/) such as falls of ground. Where conditions change, the support pattern is updated. Support needs also differ between methods, as explained in [surface vs underground mining](/mining-engineering/surface-vs-underground-mining/).
+
+## Rock bolting interview and viva questions
+
+1. **What are the three main ways rock bolts support rock?** Suspension of loose layers from stable rock, beam building by clamping thin beds together, and keying blocks so the rock forms a self supporting arch.
+2. **Why are fully grouted rebar bolts preferred for permanent openings?** They are bonded along their whole length, which makes them stiff and protects the steel from corrosion.
+3. **What is the advantage of friction bolts such as split sets?** They install quickly and tolerate rock movement, which suits short term mining support, though they are prone to corrosion.
+4. **How is the load on a bolt found in dead weight design?** Multiply the unit weight of rock by the loose layer thickness and the two bolt spacings, W = γ h s1 s2.
+5. **Why is mesh or shotcrete used with rock bolts?** Bolts reinforce the rock in depth, but small pieces between plates can fall; surface support holds them and transfers their load to the bolts.

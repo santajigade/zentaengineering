@@ -3,6 +3,7 @@ title: "Compiled vs Interpreted Languages Explained"
 description: "Compiled vs interpreted languages explained: how compilers, interpreters, bytecode and JIT work, speed, portability, debugging and which languages use each."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-19
 discipline: computer-science
 subcategory: programming-languages
 focusKeyword: "compiled vs interpreted languages"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In **compiled vs interpreted languages**, the difference is when source code is translated. A **compiler** translates the whole program into machine code before it runs, producing an executable (C, C++, Rust, Go). An **interpreter** reads and executes the program statement by statement at run time (classic BASIC, shell scripts). Many modern languages mix both: Java, C# and Python compile to **bytecode** that a virtual machine interprets or **JIT** compiles while the program runs.
+In **compiled vs interpreted languages**, the difference is when source code is translated. A **compiler** translates the whole program into machine code before it runs (C, C++, Rust, Go). An **interpreter** executes it statement by statement at run time. Java, C# and Python compile to **bytecode** that a virtual machine interprets or JIT compiles.
 
 </Key>
 
@@ -37,7 +38,7 @@ A processor only executes machine code: binary instructions for its own instruct
 
 ## How a compiler works
 
-<figure>
+<figure class="anim">
 <svg width="580" height="250" viewBox="0 0 580 250" fill="none" role="img" aria-label="Three paths from source code: a compiler producing a native executable that runs on the CPU; an interpreter that reads source and executes it directly; and a bytecode compiler feeding a virtual machine that interprets bytecode and JIT compiles hot code">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <rect x="10" y="20" width="100" height="40" rx="8" fill="#eef1f6" stroke="#0b2545" stroke-width="2" /><text x="60" y="45">Source code</text>
@@ -55,9 +56,10 @@ A processor only executes machine code: binary instructions for its own instruct
 <text x="300" y="168" font-size="12" fill="#0e7f78">Translation during run time</text>
 </g>
 <g stroke="#0b2545" stroke-width="2"><path d="M110 40H158M270 40H318M440 40H488M110 120H158M440 120H488M110 200H158M270 200H318M440 200H488" /></g>
+<g stroke="#ffffff" stroke-width="2" fill="none"><path class="anim-flow" d="M110 40H150M270 40H310M440 40H480" /><path class="anim-flow anim-d1" d="M110 120H150M440 120H480" /><path class="anim-flow anim-d2" d="M110 200H150M270 200H310M440 200H480" /></g>
 <g stroke="#0b2545" stroke-width="2" fill="none"><path d="M150 34L159 40L150 46M310 34L319 40L310 46M480 34L489 40L480 46M150 114L159 120L150 126M480 114L489 120L480 126M150 194L159 200L150 206M310 194L319 200L310 206M480 194L489 200L480 206" /></g>
 </svg>
-<figcaption>Ahead-of-time compilation (top), pure interpretation (middle) and the bytecode plus virtual machine approach (bottom).</figcaption>
+<figcaption>Ahead-of-time compilation (top), pure interpretation (middle) and the bytecode plus virtual machine approach (bottom). Moving dashes show code passing from source towards the CPU.</figcaption>
 </figure>
 
 A compiler works in stages:
@@ -128,3 +130,11 @@ A compiler for a statically typed language rejects many mistakes before the prog
 - **Web front ends** use JavaScript or languages compiled to JavaScript or WebAssembly, served over the [HTTP request and response](/computer-science/how-http-works/) cycle.
 
 Performance also depends far more on the algorithm than on the language: an O(n²) algorithm in C will lose to an O(n log n) algorithm in Python for large inputs, as [Big O notation](/computer-science/big-o-notation/) explains. How the processor fetches compiled instructions from memory is covered in [Von Neumann vs Harvard architecture](/computer-science/von-neumann-vs-harvard-architecture/).
+
+## Compiled vs interpreted languages interview and viva questions
+
+1. **What is the main difference between a compiler and an interpreter?** A compiler translates the whole program into machine code before it runs, while an interpreter translates and executes the program while it runs.
+2. **What are the main stages of a compiler?** Lexical analysis, parsing, semantic analysis, intermediate representation and optimisation, code generation and linking.
+3. **What is bytecode?** Bytecode is a compact, platform independent instruction set produced from source code and executed by a virtual machine, as with JVM bytecode or .NET intermediate language.
+4. **How does a JIT compiler improve speed?** The virtual machine profiles which methods run most often and compiles those hot methods to native machine code while the program runs.
+5. **Why do interpreted programs often find errors later?** In dynamically typed, interpreted languages many mistakes, such as a misspelt variable, appear only when the faulty line executes, whereas a compiler for a statically typed language rejects them at build time.

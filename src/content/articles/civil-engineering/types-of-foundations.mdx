@@ -3,6 +3,7 @@ title: "Types of Foundations and When to Use Them"
 description: "Types of foundations explained: isolated, combined, strip, strap and raft footings, piles and caissons, how to choose one, and a footing size example."
 pubDate: 2026-11-10
 reviewedDate: 2026-11-10
+updatedDate: 2026-11-19
 discipline: civil-engineering
 subcategory: rcc-design
 focusKeyword: "types of foundations"
@@ -32,7 +33,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The main types of foundations are **shallow foundations**, which spread the load into soil close to the surface, and **deep foundations**, which carry it down to stronger layers. Shallow types are isolated, combined, strip, strap and raft (mat) footings. Deep types are piles, piers and caissons. The choice depends on the soil's bearing capacity and settlement behaviour, the size and spacing of the loads, groundwater, and cost.
+The main **types of foundations** are **shallow foundations**, which spread load into soil near the surface, and **deep foundations**, which carry it down to stronger layers. Shallow types are isolated, combined, strip, strap and raft footings; deep types are piles, piers and caissons. Soil bearing capacity, settlement, load spacing and groundwater decide the choice.
 
 </Key>
 
@@ -74,7 +75,7 @@ A **raft** is a single thick slab, often with beams, covering the whole plan are
 
 A **floating** or compensated raft is placed deep enough that the weight of soil excavated roughly balances the building load, reducing the net pressure on the soil.
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 280" width="640" height="280" fill="none" role="img" aria-label="Cross sections of three types of foundations: an isolated footing under one column in firm soil, a raft slab under several columns on weak soil, and a pile foundation where a pile cap on piles passes through soft soil to a hard stratum.">
 <rect x="20" y="100" width="190" height="145" fill="#f3e6d3" />
 <rect x="225" y="100" width="190" height="145" fill="#efe3cf" />
@@ -97,6 +98,8 @@ A **floating** or compensated raft is placed deep enough that the weight of soil
 <path d="M80 176 V196 M100 176 V196 M115 176 V196 M130 176 V196 M150 176 V196" />
 <path d="M250 170 V188 M275 170 V188 M300 170 V188 M325 170 V188 M350 170 V188 M375 170 V188 M390 170 V188" />
 </g>
+<g stroke="#0b2545" stroke-width="2" fill="none"><path class="anim-flow-slow" d="M115 44V166M263 44V156M320 44V156M377 44V156M525 44V136M496 148V220M554 148V220" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M80 196V176M100 196V176M115 196V176M130 196V176M150 196V176M250 188V170M275 188V170M300 188V170M325 188V170M350 188V170M375 188V170M390 188V170" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="115" y="26" font-weight="700">Isolated footing</text>
 <text x="320" y="26" font-weight="700">Raft (mat) foundation</text>
@@ -166,6 +169,24 @@ The net upward pressure excludes the footing's own weight because that weight ac
 - **Swelling and shrinkage** of expansive clays with seasonal moisture changes.
 - **Scour** around bridge foundations in rivers.
 - **Durability problems** from sulphates or chlorides in soil and groundwater attacking concrete and reinforcement.
+
+## Key formulas for types of foundations
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Total service load on soil | P_total = P × (1 + w) | P = column service load in kN, w = self weight allowance (0.10 in the example) |
+| Required footing area | A_req = P_total ÷ q_safe | q_safe = safe bearing capacity in kN/m², A in m² |
+| Side of square footing | B = √A_req | B in m, rounded up to a practical size |
+| Actual gross soil pressure | q = P_total ÷ A | must not exceed q_safe |
+| Factored net upward pressure | q_u = 1.5 × P ÷ A | kN/m², used for bending and shear design to IS 456 |
+
+## Types of foundations interview and viva questions
+
+1. **When is a foundation called shallow?** In Terzaghi's bearing capacity theory, as presented by Das, a foundation is treated as shallow when its depth Df is no more than its width B.
+2. **Why is a combined footing used?** When two columns are so close that isolated footings would overlap, or a boundary column cannot have its footing extend past the property line, both columns share one footing proportioned for uniform soil pressure.
+3. **What is the purpose of the strap in a strap footing?** The stiff strap beam transfers the moment from the eccentric exterior footing to the interior footing so that neither footing tilts.
+4. **When is a raft foundation preferred?** When the soil is weak so footings would nearly touch, when differential settlement must be limited, or when a basement floor must resist water pressure.
+5. **Why is the footing self weight excluded from the net upward pressure?** The self weight acts directly on the soil beneath it, so it does not bend the footing; only the column load causes design moments and shears.
 
 ## Related reading
 

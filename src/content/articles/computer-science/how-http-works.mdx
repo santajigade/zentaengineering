@@ -3,6 +3,7 @@ title: "How HTTP Works: Requests, Responses and Status Codes"
 description: "How HTTP works step by step: DNS, TCP and TLS, the structure of requests and responses, methods, headers, status codes, cookies, caching and HTTP versions."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-19
 discipline: computer-science
 subcategory: web-development
 focusKeyword: "how HTTP works"
@@ -29,7 +30,7 @@ import Key from '../../../components/Key.astro';
 
 <Key title="Short answer">
 
-**How HTTP works:** a client, usually a browser, finds the server's IP address through DNS, opens a connection (TCP, secured with TLS for HTTPS) and sends an **HTTP request** containing a method, a path and headers. The server processes it and returns an **HTTP response** with a status code, headers and usually a body such as an HTML page or JSON data. HTTP is stateless, so each request carries everything the server needs.
+**How HTTP works:** a client, usually a browser, finds the server's IP address through DNS, opens a TCP connection (secured with TLS for HTTPS) and sends an **HTTP request** with a method, path and headers. The server returns an **HTTP response** with a status code, headers and usually a body. HTTP is stateless.
 
 </Key>
 
@@ -37,7 +38,7 @@ Every time you open a web page, submit a form or an app fetches data, the Hypert
 
 ## Step by step: what happens when you open a URL
 
-<figure>
+<figure class="anim">
 <svg width="560" height="320" viewBox="0 0 560 320" fill="none" role="img" aria-label="Sequence diagram between browser, DNS resolver and web server: the browser asks DNS for the IP address, opens a TCP connection and TLS handshake with the server, sends a GET request, and receives a 200 OK response with HTML">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <rect x="20" y="15" width="110" height="34" rx="8" fill="#0b2545" /><text x="75" y="37" fill="#ffffff">Browser</text>
@@ -53,6 +54,7 @@ Every time you open a web page, submit a form or an app fetches data, the Hypert
 <path d="M75 205H483" stroke="#13a89e" stroke-width="2.5" /><path d="M475 199L485 205L475 211" stroke="#13a89e" stroke-width="2.5" />
 <path d="M485 250H77" stroke="#f5b800" stroke-width="2.5" /><path d="M85 244L75 250L85 256" stroke="#f5b800" stroke-width="2.5" />
 </g>
+<g stroke="#ffffff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M75 75H268" /><path class="anim-flow anim-d1" d="M280 105H87" /><path class="anim-flow anim-d2" d="M75 140H473" /><path class="anim-flow anim-d3" d="M485 165H87" /><path class="anim-flow anim-d4" d="M75 205H473" /><path class="anim-flow anim-d5" d="M485 250H87" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="177" y="69">1. IP address for example.com?</text>
 <text x="177" y="99">2. 93.184.215.14 (example)</text>
@@ -63,7 +65,7 @@ Every time you open a web page, submit a form or an app fetches data, the Hypert
 <text x="280" y="290">6. Browser parses HTML and requests CSS, JS and images</text>
 </g>
 </svg>
-<figcaption>The main steps when a browser loads a page over HTTPS (simplified).</figcaption>
+<figcaption>The main steps when a browser loads a page over HTTPS (simplified). Moving dashes show the direction of each message.</figcaption>
 </figure>
 
 1. **URL parsing:** the browser splits the URL into scheme (https), host (example.com), port (443 by default for HTTPS) and path (/index.html).
@@ -158,6 +160,14 @@ Servers can instruct browsers to apply extra protections through response header
 These headers cost nothing to send and close many common attack routes, so they should be part of every production web server configuration.
 
 Browser developer tools show every request a page makes, with timings for DNS, connection, TLS, waiting and download, which makes these steps visible in practice.
+
+## How HTTP works: interview and viva questions
+
+1. **What happens before the first HTTP request is sent?** The browser resolves the domain name to an IP address through DNS, then opens a TCP connection and, for HTTPS, performs a TLS handshake.
+2. **What are the parts of an HTTP request?** A request line with method, path and version, then headers, a blank line and an optional body.
+3. **What is the difference between safe and idempotent methods?** Safe methods such as GET and HEAD do not change server state; idempotent methods such as PUT and DELETE give the same result if repeated, while POST is neither.
+4. **Why is HTTP called stateless, and how are sessions kept?** The server does not remember earlier requests, so applications add state with cookies carrying a session identifier or with tokens in the Authorization header.
+5. **What does a 304 Not Modified response mean?** The browser asked whether a cached copy had changed using ETag or Last-Modified, and the server confirms it has not, sending no body.
 
 ## Why knowing how HTTP works matters
 

@@ -1,0 +1,176 @@
+---
+title: "5S Methodology Explained with Examples"
+description: "5S methodology explained: Sort, Set in order, Shine, Standardize and Sustain, with red tagging, shadow boards, a 5S audit and a worked time saving example."
+pubDate: 2026-11-19
+reviewedDate: 2026-11-19
+discipline: manufacturing-engineering
+subcategory: lean-manufacturing
+focusKeyword: "5s methodology"
+image: { src: /images/featured/5s-methodology.webp, alt: "5S Methodology Explained with Examples: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [5s, lean-manufacturing, visual-workplace, kaizen, workplace-organisation]
+faq:
+  - q: "What are the Japanese words behind 5S?"
+    a: "The five Japanese words are seiri (sort), seiton (set in order), seiso (shine), seiketsu (standardize) and shitsuke (sustain). English versions were chosen so that each step also starts with the letter S."
+  - q: "What is the difference between 5S and 6S?"
+    a: "6S adds Safety as a sixth step, so that hazards are identified and removed while the workplace is being organised. Many lean practitioners argue safety is already part of every S, but 6S makes it explicit."
+  - q: "Is 5S only a housekeeping or cleaning campaign?"
+    a: "No. Cleaning is only one step. 5S is a system for organising the workplace so that abnormal conditions become visible at a glance, and it is the foundation for standard work, autonomous maintenance and other lean tools."
+references:
+  - text: "H. Hirano, 5 Pillars of the Visual Workplace: The Sourcebook for 5S Implementation, Productivity Press, 1995"
+  - text: "T. Osada, The 5S's: Five Keys to a Total Quality Environment, Asian Productivity Organization, 1991"
+  - text: "Productivity Press Development Team, 5S for Operators: 5 Pillars of the Visual Workplace, Productivity Press, 1996"
+  - text: "J. K. Liker, The Toyota Way, 2nd ed., McGraw-Hill, 2020"
+  - text: "S. Nakajima, Introduction to TPM: Total Productive Maintenance, Productivity Press, 1988"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+
+<Key title="Short answer">
+
+**5S methodology** is a lean workplace organisation system with five steps: Sort, Set in order, Shine, Standardize and Sustain. It removes unneeded items, gives every tool a marked place, uses cleaning as inspection and makes standards visual, so searching, waiting and errors fall and abnormal conditions become obvious at a glance.
+
+</Key>
+
+The **5S methodology** comes from Japanese manufacturing, where it was developed as the base of the Toyota style visual workplace. Hiroyuki Hirano and Takashi Osada documented it in the early 1990s, and it is now used in factories, warehouses, workshops, laboratories, hospitals and offices. This article explains each S with practical examples, shows how to audit a work area and works through the time saved when 5S removes searching.
+
+## Why 5S methodology matters in lean manufacturing
+
+Lean manufacturing aims to remove the [seven wastes](/manufacturing-engineering/seven-wastes-lean/), and a disorganised workplace creates several of them at once. Operators walk and reach for tools (motion), wait for missing parts (waiting), keep extra stock "just in case" (inventory), and pick the wrong component (defects). These losses are hard to see when everything is cluttered.
+
+5S makes the normal state of a work area obvious. When every item has a marked home, an empty shadow on a tool board or a part on the wrong shelf is noticed immediately. That visibility is why Hirano called 5S the pillars of the visual workplace, and why most lean programmes start with it before standard work, kanban or quick changeover.
+
+## The five steps of the 5S methodology
+
+<figure class="anim">
+<svg width="600" height="320" viewBox="0 0 600 320" fill="none" role="img" aria-label="5S methodology cycle: five circles arranged clockwise around a central 5S circle, labelled 1 Sort (seiri), 2 Set in order (seiton), 3 Shine (seiso), 4 Standardize (seiketsu) and 5 Sustain (shitsuke), joined by a ring with arrows showing the repeating improvement cycle, with a short note beside each step">
+<circle cx="300" cy="165" r="115" stroke="#c9d2de" stroke-width="3" />
+<path class="anim-flow-slow" d="M300 50A115 115 0 0 1 300 280A115 115 0 0 1 300 50" stroke="#13a89e" stroke-width="3" />
+<g fill="#13a89e"><path d="M373.3 76.1L366.5 65.0L360.6 73.1Z" /><path d="M407.2 207.2L415.7 197.3L406.2 194.2Z" /><path d="M293.0 280.0L305.0 285.0L305.0 275.0Z" /><path d="M188.5 193.9L187.4 206.8L196.9 203.7Z" /><path d="M238.1 67.8L225.4 70.9L231.3 78.9Z" /></g>
+<circle cx="300" cy="165" r="55" fill="#0b2545" />
+<g stroke="#0b2545" stroke-width="2">
+<circle class="anim-blink" cx="300" cy="50" r="42" fill="#ffe9e7" />
+<circle class="anim-blink anim-d1" cx="409" cy="129" r="42" fill="#fff7e0" />
+<circle class="anim-blink anim-d2" cx="368" cy="258" r="42" fill="#e6f6f4" />
+<circle class="anim-blink anim-d3" cx="232" cy="258" r="42" fill="#eef1f6" />
+<circle class="anim-blink anim-d4" cx="191" cy="129" r="42" fill="#fff7e0" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" text-anchor="middle">
+<text x="300" y="164" font-size="22" font-weight="700" fill="#ffffff">5S</text>
+<text x="300" y="184" font-size="11" fill="#ffffff">visual workplace</text>
+<g font-size="12" font-weight="700" fill="#0b2545">
+<text x="300" y="48">1 Sort</text>
+<text x="409" y="121">2 Set in</text><text x="409" y="135">order</text>
+<text x="368" y="256">3 Shine</text>
+<text x="232" y="256" font-size="10.5">4 Standardize</text>
+<text x="191" y="127">5 Sustain</text>
+</g>
+<g font-size="11" fill="#0b2545" font-style="italic">
+<text x="300" y="64">seiri</text><text x="409" y="150">seiton</text><text x="368" y="272">seiso</text><text x="232" y="272">seiketsu</text><text x="191" y="143">shitsuke</text>
+</g>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#7b8794">
+<text x="352" y="28">Red tag and remove</text><text x="352" y="42">unneeded items</text>
+<text x="460" y="125">A marked place</text><text x="460" y="139">for everything</text>
+<text x="418" y="285">Clean and inspect</text><text x="418" y="299">at the same time</text>
+<g text-anchor="end"><text x="182" y="285">Visual standards</text><text x="182" y="299">and checklists</text>
+<text x="140" y="125">Training, audits</text><text x="140" y="139">and discipline</text></g>
+</g>
+</svg>
+<figcaption>The 5S cycle. Each step builds on the one before, and Sustain feeds back into a fresh round of Sort.</figcaption>
+</figure>
+
+### 1. Sort (seiri)
+
+Separate what is needed in the area from what is not, and remove the rest. The common tool is the **red tag**: a team walks the area, attaches a red tag to every item whose need is doubtful, and moves tagged items to a holding area. After an agreed period, items are kept, relocated to where they are used, sold or scrapped. Typical finds are broken jigs, obsolete parts, surplus stock, old documents and personal items.
+
+Example: in a machining cell, Sort clears unused fixtures from under the bench, returns surplus bar stock to the store and removes three drawers of mixed fasteners that nobody uses.
+
+### 2. Set in order (seiton)
+
+Give every remaining item a defined, labelled home, close to the point of use and arranged by frequency of use. The rule is "a place for everything and everything in its place". Common methods are:
+
+- **Shadow boards** with outlines of each tool, so a missing tool is obvious.
+- **Floor marking** with painted or taped lines for walkways, work in progress and material locations.
+- **Labels and colour codes** on shelves, bins and racks, with minimum and maximum quantities where stock is held.
+- **Point of use storage**, so frequently used items are within easy reach and rarely used items are further away.
+
+Set in order is closely linked to [time and motion study](/manufacturing-engineering/time-and-motion-study/), since the layout is chosen to minimise walking, reaching and searching.
+
+### 3. Shine (seiso)
+
+Clean the work area, machines and tools, and use cleaning as a form of inspection. While wiping a machine, an operator sees oil leaks, loose bolts, cracked hoses, worn belts and damaged guards. Shine therefore supports equipment reliability and is the first step of autonomous maintenance in Total Productive Maintenance, described by Nakajima. Sources of dirt, such as leaks or chips thrown out of a guard, are traced and fixed rather than just cleaned repeatedly. See [types of maintenance](/manufacturing-engineering/types-of-maintenance/) for how this fits into planned maintenance.
+
+### 4. Standardize (seiketsu)
+
+Turn the first three steps into routine. The team defines who does what, when and how, and makes the standard visual so anyone can check it. Typical outputs are a 5S map of the area, cleaning and inspection checklists, labelled storage standards, photos of the correct state posted at the workstation, and short daily 5S tasks built into the shift. Without Standardize, areas drift back to their old state within weeks.
+
+### 5. Sustain (shitsuke)
+
+Make 5S a habit. Sustain relies on training, leadership involvement, regular audits and visible results. Supervisors and managers walk the area, audit scores are posted and actions are tracked. The aim is that people keep the standard because they see its benefit, not because of a campaign. Sustain feeds back into Sort, starting the next, more demanding cycle of improvement.
+
+## Measuring 5S: the 5S audit
+
+Progress is measured with a **5S audit** checklist. Each S has several statements, for example "No unneeded items in the area" or "All tools are on the shadow board". Each item is scored on a fixed scale, often 0 to 4 or 1 to 5, and the result is expressed as a percentage:
+
+$$
+\text{Score} = \frac{\sum \text{item scores}}{\text{maximum possible score}} \times 100\%
+$$
+
+Audits are repeated at a fixed interval, and the scores per S are shown on a radar chart so the weakest step gets attention. A falling score is a signal to retrain or simplify the standard. Trends can be tracked much like a process measure on [control charts](/manufacturing-engineering/control-charts-spc/).
+
+The time lost to searching can also be estimated directly by work sampling or time study:
+
+$$
+T_\text{saved} = (t_\text{before} - t_\text{after}) \times n_\text{operators} \times n_\text{shifts}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An assembly cell with 4 operators working 1 shift of 480 minutes per day for 250 days per year. A time study found each operator spent 25 minutes per shift searching for tools and parts before 5S, and 6 minutes after 5S. The 5S audit (25 items scored 0 to 4) rose from 38 to 72 points.</dd>
+<dt>Find</dt><dd>(a) Searching time as a share of the shift before and after, (b) annual operator hours released, (c) audit scores in percent.</dd>
+<dt>Assumptions</dt><dd>Searching times are representative averages; released time is used for productive work; no change in staffing.</dd>
+<dt>Solution</dt><dd>(a) Before: 25 ÷ 480 = 5.2%; after: 6 ÷ 480 = 1.25%<br />(b) Saving per operator per shift = 25 − 6 = 19 min<br />T_saved = 19 × 4 × 250 = 19,000 min = 316.7 h per year<br />(c) Maximum score = 25 × 4 = 100; before = 38 ÷ 100 = 38%, after = 72 ÷ 100 = 72%</dd>
+<dt>Answer</dt><dd><strong>Searching fell from 5.2% to 1.25% of the shift, releasing about 317 operator hours per year, while the 5S audit score rose from 38% to 72%.</strong></dd>
+<dt>Limitations</dt><dd>Released time only becomes output if work is rebalanced; audit scores depend on the checklist and auditor, so use the same checklist and trained auditors for comparisons.</dd>
+</dl>
+</Example>
+
+## Key formulas for 5S methodology
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| 5S audit score | Score = (Σ item scores ÷ maximum score) × 100 | Item scores on a fixed scale, result in % |
+| Maximum audit score | Max = number of items × top score per item | Points |
+| Search time share | Share = t_search ÷ t_shift × 100 | Both times in minutes, result in % |
+| Annual time released | T_saved = (t_before − t_after) × n_operators × n_shifts | t in min per operator per shift, n_shifts per year |
+
+## How to implement 5S step by step
+
+1. **Choose a pilot area** that is visible and has a clear problem, such as frequent searching or clutter.
+2. **Photograph the current state** and run a baseline audit.
+3. **Train the team** that works in the area; 5S is done by the people who use the space, not to them.
+4. **Run Sort with red tags**, then Set in order with shadow boards, labels and floor marking.
+5. **Do an initial deep clean** and record every abnormality found as an action.
+6. **Write the standards** with photos and checklists, and schedule short daily 5S tasks.
+7. **Audit regularly**, post results and expand to the next area.
+
+5S often supports wider improvement methods such as [Six Sigma DMAIC](/manufacturing-engineering/six-sigma-dmaic/), where a stable, organised workplace makes process data more reliable.
+
+## Common mistakes with 5S
+
+- Treating 5S as a one time clean up before a customer visit.
+- Skipping Sort, so clutter is only rearranged.
+- Leaving out operators, so standards do not fit the real work.
+- No Standardize and Sustain, so the area slips back.
+- Labelling everything without asking whether the item is needed at all.
+
+## 5S methodology interview and viva questions
+
+1. **What are the five steps of 5S?** Sort (seiri), Set in order (seiton), Shine (seiso), Standardize (seiketsu) and Sustain (shitsuke).
+2. **What is red tagging?** It is the Sort technique of tagging items of doubtful need and moving them to a holding area until a decision is made to keep, relocate or dispose of them.
+3. **Why is Shine called cleaning as inspection?** While cleaning equipment, operators find leaks, loose fasteners and wear early, so Shine supports reliability and is the first step of TPM autonomous maintenance.
+4. **What is a shadow board?** A board with outlines of each tool in its place, so a missing or misplaced tool is visible at a glance.
+5. **Which of the five steps is hardest and why?** Sustain is usually the hardest, because it needs habits, leadership attention and regular audits rather than a one time effort.
