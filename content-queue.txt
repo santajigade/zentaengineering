@@ -72,12 +72,12 @@ telecommunication-engineering|cellular-networks|4G vs 5G: Key Differences Explai
 petroleum-engineering|production-engineering|Oil and Gas Separators: Types and Working|oil-gas-separators|equipment|oil and gas separators|2026-11-18
 renewable-energy|hydrogen-fuel-cells|Fuel Cell Working Principle and Types|fuel-cell-working-principle|working-principle|fuel cell working principle|2026-11-18
 environmental-engineering|waste-management|Landfill Design: Liners, Leachate and Gas|landfill-design|explanation|landfill design|2026-11-18
-mining-engineering|rock-mechanics|Rock Bolting and Ground Support Methods|rock-bolting-ground-support|explanation|rock bolting|todo
-manufacturing-engineering|lean-manufacturing|5S Methodology Explained with Examples|5s-methodology|explanation|5s methodology|todo
-materials-engineering|welding|Welding Defects: Causes and Remedies|welding-defects|troubleshooting|welding defects|todo
-safety-engineering|functional-safety|Safety Instrumented System (SIS) Basics|safety-instrumented-system|fundamentals|safety instrumented system|todo
-agricultural-engineering|agricultural-automation|Greenhouse Climate Control Systems|greenhouse-climate-control|application|greenhouse climate control|todo
-aerospace-engineering|flight-mechanics|Aircraft Stability: Static and Dynamic|aircraft-stability|fundamentals|aircraft stability|todo
+mining-engineering|rock-mechanics|Rock Bolting and Ground Support Methods|rock-bolting-ground-support|explanation|rock bolting|2026-11-19
+manufacturing-engineering|lean-manufacturing|5S Methodology Explained with Examples|5s-methodology|explanation|5s methodology|2026-11-19
+materials-engineering|welding|Welding Defects: Causes and Remedies|welding-defects|troubleshooting|welding defects|2026-11-19
+safety-engineering|functional-safety|Safety Instrumented System (SIS) Basics|safety-instrumented-system|fundamentals|safety instrumented system|2026-11-19
+agricultural-engineering|agricultural-automation|Greenhouse Climate Control Systems|greenhouse-climate-control|application|greenhouse climate control|2026-11-19
+aerospace-engineering|flight-mechanics|Aircraft Stability: Static and Dynamic|aircraft-stability|fundamentals|aircraft stability|2026-11-19
 biomedical-engineering|biomaterials|Hydrogels in Biomedical Engineering|hydrogels-biomedical-applications|explanation|hydrogels|todo
 marine-engineering|ship-electrical-systems|Marine Shore Power Connection Explained|marine-shore-power|explanation|shore power|todo
 mechanical-engineering|heat-transfer|Fourier's Law of Heat Conduction Explained|fouriers-law-of-heat-conduction|fundamentals|fourier's law|todo
