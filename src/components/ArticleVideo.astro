@@ -1,0 +1,64 @@
+---
+// Short explainer video inside an article.
+// Desktop gets a 16:9 file, phones get a 9:16 file; only one is downloaded.
+// Files live in public/videos/: <slug>-16x9.mp4, <slug>-9x16.mp4 and matching -poster.webp images.
+interface Props { slug: string; title: string; description?: string; seconds?: number; uploadDate?: string }
+const { slug, title, description, seconds = 18, uploadDate = '2026-11-19' } = Astro.props;
+const site = 'https://zentaengineering.com';
+const base = `/videos/${slug}`;
+const schema = {
+  '@context': 'https://schema.org', '@type': 'VideoObject',
+  name: title, description: description ?? `${title}, explained in ${seconds} seconds.`,
+  thumbnailUrl: [`${site}${base}-16x9-poster.webp`, `${site}${base}-9x16-poster.webp`],
+  contentUrl: `${site}${base}-16x9.mp4`, uploadDate, duration: `PT${seconds}S`,
+  publisher: { '@type': 'Organization', name: 'Zenta Engineering', logo: { '@type': 'ImageObject', url: `${site}/icon-512.png` } },
+};
+---
+<figure class="article-video">
+  <div class="av-frame">
+    <video class="av" muted loop playsinline controls preload="none"
+      poster={`${base}-16x9-poster.webp`}
+      data-w={`${base}-16x9.mp4`} data-wp={`${base}-16x9-poster.webp`}
+      data-m={`${base}-9x16.mp4`} data-mp={`${base}-9x16-poster.webp`}
+      aria-label={title}></video>
+  </div>
+  <figcaption>Watch: {title} in {seconds} seconds</figcaption>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</figure>
+
+<style>
+  .article-video { margin: 1.6rem 0 2rem; }
+  .av-frame { background: #0b2545; border-radius: 14px; overflow: hidden; display: flex; justify-content: center; }
+  .av { display: block; width: 100%; aspect-ratio: 16 / 9; background: #0b2545; }
+  figcaption { margin-top: .55rem; font-size: .9rem; color: #5a6b80; text-align: center; }
+  @media (max-width: 767px) {
+    .av { width: auto; max-width: 100%; height: 70vh; aspect-ratio: 9 / 16; }
+  }
+</style>
+
+<script>
+  const mobile = window.matchMedia('(max-width: 767px)');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll<HTMLVideoElement>('video.av').forEach((v) => {
+    const pick = () => {
+      const m = mobile.matches;
+      v.poster = (m ? v.dataset.mp : v.dataset.wp) || '';
+      return (m ? v.dataset.m : v.dataset.w) || '';
+    };
+    let want = pick();
+    mobile.addEventListener('change', () => {
+      const next = pick();
+      if (v.getAttribute('src') && next !== want) { want = next; v.src = next; if (!reduce.matches) v.play().catch(() => {}); }
+      want = next;
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          if (!v.getAttribute('src')) v.src = want;
+          if (!reduce.matches) v.play().catch(() => {});
+        } else if (!v.paused) v.pause();
+      });
+    }, { threshold: 0.35 });
+    io.observe(v);
+  });
+</script>
