@@ -9,7 +9,7 @@ const common = {
   focusKeyword: z.string().optional(), // main search phrase; must appear in slug, title, description, intro and one H2
   pubDate: z.coerce.date(), // goes live on this date (scheduled publishing)
   updatedDate: z.coerce.date().optional(), // only for meaningful edits
-  author: z.string().optional(), // empty = rule in authorFor(): Electronics by Santaji Gadepatil, others Editorial Staff
+  author: z.string().optional(), // empty = rule in authorFor(): Electronics by Santaji Gadepatil, Manufacturing by Sandip Gadade, others Editorial Staff
   reviewedBy: z.string().optional(), // empty = 'Technical Team'
   reviewedDate: z.coerce.date().optional(), // set ONLY after a real technical review
   discipline: z.string(), // primary discipline slug: drives URL, breadcrumb, canonical

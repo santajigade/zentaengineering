@@ -17,6 +17,7 @@ Rules for every article, lesson, interview set, project and resource. The public
 
 ## Authors and review (approved 6 Nov 2026)
 - Electronics Engineering articles: **Santaji Gadepatil** (set automatically for `discipline: electronics-engineering`).
+- Manufacturing Engineering articles: **Sandip Gadade** (set automatically for `discipline: manufacturing-engineering`).
 - All other disciplines: **Editorial Staff**.
 - Reviewer shown as **Technical Team** unless `reviewedBy` names someone else.
 - Leave `author` empty unless an article needs a different author from the rule above.

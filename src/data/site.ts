@@ -79,6 +79,16 @@ export const AUTHORS: Record<string, Person> = {
     photo: '/images/authors/santaji-gadepatil.webp',
     isPerson: true,
   },
+  'sandip-gadade': {
+    slug: 'sandip-gadade',
+    name: 'Sandip Gadade',
+    role: 'Author, Manufacturing Engineering',
+    bio: 'Writes the Manufacturing Engineering articles on Zenta Engineering.',
+    credentials: [],
+    linkedin: 'https://www.linkedin.com/in/sandip-gadade-69897028b/',
+    photo: '/images/authors/sandip-gadade.webp',
+    isPerson: true,
+  },
   'editorial-staff': {
     slug: 'editorial-staff',
     name: 'Editorial Staff',
@@ -92,10 +102,11 @@ export const AUTHORS: Record<string, Person> = {
 // Who reviews content (shown as "Reviewed by ...").
 export const REVIEWER_DEFAULT = 'Technical Team';
 
-/** Author rule (approved 6 Nov 2026): Electronics articles by Santaji Gadepatil, all others by Editorial Staff. */
+/** Author rule: Electronics articles by Santaji Gadepatil (6 Nov 2026), Manufacturing by Sandip Gadade (20 Nov 2026), all others by Editorial Staff. */
+const DISCIPLINE_AUTHOR: Record<string, string> = { 'electronics-engineering': 'santaji-gadepatil', 'manufacturing-engineering': 'sandip-gadade' };
 export function authorFor(data: { author?: string; discipline: string }): Person {
   if (data.author && AUTHORS[data.author]) return AUTHORS[data.author];
-  return data.discipline === 'electronics-engineering' ? AUTHORS['santaji-gadepatil'] : AUTHORS['editorial-staff'];
+  return AUTHORS[DISCIPLINE_AUTHOR[data.discipline] ?? 'editorial-staff'];
 }
 
 // Main menu: exactly the 7 approved items (master plan, section C).
