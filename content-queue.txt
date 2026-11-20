@@ -78,12 +78,12 @@ materials-engineering|welding|Welding Defects: Causes and Remedies|welding-defec
 safety-engineering|functional-safety|Safety Instrumented System (SIS) Basics|safety-instrumented-system|fundamentals|safety instrumented system|2026-11-19
 agricultural-engineering|agricultural-automation|Greenhouse Climate Control Systems|greenhouse-climate-control|application|greenhouse climate control|2026-11-19
 aerospace-engineering|flight-mechanics|Aircraft Stability: Static and Dynamic|aircraft-stability|fundamentals|aircraft stability|2026-11-19
-biomedical-engineering|biomaterials|Hydrogels in Biomedical Engineering|hydrogels-biomedical-applications|explanation|hydrogels|todo
-marine-engineering|ship-electrical-systems|Marine Shore Power Connection Explained|marine-shore-power|explanation|shore power|todo
-mechanical-engineering|heat-transfer|Fourier's Law of Heat Conduction Explained|fouriers-law-of-heat-conduction|fundamentals|fourier's law|todo
-electrical-engineering|switchgear|MCB vs MCCB vs ACB: Differences|mcb-vs-mccb-vs-acb|comparison|mcb vs mccb vs acb|todo
-electronics-engineering|pcb-design|PCB Grounding Techniques Explained|pcb-grounding-techniques|explanation|pcb grounding|todo
-civil-engineering|construction-materials|Types of Bricks and Their Properties|types-of-bricks|explanation|types of bricks|todo
+biomedical-engineering|biomaterials|Hydrogels in Biomedical Engineering|hydrogels-biomedical-applications|explanation|hydrogels|2026-11-20
+marine-engineering|ship-electrical-systems|Marine Shore Power Connection Explained|marine-shore-power|explanation|shore power|2026-11-20
+mechanical-engineering|heat-transfer|Fourier's Law of Heat Conduction Explained|fouriers-law-of-heat-conduction|fundamentals|fourier's law|2026-11-20
+electrical-engineering|switchgear|MCB vs MCCB vs ACB: Differences|mcb-vs-mccb-vs-acb|comparison|mcb vs mccb vs acb|2026-11-20
+electronics-engineering|pcb-design|PCB Grounding Techniques Explained|pcb-grounding-techniques|explanation|pcb grounding|2026-11-20
+civil-engineering|construction-materials|Types of Bricks and Their Properties|types-of-bricks|explanation|types of bricks|2026-11-20
 chemical-engineering|reaction-engineering|Catalysts in Chemical Reactions: Types and Uses|catalyst-types|explanation|catalyst types|todo
 computer-science|computer-architecture|Cache Memory Explained: Levels and Mapping|cache-memory|fundamentals|cache memory|todo
 automation-robotics|motion-control|PID Controller Explained with Tuning Methods|pid-controller|fundamentals|pid controller|todo
