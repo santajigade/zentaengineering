@@ -82,8 +82,8 @@ export const AUTHORS: Record<string, Person> = {
   'sandip-gadade': {
     slug: 'sandip-gadade',
     name: 'Sandip Gadade',
-    role: 'Author, Manufacturing Engineering',
-    bio: 'Engineering graduate of Savitribai Phule Pune University. Writes the Manufacturing Engineering articles on Zenta Engineering.',
+    role: 'Manufacturing, Kobold Instruments Pvt Ltd',
+    bio: 'Responsible for manufacturing activities at Kobold Instruments Pvt Ltd, India, the Indian subsidiary of German process instrumentation maker Kobold Messring GmbH. Engineering graduate of Savitribai Phule Pune University. Writes the Manufacturing Engineering articles on Zenta Engineering.',
     credentials: ['B.E. Electrical, Electronics and Communications Engineering, Savitribai Phule Pune University (2015), First Class'],
     linkedin: 'https://www.linkedin.com/in/sandip-gadade-69897028b/',
     photo: '/images/authors/sandip-gadade.webp',
