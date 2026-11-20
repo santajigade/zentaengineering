@@ -1,10 +1,10 @@
 # Daily publishing run
 
-Each day, write and publish the next 6 articles from `content-queue.txt`. Read `AUTHORING.md` first; every rule there applies. Copy the structure of an existing article in the same discipline (front matter, imports, Key, Example, SVG figure, FAQ, references).
+Each day, write and publish the next 5 articles (owner changed from 6 to 5 on 2026-11-20) from `content-queue.txt`. Read `AUTHORING.md` first; every rule there applies. Copy the structure of an existing article in the same discipline (front matter, imports, Key, Example, SVG figure, FAQ, references).
 
 ## 1. Pick topics
 ```
-python3 scripts/queue.py next 6
+python3 scripts/queue.py next 5
 ```
 Each line: discipline|subcategory|title|slug|format|focus keyword|status.
 File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that already exists.
