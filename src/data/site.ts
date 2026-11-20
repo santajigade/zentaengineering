@@ -21,7 +21,7 @@ export const SITE = {
   disciplineMinItems: 6,
   subcategoryMinItems: 8,
   // AdSense publisher ID, e.g. 'ca-pub-1234567890123456'. Leave empty until approved.
-  adsenseClient: '',
+  adsenseClient: 'ca-pub-3931314195561246',
   // Ad slots on or off (master plan, section M). Nothing renders while adsenseClient is empty.
   ads: { inContent1: true, inContent2: true, sidebar: true, endOfArticle: true, categoryList: true },
   // Show dashed placeholders where ads will go (for layout review only; keep false on the live site).
