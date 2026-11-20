@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video (oldest first). Delete a line once its video is live.
-aerospace-engineering/aircraft-structural-components
-aerospace-engineering/avionics-systems-overview
-aerospace-engineering/forces-of-flight-and-axes
-aerospace-engineering/how-a-quadcopter-flies
-aerospace-engineering/how-wings-generate-lift
-aerospace-engineering/satellite-subsystems
 aerospace-engineering/turbojet-vs-turbofan-vs-turboprop
 agricultural-engineering/automated-irrigation-control
 agricultural-engineering/cold-storage-design-basics

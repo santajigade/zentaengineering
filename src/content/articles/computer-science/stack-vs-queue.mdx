@@ -3,6 +3,7 @@ title: "Stack vs Queue: Differences and Uses"
 description: "Stack vs queue compared: LIFO and FIFO order, core operations, time complexity, array and linked list implementations, and where each is used."
 pubDate: 2026-11-07
 reviewedDate: 2026-11-07
+updatedDate: 2026-11-20
 discipline: computer-science
 subcategory: data-structures
 focusKeyword: "stack vs queue"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-In **stack vs queue**, the difference is the order in which items leave. A **stack** is last in, first out (LIFO): items are added and removed at the same end, the top. A **queue** is first in, first out (FIFO): items join at the rear and leave from the front. Both support their main operations in constant time; stacks suit nested and backtracking tasks, queues suit fair, in-order processing.
+In **stack vs queue**, the difference is the order in which items leave. A **stack** is last in, first out (LIFO): items are added and removed at the top. A **queue** is first in, first out (FIFO): items join at the rear and leave from the front. Both run their main operations in constant time.
 
 </Key>
 
@@ -42,14 +43,14 @@ A **stack** works like a pile of plates. You put a plate on top (push) and take 
 
 A **queue** works like a line at a ticket counter. People join at the back (enqueue) and are served from the front (dequeue). The person served is always the one who has waited longest.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Left: a stack of four boxes labelled 10, 20, 30 and 40 from bottom to top, with push and pop arrows both at the top. Right: a queue of four boxes 10, 20, 30, 40 from front to rear, with dequeue at the front on the left and enqueue at the rear on the right.">
 <g stroke="#0b2545" stroke-width="2">
 <rect x="80" y="220" width="100" height="36" fill="#e6f6f5" />
 <rect x="80" y="184" width="100" height="36" fill="#e6f6f5" />
 <rect x="80" y="148" width="100" height="36" fill="#e6f6f5" />
-<rect x="80" y="112" width="100" height="36" fill="#fde9a8" />
-<rect x="340" y="140" width="56" height="44" fill="#fde9a8" />
+<rect x="80" y="112" width="100" height="36" fill="#fde9a8" class="anim-blink" />
+<rect x="340" y="140" width="56" height="44" fill="#fde9a8" class="anim-blink" />
 <rect x="396" y="140" width="56" height="44" fill="#e6f6f5" />
 <rect x="452" y="140" width="56" height="44" fill="#e6f6f5" />
 <rect x="508" y="140" width="56" height="44" fill="#e6f6f5" />
@@ -58,6 +59,7 @@ A **queue** works like a line at a ticket counter. People join at the back (enqu
 <path d="M155 100V50M148 62L155 50L162 62" stroke="#0e7f78" stroke-width="2.5" />
 <path d="M340 162H290M302 155L290 162L302 169" stroke="#0e7f78" stroke-width="2.5" />
 <path d="M536 106V136M529 124L536 136L543 124" stroke="#13a89e" stroke-width="2.5" />
+<g stroke="#ffffff" stroke-width="2" fill="none"><path class="anim-flow-slow" d="M105 50V88" /><path class="anim-flow-slow" d="M155 100V62" /><path class="anim-flow-slow" d="M340 162H302" /><path class="anim-flow-slow" d="M536 106V124" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545">
 <text x="130" y="244" text-anchor="middle">10</text>
 <text x="130" y="208" text-anchor="middle">20</text>
@@ -159,6 +161,14 @@ Use a **queue** when items must be handled in arrival order:
 - Popping from an empty stack or dequeuing from an empty queue without a check.
 - Forgetting the modulo wrap in a circular buffer, which writes past the end of the array.
 - Writing deep recursion without considering the call stack limit; an explicit stack can replace recursion.
+
+## Stack vs queue interview and viva questions
+
+1. **What is the difference between LIFO and FIFO?** In LIFO (a stack) the most recently added item leaves first. In FIFO (a queue) the item that has waited longest leaves first.
+2. **Why is a circular buffer used to implement a queue on an array?** Removing from index 0 of a plain array shifts every remaining element, which is O(n). A circular buffer keeps front and rear indices that wrap around with modulo, so both operations stay O(1).
+3. **Which traversal uses a stack and which uses a queue?** Depth-first search uses a stack and breadth-first search uses a queue. Breadth-first search finds the shortest path in an unweighted graph.
+4. **Why should you not use list.pop(0) as a queue in Python?** list.pop(0) is O(n). The Python documentation recommends collections.deque, which supports fast appends and pops at both ends.
+5. **Where does a program use a stack automatically?** The call stack stores return addresses and local variables, so the most recent function call returns first.
 
 ## Related reading
 

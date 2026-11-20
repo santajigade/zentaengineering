@@ -3,6 +3,7 @@ title: "Circuit Breaker Working Principle and Types"
 description: "Circuit breaker working principle explained: how a breaker detects faults and quenches the arc, the main types (MCB, MCCB, ACB, VCB, SF6) and key ratings."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-20
 discipline: electrical-engineering
 subcategory: switchgear
 focusKeyword: "circuit breaker working principle"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The circuit breaker working principle in brief: a circuit breaker is a switch that can carry normal current and **automatically interrupt fault current**. When it trips, its contacts separate and an arc forms between them. The breaker cools and stretches the arc in a quenching medium such as air, vacuum or SF6 gas, so that the arc goes out at a current zero and does not restrike.
+The **circuit breaker working principle** is that a breaker carries normal current and automatically interrupts fault current. When it trips, its contacts separate and an arc forms between them. The breaker stretches and cools the arc in air, vacuum or SF6 gas, so the arc goes out at a current zero and does not restrike.
 
 </Key>
 
@@ -43,6 +44,28 @@ A circuit breaker has four duties:
 - **Interrupt** short-circuit current quickly enough to limit damage, when commanded by its own trip unit or by an external [protection relay](/electrical-engineering/overcurrent-relay/).
 
 ## Circuit breaker working principle: how it interrupts current
+
+<figure class="anim">
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Circuit breaker interruption sequence: the trip unit detects the fault, the contacts part and an arc forms, the arc is stretched and cooled, and it goes out at a current zero; below, the AC current waveform continues as arc current after contact separation and stops at the next current zero">
+<rect class="anim-blink" x="20" y="20" width="125" height="50" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><rect class="anim-blink anim-d1" x="165" y="20" width="125" height="50" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><rect class="anim-blink anim-d2" x="310" y="20" width="125" height="50" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" /><rect class="anim-blink anim-d3" x="455" y="20" width="125" height="50" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<path d="M145 45H165M290 45H310M435 45H455" stroke="#0b2545" stroke-width="2" />
+<path class="anim-flow" d="M145 45H165M290 45H310M435 45H455" stroke="#ffffff" stroke-width="1.5" />
+<path d="M30 170H570" stroke="#c9d2de" stroke-width="1.5" />
+<path d="M40 170.0 L44 160.6 L48 151.5 L52 142.8 L56 134.7 L60 127.6 L64 121.5 L68 116.5 L72 112.9 L76 110.7 L80 110.0 L84 110.7 L88 112.9 L92 116.5 L96 121.5 L100 127.6 L104 134.7 L108 142.8 L112 151.5 L116 160.6 L120 170.0 L124 179.4 L128 188.5 L132 197.2 L136 205.3 L140 212.4 L144 218.5 L148 223.5 L152 227.1 L156 229.3 L160 230.0 L164 229.3 L168 227.1 L172 223.5 L176 218.5 L180 212.4 L184 205.3 L188 197.2 L192 188.5 L196 179.4 L200 170.0 L204 160.6 L208 151.5 L212 142.8 L216 134.7 L220 127.6 L224 121.5 L228 116.5 L232 112.9 L236 110.7 L240 110.0 L244 110.7 L248 112.9 L252 116.5 L256 121.5 L260 127.6 L264 134.7 L268 142.8 L272 151.5 L276 160.6 L280 170.0 L284 179.4 L288 188.5 L292 197.2 L296 205.3 L300 212.4" stroke="#0b2545" stroke-width="2.5" />
+<path class="anim-pulse" d="M300 212.4 L304 218.5 L308 223.5 L312 227.1 L316 229.3 L320 230.0 L324 229.3 L328 227.1 L332 223.5 L336 218.5 L340 212.4 L344 205.3 L348 197.2 L352 188.5 L356 179.4 L360 170.0" stroke="#b42318" stroke-width="3" />
+<path d="M360 170H560" stroke="#13a89e" stroke-width="3" />
+<path d="M300 95V250" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" />
+<circle cx="360" cy="170" r="5" fill="#f5b800" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="82.5" y="41">Trip unit</text><text x="82.5" y="58">detects fault</text><text x="227.5" y="41">Contacts part,</text><text x="227.5" y="58">arc forms</text><text x="372.5" y="41">Arc stretched</text><text x="372.5" y="58">and cooled</text><text x="517.5" y="41">Arc out at</text><text x="517.5" y="58">current zero</text>
+<text x="300" y="264">contacts part</text>
+<text x="335" y="248" fill="#b42318" text-anchor="start">arc current</text>
+<text x="460" y="160">current zero, arc out</text>
+<text x="120" y="262">load current i</text>
+</g>
+</svg>
+<figcaption>How an AC circuit breaker interrupts current: after the contacts part, current flows on as an arc until the next current zero, where the recovered gap stops it.</figcaption>
+</figure>
 
 ### 1. Detection and tripping
 
@@ -115,6 +138,13 @@ $$
 </dl>
 </Example>
 
+## Key formulas for circuit breaker working principle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Transformer full load current | IFL = S ÷ (√3 V) | S rating in VA, V secondary line voltage in V, IFL in A |
+| Prospective fault current (infinite source) | Isc ≈ IFL ÷ Zpu | Zpu = transformer impedance per unit (5 percent = 0.05) |
+| Breaking capacity check | Icu ≥ Isc | Icu ultimate breaking capacity, Isc prospective short-circuit current, both in A or kA |
 
 ## Selectivity between breakers
 
@@ -139,6 +169,14 @@ Manufacturers publish selectivity tables that show which combinations of their b
 ## Maintenance and testing
 
 Breakers are inspected and tested at intervals set by the manufacturer. Typical checks include contact resistance measurement, operating time tests, insulation resistance tests, trip unit testing by secondary or primary injection, and inspection of the operating mechanism and arc chutes. For vacuum interrupters, vacuum integrity is checked with a high voltage test.
+
+## Circuit breaker working principle interview and viva questions
+
+1. **Why does current keep flowing when the breaker contacts first separate?** The voltage across the small gap ionises the medium, so current continues as an arc of hot conducting plasma until it is extinguished.
+2. **Why is a current zero important for AC interruption?** At a current zero the arc briefly loses its energy supply, and interruption succeeds if the gap regains insulating strength faster than the transient recovery voltage rises.
+3. **How do the thermal and magnetic trip elements of an LV breaker differ?** The bimetal thermal element bends under sustained overload and trips after a delay, while the magnetic coil responds almost instantly to high short-circuit current.
+4. **What is the difference between B, C and D curve MCBs?** Their instantaneous trip ranges are 3 to 5, 5 to 10 and 10 to 20 times rated current, matching resistive, general and high inrush loads.
+5. **What is selectivity between breakers?** Only the breaker closest to a fault trips, so the rest of the installation stays in service; it is achieved by current, time or energy selectivity.
 
 ## Related reading
 

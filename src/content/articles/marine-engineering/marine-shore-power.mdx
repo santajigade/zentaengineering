@@ -1,0 +1,183 @@
+---
+title: "Marine Shore Power Connection Explained"
+description: "Shore power explained: how ships plug into the port grid at berth, HV and LV connections, frequency converters, earthing, safety loops and load transfer."
+pubDate: 2026-11-20
+reviewedDate: 2026-11-20
+discipline: marine-engineering
+subcategory: ship-electrical-systems
+focusKeyword: "shore power"
+image: { src: /images/featured/marine-shore-power.webp, alt: "Marine Shore Power Connection Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [shore-power, cold-ironing, hvsc, ship-electrical, port-electrification]
+faq:
+  - q: "Is shore power the same as cold ironing?"
+    a: "Yes. Cold ironing, onshore power supply (OPS), alternative maritime power (AMP) and shore side electricity all describe the same thing: a ship at berth takes its electrical power from the port grid so its auxiliary engines can be stopped."
+  - q: "Why do many ports need a frequency converter for shore power?"
+    a: "Most ships generate at 60 Hz, while the public grid in Europe and much of Asia runs at 50 Hz. Running 60 Hz motors on 50 Hz would change their speed and stress them, so the shore installation converts the grid supply to the frequency the ship needs."
+  - q: "Can a ship stay connected to shore power while its generators run?"
+    a: "Only briefly. IEC/IEEE 80005-1 allows a short temporary parallel during load transfer, after the ship synchronises its generators with the shore supply. Once the load has moved across, the generators are disconnected. The alternative is a blackout transfer, where the ship loses power for a short time during changeover."
+references:
+  - text: "IEC/IEEE 80005-1:2019 Utility connections in port, Part 1: High voltage shore connection (HVSC) systems, General requirements"
+  - text: "IEC/IEEE 80005-3:2014 Utility connections in port, Part 3: Low voltage shore connection (LVSC) systems, General requirements"
+  - text: "IEC 62613-1:2011, Plugs, socket-outlets and ship couplers for high-voltage shore connection (HVSC) systems, Part 1: General requirements"
+  - text: "Regulation (EU) 2023/1804 on the deployment of alternative fuels infrastructure (AFIR), Official Journal of the European Union"
+  - text: "Regulation (EU) 2023/1805 on the use of renewable and low-carbon fuels in maritime transport (FuelEU Maritime), Official Journal of the European Union"
+  - text: "D. T. Hall, Practical Marine Electrical Knowledge, 2nd ed., Witherby"
+  - text: "H. D. McGeorge, Marine Electrical Equipment and Practice, 2nd ed., Butterworth-Heinemann"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Shore power** is the supply of electricity from the port grid to a ship at berth, so the ship can stop its diesel generators while alongside. Power passes through a shore transformer, often a 50 to 60 Hz frequency converter, flexible cables and plugs to the ship's shore connection switchboard, with earthing and safety interlocks under IEC/IEEE 80005.
+
+</Key>
+
+Shore power lets a ship at berth switch off its auxiliary engines and run on electricity from the port. It is also called cold ironing, onshore power supply (OPS) or alternative maritime power (AMP). Without it, a ship in port keeps its generators running to supply lighting, ventilation, pumps, cargo equipment and accommodation, burning fuel and releasing exhaust and noise right next to the city.
+
+
+<ArticleVideo slug="marine-shore-power" title="How shore power works" />
+
+## Why ships use shore power
+
+A ship in port still needs electrical power. Container ships may run reefer containers, cruise ships run hotel loads for thousands of people, and tankers run cargo pumps. On a normal [ship electrical power system](/marine-engineering/ship-electrical-power-system/), the diesel generators carry these loads at berth.
+
+Burning fuel at berth releases nitrogen oxides, sulphur oxides, particulate matter and carbon dioxide close to port communities. Shore power moves that generation to the land grid, which can use cleaner sources, and it removes engine noise and vibration on board. Regulation is pushing the change: in the European Union, the AFIR regulation and FuelEU Maritime require shore power for large container and passenger ships at major ports from 2030.
+
+## Main parts of a shore power connection
+
+<figure class="anim">
+<svg width="680" height="300" viewBox="0 0 680 300" fill="none" role="img" aria-label="Shore power connection diagram: the 50 Hz port grid feeds a shore transformer with its neutral earthed through a resistor, then a frequency converter producing 60 Hz, then the shore switchboard. A flexible cable from a cable reel on the ship connects to the ship's shore connection switchboard, a 6.6 kV to 440 V ship transformer and the main switchboard that feeds the loads, while the diesel generator is off at berth.">
+<path d="M380 40V290" stroke="#7b8794" stroke-width="2" stroke-dasharray="6 4" />
+<path d="M395 50H665V250Q665 285 630 285H430Q395 285 395 250Z" stroke="#7b8794" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="15" y="70" width="70" height="50" rx="4" fill="#eef1f6" />
+<circle cx="122" cy="95" r="16" fill="#ffffff" /><circle cx="142" cy="95" r="16" fill="#ffffff" />
+<rect x="185" y="70" width="80" height="50" rx="4" fill="#e6f6f4" />
+<rect x="285" y="70" width="80" height="50" rx="4" fill="#eef1f6" />
+<circle cx="425" cy="95" r="18" fill="#fff7e0" /><circle cx="425" cy="95" r="6" fill="#0b2545" />
+<rect x="460" y="70" width="100" height="50" rx="4" fill="#e6f6f4" />
+<circle cx="510" cy="150" r="13" fill="#ffffff" /><circle cx="510" cy="166" r="13" fill="#ffffff" />
+<circle cx="620" cy="155" r="16" fill="#eef1f6" />
+<rect x="580" y="245" width="30" height="22" rx="3" fill="#fff7e0" /><rect x="625" y="245" width="30" height="22" rx="3" fill="#fff7e0" />
+<path d="M142 111V170M142 194V204M130 204H154M134 209H150M138 214H146" />
+<rect x="136" y="170" width="12" height="24" fill="#ffffff" />
+<path d="M620 171V210" stroke-dasharray="4 3" />
+</g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M85 95H106M158 95H185M265 95H285" /></g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M365 95H407M443 95H460M510 120V137M510 179V210M595 210V245M640 210V245" /></g>
+<path d="M440 210H660" stroke="#0b2545" stroke-width="6" />
+<g stroke="#ffffff" stroke-width="2" fill="none"><path class="anim-flow" d="M85 95H106M158 95H185M265 95H285M365 95H407M443 95H460M510 120V137M510 179V210M595 210V245M640 210V245" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="190" y="30" font-weight="700">Shore side</text><text x="530" y="30" font-weight="700">Ship side</text>
+<text x="50" y="92">Port grid</text><text x="50" y="107">50 Hz</text>
+<text x="132" y="52">Shore</text><text x="132" y="65" font-size="10">transformer</text>
+<text x="225" y="92">Frequency</text><text x="225" y="107">converter</text><text x="225" y="138" font-size="10">50 Hz to 60 Hz</text>
+<text x="325" y="92">Shore</text><text x="325" y="107">switchboard</text>
+<text x="322" y="138" font-size="10">HV cable and plug</text>
+<text x="425" y="68" font-size="10">Cable reel</text>
+<text x="510" y="92" font-size="10">Shore connection</text><text x="510" y="106" font-size="10">switchboard</text>
+<text x="620" y="159" font-size="10">DG</text><text x="620" y="132" font-size="10">off at berth</text>
+<text x="520" y="232" font-size="10">Main switchboard 440 V, 60 Hz</text>
+<text x="617" y="282" font-size="10">Loads</text>
+<text x="178" y="186" font-size="10" text-anchor="start">Neutral earthing</text><text x="178" y="199" font-size="10" text-anchor="start">resistor</text>
+</g>
+<text x="534" y="162" font-family="Open Sans Variable, Arial, sans-serif" font-size="10" fill="#0b2545">6.6 kV/440 V</text>
+</svg>
+<figcaption>A high voltage shore connection: power flows from the port grid through the converter and cable to the ship's switchboards while the generators stop.</figcaption>
+</figure>
+
+### Shore side
+
+The port takes power from the utility at medium voltage. A **shore transformer** isolates the ship from the public grid and sets the supply voltage. IEC/IEEE 80005-1 requires this transformer neutral to be earthed through a **neutral earthing resistor**, which limits the current of an earth fault. Where the grid frequency differs from the ship's, a **frequency converter** changes it, typically from 50 Hz to 60 Hz. The **shore switchboard** holds the circuit breaker and protection relays for each berth.
+
+### Connection between ship and shore
+
+Flexible, heavy cables carry the power from a socket on the quay to the ship. A **cable management system** (CMS) handles them, usually a motorised cable reel either on the ship or on the shore. Plugs and sockets follow IEC 62613-1 and include pilot contacts, so the shore breaker cannot close until the plug is fully engaged.
+
+### Ship side
+
+The cables land on the ship's **shore connection switchboard**, which has its own breaker and protection. If the ship's main system runs at a lower voltage, an onboard [transformer](/electrical-engineering/transformer-working-principle/) steps the supply down, for example from 6.6 kV to 440 V, before it reaches the main switchboard.
+
+## High voltage and low voltage shore power
+
+Shore power standards come in two families.
+
+- High voltage shore connection (HVSC): IEC/IEEE 80005-1 covers connections at 6.6 kV and 11 kV AC. It suits ships with large demand at berth, such as cruise ships, container ships and ro-ro vessels, because high voltage keeps the cable current manageable.
+- Low voltage shore connection (LVSC): IEC/IEEE 80005-3 covers smaller ships with lower demand, connected at low voltage such as 400 V or 440 V. Small ferries, workboats and inland vessels often use this route.
+
+The current needed for a given apparent power follows the three phase relation:
+
+$$
+I = \frac{S}{\sqrt{3}\,V_L}
+$$
+
+where S is the ship's apparent power demand in VA and V_L the line voltage. Raising the voltage from 440 V to 6.6 kV cuts the current by a factor of 15, which is why a large ship can be connected with a handful of cables instead of dozens.
+
+## Frequency matching
+
+Most ships generate at 60 Hz, while grids in Europe and much of Asia run at 50 Hz. The speed of the ship's [induction motors](/electrical-engineering/induction-motor-working-principle/) depends on supply frequency through the synchronous speed relation:
+
+$$
+n_s = \frac{120 f}{p}
+$$
+
+A 4 pole motor has a synchronous speed of 1800 rpm at 60 Hz but only 1500 rpm at 50 Hz, so pumps and fans would run slower and deliver less. Ports serving 60 Hz ships therefore install static frequency converters. Where both the grid and the ship use the same frequency, a converter is not needed.
+
+## Connecting and transferring load
+
+The changeover follows a set order. The safety logic only allows each step once the previous one is complete.
+
+1. The earthing conductor in the cable bonds the ship's hull to the shore earth before power is applied.
+2. The plugs are inserted and locked. Their pilot contacts close the safety loop, which permits the shore breaker to close.
+3. The shore breaker closes and voltage appears at the ship's shore connection switchboard. Phase sequence, voltage and frequency are checked.
+4. Load is transferred. The ship either synchronises its running generators with the shore supply for a short **temporary parallel**, then ramps load onto shore power, or uses a **blackout transfer**, opening the generator breakers before closing the shore breaker.
+5. Once shore power carries the load, the diesel generators are disconnected and stopped.
+
+Disconnection reverses the steps: the generators start and take the load back before the shore breaker opens and the cables are removed.
+
+## Earthing and safety
+
+The safety rules are strict because the cable runs across a quay where people work, between a ship that moves and a shore that does not.
+
+- The hull and shore earth are bonded (equipotential bonding) so a fault cannot leave a voltage difference between them. Good [electrical earthing](/electrical-engineering/electrical-earthing/) practice applies on both sides.
+- The neutral earthing resistor limits earth fault current on the high voltage supply, so protection can detect and clear a fault without heavy damage.
+- A safety circuit made of a pilot loop through the plugs, emergency stop buttons on ship and shore, and cable tension monitoring trips the shore breaker if a plug is pulled or the ship moves too far.
+- Interlocks stop the shore breaker closing onto the ship unless the earthing and pilot circuits are healthy. The ship's generator and shore breakers are also interlocked to prevent an uncontrolled parallel. 
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A ship at berth needs 2.0 MVA of apparent power. The port offers a 6.6 kV high voltage shore connection. The ship's main switchboard runs at 440 V.</dd>
+<dt>Find</dt><dd>The line current in the shore cable at 6.6 kV and the current the same load draws at 440 V.</dd>
+<dt>Assumptions</dt><dd>Balanced three phase load; transformer losses neglected.</dd>
+<dt>Solution</dt><dd>At 6.6 kV: I = 2 000 000 ÷ (1.732 × 6600) = 175 A<br />At 440 V: I = 2 000 000 ÷ (1.732 × 440) = 2624 A<br />Ratio: 2624 ÷ 175 = 15, the same as 6600 ÷ 440</dd>
+<dt>Answer</dt><dd><strong>About 175 A at 6.6 kV, compared with about 2624 A at 440 V</strong></dd>
+<dt>Limitations</dt><dd>Real cable sizing also considers voltage drop, installation method, ambient temperature and fault level, as covered in cable sizing guidance.</dd>
+</dl>
+</Example>
+
+## Key formulas for shore power
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Line current | I = S ÷ (√3 × V_L) | I in A, S in VA, V_L = line voltage in V |
+| Apparent power | S = √3 × V_L × I | S in VA |
+| Real power | P = S × cos φ | P in W, cos φ = power factor |
+| Synchronous speed | n_s = 120 f ÷ p | n_s in rpm, f in Hz, p = number of poles |
+| Transformer ratio | V_1 ÷ V_2 = N_1 ÷ N_2 | V in V, N = turns |
+
+## Benefits and limitations of shore power
+
+Shore power removes generator exhaust and noise at berth and lets the ship use grid electricity instead. Engine running hours fall, which reduces maintenance. The limits are cost and compatibility: the port needs grid capacity, transformers, converters and cable systems at each berth, and the ship needs a shore connection switchboard and fittings. The environmental gain also depends on how the grid itself generates power. Related reading includes the [ship auxiliary machinery](/marine-engineering/ship-auxiliary-machinery/) that keeps running on shore power and the [power factor](/electrical-engineering/power-factor/) of ship loads.
+
+## Shore power interview and viva questions
+
+1. **What is shore power?** It is the supply of electricity from the port grid to a ship at berth so the ship can stop its auxiliary diesel generators. It is also called cold ironing or onshore power supply.
+2. **Which standard covers high voltage shore connections?** IEC/IEEE 80005-1 covers HVSC systems at 6.6 kV and 11 kV, and IEC/IEEE 80005-3 covers low voltage connections.
+3. **Why is a frequency converter often needed?** Most ships use 60 Hz while many grids use 50 Hz, and running 60 Hz motors at 50 Hz lowers their speed in proportion to frequency.
+4. **What is the purpose of the pilot contacts in the plug?** They form part of the safety loop, so the shore breaker can only close when the plug is fully engaged and trips if it is withdrawn.
+5. **What are the two ways to transfer load to shore power?** A temporary parallel after synchronising the generators with the shore supply, or a blackout transfer where the ship loses power briefly during changeover.

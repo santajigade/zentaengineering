@@ -1,0 +1,184 @@
+---
+title: "Fourier's Law of Heat Conduction Explained"
+description: "Fourier's law of heat conduction explained: the rate equation, thermal conductivity, plane walls, cylinders, thermal resistance and a worked example."
+pubDate: 2026-11-20
+reviewedDate: 2026-11-20
+discipline: mechanical-engineering
+subcategory: heat-transfer
+focusKeyword: "fourier's law"
+image: { src: /images/featured/fouriers-law-of-heat-conduction.webp, alt: "Fourier's Law of Heat Conduction Explained: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [heat-transfer, conduction, fouriers-law, thermal-conductivity, thermal-resistance]
+faq:
+  - q: "Why is there a minus sign in Fourier's law?"
+    a: "Heat flows from high to low temperature, so it moves in the direction in which temperature falls. The temperature gradient dT/dx is negative in that direction, and the minus sign makes the heat flux come out positive along the direction of flow."
+  - q: "Is Fourier's law valid for liquids and gases?"
+    a: "Yes, for conduction through a fluid that is not moving in bulk. Fluids have much lower thermal conductivity than metals. Once the fluid moves, energy is also carried by the flow and the problem becomes convection."
+  - q: "What is the difference between thermal conductivity and thermal diffusivity?"
+    a: "Thermal conductivity k tells how well a material conducts heat at steady state. Thermal diffusivity, k divided by density times specific heat, tells how quickly temperature changes spread through it during transient heating or cooling."
+references:
+  - text: "F. P. Incropera, D. P. DeWitt, T. L. Bergman and A. S. Lavine, Fundamentals of Heat and Mass Transfer, 7th ed., Wiley"
+  - text: "Y. A. Cengel and A. J. Ghajar, Heat and Mass Transfer: Fundamentals and Applications, 6th ed., McGraw-Hill"
+  - text: "J. P. Holman, Heat Transfer, 10th ed., McGraw-Hill"
+  - text: "J. H. Lienhard IV and J. H. Lienhard V, A Heat Transfer Textbook, 5th ed., Phlogiston Press"
+  - text: "J. B. J. Fourier, Théorie analytique de la chaleur, Firmin Didot, Paris, 1822"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Fourier's law** of heat conduction states that heat flux through a material is proportional to the negative temperature gradient, q″ = minus k dT/dx, where k is the thermal conductivity. For a plane wall it gives q = k A (T₁ minus T₂) / L, so heat flows from hot to cold faster through thin, conductive, large sections.
+
+</Key>
+
+Fourier's law is the rate equation for conduction. Joseph Fourier published it in 1822 in his book on the analytical theory of heat, and you use it whenever you work out heat flow through a solid, from the insulation on a steam pipe to the wall of a furnace. Convection and radiation, the other two [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/), have their own rate laws.
+
+
+<ArticleVideo slug="fouriers-law-of-heat-conduction" title="How Fourier's law of heat conduction works" />
+
+## What Fourier's law says
+
+Conduction is energy moving from more energetic particles to their less energetic neighbours. In solids this happens through lattice vibrations, and in metals also through free electrons. In a still gas or liquid it happens through molecular collisions.
+
+Fourier's law is phenomenological, meaning it comes from observation rather than first principles. Experiments show that the heat rate through a slab rises with the temperature difference and the area, and falls as the slab gets thicker. Written for one dimension, the heat flux q″ (heat rate per unit area, W/m²) is:
+
+$$
+q'' = -k \frac{dT}{dx}
+$$
+
+The minus sign is there because heat flows in the direction of decreasing temperature. Where temperature falls with x, dT/dx is negative and the flux is positive in the +x direction. In three dimensions the law becomes q″ = minus k ∇T, so the heat flux vector always points down the temperature gradient, at right angles to the isotherms.
+
+## Thermal conductivity
+
+The proportionality constant k is the **thermal conductivity**, in W/m·K. It is a transport property of the material and depends on temperature. Typical values near room temperature (about 300 K) from Incropera's property tables:
+
+| Material | k (W/m·K) |
+| --- | --- |
+| Pure copper | 401 |
+| Pure aluminium | 237 |
+| Stainless steel AISI 304 | 14.9 |
+| Window glass | 1.4 |
+| Water (liquid) | 0.613 |
+| Air | 0.0263 |
+
+Metals conduct best because free electrons carry energy as well as the lattice. Gases conduct worst, so insulation such as mineral wool or foam traps air in small cells where it cannot move and set up convection.
+
+## Fourier's law for a plane wall
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Fourier's law in a plane wall of thickness L: the hot face at T1 on the left and the cold face at T2 on the right, a straight line temperature profile falling from T1 to T2 across the wall, and heat flux q arrows flowing through the wall from the hot side to the cold side">
+<rect x="200" y="50" width="200" height="190" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<rect x="190" y="50" width="10" height="190" fill="#b42318" />
+<rect x="400" y="50" width="10" height="190" fill="#1d4ed8" />
+<path d="M200 80L400 200" stroke="#f5b800" stroke-width="3" />
+<circle cx="200" cy="80" r="5" fill="#b42318" />
+<circle cx="400" cy="200" r="5" fill="#1d4ed8" />
+<g stroke="#b42318" stroke-width="3">
+<path d="M90 120H180M90 165H180M220 150H380M220 215H380M420 120H520M420 165H520" />
+</g>
+<g fill="#b42318">
+<path d="M180 114L192 120L180 126Z" /><path d="M180 159L192 165L180 171Z" />
+<path d="M380 144L392 150L380 156Z" /><path d="M380 209L392 215L380 221Z" />
+<path d="M520 114L532 120L520 126Z" /><path d="M520 159L532 165L520 171Z" />
+</g>
+<g stroke="#fff" stroke-width="2.5" fill="none">
+<path class="anim-flow" d="M90 120H180M90 165H180M220 150H380M220 215H380M420 120H520M420 165H520" />
+</g>
+<path d="M200 265H400" stroke="#0b2545" stroke-width="1.5" />
+<path d="M200 258V272M400 258V272" stroke="#0b2545" stroke-width="1.5" />
+<path d="M40 280H130" stroke="#0b2545" stroke-width="1.5" />
+<path d="M124 275L132 280L124 285" stroke="#0b2545" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545">
+<text x="300" y="285" text-anchor="middle">L</text>
+<text x="140" y="284">x</text>
+<text x="40" y="40" fill="#b42318" font-weight="700">Hot side</text>
+<text x="490" y="40" fill="#1d4ed8" font-weight="700">Cold side</text>
+<text x="208" y="72" fill="#b42318">T₁</text>
+<text x="418" y="205" fill="#1d4ed8">T₂</text>
+<text x="300" y="38" text-anchor="middle">Wall, conductivity k, area A</text>
+<text x="300" y="112" text-anchor="middle">T(x) linear</text>
+<text x="40" y="110" fill="#b42318">q</text>
+<text x="540" y="145" fill="#b42318">q</text>
+</g>
+</svg>
+<figcaption>Steady conduction through a plane wall: temperature falls linearly from T₁ to T₂ and the same heat rate q passes through every plane.</figcaption>
+</figure>
+
+For steady one dimensional conduction through a plane wall with constant k and no heat generation, the temperature profile is a straight line. The gradient is then (T₂ minus T₁)/L, and Fourier's law gives:
+
+$$
+q = k A \frac{T_1 - T_2}{L}
+$$
+
+where q is the heat rate (W), A the area normal to the heat flow (m²) and L the wall thickness (m). The same heat rate passes through every plane of the wall, because at steady state no energy is stored inside it.
+
+## Thermal resistance
+
+Rearranged, the plane wall result looks like Ohm's law: q = ΔT / R, with the conduction resistance:
+
+$$
+R_\text{cond} = \frac{L}{k A}
+$$
+
+Temperature difference takes the place of voltage and heat rate the place of current, as in [Ohm's law](/electrical-engineering/ohms-law-kirchhoffs-laws/). Layers in series, such as brick, insulation and plaster, add their resistances, and convection at each surface adds a resistance 1/(hA). Insulation design and the overall heat transfer coefficient used for [heat exchanger types](/chemical-engineering/heat-exchanger-types/) both rest on this network method.
+
+## Fourier's law in cylinders and spheres
+
+In a pipe wall, heat flows radially and the area grows with radius, so the temperature profile is logarithmic, not linear. Applying Fourier's law in radial form, q = minus k (2πrL) dT/dr, and integrating from the inner radius r₁ to the outer radius r₂ gives:
+
+$$
+q = \frac{2 \pi L k (T_1 - T_2)}{\ln(r_2 / r_1)}
+$$
+
+so the cylindrical resistance is R = ln(r₂/r₁) / (2πLk). For a spherical shell the resistance is (1/r₁ minus 1/r₂) / (4πk). These are the forms used for lagging on pipes and for tube walls in [shell and tube heat exchanger design](/chemical-engineering/shell-and-tube-heat-exchanger-design/).
+
+## From Fourier's law to the heat equation
+
+When temperature changes with time, an energy balance on a small element combined with Fourier's law gives the heat diffusion equation. For constant k and no heat generation in one dimension:
+
+$$
+\frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2}
+$$
+
+The thermal diffusivity α = k / (ρ c_p) combines conductivity, density and specific heat. A high α means temperature changes spread quickly through the material. Solving this equation with suitable boundary conditions gives temperature fields in quenched parts, engine walls and building elements.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A flat plate 10 mm thick and 0.5 m² in area. One face is held at 80 °C and the other at 60 °C. Case 1: stainless steel AISI 304, k = 14.9 W/m·K. Case 2: pure copper, k = 401 W/m·K.</dd>
+<dt>Find</dt><dd>The heat flux and heat rate through the plate for each material, and the thermal resistance of the steel plate.</dd>
+<dt>Assumptions</dt><dd>Steady state, one dimensional conduction, constant k, no heat generation.</dd>
+<dt>Solution</dt><dd>Steel: q″ = k ΔT / L = 14.9 × 20 / 0.010 = 29,800 W/m²<br />q = q″ A = 29,800 × 0.5 = 14,900 W<br />R = L / (kA) = 0.010 / (14.9 × 0.5) = 0.00134 K/W, and ΔT / R = 20 / 0.00134 ≈ 14,900 W (check)<br />Copper: q″ = 401 × 20 / 0.010 = 802,000 W/m²<br />q = 802,000 × 0.5 = 401,000 W</dd>
+<dt>Answer</dt><dd><strong>Steel: 29.8 kW/m² and 14.9 kW. Copper: 802 kW/m² and 401 kW, about 27 times more for the same temperature difference.</strong></dd>
+<dt>Limitations</dt><dd>In practice the surface temperatures would not stay fixed at such high heat rates; convection resistance at the surfaces would limit the flow. k also varies with temperature.</dd>
+</dl>
+</Example>
+
+<Calculator path="physics/heat-conduction" title="Heat Conduction Calculator" />
+
+## Key formulas for Fourier's law
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Heat flux, 1D | q″ = minus k dT/dx | q″ in W/m², k in W/m·K, dT/dx in K/m |
+| Plane wall heat rate | q = k A (T₁ minus T₂) / L | A in m², L in m, T in °C or K |
+| Plane wall resistance | R = L / (k A) | R in K/W |
+| Cylinder heat rate | q = 2πLk (T₁ minus T₂) / ln(r₂/r₁) | L = length, r₁ and r₂ = inner and outer radii in m |
+| Sphere resistance | R = (1/r₁ minus 1/r₂) / (4πk) | r in m |
+| Thermal diffusivity | α = k / (ρ c_p) | α in m²/s, ρ in kg/m³, c_p in J/kg·K |
+
+## Limits of Fourier's law
+
+Fourier's law assumes that the material behaves as a continuum and that heat responds instantly to the temperature gradient. Both hold for almost all engineering work. They break down at very small length scales, such as thin films and nanostructures comparable to the mean free path of the energy carriers, and at extremely short time scales. For anisotropic materials such as composites or wood, k depends on direction and the law is written with a conductivity tensor.
+
+## Fourier's law interview and viva questions
+
+1. **State Fourier's law of heat conduction.** The heat flux by conduction is proportional to the negative of the temperature gradient, q″ = minus k dT/dx, where k is the thermal conductivity of the material.
+2. **Why is the temperature profile linear in a plane wall but not in a pipe wall?** In a plane wall the area is constant, so a constant heat rate needs a constant gradient. In a pipe wall the area grows with radius, so the gradient falls with radius and the profile is logarithmic.
+3. **What is thermal resistance for conduction?** For a plane wall it is R = L/(kA), so heat rate equals temperature difference divided by resistance, and series layers add like electrical resistors.
+4. **Why are gases poor conductors of heat?** Their molecules are far apart and carry energy only through collisions, so k is very low, about 0.0263 W/m·K for air at 300 K compared with 401 W/m·K for copper.
+5. **What does thermal diffusivity tell you?** α = k/(ρc_p) measures how fast temperature changes travel through a material during transient heating or cooling.

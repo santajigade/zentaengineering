@@ -1,0 +1,170 @@
+---
+title: "Hydrogels in Biomedical Engineering: Types and Uses"
+description: "Hydrogels explained: crosslinked water swollen polymer networks, natural and synthetic types, swelling, drug release and biomedical applications."
+pubDate: 2026-11-20
+reviewedDate: 2026-11-20
+discipline: biomedical-engineering
+subcategory: biomaterials
+focusKeyword: "hydrogels"
+image: { src: /images/featured/hydrogels-biomedical-applications.webp, alt: "Hydrogels in Biomedical Engineering: Types and Uses: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [hydrogels, biomaterials, drug-delivery, tissue-engineering, contact-lenses]
+faq:
+  - q: "Why does a hydrogel not dissolve in water?"
+    a: "The polymer chains are tied together by crosslinks, either covalent bonds or physical junctions such as ionic bridges, hydrogen bonds or small crystalline regions. Water can enter and swell the network, but the crosslinks stop the chains from separating and going into solution."
+  - q: "What is the difference between a chemical and a physical hydrogel?"
+    a: "A chemical hydrogel is held together by covalent crosslinks, so it is permanent and keeps its shape. A physical hydrogel is held by reversible interactions such as calcium ions bridging alginate chains or hydrogen bonds, so it can form and break up again when the conditions change."
+  - q: "Are all contact lenses made of hydrogels?"
+    a: "Soft contact lenses are hydrogels. The first were made from poly(2-hydroxyethyl methacrylate), following work by Wichterle and Lim. Many modern soft lenses are silicone hydrogels, which add silicone to the network to let more oxygen reach the cornea. Rigid gas permeable lenses are not hydrogels."
+references:
+  - text: "A. S. Hoffman, Hydrogels for biomedical applications, Advanced Drug Delivery Reviews, 54(1), 3-12, 2002"
+  - text: "N. A. Peppas, P. Bures, W. Leobandung and H. Ichikawa, Hydrogels in pharmaceutical formulations, European Journal of Pharmaceutics and Biopharmaceutics, 50(1), 27-46, 2000"
+  - text: "O. Wichterle and D. Lim, Hydrophilic gels for biological use, Nature, 185, 117-118, 1960"
+  - text: "P. L. Ritger and N. A. Peppas, A simple equation for description of solute release I, Journal of Controlled Release, 5(1), 23-36, 1987"
+  - text: "K. Y. Lee and D. J. Mooney, Alginate: properties and biomedical applications, Progress in Polymer Science, 37(1), 106-126, 2012"
+  - text: "B. D. Ratner, A. S. Hoffman, F. J. Schoen and J. E. Lemons (eds.), Biomaterials Science: An Introduction to Materials in Medicine, 4th ed., Academic Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Hydrogels** are three dimensional networks of crosslinked hydrophilic polymer chains that absorb and hold large amounts of water without dissolving. Their soft, wet, tissue like nature makes them useful in soft contact lenses, wound dressings, controlled drug delivery, cell encapsulation and tissue engineering scaffolds, made from natural polymers such as alginate or synthetic ones such as PEG.
+
+</Key>
+
+Hydrogels swell in water but do not dissolve. Depending on the chemistry, a hydrogel can take up anything from 10 to 20% of its dry weight in water to thousands of times its dry weight. That water content, together with a soft and rubbery feel, makes hydrogels resemble living soft tissue more closely than almost any other synthetic material. Biomedical engineers use them wherever a device has to sit against wet tissue or release something slowly into it.
+
+
+<ArticleVideo slug="hydrogels-biomedical-applications" title="How hydrogels work" />
+
+## What a hydrogel is
+
+A hydrogel has two ingredients: polymer chains that like water, and crosslinks that tie those chains into one network. The chains carry hydrophilic groups such as hydroxyl, carboxyl, amide or ether groups, so water molecules are drawn into the spaces between them. Without crosslinks the same chains would simply dissolve, the way a water soluble polymer does.
+
+The network swells until two effects balance. Mixing the polymer with water lowers the free energy, which pulls more water in. Stretching the chains between crosslinks stores elastic energy, which resists further swelling. Flory and Rehner described this balance, and it is the reason a more densely crosslinked gel swells less. The average distance between neighbouring crosslinks, called the mesh size, sets which molecules can move through the gel and how fast.
+
+Hydrogels belong to the polymer family of [biomaterials](/biomedical-engineering/biomaterials-types/). A chemically crosslinked hydrogel behaves like a thermoset, while many physical gels behave more like thermoplastics, as compared in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/).
+
+## How hydrogels swell and release drugs
+
+<figure class="anim">
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Hydrogel swelling and drug release: on the left a small dry crosslinked polymer network; water flows in and the network swells to a larger open mesh on the right, with crosslink points marked; drug molecules held in the swollen mesh diffuse outward into the surrounding tissue">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="40" y="95" width="110" height="110" rx="10" fill="#eef1f6" />
+<rect x="300" y="40" width="220" height="220" rx="14" fill="#e6f6f4" />
+</g>
+<g stroke="#13a89e" stroke-width="2">
+<path d="M55 115L95 140L135 112M55 185L95 160L135 188M95 140V160M60 150H130" />
+<path d="M325 80L410 125L495 75M325 225L410 180L495 228M410 125V180M320 152H500M350 60L360 240M470 58L460 240" />
+</g>
+<g fill="#b42318">
+<circle cx="95" cy="140" r="4" /><circle cx="95" cy="160" r="4" /><circle cx="78" cy="150" r="3.5" /><circle cx="114" cy="150" r="3.5" />
+<circle class="anim-pulse" cx="410" cy="125" r="6" /><circle class="anim-pulse" cx="410" cy="180" r="6" /><circle class="anim-pulse" cx="356" cy="152" r="5" /><circle class="anim-pulse" cx="465" cy="152" r="5" />
+</g>
+<g fill="#f5b800" stroke="#0b2545" stroke-width="1">
+<circle cx="380" cy="100" r="6" /><circle cx="440" cy="205" r="6" /><circle cx="440" cy="100" r="6" /><circle cx="380" cy="205" r="6" />
+</g>
+<g stroke="#3b82c4" stroke-width="5"><path d="M160 150H280" /><path d="M200 50L266 92M200 250L266 208" /></g>
+<g fill="#3b82c4"><path d="M292 150L278 142V158Z" /><path d="M277 99L262 97L270 85Z" /><path d="M277 201L270 215L262 203Z" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M160 150H280" /><path class="anim-flow" d="M200 50L266 92M200 250L266 208" /></g>
+<g stroke="#e0a000" stroke-width="5"><path d="M446 97L552 44M446 208L552 261" /></g>
+<g fill="#e0a000"><path d="M565 38L549 38L556 51Z" /><path d="M565 267L556 254L549 267Z" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow-slow" d="M446 97L552 44M446 208L552 261" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="95" y="225">Dry network</text><text x="95" y="241">(xerogel)</text>
+<text x="222" y="140">Water in</text>
+<text x="410" y="282">Swollen hydrogel</text>
+<text x="545" y="150">Drug</text><text x="545" y="166">diffuses out</text>
+<text x="95" y="80" fill="#b42318">Crosslinks</text>
+</g>
+</svg>
+<figcaption>A dry crosslinked network takes up water and swells. Drug held in the swollen mesh then diffuses out into the surrounding fluid.</figcaption>
+</figure>
+
+Two numbers describe how much water a hydrogel holds. The mass swelling ratio compares the swollen mass with the dry mass:
+
+$$
+Q = \frac{W_s}{W_d}
+$$
+
+The equilibrium water content (EWC) gives the water as a percentage of the swollen mass:
+
+$$
+\text{EWC} = \frac{W_s - W_d}{W_s} \times 100\%
+$$
+
+For drug release, Ritger and Peppas proposed a simple power law that fits the first 60% of release from many polymer devices:
+
+$$
+\frac{M_t}{M_\infty} = k t^n
+$$
+
+Here M_t is the drug released by time t, M_∞ the total released, k a constant for the system and n the release exponent. For a thin slab, n = 0.5 means Fickian diffusion and n = 1 means Case II, swelling controlled release that runs at a constant rate. For spheres and cylinders the Fickian values are 0.43 and 0.45. Values in between point to anomalous transport, where diffusion and chain relaxation both matter.
+
+## Types of hydrogels
+
+### By source
+
+- Natural polymers: alginate, collagen, gelatin, chitosan, hyaluronic acid, agarose and fibrin. They are usually biocompatible and some carry cell binding sites, but properties vary from batch to batch.
+- Synthetic polymers: poly(ethylene glycol) (PEG), poly(vinyl alcohol) (PVA), poly(2-hydroxyethyl methacrylate) (pHEMA), polyacrylamide and poly(N-isopropylacrylamide) (PNIPAM). Their composition and crosslink density can be controlled closely.
+- Hybrids: synthetic networks with natural segments, such as PEG with cell adhesive peptides.
+
+### By crosslinking
+
+- Chemical (covalent): crosslinks are permanent bonds made by free radical polymerisation with a crosslinker, photopolymerisation or reactions between functional groups. These gels keep their shape.
+- Physical: crosslinks are reversible interactions. Alginate is the standard example: divalent calcium ions bridge guluronate blocks on neighbouring chains in the egg box structure. Hydrogen bonding, small crystalline regions (as in freeze thawed PVA) and chain entanglement also form physical gels.
+
+### By response
+
+Stimuli responsive or smart hydrogels change their swelling when the environment changes. PNIPAM has a lower critical solution temperature near 32 °C: below it the gel is swollen, above it the chains collapse and the gel releases water. Gels with acidic or basic groups swell or shrink with pH, which is used to protect a drug in the stomach and release it in the intestine.
+
+## Hydrogels in biomedical applications
+
+- Soft contact lenses: Wichterle and Lim reported pHEMA gels for biological use in 1960, and pHEMA became the first soft contact lens material. Silicone hydrogel lenses add silicone so more oxygen reaches the cornea.
+- Wound dressings: hydrogel dressings keep the wound moist, absorb some exudate and are easy to remove without damaging new tissue.
+- Drug delivery: a drug loaded into a gel is released by diffusion, swelling or degradation of the network, giving a slower and steadier dose than a single injection. Responsive gels can release on a temperature or pH trigger.
+- Cell encapsulation: alginate beads crosslinked with calcium can hold living cells, letting nutrients and small molecules in while keeping larger immune components away.
+- Tissue engineering scaffolds and bioinks: soft gels give cells a wet three dimensional support similar to the extracellular matrix, and printable gels are used in 3D bioprinting. Cell culture work of this kind often uses [bioreactors](/biomedical-engineering/bioreactor-types/).
+- Electrode interfaces: conductive hydrogel layers on skin electrodes give good contact for [biopotential measurement](/biomedical-engineering/biopotential-measurement-basics/).
+
+Any hydrogel device still needs biological evaluation under ISO 10993 and regulatory classification, as explained in [medical device classification](/biomedical-engineering/medical-device-classification/).
+
+## Worked example: swelling and release
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A dry hydrogel disc has a mass of 0.25 g. After soaking in buffer at 37 °C it reaches a swollen mass of 2.50 g. A second, drug loaded disc of the same gel releases 25% of its drug in the first 2 h.</dd>
+<dt>Find</dt><dd>The mass swelling ratio, the equilibrium water content and the time to release 50% of the drug.</dd>
+<dt>Assumptions</dt><dd>Thin disc treated as a slab with Fickian release, so n = 0.5; the power law holds up to 60% release.</dd>
+<dt>Solution</dt><dd>Q = 2.50 ÷ 0.25 = 10<br />EWC = (2.50 − 0.25) ÷ 2.50 × 100 = 90%<br />k = 0.25 ÷ 2^0.5 = 0.177 per h^0.5<br />t = (0.50 ÷ 0.177)^2 = 8.0 h, which is the same as 2 h × (0.50 ÷ 0.25)^2</dd>
+<dt>Answer</dt><dd><strong>Q = 10, EWC = 90% and about 8 h to release half the drug</strong></dd>
+<dt>Limitations</dt><dd>Real gels may swell further while releasing, giving n above 0.5. The power law does not describe the last 40% of release.</dd>
+</dl>
+</Example>
+
+With Fickian release, doubling the fraction released takes four times as long, so release slows down as time goes on.
+
+## Key formulas for hydrogels
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Mass swelling ratio | Q = W_s ÷ W_d | W_s = swollen mass, W_d = dry mass, both in g |
+| Equilibrium water content | EWC = (W_s − W_d) ÷ W_s × 100 | EWC in % of swollen mass |
+| Power law release | M_t ÷ M_∞ = k t^n | M_t ÷ M_∞ = fraction released, t = time, k = release constant, n = release exponent |
+| Release exponent for a slab | n = 0.5 Fickian, n = 1 Case II | Spheres 0.43 and cylinders 0.45 for Fickian release |
+
+## Advantages and limitations
+
+Hydrogels are soft, wet and permeable to small molecules, and they can be made biocompatible with tunable swelling and degradation. Highly swollen gels are weak and tear easily, which limits them in load bearing tissue. A gel that is good at holding water usually releases small drugs quickly, so slow release of small molecules needs extra measures. Sterilising them without changing the network is also difficult, and natural polymers can vary between batches.
+
+## Hydrogels interview and viva questions
+
+1. **What is a hydrogel?** A three dimensional network of crosslinked hydrophilic polymer chains that absorbs and holds large amounts of water without dissolving.
+2. **What stops a hydrogel from dissolving?** Crosslinks, either covalent bonds or physical junctions such as ionic bridges, hydrogen bonds or crystalline regions, hold the chains together while water swells the network.
+3. **How is alginate gelled?** Divalent calcium ions bridge guluronate blocks on neighbouring alginate chains in the egg box structure, forming a physical gel.
+4. **What does a release exponent of 0.5 mean for a thin slab?** It means Fickian, diffusion controlled release, where the fraction released grows with the square root of time.
+5. **Why is PNIPAM called a thermoresponsive hydrogel?** It has a lower critical solution temperature near 32 °C, so it is swollen below that temperature and collapses, releasing water, above it.

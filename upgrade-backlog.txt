@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/computer-science/process-vs-thread.mdx
-src/content/articles/computer-science/rest-api-basics.mdx
-src/content/articles/computer-science/solid-principles.mdx
-src/content/articles/computer-science/stack-vs-queue.mdx
-src/content/articles/computer-science/types-of-software-testing.mdx
-src/content/articles/computer-science/von-neumann-vs-harvard-architecture.mdx
-src/content/articles/electrical-engineering/cable-sizing.mdx
-src/content/articles/electrical-engineering/circuit-breaker-working-principle.mdx
 src/content/articles/electrical-engineering/dc-motor-working-principle.mdx
 src/content/articles/electrical-engineering/electrical-earthing.mdx
 src/content/articles/electrical-engineering/generation-transmission-distribution.mdx

@@ -3,6 +3,7 @@ title: "SOLID Principles of Software Design Explained"
 description: "The SOLID principles explained with code examples: single responsibility, open closed, Liskov substitution, interface segregation, dependency inversion."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-20
 discipline: computer-science
 subcategory: software-design
 focusKeyword: "SOLID principles"
@@ -145,3 +146,11 @@ Begin with existing code that changes often or is hard to test. Look for classes
 ## SOLID in the bigger picture
 
 SOLID works alongside other ideas: design patterns such as Strategy, Factory and Adapter implement it; layered and clean architectures apply dependency inversion at the system level; and the same thinking about clean interfaces shapes good [REST API design](/computer-science/rest-api-basics/). Even the choice of [data structures](/computer-science/arrays-vs-linked-lists/) can be hidden behind an interface, so it can be changed later if performance analysis with [Big O notation](/computer-science/big-o-notation/) shows a better option.
+
+## SOLID principles interview and viva questions
+
+1. **What does the single responsibility principle mean?** A class or module should have one reason to change, serving one actor or one concern. An invoice class that calculates, renders a PDF and emails should be split into three classes.
+2. **How do you follow the open closed principle?** Add new behaviour by adding new code, such as a new subclass or strategy, instead of editing tested code. Long if-elif chains on a type field are a warning sign.
+3. **Why does a Square inheriting from Rectangle break Liskov substitution?** Code that sets width and height independently expects area to equal width × height, but a Square forces both sides equal, so it cannot replace a Rectangle safely.
+4. **What problem does interface segregation solve?** It stops clients depending on methods they do not use. A Machine interface with print, scan and fax is split into Printer, Scanner and Fax.
+5. **How does dependency inversion help unit testing?** A service depends on an abstraction such as an OrderRepository interface, so tests can inject an in-memory fake instead of a real database.

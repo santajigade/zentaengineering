@@ -3,6 +3,7 @@ title: "Cable Sizing: Current Rating and Voltage Drop Explained"
 description: "Cable sizing explained: how to select a low voltage cable by current rating, derating, voltage drop and short-circuit withstand, with worked examples."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-20
 discipline: electrical-engineering
 subcategory: wiring-installation
 focusKeyword: "cable sizing"
@@ -30,16 +31,33 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-Cable sizing means choosing the smallest standard conductor that is safe and efficient. A cable is sized so that it:
-
-1. **carries the load current** without exceeding its insulation temperature, after [derating](https://www.instrumentationblog.in/cable-derating-factors/) for the way it is installed,
-2. is **protected** by a fuse or [breaker](/electrical-engineering/circuit-breaker-working-principle/) whose rating sits between the load current and the cable rating,
-3. keeps the **voltage drop** within limits at the load,
-4. can **withstand the short-circuit current** until the protective device trips.
-
-The smallest standard size that meets all four checks is chosen.
+**Cable sizing** means choosing the smallest standard conductor that carries the load current without overheating after [derating](https://www.instrumentationblog.in/cable-derating-factors/) for installation conditions, is protected by a correctly rated fuse or [breaker](/electrical-engineering/circuit-breaker-working-principle/), keeps the voltage drop at the load within limits and withstands the short-circuit current until the protective device trips.
 
 </Key>
+
+<figure class="anim">
+<svg width="600" height="200" viewBox="0 0 600 200" fill="none" role="img" aria-label="Cable sizing circuit: a supply feeds a protective device rated In, then a cable of length L carrying design current Ib to the load; the voltage drop Vd along the cable reduces the voltage at the load">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="60" width="90" height="60" rx="8" fill="#eef1f6" />
+<rect x="150" y="60" width="90" height="60" rx="8" fill="#fff7e0" />
+<rect x="490" y="60" width="90" height="60" rx="8" fill="#e6f6f4" />
+</g>
+<path d="M110 90H150M240 90H490" stroke="#b42318" stroke-width="4" />
+<path class="anim-flow" d="M110 90H150M240 90H490" stroke="#ffffff" stroke-width="2" />
+<path d="M240 150H490" stroke="#13a89e" stroke-width="1.5" />
+<path d="M240 142V158M490 142V158" stroke="#13a89e" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="65" y="87">Supply</text><text x="65" y="104" font-size="12">V</text>
+<text x="195" y="87">Breaker</text><text x="195" y="104" font-size="12">or fuse, In</text>
+<text x="535" y="87">Load</text><text x="535" y="104" font-size="12">P, cos φ</text>
+<text x="365" y="76">Cable, rating Iz after derating</text>
+<text x="365" y="115" fill="#b42318">design current Ib</text>
+<text x="365" y="176">route length L, voltage drop Vd</text>
+<text x="300" y="30" font-weight="700">Ib ≤ In ≤ Iz</text>
+</g>
+</svg>
+<figcaption>The quantities checked in cable sizing: design current, protective device rating, derated cable rating and voltage drop over the route length.</figcaption>
+</figure>
 
 ## Step 1: Design current
 
@@ -126,6 +144,16 @@ The factor k depends on the conductor material and insulation. Typical values ar
 
 For example, a copper PVC cable that must carry a fault current of 10 kA for 0.1 s needs S ≥ √(10,000² × 0.1) / 115 = 3162 / 115 = 27.5 mm². A 35 mm² cable passes this check, while a 25 mm² cable does not.
 
+## Key formulas for cable sizing
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Design current (three-phase) | Ib = P ÷ (√3 V cos φ η) | P in W, V line voltage in V, cos φ power factor, η efficiency |
+| Protection coordination | Ib ≤ In ≤ Iz and I2 ≤ 1.45 Iz | In device rating, Iz derated cable capacity, I2 conventional operating current, all in A |
+| Required tabulated rating | It ≥ In ÷ (Ca × Cg × Ci) | Ca ambient, Cg grouping, Ci insulation correction factors |
+| Voltage drop | Vd = (mV/A/m) × Ib × L ÷ 1000 | Vd in V, L route length in m |
+| Short-circuit withstand | S ≥ √(I² t) ÷ k | S in mm², I fault current in A, t in s, k = 115 (Cu PVC) or 143 (Cu XLPE) |
+
 ## Other cable sizing checks
 
 - **[Earth fault](/electrical-engineering/electrical-earthing/) loop impedance:** the cable and its protective conductor must be short and large enough for the protective device to disconnect within the required time.
@@ -143,3 +171,11 @@ Both are used for power cables. Aluminium has a higher resistivity than copper, 
 - Forgetting voltage drop on long runs to pumps, lighting columns and outbuildings.
 - Choosing a breaker larger than the cable's derated capacity.
 - Using a single-phase voltage drop value for a three-phase circuit, or the reverse.
+
+## Cable sizing interview and viva questions
+
+1. **What four checks decide a cable size?** The cable must carry the design current after derating, be protected by a suitably rated device, keep the voltage drop within limits and withstand the short-circuit current until the device trips.
+2. **Why are derating factors applied?** Tabulated ratings assume reference conditions, so factors for ambient temperature, grouping and thermal insulation reduce the rating so the conductor does not exceed its maximum temperature.
+3. **Why do long cables often end up larger than the current rating requires?** Voltage drop grows with route length, so on long runs the voltage drop limit, not the current rating, sets the size.
+4. **What does the adiabatic equation check?** It checks that the conductor cross-section is large enough to absorb the fault energy without damaging its insulation, assuming no heat escapes during the short fault time.
+5. **Why must an aluminium conductor be larger than a copper one for the same current?** Aluminium has a higher resistivity than copper, so it needs roughly one or two standard sizes larger.

@@ -3,6 +3,7 @@ title: "Types of Software Testing: Unit, Integration and System"
 description: "Types of software testing explained: unit, integration, system and acceptance tests, functional and non-functional testing, black box and the test pyramid."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-20
 discipline: computer-science
 subcategory: software-testing
 focusKeyword: "types of software testing"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The main **types of software testing** by level are **unit testing** (single functions or classes), **integration testing** (components working together), **system testing** (the complete application against its requirements) and **acceptance testing** (users or customers confirm it meets their needs). Tests are also grouped as **functional** (does it do the right thing) or **non-functional** (performance, security, usability), and as **black box** or **white box** depending on whether testers use knowledge of the code.
+The main **types of software testing** by level are **unit testing** of single functions or classes, **integration testing** of components working together, **system testing** of the complete application against its requirements and **acceptance testing** by users. Tests are also grouped as functional or non-functional, and as black box or white box.
 
 </Key>
 
@@ -69,11 +70,11 @@ Acceptance testing decides whether the software is ready to be accepted by its u
 
 ## The test pyramid
 
-<figure>
+<figure class="anim">
 <svg width="540" height="280" viewBox="0 0 540 280" fill="none" role="img" aria-label="Test pyramid: a wide base of many fast unit tests, a middle layer of fewer integration tests, and a small top of end to end system tests; arrows show that tests higher up are slower and more expensive while lower tests are faster and cheaper">
-<path d="M270 20L380 110H160Z" fill="#fde2e2" stroke="#b42318" stroke-width="2" />
-<path d="M160 110H380L440 180H100Z" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
-<path d="M100 180H440L500 260H40Z" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<path class="anim-blink anim-d2" d="M270 20L380 110H160Z" fill="#fde2e2" stroke="#b42318" stroke-width="2" />
+<path class="anim-blink anim-d1" d="M160 110H380L440 180H100Z" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<path class="anim-blink" d="M100 180H440L500 260H40Z" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545" text-anchor="middle" font-weight="700">
 <text x="270" y="88">E2E / system</text>
 <text x="270" y="152">Integration</text>
@@ -148,3 +149,11 @@ Code coverage tools report which lines and branches the tests execute. High cove
 6. Track defects found in production and add tests that would have caught them.
 
 Testing applies to every layer covered in this series, from database schemas designed by [normalization](/computer-science/database-normalization/) to the [HTTP](/computer-science/how-http-works/) behaviour of web applications and the efficiency of algorithms measured with [Big O notation](/computer-science/big-o-notation/).
+
+## Types of software testing interview and viva questions
+
+1. **What is the difference between a unit test and an integration test?** A unit test checks one function, method or class in isolation with its dependencies replaced by test doubles. An integration test checks that real components, such as the application and its database, work together.
+2. **What does the test pyramid recommend?** Many fast unit tests at the base, fewer integration tests in the middle and a small number of slow end-to-end tests at the top, which keeps feedback fast and failures easy to diagnose.
+3. **What is boundary value analysis?** It designs tests at and around the limits of valid input ranges, because defects tend to cluster at boundaries.
+4. **How does black box testing differ from white box testing?** Black box tests are based on requirements and behaviour without knowledge of the code, while white box tests are designed from the code structure to reach statement, branch or path coverage.
+5. **Why does high code coverage not guarantee good tests?** Coverage only shows which lines and branches ran, not whether the assertions would catch a fault; mutation testing reveals weak assertions by checking that injected faults make a test fail.

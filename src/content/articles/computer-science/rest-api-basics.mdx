@@ -3,6 +3,7 @@ title: "REST API Basics: Methods, Status Codes and Design"
 description: "REST API basics explained: resources and URLs, HTTP methods, status codes, JSON, statelessness, versioning, pagination, security and design best practices."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-20
 discipline: computer-science
 subcategory: apis-backend
 focusKeyword: "REST API"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-A **REST API** exposes an application's data as **resources** identified by URLs, such as /users/42. Clients act on them with standard **HTTP methods**: GET to read, POST to create, PUT or PATCH to update and DELETE to remove. The server replies with an **HTTP status code** and usually a JSON body. Each request is **stateless**, carrying everything needed to process it, which makes REST APIs simple to scale and cache.
+A **REST API** exposes an application's data as **resources** identified by URLs, such as /users/42. Clients use standard **HTTP methods**: GET to read, POST to create, PUT or PATCH to update and DELETE to remove. The server replies with a **status code** and usually JSON. Each request is **stateless**, so REST APIs scale and cache well.
 
 </Key>
 
@@ -62,7 +63,7 @@ Design URLs around **nouns** (resources), not verbs, and use plural collection n
 
 Use query parameters for filtering, sorting and paging: GET /orders?status=shipped&sort=-date&page=2.
 
-<figure>
+<figure class="anim">
 <svg width="560" height="250" viewBox="0 0 560 250" fill="none" role="img" aria-label="A client sends HTTP requests with methods GET, POST, PATCH and DELETE to a REST API server exposing the orders resource; the server reads and writes a database and returns JSON with status codes such as 200, 201, 204 and 404">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <rect x="20" y="80" width="110" height="80" rx="10" fill="#0b2545" /><text x="75" y="115" fill="#ffffff">Client</text><text x="75" y="135" fill="#9fd9d4" font-size="11">app or service</text>
@@ -73,6 +74,7 @@ Use query parameters for filtering, sorting and paging: GET /orders?status=shipp
 <text x="178" y="190" font-size="12">JSON + status</text><text x="178" y="206" font-size="12">200, 201, 204, 404</text>
 </g>
 <g stroke="#0b2545" stroke-width="2" fill="none"><path d="M130 105H223M215 99L225 105L215 111" /><path d="M225 140H132M140 134L130 140L140 146" /><path d="M365 110H448M440 104L450 110L440 116" /><path d="M450 135H367M375 129L365 135L375 141" /></g>
+<g stroke="#ffffff" stroke-width="2" fill="none"><path class="anim-flow" d="M132 105H212" /><path class="anim-flow" d="M223 140H142" /><path class="anim-flow" d="M367 110H437" /><path class="anim-flow" d="M448 135H378" /></g>
 </svg>
 <figcaption>A client works with resources through HTTP methods; the API returns JSON with status codes.</figcaption>
 </figure>
@@ -141,3 +143,11 @@ Rate limits, quotas and clear deprecation notices in responses help clients adap
 Behind the API, a backend application validates requests, applies business rules and reads or writes a database whose tables should be well designed; see [database normalization](/computer-science/database-normalization/). Clean code structure, such as the [SOLID principles](/computer-science/solid-principles/), keeps controllers, services and data access layers separate and testable. Every endpoint should be covered by [integration tests](/computer-science/types-of-software-testing/) that check status codes and response bodies.
 
 Alternatives to REST include **GraphQL**, where clients specify exactly the fields they need in one query, and **gRPC**, which uses binary messages over HTTP/2 for fast service to service calls. REST remains the most common choice for public web APIs because it is simple, cache friendly and works with every HTTP tool.
+
+## REST API interview and viva questions
+
+1. **What does stateless mean in a REST API?** Each request carries all the information the server needs, and the server keeps no client session between requests. This makes scaling and caching simpler.
+2. **Which HTTP methods are idempotent?** GET, PUT and DELETE are idempotent, so repeating them leaves the same final state. POST is not, so a retry could create a duplicate resource.
+3. **What is the difference between 401 and 403?** 401 Unauthorized means authentication is missing or invalid. 403 Forbidden means the client is authenticated but not allowed to perform the action.
+4. **Which status code should a successful create return?** 201 Created, together with a Location header pointing to the new resource.
+5. **Who defined REST and how?** Roy Fielding defined REST in his 2000 dissertation as a set of constraints: client-server, stateless, cacheable, uniform interface, layered system and optional code on demand.
