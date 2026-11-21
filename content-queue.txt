@@ -84,11 +84,11 @@ mechanical-engineering|heat-transfer|Fourier's Law of Heat Conduction Explained|
 electrical-engineering|switchgear|MCB vs MCCB vs ACB: Differences|mcb-vs-mccb-vs-acb|comparison|mcb vs mccb vs acb|2026-11-20
 electronics-engineering|pcb-design|PCB Grounding Techniques Explained|pcb-grounding-techniques|explanation|pcb grounding|2026-11-20
 civil-engineering|construction-materials|Types of Bricks and Their Properties|types-of-bricks|explanation|types of bricks|2026-11-20
-chemical-engineering|reaction-engineering|Catalysts in Chemical Reactions: Types and Uses|catalyst-types|explanation|catalyst types|todo
-computer-science|computer-architecture|Cache Memory Explained: Levels and Mapping|cache-memory|fundamentals|cache memory|todo
-automation-robotics|motion-control|PID Controller Explained with Tuning Methods|pid-controller|fundamentals|pid controller|todo
-ai-data-engineering|generative-ai|Retrieval Augmented Generation (RAG) Explained|retrieval-augmented-generation|explanation|retrieval augmented generation|todo
-telecommunication-engineering|wireless|Bluetooth vs Wi-Fi vs Zigbee Compared|bluetooth-vs-wifi-vs-zigbee|comparison|bluetooth vs wifi vs zigbee|todo
+chemical-engineering|reaction-engineering|Catalysts in Chemical Reactions: Types and Uses|catalyst-types|explanation|catalyst types|2026-11-21
+computer-science|computer-architecture|Cache Memory Explained: Levels and Mapping|cache-memory|fundamentals|cache memory|2026-11-21
+automation-robotics|motion-control|PID Controller Explained with Tuning Methods|pid-controller|fundamentals|pid controller|2026-11-21
+ai-data-engineering|generative-ai|Retrieval Augmented Generation (RAG) Explained|retrieval-augmented-generation|explanation|retrieval augmented generation|2026-11-21
+telecommunication-engineering|wireless|Bluetooth vs Wi-Fi vs Zigbee Compared|bluetooth-vs-wifi-vs-zigbee|comparison|bluetooth vs wifi vs zigbee|2026-11-21
 petroleum-engineering|gas-processing-lng|Natural Gas Dehydration: Glycol and Mol Sieve|natural-gas-dehydration|explanation|natural gas dehydration|todo
 renewable-energy|inverters|MPPT Explained: Maximum Power Point Tracking|mppt-explained|fundamentals|mppt|todo
 environmental-engineering|eia|Air Quality Index (AQI): Calculation and Pollutants|air-quality-index|fundamentals|air quality index|todo
