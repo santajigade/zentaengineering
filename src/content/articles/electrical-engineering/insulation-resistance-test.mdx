@@ -3,6 +3,7 @@ title: "Insulation Resistance Test (Megger Test) Explained"
 description: "How an insulation resistance test works, choosing the test voltage, reading the results, polarization index and temperature effects, with IEEE 43 guidance."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: high-voltage
 focusKeyword: "insulation resistance test"
@@ -29,7 +30,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-An insulation resistance test (IR test) applies a **DC voltage**, typically 500 V to 5 kV, between a conductor and [earth](/electrical-engineering/electrical-earthing/) or between conductors, and measures the small current that flows through the insulation. The tester reports the result as resistance in megohms (MΩ) or gigohms (GΩ). High, rising readings show clean, dry insulation; low or falling readings point to moisture, contamination or damage.
+An **insulation resistance test** is a non-destructive check that applies a DC voltage, typically 500 V to 5 kV, between a conductor and [earth](/electrical-engineering/electrical-earthing/) or between conductors, and measures the small current through the insulation. The result, in megohms or gigohms, should be high and rising; low or falling readings point to moisture, contamination or damage.
 
 </Key>
 
@@ -54,6 +55,33 @@ When a DC voltage is applied across insulation, the total current has three comp
 | Leakage (conduction) current | Current through and across the insulation surface | Stays roughly constant |
 
 The tester divides the test voltage by the total current. As the charging and absorption currents die away, the indicated resistance rises towards a value set by the leakage current. Moisture and contamination increase leakage current, so they keep the reading low and flat.
+
+<figure class="anim">
+<svg width="600" height="310" viewBox="0 0 600 310" fill="none" role="img" aria-label="Insulation resistance test setup: an insulation tester applies a DC test voltage with its Line lead on the cable conductor and its Earth lead on the sheath; below, a graph shows the indicated insulation resistance rising with time, with readings taken at 30 seconds, 1 minute and 10 minutes">
+<rect x="20" y="50" width="150" height="140" rx="10" fill="#0b2545" />
+<rect class="anim-pulse" x="35" y="65" width="110" height="40" rx="5" fill="#e6f6f4" />
+<rect x="330" y="45" width="250" height="60" fill="#7b8794" />
+<rect x="290" y="55" width="290" height="40" fill="#fff7e0" stroke="#0b2545" stroke-width="1" />
+<rect x="250" y="68" width="330" height="14" fill="#c27b2c" />
+<path d="M170 95C210 95 220 75 250 75" stroke="#b42318" stroke-width="3" />
+<path d="M170 145C260 160 430 150 450 105" stroke="#13a89e" stroke-width="3" />
+<circle cx="170" cy="95" r="6" fill="#b42318" /><circle cx="170" cy="145" r="6" fill="#13a89e" />
+<path d="M270 185V290H580" stroke="#0b2545" stroke-width="2" />
+<polyline points="270,285 290,277 310,270 330,263 350,257 370,251 390,245 410,239 430,233 450,227 470,221 490,215 510,210 530,204 550,198 570,193 580,190" stroke="#13a89e" stroke-width="3" fill="none" />
+<path d="M363 290V253M399 290V242M519 290V207" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" />
+<circle class="anim-blink anim-d1" cx="363" cy="253" r="5" fill="#b42318" /><circle class="anim-blink anim-d2" cx="399" cy="242" r="5" fill="#b42318" /><circle class="anim-blink anim-d3" cx="519" cy="207" r="5" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="90" y="90" font-size="15" font-weight="700">MΩ or GΩ</text>
+<text x="88" y="132" fill="#ffffff" font-weight="700">Insulation tester</text>
+<text x="88" y="152" fill="#ffffff" font-size="11">DC 500 V to 5 kV</text>
+<text x="152" y="99" fill="#ffffff" font-size="11">L</text><text x="152" y="149" fill="#ffffff" font-size="11">E</text>
+<text x="255" y="58">Conductor</text><text x="310" y="122">Insulation</text><text x="470" y="36">Sheath or earth</text>
+<text x="275" y="178" text-anchor="start">Indicated IR</text><text x="580" y="282" text-anchor="end">time</text>
+<text x="363" y="305">30 s</text><text x="399" y="305">1 min</text><text x="519" y="305">10 min</text>
+</g>
+</svg>
+<figcaption>An insulation resistance test on a cable: the indicated resistance rises as charging and absorption currents decay, and readings at 30 s, 1 min and 10 min give the DAR and PI (time axis not to scale).</figcaption>
+</figure>
 
 ## Choosing the test voltage
 
@@ -129,9 +157,26 @@ Insulation resistance of cables is tested between each core and the other cores 
 
 For medium and high voltage cables, an IR test is usually followed by withstand tests such as very low frequency (VLF) or DC tests according to the cable standard, and by sheath tests for cables with an outer sheath.
 
+## Key formulas for insulation resistance test
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Indicated insulation resistance | IR = V ÷ I | V = DC test voltage in V, I = total current in A, IR in Ω (shown as MΩ or GΩ) |
+| Polarization index | PI = IR(10 min) ÷ IR(1 min) | Ratio of readings, no unit; IEEE 43 minimum 2.0 for class B, F and H |
+| Dielectric absorption ratio | DAR = IR(60 s) ÷ IR(30 s) | Ratio of readings, no unit |
+| Minimum IR, older and some DC windings | IR(min) = kV + 1 | IR(min) in MΩ at 1 minute and 40 °C, kV = rated voltage in kilovolts |
+
 ## Interpreting results
 
 - **High and rising:** insulation is in good condition.
 - **Low but rising:** often surface moisture or dirt; cleaning and drying usually help.
 - **Low and flat or falling:** moisture absorbed into the insulation, contamination or damage; investigate before energising.
 - **Sudden drop between routine tests:** a warning sign even if the value is still above the minimum.
+
+## Insulation resistance test interview and viva questions
+
+1. **What currents flow when the DC test voltage is applied?** Capacitive charging current, which falls to almost zero within seconds, absorption current, which decays over minutes, and leakage current, which stays roughly constant.
+2. **What is the polarization index and what minimum does IEEE 43 recommend?** PI is the 10 minute reading divided by the 1 minute reading. IEEE 43 recommends at least 2.0 for class B, F and H insulation and 1.5 for class A.
+3. **What test voltage is used for a winding rated below 1000 V?** IEEE 43 recommends 500 V DC for windings rated below 1000 V.
+4. **Why are readings corrected for temperature?** Insulation resistance falls as temperature rises, roughly halving for every 10 °C, so readings are corrected to a reference such as 40 °C before comparing them with limits or earlier results.
+5. **Why must equipment be discharged after the test?** Large windings and long cables hold a dangerous charge; IEEE 43 recommends earthing them for at least four times the test duration.

@@ -3,6 +3,7 @@ title: "Power Factor Explained: Causes, Effects and Correction"
 description: "What power factor is, the power triangle, why low power factor costs money, and how to size capacitors for power factor correction with a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: power-quality
 focusKeyword: "power factor"
@@ -29,7 +30,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-Power factor is the ratio of **real power** (kW), which does useful work, to **apparent power** (kVA), which the supply must deliver. For sinusoidal voltage and current it equals cos φ, where φ is the phase angle between them. A low power factor means more current for the same useful power, which increases losses and costs. It is usually corrected by adding **capacitors** close to inductive loads.
+**Power factor** is the ratio of real power (kW), which does useful work, to apparent power (kVA), which the supply must deliver. For sinusoidal voltage and current it equals cos φ, where φ is the phase angle between them. A low power factor means more current for the same useful power, raising losses and costs; capacitors usually correct it.
 
 </Key>
 
@@ -45,17 +46,17 @@ In an AC circuit with inductance or capacitance, current and voltage are not in 
 
 They form the **power triangle**:
 
-<figure>
+<figure class="anim">
 <svg width="460" height="230" viewBox="0 0 460 230" fill="none" role="img" aria-label="Power triangle: real power P horizontal, reactive power Q vertical, apparent power S as the hypotenuse, with angle phi between P and S">
-<path d="M60 190H360V50Z" stroke="#0b2545" stroke-width="3" stroke-linejoin="round" />
+<g stroke="#0b2545" stroke-width="3" stroke-linecap="round"><path class="anim-blink" d="M60 190H360" /><path class="anim-blink anim-d1" d="M360 190V50" /><path class="anim-blink anim-d2" d="M360 50L60 190" /></g>
 <path d="M344 190V174H360" stroke="#0b2545" stroke-width="1.5" />
-<path d="M120 190A60 60 0 0 0 114.4 164.8" stroke="#13a89e" stroke-width="2.5" />
+<path class="anim-blink anim-d3" d="M120 190A60 60 0 0 0 114.4 164.8" stroke="#13a89e" stroke-width="2.5" />
 <text x="210" y="215" text-anchor="middle" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">P (kW)</text>
 <text x="372" y="125" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Q (kvar)</text>
 <text x="182" y="100" text-anchor="middle" font-size="15" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">S (kVA)</text>
 <text x="130" y="182" font-size="15" fill="#0e7f78" font-family="Georgia, serif">φ</text>
 </svg>
-<figcaption>The power triangle for a lagging (inductive) load.</figcaption>
+<figcaption>The power triangle for a lagging (inductive) load: real power P and reactive power Q combine to give apparent power S, and the angle φ between P and S sets the power factor cos φ.</figcaption>
 </figure>
 
 $$
@@ -141,12 +142,31 @@ Typical power factor values help when estimating correction, but measured values
 - **Resistive heaters and incandescent lamps** have a power factor close to 1.
 - **Drives and switch mode power supplies** may show a high displacement power factor but a lower true power factor because of harmonics, unless they have power factor correction stages.
 
+## Key formulas for power factor
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Power triangle | S² = P² + Q² | S in kVA, P in kW, Q in kvar |
+| Power factor | PF = P ÷ S = cos φ | φ = phase angle between voltage and current (sinusoidal) |
+| Three-phase apparent power | S = √3 × V × I | V = line voltage in V, I = line current in A, S in VA |
+| Correction capacitor rating | Qc = P × (tan φ1 − tan φ2) | Qc in kvar, P in kW, φ1 and φ2 = angles before and after correction |
+| Average power factor from bills | PF = kWh ÷ √(kWh² + kvarh²) | Active and reactive energy for the billing period |
+| True power factor | True PF = displacement PF × distortion factor | Applies when the current contains harmonics |
+
 ## Practical cautions
 
 - **Avoid over-correction.** Fixed capacitors sized for full load can make the power factor leading at light load.
 - **Watch for resonance.** Capacitors and the supply inductance form a resonant circuit. If it is tuned near a harmonic produced by the plant, voltages and currents can rise sharply and damage capacitors.
 - **Discharge before work.** Capacitors hold charge after disconnection. They are fitted with discharge resistors, and the discharge time must elapse before anyone touches them.
 - **Switching transients.** Use capacitor-duty contactors with pre-insertion resistors or thyristor switching for frequently switched steps.
+
+## Power factor interview and viva questions
+
+1. **Define power factor.** It is the ratio of real power to apparent power, P / S. For sinusoidal voltage and current it equals cos φ, the cosine of the phase angle between them.
+2. **Why does a low power factor increase losses?** For the same real power, current is proportional to 1 / PF, so a lower power factor means more current and higher I²R losses in cables, transformers and switchgear.
+3. **How do capacitors improve power factor?** They draw leading reactive current that cancels part of the lagging reactive current of inductive loads, so the supply delivers only the remaining reactive power.
+4. **What is the difference between displacement and true power factor?** True power factor equals displacement power factor multiplied by a distortion factor caused by harmonics. Capacitors correct only the displacement part.
+5. **Why is over-correction avoided?** Fixed capacitors sized for full load can make the power factor leading at light load, which can cause voltage rise and may be penalised by the utility.
 
 ## Related reading
 

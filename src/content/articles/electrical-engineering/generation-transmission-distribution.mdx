@@ -3,6 +3,7 @@ title: "Generation, Transmission and Distribution of Electricity"
 description: "Generation, transmission and distribution of electricity explained: power stations, high voltage lines, substations and why high voltage reduces losses."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: power-systems
 focusKeyword: "generation transmission and distribution"
@@ -28,18 +29,46 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-A power system moves electrical energy from where it is generated to where it is used. Generation, transmission and distribution, followed by utilisation, are its four stages:
-
-1. **Generation** at power stations, typically at 11 kV to about 25 kV.
-2. **Transmission** over long distances at high voltage, such as 132 kV to 765 kV.
-3. **Sub-transmission and distribution** at medium voltage, such as 33 kV and 11 kV.
-4. **Utilisation** by consumers at low voltage, such as 400/230 V or 415/240 V.
-
-Transformers in substations change the voltage between stages.
+**Generation, transmission and distribution** are the stages that carry electrical energy from power stations to consumers. Generators produce power at about 11 kV to 25 kV, transformers step it up to 132 kV to 765 kV for long distance transmission, and substations step it down through 33 kV and 11 kV to low voltage for utilisation.
 
 </Key>
 
 ## Generation, transmission and distribution: the four stages
+
+<figure class="anim">
+<svg viewBox="0 0 640 280" width="640" height="280" fill="none" role="img" aria-label="Generation, transmission and distribution chain: a power station generates at 11 to 25 kV, a step-up transformer raises the voltage for transmission lines at 132 to 765 kV, a grid substation steps down to 66 or 33 kV for sub-transmission, a distribution substation steps down to 11 kV for primary feeders, and a distribution transformer supplies consumers at 230/400 V">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="40" width="120" height="56" rx="6" fill="#e6f6f4" />
+<rect x="190" y="40" width="130" height="56" rx="6" fill="#eef1f6" />
+<rect x="470" y="40" width="150" height="56" rx="6" fill="#eef1f6" />
+<rect x="470" y="160" width="150" height="56" rx="6" fill="#eef1f6" />
+<rect x="190" y="160" width="130" height="56" rx="6" fill="#eef1f6" />
+<rect x="20" y="160" width="120" height="56" rx="6" fill="#fff7e0" />
+</g>
+<g stroke-width="3">
+<path d="M140 68H182" stroke="#0b2545" />
+<path d="M320 68H462" stroke="#b42318" />
+<path d="M545 96V152" stroke="#b38600" />
+<path d="M470 188H328" stroke="#13a89e" />
+<path d="M190 188H148" stroke="#0b2545" />
+</g>
+<g fill="#0b2545"><path d="M180 62L190 68L180 74Z" /><path d="M460 62L470 68L460 74Z" fill="#b42318" /><path d="M539 150L545 160L551 150Z" fill="#b38600" /><path d="M330 182L320 188L330 194Z" fill="#13a89e" /><path d="M150 182L140 188L150 194Z" /></g>
+<g stroke="#ffffff" stroke-width="3"><path class="anim-flow" stroke-dasharray="6 12" d="M140 68H180" /><path class="anim-flow" stroke-dasharray="6 12" d="M320 68H460" /><path class="anim-flow" stroke-dasharray="6 12" d="M545 96V150" /><path class="anim-flow" stroke-dasharray="6 12" d="M470 188H330" /><path class="anim-flow" stroke-dasharray="6 12" d="M190 188H150" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="80" y="64" font-weight="700">Power station</text><text x="80" y="82">11 to 25 kV</text>
+<text x="255" y="64" font-weight="700">Step-up</text><text x="255" y="82">transformer</text>
+<text x="391" y="58" fill="#b42318" font-weight="700">Transmission</text><text x="391" y="90" fill="#b42318">132 to 765 kV</text>
+<text x="545" y="64" font-weight="700">Grid substation</text><text x="545" y="82">steps down</text>
+<text x="535" y="122" text-anchor="end" fill="#b38600">Sub-transmission</text><text x="535" y="138" text-anchor="end" fill="#b38600">66 or 33 kV</text>
+<text x="545" y="184" font-weight="700">Distribution</text><text x="545" y="202">substation</text>
+<text x="399" y="178" fill="#13a89e" font-weight="700">Primary feeder</text><text x="399" y="210" fill="#13a89e">11 kV</text>
+<text x="255" y="184" font-weight="700">Distribution</text><text x="255" y="202">transformer</text>
+<text x="80" y="184" font-weight="700">Consumers</text><text x="80" y="202">230/400 V</text>
+<text x="320" y="258" font-size="11" fill="#7b8794">Power flows from generation to consumers; substations change the voltage between stages</text>
+</g>
+</svg>
+<figcaption>The stages of generation, transmission and distribution. Transformers raise the voltage for transmission and lower it in steps for distribution and utilisation.</figcaption>
+</figure>
 
 ### Generation
 
@@ -88,6 +117,13 @@ Because loss depends on the square of the current, and current falls in proporti
 </dl>
 </Example>
 
+## Key formulas for generation, transmission and distribution
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Three-phase line current | I = P ÷ (√3 V cos φ) | I in A, P = power in W, V = line voltage in V, cos φ = power factor |
+| Line loss | P_loss = 3 I² R | P_loss in W, R = resistance per phase in Ω |
+| Effect of raising voltage | P_loss2 ÷ P_loss1 = (V1 ÷ V2)² | Same power, power factor and conductor |
 
 ## Substations and their equipment
 
@@ -142,6 +178,14 @@ For long distances, the lower line cost and losses of HVDC outweigh its expensiv
 - **Plant engineers** use it to choose the supply voltage for a new facility and size the incoming transformer.
 - **[Protection](/electrical-engineering/overcurrent-relay/) engineers** use it to coordinate relays from the consumer up to the grid substation.
 - **Renewable developers** use it to decide the voltage level at which a solar or wind farm connects to the grid.
+
+## Generation, transmission and distribution interview and viva questions
+
+1. **Why is electricity transmitted at high voltage?** For the same power, higher voltage means lower current, and line loss is proportional to the square of the current, so losses fall with the square of the voltage ratio.
+2. **What is the function of a substation?** It changes voltage with transformers, switches circuits with circuit breakers and isolators, and protects and measures the network.
+3. **What is the difference between a radial and a ring main distribution system?** A radial feeder supplies loads from one end, so a fault cuts off everything beyond it; a ring main is fed from both ends, so a faulty section can be isolated and supply restored from the other side.
+4. **What happens to system frequency when demand rises faster than generation?** The frequency falls, so grid operators raise generator output to bring it back close to the nominal 50 Hz or 60 Hz.
+5. **When is HVDC preferred over HVAC transmission?** For very long overhead links, long undersea or underground cables, and links between grids at different frequencies, where lower line cost and losses outweigh the converter station cost.
 
 ## Related reading
 

@@ -1,0 +1,215 @@
+---
+title: "Catalyst Types: Homogeneous, Heterogeneous and Enzymes"
+description: "Catalyst types explained: homogeneous, heterogeneous and enzyme catalysts, how they lower activation energy, industrial uses and deactivation."
+pubDate: 2026-11-21
+reviewedDate: 2026-11-21
+discipline: chemical-engineering
+subcategory: reaction-engineering
+focusKeyword: "catalyst types"
+image: { src: /images/featured/catalyst-types.webp, alt: "Catalyst Types: Homogeneous, Heterogeneous and Enzymes: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [catalysis, catalyst, heterogeneous-catalysis, enzymes, reaction-engineering]
+faq:
+  - q: "Does a catalyst change the equilibrium of a reaction?"
+    a: "No. A catalyst lowers the activation energy of the forward and reverse reactions by the same amount, so both speed up equally. The equilibrium constant, the equilibrium conversion and the heat of reaction stay the same; the catalyst only helps the system reach equilibrium faster."
+  - q: "What is the main difference between homogeneous and heterogeneous catalysts?"
+    a: "A homogeneous catalyst is in the same phase as the reactants, usually dissolved in a liquid, so every molecule is accessible and selectivity can be very high, but the catalyst must be separated from the product. A heterogeneous catalyst is a separate phase, usually a solid, so it stays in the reactor and is easy to separate."
+  - q: "What is catalyst poisoning?"
+    a: "Poisoning is the loss of activity when an impurity adsorbs strongly on the active sites and blocks them. Sulphur compounds poison nickel and iron catalysts, and carbon monoxide poisons platinum in a PEM fuel cell. Feed purification upstream of the reactor is the usual protection."
+references:
+  - text: "H. S. Fogler, Elements of Chemical Reaction Engineering, 6th ed., Pearson, 2020 (chapter on catalysis and catalytic reactors)"
+  - text: "I. Chorkendorff and J. W. Niemantsverdriet, Concepts of Modern Catalysis and Kinetics, 3rd ed., Wiley-VCH, 2017"
+  - text: "C. N. Satterfield, Heterogeneous Catalysis in Industrial Practice, 2nd ed., McGraw-Hill, 1991"
+  - text: "C. H. Bartholomew and R. J. Farrauto, Fundamentals of Industrial Catalytic Processes, 2nd ed., Wiley, 2006"
+  - text: "J. A. Moulijn, M. Makkee and A. van Diepen, Chemical Process Technology, 2nd ed., Wiley, 2013"
+  - text: "IUPAC Compendium of Chemical Terminology (Gold Book), entry: catalyst"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Catalyst types** are the classes of catalysts used in chemical reactions: homogeneous catalysts in the same phase as the reactants, heterogeneous catalysts (usually solids) in a different phase, and biocatalysts or enzymes. Each one speeds a reaction by offering a path with lower activation energy, is not consumed, and leaves the equilibrium unchanged.
+
+</Key>
+
+Most large chemical processes would be too slow, or would need impossible temperatures, without a catalyst. The main catalyst types are homogeneous, heterogeneous and biological, and the choice between them decides how the reactor is built, how the product is separated and how long the plant runs between catalyst changes.
+
+
+<ArticleVideo slug="catalyst-types" title="How catalysts work" />
+
+## How a catalyst speeds up a reaction
+
+IUPAC defines a catalyst as a substance that increases the rate of a reaction without changing the overall standard Gibbs energy change of the reaction. It takes part in the elementary steps but is regenerated at the end of each cycle, so a small amount can convert a very large amount of feed.
+
+The catalyst opens a different reaction path with a lower activation energy. Because the rate constant depends exponentially on activation energy (the Arrhenius equation), even a moderate drop in activation energy gives a very large rise in rate. The start and end states are the same, so the heat of reaction does not change, and the forward and reverse reactions speed up by the same factor. A catalyst therefore cannot push conversion past equilibrium. It only gets there faster, or at a lower temperature.
+
+<figure class="anim">
+<svg width="640" height="330" viewBox="0 0 640 330" fill="none" role="img" aria-label="Left: energy profile against reaction progress, with the uncatalysed path rising to a high peak and the catalysed path rising to a lower peak, so the catalysed activation energy is smaller while the heat of reaction between reactants and products is the same. Right: a reactant molecule adsorbs on an active site of a solid catalyst, adsorbed A and B react on the surface, and the product AB desorbs">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<path fill="none" d="M50 40V280H310" stroke="#0b2545" stroke-width="2" />
+<text x="40" y="160" text-anchor="middle" transform="rotate(-90 40 160)">Energy</text>
+<text x="180" y="298" text-anchor="middle">Reaction progress</text>
+<path fill="none" d="M60 200H130" stroke="#0b2545" stroke-width="2.5" />
+<path fill="none" d="M265 245H305" stroke="#0b2545" stroke-width="2.5" />
+<text x="95" y="216" text-anchor="middle">Reactants</text>
+<text x="285" y="262" text-anchor="middle">Products</text>
+<path fill="none" d="M130 200C165 200 170 70 195 70C220 70 230 245 265 245" stroke="#b42318" stroke-width="2.5" />
+<path fill="none" d="M130 200C160 200 170 140 195 140C220 140 235 245 265 245" stroke="#13a89e" stroke-width="2.5" />
+<path fill="none" class="anim-flow-slow" d="M130 200C160 200 170 140 195 140C220 140 235 245 265 245" stroke="#fff" stroke-width="2" />
+<path fill="none" d="M64 70H195M94 140H195M130 200H305" stroke="#8a97a8" stroke-width="1" stroke-dasharray="3 3" />
+<path fill="none" d="M70 198V74M66 80L70 72L74 80" stroke="#b42318" stroke-width="1.8" />
+<path fill="none" d="M100 198V144M96 150L100 142L104 150" stroke="#13a89e" stroke-width="1.8" />
+<path fill="none" d="M300 202V241M296 235L300 243L304 235" stroke="#0b2545" stroke-width="1.8" />
+<text x="76" y="128">Ea</text>
+<text x="106" y="178">Ea, cat</text>
+<text x="294" y="226" text-anchor="end">ΔH</text>
+<path fill="none" d="M60 318H80" stroke="#b42318" stroke-width="2.5" /><text x="86" y="322">Without catalyst</text>
+<path fill="none" d="M190 318H210" stroke="#13a89e" stroke-width="2.5" /><text x="216" y="322">With catalyst</text>
+<text x="480" y="28" text-anchor="middle" font-size="12" font-weight="700">On a solid catalyst surface</text>
+<rect x="350" y="232" width="260" height="38" rx="4" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<text x="480" y="290" text-anchor="middle">Support carrying active sites</text>
+<g fill="#13a89e"><circle cx="380" cy="232" r="4" /><circle cx="410" cy="232" r="4" /><circle cx="455" cy="232" r="4" /><circle cx="480" cy="232" r="4" /><circle cx="505" cy="232" r="4" /><circle cx="550" cy="232" r="4" /><circle cx="580" cy="232" r="4" /></g>
+<g class="anim-blink anim-d1">
+<text x="395" y="62" text-anchor="middle" font-weight="700">1 Adsorb</text>
+<circle cx="395" cy="96" r="12" fill="#0b2545" /><text x="395" y="100" text-anchor="middle" fill="#fff">A</text>
+<path fill="none" d="M395 112V210M389 202L395 212L401 202" stroke="#0b2545" stroke-width="3" />
+</g>
+<path fill="none" class="anim-flow" d="M395 112V206" stroke="#fff" stroke-width="1.5" />
+<g class="anim-blink anim-d2">
+<text x="480" y="62" text-anchor="middle" font-weight="700">2 React</text>
+<circle cx="467" cy="216" r="12" fill="#0b2545" /><text x="467" y="220" text-anchor="middle" fill="#fff">A</text>
+<circle cx="493" cy="216" r="12" fill="#13a89e" /><text x="493" y="220" text-anchor="middle" fill="#fff">B</text>
+<text x="480" y="180" text-anchor="middle">on the surface</text>
+</g>
+<g class="anim-blink anim-d3">
+<text x="565" y="62" text-anchor="middle" font-weight="700">3 Desorb</text>
+<rect x="543" y="84" width="44" height="24" rx="12" fill="#0b2545" /><text x="565" y="100" text-anchor="middle" fill="#fff">AB</text>
+<path fill="none" d="M565 220V112M559 120L565 110L571 120" stroke="#0b2545" stroke-width="3" />
+</g>
+<path fill="none" class="anim-flow" d="M565 218V116" stroke="#fff" stroke-width="1.5" />
+</g>
+</svg>
+<figcaption>Energy profile with and without a catalyst (left) and the adsorb, react, desorb cycle on a solid catalyst (right).</figcaption>
+</figure>
+
+## Main catalyst types
+
+### Homogeneous catalysts
+
+A homogeneous catalyst is in the same phase as the reactants, usually a dissolved acid, base or metal complex in a liquid. Every catalyst molecule can reach the reactants, so activity is uniform and selectivity can be very high. Classic examples are sulphuric acid in esterification, rhodium iodide complexes in the carbonylation of methanol to acetic acid, and cobalt or rhodium complexes in hydroformylation (the oxo process). The weak point is separation: the catalyst leaves with the product and must be recovered by distillation, extraction or precipitation, which is costly for precious metals.
+
+### Heterogeneous catalysts
+
+A heterogeneous catalyst is in a different phase, almost always a porous solid in contact with gas or liquid. The reaction happens on active sites at the surface, so a large internal surface area is needed; Fogler quotes a typical silica alumina cracking catalyst with about 300 m²/g. The solid stays in a fixed bed, fluidised bed or slurry reactor, which makes separation simple and allows high temperatures. Most bulk chemical, refinery and emission control processes use this type.
+
+### Biocatalysts (enzymes)
+
+Enzymes are protein catalysts made by living cells. They work in water at mild temperature and near neutral pH, and they are extremely specific, often acting on one molecule and one bond. Heat, wrong pH or solvents denature them. Industrial uses include glucose isomerase for high fructose syrup and lipases for fats and oils. Enzymes are often immobilised on a solid carrier so they can be reused, which makes them behave like heterogeneous catalysts in the reactor. Whole cell processes are covered in [bioreactor types](/biomedical-engineering/bioreactor-types/).
+
+### Other catalyst types
+
+- Photocatalysts such as titanium dioxide are activated by light (UV for TiO₂) and are used for breaking down pollutants.
+- Electrocatalysts speed up electrode reactions; platinum in the catalyst layers of a [PEM fuel cell](/renewable-energy/fuel-cell-working-principle/) is the best known case.
+- Autocatalysis is when a product of the reaction catalyses the reaction itself, so the rate rises as conversion proceeds, which affects the choice between a [CSTR and a PFR](/chemical-engineering/cstr-vs-pfr/).
+
+## Catalyst types compared
+
+| Feature | Homogeneous | Heterogeneous | Enzyme |
+| --- | --- | --- | --- |
+| Phase | Same as reactants (usually liquid) | Different, usually solid | Dissolved or immobilised protein |
+| Active sites | Every molecule, well defined | Surface sites, varied | Single, highly specific site |
+| Selectivity | High | Moderate to high | Very high |
+| Temperature range | Limited by solvent and complex stability | Wide, including high temperature | Mild |
+| Separation from product | Difficult | Easy | Easy if immobilised |
+| Typical reactor | Stirred tank | Fixed bed, fluidised bed, slurry | Stirred tank or packed column |
+
+## What a solid catalyst is made of
+
+An industrial solid catalyst usually has three parts:
+
+1. The active phase is the metal, oxide or sulphide that does the chemistry, for example nickel, platinum or vanadium pentoxide.
+2. The support is a porous, high surface area carrier such as alumina, silica or activated carbon. It spreads the active phase as small crystallites and gives mechanical strength.
+3. Promoters are small additions that improve activity, selectivity or stability. The iron catalyst in the [Haber Bosch process](/chemical-engineering/haber-bosch-ammonia-process/) is promoted with potassium oxide and aluminium oxide, which raise activity and stop the iron from sintering.
+
+Pellets, extrudates, spheres, gauzes and ceramic honeycomb monoliths are the common shapes. The shape trades pressure drop against how far reactants must diffuse into the pellet.
+
+## Steps of a reaction on a heterogeneous catalyst
+
+Fogler breaks a reaction on a porous catalyst into seven steps:
+
+1. External diffusion of reactant from the bulk fluid to the outer surface of the pellet.
+2. Internal diffusion of reactant through the pores.
+3. Adsorption of reactant on an active site.
+4. Surface reaction of the adsorbed species.
+5. Desorption of the product from the surface.
+6. Internal diffusion of product back through the pores.
+7. External diffusion of product into the bulk fluid.
+
+The slowest step controls the overall rate. If diffusion is the slow step, a more active catalyst brings little gain, and smaller pellets or higher flow velocity help more. Adsorption itself is the surface process explained in [absorption vs adsorption](/chemical-engineering/absorption-vs-adsorption/).
+
+## Industrial uses of catalyst types
+
+| Process | Catalyst | Type |
+| --- | --- | --- |
+| Ammonia synthesis | Promoted iron | Heterogeneous |
+| Steam reforming of methane | Nickel on a support | Heterogeneous |
+| Sulphuric acid (SO₂ to SO₃) | Vanadium pentoxide | Heterogeneous |
+| Nitric acid (ammonia oxidation) | Platinum rhodium gauze | Heterogeneous |
+| Fluid catalytic cracking | Zeolite | Heterogeneous |
+| Hydrotreating (sulphur removal) | Cobalt or nickel molybdenum sulphides on alumina | Heterogeneous |
+| Ethylene oxide | Silver on alumina | Heterogeneous |
+| Vehicle exhaust (CO, hydrocarbons, NOx) | Platinum, palladium, rhodium on a honeycomb | Heterogeneous |
+| Acetic acid from methanol | Rhodium iodide complex | Homogeneous |
+| Hydroformylation | Cobalt or rhodium complex | Homogeneous |
+| High fructose syrup | Glucose isomerase | Enzyme |
+
+In a refinery, catalytic crackers, reformers and hydrotreaters downstream of [crude oil distillation](/petroleum-engineering/crude-oil-distillation/) all depend on solid catalysts.
+
+## Catalyst deactivation
+
+Solid catalysts lose activity over time in three main ways:
+
+- Poisoning: impurities such as sulphur compounds adsorb strongly on active sites. Feeds to nickel and iron catalysts are desulphurised for this reason.
+- Fouling or coking: carbon deposits cover the surface and block pores. In fluid catalytic cracking the coked catalyst is sent to a regenerator, where the coke is burned off and the hot catalyst returns to the riser.
+- Sintering: at high temperature small metal crystallites merge into larger ones, so active surface area falls. Promoters and stable supports slow this down.
+
+Deactivation sets the catalyst life, the regeneration schedule and often the reactor type.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An uncatalysed reaction has an activation energy of 100 kJ/mol. A catalyst lowers it to 60 kJ/mol. Temperature T = 500 K. Gas constant R = 8.314 J/(mol K).</dd>
+<dt>Find</dt><dd>(a) The ratio of catalysed to uncatalysed rate constants at 500 K. (b) The temperature at which the uncatalysed reaction would reach the catalysed rate constant at 500 K.</dd>
+<dt>Assumptions</dt><dd>Arrhenius behaviour; the same pre-exponential factor A for both paths; no diffusion limitation.</dd>
+<dt>Solution</dt><dd>(a) k_cat / k = exp((100000 − 60000) / (8.314 × 500)) = exp(9.62) ≈ 1.5 × 10⁴<br />(b) Equal k needs equal Ea / T: T = 500 × 100 / 60 = 833 K</dd>
+<dt>Answer</dt><dd><strong>The catalyst raises the rate constant about 15000 times at 500 K; without it the reaction would need about 833 K for the same rate constant.</strong></dd>
+<dt>Limitations</dt><dd>Real pre-exponential factors differ between paths, and on porous solids the observed rate may be limited by diffusion rather than by the surface reaction. The activation energies are illustrative values for practice.</dd>
+</dl>
+</Example>
+
+The rate constants follow the Arrhenius equation:
+
+$$
+k = A\,\exp\!\left(-\frac{E_a}{RT}\right), \qquad \frac{k_{cat}}{k} = \exp\!\left(\frac{E_a - E_{a,cat}}{RT}\right)
+$$
+
+## Key formulas for catalyst types
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Arrhenius equation | k = A exp(−Ea / RT) | k rate constant, A pre-exponential factor, Ea activation energy in J/mol, R = 8.314 J/(mol K), T in K |
+| Rate enhancement | k_cat / k = exp((Ea − Ea,cat) / RT) | Same A assumed for both paths |
+| Equal rate temperature | T_uncat = T × Ea / Ea,cat | Temperature in K at which the uncatalysed path matches the catalysed one |
+| Turnover frequency | TOF = molecules reacted / (active site × time) | Units of 1/s |
+| Langmuir coverage | θ = K p / (1 + K p) | θ fraction of sites covered, K adsorption equilibrium constant, p partial pressure |
+
+## Catalyst types interview and viva questions
+
+1. **Why does a catalyst not change the heat of reaction?** The reactants and products are the same with or without the catalyst, so the energy difference between them is the same; only the height of the barrier changes.
+2. **Why are heterogeneous catalysts preferred for most bulk processes?** The solid stays in the reactor, so separation from the product is simple, and solids tolerate high temperatures in fixed or fluidised beds.
+3. **What is the role of a catalyst support?** It spreads the active phase as small crystallites over a large surface area and gives mechanical strength; alumina, silica and carbon are common supports.
+4. **Name the three main causes of catalyst deactivation.** Poisoning of active sites by impurities such as sulphur, fouling by coke and sintering of metal crystallites at high temperature.
+5. **When does a more active catalyst fail to raise the rate of a packed bed?** When external or pore diffusion is the slowest of the seven steps; the rate is then limited by mass transfer, not by the surface reaction.

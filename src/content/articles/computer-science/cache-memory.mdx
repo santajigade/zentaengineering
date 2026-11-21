@@ -1,0 +1,218 @@
+---
+title: "Cache Memory Explained: Levels and Mapping"
+description: "Cache memory explained: L1, L2 and L3 levels, direct, fully associative and set associative mapping, write policies, AMAT and a worked example."
+pubDate: 2026-11-21
+reviewedDate: 2026-11-21
+discipline: computer-science
+subcategory: computer-architecture
+focusKeyword: "cache memory"
+image: { src: /images/featured/cache-memory.webp, alt: "Cache Memory Explained: Levels and Mapping: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [cache-memory, computer-architecture, memory-hierarchy, cpu, set-associative]
+faq:
+  - q: "Why is cache memory faster than main memory?"
+    a: "Caches are built from SRAM placed on the processor chip, close to the core, while main memory is DRAM on separate chips reached over a memory bus. SRAM needs no refresh and is faster per access, but it uses more transistors per bit, so it is more expensive and caches are kept small."
+  - q: "What is the difference between a cache hit and a cache miss?"
+    a: "A hit means the requested address is already held in the cache, so the data is returned in the hit time. A miss means it is not, so the cache must fetch the whole block containing that address from the next level down, which adds the miss penalty before the processor can continue."
+  - q: "Is a larger cache always better?"
+    a: "Not always. A larger cache lowers capacity misses, but it also takes more chip area and power and usually has a longer hit time. That is why processors use a small, fast L1 cache backed by larger and slower L2 and L3 caches instead of one big cache."
+references:
+  - text: "J. L. Hennessy and D. A. Patterson, Computer Architecture: A Quantitative Approach, 6th ed., Morgan Kaufmann, 2017, Chapter 2 and Appendix B: Review of Memory Hierarchy"
+  - text: "D. A. Patterson and J. L. Hennessy, Computer Organization and Design, RISC-V Edition, 2nd ed., Morgan Kaufmann, 2020, Chapter 5: Large and Fast, Exploiting Memory Hierarchy"
+  - text: "W. Stallings, Computer Organization and Architecture, 11th ed., Pearson, 2019, Chapter 4: Cache Memory"
+  - text: "A. J. Smith, Cache Memories, ACM Computing Surveys, vol. 14, no. 3, 1982"
+  - text: "M. D. Hill and A. J. Smith, Evaluating Associativity in CPU Caches, IEEE Transactions on Computers, vol. 38, no. 12, 1989"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Cache memory** is a small, fast SRAM store between the processor and main memory that keeps copies of recently used blocks. Processors use several levels, L1, L2 and L3, each larger and slower. A mapping scheme (direct, fully associative or set associative) decides where a memory block may be placed in the cache.
+
+</Key>
+
+Cache memory exists because a processor core can execute instructions far faster than DRAM main memory can deliver them. Without a cache the core would wait on almost every load. A cache keeps copies of the data and instructions the program is likely to need next, so most accesses finish in a few cycles instead of making the long trip to main memory.
+
+
+<ArticleVideo slug="cache-memory" title="How cache memory works" />
+
+## Why cache memory works: locality
+
+Caches rely on the **principle of locality**, which Hennessy and Patterson describe as one of the most important program properties. It comes in two forms. With temporal locality, an item used now is likely to be used again soon, such as a loop counter or the instructions of a loop body. With spatial locality, items whose addresses are near each other tend to be used close together in time, such as consecutive elements of an array.
+
+A cache does not fetch single bytes. It moves fixed size **blocks** (also called **lines**), so a miss on one element brings its neighbours in too. That is one reason contiguous data structures run faster, as shown in [arrays vs linked lists](/computer-science/arrays-vs-linked-lists/).
+
+## Cache memory levels: L1, L2 and L3
+
+<figure class="anim">
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" role="img" aria-label="Cache memory hierarchy: a CPU core at the top connected to split L1 instruction and L1 data caches, then a unified L2 cache, a shared L3 cache and main memory at the bottom. Address requests travel down on a miss and data blocks travel back up toward the core">
+<defs>
+<marker id="cm-down" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0b2545" /></marker>
+<marker id="cm-up" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#13a89e" /></marker>
+</defs>
+<g stroke="#0b2545" stroke-width="3" marker-end="url(#cm-down)">
+<path d="M200 70V94" />
+<path d="M360 70V94" />
+<path d="M200 140V164" />
+<path d="M360 140V164" />
+<path d="M260 210V234" />
+<path d="M260 280V304" />
+</g>
+<g stroke="#13a89e" stroke-width="4" marker-end="url(#cm-up)">
+<path d="M240 100V76" />
+<path d="M400 100V76" />
+<path d="M240 170V146" />
+<path d="M400 170V146" />
+<path d="M340 240V216" />
+<path d="M340 310V286" />
+</g>
+<g stroke="#ffffff" stroke-width="1.5" fill="none">
+<path class="anim-flow-slow" d="M200 70V90M360 70V90M200 140V160M360 140V160M260 210V230M260 280V300" />
+<path class="anim-flow" d="M240 100V80M400 100V80M240 170V150M400 170V150M340 240V220M340 310V290" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" text-anchor="middle">
+<rect x="150" y="20" width="300" height="50" rx="10" fill="#0b2545" />
+<text x="300" y="42" fill="#ffffff" font-weight="700">CPU core</text>
+<text x="300" y="60" fill="#9fd9d4" font-size="11">registers, ALU, load and store unit</text>
+<rect x="150" y="100" width="140" height="40" rx="8" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<text x="220" y="125" fill="#0b2545">L1 instruction</text>
+<rect x="310" y="100" width="140" height="40" rx="8" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<text x="380" y="125" fill="#0b2545">L1 data</text>
+<rect x="150" y="170" width="300" height="40" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<text x="300" y="195" fill="#0b2545">L2 cache (unified, per core)</text>
+<rect x="120" y="240" width="360" height="40" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
+<text x="300" y="265" fill="#0b2545">L3 cache (shared by all cores)</text>
+<rect x="90" y="310" width="420" height="40" rx="8" fill="#eef1f5" stroke="#0b2545" stroke-width="2" />
+<text x="300" y="335" fill="#0b2545">Main memory (DRAM)</text>
+<text x="60" y="110" fill="#0b2545" font-size="12">smaller, faster</text>
+<text x="60" y="300" fill="#0b2545" font-size="12">larger, slower</text>
+<text x="160" y="386" fill="#0b2545" font-size="12" text-anchor="start">address request on a miss</text>
+<text x="380" y="386" fill="#0b2545" font-size="12" text-anchor="start">block returned</text>
+</g>
+<path d="M60 124V278" stroke="#c9d2de" stroke-width="3" marker-end="url(#cm-down)" />
+<path d="M130 382H154" stroke="#0b2545" stroke-width="3" />
+<path d="M350 382H374" stroke="#13a89e" stroke-width="4" />
+</svg>
+<figcaption>A typical multicore cache hierarchy. On a miss the address goes down one level; the block containing it comes back up and is kept in each cache on the way.</figcaption>
+</figure>
+
+Modern processors use a hierarchy of caches, each level larger and slower than the one above it.
+
+The L1 cache is the smallest and fastest. It sits inside each core and is usually split into an instruction cache and a data cache, so the core can fetch an instruction and load data in the same cycle. This split is the modified Harvard idea explained in [Von Neumann vs Harvard architecture](/computer-science/von-neumann-vs-harvard-architecture/). The L2 cache is larger and slower, usually unified (instructions and data together) and private to each core. The L3 cache is the largest on chip cache, usually shared by all cores, and the last stop before main memory.
+
+For a real example, Hennessy and Patterson describe the Intel Core i7 6700 with a 32 KB, 8 way L1 instruction cache and a 32 KB, 8 way L1 data cache per core, a 256 KB, 4 way L2 cache per core, and an 8 MB, 16 way L3 cache shared by the cores, all using 64 byte blocks.
+
+When the core issues a load, the L1 cache is checked first. On a **hit** the data comes back in the hit time. On a **miss** the request goes to L2, then L3, then main memory, and the block that contains the address is copied back up into the caches.
+
+## Cache memory mapping techniques
+
+A cache holds far fewer blocks than main memory, so it needs a rule for where each memory block may go.
+
+### Direct mapping
+
+Each memory block can go into exactly one cache line:
+
+$$
+\text{line} = (\text{block address}) \bmod (\text{number of lines})
+$$
+
+The hardware is simple and fast because only one tag is compared. The weakness is **conflict misses**: two frequently used blocks that map to the same line keep evicting each other, even when the rest of the cache is empty.
+
+### Fully associative mapping
+
+A block can go into any line. The cache must compare the address tag with the tag of every line in parallel, which needs one comparator per line. It has no conflict misses but costs the most hardware and power, so it is used only for small structures such as translation lookaside buffers.
+
+### Set associative mapping
+
+The cache is divided into **sets** of n lines each (n way set associative). A block maps to exactly one set, then may go in any line within that set:
+
+$$
+\text{set} = (\text{block address}) \bmod (\text{number of sets})
+$$
+
+Only n tags are compared per access. Direct mapping is the 1 way case and fully associative is the case of one set holding every line. Most processor caches are 2 way to 16 way set associative, as the i7 example shows.
+
+## How the address is split
+
+For lookup, the cache divides the physical address into three fields:
+
+| Field | Bits | Purpose |
+| --- | --- | --- |
+| Tag | remaining high bits | Stored with the line and compared to confirm a hit |
+| Index | log2(number of sets) | Selects the set (or the line in a direct mapped cache) |
+| Block offset | log2(block size in bytes) | Selects the byte within the block |
+
+Each line also holds a **valid bit**, and a write back cache adds a **dirty bit**. A hit requires the valid bit to be set and the stored tag to match.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 32 KB, 4 way set associative data cache with 64 byte blocks and 32 bit physical addresses. For the second part: L1 hit time 1 cycle, L1 miss rate 5 percent, L2 hit time 10 cycles, L2 local miss rate 20 percent, main memory access 100 cycles.</dd>
+<dt>Find</dt><dd>(a) The tag, index and offset widths and where address 0x12345678 is placed. (b) The average memory access time (AMAT) with L1 alone and with L1 plus L2.</dd>
+<dt>Assumptions</dt><dd>Byte addressable memory; the miss penalty equals the access time of the next level; the timing values are illustrative.</dd>
+<dt>Solution</dt><dd>Lines = 32768 ÷ 64 = 512. Sets = 512 ÷ 4 = 128.<br />Offset = log2 64 = 6 bits. Index = log2 128 = 7 bits. Tag = 32 − 7 − 6 = 19 bits.<br />Address 0x12345678: offset = 0x12345678 mod 64 = 56; set = (0x12345678 ÷ 64) mod 128 = 89; tag = 0x12345678 ÷ 8192 = 0x91A2.<br />L1 alone: AMAT = 1 + 0.05 × 100 = 6 cycles.<br />With L2: miss penalty of L1 = 10 + 0.20 × 100 = 30 cycles, so AMAT = 1 + 0.05 × 30 = 2.5 cycles.</dd>
+<dt>Answer</dt><dd><strong>Tag 19 bits, index 7 bits, offset 6 bits; the address goes to set 89 with tag 0x91A2 at byte 56. AMAT falls from 6 cycles to 2.5 cycles when the L2 cache is added.</strong></dd>
+<dt>Limitations</dt><dd>Real miss rates depend on the program. Out of order cores overlap some miss time with other work, and the model ignores write traffic and contention between cores.</dd>
+</dl>
+</Example>
+
+For comparison, the same cache direct mapped would have 512 sets, so 9 index bits and a 17 bit tag; fully associative would have no index and a 26 bit tag.
+
+## Write policies
+
+A **write through** cache updates both the cache and the next level on every write. It is simple and keeps memory up to date, but it creates heavy write traffic, so a write buffer is normally added.
+
+A **write back** cache updates only the cache line and sets its dirty bit. The block goes to the next level only when it is evicted. That saves bandwidth, and it is the common choice for L2 and L3.
+
+On a write miss, **write allocate** fetches the block into the cache and then writes it, while **no write allocate** writes straight to the next level. Write back caches usually use write allocate.
+
+## Replacement policies
+
+In a set associative or fully associative cache, a miss in a full set must evict one line. Least recently used (LRU) evicts the line unused for the longest time, which suits temporal locality, but true LRU becomes costly at high associativity, so hardware often uses an approximation. First in, first out (FIFO) evicts the oldest line. Random replacement is simple to build and, for large caches, comes close to LRU in miss rate.
+
+A direct mapped cache needs no policy because each block has only one possible line.
+
+## Types of cache misses
+
+Hennessy and Patterson group misses into the **three Cs**:
+
+1. Compulsory misses happen on the first access to a block, which cannot be in the cache yet. Larger blocks reduce them.
+2. Capacity misses happen because the cache cannot hold every block the program needs. A larger cache reduces them.
+3. Conflict misses happen when too many blocks map to the same set. Higher associativity reduces them.
+
+With several cores there is a fourth kind, **coherence misses**, which come from keeping private caches consistent with each other.
+
+## Key formulas for cache memory
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Number of lines | lines = cache size ÷ block size | bytes ÷ bytes |
+| Number of sets | sets = lines ÷ n | n = associativity (ways) |
+| Offset bits | log2(block size) | bits |
+| Index bits | log2(sets) | bits |
+| Tag bits | address bits − index bits − offset bits | bits |
+| AMAT | hit time + miss rate × miss penalty | cycles or ns |
+| Two level AMAT | hit time L1 + miss rate L1 × (hit time L2 + miss rate L2 × miss penalty L2) | cycles; miss rate L2 is local |
+
+$$
+\text{AMAT} = t_\text{hit} + m \times t_\text{penalty}
+$$
+
+## Cache memory interview and viva questions
+
+1. **What is cache memory?** A small, fast SRAM memory between the processor and main memory that holds copies of recently used blocks so most accesses avoid the slow DRAM.
+2. **What is the difference between direct mapped and set associative caches?** In a direct mapped cache each block has one possible line; in an n way set associative cache it maps to one set and may use any of n lines there, which reduces conflict misses.
+3. **How is a memory address divided for cache lookup?** Into a tag, an index that selects the set, and a block offset that selects the byte within the block.
+4. **What is the difference between write through and write back?** Write through updates the next level on every write; write back updates only the cache and writes the dirty block out when it is evicted.
+5. **What are the three Cs of cache misses?** Compulsory misses on first access, capacity misses when the working set is too large, and conflict misses when too many blocks map to one set.
+
+## Related reading
+
+- [Von Neumann vs Harvard architecture](/computer-science/von-neumann-vs-harvard-architecture/)
+- [Arrays vs linked lists](/computer-science/arrays-vs-linked-lists/)
+- [Process vs thread](/computer-science/process-vs-thread/)
+- [Microcontroller vs microprocessor](/electronics-engineering/microcontroller-vs-microprocessor/)
+- [Flip-flops explained](/electronics-engineering/flip-flops-explained/)

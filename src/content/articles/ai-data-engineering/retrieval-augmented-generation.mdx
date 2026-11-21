@@ -1,0 +1,189 @@
+---
+title: "Retrieval Augmented Generation (RAG) Explained"
+description: "Retrieval augmented generation explained: chunking, embeddings, vector search, prompt building and LLM answers, with a worked cosine similarity example."
+pubDate: 2026-11-21
+reviewedDate: 2026-11-21
+discipline: ai-data-engineering
+subcategory: generative-ai
+focusKeyword: "retrieval augmented generation"
+image: { src: /images/featured/retrieval-augmented-generation.webp, alt: "Retrieval Augmented Generation (RAG) Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [rag, retrieval-augmented-generation, vector-search, embeddings, large-language-models]
+faq:
+  - q: "Does RAG stop a language model from hallucinating?"
+    a: "It reduces the problem but does not remove it. The model can still misread a retrieved passage, mix passages together or answer from its own weights when retrieval returns nothing useful. Asking the model to cite the chunks it used and checking those citations catches many errors."
+  - q: "What is the difference between RAG and fine-tuning?"
+    a: "Fine-tuning changes the model's weights by training on new examples. RAG leaves the weights alone and supplies relevant text in the prompt at question time. Lewis and colleagues showed that the document index can be replaced to update what the system knows without any retraining."
+  - q: "Do I need a vector database for RAG?"
+    a: "You need some way to find the nearest chunk vectors to a query vector. For a small collection a brute force search over all vectors works. For millions of chunks, approximate nearest neighbour libraries such as FAISS, or a vector database built on similar methods, keep search fast."
+references:
+  - text: "P. Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks, Advances in Neural Information Processing Systems (NeurIPS), 2020"
+  - text: "V. Karpukhin et al., Dense Passage Retrieval for Open-Domain Question Answering, Proceedings of EMNLP, 2020"
+  - text: "C. D. Manning, P. Raghavan and H. Schütze, Introduction to Information Retrieval, Cambridge University Press, 2008"
+  - text: "D. Jurafsky and J. H. Martin, Speech and Language Processing, 3rd ed. draft, chapter on information retrieval and question answering"
+  - text: "J. Johnson, M. Douze and H. Jégou, Billion-scale similarity search with GPUs, IEEE Transactions on Big Data, 2019"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Retrieval augmented generation (RAG)** is a method that answers a question by first searching a document collection for relevant passages and then giving those passages to a large language model together with the question. The model writes its answer from the retrieved text, so answers can use private or recent documents and cite their sources.
+
+</Key>
+
+Retrieval augmented generation lets a language model answer from your own documents instead of only from what it memorised during training. A plain LLM stores its knowledge in its weights, which are fixed at training time and cannot point to where a fact came from. RAG adds a search step in front of the model: find the passages that match the question, paste them into the prompt, and let the model write the answer from them.
+
+
+<ArticleVideo slug="retrieval-augmented-generation" title="How retrieval augmented generation works" />
+
+## Why retrieval augmented generation is needed
+
+A [large language model](/ai-data-engineering/how-large-language-models-work/) predicts the most plausible next token. When its training data is thin or out of date on a topic, a plausible answer can still be wrong, and the model has no way to show where the claim came from. It also knows nothing about documents it never saw, such as a plant's own maintenance procedures.
+
+Lewis and colleagues (2020) described this as combining two kinds of memory. The **parametric memory** is the knowledge stored in the generator's weights. The **non-parametric memory** is an external index of text passages that a retriever can search. In their system the retriever was Dense Passage Retrieval (DPR) and the generator was a pre-trained sequence to sequence model, BART. Because the index sits outside the model, it can be replaced to update the system's knowledge without retraining the generator.
+
+## The RAG pipeline
+
+Indexing runs offline, once for the document collection and again when documents change. The query path runs every time someone asks a question.
+
+<figure class="anim">
+<svg width="720" height="320" viewBox="0 0 720 320" fill="none" role="img" aria-label="Retrieval augmented generation pipeline. Offline indexing: documents are split into chunks, each chunk is turned into a vector by an embedding model, and vectors with their text are stored in a vector index. Online query: the user question is embedded with the same model, vector search finds the nearest chunks in the index, the top-k chunks are combined with the question into an augmented prompt, and the LLM generates an answer with sources">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" font-weight="700" fill="#0b2545">
+<text x="5" y="26">Offline indexing (repeated when documents change)</text>
+<text x="5" y="186">Online query (every question)</text>
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="5" y="40" width="86" height="56" rx="6" fill="#eef1f6" />
+<rect x="109" y="40" width="86" height="56" rx="6" fill="#eef1f6" />
+<rect x="213" y="40" width="86" height="56" rx="6" fill="#e6f6f4" />
+<rect x="317" y="40" width="106" height="56" rx="6" fill="#fff7e0" />
+<rect x="5" y="200" width="86" height="56" rx="6" fill="#eef1f6" />
+<rect x="109" y="200" width="86" height="56" rx="6" fill="#e6f6f4" />
+<rect x="213" y="200" width="86" height="56" rx="6" fill="#ffffff" />
+<rect x="317" y="200" width="86" height="56" rx="6" fill="#ffffff" />
+<rect x="421" y="200" width="86" height="56" rx="6" fill="#ffffff" />
+<rect x="525" y="200" width="86" height="56" rx="6" fill="#e6f6f4" />
+<rect x="629" y="200" width="86" height="56" rx="6" fill="#fff7e0" />
+</g>
+<g fill="#13a89e" fill-opacity="0.18">
+<rect class="anim-blink anim-d1" x="214" y="201" width="84" height="54" rx="5" />
+<rect class="anim-blink anim-d2" x="318" y="201" width="84" height="54" rx="5" />
+<rect class="anim-blink anim-d3" x="422" y="201" width="84" height="54" rx="5" />
+<rect class="anim-blink anim-d4" x="526" y="201" width="84" height="54" rx="5" />
+<rect class="anim-blink anim-d5" x="630" y="201" width="84" height="54" rx="5" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M91 68h12M195 68h12M299 68h12M91 228h12M195 228h12M403 228h12M507 228h12M611 228h12" /><path d="M256 200V140H340V102" /><path d="M400 96V194" /><path d="M48 256V290H464V262" /></g>
+<g fill="#13a89e"><path d="M103 63l6 5-6 5z" /><path d="M207 63l6 5-6 5z" /><path d="M311 63l6 5-6 5z" /><path d="M103 223l6 5-6 5z" /><path d="M207 223l6 5-6 5z" /><path d="M415 223l6 5-6 5z" /><path d="M519 223l6 5-6 5z" /><path d="M623 223l6 5-6 5z" /><path d="M335 102l5-6 5 6z" /><path d="M395 194l5 6 5-6z" /><path d="M459 262l5-6 5 6z" /></g>
+<g stroke="#fff" stroke-width="2" stroke-dasharray="6 12" fill="none"><path class="anim-flow-slow" d="M91 68h12M195 68h12M299 68h12" /><path class="anim-flow" d="M91 228h12M195 228h12M256 200V140H340V102M400 96V194M403 228h12M507 228h12M611 228h12M48 256V290H464V262" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="48" y="64" font-weight="700">Documents</text><text x="48" y="80" font-size="11">manuals, PDFs</text>
+<text x="152" y="64" font-weight="700">Chunking</text><text x="152" y="80" font-size="11">split text</text>
+<text x="256" y="64" font-weight="700">Embedding</text><text x="256" y="80" font-size="11">model</text>
+<text x="370" y="64" font-weight="700">Vector index</text><text x="370" y="80" font-size="11">vectors + text</text>
+<text x="48" y="224" font-weight="700">Query</text><text x="48" y="240" font-size="11">question</text>
+<text x="152" y="224" font-weight="700">Embed</text><text x="152" y="240" font-size="11">same model</text>
+<text x="256" y="224" font-weight="700">Vector</text><text x="256" y="240" font-size="11">search</text>
+<text x="360" y="224" font-weight="700">Top-k</text><text x="360" y="240" font-size="11">chunks</text>
+<text x="464" y="224" font-weight="700">Prompt</text><text x="464" y="240" font-size="11">augmented</text>
+<text x="568" y="224" font-weight="700">LLM</text><text x="568" y="240" font-size="11">generator</text>
+<text x="672" y="224" font-weight="700">Answer</text><text x="672" y="240" font-size="11">with sources</text>
+<text x="296" y="133" font-size="11">query vector</text>
+<text x="452" y="150" font-size="11">nearest chunks</text>
+<text x="256" y="306" font-size="11">original question text</text>
+</g>
+</svg>
+<figcaption>Indexing runs offline; every question then goes through embed, search, prompt and generate.</figcaption>
+</figure>
+
+### Offline indexing
+
+1. Collect the documents: manuals, standards, procedures, reports or web pages.
+2. Split each document into short passages, called chunks. Lewis and colleagues split Wikipedia into passages of 100 words, following DPR. Chunks must be small enough to fit several into a prompt but large enough to carry a complete idea.
+3. Pass each chunk through an embedding model to get a dense vector. See [tokenization and embeddings](/ai-data-engineering/tokenization-and-embeddings/) for how text becomes vectors.
+4. Save each vector with its chunk text and source in a vector index. Moving and cleaning the documents into this store is ordinary data engineering, much like an [ETL or ELT pipeline](/ai-data-engineering/etl-vs-elt/).
+
+### Online query
+
+1. Embed the question with the same embedding model, so the query and the chunks live in the same vector space.
+2. Search the index for the k chunk vectors with the highest similarity to the query vector.
+3. Put the retrieved chunks and the question into one prompt, with an instruction to answer from the given text.
+4. The LLM writes the answer, ideally citing the chunks it used.
+
+## How retrieval works
+
+The retriever scores every chunk against the query. In the vector space model described by Manning, Raghavan and Schütze, a common score is **cosine similarity**, the cosine of the angle between two vectors:
+
+$$
+\cos\theta = \frac{\mathbf{q}\cdot\mathbf{d}}{\lVert\mathbf{q}\rVert\,\lVert\mathbf{d}\rVert}
+$$
+
+A score near 1 means the vectors point the same way, which for a good embedding model means similar meaning. DPR uses two separate BERT encoders, one for questions and one for passages, and scores a pair by the dot product of their vectors:
+
+$$
+\text{sim}(q, p) = E_Q(q)^\top E_P(p)
+$$
+
+Karpukhin and colleagues reported that DPR beat the keyword method BM25 by 9% to 19% absolute in top-20 passage retrieval accuracy on open domain question answering datasets. Dense vectors can match a passage to a question that shares its meaning but few of its words.
+
+Comparing the query with millions of vectors one by one is slow. Libraries such as FAISS, described by Johnson, Douze and Jégou, use approximate nearest neighbour search: they return close matches quickly instead of guaranteeing the exact best ones.
+
+## How the generator uses the passages
+
+In the original RAG paper, the generator does not trust a single passage. It treats the retrieved document z as a hidden variable and combines the answers it would give from each of the top-k documents, weighted by the retriever's probability:
+
+$$
+p(y \mid x) \approx \sum_{z \in \text{top-}k} p_\eta(z \mid x)\, p_\theta(y \mid x, z)
+$$
+
+The paper gives two versions. **RAG-Sequence** uses the same document for the whole answer and then combines across documents. **RAG-Token** can draw on a different document for each generated token. The retriever and generator were trained together, end to end, on question and answer pairs. On open domain question answering, RAG set new state of the art results on several benchmarks, and human raters judged its generated text more factual and specific than a generator without retrieval.
+
+Most RAG systems built today on general purpose LLMs skip the joint training and simply paste the top-k chunks into the prompt.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A query vector q = (0.8, 0.4, 0.2) and three chunk vectors from a pump manual: A, seal replacement = (0.9, 0.3, 0.1); B, motor wiring = (0.1, 0.9, 0.2); C, bearing lubrication = (0.6, 0.2, 0.7). The LLM context window is 4096 tokens. The instructions and question take 300 tokens, 500 tokens are kept free for the answer, and each chunk is 512 tokens.</dd>
+<dt>Find</dt><dd>The ranking of the three chunks by cosine similarity, and the largest number of whole chunks that fit in the prompt.</dd>
+<dt>Assumptions</dt><dd>Three dimensional vectors stand in for real embeddings, which have hundreds of dimensions. All chunks are the same length.</dd>
+<dt>Solution</dt><dd>‖q‖ = √(0.64 + 0.16 + 0.04) = √0.84 = 0.917<br />A: q · A = 0.72 + 0.12 + 0.02 = 0.86; ‖A‖ = √0.91 = 0.954; cos = 0.86 ÷ (0.917 × 0.954) = 0.984<br />B: q · B = 0.08 + 0.36 + 0.04 = 0.48; ‖B‖ = √0.86 = 0.927; cos = 0.48 ÷ (0.917 × 0.927) = 0.565<br />C: q · C = 0.48 + 0.08 + 0.14 = 0.70; ‖C‖ = √0.89 = 0.943; cos = 0.70 ÷ (0.917 × 0.943) = 0.810<br />Space for chunks = 4096 − 300 − 500 = 3296 tokens; 3296 ÷ 512 = 6.44, so 6 whole chunks (3072 tokens)</dd>
+<dt>Answer</dt><dd><strong>Ranking: A (0.984), C (0.810), B (0.565). Up to 6 chunks of 512 tokens fit, using 3872 of 4096 tokens in total.</strong></dd>
+<dt>Limitations</dt><dd>A high similarity score means similar direction in the embedding space, not a correct or complete answer. Real token counts depend on the tokenizer, and a chunk boundary can cut an instruction in half.</dd>
+</dl>
+</Example>
+
+## Design choices that decide RAG quality
+
+- Chunk size and overlap. Short chunks match the query precisely but may lose context. Long chunks carry context but use up the prompt budget, as the example shows.
+- The embedding model. Use one trained for retrieval, and embed queries and chunks with the same model.
+- k, the number of chunks. More chunks raise the chance that the answer is included, but they add noise and tokens.
+- Keyword plus dense search. A keyword score such as BM25 still helps with part numbers, codes and rare terms that dense vectors can blur.
+- Metadata. Store the document title, section and date with each chunk so answers can cite sources and old revisions can be filtered out.
+- Evaluation. Measure retrieval with precision and recall, as defined in information retrieval, and check answers against the source chunks.
+
+## Limitations of retrieval augmented generation
+
+- If the right chunk is not retrieved, the model cannot use it and may fall back on its own memory.
+- Retrieved text can conflict, be out of date or be wrong, and the model may repeat it.
+- Every chunk added to the prompt costs tokens, time and money.
+- Wrong or outdated documents give wrong answers, so the collection needs owners and version control like any other engineering record.
+- None of this changes the [neural network](/ai-data-engineering/how-neural-networks-work/) inside the LLM. RAG only controls which text reaches its prompt.
+
+## Key formulas for retrieval augmented generation
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Cosine similarity | cos θ = (q · d) ÷ (‖q‖ ‖d‖) | q = query vector, d = chunk vector; result from −1 to 1, dimensionless |
+| DPR similarity | sim(q, p) = E_Q(q)ᵀ E_P(p) | E_Q, E_P = question and passage encoders; dot product of their output vectors |
+| RAG-Sequence output | p(y ∣ x) ≈ Σ p_η(z ∣ x) p_θ(y ∣ x, z) | x = input, y = output, z = retrieved document, sum over top-k documents; η = retriever, θ = generator parameters |
+| Chunk budget | n = floor((C − P − R) ÷ L) | C = context window, P = prompt and question, R = reserved answer tokens, L = tokens per chunk |
+
+## Retrieval augmented generation interview and viva questions
+
+1. **What are parametric and non-parametric memory in RAG?** Parametric memory is the knowledge stored in the generator's weights. Non-parametric memory is the external index of passages that the retriever searches at question time.
+2. **Why must the query and the chunks use the same embedding model?** Similarity scores are only meaningful when both vectors come from the same vector space, so a query embedded with a different model would not match the stored chunks correctly.
+3. **What is the difference between RAG-Sequence and RAG-Token?** RAG-Sequence uses the same retrieved document for the whole output and combines over documents, while RAG-Token can use a different document for each generated token.
+4. **How does dense retrieval differ from BM25?** BM25 scores exact keyword matches, while dense retrieval such as DPR compares learned vectors and can match passages that share meaning but not words. DPR beat BM25 by 9% to 19% absolute in top-20 retrieval accuracy in its paper.
+5. **How can a RAG system's knowledge be updated?** Add, change or remove documents, re-embed the affected chunks and update the index. The generator does not need retraining.

@@ -3,6 +3,7 @@ title: "Three-Phase Induction Motor Working Principle"
 description: "Induction motor working principle explained: rotating magnetic field, synchronous speed, slip and torque, plus construction, types and a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: electrical-machines
 focusKeyword: "induction motor working principle"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The induction motor working principle is based on electromagnetic induction. A three-phase induction motor works because the stator winding creates a **rotating magnetic field**. This field cuts the rotor conductors and **induces** currents in them. The interaction between the rotor currents and the field produces torque, so the rotor turns in the same direction as the field, always slightly slower than it. The difference in speed is called **slip**.
+The **induction motor working principle** is electromagnetic induction: the three-phase stator winding creates a rotating magnetic field that cuts the rotor conductors and induces currents in them. These currents interact with the field to produce torque, so the rotor turns in the direction of the field, always slightly slower. The speed difference is called slip.
 
 </Key>
 
@@ -53,6 +54,36 @@ An induction motor has two main parts separated by a small air gap.
 The stator and rotor cores are laminated to reduce eddy current losses, for the same reason as a [transformer](/electrical-engineering/transformer-working-principle/) core.
 
 ## Induction motor working principle step by step
+
+<figure class="anim">
+<svg viewBox="0 0 640 300" width="640" height="300" fill="none" role="img" aria-label="Cross section of a three-phase induction motor: stator slots hold coils of phases A, B and C placed 120 electrical degrees apart, producing a magnetic field that rotates clockwise at synchronous speed; the squirrel cage rotor bars cut the field, carry induced current and turn the rotor the same way, slightly slower than the field">
+<circle cx="200" cy="165" r="122" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<circle cx="200" cy="165" r="78" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="200" cy="165" r="70" fill="#d8dee8" stroke="#0b2545" stroke-width="1.5" />
+<g fill="#7b8794"><circle cx="215.0" cy="109.0" r="5" /><circle cx="241.0" cy="124.0" r="5" /><circle cx="256.0" cy="150.0" r="5" /><circle cx="256.0" cy="180.0" r="5" /><circle cx="241.0" cy="206.0" r="5" /><circle cx="215.0" cy="221.0" r="5" /><circle cx="185.0" cy="221.0" r="5" /><circle cx="159.0" cy="206.0" r="5" /><circle cx="144.0" cy="180.0" r="5" /><circle cx="144.0" cy="150.0" r="5" /><circle cx="159.0" cy="124.0" r="5" /><circle cx="185.0" cy="109.0" r="5" /></g>
+<circle cx="200" cy="165" r="10" fill="#0b2545" />
+<circle cx="200" cy="66" r="11" fill="#b42318" /><circle cx="200" cy="264" r="11" fill="#b42318" />
+<circle cx="285.7" cy="214.5" r="11" fill="#0b2545" /><circle cx="114.3" cy="115.5" r="11" fill="#0b2545" />
+<circle cx="114.3" cy="214.5" r="11" fill="#13a89e" /><circle cx="285.7" cy="115.5" r="11" fill="#13a89e" />
+<g class="anim-spin" stroke="#b38600" stroke-width="3" fill="#b38600"><path d="M200 225V117" /><path d="M193 119L200 105L207 119Z" stroke-width="1" /><path d="M193 225H207" /></g>
+<path d="M113.9 62.4A134 134 0 0 1 286.1 62.4" stroke="#b38600" stroke-width="2" />
+<path d="M282.2 67.0L293.8 68.8L290.0 57.8Z" fill="#b38600" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">
+<text x="200" y="70">A</text><text x="200" y="268">A'</text><text x="285.7" y="218.5">B</text><text x="114.3" y="119.5">B'</text><text x="114.3" y="218.5">C</text><text x="285.7" y="119.5">C'</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="200" y="20" text-anchor="middle">Field rotation (A to B to C)</text>
+<circle cx="378" cy="62" r="5" fill="#b42318" /><circle cx="392" cy="62" r="5" fill="#0b2545" /><circle cx="406" cy="62" r="5" fill="#13a89e" />
+<text x="420" y="60" font-weight="700">Stator coils A, B, C</text><text x="420" y="76">120 electrical degrees apart</text>
+<path d="M372 122H408" stroke="#b38600" stroke-width="3" /><path d="M404 116L414 122L404 128Z" fill="#b38600" />
+<text x="420" y="120" font-weight="700">Rotating magnetic field</text><text x="420" y="136">turns at Ns = 120 f / P</text>
+<circle cx="392" cy="182" r="5" fill="#7b8794" />
+<text x="420" y="180" font-weight="700">Rotor bars cut the field</text><text x="420" y="196">induced bar current gives torque</text>
+<text x="420" y="240" font-weight="700">Rotor turns the same way</text><text x="420" y="256">slightly slower than Ns (slip)</text>
+</g>
+</svg>
+<figcaption>Three-phase induction motor in cross section. The stator currents set up a field that rotates at synchronous speed (animated arrow); the rotor follows in the same direction at a slightly lower speed.</figcaption>
+</figure>
 
 1. **Rotating magnetic field.** The three stator windings are placed 120 electrical degrees apart and carry currents that are 120 degrees apart in time. Their combined flux has a constant magnitude and rotates around the air gap at synchronous speed.
 2. **Induced EMF.** The rotating field cuts the stationary rotor bars. By Faraday's law, an EMF is induced in each bar.
@@ -103,6 +134,16 @@ $$
 
 This shows why running at high slip is inefficient: at 10 percent slip, a tenth of the air gap power is turned into heat in the rotor. Other losses are stator copper loss, core loss, friction and windage, and stray load loss.
 
+## Key formulas for the induction motor working principle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Synchronous speed | Ns = 120 f ÷ P | Ns in rpm, f = supply frequency in Hz, P = number of poles |
+| Slip | s = (Ns − N) ÷ Ns | N = rotor speed in rpm; s = 1 at standstill |
+| Rotor current frequency | fr = s × f | fr in Hz |
+| Rotor copper loss | P_rotor cu = s × P_ag | P_ag = air gap power in W |
+| Mechanical power developed | P_mech = (1 − s) × P_ag | W |
+
 ## Torque and speed characteristic
 
 As the motor accelerates from rest, its torque changes with speed:
@@ -135,6 +176,14 @@ The motor nameplate gives the data needed to select cables, starters and protect
 - **Pumps and fans:** the most common loads, often fitted with VFDs to save energy at part load.
 - **Compressors and conveyors:** constant-speed duty where the rugged design suits continuous running.
 - **Machine tools and process plant:** where speed control by VFD replaced older DC drives.
+
+## Induction motor working principle interview and viva questions
+
+1. **Why is the induction motor also called an asynchronous motor?** Its rotor never runs exactly in step with the rotating field; it always turns slightly slower, and the difference is the slip.
+2. **What is the synchronous speed of a 4-pole motor on a 50 Hz supply?** Ns = 120 × 50 ÷ 4 = 1500 rpm.
+3. **Why are the stator and rotor cores laminated?** Laminations reduce eddy current losses, for the same reason as in a transformer core.
+4. **Why is running at high slip inefficient?** Rotor copper loss equals slip times air gap power, so at 10 percent slip a tenth of the air gap power becomes heat in the rotor.
+5. **What advantage does a slip ring rotor have over a squirrel cage rotor?** External resistance can be added to the rotor circuit, giving high starting torque with lower starting current, at the cost of brush and slip ring maintenance.
 
 ## Related reading
 

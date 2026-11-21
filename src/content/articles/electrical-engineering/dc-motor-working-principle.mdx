@@ -3,6 +3,7 @@ title: "DC Motor Working Principle and Types"
 description: "DC motor working principle explained: force on a conductor, commutator, back EMF, speed and torque equations, shunt, series and compound types, with example."
 pubDate: 2026-11-10
 reviewedDate: 2026-11-10
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: electrical-machines
 focusKeyword: "dc motor working principle"
@@ -31,7 +32,7 @@ import ArticleVideo from '../../../components/ArticleVideo.astro';
 
 <Key title="Short answer">
 
-The DC motor working principle is simple: a current-carrying conductor placed in a magnetic field experiences a force. In a DC motor the field poles produce the flux, the armature conductors carry current, and the forces on them create torque. A **commutator** and brushes reverse the current in each coil as it passes from one pole to the next, so the torque always acts in the same direction. As the armature turns it generates a **back EMF** that limits its current and sets its speed.
+The **DC motor working principle** is that a current-carrying conductor in a magnetic field experiences a force. Field poles produce the flux, armature conductors carry current, and the forces create torque. A **commutator** reverses each coil current at the right moment so torque stays in one direction, while the **back EMF** limits armature current and sets speed.
 
 </Key>
 
@@ -84,7 +85,7 @@ $$
 
 Speed is therefore proportional to the supply voltage (less the armature voltage drop) and inversely proportional to flux. The power converted from electrical to mechanical form is Eb × Ia, which equals T × ω.
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 300" width="640" height="300" fill="none" role="img" aria-label="Equivalent circuit of a DC shunt motor: a DC supply V feeds a line current IL that splits into a field current If through the shunt field winding and an armature current Ia through armature resistance Ra and the armature, which generates back EMF Eb. Equations V equals Eb plus Ia Ra, Eb equals k phi omega, and T equals k phi Ia are listed.">
 <g stroke="#0b2545" stroke-width="1.8">
 <path d="M80 60 H420 M80 250 H420" />
@@ -97,6 +98,7 @@ Speed is therefore proportional to the supply voltage (less the armature voltage
 <rect x="410" y="80" width="20" height="50" fill="#ffffff" />
 <circle cx="420" cy="180" r="28" fill="#e6eef7" />
 </g>
+<g stroke="#ffffff" stroke-width="1.8" fill="none"><path class="anim-flow" stroke-dasharray="6 12" d="M80 140V60H230" /><path class="anim-flow" stroke-dasharray="6 12" d="M230 60H420V80M420 130V152M420 208V250H80V160" /><path class="anim-flow" stroke-dasharray="6 12" d="M230 60V105M230 205V250" /></g>
 <g stroke="#b42318" stroke-width="1.6">
 <path d="M135 60 H165" /><path d="M158 55 L167 60 L158 65" />
 <path d="M310 60 H340" /><path d="M333 55 L342 60 L333 65" />
@@ -173,6 +175,27 @@ From the speed equation, there are three ways to change speed:
 | High starting torque (series and compound) | Sparking limits use in hazardous areas |
 | Good dynamic response | Higher cost and size than an induction motor of equal rating |
 | Runs directly from batteries | Commutation limits maximum speed and current |
+
+## Key formulas for the DC motor working principle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Force on a conductor | F = B I L | B = flux density in T, I = current in A, L = conductor length in m |
+| Back EMF | Eb = k Φ ω | k = machine constant, Φ = flux, ω = speed in rad/s |
+| Developed torque | T = k Φ Ia | T in N·m, Ia = armature current in A |
+| Armature circuit | V = Eb + Ia Ra | V = supply voltage in V, Ra = armature resistance in Ω |
+| Speed | ω = (V − Ia Ra) ÷ (k Φ) | ω in rad/s |
+| Converted power | P = Eb Ia = T ω | P in W |
+| Shunt motor line current | IL = Ia + If | If = field current in A |
+| Speed conversion | ω = 2π N ÷ 60 | N = speed in rpm |
+
+## DC motor working principle interview and viva questions
+
+1. **What is the function of the commutator in a DC motor?** It reverses the current in each armature coil as the coil passes from one pole to the next, so the torque always acts in the same direction.
+2. **Why is the starting current of a DC motor high?** At standstill there is no back EMF, so only the small armature resistance limits the current. A starter or a controlled drive limits it until the back EMF builds up.
+3. **Why does a shunt motor run at nearly constant speed?** With a constant supply the shunt field flux is nearly constant and the Ia Ra drop is small, so speed falls only slightly as load increases.
+4. **Why must a series motor never run without load?** Its field current is the armature current, so at light load the flux is weak and the speed rises to dangerous values that can damage the armature and commutator.
+5. **How does field weakening change the speed of a DC motor?** Speed is inversely proportional to flux, so reducing the field current raises the speed above base speed, with constant power capability.
 
 ## Related reading
 

@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video (oldest first). Delete a line once its video is live.
-aerospace-engineering/turbojet-vs-turbofan-vs-turboprop
-agricultural-engineering/automated-irrigation-control
-agricultural-engineering/cold-storage-design-basics
-agricultural-engineering/drip-vs-sprinkler-irrigation
-agricultural-engineering/grain-drying-methods
-agricultural-engineering/haccp-principles
 agricultural-engineering/pasteurization-htst-uht
 agricultural-engineering/precision-agriculture-technologies
 agricultural-engineering/tractor-power-transmission

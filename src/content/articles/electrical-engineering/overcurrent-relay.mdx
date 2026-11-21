@@ -3,6 +3,7 @@ title: "Overcurrent Relay: Working Principle and Characteristics"
 description: "How an overcurrent relay works: pickup setting, instantaneous, definite time and IDMT characteristics, the IEC curve equation and time grading, with an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: protection-relays
 focusKeyword: "overcurrent relay"
@@ -29,7 +30,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-An overcurrent relay measures the current in a circuit through a current [transformer](/electrical-engineering/transformer-working-principle/) (CT). When the current rises above a set **pickup value**, the relay starts timing, and if the current stays high long enough it **trips the [circuit breaker](/electrical-engineering/circuit-breaker-working-principle/)**. The operating time can be instantaneous, fixed (definite time) or **inversely related to the current** (IDMT), so heavier faults are cleared faster.
+An **overcurrent relay** is a protection device that measures circuit current through a current [transformer](/electrical-engineering/transformer-working-principle/) (CT) and trips the [circuit breaker](/electrical-engineering/circuit-breaker-working-principle/) when the current stays above a set pickup value for long enough. Its operating time can be instantaneous, definite time or inverse (IDMT), so heavier faults are cleared faster.
 
 </Key>
 
@@ -46,6 +47,38 @@ Short circuits and overloads cause currents far above normal. Without protection
 5. **Reset.** If the current falls below the reset level before the timer expires, the relay resets without tripping.
 
 Modern numerical relays do all of this in software and record the fault current and time for later analysis.
+
+<figure class="anim">
+<svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Overcurrent relay scheme: fault current flows from the source through the circuit breaker and current transformer to a fault on the feeder; the CT secondary current goes to the 50/51 relay, which sends a trip signal to the circuit breaker; an inset shows the inverse time curve, with trip time falling as the current rises above the pickup setting">
+<rect x="20" y="35" width="80" height="50" rx="6" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<path d="M100 60H150M190 60H520" stroke="#0b2545" stroke-width="4" />
+<path class="anim-flow" d="M100 60H150M190 60H520" stroke="#ffffff" stroke-width="2" stroke-dasharray="6 12" />
+<rect x="150" y="45" width="40" height="30" fill="#ffffff" stroke="#0b2545" stroke-width="2" />
+<circle cx="280" cy="60" r="12" stroke="#13a89e" stroke-width="3" />
+<path class="anim-pulse" d="M520 60L532 76L522 78L536 98" stroke="#b42318" stroke-width="3" />
+<rect x="220" y="130" width="120" height="60" rx="6" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<path d="M280 72V130" stroke="#13a89e" stroke-width="2.5" />
+<path class="anim-flow" d="M280 72V130" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 12" />
+<path d="M220 160H170V75" stroke="#c27b2c" stroke-width="2.5" />
+<path class="anim-flow" d="M220 160H170V75" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 12" />
+<path d="M400 120V240H580" stroke="#0b2545" stroke-width="2" />
+<path d="M410 120V240" stroke="#b42318" stroke-width="1.5" stroke-dasharray="4 3" />
+<polyline points="415,125 420,146 425,157 433,171 440,179 449,188 462,197 472,203 489,210 501,215 520,221 541,226 560,231 580,235" stroke="#13a89e" stroke-width="3" fill="none" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="60" y="57">Source</text><text x="60" y="73">busbar</text>
+<text x="170" y="65" font-weight="700">CB</text>
+<text x="280" y="38">CT</text><text x="400" y="50">Feeder</text>
+<text x="545" y="44" fill="#b42318">Fault</text>
+<text x="280" y="156" font-weight="700">Relay</text><text x="280" y="174">50/51</text>
+<text x="288" y="100" text-anchor="start">CT secondary</text><text x="288" y="115" text-anchor="start">1 A or 5 A</text>
+<text x="160" y="112" text-anchor="end">Trip</text><text x="160" y="127" text-anchor="end">signal</text>
+<text x="392" y="130" text-anchor="end">t</text><text x="580" y="256" text-anchor="end">I / Is</text>
+<text x="415" y="256" fill="#b42318">pickup</text>
+<text x="510" y="180" fill="#0e7f78">IDMT curve</text>
+</g>
+</svg>
+<figcaption>How an overcurrent relay protects a feeder: the CT feeds the relay, which trips the circuit breaker when the fault current stays above the pickup setting; on the inverse time curve, a larger current gives a shorter trip time.</figcaption>
+</figure>
 
 ## Operating characteristics
 
@@ -118,9 +151,28 @@ The CT must deliver an accurate current to the relay up to the maximum fault cur
 
 <Calculator path="electrical/ct-burden" title="CT Burden Calculator" />
 
+## Key formulas for overcurrent relay
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Plug setting multiplier | PSM = I ÷ Is | I = measured current, Is = current setting, both in A |
+| IEC IDMT operating time | t = TMS × k ÷ [(I ÷ Is)^α − 1] | t in s; TMS = time multiplier setting; k and α set by the curve |
+| Standard inverse constants | k = 0.14, α = 0.02 | IEC 60255-151 |
+| Very inverse constants | k = 13.5, α = 1 | IEC 60255-151 |
+| Extremely inverse constants | k = 80, α = 2 | IEC 60255-151 |
+| Long time inverse constants | k = 120, α = 1 | IEC 60255-151 |
+
 ## Applications
 
 - **Distribution feeders:** IDMT phase and earth fault protection with an instantaneous element for close-in faults.
 - **Transformers:** overcurrent protection on the primary as backup to differential protection.
 - **Motors:** overcurrent and earth fault elements, combined with thermal overload protection.
 - **Transmission lines:** backup to distance and differential protection.
+
+## Overcurrent relay interview and viva questions
+
+1. **What is the plug setting multiplier?** It is the ratio I / Is of the measured current to the current setting, and it decides where on its time curve the relay operates.
+2. **What do ANSI device numbers 50 and 51 mean?** 50 is instantaneous overcurrent and 51 is time-delayed (inverse time) overcurrent; the suffix N applies them to earth fault current.
+3. **What is a grading margin?** It is the time difference between upstream and downstream relays for the same fault. It covers breaker opening time, relay timing and CT errors and a safety allowance, commonly about 0.25 to 0.4 s.
+4. **How is the pickup current chosen?** It is set above the maximum load current, including allowed overloads, and well below the minimum fault current at the far end of the protected zone.
+5. **How can CT saturation affect an overcurrent relay?** A saturated CT delivers less secondary current than the true fault current, so at very high currents the operating time can become longer.

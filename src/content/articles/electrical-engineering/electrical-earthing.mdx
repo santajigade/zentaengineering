@@ -3,6 +3,7 @@ title: "Electrical Earthing: Purpose, Types and Systems (TN, TT, IT)"
 description: "Electrical earthing explained: why systems are earthed, system and equipment earthing, TN, TT and IT systems, and earth electrode resistance."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: earthing
 focusKeyword: "electrical earthing"
@@ -30,19 +31,46 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-Electrical earthing connects parts of an electrical system to earth so that:
-
-- people are protected from electric shock when [insulation](/electrical-engineering/insulation-resistance-test/) fails,
-- fault current has a low resistance path, so protective devices trip quickly,
-- system voltages stay stable with respect to earth.
-
-IEC 60364 classifies low voltage systems as **TN** (TN-S, TN-C, TN-C-S), **TT** and **IT**, according to how the source and the exposed metal parts are earthed.
+**Electrical earthing** is the connection of parts of an electrical system to the general mass of the earth. It protects people from shock when [insulation](/electrical-engineering/insulation-resistance-test/) fails, gives fault current a low resistance path so protective devices trip quickly, and keeps system voltages stable. IEC 60364 classifies low voltage systems as **TN**, **TT** and **IT**.
 
 </Key>
 
 ## Why electrical earthing is needed
 
 If a live conductor touches the metal case of an appliance and the case is not earthed, the case rises to a dangerous voltage. Anyone touching it completes a path to earth through their body. When the case is connected to earth through a [protective conductor](/electrical-engineering/cable-sizing/), the fault current flows through that conductor instead, and it is large enough to operate the fuse, [circuit breaker](/electrical-engineering/circuit-breaker-working-principle/) or residual current device (RCD) quickly.
+
+<figure class="anim">
+<svg viewBox="0 0 640 300" width="640" height="300" fill="none" role="img" aria-label="TN-S earth fault loop: a source transformer with its star point earthed feeds line L, neutral N and protective earth PE conductors to an appliance with an exposed metal case; an insulation fault connects L to the case, and the fault current flows from the source through the fuse or MCB, through the fault into the case, back along the PE conductor to the earthed star point, so the protective device trips">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="30" y="40" width="120" height="160" rx="6" fill="#f4f7fb" />
+<rect x="470" y="40" width="140" height="110" rx="6" fill="#eef1f6" stroke-width="3" />
+<path d="M150 70H260M320 70H470M150 120H470M130 70H150M130 120H150" />
+<path d="M130 75A5 5 0 0 1 130 85A5 5 0 0 1 130 95A5 5 0 0 1 130 105A5 5 0 0 1 130 115" />
+<path d="M130 70V75M130 115V120" />
+<path d="M130 120V230M115 230H145M121 238H139M127 246H133" />
+<path d="M470 70H560V85M470 120H560V105" />
+<rect x="260" y="62" width="60" height="16" rx="3" fill="#ffffff" />
+<rect x="530" y="85" width="60" height="20" rx="3" fill="#ffffff" />
+</g>
+<path d="M150 170H490V150M130 170H150" stroke="#13a89e" stroke-width="2.5" />
+<path d="M510 70L500 62L514 54L504 46L510 40" stroke="#b42318" stroke-width="2.5" />
+<path class="anim-flow" stroke-dasharray="6 12" d="M490 150V170H130V120M130 70H260M320 70H510L500 62L514 54L504 46L510 40H470V150H490" stroke="#f5b800" stroke-width="2.5" />
+<circle class="anim-pulse" cx="510" cy="55" r="16" stroke="#b42318" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="30" y="24" font-weight="700">TN-S earth fault loop</text>
+<text x="75" y="112" text-anchor="middle" font-weight="700">Source</text><text x="75" y="128" text-anchor="middle">transformer</text>
+<text x="170" y="63">L</text><text x="170" y="113">N</text><text x="170" y="163" fill="#13a89e">PE</text>
+<text x="290" y="54" text-anchor="middle">Fuse or MCB</text>
+<text x="560" y="99" text-anchor="middle">Load</text>
+<text x="575" y="28" text-anchor="middle" fill="#b42318">Insulation fault</text>
+<text x="550" y="174" text-anchor="middle">Exposed metal case</text>
+<text x="330" y="190" text-anchor="middle" fill="#13a89e">Protective conductor (PE)</text>
+<text x="190" y="242">Star point earthed,</text><text x="190" y="258">N and PE joined only here</text>
+<text x="320" y="288" text-anchor="middle" font-size="11" fill="#7b8794">Moving yellow dashes: earth fault current, returning through PE to the source</text>
+</g>
+</svg>
+<figcaption>Earth fault in a TN-S system. The fault current returns to the earthed star point of the source through the protective conductor, which is a low impedance path, so the fuse or circuit breaker disconnects the supply quickly.</figcaption>
+</figure>
 
 Earthing also:
 
@@ -111,6 +139,13 @@ $$
 - Use horizontal strips or a buried mesh, especially in rocky ground.
 - Improve the soil around the electrode with approved low-resistivity backfill.
 
+## Key formulas for electrical earthing
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Resistance of a single vertical rod | R = ρ ÷ (2π L) × [ln(8L ÷ d) − 1] | R in Ω, ρ = soil resistivity in Ω·m, L = rod length in m, d = rod diameter in m |
+| Two rods in parallel, spaced well apart | R2 ≈ R ÷ 2 | Holds only when the spacing is large; close rods interfere |
+
 ## Earthing in substations: step and touch voltage
 
 In high voltage substations, earth fault currents can reach tens of kiloamperes. As this current flows into the ground, the soil surface around the earthing system rises in potential, and the potential varies from point to point. Two hazards follow:
@@ -123,6 +158,14 @@ Substation earthing grids are designed, for example to IEEE 80, so that these vo
 ## Testing and maintenance
 
 Earth electrode resistance is measured with an earth tester, for example by the fall-of-potential method. Earth fault loop impedance is measured at socket outlets and distribution boards to confirm that protective devices will trip in time. Connections should be inspected for corrosion and tightness, because a broken protective conductor removes protection without any visible sign.
+
+## Electrical earthing interview and viva questions
+
+1. **What do the letters in TN-S mean?** T means the source neutral is connected directly to earth, N means exposed metal parts connect to that earthed point through a protective conductor, and S means separate neutral and protective conductors.
+2. **Why does a TT system usually need an RCD?** The fault current returns through the earth, whose resistance is often too high for a fuse or MCB to trip quickly, so an RCD detects the leakage and disconnects.
+3. **What is the main advantage of an IT system?** A first earth fault does not cause a trip, which gives continuity of supply. The fault must be cleared promptly because a second fault on another phase becomes a short circuit.
+4. **What is the difference between touch voltage and step voltage?** Touch voltage is between a hand on earthed metalwork and the feet on the ground; step voltage is between the feet one step apart.
+5. **What disconnection times does IEC 60364-4-41 set for final circuits up to 32 A at 230 V?** The limit is 0.4 s in a TN system and 0.2 s in a TT system.
 
 ## Related reading
 

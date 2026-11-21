@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/electrical-engineering/dc-motor-working-principle.mdx
-src/content/articles/electrical-engineering/electrical-earthing.mdx
-src/content/articles/electrical-engineering/generation-transmission-distribution.mdx
-src/content/articles/electrical-engineering/induction-motor-working-principle.mdx
-src/content/articles/electrical-engineering/insulation-resistance-test.mdx
-src/content/articles/electrical-engineering/ohms-law-kirchhoffs-laws.mdx
-src/content/articles/electrical-engineering/overcurrent-relay.mdx
-src/content/articles/electrical-engineering/power-factor.mdx
 src/content/articles/electrical-engineering/thevenins-theorem.mdx
 src/content/articles/electrical-engineering/transformer-working-principle.mdx
 src/content/articles/electronics-engineering/active-vs-passive-filters.mdx

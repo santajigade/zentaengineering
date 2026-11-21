@@ -3,6 +3,7 @@ title: "Ohm's Law and Kirchhoff's Laws with Worked Examples"
 description: "Ohm's law and Kirchhoff's laws explained: V = IR, KCL and KVL, series and parallel circuits, and a fully checked worked example for students."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-21
 discipline: electrical-engineering
 subcategory: circuit-fundamentals
 focusKeyword: "Ohm's law and Kirchhoff's laws"
@@ -28,13 +29,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-Ohm's law and Kirchhoff's laws are the three basic rules of circuit analysis:
-
-- **Ohm's law:** the voltage across a resistor equals the current through it times its resistance, V = I × R.
-- **Kirchhoff's current law (KCL):** the total current entering a node equals the total current leaving it.
-- **Kirchhoff's voltage law (KVL):** the voltages around any closed loop add up to zero.
-
-Together these three laws let you solve any circuit made of sources and resistors.
+**Ohm's law and Kirchhoff's laws** are the basic rules of circuit analysis. Ohm's law states that the voltage across a resistor equals current times resistance, V = I × R. Kirchhoff's current law says the current entering a node equals the current leaving it, and Kirchhoff's voltage law says the voltages around any closed loop add up to zero.
 
 </Key>
 
@@ -101,7 +96,7 @@ Choose a direction to travel around the loop. Count a voltage as positive when y
 
 For two resistors in parallel, the shortcut R = (R1 × R2) / (R1 + R2) is often quicker. Both rules come directly from KVL (series) and KCL (parallel) combined with Ohm's law.
 
-<figure>
+<figure class="anim">
 <svg width="560" height="250" viewBox="0 0 560 250" fill="none" role="img" aria-label="Circuit: 12 V source in series with R1 of 4 ohms, feeding R2 of 6 ohms and R3 of 12 ohms in parallel">
 <path d="M80 40H180M260 40H460V95M460 155V210H80V160M80 90V40M340 40V95M340 155V210" stroke="#0b2545" stroke-width="2.5" />
 <rect x="180" y="28" width="80" height="24" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
@@ -109,6 +104,7 @@ For two resistors in parallel, the shortcut R = (R1 × R2) / (R1 + R2) is often 
 <rect x="448" y="95" width="24" height="60" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
 <path d="M60 112H100M68 138H92" stroke="#0b2545" stroke-width="3" />
 <path d="M80 90V112M80 138V160" stroke="#0b2545" stroke-width="2.5" />
+<g stroke="#ffffff" stroke-width="1.5" stroke-dasharray="6 12" fill="none"><path class="anim-flow" d="M80 112V40H180M260 40H340M340 40V95M340 155V210M340 210H80V138" /><path class="anim-flow-slow" d="M340 40H460V95M460 155V210H340" /></g>
 <circle cx="340" cy="40" r="4" fill="#0b2545" /><circle cx="340" cy="210" r="4" fill="#0b2545" />
 <text x="110" y="120" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">12 V</text>
 <text x="44" y="108" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">+</text>
@@ -118,7 +114,7 @@ For two resistors in parallel, the shortcut R = (R1 × R2) / (R1 + R2) is often 
 <text x="340" y="236" text-anchor="middle" font-size="13" fill="#4a5360" font-family="Open Sans Variable, Arial, sans-serif">node B</text>
 <text x="340" y="26" text-anchor="middle" font-size="13" fill="#4a5360" font-family="Open Sans Variable, Arial, sans-serif">node A</text>
 </svg>
-<figcaption>A 12 V source feeding R1 in series with R2 and R3 in parallel.</figcaption>
+<figcaption>A 12 V source feeding R1 in series with R2 and R3 in parallel. Conventional current leaves the positive terminal, splits at node A and rejoins at node B; the R3 branch carries half the current of the R2 branch.</figcaption>
 </figure>
 
 <Example>
@@ -152,9 +148,29 @@ These laws are used every day in electrical work, not only in exams:
 - **Sensor circuits:** voltage dividers built from a fixed resistor and a resistive sensor, such as a thermistor, convert a change in resistance into a change in voltage.
 - **Checking measurements:** in a DC panel, the outgoing branch currents should add up to the incoming current (KCL). A large mismatch points to a meter error or an unrecorded load. In AC circuits KCL still holds, but the currents must be added as [phasors](/electrical-engineering/power-factor/) because they may not be in phase.
 
+## Key formulas for Ohm's law and Kirchhoff's laws
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Ohm's law | V = I × R | V in volts (V), I in amperes (A), R in ohms (Ω) |
+| Power in a resistor | P = V × I = I²R = V²/R | P in watts (W) |
+| Kirchhoff's current law | ΣI(in) = ΣI(out) | Currents at a node, A |
+| Kirchhoff's voltage law | ΣV = 0 | Voltages around a closed loop, V |
+| Series resistors | R = R1 + R2 + R3 + ... | Ω |
+| Parallel resistors | 1/R = 1/R1 + 1/R2 + 1/R3 + ... | Ω |
+| Two resistors in parallel | R = (R1 × R2) ÷ (R1 + R2) | Ω |
+
 ## Limits of Kirchhoff's laws
 
 KCL and KVL assume a **lumped** circuit, where the physical size of the circuit is small compared with the wavelength of the signals in it. This holds for power circuits at 50 Hz or 60 Hz and for most electronics. At radio and microwave frequencies, or on very long transmission lines, voltages and currents vary along the conductors and transmission line theory is needed instead.
+
+## Ohm's law and Kirchhoff's laws interview and viva questions
+
+1. **State Ohm's law and its main limitation.** The current through a conductor is proportional to the voltage across it when temperature and other physical conditions stay the same, so V = I × R. It applies to linear components, not to diodes, transistors or lamp filaments.
+2. **Which conservation law is behind KCL?** Conservation of electric charge: charge cannot build up at a node, so whatever current flows in must flow out.
+3. **Which conservation law is behind KVL?** Conservation of energy: a charge that travels around a closed loop returns to its starting potential, so the source voltages equal the voltage drops.
+4. **What does a negative answer for a branch current mean?** The real current flows in the opposite direction to the one assumed when the equations were written.
+5. **When do Kirchhoff's laws stop being accurate?** When the circuit is not lumped, for example at radio and microwave frequencies or on very long transmission lines, where transmission line theory is needed.
 
 ## Related reading
 

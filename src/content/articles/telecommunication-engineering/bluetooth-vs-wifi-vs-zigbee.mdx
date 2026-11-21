@@ -1,0 +1,190 @@
+---
+title: "Bluetooth vs WiFi vs Zigbee: Range, Speed and Power"
+description: "Bluetooth vs WiFi vs Zigbee compared: standards, bands, data rates, topology, power use and when to pick each, with a path loss worked example."
+pubDate: 2026-11-21
+reviewedDate: 2026-11-21
+discipline: telecommunication-engineering
+subcategory: wireless
+focusKeyword: "bluetooth vs wifi vs zigbee"
+image: { src: /images/featured/bluetooth-vs-wifi-vs-zigbee.webp, alt: "Bluetooth vs WiFi vs Zigbee: Range, Speed and Power: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [bluetooth, wifi, zigbee, ieee-802-15-4, wireless, iot]
+faq:
+  - q: "Can Bluetooth, Wi-Fi and Zigbee work in the same room?"
+    a: "Yes. All three share the 2.4 GHz ISM band, but each has ways to coexist. Bluetooth hops across many narrow channels and can skip busy ones with adaptive frequency hopping, all three listen before they transmit or retry lost packets, and a Zigbee network can be placed on a channel that falls between the Wi-Fi channels in use."
+  - q: "Is Zigbee faster than Bluetooth Low Energy?"
+    a: "No. IEEE 802.15.4 at 2.4 GHz, which Zigbee uses, has a nominal data rate of 250 kbit/s, while Bluetooth LE offers 1 Mbit/s on the LE 1M PHY and 2 Mbit/s on the LE 2M PHY. Zigbee is chosen for its self healing mesh and low duty cycle operation, not for speed."
+  - q: "Does Zigbee need Wi-Fi or internet to work?"
+    a: "No. A Zigbee network runs on its own radio and is formed by a coordinator. It only needs a gateway, often a hub with Wi-Fi or Ethernet, when its devices must be reached from an IP network or the internet."
+references:
+  - text: "IEEE 802.11-2020, IEEE Standard for Information Technology, Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications"
+  - text: "IEEE 802.11ax-2021, Enhancements for High Efficiency WLAN"
+  - text: "IEEE 802.15.4-2020, IEEE Standard for Low-Rate Wireless Networks"
+  - text: "Bluetooth SIG, Bluetooth Core Specification, Version 5.4 (2023)"
+  - text: "Bluetooth SIG, Mesh Protocol Specification, Version 1.1 (2023)"
+  - text: "Connectivity Standards Alliance, Zigbee Specification (Zigbee PRO 2023, Revision 23)"
+  - text: "T. S. Rappaport, Wireless Communications: Principles and Practice, 2nd ed., Prentice Hall, 2002"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Bluetooth vs WiFi vs Zigbee** compares three short range radios. Bluetooth links personal devices at 1 to 3 Mbit/s in 2.4 GHz. Wi-Fi (IEEE 802.11) is the wireless LAN, using 2.4, 5 and 6 GHz for high throughput through an access point. Zigbee builds low power mesh networks on IEEE 802.15.4 at 250 kbit/s.
+
+</Key>
+
+You face Bluetooth vs WiFi vs Zigbee in almost any smart home, wearable or factory sensor project. All three can run in the 2.4 GHz ISM band (2400 to 2483.5 MHz), but each was designed for a different job. Bluetooth replaces the cable between a phone and its accessories, Wi-Fi extends an IP network to laptops and phones, and Zigbee connects many small battery powered devices that send a few bytes at a time. Each standard fixes the data rate, topology and power budget, so start from what the device has to do.
+
+
+<ArticleVideo slug="bluetooth-vs-wifi-vs-zigbee" title="How Bluetooth, Wi-Fi and Zigbee networks work" />
+
+## Bluetooth vs WiFi vs Zigbee comparison table
+
+| Feature | Bluetooth (Classic and LE) | Wi-Fi | Zigbee |
+| --- | --- | --- | --- |
+| Standard body | Bluetooth SIG, Core Specification | IEEE 802.11, Wi-Fi Alliance | IEEE 802.15.4 PHY and MAC, Connectivity Standards Alliance network and application layers |
+| Bands | 2.4 GHz ISM | 2.4 GHz, 5 GHz, 6 GHz | 2.4 GHz worldwide (802.15.4 also defines 868 MHz and 915 MHz) |
+| Channels | Classic: 79 of 1 MHz; LE: 40 of 2 MHz | 20 MHz, bonded to 40, 80 or 160 MHz | 16 channels (11 to 26) at 5 MHz spacing |
+| Modulation | GFSK; π/4-DQPSK and 8DPSK for EDR | OFDM with QAM (DSSS in 802.11b) | O-QPSK with DSSS at 2.4 GHz |
+| Nominal data rate | Classic 1, 2 or 3 Mbit/s; LE 125 kbit/s to 2 Mbit/s | 54 Mbit/s (802.11a/g) up to about 9.6 Gbit/s (802.11ax) | 250 kbit/s at 2.4 GHz |
+| Basic topology | Piconet: one central, up to 7 active peripherals (Classic) | Star around an access point | Mesh of coordinator, routers and end devices |
+| Medium access | Central schedules time slots | CSMA/CA | CSMA-CA, optional beacons |
+| Typical use | Audio, wearables, phone accessories | Internet access, video, file transfer | Lighting, sensors, building and home automation |
+| Native IP | No | Yes | No, needs a gateway |
+
+The data rates are raw PHY rates from the standards. Application throughput is always lower because of headers, acknowledgements and shared airtime.
+
+<figure class="anim">
+<svg width="600" height="330" viewBox="0 0 600 330" fill="none" role="img" aria-label="Bluetooth vs WiFi vs Zigbee topology diagram: a Bluetooth piconet with one central and seven peripherals in a star, a Wi-Fi access point with a wired LAN uplink serving four stations in a star, and a Zigbee mesh where a packet from an end device hops through two routers to the coordinator">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="105" y="24">Bluetooth piconet</text><text x="300" y="24">Wi-Fi infrastructure</text><text x="500" y="24">Zigbee mesh</text>
+</g>
+<g stroke="#c9d2de" stroke-width="1.5"><path d="M202 36V300M398 36V300" /></g>
+<g stroke="#13a89e" stroke-width="4">
+<path d="M105 150L105 80M105 150L160 106M105 150L173 166M105 150L135 213M105 150L75 213M105 150L37 166M105 150L50 106" />
+</g>
+<g stroke="#fff" stroke-width="1.5" fill="none" class="anim-flow">
+<path d="M105 150L105 80M105 150L160 106M105 150L173 166M105 150L135 213M105 150L75 213M105 150L37 166M105 150L50 106" />
+</g>
+<g class="anim-pulse"><circle cx="105" cy="150" r="17" fill="#0b2545" /></g>
+<g stroke="#0b2545" stroke-width="2" fill="#e6f6f4">
+<circle cx="105" cy="80" r="11" /><circle cx="160" cy="106" r="11" /><circle cx="173" cy="166" r="11" /><circle cx="135" cy="213" r="11" /><circle cx="75" cy="213" r="11" /><circle cx="37" cy="166" r="11" /><circle cx="50" cy="106" r="11" />
+</g>
+<g stroke="#0b2545" stroke-width="4"><path d="M300 66V128" /></g>
+<g stroke="#f5b800" stroke-width="4">
+<path d="M300 150L240 120M300 150L360 120M300 150L245 205M300 150L355 205" />
+</g>
+<g stroke="#fff" stroke-width="1.5" fill="none" class="anim-flow">
+<path d="M300 66V128" /><path d="M300 150L240 120M300 150L360 120M300 150L245 205M300 150L355 205" />
+</g>
+<rect x="262" y="42" width="76" height="24" rx="5" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<rect x="282" y="132" width="36" height="36" rx="6" fill="#0b2545" />
+<g stroke="#0b2545" stroke-width="2" fill="#fff7e0">
+<rect x="226" y="110" width="28" height="20" rx="3" /><rect x="346" y="110" width="28" height="20" rx="3" /><rect x="231" y="195" width="28" height="20" rx="3" /><rect x="341" y="195" width="28" height="20" rx="3" />
+</g>
+<g stroke="#c9d2de" stroke-width="2.5">
+<path d="M440 160L490 90M440 160L500 195M490 90L500 195M490 90L560 130M500 195L560 130M490 90L555 55M500 195L455 245M560 130L570 215" />
+</g>
+<g stroke="#b42318" stroke-width="4.5"><path d="M570 215L560 130L490 90L440 160" /></g>
+<g stroke="#fff" stroke-width="2" fill="none" class="anim-flow-slow"><path d="M570 215L560 130L490 90L440 160" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<circle cx="440" cy="160" r="16" fill="#0b2545" />
+<circle cx="490" cy="90" r="13" fill="#e6f6f4" /><circle cx="500" cy="195" r="13" fill="#e6f6f4" /><circle cx="560" cy="130" r="13" fill="#e6f6f4" />
+<circle cx="555" cy="55" r="10" fill="#fff7e0" /><circle cx="455" cy="245" r="10" fill="#fff7e0" />
+</g>
+<circle class="anim-pulse" cx="570" cy="215" r="10" fill="#fff7e0" stroke="#b42318" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="middle">
+<text x="105" y="154" fill="#fff">C</text>
+<text x="300" y="58" fill="#0b2545">LAN</text><text x="300" y="154" fill="#fff">AP</text>
+<text x="440" y="164" fill="#fff">C</text>
+<text x="490" y="94" fill="#0b2545">R</text><text x="500" y="199" fill="#0b2545">R</text><text x="560" y="134" fill="#0b2545">R</text>
+<text x="555" y="59" fill="#0b2545">E</text><text x="455" y="249" fill="#0b2545">E</text><text x="570" y="219" fill="#0b2545">E</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="105" y="262">1 central, up to 7 active</text><text x="105" y="278">peripherals</text>
+<text x="105" y="300" font-weight="700">2.4 GHz, 1 to 3 Mbit/s</text>
+<text x="300" y="262">Stations join one</text><text x="300" y="278">access point</text>
+<text x="300" y="300" font-weight="700">2.4, 5 and 6 GHz</text>
+<text x="500" y="278">C coordinator, R router, E end device</text>
+<text x="500" y="300" font-weight="700">2.4 GHz, 250 kbit/s</text>
+</g>
+<text x="300" y="324" font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">Red path: a sensor packet hops end device to router to router to coordinator</text>
+</svg>
+<figcaption>Typical topologies: a Bluetooth piconet, a Wi-Fi access point star and a Zigbee mesh with a packet relayed over three hops.</figcaption>
+</figure>
+
+## Differences explained
+
+### Radio and data rate
+
+Bluetooth Classic (BR/EDR) hops across 79 channels of 1 MHz at 1600 hops per second. Basic rate uses GFSK at 1 Mbit/s, and Enhanced Data Rate adds π/4-DQPSK at 2 Mbit/s and 8DPSK at 3 Mbit/s. Bluetooth Low Energy uses 40 channels of 2 MHz, three of which are primary advertising channels. Since version 5.0 it offers the LE 1M and LE 2M PHYs and the LE Coded PHY at 500 or 125 kbit/s, which trades rate for range.
+
+Wi-Fi uses OFDM on channels of 20 MHz or wider, with higher order QAM and several spatial streams, so its throughput is far above the other two. Its standards, bands and generations are covered in [Wi-Fi standards and bands](/telecommunication-engineering/wi-fi-standards-and-bands/), and the modulation schemes in [modulation techniques](/telecommunication-engineering/modulation-techniques/).
+
+The IEEE 802.15.4 2.4 GHz PHY that Zigbee uses sends O-QPSK at 62.5 ksymbol/s with 4 bits per symbol, which gives 250 kbit/s. Its 16 channels sit at 2405 + 5(k − 11) MHz for channel numbers k = 11 to 26. A PHY frame carries at most 127 bytes, so Zigbee suits short messages, not streams.
+
+### Topology
+
+A Bluetooth Classic piconet has one central device that sets the hopping sequence and timing, with up to seven active peripherals. Bluetooth LE links are also central to peripheral, and the Bluetooth SIG publishes a separate Mesh Protocol specification for many node networks built on LE.
+
+Wi-Fi normally works as an infrastructure basic service set: every station associates with one access point, which bridges the radio to the wired LAN. How that LAN forwards frames is explained in [router vs switch](/telecommunication-engineering/router-vs-switch/).
+
+Zigbee is built for mesh. One coordinator forms the network, routers relay traffic for others, and end devices talk only to their parent router, so they can sleep most of the time. If a router fails, the network finds another route. That is why Zigbee is used for lighting and building systems spread across many rooms.
+
+### Power
+
+Power use follows how long the radio stays on. Wi-Fi radios move a lot of data quickly but usually stay associated with the access point, so they draw more average power; target wake time in 802.11ax lets IoT clients schedule when they wake. Bluetooth LE and Zigbee end devices sleep between short transmissions, which lets small sensors run from coin cells. Bluetooth Classic defines power classes of 100 mW (Class 1), 2.5 mW (Class 2) and 1 mW (Class 3).
+
+### Coexistence in 2.4 GHz
+
+All three share 2.4 GHz with microwave ovens and other devices. Bluetooth uses adaptive frequency hopping to avoid busy channels. Wi-Fi channels 1, 6 and 11 are centred at 2412, 2437 and 2462 MHz and are about 20 MHz wide, so Zigbee channels 15 (2425 MHz), 20 (2450 MHz), 25 (2475 MHz) and 26 (2480 MHz) fall in the gaps between them. Pick one of those when Zigbee and Wi-Fi share a building.
+
+## Key formulas for Bluetooth, Wi-Fi and Zigbee links
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Free space path loss | FSPL = 20 log10(4πdf ÷ c) | d in m, f in Hz, c = 3 × 10^8 m/s, FSPL in dB |
+| 802.15.4 channel centre (2.4 GHz) | f_c = 2405 + 5(k − 11) | f_c in MHz, k = 11 to 26 |
+| 802.15.4 bit rate | R_b = R_s × bits per symbol | 62.5 ksymbol/s × 4 bit = 250 kbit/s |
+| Minimum transfer time | t = 8N ÷ R | N in bytes, R in bit/s, t in s |
+
+Free space loss comes from the Friis equation in Rappaport:
+
+$$
+\text{FSPL} = 20\log_{10}\!\left(\frac{4\pi d f}{c}\right)\ \text{dB}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A sensor 10 m from its receiver must send a 32 000 byte log file. Options: Zigbee at 2.44 GHz and 250 kbit/s, Bluetooth LE at 2.44 GHz on the 1 Mbit/s and 2 Mbit/s PHYs, and Wi-Fi 802.11a at 5.5 GHz and 54 Mbit/s.</dd>
+<dt>Find</dt><dd>The free space path loss at 2.44 GHz and 5.5 GHz, and the minimum air time for the file at each nominal data rate.</dd>
+<dt>Assumptions</dt><dd>Free space with isotropic antennas; c = 3 × 10^8 m/s; no protocol overhead, retries or sharing of the channel.</dd>
+<dt>Solution</dt><dd>FSPL at 2.44 GHz = 20 log10[(4π × 10 × 2.44 × 10^9) ÷ (3 × 10^8)] = 60.19 dB<br />FSPL at 5.5 GHz = 20 log10[(4π × 10 × 5.5 × 10^9) ÷ (3 × 10^8)] = 67.25 dB, which is 7.06 dB more<br />File size = 32 000 × 8 = 256 000 bit<br />Zigbee: 256 000 ÷ 250 000 = 1.024 s<br />Bluetooth LE 1M: 256 000 ÷ 1 000 000 = 0.256 s; LE 2M: 0.128 s<br />Wi-Fi at 54 Mbit/s: 256 000 ÷ 54 000 000 = 0.0047 s (4.7 ms)</dd>
+<dt>Answer</dt><dd><strong>Path loss is 60.19 dB at 2.44 GHz and 67.25 dB at 5.5 GHz over 10 m. Minimum air time is 1.024 s for Zigbee, 0.256 s and 0.128 s for Bluetooth LE, and about 4.7 ms for Wi-Fi.</strong></dd>
+<dt>Limitations</dt><dd>Real links lose extra signal through walls, bodies and multipath fading, and real throughput is well below the PHY rate because of headers, acknowledgements, the 127 byte 802.15.4 frame limit and contention. The figures are lower bounds for comparison only.</dd>
+</dl>
+</Example>
+
+Antenna gain changes the received power from the same path loss; see [antenna gain and directivity](/electronics-engineering/antenna-gain-and-directivity/).
+
+## When to use which
+
+Use Bluetooth for headsets, speakers, fitness bands, medical wearables and any accessory paired to a phone, because every phone already has the radio. Bluetooth LE also suits beacons and battery sensors that one phone or gateway reads.
+
+Use Wi-Fi for anything that needs IP and real throughput, such as laptops, cameras, displays and HMI tablets. It works through existing access points and reaches the internet directly, but draws more power.
+
+Use Zigbee for many low rate nodes spread over a building, such as lights, switches, door sensors and thermostats, where a self healing mesh and long battery life matter more than speed. A gateway connects it to the IP network.
+
+Many products use more than one. A smart home hub often has Wi-Fi or Ethernet towards the router and a Zigbee radio towards the devices, while a phone sets it up over Bluetooth LE. For wired field networks, see [Modbus RTU vs TCP](/automation-robotics/modbus-rtu-vs-tcp/).
+
+## Bluetooth vs Wi-Fi vs Zigbee interview and viva questions
+
+1. **Which standard defines the Zigbee physical layer?** IEEE 802.15.4 defines the PHY and MAC. The Connectivity Standards Alliance Zigbee specification adds the network, security and application layers on top.
+2. **How is the 250 kbit/s rate of 802.15.4 at 2.4 GHz obtained?** The O-QPSK PHY sends 62.5 ksymbol/s and each symbol carries 4 bits, so 62.5 × 4 = 250 kbit/s.
+3. **What is a Bluetooth piconet?** It is a network of one central device and up to seven active peripherals in Bluetooth Classic, all following the hopping sequence and clock of the central.
+4. **Why can Zigbee and Wi-Fi share 2.4 GHz?** Zigbee channels 15, 20, 25 and 26 fall in the gaps between Wi-Fi channels 1, 6 and 11, and both use listen before talk access with retries.
+5. **Why does path loss rise when Wi-Fi moves from 2.4 GHz to 5 GHz?** Free space path loss grows with 20 log10(f), so at the same distance the 5.5 GHz link loses about 7 dB more than a 2.44 GHz link.
