@@ -89,11 +89,11 @@ computer-science|computer-architecture|Cache Memory Explained: Levels and Mappin
 automation-robotics|motion-control|PID Controller Explained with Tuning Methods|pid-controller|fundamentals|pid controller|2026-11-21
 ai-data-engineering|generative-ai|Retrieval Augmented Generation (RAG) Explained|retrieval-augmented-generation|explanation|retrieval augmented generation|2026-11-21
 telecommunication-engineering|wireless|Bluetooth vs Wi-Fi vs Zigbee Compared|bluetooth-vs-wifi-vs-zigbee|comparison|bluetooth vs wifi vs zigbee|2026-11-21
-petroleum-engineering|gas-processing-lng|Natural Gas Dehydration: Glycol and Mol Sieve|natural-gas-dehydration|explanation|natural gas dehydration|todo
-renewable-energy|inverters|MPPT Explained: Maximum Power Point Tracking|mppt-explained|fundamentals|mppt|todo
-environmental-engineering|eia|Air Quality Index (AQI): Calculation and Pollutants|air-quality-index|fundamentals|air quality index|todo
-mining-engineering|mineral-processing|Crushing and Grinding Circuits in Mineral Processing|crushing-and-grinding-circuits|explanation|crushing and grinding|todo
-manufacturing-engineering|quality|Quality Control vs Quality Assurance|quality-control-vs-quality-assurance|comparison|quality control vs quality assurance|todo
+petroleum-engineering|gas-processing-lng|Natural Gas Dehydration: Glycol and Mol Sieve|natural-gas-dehydration|explanation|natural gas dehydration|2026-11-22
+renewable-energy|inverters|MPPT Explained: Maximum Power Point Tracking|mppt-explained|fundamentals|mppt|2026-11-22
+environmental-engineering|eia|Air Quality Index (AQI): Calculation and Pollutants|air-quality-index|fundamentals|air quality index|2026-11-22
+mining-engineering|mineral-processing|Crushing and Grinding Circuits in Mineral Processing|crushing-and-grinding-circuits|explanation|crushing and grinding|2026-11-22
+manufacturing-engineering|quality|Quality Control vs Quality Assurance|quality-control-vs-quality-assurance|comparison|quality control vs quality assurance|2026-11-22
 materials-engineering|corrosion|Cathodic Protection: Sacrificial vs Impressed Current|cathodic-protection|comparison|cathodic protection|todo
 safety-engineering|fire-detection|Gas Detectors: Types and Working Principles|gas-detector-types|working-principle|gas detectors|todo
 agricultural-engineering|post-harvest|Grain Storage Structures and Silos|grain-storage-structures|explanation|grain storage|todo
