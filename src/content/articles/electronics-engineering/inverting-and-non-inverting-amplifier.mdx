@@ -3,6 +3,7 @@ title: "Inverting and Non-Inverting Amplifier: Op-Amp Basics"
 description: "How op-amps work with negative feedback, gain equations for inverting and non-inverting amplifiers, and limits such as bandwidth and slew rate."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-22
 discipline: electronics-engineering
 subcategory: analog-electronics
 focusKeyword: "inverting and non-inverting amplifier"
@@ -29,12 +30,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The inverting and non-inverting amplifier are the two basic op-amp circuits. An operational amplifier (op-amp) is a very high gain differential amplifier. Used with **negative feedback**, its gain is set by two resistors:
-
-- **Inverting amplifier:** gain = −Rf / Rin
-- **Non-inverting amplifier:** gain = 1 + Rf / Rg
-
-Real op-amps are limited by their gain bandwidth product, slew rate, output swing and input errors.
+The **inverting and non-inverting amplifier** are the two basic op-amp circuits with negative feedback, where two resistors set the gain. The inverting amplifier has gain −Rf / Rin and an inverted output. The non-inverting amplifier has gain 1 + Rf / Rg, an in-phase output and very high input impedance. Bandwidth and slew rate limit both.
 
 </Key>
 
@@ -59,14 +55,15 @@ These rules, together with [Ohm's law](/electrical-engineering/ohms-law-kirchhof
 
 ## Inverting amplifier
 
-<figure>
+<figure class="anim">
 <svg width="520" height="220" viewBox="0 0 520 220" fill="none" role="img" aria-label="Inverting amplifier: input through Rin to the inverting input, feedback resistor Rf from output to inverting input, non-inverting input grounded">
 <path d="M220 60V160L320 110Z" stroke="#0b2545" stroke-width="2.5" stroke-linejoin="round" fill="#ffffff" />
 <path d="M40 85H90M150 85H220M180 85V35H250M310 35H400V110M320 110H460M220 135H200V175" stroke="#0b2545" stroke-width="2.5" />
 <path d="M188 175H212M192 181H208M197 187H203" stroke="#0b2545" stroke-width="2" />
 <rect x="90" y="75" width="60" height="20" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
 <rect x="250" y="25" width="60" height="20" stroke="#0b2545" stroke-width="2.5" fill="#ffffff" />
-<circle cx="40" cy="85" r="4" fill="#0b2545" /><circle cx="460" cy="110" r="4" fill="#0b2545" /><circle cx="180" cy="85" r="4" fill="#0b2545" /><circle cx="400" cy="110" r="4" fill="#0b2545" />
+<path class="anim-flow" d="M40 85H90M150 85H180V35H250M310 35H400V110" stroke="#13a89e" stroke-width="2" />
+<circle cx="40" cy="85" r="4" fill="#0b2545" /><circle cx="460" cy="110" r="4" fill="#0b2545" /><circle class="anim-pulse" cx="180" cy="85" r="4" fill="#0b2545" /><circle cx="400" cy="110" r="4" fill="#0b2545" />
 <text x="229" y="90" font-size="18" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">−</text>
 <text x="228" y="141" font-size="18" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">+</text>
 <text x="120" y="66" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Rin</text>
@@ -74,7 +71,7 @@ These rules, together with [Ohm's law](/electrical-engineering/ohms-law-kirchhof
 <text x="34" y="70" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Vin</text>
 <text x="466" y="98" text-anchor="middle" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Vout</text>
 </svg>
-<figcaption>Inverting amplifier. The non-inverting input is grounded, so the inverting input is a virtual ground.</figcaption>
+<figcaption>Inverting amplifier. The non-inverting input is grounded, so the inverting input is a virtual ground. For a positive input, the current Vin / Rin flows through Rin and on through Rf to the output, which goes negative.</figcaption>
 </figure>
 
 The input signal is applied through Rin to the inverting input, and Rf feeds the output back to the same input. The non-inverting input is grounded. By rule 2, the inverting input is held at 0 V, a **virtual ground**. The input current is Vin / Rin, and by rule 1 all of it flows through Rf, so Vout = −(Vin / Rin) × Rf:
@@ -158,6 +155,25 @@ $$
 ## Choosing resistor values
 
 Resistors in the range of about 1 kΩ to 100 kΩ suit most general purpose op-amps. Much smaller values load the output and waste power; much larger values increase noise and errors from bias current and stray capacitance. Use 1 percent tolerance resistors where the gain must be accurate, since the gain depends on their ratio.
+
+## Key formulas for inverting and non-inverting amplifiers
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Open-loop output | Vout = A_OL (V+ − V−) | A_OL = open-loop gain, V in volts |
+| Inverting gain | Av = −Rf / Rin | Rf, Rin in Ω |
+| Non-inverting gain | Av = 1 + Rf / Rg | Rg = resistor from inverting input to ground, in Ω |
+| Noise gain | 1 + Rf / Rg | Same expression for both configurations |
+| Closed-loop bandwidth | f(−3 dB) ≈ GBW / noise gain | GBW in Hz |
+| Full power bandwidth | f_max = SR / (2π Vp) | SR in V/s, Vp = peak output in V |
+
+## Inverting and non-inverting amplifier interview and viva questions
+
+1. **What are the two golden rules of an ideal op-amp with negative feedback?** No current flows into either input, and the output adjusts so that the two inputs are at the same voltage.
+2. **What is a virtual ground?** In an inverting amplifier the non-inverting input is grounded, so negative feedback holds the inverting input at 0 V even though it is not connected to ground.
+3. **Why can a non-inverting amplifier not have a gain below 1?** Its gain is 1 + Rf / Rg, and Rf / Rg cannot be negative, so the minimum is 1, the voltage follower.
+4. **What is the noise gain of an inverting amplifier with a gain of −10?** It is 1 + Rf / Rg = 11, the same as a non-inverting amplifier with a gain of 11, and it sets the closed-loop bandwidth.
+5. **How do gain bandwidth product and slew rate differ?** GBW limits small-signal bandwidth for a given gain, while slew rate limits how fast the output voltage can change, which matters for large swings.
 
 ## Related reading
 

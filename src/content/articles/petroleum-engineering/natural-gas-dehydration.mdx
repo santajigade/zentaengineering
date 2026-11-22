@@ -1,0 +1,205 @@
+---
+title: "Natural Gas Dehydration: Glycol and Mol Sieve"
+description: "Natural gas dehydration explained: why water is removed, how TEG glycol and molecular sieve units work, design limits and a glycol rate example."
+pubDate: 2026-11-22
+reviewedDate: 2026-11-22
+discipline: petroleum-engineering
+subcategory: gas-processing-lng
+focusKeyword: "natural gas dehydration"
+image: { src: /images/featured/natural-gas-dehydration.webp, alt: "Natural Gas Dehydration: Glycol and Mol Sieve: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [gas-dehydration, teg, glycol, molecular-sieve, gas-processing]
+faq:
+  - q: "Why is triethylene glycol preferred for gas dehydration?"
+    a: "TEG has a high boiling point and good thermal stability, so it can be regenerated to high purity in a simple atmospheric reboiler with low vaporisation losses. It also has a strong affinity for water and reaches the dew points needed for most pipeline contracts."
+  - q: "When is a molecular sieve used instead of glycol?"
+    a: "A molecular sieve is used when the gas must be extremely dry, for example upstream of cryogenic NGL recovery or LNG liquefaction, where water must be below about 0.1 ppmv to stop ice and hydrates forming in the cold equipment. Glycol cannot reach that level."
+  - q: "What is the water dew point of natural gas?"
+    a: "It is the temperature at which water starts to condense from the gas at a given pressure. Dehydration lowers the water content, which lowers the dew point. Specifications are written either as a water content, such as 7 lb per MMscf, or as a dew point at a stated pressure."
+references:
+  - text: "GPSA Engineering Data Book, 14th ed., Section 20: Dehydration, Gas Processors Suppliers Association"
+  - text: "A. J. Kidnay, W. R. Parrish and D. G. McCartney, Fundamentals of Natural Gas Processing, 3rd ed., CRC Press, 2019"
+  - text: "J. M. Campbell, Gas Conditioning and Processing, Vol. 2: The Equipment Modules, Campbell Petroleum Series"
+  - text: "S. Mokhatab, W. A. Poe and J. Y. Mak, Handbook of Natural Gas Transmission and Processing, 4th ed., Gulf Professional Publishing, 2019"
+  - text: "API Specification 12GDU, Specification for Glycol-Type Gas Dehydration Units, American Petroleum Institute"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Natural gas dehydration** is the removal of water vapour from produced gas so that it cannot form hydrates, cause corrosion or condense in pipelines. The two main methods are absorption in liquid triethylene glycol (TEG), which meets typical pipeline limits, and adsorption on molecular sieve beds, which dries gas for cryogenic plants.
+
+</Key>
+
+Natural gas dehydration is one of the first treatment steps after gas leaves the wellhead separators. Gas from a reservoir is normally saturated with water at reservoir conditions, and as it cools and its pressure changes in flowlines, that water can condense, freeze or combine with methane to form solid hydrates.
+
+
+<ArticleVideo slug="natural-gas-dehydration" title="How natural gas dehydration works" />
+
+## Why natural gas dehydration is needed
+
+Water in gas causes four problems.
+
+- Hydrates. Water and light hydrocarbons form ice-like solids at temperatures well above 0 °C when the pressure is high. Hydrates block valves, chokes and pipelines.
+- Corrosion. Liquid water dissolves carbon dioxide and hydrogen sulphide to form acidic solutions that attack carbon steel.
+- Liquid slugs. Condensed water collects at low points, reduces pipeline capacity and arrives at the receiving end as slugs.
+- Freezing in cold plants. In NGL recovery and LNG trains the gas is cooled far below 0 °C, so any water would freeze in the heat exchangers.
+
+Sales gas contracts therefore limit water content. A common North American limit is 7 lb of water per million standard cubic feet (MMscf), about 112 mg/Sm³. Gas going to cryogenic processing needs much less, typically below about 0.1 ppmv. The amount of water in saturated gas is read from a water content chart such as the McKetta-Wehe chart in the GPSA Engineering Data Book; it rises with temperature and falls with pressure.
+
+The main dehydration methods are:
+
+- Absorption in a liquid desiccant, almost always TEG.
+- Adsorption on a solid desiccant: molecular sieve, silica gel or activated alumina.
+- Other methods, such as cooling with hydrate inhibitor injection, membranes and calcium chloride units, used in special cases.
+
+The difference between taking water into a liquid and holding it on a solid surface is covered in [absorption vs adsorption](/chemical-engineering/absorption-vs-adsorption/).
+
+## How a TEG glycol dehydration unit works
+
+<figure class="anim">
+<svg width="640" height="310" viewBox="0 0 640 310" fill="none" role="img" aria-label="Natural gas dehydration with triethylene glycol: wet gas enters the bottom of a tray contactor and dry gas leaves the top, lean glycol enters the top, rich glycol flows from the bottom to a flash tank, a lean rich glycol exchanger and a still column on a reboiler where water vapour is driven off, and the lean glycol is pumped back to the contactor">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="90" y="40" width="60" height="210" rx="10" fill="#eef1f6" />
+<rect x="220" y="248" width="70" height="34" rx="12" fill="#eef1f6" />
+<rect x="340" y="248" width="60" height="50" rx="4" fill="#e6f6f4" />
+<rect x="455" y="70" width="40" height="80" rx="4" fill="#eef1f6" />
+<rect x="430" y="150" width="160" height="55" rx="8" fill="#fff7e0" />
+<circle cx="185" cy="180" r="11" fill="#e6f6f4" />
+</g>
+<g stroke="#7b8794" stroke-width="1.5"><path d="M95 65H145M95 85H145M95 105H145M95 125H145M95 175H145M95 195H145M95 215H145M95 235H145" /></g>
+<path d="M180 186L185 174L190 186Z" fill="#0b2545" />
+<g stroke="#0b5394" stroke-width="3"><path d="M20 225H90M120 40V18H230" /></g>
+<g stroke="#b42318" stroke-width="3"><path d="M120 250V265H220M290 265H340M400 265H420V120H455" /></g>
+<g stroke="#13a89e" stroke-width="3"><path d="M590 180H615V290H400M340 290H185V191M185 169V70H150" /></g>
+<g stroke="#7b8794" stroke-width="2.5"><path d="M475 70V30M255 248V232" /></g>
+<g stroke="#fff" stroke-width="2" fill="none">
+<path class="anim-flow" d="M20 225H90M120 40V18H230" />
+<path class="anim-flow-slow" d="M120 250V265H220M290 265H340M400 265H420V120H455" />
+<path class="anim-flow-slow" d="M590 180H615V290H400M340 290H185V191M185 169V70H150" />
+<path class="anim-flow" d="M475 70V30M255 248V232" />
+</g>
+<circle class="anim-pulse" cx="510" cy="215" r="5" fill="#f5b800" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="120" y="154" text-anchor="middle" font-weight="700">Contactor</text>
+<text x="22" y="216">Wet gas in</text>
+<text x="238" y="22" fill="#0b5394">Dry gas out</text>
+<text x="160" y="62">Lean TEG in</text>
+<text x="200" y="184">Glycol pump</text>
+<text x="255" y="269" text-anchor="middle" font-size="10">Flash tank</text>
+<text x="262" y="236">Flash gas</text>
+<text x="370" y="270" text-anchor="middle" font-size="10">Glycol</text>
+<text x="370" y="283" text-anchor="middle" font-size="10">exchanger</text>
+<text x="414" y="210" text-anchor="end" fill="#b42318">Rich TEG</text>
+<text x="475" y="114" text-anchor="middle" font-size="10">Still</text>
+<text x="545" y="174" text-anchor="middle" font-weight="700">Reboiler</text>
+<text x="545" y="191" text-anchor="middle" font-size="10">about 204 °C max</text>
+<text x="484" y="34">Water vapour out</text>
+<text x="505" y="284" text-anchor="middle" fill="#13a89e">Lean TEG</text>
+</g>
+</svg>
+<figcaption>TEG dehydration loop: gas and glycol meet counter-currently in the contactor, and the reboiler boils the absorbed water out so the lean glycol can be reused.</figcaption>
+</figure>
+
+A glycol unit is a closed loop with an absorption side and a regeneration side.
+
+### Absorption in the contactor
+
+Wet gas first passes through an inlet scrubber that removes free liquids, then enters the bottom of the contactor (absorber). The contactor holds bubble cap trays or structured packing, commonly the equivalent of 6 to 8 trays. Lean, dry TEG enters near the top and flows down from tray to tray while the gas bubbles up through it. Because the flows are counter-current, the driest glycol meets the driest gas at the top, which gives the lowest outlet water content. Dry gas leaves the top through a mist eliminator, and glycol that has picked up water (rich glycol) leaves the bottom.
+
+### Regeneration
+
+The rich glycol is still at contactor pressure. It is usually heated in a coil at the top of the still column, then let down into a **flash tank**, where dissolved hydrocarbon gas is released and can be used as fuel. Filters remove solids and degraded products. The glycol then passes through the **lean/rich exchanger**, where it is heated by hot lean glycol coming from the reboiler.
+
+In the **still column** and **reboiler**, the glycol is heated to drive off the water. TEG boils at a much higher temperature than water, so the water leaves as vapour from the top of the still while the glycol stays in the reboiler. The reboiler temperature is limited to about 204 °C (400 °F) because TEG starts to degrade thermally above that. At atmospheric pressure this gives a lean TEG of around 98.5 to 99 wt%. When drier gas is needed, **stripping gas** is passed through the hot lean glycol to remove more water, raising the concentration towards 99.9 wt%.
+
+The hot lean glycol is cooled in the lean/rich exchanger and a final cooler, then pumped back to the top of the contactor.
+
+### Operating points that matter
+
+- Glycol concentration sets how low the outlet water content can go.
+- Circulation rate is typically 2 to 5 US gallons of TEG per lb of water removed, with about 3 gal/lb a common design figure (about 25 L/kg).
+- Gas inlet temperature matters because warmer gas carries more water. Below about 10 °C, TEG becomes viscous and tends to foam.
+- Emissions from the still vent include aromatic hydrocarbons (benzene, toluene, ethylbenzene, xylenes) absorbed from the gas, so many units route the vent to a condenser or combustion device.
+
+## Molecular sieve dehydration
+
+A molecular sieve is a crystalline zeolite with pores of a uniform, molecular size. Types 3A, 4A, 5A and 13X differ in pore size; 4A is widely used for gas dehydration. Water molecules are small and strongly polar, so they are held on the internal surface while most hydrocarbon molecules pass through.
+
+A typical unit has two or more vessels packed with sieve beads:
+
+1. Adsorption. Wet gas flows downwards through one bed. Water is taken up in a moving mass transfer zone that travels down the bed. Adsorption periods of 8 to 24 hours are common.
+2. Regeneration. Before the mass transfer zone reaches the bottom of the bed, the gas is switched to the other bed. The loaded bed is heated with hot dry regeneration gas, typically at about 230 to 315 °C (450 to 600 °F), usually flowing upwards, which drives off the water.
+3. Cooling. The bed is cooled with unheated gas, then put back on line.
+
+The wet regeneration gas is cooled, the condensed water is separated, and the gas is recycled or sent to fuel. Molecular sieves can dry gas to below 0.1 ppmv water, which is why they protect cryogenic NGL plants and the liquefaction trains described in the [LNG process](/petroleum-engineering/lng-process/). The cost is higher capital, high regeneration heat duty and gradual loss of capacity as the sieve ages.
+
+## TEG vs molecular sieve for natural gas dehydration
+
+| Feature | TEG absorption | Molecular sieve adsorption |
+| --- | --- | --- |
+| Desiccant | Liquid triethylene glycol | Solid zeolite beads |
+| Operation | Continuous loop | Cyclic, two or more beds |
+| Outlet water | Meets pipeline limits such as 7 lb/MMscf | Below about 0.1 ppmv |
+| Regeneration | Reboiler, about 204 °C maximum | Hot gas, about 230 to 315 °C |
+| Typical use | Sales gas, field and offshore units | Upstream of cryogenic NGL and LNG plants |
+| Main issues | Foaming, glycol losses, vent emissions | Bed ageing, high heat duty, higher cost |
+
+Large plants sometimes use both: a glycol unit removes the bulk of the water and a smaller molecular sieve polishes the gas before the cold section. Upstream of either unit, a [separator](/petroleum-engineering/oil-gas-separators/) must remove free water and condensate, because liquid water and hydrocarbons overload glycol and damage sieve beds.
+
+## Water removal and glycol rate
+
+The water to be removed is the gas flow multiplied by the drop in water content:
+
+$$
+\dot m_w = Q_g \left( W_\text{in} - W_\text{out} \right)
+$$
+
+The glycol circulation rate then follows from the chosen ratio of glycol to water:
+
+$$
+L = G \, \dot m_w
+$$
+
+where Q_g is the gas flow in MMscf/d, W_in and W_out are inlet and outlet water contents in lb/MMscf, and G is the circulation ratio in gal TEG per lb water.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A TEG unit treats 50 MMscf/d of gas. Inlet water content (saturated, from a water content chart) is 60 lb/MMscf. The outlet specification is 7 lb/MMscf. Design circulation ratio is 3 gal TEG per lb of water.</dd>
+<dt>Find</dt><dd>The water removed per day and the glycol circulation rate.</dd>
+<dt>Assumptions</dt><dd>Steady flow; free liquids removed upstream; the contactor and lean glycol purity are able to reach 7 lb/MMscf.</dd>
+<dt>Solution</dt><dd>Water removed = 50 × (60 − 7) = 50 × 53 = 2650 lb/d, about 1202 kg/d<br />Glycol rate = 3 × 2650 = 7950 gal/d<br />Per hour = 7950 ÷ 24 = 331 gal/h, about 1.25 m³/h</dd>
+<dt>Answer</dt><dd><strong>About 2650 lb (1.2 t) of water per day, with a TEG circulation of about 330 US gal/h (1.25 m³/h)</strong></dd>
+<dt>Limitations</dt><dd>The outlet water content achieved depends on lean glycol concentration, number of trays and contactor temperature; detailed design uses equilibrium charts or simulation.</dd>
+</dl>
+</Example>
+
+## Key formulas for natural gas dehydration
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Water removed | m_w = Q_g × (W_in − W_out) | Q_g in MMscf/d, W in lb/MMscf, m_w in lb/d |
+| Glycol circulation | L = G × m_w | G = 2 to 5 gal TEG per lb water, typically 3 |
+| Unit conversion | 1 lb/MMscf ≈ 16 mg/Sm³ | 7 lb/MMscf ≈ 112 mg/Sm³ |
+| Glycol ratio in SI | 1 gal/lb ≈ 8.35 L/kg | 3 gal/lb ≈ 25 L/kg |
+
+## Common operating problems
+
+- Foaming in the contactor, caused by liquid hydrocarbons, corrosion inhibitors or solids, carries glycol out with the gas. Good inlet separation and filtration prevent most of it.
+- Glycol losses by carry-over, vaporisation and leaks add cost and must be made up.
+- Degradation from overheating the reboiler or from oxygen contact makes the glycol acidic and corrosive, so pH and contamination are checked regularly.
+- High outlet water usually points to low lean glycol concentration, too low a circulation rate or hot inlet gas.
+
+Related gas handling topics include [pipeline pigging](/petroleum-engineering/pipeline-pigging/), which removes liquids and deposits from lines, and [distillation columns](/chemical-engineering/distillation-column-working-principle/), which work on the same vapour and liquid contact principle as the glycol still.
+
+## Natural gas dehydration interview and viva questions
+
+1. **Why must water be removed from natural gas?** Water can form hydrates that block lines, cause corrosion with CO2 and H2S, collect as liquid slugs, and freeze in cryogenic plants.
+2. **Why do gas and glycol flow counter-currently in the contactor?** The leanest glycol meets the driest gas at the top, which gives the greatest driving force for absorption and the lowest outlet water content.
+3. **Why is the TEG reboiler kept below about 204 °C?** Above that temperature TEG begins to degrade thermally, forming acidic products and increasing losses.
+4. **What does stripping gas do in a glycol unit?** It lowers the partial pressure of water over the hot lean glycol, removing more water and raising the glycol concentration towards 99.9 wt%.
+5. **Why are molecular sieves used before cryogenic plants?** They can dry gas below about 0.1 ppmv water, which prevents ice and hydrates in the very cold heat exchangers, a level glycol units cannot reach.

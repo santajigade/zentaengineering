@@ -1,0 +1,169 @@
+---
+title: "Quality Control vs Quality Assurance"
+description: "Quality control vs quality assurance: ISO 9000 definitions, process vs product focus, tools of each, cost of quality and a worked manufacturing example."
+pubDate: 2026-11-22
+reviewedDate: 2026-11-22
+discipline: manufacturing-engineering
+subcategory: quality
+focusKeyword: "quality control vs quality assurance"
+image: { src: /images/featured/quality-control-vs-quality-assurance.webp, alt: "Quality Control vs Quality Assurance: featured diagram" }
+format: comparison
+pillar: false
+tags: [quality-control, quality-assurance, iso-9001, cost-of-quality, inspection]
+faq:
+  - q: "Is inspection quality control or quality assurance?"
+    a: "Inspection is quality control. It checks whether a product or part meets its requirements and separates good from bad. Deciding what to inspect, how often, with which gauges and under which procedure is part of quality assurance, because it builds confidence that the system will catch problems."
+  - q: "Can a company have quality control without quality assurance?"
+    a: "It can, but it then relies on finding defects after they are made. Without the planning, procedures, training and audits of quality assurance, the same defects keep recurring and inspection costs stay high. Most standards, such as ISO 9001, expect both."
+  - q: "Is ISO 9001 about quality control or quality assurance?"
+    a: "ISO 9001 specifies requirements for a quality management system, which includes both. It is closer to quality assurance because it is about how processes are planned, controlled, measured and improved, but it also requires control of production, monitoring and measurement, and control of nonconforming outputs."
+references:
+  - text: "ISO 9000:2015, Quality management systems: Fundamentals and vocabulary"
+  - text: "ISO 9001:2015, Quality management systems: Requirements"
+  - text: "J. M. Juran and J. A. De Feo, Juran's Quality Handbook, 7th ed., McGraw-Hill, 2016"
+  - text: "D. C. Montgomery, Introduction to Statistical Quality Control, 8th ed., Wiley, 2019"
+  - text: "A. V. Feigenbaum, Total Quality Control, 4th ed., McGraw-Hill, 1991"
+  - text: "ISO 2859-1:1999, Sampling procedures for inspection by attributes, Part 1"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Quality control vs quality assurance**: quality control checks products and outputs against requirements, finding and removing defects through inspection and testing. Quality assurance manages the processes, procedures, training and audits that give confidence the requirements will be met, preventing defects. QC is product focused and detective; QA is process focused and preventive.
+
+</Key>
+
+Quality control vs quality assurance is one of the most common points of confusion in manufacturing, partly because many companies use one department name for both. The two are related but not the same. ISO 9000:2015 treats both as parts of quality management: quality assurance is the part focused on providing confidence that quality requirements will be fulfilled, and quality control is the part focused on fulfilling those requirements.
+
+
+<ArticleVideo slug="quality-control-vs-quality-assurance" title="How QA and QC work together" />
+
+## Quality control vs quality assurance comparison table
+
+| Aspect | Quality control (QC) | Quality assurance (QA) |
+| --- | --- | --- |
+| ISO 9000 focus | Fulfilling quality requirements | Providing confidence that requirements will be fulfilled |
+| Object | Products, parts, batches, outputs | Processes, systems, procedures |
+| Approach | Detective: find and remove defects | Preventive: stop defects occurring |
+| Timing | During and after production | Before and throughout, starting at design |
+| Typical activities | Inspection, testing, SPC charts, acceptance sampling | Quality planning, procedures, training, supplier approval, audits, FMEA |
+| Typical people | Inspectors, test technicians, operators doing checks | Quality engineers, auditors, process owners, management |
+| Output | Accept or reject decisions, test records, defect data | Documented system, audit reports, corrective and preventive actions |
+| Cost of quality category | Mainly appraisal | Mainly prevention |
+
+## How QA and QC fit in a production process
+
+<figure class="anim">
+<svg width="640" height="270" viewBox="0 0 640 270" fill="none" role="img" aria-label="Quality control vs quality assurance: quality assurance surrounds the whole process from design and purchasing to production and delivery, with procedures, training and audits and a corrective action loop back to design, while quality control checks the product at incoming, in-process and final inspection points before it reaches the customer">
+<rect x="25" y="55" width="500" height="205" rx="12" fill="#e6f6f4" fill-opacity="0.5" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="40" y="120" width="90" height="40" rx="6" fill="#ffffff" />
+<rect x="165" y="120" width="90" height="40" rx="6" fill="#ffffff" />
+<rect x="290" y="120" width="90" height="40" rx="6" fill="#ffffff" />
+<rect x="415" y="120" width="90" height="40" rx="6" fill="#ffffff" />
+<rect x="545" y="120" width="80" height="40" rx="6" fill="#fff7e0" />
+</g>
+<g stroke="#0b2545" stroke-width="2.5"><path d="M130 140H165M255 140H290M380 140H415M505 140H545" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M130 140H165M255 140H290M380 140H415M505 140H545" /></g>
+<g stroke="#13a89e" stroke-width="2"><path d="M460 120V100H85V114" /></g>
+<path d="M79 112L85 120L91 112Z" fill="#13a89e" />
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow-slow" d="M460 120V100H85V114" /></g>
+<g stroke="#b42318" stroke-width="1.5" stroke-dasharray="3 3"><path d="M272 140V188M335 160V188M397 140V188" /></g>
+<g stroke="#b42318" stroke-width="2" fill="#ffe9e7">
+<path class="anim-blink anim-d1" d="M272 188L284 200L272 212L260 200Z" />
+<path class="anim-blink anim-d2" d="M335 188L347 200L335 212L323 200Z" />
+<path class="anim-blink anim-d3" d="M397 188L409 200L397 212L385 200Z" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="275" y="76" font-weight="700" fill="#0b6e66">Quality assurance: plans, procedures, training, audits</text>
+<text x="272" y="94" font-size="10" fill="#0b6e66">Corrective and preventive action</text>
+<text x="85" y="145">Design</text><text x="210" y="145">Purchasing</text><text x="335" y="145">Production</text>
+<text x="460" y="145">Delivery</text><text x="585" y="145">Customer</text>
+<g font-size="10"><text x="272" y="228">Incoming</text><text x="335" y="228">In-process</text><text x="397" y="228">Final</text></g>
+<text x="335" y="248" font-weight="700" fill="#b42318">Quality control checks</text>
+</g>
+</svg>
+<figcaption>Quality assurance covers the whole system and feeds corrective action back to the start; quality control checks the product at set points along the flow.</figcaption>
+</figure>
+
+## Quality control explained
+
+Quality control asks a direct question: does this product, part or batch meet its specification? Answering it needs a requirement (a drawing, specification or standard), a measurement, and a decision rule.
+
+Common quality control activities are:
+
+- Inspection of incoming materials, in-process parts and finished products, by measurement, gauging or visual checks.
+- Testing, such as functional, pressure, electrical or destructive tests on samples.
+- Statistical process control, which uses [control charts](/manufacturing-engineering/control-charts-spc/) to detect when a process starts to drift, before many bad parts are made.
+- Acceptance sampling, in which a lot is accepted or rejected based on a sample, using plans such as those in ISO 2859-1.
+- Control of nonconforming product: identifying, segregating and deciding on rework, repair, concession or scrap.
+
+QC is essential, but on its own it is reactive. It finds a defect after the material, machine time and labour have already been spent. Inspection is also not perfect: inspectors miss some defects, especially in repetitive visual checks, so quality cannot be inspected into a product.
+
+## Quality assurance explained
+
+Quality assurance asks a different question: how do we know the process will keep producing conforming products? It builds confidence for management, customers and regulators that requirements will be met. Activities include:
+
+- Quality planning: defining requirements, control plans, inspection points and acceptance criteria.
+- Documented procedures and work instructions, so tasks are done the same way every time.
+- Training and competence records for operators, inspectors and engineers.
+- Supplier approval and monitoring, so purchased parts arrive right.
+- Design reviews and risk analysis, such as failure mode and effects analysis (FMEA).
+- Calibration of measuring equipment, so QC decisions can be trusted.
+- Internal and external audits of the quality management system, for example against ISO 9001.
+- Corrective and preventive action: finding the root cause of problems and changing the process so they do not recur.
+
+Improvement methods such as [Six Sigma DMAIC](/manufacturing-engineering/six-sigma-dmaic/) and workplace organisation through [5S](/manufacturing-engineering/5s-methodology/) support quality assurance because they reduce variation and error at the source.
+
+## Differences explained with an example
+
+Consider a machining line that produces shafts.
+
+- A QC inspector measures the diameter of every tenth shaft with a micrometer and rejects any outside tolerance. That is quality control.
+- The quality engineer who wrote the control plan, chose the sample frequency, arranged micrometer calibration, trained the inspector, and audits the line each quarter is doing quality assurance.
+- When rejected shafts are traced to tool wear, QC records the defect; QA leads the corrective action, for example a change to the tool change interval in the work instruction.
+
+The two depend on each other. QA needs QC data to know whether the system works, and QC needs QA to make its checks consistent and trustworthy.
+
+## Quality control vs quality assurance in the cost of quality
+
+Feigenbaum and Juran grouped quality costs into four categories:
+
+- Prevention costs: planning, training, supplier development, process design. Mostly QA.
+- Appraisal costs: inspection, testing, calibration, audits of product. Mostly QC.
+- Internal failure costs: scrap, rework, re-inspection before delivery.
+- External failure costs: warranty claims, returns, recalls, lost customers.
+
+Spending more on prevention usually reduces both appraisal and failure costs.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A plant's monthly records (in currency units) show: operator training 4000, supplier audits 6000, incoming and final inspection 18,000, gauge calibration 2000, scrap and rework 25,000, warranty returns 15,000. Monthly sales are 500,000. In the same month the line made 10,000 units, of which 9200 passed all checks first time.</dd>
+<dt>Find</dt><dd>The cost of quality by category, as a percentage of sales, and the first pass yield.</dd>
+<dt>Assumptions</dt><dd>Each cost belongs wholly to one category; figures are illustrative for the calculation.</dd>
+<dt>Solution</dt><dd>Prevention = 4000 + 6000 = 10,000<br />Appraisal = 18,000 + 2000 = 20,000<br />Internal failure = 25,000; external failure = 15,000<br />Total cost of quality = 10,000 + 20,000 + 25,000 + 15,000 = 70,000<br />Percentage of sales = 70,000 ÷ 500,000 × 100 = 14%<br />Failure share = 40,000 ÷ 70,000 = 57% of the cost of quality<br />First pass yield = 9200 ÷ 10,000 = 92%</dd>
+<dt>Answer</dt><dd><strong>Cost of quality 70,000 (14% of sales), of which 57% is failure cost; first pass yield 92%</strong></dd>
+<dt>Limitations</dt><dd>Real cost of quality studies need agreed rules for assigning costs, and hidden costs such as lost sales are hard to measure. A high failure share points to more prevention, not simply more inspection.</dd>
+</dl>
+</Example>
+
+## When to use which
+
+Both are always needed; the question is the balance.
+
+- New process or product: emphasise QA. Plan, assess risk with FMEA, qualify suppliers and set control plans before launch, with tighter QC until the process is proven capable.
+- Stable, capable process: QC can move from 100% inspection to sampling and SPC, while QA audits keep the system healthy.
+- Regulated industries such as aerospace, medical devices and pharmaceuticals: both are formal and documented, with QA often holding release authority.
+- Recurring defects: QC data identifies them, QA removes the cause.
+
+Lean manufacturing counts defects among the [seven wastes](/manufacturing-engineering/seven-wastes-lean/) and aims to prevent them rather than sort them out.
+
+## Quality control vs quality assurance interview and viva questions
+
+1. **How does ISO 9000:2015 distinguish QC and QA?** Both are parts of quality management: QC is focused on fulfilling quality requirements, while QA is focused on providing confidence that those requirements will be fulfilled.
+2. **Why is QC described as detective and QA as preventive?** QC finds defects in products after or during production, while QA works on processes, procedures and training so defects do not occur.
+3. Give two examples each of QC and QA activities. QC: final inspection and acceptance sampling. QA: internal audits and supplier approval.
+4. **Which cost of quality category does inspection fall into?** Appraisal cost, the cost of checking products and processes against requirements.
+5. **Why can quality not be inspected into a product?** Inspection only sorts products already made and misses some defects, so a defect free output depends on a capable, well controlled process.

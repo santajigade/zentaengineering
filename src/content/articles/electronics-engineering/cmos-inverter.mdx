@@ -3,6 +3,7 @@ title: "CMOS Inverter Working Principle"
 description: "How the CMOS inverter works, its voltage transfer characteristic, noise margins, transistor sizing, propagation delay and static and dynamic power."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-22
 discipline: electronics-engineering
 subcategory: vlsi
 focusKeyword: "CMOS inverter"
@@ -28,7 +29,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-A CMOS inverter is built from one **PMOS** transistor connected to the supply and one **NMOS** transistor connected to ground, with their gates joined as the input and their drains joined as the output. When the input is low, the PMOS conducts and the output goes high; when the input is high, the NMOS conducts and the output goes low. Because one transistor is always off in steady state, the inverter draws almost no static power.
+A **CMOS inverter** is a NOT gate made from a PMOS transistor to the supply and an NMOS transistor to ground, with joined gates as input and joined drains as output. A low input turns the PMOS on and drives the output high; a high input turns the NMOS on and pulls it low. Static power is almost zero.
 
 </Key>
 
@@ -38,13 +39,17 @@ The inverter is the simplest CMOS [logic gate](/electronics-engineering/logic-ga
 
 ## Circuit structure
 
-<figure>
+<figure class="anim">
 <svg width="460" height="270" viewBox="0 0 460 270" fill="none" role="img" aria-label="CMOS inverter block diagram: PMOS between VDD and output, NMOS between output and ground, both gates connected to the input">
 <path d="M230 30V60M230 110V160M230 210V240M110 135H160V85H190M160 135V185H190M230 135H340" stroke="#0b2545" stroke-width="2.5" />
 <path d="M200 30H260" stroke="#0b2545" stroke-width="3" />
 <path d="M210 240H250M218 247H242M226 254H234" stroke="#0b2545" stroke-width="2.5" />
 <rect x="190" y="60" width="80" height="50" rx="6" stroke="#0b2545" stroke-width="2.5" fill="#e6ecf4" />
 <rect x="190" y="160" width="80" height="50" rx="6" stroke="#0b2545" stroke-width="2.5" fill="#e3f5f3" />
+<g stroke="#13a89e" stroke-width="2" fill="none">
+<g class="anim-blink"><path class="anim-flow" d="M230 30V60M230 110V135H340" /></g>
+<g class="anim-blink anim-d2"><path class="anim-flow" d="M230 135V160M230 210V240" /></g>
+</g>
 <circle cx="230" cy="135" r="4" fill="#0b2545" /><circle cx="160" cy="135" r="4" fill="#0b2545" />
 <circle cx="110" cy="135" r="4" fill="#0b2545" /><circle cx="340" cy="135" r="4" fill="#0b2545" />
 <text x="230" y="90" text-anchor="middle" font-size="15" font-weight="600" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">PMOS</text>
@@ -56,7 +61,7 @@ The inverter is the simplest CMOS [logic gate](/electronics-engineering/logic-ga
 <text x="98" y="140" text-anchor="end" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Vin</text>
 <text x="352" y="140" font-size="14" fill="#0b2545" font-family="Open Sans Variable, Arial, sans-serif">Vout</text>
 </svg>
-<figcaption>CMOS inverter: the input drives both gates; the output is taken where the two drains meet.</figcaption>
+<figcaption>CMOS inverter: the input drives both gates; the output is taken where the two drains meet. The animation alternates between the PMOS charging the output from VDD and the NMOS discharging it to ground.</figcaption>
 </figure>
 
 - The **PMOS** source is connected to the supply VDD. It turns on when its gate is low relative to its source.
@@ -137,6 +142,23 @@ Because dynamic power depends on VDD squared, [supply voltages](https://www.inst
 ## Applications
 
 The CMOS inverter is used as a buffer and clock driver, as a building block of ring oscillators for process monitoring, and as the basis of SRAM cells, where two cross-coupled inverters store one bit. Every CMOS logic gate in a processor, FPGA or [microcontroller](/electronics-engineering/microcontroller-vs-microprocessor/) is an extension of the same complementary pull-up and pull-down principle.
+
+## Key formulas for the CMOS inverter
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Dynamic switching power | P_dyn = α C_L V_DD² f | α = activity factor, C_L in F, V_DD in V, f in Hz, P in W |
+| Low noise margin | NML = VIL − VOL | VIL = maximum input read as 0, VOL ≈ 0 V |
+| High noise margin | NMH = VOH − VIH | VIH = minimum input read as 1, VOH ≈ V_DD |
+| Switching threshold | VM where Vin = Vout | Close to V_DD / 2 for balanced transistors |
+
+## CMOS inverter interview and viva questions
+
+1. **Why does a CMOS inverter draw almost no static power?** In either steady state one transistor is fully off, so there is no direct path from VDD to ground and only a tiny leakage current flows.
+2. **Why is the PMOS made wider than the NMOS?** Hole mobility is roughly two to three times lower than electron mobility, so the PMOS is made about two to three times wider to balance rise and fall times and place VM near VDD / 2.
+3. **What is the switching threshold VM?** It is the input voltage at which Vin equals Vout on the voltage transfer characteristic, close to VDD / 2 for balanced transistors.
+4. **Why does lowering VDD save so much power?** Dynamic power is proportional to VDD squared, but lower voltage also slows switching and reduces noise margins.
+5. **Why are NAND gates preferred to NOR gates in CMOS?** NAND puts its series transistor stack in the stronger NMOS pull-down network, while NOR needs a slow series stack of weaker PMOS transistors.
 
 ## Related reading
 

@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video (oldest first). Delete a line once its video is live.
-agricultural-engineering/pasteurization-htst-uht
-agricultural-engineering/precision-agriculture-technologies
-agricultural-engineering/tractor-power-transmission
-ai-data-engineering/big-data-five-vs
-ai-data-engineering/classification-vs-detection-vs-segmentation
-ai-data-engineering/data-science-workflow
 ai-data-engineering/etl-vs-elt
 ai-data-engineering/how-large-language-models-work
 ai-data-engineering/how-neural-networks-work

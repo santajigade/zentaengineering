@@ -3,6 +3,7 @@ title: "Thevenin's Theorem: Steps and Solved Examples"
 description: "Thevenin's theorem explained step by step: finding Vth and Rth, dependent sources, the Norton link and maximum power transfer, with a solved example."
 pubDate: 2026-11-07
 reviewedDate: 2026-11-07
+updatedDate: 2026-11-22
 discipline: electrical-engineering
 subcategory: circuit-fundamentals
 focusKeyword: "thevenin's theorem"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Thevenin's theorem** states that any linear two-terminal circuit, however complex, can be replaced at its terminals by a single voltage source V<sub>th</sub> in series with a single resistance R<sub>th</sub>. V<sub>th</sub> is the open-circuit voltage at the terminals, and R<sub>th</sub> is the resistance seen at the terminals with all independent sources turned off.
+**Thevenin's theorem** states that any linear two-terminal circuit can be replaced at its terminals by one voltage source V<sub>th</sub> in series with one resistance R<sub>th</sub>. V<sub>th</sub> is the open-circuit terminal voltage, and R<sub>th</sub> is the resistance seen at the terminals with all independent sources turned off.
 
 </Key>
 
@@ -50,7 +51,7 @@ $$
 I_L = \frac{V_{th}}{R_{th} + R_L}
 $$
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Left: a 24 volt source with series resistor R1 of 6 ohms, a shunt resistor R2 of 3 ohms, and a series resistor R3 of 2 ohms leading to terminals A and B with load RL. Right: the Thevenin equivalent, a source Vth of 8 volts in series with Rth of 4 ohms feeding the same terminals.">
 <g stroke="#0b2545" stroke-width="2" fill="none">
 <circle cx="50" cy="140" r="20" />
@@ -85,7 +86,8 @@ $$
 <text x="150" y="262" text-anchor="middle" fill="#0e7f78">Original network</text>
 <text x="440" y="262" text-anchor="middle" fill="#0e7f78">Thevenin equivalent</text>
 </g>
-<path d="M296 140H336M336 140L326 133M336 140L326 147" stroke="#f5b800" stroke-width="3" />
+<path class="anim-pulse" d="M296 140H336M336 140L326 133M336 140L326 147" stroke="#f5b800" stroke-width="3" />
+<path class="anim-flow" d="M50 120V60H80M120 60H160V100M160 180V220H50V160" stroke="#13a89e" stroke-width="2" fill="none" />
 </svg>
 <figcaption>The network used in the solved example (left) and its Thevenin equivalent seen from terminals A and B (right). The load RL connects across A and B.</figcaption>
 </figure>
@@ -156,6 +158,24 @@ To check the result, solve the original circuit directly with the 4 Ω load. R3 
 - Switching off dependent sources.
 - Using the equivalent to calculate power inside the original network.
 - Getting the polarity of V<sub>th</sub> wrong, which reverses the load current.
+
+## Key formulas for Thevenin's theorem
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Load current | I<sub>L</sub> = V<sub>th</sub> / (R<sub>th</sub> + R<sub>L</sub>) | V<sub>th</sub> in V, R<sub>th</sub> and R<sub>L</sub> in Ω, I<sub>L</sub> in A |
+| Thevenin resistance from short circuit | R<sub>th</sub> = V<sub>th</sub> / I<sub>sc</sub> | I<sub>sc</sub> = short-circuit current at A and B, in A |
+| Test source method | R<sub>th</sub> = V<sub>t</sub> / I<sub>t</sub> | V<sub>t</sub> = test voltage in V, I<sub>t</sub> = test current in A |
+| Norton equivalent | R<sub>N</sub> = R<sub>th</sub>, I<sub>N</sub> = V<sub>th</sub> / R<sub>th</sub> | I<sub>N</sub> = Norton current in A |
+| Maximum power transfer | P<sub>max</sub> = V<sub>th</sub>² / (4 R<sub>th</sub>) at R<sub>L</sub> = R<sub>th</sub> | P<sub>max</sub> in W |
+
+## Thevenin's theorem interview and viva questions
+
+1. **What does Thevenin's theorem state?** Any linear two-terminal circuit can be replaced at its terminals by a voltage source V<sub>th</sub> in series with a resistance R<sub>th</sub>, giving the same load voltage and current for any load.
+2. **How do you find R<sub>th</sub> in a circuit with only independent sources?** Remove the load, replace voltage sources with short circuits and current sources with open circuits, then find the equivalent resistance between the terminals.
+3. **Why must dependent sources not be switched off?** Their value depends on a voltage or current elsewhere in the circuit, so they are left active and R<sub>th</sub> is found with a test source or from V<sub>th</sub> / I<sub>sc</sub>.
+4. **How are the Thevenin and Norton equivalents related?** They are linked by source transformation: R<sub>N</sub> = R<sub>th</sub> and I<sub>N</sub> = V<sub>th</sub> / R<sub>th</sub>.
+5. **What is the efficiency at maximum power transfer?** It is 50 percent, because equal power is lost in R<sub>th</sub>, which is why power systems are not operated at matched conditions.
 
 ## Related reading
 

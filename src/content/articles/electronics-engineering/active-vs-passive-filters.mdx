@@ -3,6 +3,7 @@ title: "Active vs Passive Filters: Differences Explained"
 description: "Active vs passive filters compared: components, gain, loading, power, frequency range and noise, with cutoff formulas and a worked RC loading example."
 pubDate: 2026-11-10
 reviewedDate: 2026-11-10
+updatedDate: 2026-11-22
 discipline: electronics-engineering
 subcategory: analog-electronics
 focusKeyword: "active vs passive filters"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The key difference in active vs passive filters is the use of an amplifying device. A **passive filter** uses only resistors, capacitors and inductors, needs no power supply and can never give power gain. An **active filter** adds an op amp or transistor, so it can provide gain, has a low output impedance that is not affected by the load, and can realise inductor-like responses with only R and C. Passive filters win at high frequencies and high power; active filters win at audio and low frequencies where inductors would be large.
+**Active vs passive filters** differ in the amplifying device. A passive filter uses only resistors, capacitors and inductors, needs no supply and cannot give power gain. An active filter adds an op amp or transistor, giving gain and a low output impedance unaffected by the load. Passive suits RF and high power; active suits low frequencies.
 
 </Key>
 
@@ -74,7 +75,7 @@ An active filter places an amplifier inside or after the RC network. The amplifi
 
 Each second order stage gives a roll off of 40 dB per decade. Higher orders are built by cascading second order stages and, for odd orders, one first order stage. The response shape is chosen from classic approximations: **Butterworth** for the flattest passband, **Chebyshev** for a steeper transition with passband ripple, and **Bessel** for the best phase linearity and step response. The basic amplifier circuits used are those in [inverting and non-inverting amplifiers](/electronics-engineering/inverting-and-non-inverting-amplifier/), and a detailed Sallen-Key design walk-through is available on [InstrumentationBlog](https://www.instrumentationblog.in/active-filter-sallen-and-key/).
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 330" width="640" height="330" fill="none" role="img" aria-label="Bode magnitude plot of a first order passive RC low pass filter and a second order active Butterworth low pass filter, both with a 1 kilohertz cutoff. Both are 3 dB down at the cutoff; the first order curve then falls at 20 dB per decade and the second order curve at 40 dB per decade.">
 <g stroke="#7b8794" stroke-width="1" stroke-dasharray="2 4">
 <path d="M80 50 H560" /><path d="M80 130 H560" /><path d="M80 210 H560" />
@@ -85,7 +86,8 @@ Each second order stage gives a roll off of 40 dB per decade. Higher orders are 
 <path d="M320 50 V290" stroke="#b38600" stroke-width="1.2" stroke-dasharray="5 4" />
 <path d="M80 50 L225 50 L230 51 L255 51 L260 52 L270 52 L275 53 L280 53 L285 54 L290 55 L295 56 L300 57 L305 58 L310 59 L315 60 L320 62 L325 64 L330 66 L335 68 L340 70 L345 72 L350 75 L355 77 L360 80 L365 83 L370 86 L375 89 L380 92 L385 95 L390 98 L395 101 L400 104 L405 107 L410 111 L415 114 L420 117 L425 120 L430 124 L435 127 L440 130 L445 133 L450 137 L455 140 L460 143 L465 147 L470 150 L475 153 L480 157 L485 160 L490 163 L495 167 L500 170 L505 173 L510 177 L515 180 L520 183 L525 187 L530 190 L535 193 L540 197 L545 200 L550 203 L555 207 L560 210" stroke="#13a89e" stroke-width="2.5" />
 <path d="M80 50 L270 50 L275 51 L285 51 L290 52 L295 52 L300 53 L305 55 L310 57 L315 59 L320 62 L325 66 L330 70 L335 75 L340 80 L345 86 L350 92 L355 98 L360 104 L365 111 L370 117 L375 124 L380 130 L385 137 L390 143 L395 150 L400 157 L405 163 L410 170 L415 177 L420 183 L425 190 L430 197 L435 203 L440 210 L445 217 L450 223 L455 230 L460 237 L465 243 L470 250 L475 257 L480 263 L485 270 L490 277 L495 283 L500 290" stroke="#b42318" stroke-width="2.5" />
-<circle cx="320" cy="62" r="4" fill="#0b2545" />
+<g stroke="#fff" stroke-width="1.2"><path class="anim-flow-slow" d="M80 50 L225 50 L230 51 L255 51 L260 52 L270 52 L275 53 L280 53 L285 54 L290 55 L295 56 L300 57 L305 58 L310 59 L315 60 L320 62 L325 64 L330 66 L335 68 L340 70 L345 72 L350 75 L355 77 L360 80 L365 83 L370 86 L375 89 L380 92 L385 95 L390 98 L395 101 L400 104 L405 107 L410 111 L415 114 L420 117 L425 120 L430 124 L435 127 L440 130 L445 133 L450 137 L455 140 L460 143 L465 147 L470 150 L475 153 L480 157 L485 160 L490 163 L495 167 L500 170 L505 173 L510 177 L515 180 L520 183 L525 187 L530 190 L535 193 L540 197 L545 200 L550 203 L555 207 L560 210" /><path class="anim-flow-slow" d="M80 50 L270 50 L275 51 L285 51 L290 52 L295 52 L300 53 L305 55 L310 57 L315 59 L320 62 L325 66 L330 70 L335 75 L340 80 L345 86 L350 92 L355 98 L360 104 L365 111 L370 117 L375 124 L380 130 L385 137 L390 143 L395 150 L400 157 L405 163 L410 170 L415 177 L420 183 L425 190 L430 197 L435 203 L440 210 L445 217 L450 223 L455 230 L460 237 L465 243 L470 250 L475 257 L480 263 L485 270 L490 277 L495 283 L500 290" /></g>
+<circle class="anim-pulse" cx="320" cy="62" r="4" fill="#0b2545" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
 <text x="20" y="30">Gain (dB)</text>
 <text x="560" y="324" text-anchor="end">Frequency (log scale)</text>
@@ -143,6 +145,24 @@ Choose an **active filter** when:
 - Use stable capacitor types such as C0G/NP0 ceramic or film capacitors in the frequency setting positions.
 - Place high Q stages last in a cascade to reduce the risk of clipping inside the filter.
 - Lay out the filter close to the ADC with a solid ground return, as covered in [PCB design basics](/electronics-engineering/pcb-design-basics/).
+
+## Key formulas for active vs passive filters
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| RC cutoff frequency | fc = 1 / (2π R C) | fc in Hz, R in Ω, C in F |
+| Loaded RC passband gain | Gain = RL / (R + RL) | RL = load resistance in Ω |
+| Loaded RC cutoff | fc = 1 / (2π (R ∥ RL) C) | R ∥ RL = R × RL / (R + RL), in Ω |
+| Gain in decibels | Gain (dB) = 20 log10(Vout / Vin) | Vout and Vin in V |
+| Roll off above cutoff | 20 dB per decade per order | First order 20, second order 40 dB per decade |
+
+## Active vs passive filters interview and viva questions
+
+1. **What is the main difference between active and passive filters?** A passive filter uses only R, L and C and needs no power supply, while an active filter adds an op amp or transistor that provides gain and a low output impedance.
+2. **Why is loading a problem for passive filters?** The load becomes part of the circuit, so a low impedance load changes both the passband gain and the cutoff frequency, as the worked example shows with gain falling to 0.5 and fc doubling.
+3. **Why are active filters preferred at audio and low frequencies?** At low frequencies the inductors a passive filter would need become large, heavy and lossy, while an active filter reaches the same response with only R, C and an op amp.
+4. **Name two common second order active filter topologies.** Sallen-Key, a unity gain or non-inverting stage with two resistors and two capacitors, and multiple feedback, an inverting stage with the components in its feedback paths.
+5. **When would you choose a Butterworth, Chebyshev or Bessel response?** Butterworth gives the flattest passband, Chebyshev a steeper transition with passband ripple, and Bessel the best phase linearity and step response.
 
 ## Related reading
 

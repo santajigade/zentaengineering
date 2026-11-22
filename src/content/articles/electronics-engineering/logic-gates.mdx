@@ -3,6 +3,7 @@ title: "Logic Gates: Types and Truth Tables Explained"
 description: "The seven basic logic gates with Boolean expressions and truth tables, universal gates, De Morgan's theorems, logic levels and a half adder worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-22
 discipline: electronics-engineering
 subcategory: digital-electronics
 focusKeyword: "logic gates"
@@ -27,7 +28,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-Logic gates are the building blocks of digital electronics. A logic gate is a circuit that produces a binary output (0 or 1) from one or more binary inputs according to a fixed rule. The seven basic gates are **NOT, AND, OR, NAND, NOR, XOR and XNOR**. Every digital system, from a simple counter to a microprocessor, is built from combinations of these gates.
+**Logic gates** are circuits that produce a binary output, 0 or 1, from one or more binary inputs according to a fixed rule, and they are the building blocks of digital electronics. The seven basic gates are NOT, AND, OR, NAND, NOR, XOR and XNOR. NAND and NOR are universal gates.
 
 </Key>
 
@@ -86,6 +87,27 @@ They are used to simplify logic expressions and to convert a circuit into all-NA
 
 Gates are combined to perform arithmetic. A **half adder** adds two single bits A and B and produces a sum bit S and a carry bit C.
 
+<figure class="anim">
+<svg width="560" height="250" viewBox="0 0 560 250" fill="none" role="img" aria-label="Half adder logic diagram: inputs A and B each feed both an XOR gate and an AND gate; the XOR gate output is the sum S and the AND gate output is the carry C">
+<path d="M40 80H268M120 80V170H270M40 110H268M160 110V200H270M360 95H480M335 185H480" stroke="#0b2545" stroke-width="2.5" />
+<path class="anim-flow" d="M40 80H268M120 80V170H270M40 110H268M160 110V200H270M360 95H480M335 185H480" stroke="#13a89e" stroke-width="2" />
+<path d="M260 70Q285 95 260 120Q330 120 360 95Q330 70 260 70Z" stroke="#0b2545" stroke-width="2.5" fill="#e6ecf4" stroke-linejoin="round" />
+<path d="M250 70Q275 95 250 120" stroke="#0b2545" stroke-width="2.5" />
+<path d="M270 160H310A25 25 0 0 1 310 210H270Z" stroke="#0b2545" stroke-width="2.5" fill="#e3f5f3" stroke-linejoin="round" />
+<circle cx="120" cy="80" r="4" fill="#0b2545" /><circle cx="160" cy="110" r="4" fill="#0b2545" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" fill="#0b2545">
+<text x="30" y="85" text-anchor="end" font-weight="600">A</text>
+<text x="30" y="115" text-anchor="end" font-weight="600">B</text>
+<text x="490" y="100" font-weight="600">S (sum)</text>
+<text x="490" y="190" font-weight="600">C (carry)</text>
+<text x="308" y="100" text-anchor="middle" font-size="12">XOR</text>
+<text x="300" y="190" text-anchor="middle" font-size="12">AND</text>
+<text x="280" y="240" text-anchor="middle" font-size="13" fill="#4a5360">S = A ⊕ B, C = A·B</text>
+</g>
+</svg>
+<figcaption>Half adder built from one XOR gate and one AND gate. Both inputs feed both gates; the signals travel from the inputs on the left to the sum and carry outputs on the right.</figcaption>
+</figure>
+
 <Example>
 <dl>
 <dt>Given</dt><dd>Two input bits A and B.</dd>
@@ -127,6 +149,14 @@ Circuits built only from gates, where the outputs depend only on the present inp
 - **Multiplexers and decoders:** selecting data paths and memory locations.
 - **Control logic:** interlocks, enable signals and glue logic between chips.
 - **Programmable logic:** FPGAs and CPLDs implement millions of gates defined in a hardware description language.
+
+## Logic gates interview and viva questions
+
+1. **Why are NAND and NOR called universal gates?** Any logic function, including NOT, AND, OR and XOR, can be built using only NAND gates or only NOR gates.
+2. **How do you make a NOT gate from a NAND gate?** Connect both inputs together, so Y = (A·A)′ = A′.
+3. **State De Morgan's theorems.** (A·B)′ = A′ + B′ and (A + B)′ = A′·B′, so a NAND equals an OR with inverted inputs and a NOR equals an AND with inverted inputs.
+4. **What is the noise margin of standard TTL?** It is VOH − VIH = 0.4 V for the high level and VIL − VOL = 0.4 V for the low level.
+5. **What is the difference between combinational and sequential logic?** Combinational outputs depend only on present inputs, while sequential circuits use feedback to store a state, as in an SR latch built from two cross-coupled NAND or NOR gates.
 
 ## Related reading
 

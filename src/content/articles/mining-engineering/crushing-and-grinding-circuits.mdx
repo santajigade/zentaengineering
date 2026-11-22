@@ -1,0 +1,181 @@
+---
+title: "Crushing and Grinding Circuits in Mineral Processing"
+description: "Crushing and grinding circuits explained: crushing stages, open and closed circuits, SAG and ball mills, hydrocyclones, circulating load and Bond power."
+pubDate: 2026-11-22
+reviewedDate: 2026-11-22
+discipline: mining-engineering
+subcategory: mineral-processing
+focusKeyword: "crushing and grinding"
+image: { src: /images/featured/crushing-and-grinding-circuits.webp, alt: "Crushing and Grinding Circuits in Mineral Processing: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [comminution, crushing, grinding, ball-mill, hydrocyclone]
+faq:
+  - q: "What is the difference between crushing and grinding?"
+    a: "Crushing is the dry, coarse stage of comminution, done in jaw, gyratory and cone crushers that break rock mainly by compression. Grinding is the finer stage, usually done wet in tumbling mills, where the ore is broken by impact and abrasion down to the size needed to liberate the valuable minerals."
+  - q: "Why are grinding mills run in closed circuit?"
+    a: "A mill in open circuit must grind every particle fine enough in one pass, which overgrinds much of the ore. In closed circuit, a classifier such as a hydrocyclone removes particles as soon as they are fine enough and returns only the coarse ones, which saves energy and gives a sharper product size."
+  - q: "What is a SABC circuit?"
+    a: "SABC stands for semi-autogenous mill, ball mill and pebble crusher. The SAG mill does the coarse grinding, a pebble crusher breaks the critical size pebbles that build up in the SAG mill, and a ball mill in closed circuit with hydrocyclones does the fine grinding."
+references:
+  - text: "B. A. Wills and J. A. Finch, Wills' Mineral Processing Technology, 8th ed., Butterworth-Heinemann, 2016"
+  - text: "T. J. Napier-Munn, S. Morrell, R. D. Morrison and T. Kojovic, Mineral Comminution Circuits: Their Operation and Optimisation, JKMRC, 1996"
+  - text: "F. C. Bond, Crushing and Grinding Calculations, British Chemical Engineering, vol. 6, 1961"
+  - text: "SME Mineral Processing and Extractive Metallurgy Handbook, R. C. Dunne, S. K. Kawatra and C. A. Young (eds.), Society for Mining, Metallurgy and Exploration, 2019"
+  - text: "A. Gupta and D. S. Yan, Mineral Processing Design and Operations, 2nd ed., Elsevier, 2016"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Crushing and grinding** circuits reduce run of mine ore to the particle size at which valuable minerals are freed from waste rock. Crushers break coarse rock in stages, often with screens in closed circuit, and tumbling mills grind it finer, usually in closed circuit with hydrocyclones that return oversize to the mill.
+
+</Key>
+
+Crushing and grinding, together called comminution, are the first steps in almost every mineral processing plant. The ore leaving the mine may contain lumps a metre or more across, while a flotation plant needs particles of a fraction of a millimetre. Comminution is also the largest energy consumer in most concentrators, so the way crushers, mills and classifiers are connected into circuits has a large effect on cost.
+
+
+<ArticleVideo slug="crushing-and-grinding-circuits" title="How crushing and grinding circuits work" />
+
+## Why ore is crushed and ground
+
+The aim of comminution is **liberation**: breaking the ore until most particles of valuable mineral are free from gangue, so that a separation process such as [froth flotation](/mining-engineering/froth-flotation/) can recover them. Grinding too coarse leaves locked particles that are lost to tailings. Grinding too fine wastes energy and makes slimes that separate poorly. The target is usually stated as P80, the size through which 80% of the product passes.
+
+Size reduction happens in stages because each machine works well only over a limited reduction ratio, the feed size divided by the product size. The breakage mechanisms and the individual machines are described in [size reduction equipment](/chemical-engineering/size-reduction-equipment/); the subject here is how they are combined into circuits.
+
+## Crushing circuits
+
+Crushing is normally dry and done in two or three stages.
+
+- Primary crushing. Gyratory or jaw crushers take run of mine ore, often near the pit, and reduce it to roughly 100 to 200 mm. Gyratory crushers suit high tonnages; jaw crushers suit smaller plants. Primary crushers usually run in open circuit, with a grizzly ahead of them to bypass fines.
+- Secondary and tertiary crushing. Cone crushers reduce the ore further, typically to between about 5 and 20 mm. They are usually run in **closed circuit with vibrating screens**: the screen oversize returns to the crusher and only the undersize moves on.
+- High pressure grinding rolls (HPGR). Two counter-rotating rolls compress a bed of particles at high pressure. HPGR can replace tertiary crushing or part of the grinding duty and is often more energy efficient than tumbling mills for hard ores.
+
+Crushed ore goes to a stockpile or bins, which decouple the mine and crushers from the mill so that short stoppages do not stop the grinding circuit.
+
+## Grinding circuits
+
+Grinding is normally wet, in rotating cylindrical mills partly filled with grinding media.
+
+- Rod mills use steel rods and give a product with few fines. They were common after crushing but are now less used.
+- Ball mills use steel balls and do most fine grinding.
+- Autogenous (AG) mills use the ore itself as the grinding medium. **Semi-autogenous (SAG) mills** add a small charge of steel balls. Both have large diameters, usually greater than their length, and can take primary crushed ore directly, which removes secondary and tertiary crushing.
+
+The mill speed is set as a fraction of the critical speed, at which the charge would centrifuge against the shell. Ball mills commonly run at about 65 to 80% of critical, so that the balls are lifted and cascade or cataract back onto the ore.
+
+<figure class="anim">
+<svg width="660" height="320" viewBox="0 0 660 320" fill="none" role="img" aria-label="Crushing and grinding circuit: run of mine ore passes a primary crusher to a screen, screen oversize goes to a cone crusher and returns to the screen in closed circuit, screen undersize goes to a stockpile, then to a ball mill whose discharge is pumped from a sump to a hydrocyclone, the cyclone overflow goes to flotation and the underflow returns to the mill">
+<g stroke="#0b2545" stroke-width="2">
+<path d="M60 40H120L100 108H80Z" fill="#eef1f6" />
+<path d="M190 62L270 82V96L190 76Z" fill="#e6f6f4" />
+<path d="M330 55H380L365 105H345Z" fill="#eef1f6" />
+<path d="M200 190L230 155L260 190Z" fill="#fff7e0" />
+<circle cx="360" cy="230" r="34" fill="#eef1f6" />
+<rect x="450" y="240" width="40" height="40" rx="4" fill="#e6f6f4" />
+<path d="M530 130H570V150L554 210H546L530 150Z" fill="#eef1f6" />
+</g>
+<g fill="#7b8794"><circle cx="342" cy="246" r="5" /><circle cx="352" cy="252" r="5" /><circle cx="336" cy="236" r="5" /><circle cx="346" cy="238" r="4" /><circle cx="362" cy="254" r="4" /><circle cx="340" cy="226" r="4" /></g>
+<g class="anim-spin" stroke="#0b2545" stroke-width="3"><path d="M386.0 230.0L391.0 230.0 M378.4 248.4L381.9 251.9 M360.0 256.0L360.0 261.0 M341.6 248.4L338.1 251.9 M334.0 230.0L329.0 230.0 M341.6 211.6L338.1 208.1 M360.0 204.0L360.0 199.0 M378.4 211.6L381.9 208.1" /></g>
+<g stroke="#13a89e" stroke-width="3">
+<path d="M15 75H62M110 75H190M270 89H330M230 92V155M230 190V230H326M394 230H450M490 270H520V140H530M550 130V105H645" />
+</g>
+<g stroke="#b42318" stroke-width="3"><path d="M355 55V30H160V69H190M550 212V300H270V230" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none">
+<path class="anim-flow-slow" d="M15 75H62M110 75H190M270 89H330M230 92V155M230 190V230H326M394 230H450M490 270H520V140H530M550 130V105H645" />
+<path class="anim-flow-slow" d="M355 55V30H160V69H190M550 212V300H270V230" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="15" y="66">ROM ore</text>
+<text x="90" y="126" text-anchor="middle">Primary crusher</text>
+<text x="276" y="72">Screen</text>
+<text x="388" y="80">Cone crusher</text>
+<text x="258" y="24" fill="#b42318" text-anchor="middle">Oversize returns</text>
+<text x="270" y="180">Stockpile</text>
+<text x="240" y="222">Fresh feed</text>
+<text x="360" y="186" text-anchor="middle" font-weight="700">Ball mill</text>
+<text x="470" y="264" text-anchor="middle" font-size="10">Sump</text>
+<text x="578" y="170">Hydrocyclone</text>
+<text x="640" y="97" text-anchor="end">Overflow to flotation</text>
+<text x="410" y="316" text-anchor="middle" fill="#b42318">Underflow returns (circulating load)</text>
+</g>
+</svg>
+<figcaption>A two stage crushing plant with a closed screen circuit, followed by a ball mill in closed circuit with a hydrocyclone. Red lines are recycle streams; the mill shell turns clockwise, so the charge rides up the left side.</figcaption>
+</figure>
+
+## Open and closed circuits
+
+In **open circuit**, ore passes through a machine once. Product size cannot be controlled tightly, and to make sure the coarsest particles are fine enough, much of the ore is overground.
+
+In **closed circuit**, the machine discharge goes to a classifier. Fine enough particles leave as product and coarse particles return for another pass. In crushing, the classifier is a screen. In wet grinding it is usually a bank of **hydrocyclones**: slurry is pumped in tangentially, coarse and dense particles move to the wall and leave through the bottom apex as **underflow**, and fine particles leave through the top vortex finder as **overflow**.
+
+The returned stream is the **circulating load**, expressed as a percentage of the fresh feed. Circulating loads of several hundred percent are common in ball mill circuits. A higher circulating load reduces the time each particle spends in the mill and so reduces overgrinding, but it increases pumping and cyclone capacity.
+
+When the fresh feed already contains a lot of fine material, it can be fed to the cyclones first (reverse closed circuit), so that fines bypass the mill.
+
+## Common crushing and grinding flowsheets
+
+| Circuit | Stages | Typical use |
+| --- | --- | --- |
+| Three stage crushing, ball mill | Primary, secondary and tertiary crushers, then ball mill with cyclones | Traditional design for medium tonnages |
+| Crushing, rod mill, ball mill | Two or three stage crushing, rod mill, ball mill | Older plants needing few fines |
+| SAG and ball mill (SAB) | Primary crusher, SAG mill, ball mill with cyclones | Large modern concentrators |
+| SABC | As SAB, plus a pebble crusher on the SAG mill pebble stream | Hard ores where critical size pebbles build up |
+| Crushing and HPGR, ball mill | Primary and secondary crushing, HPGR, ball mill | Hard ores, plants aiming to cut energy use |
+
+In a SAG mill, particles of a middle size range, too small to act as grinding media and too large to be broken quickly, accumulate. These **critical size pebbles** are taken out through pebble ports in the discharge grate, crushed in a cone crusher and returned.
+
+## Circulating load and mill power
+
+The circulating load ratio C of a closed grinding circuit can be found from a size analysis of the cyclone streams. If f, o and u are the percentages passing a chosen size in the cyclone feed, overflow and underflow, a mass balance gives:
+
+$$
+C = \frac{U}{O} = \frac{o - f}{f - u}
+$$
+
+At steady state the overflow rate O equals the fresh feed rate, so the cyclone feed is (1 + C) times the fresh feed.
+
+The specific energy for grinding is estimated with Bond's equation:
+
+$$
+W = 10\, W_i \left( \frac{1}{\sqrt{P_{80}}} - \frac{1}{\sqrt{F_{80}}} \right)
+$$
+
+where W is in kWh/t, W_i is the Bond work index in kWh/t, and P80 and F80 are product and feed sizes in µm.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A ball mill circuit takes 200 t/h of fresh feed with F80 = 2000 µm and must produce P80 = 100 µm. The ore has a Bond work index of 14 kWh/t. Cyclone size analyses give 35% passing 75 µm in the cyclone feed, 70% in the overflow and 20% in the underflow.</dd>
+<dt>Find</dt><dd>The circulating load, the cyclone feed rate and the mill power.</dd>
+<dt>Assumptions</dt><dd>Steady state; Bond's equation applies without efficiency correction factors; overflow rate equals fresh feed rate.</dd>
+<dt>Solution</dt><dd>C = (70 − 35) ÷ (35 − 20) = 35 ÷ 15 = 2.33, a circulating load of 233%<br />Underflow = 2.33 × 200 = 467 t/h; cyclone feed = 200 + 467 = 667 t/h<br />W = 10 × 14 × (1 ÷ √100 − 1 ÷ √2000) = 140 × (0.1000 − 0.0224) = 10.87 kWh/t<br />Mill power = 10.87 × 200 = 2174 kW</dd>
+<dt>Answer</dt><dd><strong>Circulating load about 233%, cyclone feed about 667 t/h of solids, and a mill power draw at the pinion of about 2.2 MW</strong></dd>
+<dt>Limitations</dt><dd>Bond's equation is applied with correction factors for mill type, size and circuit in real design; size analyses carry sampling errors, so circulating load is usually checked with several size fractions.</dd>
+</dl>
+</Example>
+
+## Key formulas for crushing and grinding
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Reduction ratio | R = F80 ÷ P80 | Same size units for feed and product |
+| Circulating load ratio | C = (o − f) ÷ (f − u) | f, o, u = percent passing a size in cyclone feed, overflow and underflow |
+| Cyclone feed rate | F_c = (1 + C) × fresh feed | t/h of solids |
+| Bond specific energy | W = 10 W_i (1 ÷ √P80 − 1 ÷ √F80) | W, W_i in kWh/t; P80, F80 in µm |
+| Mill power | P = W × throughput | kW when W in kWh/t and throughput in t/h |
+
+## Control and operation
+
+Grinding circuits are controlled to hold a steady product size at the highest throughput. Typical controlled variables are fresh feed rate, mill water addition, sump level, cyclone feed density and pressure, and mill power or load. Cyclone overflow particle size analysers and mill load measurements allow advanced control, using the same loop principles described in the [PID controller](/automation-robotics/pid-controller/) article. Liner wear, media consumption and cyclone apex wear are the main maintenance items.
+
+Ore hardness depends partly on blasting: better fragmentation from [drilling and blasting](/mining-engineering/drilling-and-blasting-basics/) can raise mill throughput because the primary crusher and SAG mill receive finer feed.
+
+## Crushing and grinding interview and viva questions
+
+1. **Why is comminution done in several stages?** Each machine works efficiently only over a limited reduction ratio, so coarse rock is reduced step by step from crushers to mills.
+2. **What is the difference between open and closed circuit grinding?** In open circuit ore passes the mill once; in closed circuit a classifier returns oversize to the mill and removes product as soon as it is fine enough, reducing overgrinding.
+3. **How does a hydrocyclone classify particles?** Slurry enters tangentially and spins; coarse and dense particles move to the wall and leave through the apex as underflow, while fines leave through the vortex finder as overflow.
+4. **What are critical size pebbles in a SAG mill?** Particles too small to act as grinding media but too large to break quickly, which accumulate and are removed through pebble ports for crushing in an SABC circuit.
+5. **What does Bond's work index represent?** It is the specific energy in kWh/t needed to reduce a material from a very large size to 80% passing 100 µm, used to estimate mill power.

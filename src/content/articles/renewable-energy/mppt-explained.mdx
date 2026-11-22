@@ -1,0 +1,179 @@
+---
+title: "MPPT Explained: Maximum Power Point Tracking"
+description: "MPPT explained: why a solar panel has a maximum power point, how perturb and observe and incremental conductance track it, and a charge controller example."
+pubDate: 2026-11-22
+reviewedDate: 2026-11-22
+discipline: renewable-energy
+subcategory: inverters
+focusKeyword: "mppt"
+image: { src: /images/featured/mppt-explained.webp, alt: "MPPT Explained: Maximum Power Point Tracking: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [mppt, solar-pv, charge-controller, inverter, dc-dc-converter]
+faq:
+  - q: "Is an MPPT charge controller better than a PWM controller?"
+    a: "An MPPT controller uses a DC-DC converter, so the panel can run at its maximum power point voltage while the battery charges at its own lower voltage. A PWM controller connects the panel almost directly to the battery, which pulls the panel voltage down to battery voltage and wastes the difference. MPPT gains most when the panel voltage is well above the battery voltage."
+  - q: "Why do some inverters have more than one MPPT input?"
+    a: "Each MPPT input tracks the maximum power point of the strings connected to it. Strings facing different directions, with different lengths or with different shading have different maximum power points, so giving them separate trackers stops one string from pulling the other away from its best operating point."
+  - q: "Does MPPT work under partial shading?"
+    a: "Partial shading with bypass diodes creates several peaks on the power-voltage curve. A simple hill climbing tracker can stop on a local peak. Many inverters therefore run a periodic scan of the whole voltage range to find the global peak, then return to normal tracking around it."
+references:
+  - text: "T. Esram and P. L. Chapman, Comparison of Photovoltaic Array Maximum Power Point Tracking Techniques, IEEE Transactions on Energy Conversion, vol. 22, no. 2, 2007"
+  - text: "EN 50530:2010, Overall efficiency of grid connected photovoltaic inverters, CENELEC"
+  - text: "A. Luque and S. Hegedus (eds.), Handbook of Photovoltaic Science and Engineering, 2nd ed., Wiley, 2011"
+  - text: "N. Mohan, T. M. Undeland and W. P. Robbins, Power Electronics: Converters, Applications and Design, 3rd ed., Wiley"
+  - text: "IEC 61215, Terrestrial photovoltaic (PV) modules: Design qualification and type approval"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**MPPT** (maximum power point tracking) is a control method that keeps a solar panel operating at the voltage where its output power is highest. A DC-DC converter or inverter adjusts the panel voltage, measures voltage and current, and keeps moving towards the peak as sunlight and temperature change.
+
+</Key>
+
+MPPT is built into almost every solar inverter and modern charge controller. A solar panel does not have a fixed output voltage. The voltage and current it delivers depend on the load connected to it, and only one point on its curve gives the most power.
+
+
+<ArticleVideo slug="mppt-explained" title="How MPPT works" />
+
+## The maximum power point of a solar panel
+
+A solar cell behaves like a current source in parallel with a diode. At zero voltage (short circuit) it delivers its short circuit current Isc. As the voltage rises, the diode starts to conduct and the current falls, slowly at first and then steeply, until it reaches zero at the open circuit voltage Voc. This is the **I-V curve**.
+
+Power is the product of voltage and current, so the **P-V curve** is zero at both ends and has a single peak near the knee of the I-V curve. That peak is the **maximum power point (MPP)**, at voltage Vmp and current Imp.
+
+<figure class="anim">
+<svg width="660" height="290" viewBox="0 0 660 290" fill="none" role="img" aria-label="MPPT: left, the I-V and P-V curves of a solar panel with the maximum power point at the peak of the power curve, at Vmp just below the open circuit voltage Voc; right, a PV array feeding a DC-DC converter and load, with an MPPT controller measuring panel voltage and current and setting the converter duty cycle">
+<g stroke="#0b2545" stroke-width="1.5"><path d="M50 250H300M50 250V40" /></g>
+<path d="M50 80 L73 80 L96 80 L119 80 L142 80 L165 80 L188 82 L200 83 L205 84 L211 85 L217 87 L222 89 L228 92 L234 96 L240 102 L246 109 L251 119 L257 132 L263 150 L268 174 L274 207 L280 250" stroke="#0b5394" stroke-width="2.5" />
+<path d="M50 250 L73 233 L96 217 L119 200 L142 184 L165 167 L188 151 L200 144 L205 141 L211 137 L217 135 L222 132 L228 131 L234 130 L240 131 L246 133 L251 138 L257 147 L263 160 L268 180 L274 209 L280 250" stroke="#b42318" stroke-width="2.5" />
+<path d="M234 130V250" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" />
+<circle class="anim-pulse" cx="234" cy="130" r="6" fill="#f5b800" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="360" y="60" width="70" height="50" rx="4" fill="#0b2545" fill-opacity="0.85" />
+<rect x="470" y="60" width="80" height="50" rx="6" fill="#e6f6f4" />
+<rect x="585" y="60" width="65" height="50" rx="6" fill="#fff7e0" />
+<rect x="470" y="175" width="80" height="50" rx="6" fill="#eef1f6" />
+</g>
+<circle class="anim-pulse" cx="395" cy="32" r="11" fill="#f5b800" />
+<g stroke="#13a89e" stroke-width="3"><path d="M430 85H470M550 85H585" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M430 85H470M550 85H585" /></g>
+<g stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3"><path d="M450 85V200H470" /></g>
+<path d="M510 175V116" stroke="#b42318" stroke-width="2" />
+<path d="M504 118L510 110L516 118Z" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="96" y="70" fill="#0b5394">I-V curve</text>
+<text x="150" y="203" fill="#b42318">P-V curve</text>
+<text x="226" y="120" text-anchor="end" font-weight="700">MPP</text>
+<text x="44" y="84" text-anchor="end">Isc</text>
+<text x="234" y="266" text-anchor="middle">Vmp</text>
+<text x="282" y="266" text-anchor="middle">Voc</text>
+<text x="150" y="284" text-anchor="middle">Panel voltage</text>
+<text x="40" y="34">Current and power</text>
+<text x="395" y="89" text-anchor="middle" fill="#fff">PV array</text>
+<text x="510" y="82" text-anchor="middle">DC-DC</text>
+<text x="510" y="97" text-anchor="middle">converter</text>
+<text x="617" y="82" text-anchor="middle">Load or</text>
+<text x="617" y="97" text-anchor="middle">battery</text>
+<text x="510" y="197" text-anchor="middle" font-weight="700">MPPT</text>
+<text x="510" y="212" text-anchor="middle">controller</text>
+<text x="444" y="150" text-anchor="end">V, I</text>
+<text x="518" y="148">Duty cycle D</text>
+</g>
+</svg>
+<figcaption>The power curve has one peak, the maximum power point. The MPPT controller measures panel voltage and current and adjusts the converter duty cycle to hold the panel at that peak.</figcaption>
+</figure>
+
+The MPP moves all the time:
+
+- Irradiance mainly changes the current. Halving the sunlight roughly halves Isc and Imp, while Vmp changes only a little.
+- Temperature mainly changes the voltage. A hotter cell has a lower Voc and Vmp, so the MPP shifts to the left.
+- Partial shading with bypass diodes can give the P-V curve several peaks, only one of which is the true global maximum.
+
+If the panel were connected straight to a load, the operating point would be wherever the load line crosses the I-V curve. A battery, for example, holds the panel close to battery voltage. That point is rarely the MPP, so power is lost. MPPT puts a controllable converter between the panel and the load so the panel can work at Vmp whatever the load needs.
+
+## How MPPT moves the operating point
+
+The converter changes the resistance the panel sees. For an ideal buck converter in continuous conduction, the output voltage is D times the input voltage, and the input resistance seen by the panel is:
+
+$$
+R_\text{in} = \frac{R_\text{load}}{D^2}
+$$
+
+For an ideal boost converter it is the load resistance multiplied by (1 − D) squared. By changing the duty cycle D, the controller slides the operating point along the I-V curve. The converter types themselves are explained in the [buck converter](/electronics-engineering/buck-converter/) and [boost converter](/electronics-engineering/boost-converter/) articles. In a grid-tied inverter, a DC-DC stage or the inverter's own DC link voltage control does the same job.
+
+## MPPT algorithms
+
+Esram and Chapman compared many tracking techniques. These are the common ones.
+
+### Perturb and observe (P&O)
+
+The controller changes the operating voltage by a small step and measures the new power. If power went up, it keeps stepping in the same direction; if power went down, it reverses. This **hill climbing** method is simple and needs no panel data, which is why it is widely used. Its weaknesses are a steady oscillation around the MPP, set by the step size, and a tendency to step the wrong way when irradiance changes quickly, because the controller cannot tell a change in sunlight from the effect of its own step.
+
+### Incremental conductance
+
+At the MPP the slope of the P-V curve is zero. Since P = VI:
+
+$$
+\frac{dP}{dV} = I + V\frac{dI}{dV} = 0 \quad \Rightarrow \quad \frac{dI}{dV} = -\frac{I}{V}
+$$
+
+The controller compares the incremental conductance dI/dV with the instantaneous conductance minus I/V. If dI/dV is greater than minus I/V, the operating point is left of the MPP and the voltage is raised; if it is smaller, the point is to the right and the voltage is lowered. When they are equal, the tracker holds. This reacts better to fast irradiance changes than basic P&O, at the cost of more computation.
+
+### Fractional open circuit voltage and short circuit current
+
+Vmp is roughly proportional to Voc, and Imp is roughly proportional to Isc:
+
+- Vmp ≈ k1 × Voc, with k1 reported between about 0.71 and 0.78.
+- Imp ≈ k2 × Isc, with k2 reported between about 0.78 and 0.92.
+
+The controller briefly opens the circuit (or shorts it) to measure Voc (or Isc), then sets the operating point. These methods are cheap but only approximate, and power is lost during each measurement.
+
+### Global tracking under shading
+
+When shading creates multiple peaks, P&O and incremental conductance can settle on a local peak. Many inverters add a periodic sweep of the voltage range to find the global peak, then resume local tracking. Module level power electronics (microinverters and power optimisers) avoid much of the problem by giving each module its own tracker.
+
+## Where MPPT is used
+
+- String and central inverters, often with two or more independent MPPT inputs for strings with different orientation or length. Inverter types are compared in [solar inverter types](/renewable-energy/solar-inverter-types/).
+- Microinverters and DC optimisers, which track each module separately.
+- MPPT charge controllers in off-grid systems and [battery storage](/renewable-energy/battery-energy-storage-systems/).
+- Wind turbines and other variable sources, where the same idea is applied to rotor speed.
+
+How well an inverter tracks is measured by its **MPPT efficiency**, the energy actually drawn from the array divided by the energy theoretically available at the MPP. EN 50530 defines static tests at constant irradiance and dynamic tests with ramps of irradiance.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A solar module with Voc = 45 V, Vmp = 34 V, Imp = 9 A and Isc = 9.6 A at the test conditions. It charges a 12 V battery sitting at 13 V. Compare a PWM controller, which connects the module directly to the battery, with an MPPT controller of 96% efficiency.</dd>
+<dt>Find</dt><dd>The charging power and battery current in each case.</dd>
+<dt>Assumptions</dt><dd>Constant irradiance and temperature. With the PWM controller the module runs at 13 V, on the flat part of its I-V curve, so its current is taken as Isc. Cable and diode losses ignored.</dd>
+<dt>Solution</dt><dd>PWM: P = 13 V × 9.6 A = 124.8 W, battery current 9.6 A<br />Module power at MPP: P = 34 V × 9 A = 306 W<br />MPPT output: 306 × 0.96 = 293.8 W<br />Battery current: 293.8 ÷ 13 = 22.6 A<br />Check fractional Voc: 34 ÷ 45 = 0.76, within 0.71 to 0.78</dd>
+<dt>Answer</dt><dd><strong>About 125 W with PWM against about 294 W with MPPT, so MPPT delivers about 2.4 times the charging power in this case</strong></dd>
+<dt>Limitations</dt><dd>The gain is largest when panel voltage is far above battery voltage, as here. Real module current at 13 V is slightly below Isc, and panel temperature changes Vmp.</dd>
+</dl>
+</Example>
+
+## Key formulas for MPPT
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Panel power | P = V × I | V in volts, I in amperes, P in watts |
+| MPP condition | dP/dV = 0 | Slope of the P-V curve is zero at the peak |
+| Incremental conductance test | dI/dV = −I/V at the MPP | Greater than −I/V: left of MPP; smaller: right of MPP |
+| Fractional Voc | Vmp ≈ k1 × Voc | k1 about 0.71 to 0.78 |
+| Fractional Isc | Imp ≈ k2 × Isc | k2 about 0.78 to 0.92 |
+| Buck input resistance | R_in = R_load ÷ D² | D = duty cycle, ideal continuous conduction |
+
+MPPT gets the most out of whatever the panels can produce, but it cannot raise the panels' own conversion limit, which is discussed in [solar panel efficiency](/renewable-energy/solar-panel-efficiency/). For the complete system around the tracker, see [how solar PV systems work](/renewable-energy/how-solar-pv-systems-work/).
+
+## MPPT interview and viva questions
+
+1. **What is the maximum power point of a PV module?** It is the point on the I-V curve where the product of voltage and current is greatest, at Vmp and Imp, near the knee of the curve.
+2. **Why is a DC-DC converter needed for MPPT?** The converter changes the resistance the panel sees through its duty cycle, so the panel can run at Vmp while the load or battery works at its own voltage.
+3. **What is the main drawback of perturb and observe?** It oscillates around the MPP in steady state and can step in the wrong direction when irradiance changes quickly.
+4. State the incremental conductance condition at the MPP. dI/dV equals minus I/V, which comes from setting dP/dV = I + V dI/dV to zero.
+5. **How do irradiance and temperature move the MPP?** Higher irradiance raises the current and so the power, while higher temperature lowers the voltage and shifts the MPP to a lower voltage.
