@@ -1,4 +1,6 @@
-# Manual: check the Pinterest feed and a pin image from outside, as Pinterestbot sees them.
+# Manual: check the Pinterest feed and pin images from outside, as Pinterestbot sees them.
+# Hostinger's CDN rate-limits bursts from one IP (about 30 fast requests, then HTTP 429),
+# so requests are paced and a 429 is retried with backoff instead of counted as a failure.
 name: Check pin feed
 on:
   workflow_dispatch:
@@ -7,19 +9,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Fetch helper
+        run: |
+          cat > /tmp/fetch.sh <<'EOF'
+          # fetch URL OUT UA -> prints "code type size"; retries 429 up to 5 times
+          url="$1"; out="$2"; ua="$3"
+          for wait in 0 10 20 40 60 90; do
+            sleep "$wait"
+            r=$(curl -s -o "$out" -A "$ua" -D /tmp/h -w "%{http_code} %{content_type} %{size_download}" "$url")
+            [ "${r%% *}" != "429" ] && break
+          done
+          sleep 1.5
+          echo "$r"
+          EOF
       - name: Manual (.csv) pin images
         run: |
+          bad=0
           for id in $(python3 -c "import json;print(' '.join(json.load(open('src/data/pins-manual.json'))[-40:]))"); do
-            curl -s -o /dev/null -A "Pinterestbot/1.0" -w "%{http_code} %{content_type} %{size_download}B  $id\n" "https://zentaengineering.com/pins/$id.jpg"
+            r=$(bash /tmp/fetch.sh "https://zentaengineering.com/pins/$id.jpg" /tmp/m.jpg "Pinterestbot/1.0")
+            echo "$r B  $id"
+            case "$r" in "200 image/jpeg "*) ;; *) bad=$((bad+1));; esac
           done
-      - run: |
+          echo "failed: $bad"
+          [ "$bad" = 0 ]
+      - name: Feed
+        run: |
           for ua in "Pinterestbot/1.0 (+http://www.pinterest.com/bot.html)" "Mozilla/5.0 (compatible; Pinterestbot/1.0; +http://www.pinterest.com/bot.html)"; do
             echo "== $ua"
-            curl -s -A "$ua" -D /tmp/h -o /tmp/f.xml -w 'time %{time_total}s size %{size_download}\n' https://zentaengineering.com/pins/feed.xml
-            grep -iE '^HTTP|content-type' /tmp/h
+            bash /tmp/fetch.sh https://zentaengineering.com/pins/feed.xml /tmp/f.xml "$ua"
           done
           python3 -c "import xml.etree.ElementTree as E; r=E.parse('/tmp/f.xml').getroot(); it=r.findall('./channel/item'); print('valid XML,', len(it), 'items')"
           for img in $(grep -oE 'enclosure url="[^"]+"' /tmp/f.xml | cut -d'"' -f2 | head -5); do
-            curl -s -o /tmp/p.jpg -A "Pinterestbot/1.0" -w "%{http_code} %{content_type} %{size_download}B  $img\n" "$img"
+            echo "$(bash /tmp/fetch.sh "$img" /tmp/p.jpg "Pinterestbot/1.0") B  $img"
           done
           if [ -f /tmp/p.jpg ]; then python3 -c "d=open('/tmp/p.jpg','rb').read(); print('jpeg ok' if d[:2]==b'\xff\xd8' else 'NOT JPEG')"; else echo "no pins released yet"; fi
