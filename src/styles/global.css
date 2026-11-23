@@ -144,8 +144,9 @@ a.card:hover { border-color: var(--ze-navy); }
 .side-rel { padding: 18px 20px; }
 .side-rel ul { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
 .side-rel li a { display: flex; gap: 12px; align-items: flex-start; text-decoration: none; color: var(--ze-navy); }
-.side-rel img, .side-ph { flex: none; width: 96px; height: 50px; border-radius: 6px; object-fit: cover; background: var(--ze-navy); }
-.side-t { display: block; font-size: 14px; font-weight: 700; line-height: 1.3; }
+.side-n { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--ze-teal-100); color: var(--ze-teal-700); font-size: 12px; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.side-rel li + li { border-top: 1px solid var(--ze-line); padding-top: 12px; }
+.side-t { display: block; font-size: 15px; font-weight: 700; line-height: 1.35; }
 .side-rel li a:hover .side-t { color: var(--ze-teal-700); }
 .side-rel time { display: block; font-size: 12px; color: var(--ze-ink-2); margin-top: 3px; }
 .side-more { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 700; color: var(--ze-teal-700); text-decoration: none; }

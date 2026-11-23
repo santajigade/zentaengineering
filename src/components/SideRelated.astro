@@ -1,5 +1,5 @@
 ---
-// Sidebar: newest articles from the same discipline, with thumbnails.
+// Sidebar: newest articles from the same discipline (numbered list, no thumbnails).
 import { liveArticles, articleUrl, formatDate } from '../lib/content';
 interface Props { discipline: string; current: string; name: string }
 const { discipline, current, name } = Astro.props;
@@ -9,9 +9,9 @@ const items = (await liveArticles()).filter((a) => a.data.discipline === discipl
   <section class="card side-rel">
     <span class="toc-label">More in {name}</span>
     <ul>
-      {items.map((a) => (
+      {items.map((a, i) => (
         <li><a href={articleUrl(a)}>
-          {a.data.image ? <img src={a.data.image.src.replace(/\.webp$/, '-thumb.webp')} alt="" width="96" height="50" loading="lazy" decoding="async" /> : <span class="side-ph" />}
+          <b class="side-n">{String(i + 1).padStart(2, '0')}</b>
           <span><span class="side-t">{a.data.title}</span><time datetime={a.data.pubDate.toISOString().slice(0, 10)}>{formatDate(a.data.pubDate)}</time></span>
         </a></li>
       ))}
