@@ -94,11 +94,11 @@ renewable-energy|inverters|MPPT Explained: Maximum Power Point Tracking|mppt-exp
 environmental-engineering|eia|Air Quality Index (AQI): Calculation and Pollutants|air-quality-index|fundamentals|air quality index|2026-11-22
 mining-engineering|mineral-processing|Crushing and Grinding Circuits in Mineral Processing|crushing-and-grinding-circuits|explanation|crushing and grinding|2026-11-22
 manufacturing-engineering|quality|Quality Control vs Quality Assurance|quality-control-vs-quality-assurance|comparison|quality control vs quality assurance|2026-11-22
-materials-engineering|corrosion|Cathodic Protection: Sacrificial vs Impressed Current|cathodic-protection|comparison|cathodic protection|todo
-safety-engineering|fire-detection|Gas Detectors: Types and Working Principles|gas-detector-types|working-principle|gas detectors|todo
-agricultural-engineering|post-harvest|Grain Storage Structures and Silos|grain-storage-structures|explanation|grain storage|todo
-aerospace-engineering|avionics|Instrument Landing System (ILS) Explained|instrument-landing-system|working-principle|instrument landing system|todo
-biomedical-engineering|prosthetics|Exoskeletons in Rehabilitation Engineering|rehabilitation-exoskeletons|explanation|exoskeletons|todo
+materials-engineering|corrosion|Cathodic Protection: Sacrificial vs Impressed Current|cathodic-protection|comparison|cathodic protection|2026-11-23
+safety-engineering|fire-detection|Gas Detectors: Types and Working Principles|gas-detector-types|working-principle|gas detectors|2026-11-23
+agricultural-engineering|post-harvest|Grain Storage Structures and Silos|grain-storage-structures|explanation|grain storage|2026-11-23
+aerospace-engineering|avionics|Instrument Landing System (ILS) Explained|instrument-landing-system|working-principle|instrument landing system|2026-11-23
+biomedical-engineering|prosthetics|Exoskeletons in Rehabilitation Engineering|rehabilitation-exoskeletons|explanation|exoskeletons|2026-11-23
 marine-engineering|offshore-structures|Mooring Systems for Floating Structures|mooring-systems|explanation|mooring systems|todo
 mechanical-engineering|pumps-compressors-turbines|Pump Cavitation and NPSH Explained|pump-cavitation-and-npsh|troubleshooting|pump cavitation|todo
 electrical-engineering|protection-relays|Differential Protection of Transformers|transformer-differential-protection|working-principle|differential protection|todo
