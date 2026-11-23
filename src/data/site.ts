@@ -89,6 +89,16 @@ export const AUTHORS: Record<string, Person> = {
     photo: '/images/authors/sandip-gadade.webp',
     isPerson: true,
   },
+  'sayali-ganjale': {
+    slug: 'sayali-ganjale',
+    name: 'Sayali Ganjale',
+    role: 'Author, Computer Science and AI',
+    bio: 'Final year MCA student at MIT World Peace University (MIT-WPU), Pune, focused on software development and problem solving. Works with Java, C, C++ and Python. Writes the Computer Science and AI and Data articles on Zenta Engineering.',
+    credentials: ['MCA (final year), MIT World Peace University, Pune'],
+    linkedin: 'https://www.linkedin.com/in/sayaliganjale/',
+    photo: '/images/authors/sayali-ganjale.webp',
+    isPerson: true,
+  },
   'editorial-staff': {
     slug: 'editorial-staff',
     name: 'Editorial Staff',
@@ -102,8 +112,8 @@ export const AUTHORS: Record<string, Person> = {
 // Who reviews content (shown as "Reviewed by ...").
 export const REVIEWER_DEFAULT = 'Technical Team';
 
-/** Author rule: Electronics articles by Santaji Gadepatil (6 Nov 2026), Manufacturing by Sandip Gadade (20 Nov 2026), all others by Editorial Staff. */
-const DISCIPLINE_AUTHOR: Record<string, string> = { 'electronics-engineering': 'santaji-gadepatil', 'manufacturing-engineering': 'sandip-gadade' };
+/** Author rule: Electronics articles by Santaji Gadepatil (6 Nov 2026), Manufacturing by Sandip Gadade (20 Nov 2026), Computer Science and AI and Data by Sayali Ganjale (23 Nov 2026), all others by Editorial Staff. */
+const DISCIPLINE_AUTHOR: Record<string, string> = { 'electronics-engineering': 'santaji-gadepatil', 'manufacturing-engineering': 'sandip-gadade', 'computer-science': 'sayali-ganjale', 'ai-data-engineering': 'sayali-ganjale' };
 export function authorFor(data: { author?: string; discipline: string }): Person {
   if (data.author && AUTHORS[data.author]) return AUTHORS[data.author];
   return AUTHORS[DISCIPLINE_AUTHOR[data.discipline] ?? 'editorial-staff'];
