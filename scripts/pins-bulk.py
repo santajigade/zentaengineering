@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """'A lot now': take the next N scheduled pins (not yet released, not already manual), add them to
-src/data/pins-manual.json (they get images on the next deploy but never enter the RSS feed) and write a
+src/data/pins-manual.json (they get images on the next deploy) and write a
 Pinterest bulk-upload CSV. Usage: python3 scripts/pins-bulk.py "BOARD NAME" [N=10]
 Weekly mode: python3 scripts/pins-bulk.py "BOARD NAME" --week
   takes every scheduled pin dated up to 6 days ahead that is not yet uploaded; overdue ones publish

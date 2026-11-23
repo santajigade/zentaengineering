@@ -1,5 +1,5 @@
 # Builds the site and uploads it to Hostinger by FTP.
-# Runs on every push to main, four times a day (scheduled items go live; 09:00 IST releases the day's Pinterest pins), and on demand.
+# Runs on every push to main, three times a day (scheduled items go live), and on demand.
 # After upload it pings IndexNow with the pages whose content changed since the previous deploy (never fails the deploy).
 # Live site secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD (FTP account rooted at zentaengineering.com/public_html)
 # Preview site secrets (optional): PREVIEW_FTP_SERVER, PREVIEW_FTP_USERNAME, PREVIEW_FTP_PASSWORD
@@ -10,7 +10,6 @@ on:
     branches: [main]
   schedule:
     - cron: '30 0,6,12 * * *' # 06:00, 12:00 and 18:00 IST
-    - cron: '30 3 * * *' # 09:00 IST daily rebuild so the Pinterest feed releases the day's pins
   workflow_dispatch:
 concurrency: deploy
 jobs:

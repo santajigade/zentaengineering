@@ -3,7 +3,7 @@ import { slugOf } from '../../../lib/content';
 
 import { pinQueue, pinInput, pinJpg, kickerOf } from '../../../lib/pins';
 
-// Tall Pinterest images, only for articles already released to the pin feed (keeps builds fast).
+// Tall Pinterest images, only for .csv pins and past scheduled dates (keeps builds fast).
 export async function getStaticPaths() {
   return (await pinQueue()).map(({ a }) => ({
     params: { discipline: a.data.discipline, slug: slugOf(a) },

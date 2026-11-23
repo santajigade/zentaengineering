@@ -9,7 +9,7 @@ import { liveArticles, slugOf, type Article } from './content';
 import SCHEDULE from '../data/pins.json';
 import MANUAL from '../data/pins-manual.json';
 
-/** Pins uploaded by hand (.csv): they get images but stay out of the RSS feed, so Pinterest never pins them twice. */
+/** Pins uploaded by hand (.csv bulk upload). These get images on the next deploy. */
 export const manualPins = new Set(MANUAL as string[]);
 
 /** One colour per discipline (pin backgrounds are multicolour by category). */
@@ -29,7 +29,8 @@ export const today = () => process.env.PINS_TODAY ?? istToday();
 const istToday = () => new Date(Date.now() + 5.5 * 3600e3).toISOString().slice(0, 10);
 const DAY = 864e5;
 
-/** Released pins, newest first. Backlog follows src/data/pins.json (4 a day); newer articles are pinned the day after they go live. */
+/** Pins that get images, newest first: every .csv pin, plus earlier scheduled dates (kept so pins already on Pinterest keep their image).
+ * Schedule follows src/data/pins.json (4 a day); newer articles are dated the day after they go live. */
 export async function pinQueue(): Promise<{ a: Article; date: string }[]> {
   const t = today(); // PINS_TODAY=YYYY-MM-DD previews a future day (testing only)
   const sched = SCHEDULE as Record<string, string>;
@@ -114,5 +115,5 @@ const KICKER: Record<string, string> = {
   'safety-engineering': 'Safety Engineering', 'agricultural-engineering': 'Agricultural Engineering', 'aerospace-engineering': 'Aerospace Engineering',
   'biomedical-engineering': 'Biomedical Engineering', 'marine-engineering': 'Marine Engineering',
 };
-/** Category label on pins and in the feed. */
+/** Category label on pins. */
 export const kickerOf = (d: string) => KICKER[d] ?? getDiscipline(d)?.name ?? 'Engineering';
