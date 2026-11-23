@@ -216,3 +216,11 @@ figure.anim.paused * { animation-play-state: paused !important; }
 .share-b { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--ze-line); background: #fff; color: var(--c); cursor: pointer; padding: 0; transition: background .15s, color .15s, border-color .15s; }
 .share-b:hover, .share-b:focus-visible { background: var(--c); border-color: var(--c); color: #fff; }
 .share-msg { font-size: 13px; color: var(--ze-teal-700); }
+
+/* Article cards (homepage Latest articles) */
+.art-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.art-card img, .art-ph { width: 100%; height: auto; aspect-ratio: 1200 / 630; display: block; background: var(--ze-navy); object-fit: cover; }
+.art-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; flex: 1; }
+.art-body .card-title { font-size: 17px; line-height: 1.35; }
+.art-meta { margin-top: auto; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--ze-ink-2); }
+.art-meta > * + *::before { content: "\00B7"; margin-right: 14px; }

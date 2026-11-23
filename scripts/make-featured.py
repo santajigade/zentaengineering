@@ -59,6 +59,7 @@ h1{{font-size:44px;line-height:1.18;font-weight:800;margin-top:28px}}
     im = Image.open(p + '.png').convert('RGB')
     im.save(f'{OUT}/{slug}.webp', 'WEBP', quality=82, method=6)
     im.save(f'{OUT}/{slug}.jpg', 'JPEG', quality=85, optimize=True, progressive=True)
+    im.resize((600, 315), Image.LANCZOS).save(f'{OUT}/{slug}-thumb.webp', 'WEBP', quality=78, method=6)  # card thumbnail
     if 'image:' not in fm:
         alt = f'{title}: featured diagram'.replace('"', "'")
         line = f'image: {{ src: /images/featured/{slug}.webp, alt: "{alt}" }}'

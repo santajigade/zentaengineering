@@ -84,6 +84,16 @@ const schema = {
   <slot name="below" />
 <Newsletter variant="popup" />
 <script>
+  // One view per article per browser per day (see public/api/views.php).
+  try {
+    const p = location.pathname, k = 'zv:' + p, today = new Date().toDateString();
+    if (/^\/[a-z0-9-]+\/[a-z0-9-]+\/$/.test(p) && !navigator.webdriver && localStorage.getItem(k) !== today) {
+      localStorage.setItem(k, today);
+      navigator.sendBeacon('/api/views.php', new URLSearchParams({ p }));
+    }
+  } catch {}
+</script>
+<script>
   document.querySelectorAll('figure.anim').forEach((f) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'anim-toggle'; b.textContent = 'Pause';

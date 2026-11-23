@@ -4,6 +4,7 @@ const popular = await popularTopics();
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ItemCard from '../components/ItemCard.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import DisciplineCard from '../components/DisciplineCard.astro';
 import WhyZenta from '../components/WhyZenta.astro';
 import { SITE } from '../data/site';
@@ -11,16 +12,14 @@ import { DISCIPLINES, FAMILIES, getDiscipline } from '../data/disciplines';
 import { liveArticles, liveLessons, liveInterview, liveProjects, liveResources, articleUrl, interviewUrl, projectUrl, resourceUrl, ARTICLE_FORMATS } from '../lib/content';
 
 const articles = await liveArticles();
-const pillars = articles.filter((a) => a.data.pillar).slice(0, 6);
-const latest = articles.slice(0, 6);
-const updated = articles.filter((a) => a.data.updatedDate).sort((a, b) => b.data.updatedDate!.valueOf() - a.data.updatedDate!.valueOf()).slice(0, 5);
+const latest = articles.slice(0, 12);
 const lessons = await liveLessons();
 const seriesSlugs = [...new Set(lessons.map((l) => l.data.series))];
 const interview = (await liveInterview()).slice(0, 3);
 const projects = (await liveProjects()).slice(0, 3);
 const resources = (await liveResources()).slice(0, 4);
 const fam = (slug: string) => getDiscipline(slug)!;
-const hasMore = pillars.length + latest.length + seriesSlugs.length + interview.length + projects.length + resources.length > 0 || updated.length >= 3 || !!SITE.newsletterAction;
+const hasMore = latest.length + seriesSlugs.length + interview.length + projects.length + resources.length > 0 || !!SITE.newsletterAction;
 const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 ---
 <Base title={`${SITE.name}: Understand the Principles, Explore the Applications, Master Engineering`} description={SITE.description}>
@@ -54,16 +53,10 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
   </div>
   <WhyZenta last={!hasMore} />
   <div class="wrap">
-    {pillars.length > 0 && (
-      <section class="section">
-        <h2 class="h2">Start with these guides</h2>
-        <div class="grid" style="--min:300px">{pillars.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} fam={fam(a.data.discipline).family} chips={[{ label: fam(a.data.discipline).short, cls: 'chip-fam' }, { label: ARTICLE_FORMATS[a.data.format] }]} />)}</div>
-      </section>
-    )}
     {latest.length > 0 && (
       <section class="section">
-        <h2 class="h2">Latest articles</h2>
-        <div class="grid" style="--min:300px">{latest.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} fam={fam(a.data.discipline).family} chips={[{ label: fam(a.data.discipline).short, cls: 'chip-fam' }]} />)}</div>
+        <div class="section-head"><h2 class="h2">Latest articles</h2><a class="more" href="/engineering-categories/">All categories <Icon name="arrow" size={16} stroke={2} /></a></div>
+        <div class="grid" style="--min:300px">{latest.map((a) => <ArticleCard a={a} />)}</div>
       </section>
     )}
     {seriesSlugs.length > 0 && (
@@ -90,12 +83,6 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
         <div class="grid">{resources.map((r) => <ItemCard href={resourceUrl(r)} title={r.data.title} text={r.data.description} />)}</div>
       </section>
     )}
-    {updated.length >= 3 && (
-      <section class="section">
-        <h2 class="h2">Recently updated</h2>
-        <div class="grid" style="--min:300px">{updated.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} chips={[{ label: fam(a.data.discipline).short }]} />)}</div>
-      </section>
-    )}
     {SITE.newsletterAction && <section class="section">
       <div style="background:var(--ze-navy);border-radius:var(--ze-radius);padding:36px;display:flex;gap:28px;align-items:center;flex-wrap:wrap">
         <div style="flex:1 1 380px"><h2 style="margin:0;color:#fff;font-size:24px">Get new articles in your discipline</h2><p style="margin:6px 0 0;color:#c9d3df">One email a week. Unsubscribe anytime.</p></div>
@@ -107,4 +94,10 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
       </div>
     </section>}
   </div>
+<script>
+  const els = [...document.querySelectorAll<HTMLElement>('[data-views]')];
+  if (els.length) fetch('/api/views.php?p=' + encodeURIComponent(els.map((e) => e.dataset.views).join(',')))
+    .then((r) => r.json()).then((v) => els.forEach((e) => { const n = v[e.dataset.views!] || 0; if (n > 0) { e.textContent = `${n.toLocaleString('en-IN')} view${n === 1 ? '' : 's'}`; e.hidden = false; } }))
+    .catch(() => {});
+</script>
 </Base>
