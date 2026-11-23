@@ -4,13 +4,14 @@
 // Files live in public/videos/: <slug>-16x9.mp4, <slug>-9x16.mp4 and matching -poster.webp images.
 interface Props { slug: string; title: string; description?: string; seconds?: number; uploadDate?: string }
 const { slug, title, description, seconds = 18, uploadDate = '2026-11-19' } = Astro.props;
+const uploadIso = /T/.test(uploadDate) ? uploadDate : `${uploadDate}T09:00:00+05:30`;
 const site = 'https://zentaengineering.com';
 const base = `/videos/${slug}`;
 const schema = {
   '@context': 'https://schema.org', '@type': 'VideoObject',
   name: title, description: description ?? `${title}, explained in ${seconds} seconds.`,
   thumbnailUrl: [`${site}${base}-16x9-poster.webp`, `${site}${base}-9x16-poster.webp`],
-  contentUrl: `${site}${base}-16x9.mp4`, uploadDate, duration: `PT${seconds}S`,
+  contentUrl: `${site}${base}-16x9.mp4`, uploadDate: uploadIso, duration: `PT${seconds}S`,
   publisher: { '@type': 'Organization', name: 'Zenta Engineering', logo: { '@type': 'ImageObject', url: `${site}/icon-512.png` } },
 };
 ---

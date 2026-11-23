@@ -8,6 +8,8 @@ Needs public/videos/<slug>-16x9.mp4 and -9x16.mp4 to exist. Safe to re-run (skip
 import os, sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+import datetime
+TODAY = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=5, minutes=30)).date().isoformat()  # IST, for VideoObject uploadDate
 IMPORT = "import ArticleVideo from '../../../components/ArticleVideo.astro';"
 
 
@@ -31,7 +33,7 @@ def insert(path, title):
     body = '\n'.join(lines)
     i = body.index('\n## ')
     title = title.replace('"', "'")
-    body = body[:i] + f'\n\n<ArticleVideo slug="{slug}" title="{title}" />\n' + body[i:]
+    body = body[:i] + f'\n\n<ArticleVideo slug="{slug}" title="{title}" uploadDate="{TODAY}" />\n' + body[i:]
     open(f, 'w').write(head + body)
     print('inserted:', path)
 
