@@ -1,12 +1,24 @@
 ---
 // Newsletter signup. variant="inline" = box at the end of an article; variant="popup" = slide-in card
 // shown once per visitor after 40 s or half the article (never on load, so it does not block content).
-interface Props { variant?: 'inline' | 'popup' }
+interface Props { variant?: 'inline' | 'popup' | 'side' }
 const { variant = 'inline' } = Astro.props;
 const title = 'Get one engineering email a week';
 const text = 'New articles, worked examples and study notes every week. Free, no spam, unsubscribe any time.';
 ---
-{variant === 'inline' ? (
+{variant === 'side' ? (
+  <section class="nl nl-side" aria-labelledby="nl-side-t">
+    <p id="nl-side-t" class="nl-t">One engineering email a week</p>
+    <p class="nl-p">New articles and worked examples. Free, unsubscribe any time.</p>
+    <form class="nl-form" data-form="sidebar" novalidate>
+      <label class="sr" for="nl-side-e">Email address</label>
+      <input id="nl-side-e" type="email" name="email" placeholder="Your email" autocomplete="email" required />
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="nl-hp" aria-hidden="true" />
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+      <p class="nl-msg" role="status"></p>
+    </form>
+  </section>
+) : variant === 'inline' ? (
   <section class="nl nl-inline" aria-labelledby="nl-inline-t">
     <h2 id="nl-inline-t" class="nl-t">{title}</h2>
     <p class="nl-p">{text}</p>

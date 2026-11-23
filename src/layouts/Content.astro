@@ -9,6 +9,7 @@ import References from '../components/References.astro';
 import ShareBar from '../components/ShareBar.astro';
 import Newsletter from '../components/Newsletter.astro';
 import AdSlot from '../components/AdSlot.astro';
+import SideRelated from '../components/SideRelated.astro';
 import Logo from '../components/Logo.astro';
 import type { MarkdownHeading } from 'astro';
 import { SITE, authorFor, REVIEWER_DEFAULT } from '../data/site';
@@ -77,8 +78,10 @@ const schema = {
     </article>
     <aside class="side" data-pagefind-ignore>
       <slot name="side" />
-      <Toc headings={headings} />
+      {type === 'Article' && <SideRelated discipline={data.discipline} current={Astro.url.pathname} name={d.short} />}
+      <Newsletter variant="side" />
       <AdSlot slot="sidebar" minHeight={600} />
+      <div class="side-sticky"><Toc headings={headings} /></div>
     </aside>
   </div>
   <slot name="below" />
