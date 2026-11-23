@@ -221,6 +221,7 @@ figure.anim.paused * { animation-play-state: paused !important; }
 .art-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .art-card img, .art-ph { width: 100%; height: auto; aspect-ratio: 1200 / 630; display: block; background: var(--ze-navy); object-fit: cover; }
 .art-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; flex: 1; }
-.art-body .card-title { font-size: 17px; line-height: 1.35; }
+.art-body .card-title { font-size: 20px; line-height: 1.3; font-weight: 700; }
+@media (max-width: 600px) { .art-body .card-title { font-size: 19px; } }
 .art-meta { margin-top: auto; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--ze-ink-2); }
 .art-meta > * + *::before { content: "\00B7"; margin-right: 14px; }
