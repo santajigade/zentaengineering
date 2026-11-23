@@ -3,6 +3,7 @@ title: "What Is a Diode? Working, Types and Characteristics"
 description: "What is a diode? Learn how a PN junction diode works, its V-I characteristic, the main diode types, key ratings and common circuits, with an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-23
 discipline: electronics-engineering
 subcategory: components
 focusKeyword: "what is a diode"
@@ -29,7 +30,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-What is a diode? A diode is a two-terminal semiconductor device that lets current flow easily in one direction (from **anode** to **cathode**) and blocks it in the other. It is made from a **PN junction**. A silicon diode starts conducting at a forward voltage of roughly 0.6 to 0.7 V and blocks reverse voltage until its breakdown rating is reached.
+What is a diode? A **diode** is a two-terminal semiconductor device, made from a **PN junction**, that lets current flow easily from **anode** to **cathode** and blocks it in the reverse direction. A silicon diode starts conducting at a forward voltage of roughly 0.6 to 0.7 V and blocks reverse voltage until its breakdown rating is reached.
 
 </Key>
 
@@ -39,6 +40,31 @@ A diode is formed by joining P-type semiconductor, which has an excess of holes,
 
 - **Forward bias:** making the P side (anode) positive with respect to the N side (cathode) reduces the barrier. Once the applied voltage approaches the barrier, carriers cross freely and current rises steeply.
 - **Reverse bias:** making the cathode positive widens the depletion region. Only a very small leakage current flows, until the reverse voltage is high enough to cause breakdown.
+
+<figure class="anim">
+<svg width="600" height="240" viewBox="0 0 600 240" fill="none" role="img" aria-label="Forward biased PN junction diode circuit: a DC supply drives conventional current clockwise through a series resistor and a diode from anode to cathode; below, a PN junction shows a P region, a thin depletion region and an N region, with holes moving from P to N and electrons moving from N to P">
+<g stroke="#0b2545" stroke-width="2.5"><path d="M70 100V60H560V200H70V130" /><path d="M55 100H85" /><path d="M62 130H78" /></g>
+<rect x="150" y="50" width="60" height="20" fill="#fff7e0" stroke="#0b2545" stroke-width="2" />
+<path d="M290 48V72L314 60Z" fill="#0b2545" stroke="#0b2545" stroke-width="2" /><path d="M314 48V72" stroke="#0b2545" stroke-width="3" />
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow" stroke-dasharray="6 12" d="M70 100V60H150M210 60H290M314 60H560V200H70V130" /></g>
+<path d="M118 54L130 60L118 66Z" fill="#b42318" />
+<g stroke="#0b2545" stroke-width="1.5"><rect x="170" y="100" width="150" height="70" fill="#ffe9e7" /><rect x="320" y="100" width="30" height="70" fill="#eef1f6" /><rect x="350" y="100" width="150" height="70" fill="#e6f6f4" /></g>
+<path d="M190 132H372" stroke="#b42318" stroke-width="2.5" /><path d="M480 152H298" stroke="#13a89e" stroke-width="2.5" />
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow-slow" stroke-dasharray="6 12" d="M190 132H372" /><path class="anim-flow-slow" stroke-dasharray="6 12" d="M480 152H298" /></g>
+<path d="M372 126L384 132L372 138Z" fill="#b42318" /><path d="M298 146L286 152L298 158Z" fill="#13a89e" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="180" y="40">R</text><text x="268" y="40">Anode</text><text x="338" y="40">Cathode</text>
+<text x="124" y="46" fill="#b42318">I</text>
+<text x="92" y="105" text-anchor="start" font-weight="700">+</text><text x="92" y="135" text-anchor="start" font-weight="700">&#8722;</text>
+<text x="40" y="160">Supply</text><text x="40" y="175">VS</text>
+<text x="245" y="118">P (anode side)</text><text x="425" y="118">N (cathode side)</text>
+<text x="335" y="93" font-size="11">Depletion region</text>
+<text x="200" y="146" font-size="10" text-anchor="start" fill="#b42318">holes</text><text x="490" y="166" font-size="10" text-anchor="end" fill="#13a89e">electrons</text>
+<text x="315" y="225" font-size="11">Forward bias: conventional current I flows from anode to cathode</text>
+</g>
+</svg>
+<figcaption>A forward biased diode: the supply narrows the depletion region, carriers cross the junction and current flows from anode to cathode.</figcaption>
+</figure>
 
 ## The diode equation and V-I characteristic
 
@@ -115,6 +141,16 @@ $$
 
 <Calculator path="electronics/led-resistor" title="LED Resistor Calculator" />
 
+## Key formulas for diodes
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Diode current (Shockley equation) | I = IS × (e^(V / (n VT)) − 1) | IS = saturation current in A, n = ideality factor (about 1 to 2), V = junction voltage in V |
+| Thermal voltage | VT = kT / q | k = Boltzmann constant, T = temperature in K, q = electron charge; about 26 mV at room temperature |
+| Conduction loss | P = VF × IF | VF = forward voltage in V, IF = forward current in A, P in W |
+| LED series resistor | R = (VS − VF) / IF | VS = supply voltage in V, R in Ω |
+| Resistor power | P = I² × R | I in A, R in Ω, P in W |
+
 ## Reverse recovery
 
 When a conducting PN junction diode is suddenly reverse biased, charge stored in the junction must be removed before it can block. For a short time, called the reverse recovery time trr, current flows in the reverse direction. In switching power supplies this causes extra loss and electrical noise, which is why fast recovery, ultrafast or Schottky diodes are used at high switching frequencies.
@@ -122,6 +158,14 @@ When a conducting PN junction diode is suddenly reverse biased, charge stored in
 ## Testing a diode
 
 Most digital multimeters have a diode test mode that passes a small current and displays the forward voltage. A healthy silicon diode reads roughly 0.5 to 0.7 V in the forward direction and shows an open circuit in reverse. A reading near zero in both directions indicates a shorted diode; an open reading in both directions indicates an open diode. Test diodes out of circuit, because parallel components can give misleading readings.
+
+## Diode interview and viva questions
+
+1. **What is the depletion region of a PN junction?** It is the thin layer at the junction left without free carriers after electrons and holes diffuse across and recombine. Its fixed charged ions create the electric field and built-in potential barrier that stop further diffusion.
+2. **Why is 0.7 V used as the forward voltage of a silicon diode?** Diode current rises exponentially with voltage, about ten times for every 60 mV or so when n = 1, so over a wide range of currents the forward voltage of a small silicon diode stays near 0.6 to 0.7 V.
+3. **What is reverse recovery time?** It is the short time, trr, for which a conducting PN junction diode carries reverse current after being reverse biased, while its stored charge is removed. It causes extra loss and noise in switching power supplies.
+4. **Why are Schottky diodes used for low-loss rectifiers?** A Schottky diode uses a metal to semiconductor junction with no minority carrier storage, so it has a low forward voltage of about 0.15 to 0.45 V and switches quickly. Its reverse leakage rises steeply with temperature.
+5. **How do you test a diode with a multimeter?** In diode test mode, a healthy silicon diode reads roughly 0.5 to 0.7 V forward and open circuit in reverse. A reading near zero both ways means a shorted diode, and open both ways means an open diode.
 
 ## Related reading
 

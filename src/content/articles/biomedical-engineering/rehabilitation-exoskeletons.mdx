@@ -1,0 +1,184 @@
+---
+title: "Exoskeletons in Rehabilitation Engineering: How They Work"
+description: "How rehabilitation exoskeletons work: frame, actuators, sensors and control, knee torque and actuator power, safety standards and a worked example."
+pubDate: 2026-11-23
+reviewedDate: 2026-11-23
+discipline: biomedical-engineering
+subcategory: prosthetics
+focusKeyword: "exoskeletons"
+image: { src: /images/featured/rehabilitation-exoskeletons.webp, alt: "Exoskeletons in Rehabilitation Engineering: How They Work: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [exoskeletons, rehabilitation-engineering, gait-training, actuators, wearable-robots]
+faq:
+  - q: "What is the difference between an exoskeleton and a prosthesis?"
+    a: "A prosthesis replaces a missing limb segment. An exoskeleton is worn over an existing limb that is paralysed or weak, and it acts in parallel with the user's own joints to move or support them. Both are medical devices, but they are fitted and regulated differently."
+  - q: "Who uses rehabilitation exoskeletons?"
+    a: "They are used mainly by people with spinal cord injury and by people recovering from stroke and other neurological conditions, under the supervision of trained therapists. Treadmill based systems are used in clinics for gait training, while wearable overground devices can also be used for walking in the clinic or, for some cleared devices, at home and in the community with a trained companion."
+  - q: "Why do exoskeleton joints need to line up with the user's joints?"
+    a: "If the exoskeleton joint axis does not match the anatomical joint axis, the two rotate about different centres. The cuffs then slide over the skin and push on the limb, which causes discomfort, pressure injury risk and wrong torque at the joint. Adjustable link lengths and careful fitting reduce this misalignment."
+references:
+  - text: "D. A. Winter, Biomechanics and Motor Control of Human Movement, 4th ed., Wiley, 2009"
+  - text: "A. M. Dollar and H. Herr, Lower extremity exoskeletons and active orthoses: challenges and state of the art, IEEE Transactions on Robotics, vol. 24, no. 1, pp. 144 to 158, 2008"
+  - text: "L. Marchal-Crespo and D. J. Reinkensmeyer, Review of control strategies for robotic movement training after neurologic injury, Journal of NeuroEngineering and Rehabilitation, vol. 6, article 20, 2009"
+  - text: "G. Colombo, M. Joerg, R. Schreier and V. Dietz, Treadmill training of paraplegic patients using a robotic orthosis, Journal of Rehabilitation Research and Development, vol. 37, no. 6, pp. 693 to 700, 2000"
+  - text: "G. A. Pratt and M. M. Williamson, Series elastic actuators, Proceedings of the IEEE/RSJ International Conference on Intelligent Robots and Systems, pp. 399 to 406, 1995"
+  - text: "J. Mehrholz, S. Thomas, J. Kugler, M. Pohl and B. Elsner, Electromechanical-assisted training for walking after stroke, Cochrane Database of Systematic Reviews, Issue 10, CD006185, 2020"
+  - text: "ISO 13482:2014 Robots and robotic devices, Safety requirements for personal care robots"
+  - text: "IEC 80601-2-78:2019 Medical electrical equipment, Part 2-78: Particular requirements for basic safety and essential performance of medical robots for rehabilitation, assessment, compensation or alleviation"
+  - text: "US FDA, 21 CFR 890.3480 Powered lower extremity exoskeleton, Code of Federal Regulations, Title 21"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Exoskeletons** for rehabilitation are powered orthoses worn over a weak or paralysed limb. A frame strapped to the body carries motors at the hip and knee. Sensors measure joint angle, foot loading and trunk motion, a controller works out the assist torque for each gait phase, and the motors apply it to help the user stand, walk and retrain movement.
+
+</Key>
+
+Rehabilitation exoskeletons are used for gait training after spinal cord injury and stroke. With one, a therapist can give many repeated, consistent steps without lifting the patient's legs by hand. Designing or assessing one draws on joint mechanics, actuators and sensors, feedback control and the safety rules for a robot attached to a person.
+
+
+<ArticleVideo slug="rehabilitation-exoskeletons" title="How a rehabilitation exoskeleton works" />
+
+## What rehabilitation exoskeletons are
+
+Dollar and Herr use "exoskeleton" for a device that works in parallel with the wearer's joints, and "active orthosis" for a powered device that assists a limb with a pathology. In rehabilitation the two terms overlap. Every device has links that run alongside the thigh and shank, joints whose axes line up with the hip and knee, and cuffs or straps that transfer force to the limb.
+
+There are two main families:
+
+- Treadmill based systems, such as the driven gait orthosis described by Colombo and colleagues, combine a powered hip and knee orthosis with a treadmill and body weight support. The patient walks in place while the robot guides the legs.
+- Overground wearable exoskeletons carry their own battery and controller, so the user walks across the floor, usually with crutches or a walker for balance.
+
+Upper limb rehabilitation robots work on the same principles at the shoulder, elbow and wrist. Unlike [prosthetic limbs](/biomedical-engineering/prosthetic-limbs/), which replace a missing segment, an exoskeleton moves a limb that is still there.
+
+## Main parts of rehabilitation exoskeletons
+
+<figure class="anim">
+<svg width="640" height="370" viewBox="0 0 640 370" fill="none" role="img" aria-label="Side view of a lower limb rehabilitation exoskeleton with a battery pack at the waist, a hip actuator, thigh link and cuff, knee actuator, shank link and cuff, an IMU on the shank and a foot pressure sensor under the foot plate. Sensor signals run to a sensors block, then to the controller, then to the motor drivers, which drive the hip and knee motors.">
+<path d="M150 112L192 222L182 318" stroke="#e8d5c4" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="120" y="44" width="44" height="58" rx="6" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
+<path d="M142 102V112" stroke="#0b2545" stroke-width="4" />
+<g stroke="#13a89e" stroke-width="8" stroke-linecap="round"><path d="M170 120L190 222" /><path d="M190 222L180 312" /></g>
+<g fill="#c9d2de" stroke="#0b2545" stroke-width="1.5"><rect x="166" y="160" width="26" height="12" rx="3" transform="rotate(-11 179 166)" /><rect x="173" y="278" width="26" height="12" rx="3" transform="rotate(6 186 284)" /></g>
+<path d="M148 318H240" stroke="#0b2545" stroke-width="6" stroke-linecap="round" />
+<rect class="anim-pulse" x="160" y="324" width="70" height="7" rx="2" fill="#f5b800" stroke="#0b2545" stroke-width="1" />
+<rect class="anim-pulse" x="190" y="254" width="18" height="14" rx="2" fill="#f5b800" stroke="#0b2545" stroke-width="1" />
+<g stroke="#0b2545" stroke-width="2"><circle cx="170" cy="120" r="16" fill="#e6f6f4" /><circle cx="190" cy="222" r="16" fill="#e6f6f4" /></g>
+<g class="anim-spin"><path d="M170 108V132M158 120H182" stroke="#0b2545" stroke-width="2" /></g>
+<g class="anim-spin"><path d="M190 210V234M178 222H202" stroke="#0b2545" stroke-width="2" /></g>
+<g stroke="#0b2545" stroke-width="2" fill="#ffffff">
+<rect x="390" y="44" width="220" height="52" rx="6" /><rect x="390" y="146" width="220" height="56" rx="6" fill="#e6f6f4" /><rect x="390" y="252" width="220" height="56" rx="6" />
+</g>
+<g stroke="#0b2545" stroke-width="2"><path d="M500 252V210M500 146V104" /></g>
+<g fill="#0b2545"><path d="M494 210L500 202L506 210Z" /><path d="M494 104L500 96L506 104Z" /></g>
+<g stroke="#b42318" stroke-width="2.5" fill="none"><path d="M390 70H330V222H206" /><path d="M330 120H186" /></g>
+<g stroke="#7b8794" stroke-width="2" fill="none"><path d="M230 328H350V280H390" /><path d="M208 261H350V280" /></g>
+<g stroke="#ffffff" stroke-width="1.2" fill="none" stroke-dasharray="4 4"><path class="anim-flow" d="M390 70H330V222H206" /><path class="anim-flow" d="M330 120H186" /><path class="anim-flow" d="M230 328H350V280H390" /><path class="anim-flow" d="M208 261H350V280" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
+<text x="500" y="67" font-weight="700">Motor drivers</text><text x="500" y="84" font-size="11">set motor current</text>
+<text x="500" y="170" font-weight="700">Controller</text><text x="500" y="188" font-size="11">gait phase and assist torque</text>
+<text x="500" y="276" font-weight="700">Sensors</text><text x="500" y="294" font-size="11">encoders, foot pressure, IMU</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="114" y="70" text-anchor="end">Battery</text>
+<text x="148" y="124" text-anchor="end">Hip actuator</text>
+<text x="160" y="170" text-anchor="end">Thigh cuff</text>
+<text x="168" y="226" text-anchor="end">Knee actuator</text>
+<text x="166" y="288" text-anchor="end">Shank cuff</text>
+<text x="214" y="252">IMU</text>
+<text x="195" y="350" text-anchor="middle">Foot pressure sensor</text>
+<text x="228" y="112" fill="#b42318">Motor power</text>
+<text x="262" y="320" fill="#7b8794">Sensor signals</text>
+</g>
+</svg>
+<figcaption>Lower limb rehabilitation exoskeleton: sensors feed the controller, which sets the motor drivers that power the hip and knee actuators.</figcaption>
+</figure>
+
+- The frame has rigid thigh and shank links of adjustable length, held to the limb by padded cuffs and straps. Dollar and Herr point out that the exoskeleton joints must line up with the anatomical joints, or the cuffs slide and press on the skin.
+- The actuators, usually at the hip and knee, are electric motors driving through a high ratio reduction such as a [gear train](/mechanical-engineering/types-of-gears/) or ball screw. The motor itself works like any [DC motor](/electrical-engineering/dc-motor-working-principle/). A series elastic actuator puts a spring between the gearbox and the joint. Pratt and Williamson showed that the spring deflection gives the output force and that the spring makes the actuator more tolerant of shocks.
+- Joint encoders measure angle and speed. Force or pressure sensors under the foot detect heel contact and loading, inertial measurement units (IMUs) measure trunk and limb tilt, and some research systems add surface EMG electrodes, which follow the methods in [biopotential measurement](/biomedical-engineering/biopotential-measurement-basics/).
+- An embedded processor, motor drivers and a rechargeable battery pack make up the controller and power supply, worn on the back or waist in overground devices.
+
+## How exoskeletons are controlled
+
+Control runs as a loop. Sensors report joint angles and foot loading, the controller decides which part of the gait cycle the leg is in and how much torque each joint needs, and the motor drivers set the motor currents to produce that torque. Each motor runs its own inner current, speed or position loop, often a [PID controller](/automation-robotics/pid-controller/).
+
+Marchal-Crespo and Reinkensmeyer group the high level strategies used in robotic movement training:
+
+1. In trajectory tracking (position control) the robot moves the joints along a reference walking pattern. Early treadmill gait trainers worked this way, and it suits patients who cannot step at all.
+2. Under impedance or admittance control the robot behaves like a spring and damper around the reference path, so the patient can deviate a little and has to contribute effort.
+3. Assist as needed control reduces the help as the patient improves and supports only the part of the movement that falls short. The review gives the reason: if the robot does all the work, the patient may become passive and learn less.
+4. Intention detection uses trunk tilt, foot pressure, buttons on the crutches or EMG to tell the controller that the user wants to stand, sit or take a step.
+
+## Joint torque and actuator power in exoskeletons
+
+Winter describes each joint by its net moment and angular velocity, and joint power is their product. Positive power means the muscles are generating energy; negative power means they are absorbing it. An exoskeleton actuator works in parallel with the user's muscles, so it has to supply some share of that moment and power.
+
+A linear actuator pushing on a lever at perpendicular distance $r$ from the joint axis produces a torque
+
+$$
+\tau = F\,r
+$$
+
+and the mechanical power at the joint is
+
+$$
+P = \tau\,\omega
+$$
+
+with $\omega$ in rad/s. A gearbox of ratio $N$ and efficiency $\eta$ links the motor to the joint:
+
+$$
+\tau_m = \frac{\tau}{N\,\eta}, \qquad \omega_m = N\,\omega
+$$
+
+so the motor runs fast at low torque and the joint turns slowly at high torque.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>During sit to stand training, a knee actuator pushes with a force F = 1200 N at a perpendicular moment arm r = 0.05 m from the knee axis. The knee extends at ω = 1.5 rad/s. A rotary motor drive for the same joint would use a gearbox with ratio N = 100 and efficiency η = 0.85.</dd>
+<dt>Find</dt><dd>Knee torque, mechanical power at the knee, motor torque and speed, and motor shaft power.</dd>
+<dt>Assumptions</dt><dd>Force acts perpendicular to the lever; steady speed, so inertia is ignored; constant gearbox efficiency.</dd>
+<dt>Solution</dt><dd>Knee torque τ = F × r = 1200 × 0.05 = 60 N·m<br />Joint power P = τ × ω = 60 × 1.5 = 90 W<br />Motor torque τm = τ ÷ (N × η) = 60 ÷ (100 × 0.85) = 0.706 N·m<br />Motor speed ωm = N × ω = 100 × 1.5 = 150 rad/s = 150 × 60 ÷ (2π) = 1432 rpm<br />Motor shaft power = τm × ωm = 0.706 × 150 = 105.9 W, which equals 90 ÷ 0.85</dd>
+<dt>Answer</dt><dd><strong>The actuator gives 60 N·m and 90 W at the knee; the motor must deliver about 0.71 N·m at 1432 rpm, or about 106 W</strong></dd>
+<dt>Limitations</dt><dd>Real torque changes through the movement, the moment arm changes with knee angle, and limb inertia, gravity and the user's own muscle effort all change the load. Motor electrical losses add to the power drawn from the battery.</dd>
+</dl>
+</Example>
+
+## Key formulas for exoskeletons
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Joint torque | τ = F × r | F = actuator force in N, r = perpendicular moment arm in m, τ in N·m |
+| Joint power | P = τ × ω | ω = joint angular speed in rad/s, P in W |
+| Motor torque through gearbox | τm = τ ÷ (N × η) | N = gear ratio, η = gearbox efficiency |
+| Motor speed through gearbox | ωm = N × ω | ωm in rad/s |
+| Speed conversion | rpm = ω × 60 ÷ (2π) | ω in rad/s |
+
+## Safety standards and regulation
+
+The person wearing a powered exoskeleton may not be able to move away from it if something goes wrong. Which standard applies depends on whether the device is a medical device:
+
+- IEC 80601-2-78:2019 gives particular requirements for basic safety and essential performance of medical robots for rehabilitation, assessment, compensation or alleviation. It works alongside the general medical electrical equipment standard.
+- ISO 13482:2014 covers personal care robots, including physical assistant robots worn by the user, when they are not medical devices.
+- In the United States, 21 CFR 890.3480 defines a powered lower extremity exoskeleton as a prescription device made of an external, powered, motorized orthosis placed over paralysed or weakened limbs for medical purposes. It is Class II with special controls, which include performance testing, software verification and validation, electrical safety and a user training programme. See [medical device classification](/biomedical-engineering/medical-device-classification/) for how classes work.
+
+In practice designers add mechanical joint stops beyond the user's safe range of motion, torque and speed limits in software, emergency stop buttons and fall detection.
+
+## Clinical use and limitations
+
+Colombo and colleagues showed that a powered orthosis on a treadmill could guide the legs of paraplegic patients through walking movements with less physical work for the therapists. The Cochrane review by Mehrholz and colleagues found that people after stroke who received electromechanical assisted gait training together with physiotherapy were more likely to walk independently than those who had physiotherapy alone.
+
+Dollar and Herr list the main engineering limits: device mass and the energy needed to carry it, battery life, actuator size and power, misalignment between device and human joints, and comfort at the cuffs. Overground exoskeletons still need crutches or a walker for balance in most users.
+
+## Exoskeletons interview and viva questions
+
+1. **What is the difference between an exoskeleton and a prosthesis?** An exoskeleton acts in parallel with an existing limb to move or support it, while a prosthesis replaces a missing limb segment.
+2. **How is joint torque found from an actuator force?** Multiply the actuator force by its perpendicular moment arm about the joint axis, τ = F × r.
+3. **Why is a high gear ratio used in exoskeleton actuators?** A small fast motor gives high torque at low joint speed, because joint torque rises with N × η while joint speed falls by N.
+4. **What is a series elastic actuator?** An actuator with a spring between the gearbox and the load; the spring deflection gives the output force and the spring makes the actuator more tolerant of shocks.
+5. **Why is assist as needed control used in rehabilitation?** If the robot does all the work the patient may stay passive, so reducing help as the patient improves keeps them active in the movement.

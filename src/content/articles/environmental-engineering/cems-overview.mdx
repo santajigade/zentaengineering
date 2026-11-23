@@ -3,6 +3,7 @@ title: "Continuous Emissions Monitoring Systems (CEMS) Overview"
 description: "CEMS overview: extractive and in-situ systems, gas analysers, dust monitors, flow measurement, data acquisition, calibration, QAL standards and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-23
 discipline: environmental-engineering
 subcategory: emissions-compliance
 focusKeyword: "cems"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-A **CEMS** (continuous emissions monitoring system) measures pollutants in stack gases around the clock and reports them to plant operators and regulators. A typical system includes **gas analysers** for SO₂, NOx, CO, CO₂ and O₂ (plus HCl, NH₃ or others as needed), a **particulate (dust) monitor**, **flow, temperature and pressure** sensors to calculate mass emissions, a **sampling system** (for extractive designs) and a **data acquisition and handling system (DAHS)**. CEMS must be certified and regularly calibrated under standards such as **EN 14181** or **US EPA performance specifications**.
+A **CEMS** (continuous emissions monitoring system) measures stack pollutants such as SO₂, NOx and CO, plus O₂, dust and flue gas flow, around the clock. Extractive or in-situ analysers feed a **data acquisition and handling system (DAHS)** that corrects readings to reference oxygen, averages them and reports to regulators. CEMS are calibrated under **EN 14181** or US EPA specifications.
 
 </Key>
 
@@ -45,7 +46,7 @@ Power plants, cement kilns, refineries, steel plants, incinerators and many othe
 
 ## CEMS types
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Extractive CEMS: a heated probe in the stack withdraws sample gas through a heated line to a sample conditioning unit with a cooler and filter, then to gas analysers in a shelter; a dust monitor and flow monitor are mounted on the stack; all signals go to the data acquisition system and then to the regulator's server">
 <g stroke="#0b2545" stroke-width="2">
 <path d="M60 20V270M140 20V270" />
@@ -54,8 +55,9 @@ Power plants, cement kilns, refineries, steel plants, incinerators and many othe
 </g>
 <path d="M80 150H140" stroke="#0b2545" stroke-width="3" />
 <path d="M140 150H250" stroke="#b42318" stroke-width="2.5" />
-<g stroke="#13a89e" stroke-width="2"><path d="M340 150h30M460 150h30M537 180v35" /><path d="M180 71H537V120M180 221H232V100H537" stroke-dasharray="5 3" stroke="#7b8794" /></g>
-<g stroke="#f5b800" stroke-width="2" fill="none"><path d="M90 230Q95 215 100 230T110 230T120 230" /><path d="M90 255Q95 240 100 255T110 255T120 255" /></g>
+<g stroke="#13a89e" stroke-width="2"><path d="M340 150h30M460 150h30M537 180v35" /><path class="anim-flow-slow" d="M180 71H537V120M180 221H232V100H537" stroke-dasharray="5 3" stroke="#7b8794" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" stroke-dasharray="6 12" d="M80 150H250" /><path class="anim-flow" stroke-dasharray="6 12" d="M340 150h30M460 150h30M537 180v35" /></g>
+<g stroke="#f5b800" stroke-width="2" fill="none"><path class="anim-blink anim-d2" d="M90 230Q95 215 100 230T110 230T120 230" /><path class="anim-blink" d="M90 255Q95 240 100 255T110 255T120 255" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="100" y="40">Stack</text><text x="110" y="140" font-size="11">Probe</text><text x="195" y="143" font-size="11" fill="#b42318">Heated line</text>
 <text x="295" y="146">Sample</text><text x="295" y="162">conditioning</text>
@@ -122,6 +124,13 @@ with concentrations at standard temperature and pressure on a dry basis.
 </dl>
 </Example>
 
+## Key formulas for CEMS
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Reference oxygen correction | C_ref = C_meas × (20.9 − O₂,ref) ÷ (20.9 − O₂,meas) | C in mg/Nm³ dry at standard temperature and pressure, O₂ in % by volume, 20.9 = O₂ in air |
+| Mass emission rate | E = C_meas × Q | C_meas in mg/Nm³, Q = dry flue gas flow in Nm³/h; divide by 1 000 000 for kg/h |
+
 ## Selecting and installing a CEMS
 
 A successful CEMS project starts with the regulatory requirements: which parameters, ranges, averaging periods and certification standards apply. The measurement location must have fully developed, representative flow, typically several duct diameters downstream of bends, fans and dampers, with safe platforms, power and weather protection. Engineers then choose between extractive and in-situ designs based on gas composition, moisture, dust load, temperature and corrosive components. Heated sample lines must stay above the acid dew point, and shelters need air conditioning to keep analysers stable. Instrument air, calibration gas storage and data communication links to the plant control system and the regulator complete the design. A stratification test across the duct confirms that a single point probe gives a representative sample.
@@ -149,3 +158,11 @@ Good maintenance includes probe filter cleaning, heated line checks, chiller and
 ## Using CEMS beyond compliance
 
 Operators use CEMS data to tune combustion (O₂ and CO), optimise urea or ammonia dosing in SCR and SNCR systems, monitor the performance of [electrostatic precipitators](/environmental-engineering/electrostatic-precipitator/) and scrubbers, and report greenhouse gas emissions. CEMS data also verifies predictions made during [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/). Routine zero and span checks with reference gases confirm that the analysers stay within their permitted drift between calibrations.
+
+## CEMS interview and viva questions
+
+1. **What is the difference between extractive and in-situ CEMS?** An extractive CEMS draws flue gas through a heated probe and line to analysers in a shelter, while an in-situ CEMS measures directly in the stack, for example with a light beam across the duct or a probe mounted zirconia O₂ cell.
+2. **Why are emissions corrected to a reference oxygen level?** Extra air dilutes the flue gas and lowers measured concentrations without reducing pollution, so values are normalised to a reference O₂ such as 6% for solid fuel boilers or 11% for incinerators.
+3. **Why is a hot wet extractive system used for HCl and NH₃?** These gases are water soluble, so the sample must stay above its dew point all the way to a heated analyser; a cold dry system would lose them in the condensate.
+4. **What are QAL1, QAL2 and QAL3 under EN 14181?** QAL1 is certification of the analyser under EN 15267, QAL2 is calibration against a standard reference method by an accredited lab, and QAL3 is the operator's ongoing drift and precision control.
+5. **A CEMS shows high oxygen and low pollutant readings. What is a likely cause?** A leak in the sample system is drawing in ambient air and diluting the gas, which raises measured oxygen.

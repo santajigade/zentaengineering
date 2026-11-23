@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video (oldest first). Delete a line once its video is live.
-ai-data-engineering/etl-vs-elt
-ai-data-engineering/how-large-language-models-work
-ai-data-engineering/how-neural-networks-work
-ai-data-engineering/predictive-maintenance-machine-learning
-ai-data-engineering/supervised-vs-unsupervised-learning
-ai-data-engineering/tokenization-and-embeddings
 automation-robotics/dcs-architecture
 automation-robotics/digital-twin-explained
 automation-robotics/machine-vision-components

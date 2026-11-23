@@ -1,0 +1,195 @@
+---
+title: "Instrument Landing System (ILS) Explained"
+description: "Instrument landing system explained: localizer, glide slope, 90 Hz and 150 Hz lobes, DDM, marker beacons, categories and a glide path example."
+pubDate: 2026-11-23
+reviewedDate: 2026-11-23
+discipline: aerospace-engineering
+subcategory: avionics
+focusKeyword: "instrument landing system"
+image: { src: /images/featured/instrument-landing-system.webp, alt: "Instrument Landing System (ILS) Explained: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [ils, localizer, glide-slope, avionics, radio-navigation]
+faq:
+  - q: "What is the difference between the localizer and the glide slope?"
+    a: "The localizer gives lateral guidance along the extended runway centreline. It transmits in the VHF band between 108.10 and 111.95 MHz from an antenna beyond the far end of the runway. The glide slope gives vertical guidance along a descent path, normally 3 degrees, and transmits in the UHF band between 329.15 and 335 MHz from an antenna beside the touchdown zone."
+  - q: "Why does an ILS use 90 Hz and 150 Hz tones?"
+    a: "The two tones let the receiver measure position without knowing signal strength. The antenna pattern makes one tone stronger on each side of the course or glide path, and the receiver compares their depths of modulation. The difference in depth of modulation (DDM) is zero on the course line and grows with angular displacement, which drives the cockpit deviation needles."
+  - q: "Do pilots tune the glide slope separately?"
+    a: "No. Each localizer frequency is paired with one glide slope frequency, so tuning the localizer frequency on the navigation receiver also selects the matching glide slope channel. The localizer also carries a Morse identifier, a three letter code preceded by I, so the crew can confirm the correct facility."
+references:
+  - text: "ICAO Annex 10 to the Convention on International Civil Aviation, Aeronautical Telecommunications, Volume I: Radio Navigation Aids, 7th ed., 2018"
+  - text: "FAA Aeronautical Information Manual (AIM), Chapter 1, Section 1: Navigation Aids, paragraph 1-1-9 Instrument Landing System"
+  - text: "FAA-H-8083-15B, Instrument Flying Handbook, Chapter 9: Navigation Systems, Federal Aviation Administration"
+  - text: "M. Kayton and W. R. Fried, Avionics Navigation Systems, 2nd ed., Wiley, 1997"
+  - text: "R. P. G. Collinson, Introduction to Avionics Systems, 3rd ed., Springer"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+An **instrument landing system** (ILS) is a ground based radio approach aid that guides an aircraft to the runway in poor visibility. A **localizer** gives left and right guidance, a **glide slope** gives a descent path of about 3 degrees, and the receiver compares 90 Hz and 150 Hz tones to show deviation.
+
+</Key>
+
+An instrument landing system lets a pilot or autopilot fly a precise straight in approach when cloud or fog hides the runway. Besides the localizer and glide slope, it gives range from marker beacons or DME. The cockpit shows two needles, and keeping both centred holds the aircraft on the final approach path down to the decision height.
+
+
+<ArticleVideo slug="instrument-landing-system" title="How an instrument landing system works" />
+
+## Principle of the instrument landing system
+
+The ILS uses space modulation. Each ground transmitter radiates a carrier amplitude modulated by two tones, 90 Hz and 150 Hz, and the antenna array shapes the radiation so that one tone is stronger on each side of the desired path. Exactly on the path the two tones have equal depth of modulation.
+
+The airborne receiver ignores signal strength. It demodulates both tones and calculates the difference in depth of modulation (DDM), defined in ICAO Annex 10 as the percentage modulation depth of the larger tone minus that of the smaller tone, divided by 100:
+
+$$
+\mathrm{DDM} = \frac{m_{90} - m_{150}}{100}
+$$
+
+with the depths in percent. The sign of the DDM tells the receiver which side of the path the aircraft is on, and its size tells how far. Both tones ride on the same carrier, so fading and range change them equally. Amplitude modulation is covered in [modulation techniques](/telecommunication-engineering/modulation-techniques/).
+
+Kayton and Fried describe the two signals fed to the array: carrier plus both sidebands (CSB), and sidebands only (SBO). The SBO pattern has a null on the course line and opposite phase on each side, so in space it adds to one tone and subtracts from the other.
+
+<figure class="anim">
+<svg width="640" height="400" viewBox="0 0 640 400" fill="none" role="img" aria-label="Instrument landing system signal lobes. Plan view: the localizer antenna beyond the far end of the runway radiates two lobes toward the approaching aircraft, with 90 Hz predominating on the pilot's left and 150 Hz on the right, meeting on the course line where DDM is zero. Side view: the glide slope antenna beside the touchdown zone forms a 90 Hz lobe above the glide path and a 150 Hz lobe below it, with outer and middle marker beacons radiating vertically upward along the approach">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" font-weight="700">
+<text x="20" y="22">Plan view: localizer</text><text x="20" y="222">Side view: glide slope</text>
+</g>
+<path d="M590 105 L70 105 Q50 60 130 42 C300 22 470 55 590 105 Z" fill="#dbe9ff" stroke="#2f6fb3" stroke-width="1.5" />
+<path d="M590 105 L70 105 Q50 150 130 168 C300 188 470 155 590 105 Z" fill="#fff1c9" stroke="#c98a00" stroke-width="1.5" />
+<rect x="380" y="95" width="180" height="20" fill="#5b6675" />
+<path d="M40 105H380" stroke="#0b2545" stroke-width="2" />
+<path class="anim-flow" d="M40 105H380" stroke="#fff" stroke-width="2" />
+<circle class="anim-pulse" cx="590" cy="105" r="6" fill="#b42318" />
+<path d="M126 105 L104 97 L108 105 L104 113 Z M118 105 L112 92 L109 92 L111 105 L109 118 L112 118 Z" fill="#0b2545" />
+<path d="M133 105 L105 105" stroke="#0b2545" stroke-width="4" stroke-linecap="round" />
+<path d="M122 105 L114 88 M122 105 L114 122" stroke="#0b2545" stroke-width="3.5" stroke-linecap="round" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="250" y="68">90 Hz predominates (pilot's left)</text>
+<text x="250" y="148">150 Hz predominates (pilot's right)</text>
+<text x="250" y="98" font-size="11">Course line, DDM = 0</text>
+<text x="470" y="109" fill="#fff" font-size="11">Runway</text>
+<text x="604" y="132" font-size="11">Localizer</text><text x="604" y="145" font-size="11">antenna</text>
+<text x="118" y="140" font-size="11">Aircraft</text>
+</g>
+<path d="M430 368 L40 248 L40 222 C200 228 360 300 430 368 Z" fill="#dbe9ff" stroke="#2f6fb3" stroke-width="1.5" />
+<path d="M430 368 L40 248 L40 300 C200 336 360 358 430 368 Z" fill="#fff1c9" stroke="#c98a00" stroke-width="1.5" />
+<path d="M20 370H620" stroke="#7b8794" stroke-width="2" />
+<rect x="380" y="366" width="180" height="6" fill="#5b6675" />
+<path d="M40 248L430 368" stroke="#0b2545" stroke-width="2" />
+<path class="anim-flow" d="M40 248L430 368" stroke="#fff" stroke-width="2" />
+<path d="M430 370V352" stroke="#0b2545" stroke-width="3" />
+<circle class="anim-pulse" cx="430" cy="350" r="5" fill="#b42318" />
+<path class="anim-blink" d="M100 370 L84 245 L116 245 Z" fill="#7d5bd6" fill-opacity="0.35" stroke="#7d5bd6" />
+<path class="anim-blink anim-d2" d="M330 370 L320 312 L340 312 Z" fill="#c98a00" fill-opacity="0.35" stroke="#c98a00" />
+<g transform="rotate(17.1 150 281.8)">
+<path d="M164 281.8 L136 281.8" stroke="#0b2545" stroke-width="4" stroke-linecap="round" />
+<path d="M141 281.8 L136 272" stroke="#0b2545" stroke-width="3" stroke-linecap="round" />
+<path d="M154 281.8 L148 286" stroke="#0b2545" stroke-width="3" stroke-linecap="round" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="200" y="246">90 Hz above path: fly down</text>
+<text x="180" y="285" font-size="11" text-anchor="start" transform="rotate(17.1 180 285)">3° glide path (exaggerated)</text>
+<text x="230" y="334">150 Hz below path: fly up</text>
+<text x="100" y="386" font-size="11">Outer marker</text>
+<text x="330" y="386" font-size="11">Middle marker</text>
+<text x="470" y="386" font-size="11">Runway</text>
+<text x="545" y="350" font-size="11">Glide slope antenna</text>
+</g>
+<path d="M480 346 L440 350" stroke="#0b2545" stroke-width="1" />
+</svg>
+<figcaption>Localizer and glide slope lobes of an instrument landing system. The aircraft flies along the course line toward the runway, where the 90 Hz and 150 Hz tones are equal.</figcaption>
+</figure>
+
+## Localizer: lateral guidance
+
+The localizer array stands on the extended centreline beyond the far end of the runway, facing the approach. It transmits on one of 40 ILS channels between **108.10 and 111.95 MHz**, using odd tenths of a megahertz, for example 109.30 or 109.35 MHz. Each tone modulates the carrier to a depth of about 20%.
+
+Seen by a pilot on approach, 90 Hz predominates on the left of the course and 150 Hz on the right. The course sector ends where the DDM reaches 0.155. The FAA AIM sets the course width between 3 and 6 degrees so that it is 700 ft wide at the runway threshold, so the needle grows more sensitive as the aircraft gets closer. Proper off course indications reach 18 NM within 10 degrees either side of the course, and 10 NM between 10 and 35 degrees.
+
+The localizer also sends a Morse identifier, three letters preceded by I. Flown on its own, it supports a non precision approach.
+
+## Glide slope: vertical guidance
+
+The glide slope transmitter sits 750 to 1250 ft down the runway from the threshold and 250 to 650 ft to one side of the centreline (FAA AIM). It transmits between **329.15 and 335 MHz** UHF, each frequency paired with one localizer frequency, and each tone modulates the carrier to about 40%.
+
+The glide path angle is normally **3 degrees**. Above the path 90 Hz predominates and the needle says fly down; below it 150 Hz predominates and the needle says fly up. The glide path sector ends at a DDM of 0.175. The AIM gives a thickness of about 1.4 degrees, about 0.7 degrees above and below the path, and a usable range of 10 NM.
+
+At these frequencies the ground acts as a mirror. Kayton and Fried explain that each antenna and its ground image form a vertical lobe pattern, so mast height sets the glide path angle. In a null reference glide slope the SBO antenna's first null above the ground lies on the glide path:
+
+$$
+h_\text{SBO} = \frac{\lambda}{2 \sin\theta}, \qquad \lambda = \frac{c}{f}
+$$
+
+At 332 MHz the wavelength is 0.904 m, so for a 3 degree path the SBO antenna is about 8.6 m high and the CSB antenna, at half that height, about 4.3 m. The image only forms correctly over flat, clear ground in front of the antenna.
+
+## Marker beacons and range
+
+Marker beacons transmit on **75 MHz** in a narrow fan beam pointing straight up, so the cockpit light and tone come on only while the aircraft passes overhead.
+
+| Marker | Typical location | Tone and code | Light |
+| --- | --- | --- | --- |
+| Outer (OM) | 4 to 7 NM from threshold, where the glide path is normally intercepted | 400 Hz, continuous dashes | Blue |
+| Middle (MM) | About 3500 ft from threshold | 1300 Hz, alternating dots and dashes | Amber |
+| Inner (IM) | Between the MM and threshold, on Category II approaches | 3000 Hz, dots | White |
+
+The AIM notes that the 3 degree path crosses the MM at about 200 ft and the OM at about 1400 ft above runway elevation. Many airports now use DME or GPS fixes instead of markers.
+
+## Operation step by step
+
+1. The crew tunes the localizer frequency; the paired glide slope is selected automatically and the Morse identifier is checked.
+2. Air traffic control vectors the aircraft to intercept the localizer course, usually below the glide path.
+3. The localizer needle centres and the aircraft tracks the course line toward the runway.
+4. Near the outer marker or the published fix, the glide slope needle centres and the aircraft starts descending at about 3 degrees.
+5. The pilot or autopilot keeps both needles centred down to the decision height, then lands visually or goes around. On suitably equipped aircraft an autoland system can fly the approach to touchdown.
+
+Category I approaches have a decision height of 200 ft and Category II allows 100 ft. Category III allows a lower decision height or none, needs more precise ground and aircraft equipment, and is the basis of autoland operations.
+
+## Glide path height and descent rate
+
+On the glide path the height above the threshold at distance d from the threshold is:
+
+$$
+h = \mathrm{TCH} + d \tan\theta
+$$
+
+where TCH is the threshold crossing height, often about 50 ft. For a 3 degree path tan 3° is 0.0524, about 318 ft of height per nautical mile (6076 ft). Descent rate is groundspeed times tan θ, about 5.3 times the groundspeed in knots, in ft/min, which is why the Instrument Flying Handbook tabulates descent rate against groundspeed.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>ILS with a 3° glide path and a threshold crossing height of 50 ft. Aircraft on the glide path 5 NM from the threshold at a groundspeed of 130 kt. Runway 10,000 ft long, localizer antenna 1000 ft beyond the far end, course width 700 ft at the threshold.</dd>
+<dt>Find</dt><dd>(a) Height above the threshold, (b) descent rate needed to stay on the path, (c) localizer course sector angle.</dd>
+<dt>Assumptions</dt><dd>Straight glide path, flat runway, 1 NM = 6076 ft, still air so groundspeed is constant.</dd>
+<dt>Solution</dt><dd>(a) d = 5 × 6076 = 30,380 ft; d tan 3° = 30,380 × 0.0524 = 1592 ft; h = 50 + 1592 = 1642 ft<br />(b) Groundspeed = 130 × 6076 ÷ 60 = 13,165 ft/min; descent rate = 13,165 × 0.0524 = 690 ft/min<br />(c) Distance from antenna to threshold = 10,000 + 1000 = 11,000 ft; sector angle = 2 × atan(350 ÷ 11,000) = 2 × 1.82° = 3.64°</dd>
+<dt>Answer</dt><dd><strong>About 1640 ft above the threshold, a descent rate of about 690 ft/min, and a course sector of 3.64°, inside the 3 to 6 degree range</strong></dd>
+<dt>Limitations</dt><dd>Wind changes groundspeed and so the descent rate. Published heights use the actual threshold crossing height and charted distances; the barometric altimeter reads altitude, not height above the threshold.</dd>
+</dl>
+</Example>
+
+## Key formulas for instrument landing system
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Difference in depth of modulation | DDM = (m90 − m150) ÷ 100 | m90, m150 = modulation depths in % |
+| Height on glide path | h = TCH + d tan θ | TCH = threshold crossing height (ft), d = distance from threshold (ft), θ = glide path angle |
+| Descent rate | ROD = V_GS × tan θ | V_GS = groundspeed (ft/min), about 5.3 × knots for 3° |
+| Localizer sector angle | α = 2 atan(w ÷ 2D) | w = course width at threshold (700 ft), D = antenna to threshold distance (ft) |
+| Null reference SBO antenna height | h_SBO = λ ÷ (2 sin θ) | λ = c ÷ f (m) |
+
+## Advantages and limitations
+
+The ILS gives continuous, precise guidance that can be flown by hand, by autopilot or to automatic landing. Buildings, hangars and taxiing aircraft can reflect the signals and bend the course, so critical areas around the antennas are protected. The glide slope needs flat ground in front of it, and each runway end needs its own installation. Satellite approaches are covered in the GNSS section of [avionics systems](/aerospace-engineering/avionics-systems-overview/), and the antenna patterns build on [antenna gain and directivity](/electronics-engineering/antenna-gain-and-directivity/).
+
+## Instrument landing system interview and viva questions
+
+1. **What does DDM mean in an ILS?** It is the difference in depth of modulation between the 90 Hz and 150 Hz tones, divided by 100; it is zero on the course or glide path and increases with displacement.
+2. **On which side of the localizer course does 150 Hz predominate?** On the right side as seen by a pilot approaching the runway; 90 Hz predominates on the left.
+3. **What are the localizer and glide slope frequency bands?** The localizer uses 108.10 to 111.95 MHz VHF and the glide slope uses 329.15 to 335 MHz UHF, with each localizer frequency paired to one glide slope frequency.
+4. **How wide is the localizer course?** Its angular width is set between 3 and 6 degrees so that the course is 700 ft wide at the runway threshold.
+5. **How do marker beacons differ from the localizer?** They transmit on 75 MHz with a vertical fan beam and only indicate passage over a fixed point, using 400, 1300 and 3000 Hz tones for the outer, middle and inner markers.
+
+Related reading: [aircraft stability](/aerospace-engineering/aircraft-stability/) and [forces of flight and aircraft axes](/aerospace-engineering/forces-of-flight-and-axes/).

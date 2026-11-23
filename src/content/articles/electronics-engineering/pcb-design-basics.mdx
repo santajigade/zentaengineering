@@ -3,6 +3,7 @@ title: "PCB Design Basics: Layers, Traces and Design Rules"
 description: "How a printed circuit board is built, the PCB design workflow, trace width and clearance rules, layout good practice and the files a manufacturer needs."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-23
 discipline: electronics-engineering
 subcategory: pcb-design
 focusKeyword: "PCB design"
@@ -30,7 +31,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-A printed circuit board (PCB) holds and connects electronic components using copper tracks on an insulating board. Good PCB design means choosing the right **layer stack**, sizing **traces** for their current, keeping enough **clearance** for the voltage, placing components so that high-current and high-speed loops are short, and following the **design rules** of the board manufacturer.
+**PCB design** is the process of laying out a printed circuit board, which holds and connects electronic components using copper tracks on an insulating board. Good PCB design means choosing the right layer stack, sizing traces for their current, keeping enough clearance for the voltage, keeping high-current and high-speed loops short, and following the manufacturer's design rules.
 
 </Key>
 
@@ -55,6 +56,37 @@ A common finished thickness is 1.6 mm. Boards are described by their number of c
 - **Vias:** plated holes that connect layers. Through [vias](https://www.instrumentationblog.in/pcb-via-current-capacity/) pass through the whole board; blind vias connect an outer layer to an inner one; buried vias connect inner layers only.
 - **Planes:** large copper areas, usually ground or power, that give low impedance supply paths and a clean return path for signals.
 - **Thermal reliefs:** spoke connections between a pad and a plane, which make soldering easier by limiting heat flow into the plane.
+
+<figure class="anim">
+<svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="PCB design cross-section of a two layer board: a surface mount pad with surface finish connects through a top copper trace to a plated through via, which carries the current down through the FR-4 core to the bottom copper ground plane; solder mask covers both outer copper layers and silkscreen ink is printed on top">
+<rect x="40" y="100" width="350" height="80" fill="#efe3b8" stroke="#0b2545" stroke-width="1.5" />
+<rect x="40" y="180" width="350" height="10" fill="#c87533" />
+<rect x="60" y="90" width="230" height="10" fill="#c87533" />
+<rect x="284" y="90" width="32" height="10" fill="#c87533" />
+<rect x="290" y="100" width="6" height="80" fill="#c87533" />
+<rect x="304" y="100" width="6" height="80" fill="#c87533" />
+<rect x="296" y="100" width="8" height="80" fill="#ffffff" />
+<rect x="60" y="86" width="50" height="4" fill="#e0b000" />
+<path d="M40 82H60V90H40ZM110 82H390V90H110Z" fill="#3a9a5b" />
+<rect x="40" y="190" width="350" height="8" fill="#3a9a5b" />
+<rect x="340" y="75" width="35" height="5" fill="#ffffff" stroke="#7b8794" stroke-width="1" />
+<path class="anim-flow" stroke-dasharray="6 12" d="M70 95H300V185H390" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#7b8794" stroke-width="1">
+<path d="M85 56V84M220 56V82M300 192V212M376 77L404 64M392 86H404M392 140H404M392 185H404M392 194L404 204" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="85" y="50" text-anchor="middle">Pad with surface finish</text>
+<text x="220" y="50" text-anchor="middle">Top copper trace</text>
+<text x="300" y="226" text-anchor="middle">Plated through via</text>
+<text x="408" y="66">Silkscreen</text>
+<text x="408" y="90">Solder mask (top)</text>
+<text x="408" y="144">FR-4 core (substrate)</text>
+<text x="408" y="182">Ground plane (bottom copper)</text>
+<text x="408" y="210">Solder mask (bottom)</text>
+</g>
+</svg>
+<figcaption>Cross-section of a two-layer PCB (not to scale): current from a pad runs along a top trace and down a plated via to the bottom ground plane.</figcaption>
+</figure>
 
 ## The PCB design workflow
 
@@ -89,6 +121,14 @@ Here I is the current in amperes, ΔT the temperature rise in °C, A the cross-s
 
 <Calculator path="electronics/pcb-trace-width" title="PCB Trace Width Calculator" />
 
+## Key formulas for PCB design
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Trace current capacity (IPC-2221) | I = k ΔT<sup>0.44</sup> A<sup>0.725</sup> | I in A, ΔT = temperature rise in °C, A = cross-sectional area in square mils, k = 0.048 (outer layers) or 0.024 (inner layers) |
+| Required cross-sectional area | A = (I ÷ (k ΔT<sup>0.44</sup>))<sup>1/0.725</sup> | A in square mils |
+| Trace width | Width = A ÷ t | t = copper thickness in mils (1 oz copper is about 1.38 mil, or 35 µm) |
+
 ## Clearance and creepage
 
 Conductors at different voltages need enough spacing to prevent arcing and leakage. IPC-2221 gives minimum electrical clearances that increase with voltage and depend on whether the conductors are internal, coated or bare on the surface. For mains-powered products, safety standards such as IEC 62368-1 set **creepage** (distance along the surface) and **clearance** (distance through air) between hazardous and safe circuits, and these are usually much larger than the PCB fabrication minimums.
@@ -118,6 +158,14 @@ Every fabricator publishes minimum trace width and spacing, drill sizes, annular
 ## Applications
 
 PCBs are used in nearly every electronic product: consumer devices, industrial controllers, power supplies, automotive modules, medical equipment and communication systems. The same design principles apply from a simple two-layer sensor board to a twelve-layer processor board, with more attention to signal integrity as speeds rise.
+
+## PCB design interview and viva questions
+
+1. **What does a solid ground plane do in PCB design?** It gives every signal a short return path directly under its trace, which reduces noise and radiated emissions.
+2. **Why are decoupling capacitors placed close to IC power pins?** Short connections to the pin and to ground let them supply the fast current pulses the IC draws.
+3. **What is the difference between creepage and clearance?** Creepage is the distance along the board surface between conductors, and clearance is the distance through air. Safety standards such as IEC 62368-1 set both for mains-powered products.
+4. **Why does an inner layer trace need more copper than an outer layer trace for the same current?** IPC-2221 uses k = 0.024 for inner layers against 0.048 for outer layers, so a larger cross-section is needed for the same temperature rise.
+5. **What does a design rule check (DRC) do?** It checks spacing, widths, unconnected nets and drill sizes against the manufacturer's capabilities before the output files are generated.
 
 ## Related reading
 

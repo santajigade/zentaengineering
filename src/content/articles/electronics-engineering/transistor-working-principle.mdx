@@ -3,6 +3,7 @@ title: "Transistor Working Principle: BJT Basics"
 description: "Transistor working principle explained for the BJT: NPN and PNP structure, biasing, current gain, operating regions and a solved switch example."
 pubDate: 2026-11-07
 reviewedDate: 2026-11-07
+updatedDate: 2026-11-23
 discipline: electronics-engineering
 subcategory: components
 focusKeyword: "transistor working principle"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The **transistor working principle** of a bipolar junction transistor (BJT) is that a small current into the base controls a much larger current from collector to emitter. With the base-emitter junction forward biased and the base-collector junction reverse biased, carriers injected from the emitter cross a thin base and are swept into the collector, so I<sub>C</sub> ≈ β I<sub>B</sub>.
+**Transistor working principle**: in a bipolar junction transistor (BJT), a small current into the base controls a much larger current from collector to emitter. With the base-emitter junction forward biased and the base-collector junction reverse biased, carriers injected from the emitter cross a thin base and are swept into the collector, so I<sub>C</sub> ≈ β I<sub>B</sub>.
 
 </Key>
 
@@ -57,7 +58,7 @@ The description below is for an NPN device in the forward-active mode. For PNP t
 4. **Collector sweeps them up.** Electrons reaching the edge of the reverse biased BC depletion region are pulled across by its electric field into the collector. This forms the collector current I<sub>C</sub>.
 5. **Control.** Raising V<sub>BE</sub> slightly raises the injection exponentially, so the base terminal controls the collector current while drawing only a small current itself.
 
-<figure>
+<figure class="anim">
 <svg width="580" height="300" viewBox="0 0 580 300" fill="none" role="img" aria-label="NPN transistor structure: a wide N type emitter on the left, a thin P type base in the middle and an N type collector on the right. Electrons flow from emitter through base to collector. A small base current leaves at the base terminal. The base emitter junction is forward biased and the base collector junction reverse biased.">
 <rect x="60" y="90" width="170" height="110" fill="#d9eef8" stroke="#0b2545" stroke-width="2" />
 <rect x="230" y="90" width="50" height="110" fill="#fde9a8" stroke="#0b2545" stroke-width="2" />
@@ -79,6 +80,8 @@ The description below is for an NPN device in the forward-active mode. For PNP t
 <path d="M90 150H440M440 150L428 142M440 150L428 158" stroke="#13a89e" stroke-width="3" />
 <path d="M266 158V250L338 274" stroke="#f5b800" stroke-width="2" stroke-dasharray="5 4" />
 <path d="M230 82V208M280 82V208" stroke="#0b2545" stroke-width="1" stroke-dasharray="3 3" />
+<path class="anim-flow" stroke-dasharray="6 12" d="M90 150H428" stroke="#fff" stroke-width="1.5" />
+<path class="anim-flow-slow" stroke-dasharray="6 12" d="M266 158V250L338 274" stroke="#0b2545" stroke-width="1.5" />
 </svg>
 <figcaption>NPN transistor in the forward-active mode: most electrons from the emitter cross the thin base into the collector; a few recombine and form the base current (not to scale).</figcaption>
 </figure>
@@ -141,12 +144,31 @@ To switch a load such as a relay, LED string or small motor from a microcontroll
 
 <Calculator path="electronics/transistor-base-resistor" title="Transistor Base Resistor Calculator" />
 
+## Key formulas for the transistor working principle
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Emitter current | I<sub>E</sub> = I<sub>C</sub> + I<sub>B</sub> | Currents in A or mA (Kirchhoff's current law) |
+| DC current gain | β = I<sub>C</sub> ÷ I<sub>B</sub> | Dimensionless, typically about 50 to 300 for small signal transistors |
+| Common-base gain | α = I<sub>C</sub> ÷ I<sub>E</sub> = β ÷ (β + 1) | Dimensionless, slightly less than 1 |
+| Active-region collector current | I<sub>C</sub> = I<sub>S</sub> e<sup>V<sub>BE</sub>/V<sub>T</sub></sup> | I<sub>S</sub> = saturation current, V<sub>T</sub> = thermal voltage, about 25.9 mV at 300 K |
+| Switch base current | I<sub>B</sub> = I<sub>C</sub> ÷ forced beta | Forced beta commonly about 10 |
+| Base resistor | R<sub>B</sub> = (V<sub>in</sub> − V<sub>BE</sub>) ÷ I<sub>B</sub> | V in volts, I in A, R in Ω; V<sub>BE</sub> about 0.7 V when ON |
+
 ## Advantages and limitations of the BJT
 
 - **Advantages:** high transconductance for a given current, predictable V<sub>BE</sub>, low noise in many analog stages, simple to drive at low voltages.
 - **Limitations:** needs continuous base current, which wastes power in switching; slower to turn off from saturation because stored charge must be removed; current gain varies with temperature and between devices; risk of thermal runaway in power stages without emitter resistance.
 
 For switching at higher power and speed, MOSFETs are often preferred. The [CMOS inverter](/electronics-engineering/cmos-inverter/) article shows how MOSFETs build digital logic, and [TTL vs CMOS logic families](https://www.instrumentationblog.in/ttl-vs-cmos-logic-families/) on InstrumentationBlog.in compares the two technologies.
+
+## Transistor working principle interview and viva questions
+
+1. **Why must the base-collector junction be reverse biased in the forward-active mode?** Its depletion region field sweeps the electrons that reach the edge of the base into the collector, forming the collector current. If both junctions are forward biased the transistor is in saturation and I<sub>C</sub> is set by the external circuit, not by β.
+2. **How are α and β related?** α = I<sub>C</sub> ÷ I<sub>E</sub> = β ÷ (β + 1), so α is slightly less than 1 for the typical β range of about 50 to 300.
+3. **Why does V<sub>BE</sub> stay near 0.7 V over a wide range of currents?** The collector current depends exponentially on V<sub>BE</sub>, so a tenfold change in I<sub>C</sub> changes V<sub>BE</sub> by only about 60 mV.
+4. **Why is a BJT switch designed for a forced beta of about 10?** β varies widely between devices and with temperature, so supplying more base current than I<sub>C</sub> ÷ β keeps even a low-gain transistor saturated.
+5. **Which configuration is used as a buffer, and why?** The common collector (emitter follower), because its voltage gain is just below 1 while its input resistance is high and its output resistance is low.
 
 ## Related reading
 

@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/electronics-engineering/microcontroller-vs-microprocessor.mdx
-src/content/articles/electronics-engineering/pcb-design-basics.mdx
-src/content/articles/electronics-engineering/sampling-theorem.mdx
-src/content/articles/electronics-engineering/transistor-working-principle.mdx
-src/content/articles/electronics-engineering/what-is-a-diode.mdx
-src/content/articles/environmental-engineering/activated-sludge-process.mdx
-src/content/articles/environmental-engineering/cems-overview.mdx
-src/content/articles/environmental-engineering/circular-economy-principles.mdx
 src/content/articles/environmental-engineering/electrostatic-precipitator.mdx
 src/content/articles/environmental-engineering/environmental-impact-assessment.mdx
 src/content/articles/environmental-engineering/life-cycle-assessment.mdx

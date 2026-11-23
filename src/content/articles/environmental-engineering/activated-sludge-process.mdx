@@ -3,6 +3,7 @@ title: "Activated Sludge Process in Wastewater Treatment"
 description: "Activated sludge process explained: aeration tank, secondary clarifier, return and waste sludge, F/M ratio, SRT, oxygen demand, nutrient removal and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-23
 discipline: environmental-engineering
 subcategory: wastewater-treatment
 focusKeyword: "activated sludge process"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The **activated sludge process** is the most widely used biological method for treating sewage and industrial wastewater. Wastewater is mixed with a concentrated population of microorganisms (**activated sludge**) in an **aeration tank**, where air or oxygen is supplied. The bacteria consume dissolved and suspended organic matter, measured as BOD, converting it to carbon dioxide, water and new cells. The mixture flows to a **secondary clarifier**, where the sludge settles; most is **returned** to the aeration tank (RAS) to keep the biomass high, and the excess is **wasted** (WAS) for treatment. The clear effluent is discharged or polished further.
+The **activated sludge process** is a biological wastewater treatment method in which a concentrated population of microorganisms is mixed with wastewater in an **aeration tank** supplied with air. Bacteria consume organic matter, measured as BOD, and form settleable flocs. A **secondary clarifier** separates the sludge; most is returned to the tank (RAS) and the excess is wasted (WAS).
 
 </Key>
 
@@ -43,7 +44,7 @@ The activated sludge process was developed by Ardern and Lockett in Manchester i
 4. **Tertiary treatment:** filtration, disinfection, nutrient polishing or membranes for reuse.
 5. **Sludge treatment:** thickening, digestion, dewatering and disposal or reuse.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Activated sludge process: primary effluent enters the aeration tank with diffusers supplying air bubbles; mixed liquor flows to a circular secondary clarifier; clear effluent leaves over the weir; settled sludge is pumped back as return activated sludge to the aeration tank inlet, and excess sludge is removed as waste activated sludge">
 <g stroke="#0b2545" stroke-width="2">
 <rect x="90" y="60" width="220" height="100" fill="#e6f6f4" />
@@ -51,13 +52,16 @@ The activated sludge process was developed by Ardern and Lockett in Manchester i
 <rect x="190" y="200" width="60" height="30" rx="4" fill="#fff7e0" />
 </g>
 <g stroke="#7b8794" stroke-width="2"><path d="M110 150H290" /></g>
-<g fill="#ffffff" stroke="#13a89e" stroke-width="1.5"><circle cx="130" cy="135" r="4" /><circle cx="150" cy="115" r="4" /><circle cx="170" cy="130" r="4" /><circle cx="190" cy="105" r="4" /><circle cx="210" cy="125" r="4" /><circle cx="230" cy="100" r="4" /><circle cx="250" cy="130" r="4" /><circle cx="270" cy="110" r="4" /><circle cx="140" cy="90" r="4" /><circle cx="260" cy="85" r="4" /></g>
+<g fill="#ffffff" stroke="#13a89e" stroke-width="1.5"><circle class="anim-blink" cx="130" cy="135" r="4" /><circle class="anim-blink anim-d1" cx="150" cy="115" r="4" /><circle class="anim-blink anim-d2" cx="170" cy="130" r="4" /><circle class="anim-blink anim-d3" cx="190" cy="105" r="4" /><circle class="anim-blink anim-d1" cx="210" cy="125" r="4" /><circle class="anim-blink anim-d4" cx="230" cy="100" r="4" /><circle class="anim-blink" cx="250" cy="130" r="4" /><circle class="anim-blink anim-d2" cx="270" cy="110" r="4" /><circle class="anim-blink anim-d5" cx="140" cy="90" r="4" /><circle class="anim-blink anim-d3" cx="260" cy="85" r="4" /></g>
 <path d="M405 155L445 120L485 155" fill="#8a6d3b" fill-opacity="0.4" />
 <g stroke="#13a89e" stroke-width="2.5"><path d="M20 100H90M310 100H385M520 70H580" /></g>
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow" stroke-dasharray="6 12" d="M20 100H90M310 100H385M520 70H580" /></g>
 <g fill="#13a89e"><path d="M82 95l9 5-9 5z" /><path d="M377 95l9 5-9 5z" /><path d="M572 65l9 5-9 5z" /></g>
-<g stroke="#8a6d3b" stroke-width="2.5"><path d="M445 160V215H250M190 215H60V120H90" /><path d="M445 215V245H530" stroke-dasharray="6 3" /></g>
+<g stroke="#8a6d3b" stroke-width="2.5"><path d="M445 160V215H250M190 215H60V120H90" /><path class="anim-flow-slow" d="M445 215V245H530" stroke-dasharray="6 3" /></g>
+<g stroke="#fff" stroke-width="2.5" fill="none"><path class="anim-flow-slow" stroke-dasharray="6 12" d="M445 160V215H250M190 215H60V120H90" /></g>
 <g fill="#8a6d3b"><path d="M82 115l9 5-9 5z" /><path d="M522 240l9 5-9 5z" /></g>
 <path d="M200 45V60M200 45H160" stroke="#0b2545" stroke-width="2" />
+<path class="anim-flow" d="M160 45H200V60" stroke="#fff" stroke-width="2" stroke-dasharray="6 12" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="40" y="92">Influent</text><text x="200" y="182">Aeration tank</text><text x="140" y="40">Air blower</text>
 <text x="445" y="50">Secondary clarifier</text><text x="550" y="60">Effluent</text><text x="340" y="120" font-size="11">Mixed liquor</text>
@@ -117,6 +121,17 @@ where S₀ is influent BOD and X is MLSS. Conventional plants run at about 0.2 t
 </dl>
 </Example>
 
+## Key formulas for the activated sludge process
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Hydraulic retention time | HRT = V ÷ Q | V = aeration tank volume in m³, Q = influent flow in m³/day; typically 4 to 8 h |
+| BOD load | BOD load = Q × S₀ | S₀ = influent BOD in kg/m³, load in kg BOD/day |
+| Biomass in tank | Biomass = V × X | X = MLSS in kg/m³, biomass in kg |
+| Food to microorganism ratio | F/M = (Q × S₀) ÷ (V × X) | kg BOD per kg MLSS per day; about 0.2 to 0.4 for conventional plants |
+| Volumetric loading | Loading = (Q × S₀) ÷ V | kg BOD per m³ of tank per day |
+| Sludge volume index | SVI = settled sludge volume after 30 min ÷ mass of sludge | mL/g; below about 150 mL/g indicates good settling |
+
 ## Variants of the activated sludge process
 
 - **Conventional plug flow:** long, narrow tanks.
@@ -146,3 +161,11 @@ Ammonia in sewage is oxidised to nitrate by slow growing nitrifying bacteria (ni
 Operators control the process through DO setpoints, RAS and WAS rates and microscopy. Online dissolved oxygen, ammonia, nitrate, MLSS and [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) support automatic aeration control, which can cut blower energy significantly.
 
 The activated sludge process complements drinking [water treatment](/environmental-engineering/water-treatment-process/) in the urban water cycle, and its waste sludge is a resource for biogas and nutrients in a [circular economy](/environmental-engineering/circular-economy-principles/).
+
+## Activated sludge process interview and viva questions
+
+1. **Why is activated sludge returned to the aeration tank?** Return activated sludge, typically 50 to 100% of influent flow, keeps the biomass concentration in the aeration tank high so the bacteria can remove BOD quickly.
+2. **What does the F/M ratio tell an operator?** It compares the BOD load fed each day with the mass of microorganisms (MLSS) in the tank. Conventional plants run at about 0.2 to 0.4 kg BOD per kg MLSS per day.
+3. **What is the difference between HRT and SRT?** HRT is how long the water stays in the tank, typically 4 to 8 hours, while SRT or sludge age is how long the sludge stays in the system, typically 5 to 15 days and longer for nitrification.
+4. **What is the sludge volume index?** SVI is the volume in mL occupied by 1 g of sludge after 30 minutes of settling. A value below about 150 mL/g indicates good settling.
+5. **What causes sludge bulking?** Bulking is usually caused by excessive growth of filamentous bacteria, linked to low dissolved oxygen, low F/M ratio, nutrient deficiency or septic wastewater, and it makes sludge settle poorly in the clarifier.

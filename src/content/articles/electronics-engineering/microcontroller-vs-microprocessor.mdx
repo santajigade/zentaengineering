@@ -3,6 +3,7 @@ title: "Microcontroller vs Microprocessor: Differences Explained"
 description: "Microcontroller vs microprocessor: the differences in architecture, memory, peripherals, operating systems, power and cost, and how to choose one."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-23
 discipline: electronics-engineering
 subcategory: embedded-systems
 focusKeyword: "microcontroller vs microprocessor"
@@ -28,11 +29,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-Microcontroller vs microprocessor comes down to how much is built into the chip.
-
-A **microcontroller (MCU)** is a complete small computer on one chip: processor core, program memory, RAM and peripherals such as timers, ADCs and serial ports. It is built to control a specific device with low power and predictable timing.
-
-A **microprocessor (MPU)** is mainly the processing core. It relies on external memory and support chips, runs at higher speed and usually runs a full operating system such as Linux or Windows.
+**Microcontroller vs microprocessor** comes down to how much is built into the chip. A microcontroller (MCU) is a complete small computer on one chip, with core, flash, RAM and peripherals such as timers and ADCs, built for low-power, predictable device control. A microprocessor (MPU) is mainly the processing core, relying on external memory and usually running a full operating system.
 
 </Key>
 
@@ -58,6 +55,54 @@ A microprocessor is designed for general-purpose computing. A system built aroun
 - power management ICs that supply several voltage rails in the right sequence.
 
 Many modern application processors are **systems on chip (SoC)** that also integrate graphics, video, networking and many peripherals, so the line between the two categories is less sharp than it once was. The key difference remains the use of external memory and a full operating system.
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Microcontroller vs microprocessor block diagram: on the left, one microcontroller chip contains the CPU core, flash program memory, SRAM, peripherals such as GPIO, timers, PWM, ADC, UART, SPI and I2C, and a clock and watchdog, connected directly to sensors and actuators; on the right, a microprocessor with CPU core and MMU uses external DRAM, external storage such as eMMC, SD card or SSD, and separate power management ICs">
+<rect x="20" y="40" width="265" height="190" rx="8" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" />
+<g stroke="#0b2545" stroke-width="2">
+<rect x="35" y="55" width="100" height="45" rx="4" fill="#eef1f6" />
+<rect x="175" y="55" width="95" height="45" rx="4" fill="#fff7e0" />
+<rect x="35" y="120" width="100" height="95" rx="4" fill="#ffffff" />
+<rect x="175" y="120" width="95" height="40" rx="4" fill="#fff7e0" />
+<rect x="175" y="175" width="95" height="40" rx="4" fill="#ffffff" />
+<rect x="20" y="255" width="80" height="32" rx="4" fill="#eef1f6" />
+<rect x="110" y="255" width="80" height="32" rx="4" fill="#eef1f6" />
+<rect x="330" y="55" width="120" height="80" rx="6" fill="#eef1f6" />
+<rect x="490" y="55" width="90" height="40" rx="4" fill="#fff7e0" />
+<rect x="490" y="115" width="90" height="40" rx="4" fill="#fff7e0" />
+<rect x="330" y="175" width="120" height="40" rx="4" fill="#ffe9e7" />
+</g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M175 72H135M135 90H155V140H175M85 100V120M60 255V215M125 215V255M490 75H450M490 130H450M390 175V135" />
+</g>
+<g stroke="#fff" stroke-width="1.5">
+<path class="anim-flow" stroke-dasharray="6 12" d="M175 72H135" />
+<path class="anim-flow" stroke-dasharray="6 12" d="M60 255V215" />
+<path class="anim-flow" stroke-dasharray="6 12" d="M125 215V255" />
+<path class="anim-flow" stroke-dasharray="6 12" d="M490 75H450" />
+<path class="anim-flow-slow" stroke-dasharray="6 12" d="M390 175V135" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="152" y="28" font-weight="700">Microcontroller (one chip)</text>
+<text x="455" y="28" font-weight="700">Microprocessor system</text>
+<text x="85" y="82">CPU core</text>
+<text x="222" y="75">Flash</text><text x="222" y="90">(program)</text>
+<text x="85" y="140" font-weight="700">Peripherals</text>
+<text x="85" y="160">GPIO, timers</text><text x="85" y="178">PWM, ADC</text><text x="85" y="196">UART, SPI, I²C</text>
+<text x="222" y="144">SRAM (data)</text>
+<text x="222" y="192">Clock and</text><text x="222" y="207">watchdog</text>
+<text x="60" y="275">Sensors</text><text x="150" y="275">Actuators</text>
+<text x="242" y="268" font-size="11">Bare metal</text><text x="242" y="282" font-size="11">or RTOS</text>
+<text x="390" y="82" font-weight="700">Microprocessor</text><text x="390" y="100">CPU core</text><text x="390" y="117">and MMU</text>
+<text x="535" y="72">External</text><text x="535" y="87">DRAM</text>
+<text x="535" y="132">eMMC, SD</text><text x="535" y="147">or SSD</text>
+<text x="390" y="192">Power ICs</text><text x="390" y="207">(several rails)</text>
+<text x="455" y="250" font-size="11">Runs Linux, Android or Windows</text>
+<text x="455" y="266" font-size="11">from external memory</text>
+</g>
+</svg>
+<figcaption>A microcontroller puts memory and peripherals on one chip; a microprocessor relies on external memory, storage and power ICs.</figcaption>
+</figure>
 
 ## Microcontroller vs microprocessor: side by side comparison
 
@@ -98,6 +143,13 @@ $$
 <dt>Limitations</dt><dd>Real ADCs have noise, offset, gain and linearity errors, so the effective resolution is lower than the nominal bit count. The datasheet gives the effective number of bits (ENOB).</dd>
 </dl>
 </Example>
+
+## Key formulas for microcontroller ADC resolution
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Number of ADC steps | Steps = 2<sup>N</sup> | N = ADC resolution in bits |
+| Voltage per step (one LSB) | LSB = V<sub>ref</sub> ÷ 2<sup>N</sup> | V<sub>ref</sub> = ADC reference voltage in V, LSB in V |
 
 
 ## Popular families
@@ -143,6 +195,14 @@ Microcontrollers offer several low-power modes. In sleep or stop modes the core 
 ## Development differences
 
 Microcontroller firmware is usually written in C or C++, sometimes MicroPython, and loaded into flash through a debug interface such as SWD or JTAG. Developers work close to the hardware, configuring registers or using vendor hardware abstraction libraries. Microprocessor development involves a bootloader, an operating system image, device drivers and applications, and can use almost any programming language.
+
+## Microcontroller vs microprocessor interview and viva questions
+
+1. **What is the main difference between a microcontroller and a microprocessor?** A microcontroller integrates the core, flash, SRAM and peripherals on one chip for dedicated control. A microprocessor is mainly the processing core and relies on external DRAM, storage and support chips.
+2. **Why do many microcontrollers use a Harvard architecture?** Separate instruction and data buses let the core fetch an instruction and access data at the same time.
+3. **Why does a typical microcontroller not run Linux?** Most microcontrollers lack the memory management unit and external memory that a general-purpose operating system needs, so they run bare metal code or an RTOS.
+4. **Why is a microcontroller preferred for real-time control?** It offers deterministic instruction timing and interrupt latency, while the caches, deep pipelines and OS scheduler of a microprocessor make timing less predictable.
+5. **What is the voltage step of a 12-bit ADC with a 3.3 V reference?** One LSB is 3.3 V ÷ 4096, about 0.81 mV, over 4096 steps.
 
 ## Related reading
 

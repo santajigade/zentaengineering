@@ -1,0 +1,173 @@
+---
+title: "Cathodic Protection: Sacrificial vs Impressed Current"
+description: "Cathodic protection compared: sacrificial anode and impressed current systems, protection criteria, anode design and a worked anode mass example."
+pubDate: 2026-11-23
+reviewedDate: 2026-11-23
+discipline: materials-engineering
+subcategory: corrosion
+focusKeyword: "cathodic protection"
+image: { src: /images/featured/cathodic-protection.webp, alt: "Cathodic Protection: Sacrificial vs Impressed Current: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [cathodic-protection, corrosion, sacrificial-anode, impressed-current, pipelines]
+faq:
+  - q: "Can cathodic protection replace a coating?"
+    a: "Not economically on most structures. The coating does most of the work and cathodic protection only has to protect the holidays and damaged areas, so the current demand stays small. Bare steel can be protected, but it needs far more current and many more anodes."
+  - q: "What happens if an impressed current rectifier is wired the wrong way round?"
+    a: "The structure becomes the anode and corrodes rapidly instead of being protected. The positive terminal must always go to the anode bed and the negative terminal to the structure, and polarity is checked at commissioning by measuring the structure potential."
+  - q: "Why is a copper/copper sulphate electrode used for buried pipelines?"
+    a: "It is a stable, rugged reference electrode that can be placed on the soil surface above the pipe. The minus 850 mV criterion in ISO 15589-1 and AMPP SP0169 is quoted against it. In seawater a silver/silver chloride electrode is normally used instead."
+references:
+  - text: "ISO 15589-1:2015, Petroleum, petrochemical and natural gas industries: Cathodic protection of pipeline systems, Part 1: On-land pipelines"
+  - text: "ISO 15589-2:2012, Petroleum, petrochemical and natural gas industries: Cathodic protection of pipeline transportation systems, Part 2: Offshore pipelines"
+  - text: "DNV-RP-B401, Cathodic protection design, DNV, edition June 2017"
+  - text: "AMPP (NACE) SP0169-2013, Control of External Corrosion on Underground or Submerged Metallic Piping Systems"
+  - text: "A. W. Peabody, Peabody's Control of Pipeline Corrosion, 2nd ed., R. L. Bianchetti (ed.), NACE International, 2001"
+  - text: "R. W. Revie and H. H. Uhlig, Corrosion and Corrosion Control, 4th ed., Wiley"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+Cathodic protection stops corrosion of buried or immersed steel by making it the cathode of an electrochemical cell. A sacrificial anode system uses a more active metal such as magnesium, zinc or aluminium that corrodes instead. An impressed current system uses a DC rectifier to drive current from long life anodes to the structure.
+
+</Key>
+
+Cathodic protection is used on buried pipelines, storage tank bottoms, ship hulls, jetties and offshore platforms, almost always together with a coating. Both methods work the same way electrically: protective current leaves an anode, flows through the soil or seawater, and enters the steel surface. They differ in where the driving voltage comes from, how much current they can deliver and how they are maintained.
+
+
+<ArticleVideo slug="cathodic-protection" title="How cathodic protection works" />
+
+## How cathodic protection works
+
+Corrosion of steel in water or soil is an electrochemical cell. At anodic sites iron dissolves, Fe → Fe²⁺ + 2e⁻, and at cathodic sites oxygen is reduced. The background is covered in [types of corrosion](/materials-engineering/types-of-corrosion/). If enough current flows onto the whole steel surface from an outside anode, every part of the steel becomes a cathode. The oxidation reaction is suppressed and the metal loss stops; the anode carries the corrosion instead.
+
+The steel potential tells you whether enough current is flowing. For buried steel, ISO 15589-1 and AMPP SP0169 use a polarised potential of minus 850 mV or more negative against a copper/copper sulphate (CSE) reference electrode. ISO 15589-1 asks for minus 950 mV CSE where sulphate reducing bacteria are active. An alternative criterion is at least 100 mV of cathodic polarisation measured from the native potential. In seawater, DNV-RP-B401 uses minus 0.80 V against a silver/silver chloride electrode, which is about the same as minus 850 mV CSE.
+
+<figure class="anim">
+<svg width="640" height="330" viewBox="0 0 640 330" fill="none" role="img" aria-label="Cathodic protection compared: on the left a sacrificial magnesium anode buried near a steel pipe and joined to it by a cable, on the right a transformer rectifier with its positive terminal to an anode groundbed and its negative terminal to the pipe; in both, conventional protective current flows from the anode through the soil to the pipe and returns through the cable">
+<rect x="10" y="70" width="300" height="220" fill="#f3ead9" />
+<rect x="330" y="70" width="300" height="220" fill="#f3ead9" />
+<g stroke="#0b2545" stroke-width="2"><path d="M10 70H310M330 70H630" /></g>
+<rect x="30" y="222" width="260" height="30" rx="15" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<rect x="350" y="222" width="260" height="30" rx="15" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<rect x="222" y="120" width="36" height="50" rx="4" fill="#c9ccd1" stroke="#0b2545" stroke-width="1.5" />
+<rect x="548" y="120" width="44" height="50" rx="4" fill="#3d4b5c" stroke="#0b2545" stroke-width="1.5" />
+<rect x="420" y="26" width="110" height="38" rx="5" fill="#e6f6f4" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="4"><path d="M50 222V105H240V120" /><path d="M530 45H570V120" /><path d="M370 222V45H420" /></g>
+<g stroke="#b42318" stroke-width="3.5"><path d="M240 170V214M228 170L190 214M252 170L280 214" /><path d="M570 170V214M558 170L515 214M582 170L600 214" /></g>
+<g fill="#b42318"><path d="M235 212L240 221L245 212Z" /><path d="M185 209L186 220L195 214Z" /><path d="M275 214L284 220L284 209Z" /><path d="M565 212L570 221L575 212Z" /><path d="M510 209L511 220L520 214Z" /><path d="M595 214L604 220L604 209Z" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M240 170V214M228 170L190 214M252 170L280 214" /><path class="anim-flow" d="M570 170V214M558 170L515 214M582 170L600 214" /><path class="anim-flow-slow" d="M50 222V105H240V120" /><path class="anim-flow-slow" d="M530 45H570V120" /><path class="anim-flow-slow" d="M370 222V45H420" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="160" y="24" font-weight="700">Sacrificial anode</text>
+<text x="475" y="16" font-weight="700">Impressed current</text>
+<text x="475" y="43" font-size="11">Transformer</text><text x="475" y="57" font-size="11">rectifier</text>
+<text x="540" y="40" font-size="13" font-weight="700" fill="#b42318">+</text>
+<text x="408" y="40" font-size="13" font-weight="700">−</text>
+<text x="70" y="62" font-size="11" text-anchor="start">Ground level</text>
+<text x="145" y="99" font-size="11">Cable</text>
+<text x="212" y="142" font-size="11" text-anchor="end">Mg anode</text>
+<text x="212" y="156" font-size="11" text-anchor="end">in backfill</text>
+<text x="538" y="142" font-size="11" text-anchor="end">Anode</text>
+<text x="538" y="156" font-size="11" text-anchor="end">groundbed</text>
+<text x="120" y="190" font-size="11">Soil (electrolyte)</text>
+<text x="445" y="190" font-size="11">Soil (electrolyte)</text>
+<text x="160" y="241" font-size="11" fill="#fff" font-weight="700">Steel pipe (cathode)</text>
+<text x="480" y="241" font-size="11" fill="#fff" font-weight="700">Steel pipe (cathode)</text>
+<text x="160" y="276" font-size="11">Anode metal corrodes instead</text>
+<text x="480" y="276" font-size="11">DC supply drives the current</text>
+<text x="320" y="318" font-size="11" fill="#b42318">Conventional current: anode → soil → pipe, returning through the cable</text>
+</g>
+</svg>
+<figcaption>Both systems send protective current from an anode through the electrolyte onto the steel. The driving voltage comes from the galvanic series on the left and from a rectifier on the right.</figcaption>
+</figure>
+
+## Cathodic protection comparison table
+
+| Feature | Sacrificial (galvanic) anode | Impressed current (ICCP) |
+| --- | --- | --- |
+| Driving voltage | Natural potential difference between anode metal and steel | Set by a DC transformer rectifier |
+| Anode materials | Magnesium, zinc, aluminium alloys | High silicon cast iron, graphite, mixed metal oxide or platinised titanium |
+| External power | None | Needed, from mains or a local source |
+| Current output | Low, limited by driving voltage and electrolyte resistivity | High and adjustable |
+| Anode life | Consumed; sized by mass for the design life | Long, anodes are designed to dissolve slowly |
+| Interference with other structures | Low | Possible, needs testing and control |
+| Risk of overprotection | Low | Higher if output is set too high |
+| Maintenance | Inspect and replace spent anodes | Check rectifier output and potentials regularly |
+| Typical use | Coated pipelines in low resistivity soil, offshore jackets, hulls, small tanks | Long pipelines, large tank farms, bare or poorly coated structures, high resistivity soil |
+
+## Sacrificial anode systems
+
+A sacrificial anode is a metal more active than steel in the galvanic series, bonded to the structure by a cable or welded directly to it. The cell runs on its own: the anode dissolves, and the current it releases protects the steel. Peabody gives open circuit potentials of roughly minus 1.55 to minus 1.75 V CSE for magnesium alloys and about minus 1.1 V CSE for zinc. Magnesium has the highest driving voltage, so it is used in higher resistivity soils. Zinc and aluminium are used in seawater and low resistivity soils. In seawater DNV-RP-B401 takes a closed circuit potential of minus 1.05 V (Ag/AgCl) for aluminium anodes.
+
+Buried anodes sit in a prepared backfill, usually gypsum, bentonite and sodium sulphate for magnesium and zinc, which keeps the anode moist and lowers its resistance to earth. The system needs no power supply and almost never upsets nearby structures. It is limited by the small driving voltage of a few hundred millivolts. Once the soil resistivity rises or the coating degrades, each anode delivers too little current, and more anodes are needed.
+
+## Impressed current systems
+
+An impressed current system uses a transformer rectifier to convert AC to DC. The positive terminal connects to an anode bed and the negative terminal to the structure. If the leads are reversed, the structure becomes the anode and corrodes quickly, so polarity is confirmed at commissioning. The anodes are made of materials that dissolve very slowly: high silicon cast iron, graphite, or titanium coated with mixed metal oxides or platinum. Anodes can be laid in a shallow horizontal groundbed or a deep vertical well, usually in carbonaceous backfill.
+
+Because the voltage is adjustable, one rectifier can protect many kilometres of coated pipeline or a large tank farm. Its drawbacks come from that high output too. Stray current can leave a nearby foreign pipeline and corrode it, so interference testing is part of the design. Driving the potential too negative causes hydrogen evolution, which can disbond coatings and embrittle high strength steels, and ISO 15589-1 sets a negative limit as well as a protection criterion.
+
+## Designing a cathodic protection system
+
+Design starts from the current demand. DNV-RP-B401 calculates it from the surface area, a design current density for the environment and a coating breakdown factor that grows over the design life:
+
+$$
+I_c = A_c \, i_c \, f_c
+$$
+
+For sacrificial anodes, the net anode mass needed to supply the mean current for the design life is:
+
+$$
+M = \frac{I_{cm} \, t_f \, 8760}{u \, \varepsilon}
+$$
+
+where I_cm is the mean current demand in A, t_f the design life in years, 8760 the hours in a year, u the utilisation factor and ε the electrochemical capacity in Ah/kg. DNV-RP-B401 gives 2000 Ah/kg for aluminium anodes and 780 Ah/kg for zinc in seawater, and a utilisation factor of 0.90 for long slender stand-off anodes.
+
+Each anode must also deliver enough current at the end of life. Its output follows [Ohm's law](/electrical-engineering/ohms-law-kirchhoffs-laws/):
+
+$$
+I_a = \frac{E_c - E_a}{R_a}
+$$
+
+with E_c the design protective potential, E_a the anode closed circuit potential and R_a the anode resistance to the electrolyte. For a long slender anode, DNV-RP-B401 uses R_a = ρ ÷ (2πL) × [ln(4L/r) − 1].
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An offshore steel structure in seawater with a mean current demand of 2.0 A and a final current demand of 2.6 A. Design life 20 years. Aluminium alloy stand-off anodes, each with a calculated final resistance of 0.20 Ω.</dd>
+<dt>Find</dt><dd>The net anode mass and the number of anodes needed.</dd>
+<dt>Assumptions</dt><dd>DNV-RP-B401 values: capacity 2000 Ah/kg, utilisation factor 0.90, protective potential minus 0.80 V and anode closed circuit potential minus 1.05 V, both against Ag/AgCl.</dd>
+<dt>Solution</dt><dd>M = 2.0 × 20 × 8760 ÷ (0.90 × 2000) = 350 400 ÷ 1800 = 194.7 kg<br />Driving voltage = −0.80 − (−1.05) = 0.25 V<br />Output per anode = 0.25 ÷ 0.20 = 1.25 A<br />Number of anodes = 2.6 ÷ 1.25 = 2.08, rounded up to 3<br />Net mass per anode = 194.7 ÷ 3 = 64.9 kg</dd>
+<dt>Answer</dt><dd><strong>About 195 kg of aluminium anode, as 3 anodes of at least 65 kg net each</strong>. Zinc anodes with 780 Ah/kg would need 350 400 ÷ (0.90 × 780) = 499 kg.</dd>
+<dt>Limitations</dt><dd>The current demands are taken as given here. A real design calculates them from area, current density and coating breakdown for initial, mean and final conditions, and checks the initial current as well.</dd>
+</dl>
+</Example>
+
+## Key formulas for cathodic protection
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Current demand | I_c = A_c × i_c × f_c | A_c = area in m², i_c = design current density in A/m², f_c = coating breakdown factor |
+| Net anode mass | M = I_cm × t_f × 8760 ÷ (u × ε) | M in kg, I_cm = mean current in A, t_f in years, u = utilisation factor, ε in Ah/kg |
+| Anode current output | I_a = (E_c − E_a) ÷ R_a | potentials in V, R_a in Ω, I_a in A |
+| Long slender anode resistance | R_a = ρ ÷ (2πL) × [ln(4L/r) − 1] | ρ = resistivity in Ω·m, L = anode length in m, r = equivalent radius in m |
+| Number of anodes | N = I_cf ÷ I_af | I_cf = final current demand, I_af = final output per anode |
+
+## When to use which cathodic protection method
+
+Sacrificial anodes suit well coated structures with a modest current demand in low resistivity electrolytes: offshore jackets, ship hulls, short pipeline sections, tank bottoms and isolated fittings. They also suit places without reliable power, or where interference with neighbouring structures has to be avoided. Impressed current suits long pipelines, large or poorly coated structures and high resistivity soils, where the needed current is too large for galvanic anodes. Many ship hulls and some [offshore platforms](/petroleum-engineering/offshore-platform-types/) use impressed current for the same reason. The two are often combined, for example sacrificial anodes at isolating joints on a pipeline protected by impressed current.
+
+## Monitoring cathodic protection
+
+Pipelines carry test stations where an engineer measures the pipe potential against a portable reference electrode. Part of the reading is an IR drop through the soil, so on impressed current systems the rectifiers are switched off for an instant and the "instant off" potential is recorded, as described in SP0169. Close interval potential surveys along the route find poorly protected sections. Coating surveys and in-line inspection by [pipeline pigging](/petroleum-engineering/pipeline-pigging/) are used alongside these measurements. Cathodic protection current must also be kept separate from the safety [earthing](/electrical-engineering/electrical-earthing/) of plant, normally with isolating joints and decoupling devices.
+
+## Cathodic protection interview and viva questions
+
+1. **What is the principle of cathodic protection?** The structure is made the cathode of an electrochemical cell by supplying current from an external anode, so oxidation of the steel is suppressed.
+2. **In which direction does protective current flow?** Conventional current flows from the anode through the soil or seawater onto the structure, then returns to the anode or rectifier through the cable.
+3. **What is the usual protection criterion for buried steel?** A polarised potential of minus 850 mV or more negative against a copper/copper sulphate electrode, or at least 100 mV of cathodic polarisation.
+4. **Why is magnesium preferred over zinc in high resistivity soil?** Magnesium has a more negative potential, so its larger driving voltage pushes more current through the high soil resistance.
+5. **What are the risks of overprotection?** Hydrogen evolution at very negative potentials can disbond coatings and cause hydrogen embrittlement in high strength steels.

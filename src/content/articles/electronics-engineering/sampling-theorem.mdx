@@ -3,6 +3,7 @@ title: "Sampling Theorem and Aliasing Explained"
 description: "The Nyquist-Shannon sampling theorem, what aliasing is, how to calculate alias frequencies and how anti-aliasing filters and sampling rate choice prevent it."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-23
 discipline: electronics-engineering
 subcategory: signal-processing
 focusKeyword: "sampling theorem"
@@ -29,7 +30,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-The **sampling theorem** states that a signal containing no frequencies above fmax can be reconstructed exactly from samples taken at a rate fs greater than **2 × fmax**. If a signal contains frequencies above half the sampling rate, they are not lost: they reappear as false lower frequencies called **aliases**. An analog **[anti-aliasing filter](https://www.instrumentationblog.in/active-filter-sallen-and-key/)** before the ADC prevents this.
+**Sampling theorem**, also called the Nyquist-Shannon theorem, states that a signal containing no frequencies above fmax can be reconstructed exactly from samples taken at a rate fs greater than 2 × fmax. Frequencies above half the sampling rate reappear as false lower frequencies called aliases, so an analog **[anti-aliasing filter](https://www.instrumentationblog.in/active-filter-sallen-and-key/)** is placed before the ADC.
 
 </Key>
 
@@ -63,6 +64,43 @@ f_{alias} = \left| f - k\,f_s \right|
 $$
 
 where k is the integer that brings the result into the range 0 to fs / 2.
+
+<figure class="anim">
+<svg width="600" height="320" viewBox="0 0 600 320" fill="none" role="img" aria-label="Sampling theorem and aliasing: top, the signal chain from analog input through an anti-aliasing low-pass filter to an ADC sampling at fs and on to digital data; bottom, a 700 Hz cosine sampled at 1000 Hz gives samples that lie exactly on a 300 Hz cosine, so the 700 Hz input appears as a 300 Hz alias">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="15" y="20" width="100" height="44" rx="4" fill="#eef1f6" />
+<rect x="160" y="20" width="140" height="44" rx="4" fill="#e6f6f4" />
+<rect x="345" y="20" width="100" height="44" rx="4" fill="#fff7e0" />
+<rect x="490" y="20" width="95" height="44" rx="4" fill="#eef1f6" />
+<path d="M115 42H160M300 42H345M445 42H490" />
+</g>
+<g stroke="#fff" stroke-width="1.5"><path class="anim-flow" stroke-dasharray="6 12" d="M115 42H160M300 42H345M445 42H490" /></g>
+<path d="M60 215H560M60 145V285" stroke="#7b8794" stroke-width="1" />
+<path d="M60.0 155.0L62.0 155.9L64.0 158.7L66.0 163.2L68.0 169.3L70.0 176.8L72.0 185.4L74.0 195.0L76.0 205.2L78.0 215.8L80.0 226.2L82.0 236.4L84.0 245.9L86.0 254.4L88.0 261.7L90.0 267.6L92.0 271.8L94.0 274.3L96.0 275.0L98.0 273.8L100.0 270.8L102.0 266.1L104.0 259.8L106.0 252.1L108.0 243.2L110.0 233.5L112.0 223.3L114.0 212.7L116.0 202.3L118.0 192.2L120.0 182.9L122.0 174.5L124.0 167.4L126.0 161.7L128.0 157.7L130.0 155.5L132.0 155.1L134.0 156.5L136.0 159.8L138.0 164.7L140.0 171.3L142.0 179.1L144.0 188.1L146.0 197.9L148.0 208.2L150.0 218.8L152.0 229.2L154.0 239.2L156.0 248.4L158.0 256.6L160.0 263.5L162.0 269.0L164.0 272.7L166.0 274.7L168.0 274.8L170.0 273.1L172.0 269.6L174.0 264.4L176.0 257.7L178.0 249.7L180.0 240.5L182.0 230.7L184.0 220.3L186.0 209.7L188.0 199.3L190.0 189.5L192.0 180.3L194.0 172.3L196.0 165.6L198.0 160.4L200.0 156.9L202.0 155.2L204.0 155.3L206.0 157.3L208.0 161.0L210.0 166.5L212.0 173.4L214.0 181.6L216.0 190.8L218.0 200.8L220.0 211.2L222.0 221.8L224.0 232.1L226.0 241.9L228.0 250.9L230.0 258.7L232.0 265.3L234.0 270.2L236.0 273.5L238.0 274.9L240.0 274.5L242.0 272.3L244.0 268.3L246.0 262.6L248.0 255.5L250.0 247.1L252.0 237.8L254.0 227.7L256.0 217.3L258.0 206.7L260.0 196.5L262.0 186.8L264.0 177.9L266.0 170.2L268.0 163.9L270.0 159.2L272.0 156.2L274.0 155.0L276.0 155.7L278.0 158.2L280.0 162.4L282.0 168.3L284.0 175.6L286.0 184.1L288.0 193.6L290.0 203.8L292.0 214.2L294.0 224.8L296.0 235.0L298.0 244.6L300.0 253.2L302.0 260.7L304.0 266.8L306.0 271.3L308.0 274.1L310.0 275.0L312.0 274.1L314.0 271.3L316.0 266.8L318.0 260.7L320.0 253.2L322.0 244.6L324.0 235.0L326.0 224.8L328.0 214.2L330.0 203.8L332.0 193.6L334.0 184.1L336.0 175.6L338.0 168.3L340.0 162.4L342.0 158.2L344.0 155.7L346.0 155.0L348.0 156.2L350.0 159.2L352.0 163.9L354.0 170.2L356.0 177.9L358.0 186.8L360.0 196.5L362.0 206.7L364.0 217.3L366.0 227.7L368.0 237.8L370.0 247.1L372.0 255.5L374.0 262.6L376.0 268.3L378.0 272.3L380.0 274.5L382.0 274.9L384.0 273.5L386.0 270.2L388.0 265.3L390.0 258.7L392.0 250.9L394.0 241.9L396.0 232.1L398.0 221.8L400.0 211.2L402.0 200.8L404.0 190.8L406.0 181.6L408.0 173.4L410.0 166.5L412.0 161.0L414.0 157.3L416.0 155.3L418.0 155.2L420.0 156.9L422.0 160.4L424.0 165.6L426.0 172.3L428.0 180.3L430.0 189.5L432.0 199.3L434.0 209.7L436.0 220.3L438.0 230.7L440.0 240.5L442.0 249.7L444.0 257.7L446.0 264.4L448.0 269.6L450.0 273.1L452.0 274.8L454.0 274.7L456.0 272.7L458.0 269.0L460.0 263.5L462.0 256.6L464.0 248.4L466.0 239.2L468.0 229.2L470.0 218.8L472.0 208.2L474.0 197.9L476.0 188.1L478.0 179.1L480.0 171.3L482.0 164.7L484.0 159.8L486.0 156.5L488.0 155.1L490.0 155.5L492.0 157.7L494.0 161.7L496.0 167.4L498.0 174.5L500.0 182.9L502.0 192.2L504.0 202.3L506.0 212.7L508.0 223.3L510.0 233.5L512.0 243.2L514.0 252.1L516.0 259.8L518.0 266.1L520.0 270.8L522.0 273.8L524.0 275.0L526.0 274.3L528.0 271.8L530.0 267.6L532.0 261.7L534.0 254.4L536.0 245.9L538.0 236.4L540.0 226.2L542.0 215.8L544.0 205.2L546.0 195.0L548.0 185.4L550.0 176.8L552.0 169.3L554.0 163.2L556.0 158.7L558.0 155.9L560.0 155.0" stroke="#13a89e" stroke-width="1.5" />
+<path d="M60.0 155.0L62.0 155.2L64.0 155.7L66.0 156.5L68.0 157.7L70.0 159.2L72.0 161.0L74.0 163.2L76.0 165.6L78.0 168.3L80.0 171.3L82.0 174.5L84.0 177.9L86.0 181.6L88.0 185.4L90.0 189.5L92.0 193.6L94.0 197.9L96.0 202.3L98.0 206.7L100.0 211.2L102.0 215.8L104.0 220.3L106.0 224.8L108.0 229.2L110.0 233.5L112.0 237.8L114.0 241.9L116.0 245.9L118.0 249.7L120.0 253.2L122.0 256.6L124.0 259.8L126.0 262.6L128.0 265.3L130.0 267.6L132.0 269.6L134.0 271.3L136.0 272.7L138.0 273.8L140.0 274.5L142.0 274.9L144.0 275.0L146.0 274.7L148.0 274.1L150.0 273.1L152.0 271.8L154.0 270.2L156.0 268.3L158.0 266.1L160.0 263.5L162.0 260.7L164.0 257.7L166.0 254.4L168.0 250.9L170.0 247.1L172.0 243.2L174.0 239.2L176.0 235.0L178.0 230.7L180.0 226.2L182.0 221.8L184.0 217.3L186.0 212.7L188.0 208.2L190.0 203.8L192.0 199.3L194.0 195.0L196.0 190.8L198.0 186.8L200.0 182.9L202.0 179.1L204.0 175.6L206.0 172.3L208.0 169.3L210.0 166.5L212.0 163.9L214.0 161.7L216.0 159.8L218.0 158.2L220.0 156.9L222.0 155.9L224.0 155.3L226.0 155.0L228.0 155.1L230.0 155.5L232.0 156.2L234.0 157.3L236.0 158.7L238.0 160.4L240.0 162.4L242.0 164.7L244.0 167.4L246.0 170.2L248.0 173.4L250.0 176.8L252.0 180.3L254.0 184.1L256.0 188.1L258.0 192.2L260.0 196.5L262.0 200.8L264.0 205.2L266.0 209.7L268.0 214.2L270.0 218.8L272.0 223.3L274.0 227.7L276.0 232.1L278.0 236.4L280.0 240.5L282.0 244.6L284.0 248.4L286.0 252.1L288.0 255.5L290.0 258.7L292.0 261.7L294.0 264.4L296.0 266.8L298.0 269.0L300.0 270.8L302.0 272.3L304.0 273.5L306.0 274.3L308.0 274.8L310.0 275.0L312.0 274.8L314.0 274.3L316.0 273.5L318.0 272.3L320.0 270.8L322.0 269.0L324.0 266.8L326.0 264.4L328.0 261.7L330.0 258.7L332.0 255.5L334.0 252.1L336.0 248.4L338.0 244.6L340.0 240.5L342.0 236.4L344.0 232.1L346.0 227.7L348.0 223.3L350.0 218.8L352.0 214.2L354.0 209.7L356.0 205.2L358.0 200.8L360.0 196.5L362.0 192.2L364.0 188.1L366.0 184.1L368.0 180.3L370.0 176.8L372.0 173.4L374.0 170.2L376.0 167.4L378.0 164.7L380.0 162.4L382.0 160.4L384.0 158.7L386.0 157.3L388.0 156.2L390.0 155.5L392.0 155.1L394.0 155.0L396.0 155.3L398.0 155.9L400.0 156.9L402.0 158.2L404.0 159.8L406.0 161.7L408.0 163.9L410.0 166.5L412.0 169.3L414.0 172.3L416.0 175.6L418.0 179.1L420.0 182.9L422.0 186.8L424.0 190.8L426.0 195.0L428.0 199.3L430.0 203.8L432.0 208.2L434.0 212.7L436.0 217.3L438.0 221.8L440.0 226.2L442.0 230.7L444.0 235.0L446.0 239.2L448.0 243.2L450.0 247.1L452.0 250.9L454.0 254.4L456.0 257.7L458.0 260.7L460.0 263.5L462.0 266.1L464.0 268.3L466.0 270.2L468.0 271.8L470.0 273.1L472.0 274.1L474.0 274.7L476.0 275.0L478.0 274.9L480.0 274.5L482.0 273.8L484.0 272.7L486.0 271.3L488.0 269.6L490.0 267.6L492.0 265.3L494.0 262.6L496.0 259.8L498.0 256.6L500.0 253.2L502.0 249.7L504.0 245.9L506.0 241.9L508.0 237.8L510.0 233.5L512.0 229.2L514.0 224.8L516.0 220.3L518.0 215.8L520.0 211.2L522.0 206.7L524.0 202.3L526.0 197.9L528.0 193.6L530.0 189.5L532.0 185.4L534.0 181.6L536.0 177.9L538.0 174.5L540.0 171.3L542.0 168.3L544.0 165.6L546.0 163.2L548.0 161.0L550.0 159.2L552.0 157.7L554.0 156.5L556.0 155.7L558.0 155.2L560.0 155.0" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" />
+<circle class="anim-blink" cx="60" cy="155.0" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d1" cx="110" cy="233.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d2" cx="160" cy="263.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d3" cx="210" cy="166.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink" cx="260" cy="196.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d1" cx="310" cy="275.0" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d2" cx="360" cy="196.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d3" cx="410" cy="166.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink" cx="460" cy="263.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d1" cx="510" cy="233.5" r="4.5" fill="#0b2545" />
+<circle class="anim-blink anim-d2" cx="560" cy="155.0" r="4.5" fill="#0b2545" />
+<path d="M60 110H85" stroke="#13a89e" stroke-width="2" /><path d="M215 110H240" stroke="#b42318" stroke-width="2" stroke-dasharray="6 4" /><circle cx="372" cy="110" r="4.5" fill="#0b2545" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="91" y="114">700 Hz input</text><text x="246" y="114">300 Hz alias</text><text x="382" y="114">Samples at fs = 1000 Hz</text>
+<text x="310" y="306" text-anchor="middle">Time, 0 to 10 ms (one sample every 1 ms)</text>
+<g text-anchor="middle"><text x="65" y="38">Analog</text><text x="65" y="53">input</text>
+<text x="230" y="38">Anti-aliasing</text><text x="230" y="53">low-pass filter</text>
+<text x="395" y="38">ADC</text><text x="395" y="53">samples at fs</text>
+<text x="537" y="38">Digital</text><text x="537" y="53">data</text></g>
+</g>
+</svg>
+<figcaption>Top: an anti-aliasing filter removes content above fs / 2 before the ADC. Bottom: without it, a 700 Hz signal sampled at 1000 Hz gives the same samples as a 300 Hz signal.</figcaption>
+</figure>
 
 <Example>
 <dl>
@@ -124,6 +162,16 @@ To turn samples back into a continuous signal, a digital to analog converter (DA
 
 Consider a power monitor that must measure mains voltage and current up to the 25th harmonic on a 50 Hz system. The highest frequency of interest is 25 × 50 = 1250 Hz, so the Nyquist rate is 2500 Hz. Sampling at, for example, 6.4 kHz (128 samples per 50 Hz cycle) leaves a wide transition band. An anti-aliasing filter with a cut-off around 2 kHz then attenuates switching noise from drives and inverters, which can contain components of several kilohertz, before it can alias into the harmonic measurement range. Sampling synchronously with the mains, an integer number of samples per cycle, also makes the later Fourier analysis more accurate.
 
+## Key formulas for the sampling theorem
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Sampling condition | fs > 2 × fmax | fs = sampling rate in Hz, fmax = highest signal frequency in Hz |
+| Nyquist rate | 2 × fmax | Minimum sampling rate for the signal, in Hz |
+| Nyquist frequency | fs ÷ 2 | Highest frequency represented without ambiguity, in Hz |
+| Alias frequency | f<sub>alias</sub> = abs(f − k × fs) | k = integer that brings the result into 0 to fs ÷ 2 |
+| Ideal quantisation SNR | SNR ≈ 6.02 N + 1.76 dB | N = ADC resolution in bits, full-scale sine input |
+
 ## Practical checklist
 
 - Find the highest frequency of interest and of any interference that could reach the ADC, including switching noise and mains harmonics.
@@ -131,6 +179,14 @@ Consider a power monitor that must measure mains voltage and current up to the 2
 - Design an anti-aliasing filter that attenuates everything above fs / 2 below the ADC's noise floor.
 - Consider oversampling with digital filtering where a sharp analog filter is hard to build.
 - Never rely on software to remove aliasing after sampling.
+
+## Sampling theorem interview and viva questions
+
+1. **What does the sampling theorem state?** A band-limited signal with no components above fmax is completely described by samples taken at a rate fs greater than 2 × fmax.
+2. **What is the difference between the Nyquist rate and the Nyquist frequency?** The Nyquist rate is 2 × fmax, the minimum sampling rate for a given signal. The Nyquist frequency is fs / 2, the highest frequency a system sampling at fs can represent without ambiguity.
+3. **Where does a 700 Hz signal appear when sampled at 1000 Hz?** It aliases to 1000 − 700 = 300 Hz, because it lies above the 500 Hz Nyquist frequency.
+4. **Why can aliasing not be removed in software after sampling?** An alias is indistinguishable from a real signal at the alias frequency, so it must be prevented by an analog anti-aliasing filter before the ADC.
+5. **How does oversampling help an ADC design?** Sampling much faster than needed and then decimating digitally relaxes the analog filter, and it spreads quantisation noise over a wider band, which improves resolution after filtering.
 
 ## Related reading
 

@@ -1,0 +1,183 @@
+---
+title: "Gas Detectors: Types and Working Principles"
+description: "Gas detectors explained: catalytic bead, infrared, electrochemical, PID, semiconductor and thermal conductivity sensors, LEL units and a worked example."
+pubDate: 2026-11-23
+reviewedDate: 2026-11-23
+discipline: safety-engineering
+subcategory: fire-detection
+focusKeyword: "gas detector"
+image: { src: /images/featured/gas-detector-types.webp, alt: "Gas Detectors: Types and Working Principles: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [gas-detection, catalytic-bead, infrared-gas-detector, electrochemical-sensor, photoionisation-detector]
+faq:
+  - q: "Why can an infrared detector not detect hydrogen?"
+    a: "Infrared detection needs a molecule that absorbs infrared light, which requires bonds such as C-H in hydrocarbons or the bonds in CO2. Hydrogen is a symmetric diatomic molecule with no infrared absorption, so it is measured with catalytic bead, electrochemical or thermal conductivity sensors instead."
+  - q: "What is the difference between a bump test and a calibration?"
+    a: "A bump test briefly exposes the detector to a known gas to confirm that the sensor responds and the alarms work. A calibration adjusts the zero and span so the reading matches a certified test gas. Bump tests are done often, for example before each day's use of a portable detector, and calibration at the interval the manufacturer and site procedures set."
+  - q: "Is a catalytic bead or an infrared detector better for flammable gas?"
+    a: "Neither is better everywhere. Catalytic bead sensors respond to almost all flammable gases including hydrogen and are low cost, but they need oxygen and can be poisoned by silicones, lead and sulfur compounds. Infrared sensors cannot be poisoned, work without oxygen and fail to a detectable state, but they cannot see hydrogen."
+references:
+  - text: "IEC 60079-29-1:2016 Explosive atmospheres, Part 29-1: Gas detectors, Performance requirements of detectors for flammable gases"
+  - text: "IEC 60079-29-2:2015 Explosive atmospheres, Part 29-2: Gas detectors, Selection, installation, use and maintenance of detectors for flammable gases and oxygen"
+  - text: "EN 45544-1:2015 Workplace atmospheres, Electrical apparatus used for the direct detection and direct concentration measurement of toxic gases and vapours, Part 1: General requirements and test methods"
+  - text: "IEC 60079-20-1:2010 Explosive atmospheres, Part 20-1: Material characteristics for gas and vapour classification, Test methods and data"
+  - text: "Honeywell Analytics, Gas Book: Gas detection fundamentals handbook"
+  - text: "J. Chou, Hazardous Gas Monitors: A Practical Guide to Selection, Operation and Applications, McGraw-Hill, 2000"
+  - text: "A. J. Bard and L. R. Faulkner, Electrochemical Methods: Fundamentals and Applications, 2nd ed., Wiley, 2001"
+  - text: "OSHA 29 CFR 1910.146, Permit-required confined spaces, US Occupational Safety and Health Administration"
+  - text: "NIST Chemistry WebBook, NIST Standard Reference Database 69, ionization energy data"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Gas detectors** are instruments that measure the concentration of flammable, toxic or oxygen gases in air and raise an alarm before a hazard develops. The main sensor types are catalytic bead (pellistor), infrared, electrochemical, photoionisation (PID), semiconductor and thermal conductivity, each turning a physical or chemical reaction into an electrical signal.
+
+</Key>
+
+Gas detectors guard against three hazards: fire or explosion from flammable gas, poisoning from toxic gas, and asphyxiation in oxygen deficient air. A fixed gas detector on a refinery skid and a portable monitor clipped to a worker's collar use the same few sensing principles. The performance standards are IEC 60079-29 for flammable gases and EN 45544 for toxic gases.
+
+
+<ArticleVideo slug="gas-detector-types" title="How a gas detector works" />
+
+## How a gas detector expresses concentration
+
+- Flammable gases are read in **%LEL**, the percentage of the lower explosive limit. Under IEC 60079-20-1 the LEL of methane is 4.4% by volume, so at 100% LEL there is 4.4% vol methane in air and the mixture can ignite. The Honeywell Gas Book describes alarms set well below this, for example a first alarm at 20% LEL and a second at 40% LEL.
+- Toxic gases such as carbon monoxide (CO), hydrogen sulfide (H₂S) and chlorine are read in **ppm** (parts per million by volume). 1% vol equals 10,000 ppm.
+- Oxygen is read in **% vol**. Normal air contains 20.9%, and OSHA 29 CFR 1910.146 treats air below 19.5% as oxygen deficient and above 23.5% as oxygen enriched.
+
+<figure class="anim">
+<svg width="720" height="320" viewBox="0 0 720 320" fill="none" role="img" aria-label="Three gas detector sensor types side by side: a catalytic bead sensor with a heated detector bead and a compensator bead in a Wheatstone bridge with a voltmeter; an infrared gas cell with an IR lamp, gas entering through a sinter and two detectors, active and reference; and an electrochemical cell with a diffusion membrane, working, reference and counter electrodes in electrolyte and an external current meter">
+<defs><pattern id="gd-hatch" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M0 6L6 0" stroke="#7b8794" stroke-width="1" /></pattern></defs>
+<g stroke="#c9d2de" stroke-width="1.5" stroke-dasharray="4 4"><path d="M240 10V310M480 10V310" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="40" y="44" width="160" height="12" fill="url(#gd-hatch)" />
+<rect x="40" y="56" width="160" height="78" rx="4" fill="#eef1f6" />
+<rect x="300" y="96" width="110" height="14" fill="url(#gd-hatch)" />
+<rect x="260" y="110" width="200" height="70" rx="6" fill="#eef1f6" />
+<rect x="520" y="90" width="160" height="14" fill="url(#gd-hatch)" />
+<rect x="520" y="104" width="160" height="146" rx="4" fill="#e6f6f4" />
+</g>
+<g stroke="#c9d2de" stroke-width="3"><path d="M85 60V88M330 60V92M380 60V92M600 52V86" /></g>
+<g stroke="#b42318" stroke-width="3"><path class="anim-flow" stroke-dasharray="6 12" d="M85 60V88M330 60V92M380 60V92M600 52V86" /></g>
+<g stroke="#0b2545" stroke-width="2"><path d="M120 100V80M96 100H144M85 111V290M155 111V290M85 290H155M85 180H106M134 180H155" /></g>
+<g stroke="#f5b800" stroke-width="2"><path class="anim-flow-slow" stroke-dasharray="6 12" d="M85 111V290M155 111V290" /></g>
+<circle class="anim-pulse" cx="85" cy="100" r="11" fill="#0b2545" stroke="#0b2545" stroke-width="2" />
+<circle cx="155" cy="100" r="11" fill="#fff" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2" fill="#fff"><rect x="77" y="218" width="16" height="40" /><rect x="147" y="218" width="16" height="40" /><circle cx="120" cy="180" r="14" /></g>
+<circle class="anim-pulse" cx="275" cy="145" r="9" fill="#f5b800" stroke="#0b2545" stroke-width="2" />
+<g stroke="#f5b800" stroke-width="2.5"><path d="M286 141L416 129M286 149L416 161" /></g>
+<g stroke="#b42318" stroke-width="2.5"><path class="anim-flow" stroke-dasharray="6 12" d="M286 141L416 129M286 149L416 161" /></g>
+<g stroke="#0b2545" stroke-width="2"><rect x="417" y="119" width="5" height="20" fill="#b42318" /><rect x="417" y="151" width="5" height="20" fill="#13a89e" /><rect x="425" y="118" width="22" height="22" fill="#0b2545" /><rect x="425" y="150" width="22" height="22" fill="#0b2545" /></g>
+<g fill="#7b8794"><circle cx="330" cy="125" r="3" /><circle cx="355" cy="165" r="3" /><circle cx="372" cy="122" r="3" /><circle cx="392" cy="150" r="3" /><circle cx="345" cy="145" r="3" /></g>
+<g stroke="#0b2545" stroke-width="4"><path d="M535 116H665M560 172H640M535 230H665" /></g>
+<g stroke="#0b2545" stroke-width="2"><path d="M535 116H505V230H535" /><circle cx="505" cy="172" r="12" fill="#fff" /></g>
+<g stroke="#f5b800" stroke-width="2"><path class="anim-flow" stroke-dasharray="6 12" d="M535 116H505V230H535" /></g>
+<g stroke="#b42318" stroke-width="2.5"><path class="anim-flow-slow" stroke-dasharray="6 12" d="M655 122V224" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle">
+<text x="120" y="22">Catalytic bead</text><text x="360" y="22">Infrared (NDIR)</text><text x="600" y="22">Electrochemical</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="120" y="38">Sinter (flame arrestor)</text>
+<text x="85" y="104" fill="#fff" font-weight="700">D</text><text x="155" y="104" font-weight="700">C</text>
+<text x="141" y="78" text-anchor="start">+V</text><text x="120" y="184" font-weight="700">V</text>
+<text x="66" y="242" text-anchor="end">R1</text><text x="174" y="242" text-anchor="start">R2</text>
+<text x="120" y="306">0 V</text>
+<text x="360" y="52">Gas in</text>
+<text x="436" y="133" fill="#fff" font-weight="700">A</text><text x="436" y="165" fill="#fff" font-weight="700">R</text>
+<text x="275" y="200">IR lamp</text><text x="420" y="200">Active and</text><text x="420" y="214">reference detectors</text>
+<text x="360" y="248">Gas absorbs the active</text><text x="360" y="263">band (3.3 µm for</text><text x="360" y="278">hydrocarbons); the</text><text x="360" y="293">reference band is clear</text>
+<text x="640" y="46">Gas in</text><text x="505" y="176" font-weight="700">A</text>
+<text x="690" y="120" text-anchor="start">WE</text><text x="690" y="176" text-anchor="start">RE</text><text x="690" y="234" text-anchor="start">CE</text>
+<text x="625" y="150" text-anchor="start">H⁺</text>
+<text x="600" y="276">Current is proportional</text><text x="600" y="291">to gas concentration</text>
+</g>
+</svg>
+<figcaption>Simplified working principles of the three most common gas detector sensors: catalytic bead in a Wheatstone bridge, dual beam infrared and a three electrode electrochemical cell.</figcaption>
+</figure>
+
+## Catalytic bead (pellistor) gas detectors
+
+A pellistor has two small ceramic beads, each moulded around a fine platinum wire coil. The detector bead (D) is coated with a precious metal catalyst such as palladium or platinum. The compensator bead (C) is identical but treated so it does not oxidise gas. Current through the coils heats both beads to about 450 to 550 °C. Both beads are wired into a **Wheatstone bridge** inside a flameproof housing, and gas reaches them through a sintered metal flame arrestor.
+
+Flammable gas burns on the catalyst surface without a flame, for methane CH₄ + 2O₂ → CO₂ + 2H₂O. The heat raises the detector bead temperature and the resistance of its platinum coil, which unbalances the bridge. The output voltage is roughly proportional to concentration up to 100% LEL. Ambient temperature, humidity and pressure act on the compensator bead equally and cancel out.
+
+The Honeywell Gas Book and Chou list three limitations. The sensor needs oxygen to burn the gas, so it under reads in oxygen deficient air. Silicones, lead compounds and some sulfur and halogenated compounds **poison** or inhibit the catalyst, and you will not notice the lost sensitivity without a bump test. Above the LEL a gas rich mixture can give a falling reading, so detectors latch the alarm on a high reading.
+
+## Infrared gas detectors
+
+Many gas molecules absorb infrared light at wavelengths set by their bonds. Hydrocarbons absorb near **3.3 µm** because of the C-H bond, and carbon dioxide near 4.3 µm. An NDIR (non dispersive infrared) detector shines an IR lamp through a gas cell onto two detectors. The active detector has a filter at the gas absorption band, and the reference detector looks at a nearby band where the gas does not absorb. The ratio of the two signals follows gas concentration, and taking a ratio cancels lamp ageing and dirt on the optics. The absorption obeys the **Beer-Lambert law**, as in the [spectrophotometer](/biomedical-engineering/spectrophotometer-working-principle/).
+
+Infrared sensors cannot be poisoned and work in inert atmospheres with no oxygen. A blocked beam shows as a fault, not a false zero. They cannot detect hydrogen, which has no infrared absorption. Open path detectors put the source and receiver up to tens of metres apart and read the gas over the whole beam in LEL·m, for perimeter and process area monitoring.
+
+## Electrochemical gas detectors
+
+An electrochemical sensor is a small fuel cell. Gas diffuses through a capillary or porous membrane into an electrolyte and reacts at the working electrode (WE). For carbon monoxide the reaction is CO + H₂O → CO₂ + 2H⁺ + 2e⁻. At the counter electrode (CE) oxygen takes up the protons and electrons: ½O₂ + 2H⁺ + 2e⁻ → H₂O. A reference electrode (RE) holds the working electrode at a fixed potential, and that potential decides which gases react.
+
+Because the barrier limits how fast gas reaches the electrode, the current is **diffusion limited** and directly proportional to concentration. The result is a linear ppm reading for CO, H₂S, Cl₂, NO₂, SO₂ and many other toxic gases at low power, which is why portable monitors use these cells. Oxygen sensors are usually galvanic cells whose lead anode is slowly consumed, so they have a fixed life. Electrochemical cells show **cross sensitivity** to other gases, and the electrolyte can dry out in hot, dry air.
+
+## Photoionisation detectors (PID)
+
+A PID uses an ultraviolet lamp, commonly with a photon energy of 10.6 eV. Any molecule with an ionisation energy below the photon energy is ionised, and two electrodes collect the ions as a current. PIDs detect volatile organic compounds (VOCs) such as benzene, toluene and solvents down to ppb levels. They are not selective: the reading is the total of everything ionised, converted with a response factor for the target gas. Methane, with an ionisation energy of 12.6 eV (NIST), is not detected by a 10.6 eV lamp.
+
+## Semiconductor and thermal conductivity sensors
+
+A metal oxide semiconductor sensor uses a heated film of a metal oxide such as tin dioxide. Oxygen adsorbed on the surface traps electrons and keeps resistance high. A reducing gas removes that oxygen and the resistance falls. These sensors are cheap and very sensitive but respond to many gases and to humidity, so you find them in domestic alarms more than in safety systems.
+
+A thermal conductivity sensor compares heat loss from a heated element in sample gas with one in reference air. It measures high concentrations in % vol, for example hydrogen or helium, and needs no oxygen.
+
+## Types of gas detectors compared
+
+| Sensor | Gases | Range | Strengths | Weaknesses |
+| --- | --- | --- | --- | --- |
+| Catalytic bead | Most flammable gases, including hydrogen | 0 to 100% LEL | Broad response, low cost | Needs oxygen, can be poisoned |
+| Infrared (point, open path) | Hydrocarbons, CO₂ | % LEL, % vol, LEL·m | No poisoning, no oxygen needed | Cannot see hydrogen |
+| Electrochemical | CO, H₂S, Cl₂, NO₂, SO₂, O₂ | ppm, % vol O₂ | Linear, low power, selective | Cross sensitivity, limited life |
+| PID | VOCs | ppb to ppm | Very sensitive | Not selective, humidity effects |
+| Semiconductor | Many reducing gases | ppm | Cheap, sensitive | Poor selectivity, humidity |
+| Thermal conductivity | H₂, He, high % vol gases | % vol | No oxygen needed | Not for low levels |
+
+## Key formulas for gas detectors
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Lower explosive limit fraction | %LEL = 100 × C ÷ LEL | C and LEL in % vol |
+| Volume fraction to ppm | ppm = % vol × 10,000 | ppm by volume |
+| Infrared absorption (Beer-Lambert) | I = I₀ × exp(−α × C × L) | I₀ zero gas signal, α absorption coefficient, C concentration, L optical path in m |
+| Electrochemical limiting current | I = n F A D C ÷ δ | n electrons per molecule, F = 96,485 C/mol, A electrode area, D diffusion coefficient, δ diffusion layer thickness |
+| PID photon energy | E = h c ÷ λ | E in eV, hc = 1239.84 eV·nm, λ in nm |
+
+Solved for concentration, the infrared relation and the electrochemical current are:
+
+$$
+C = \frac{-\ln(I/I_0)}{\alpha L}, \qquad I_\text{lim} = \frac{n F A D C}{\delta}
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A point infrared methane detector has an optical path L = 0.10 m and an absorption coefficient α = 0.5 per (% vol × m) from its calibration. During a leak the normalised active to reference signal ratio is I/I₀ = 0.90. Methane LEL = 4.4% vol. The site also wants to know whether a 10.6 eV PID would respond to methane (ionisation energy 12.6 eV) or benzene (9.24 eV).</dd>
+<dt>Find</dt><dd>Methane concentration in % vol, %LEL and ppm; the alarm state for alarms at 20% and 40% LEL; the PID response.</dd>
+<dt>Assumptions</dt><dd>Beer-Lambert law applies over this range; α is constant; no other absorbing gas is present.</dd>
+<dt>Solution</dt><dd>C = −ln(0.90) ÷ (0.5 × 0.10) = 0.10536 ÷ 0.05 = 2.107% vol<br />%LEL = 100 × 2.107 ÷ 4.4 = 47.9% LEL<br />ppm = 2.107 × 10,000 = 21,070 ppm<br />47.9% LEL is above both 20% and 40% LEL<br />PID: lamp photon energy 10.6 eV is above 9.24 eV but below 12.6 eV; λ = 1239.84 ÷ 10.6 = 117 nm</dd>
+<dt>Answer</dt><dd><strong>About 2.1% vol methane (48% LEL, about 21,000 ppm), so both alarms are active. A 10.6 eV PID detects benzene but not methane.</strong></dd>
+<dt>Limitations</dt><dd>Real NDIR sensors use a broadband lamp and filter, so their response is linearised by a calibration curve rather than a single α. Concentration varies across a leak cloud, and one point reading is not the cloud average.</dd>
+</dl>
+</Example>
+
+## Installation, calibration and bump testing
+
+IEC 60079-29-2 covers selection and placement. Detectors for gases lighter than air, such as methane and hydrogen, go high, near possible leak points and where gas collects under roofs. Heavier vapours such as propane and petrol vapour need detectors low down. Toxic gas detectors usually sit in the breathing zone. Fixed flammable gas detectors often feed a [safety instrumented system](/safety-engineering/safety-instrumented-system/) that shuts down the plant or starts ventilation, and its [safety integrity level](/safety-engineering/safety-integrity-level/) sets the reliability required.
+
+A bump test exposes the detector to gas to prove it responds and alarms. A calibration sets zero in clean air and span with certified test gas. Catalytic bead sensors need regular bump tests because poisoning gives no fault signal. Gas detection also appears among the [types of fire detectors](/safety-engineering/types-of-fire-detectors/), and underground hazards are covered in [mine gases](/mining-engineering/mine-gases/).
+
+## Gas detectors interview and viva questions
+
+1. **Why does a catalytic bead sensor use a compensator bead?** The compensator sits in the opposite bridge arm and sees the same temperature, humidity and pressure, so those effects cancel and only the heat of gas combustion on the detector bead unbalances the bridge.
+2. **What does 50% LEL mean for methane?** It means a concentration of half the lower explosive limit, which is 2.2% vol methane in air because the LEL is 4.4% vol under IEC 60079-20-1.
+3. **Why is an electrochemical sensor output linear?** A capillary or membrane limits gas diffusion to the working electrode, so the reaction current is diffusion limited and proportional to concentration.
+4. **Why does an NDIR detector have a reference channel?** The reference detector sees a band the gas does not absorb, so dividing the active signal by it cancels lamp ageing, dirt on the optics and temperature drift.
+5. **Which gases can a 10.6 eV PID detect?** Any compound with an ionisation energy below 10.6 eV, such as benzene at 9.24 eV, but not methane at 12.6 eV.
