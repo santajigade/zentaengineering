@@ -94,10 +94,4 @@ const title = (s: string) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUp
       </div>
     </section>}
   </div>
-<script>
-  const els = [...document.querySelectorAll<HTMLElement>('[data-views]')];
-  if (els.length) fetch('/api/views.php?p=' + encodeURIComponent(els.map((e) => e.dataset.views).join(',')))
-    .then((r) => r.json()).then((v) => els.forEach((e) => { const n = v[e.dataset.views!] || 0; if (n > 0) { e.textContent = `${n.toLocaleString('en-IN')} view${n === 1 ? '' : 's'}`; e.hidden = false; } }))
-    .catch(() => {});
-</script>
 </Base>

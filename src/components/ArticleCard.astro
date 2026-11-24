@@ -2,8 +2,8 @@
 // Article card with thumbnail, discipline, title, date, reading time and view count (filled in by /api/views.php).
 import { articleUrl, formatDate, type Article } from '../lib/content';
 import { getDiscipline } from '../data/disciplines';
-interface Props { a: Article }
-const { a } = Astro.props;
+interface Props { a: Article; label?: string }
+const { a, label } = Astro.props;
 const d = getDiscipline(a.data.discipline)!;
 const href = articleUrl(a);
 const words = (a.body ?? '').replace(/<[^>]+>|import .*|[#*_`|$]/g, ' ').split(/\s+/).filter(Boolean).length;
@@ -13,8 +13,14 @@ const thumb = a.data.image?.src.replace(/\.webp$/, '-thumb.webp');
 <a class={`card art-card fam-${d.family}`} href={href}>
   {thumb ? <img src={thumb} alt="" width="600" height="315" loading="lazy" decoding="async" /> : <div class="art-ph" />}
   <div class="art-body">
-    <span class="chip chip-fam">{d.short}</span>
+    <span class="chip chip-fam">{label ?? d.short}</span>
     <span class="card-title">{a.data.title}</span>
     <span class="art-meta"><time datetime={a.data.pubDate.toISOString().slice(0, 10)}>{formatDate(a.data.pubDate)}</time><span>{mins} min read</span><span class="art-views" data-views={href} hidden></span></span>
   </div>
 </a>
+<script>
+  const els = [...document.querySelectorAll<HTMLElement>('[data-views]')];
+  if (els.length) fetch('/api/views.php?p=' + encodeURIComponent(els.map((e) => e.dataset.views).join(',')))
+    .then((r) => r.json()).then((v) => els.forEach((e) => { const n = v[e.dataset.views!] || 0; if (n > 0) { e.textContent = `${n.toLocaleString('en-IN')} view${n === 1 ? '' : 's'}`; e.hidden = false; } }))
+    .catch(() => {});
+</script>

@@ -5,6 +5,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Content from '../../layouts/Content.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import ItemCard from '../../components/ItemCard.astro';
 import { DISCIPLINES, getDiscipline } from '../../data/disciplines';
 import { SITE } from '../../data/site';
@@ -49,8 +50,8 @@ const subName = (slug?: string) => d.subcategories.find((s) => s.slug === slug)?
       <p class="lead">Articles on {subData.name.toLowerCase()} in {d.name}, starting with the main guide.</p>
     </div></div>
     <div class="wrap section">
-      <div class="grid" style="--min:300px">
-        {subData.items.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} text={a.data.description} chips={[{ label: a.data.pillar ? 'Start here' : ARTICLE_FORMATS[a.data.format], cls: a.data.pillar ? 'chip-teal' : '' }]} />)}
+      <div class="grid art-grid">
+        {subData.items.map((a) => <ArticleCard a={a} label={a.data.pillar ? 'Start here' : ARTICLE_FORMATS[a.data.format]} />)}
       </div>
       <h2 class="h2" style="margin-top:32px">More in {d.name}</h2>
       <div style="display:flex;gap:8px;flex-wrap:wrap">{[{ slug: '', name: `All ${d.short}` }, ...subData.others].map((s) => <a class="chip" style="min-height:36px;padding:0 14px;background:#fff;border:1px solid var(--ze-line)" href={s.slug ? `/${d.slug}/${s.slug}/` : `/${d.slug}/`}>{s.name}</a>)}</div>

@@ -8,6 +8,7 @@ python3 scripts/queue.py next 5
 ```
 Each line: discipline|subcategory|title|slug|format|focus keyword|status.
 File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that already exists.
+- Slugs for single concept articles (a term, ratio, law, equation, component): use `what-is-<concept>`, e.g. `what-is-turndown-ratio`, even if the queue line has a shorter slug (update the queue line). Comparisons, how-tos and lists keep descriptive slugs. Owner preference, 24 Nov 2026.
 
 ## 2. Write each article (hard rules)
 - 1000 to 1800 words as counted by `scripts/check-article.py`. Aim for about 1400 including the sections below; drafts usually come out short, so include one extra section from the start.

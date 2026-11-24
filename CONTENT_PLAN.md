@@ -6,7 +6,7 @@ Status: draft = written, waiting for technical review; live = reviewed and publi
 
 | Subcategory | Title | Slug | Format | Status |
 | --- | --- | --- | --- | --- |
-| measurement-fundamentals | Turndown Ratio Explained: Formula, Examples and Typical Values | turndown-ratio | fundamentals | draft |
+| measurement-fundamentals | Turndown Ratio Explained: Formula, Examples and Typical Values | what-is-turndown-ratio | fundamentals | draft |
 | process-measurement-principles | Bernoulli Equation in Flow Measurement: Why Flow Follows the Square Root of DP | bernoulli-equation-flow-measurement | fundamentals | draft |
 
 ## mechanical-engineering

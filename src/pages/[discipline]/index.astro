@@ -2,9 +2,10 @@
 import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ItemCard from '../../components/ItemCard.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
 import Icon from '../../components/Icon.astro';
 import AdSlot from '../../components/AdSlot.astro';
-import { DISCIPLINE_ICON } from '../../components/icons';
+import { DISCIPLINE_ICON, subIcon } from '../../components/icons';
 import { DISCIPLINES, FAMILIES, getDiscipline, type Discipline } from '../../data/disciplines';
 import { SITE } from '../../data/site';
 import { liveArticles, liveLessons, liveInterview, liveProjects, liveResources, articleUrl, interviewUrl, projectUrl, resourceUrl, counts, disciplineIndexable, subcategoryIndexable, ARTICLE_FORMATS } from '../../lib/content';
@@ -46,9 +47,9 @@ const subName = (slug?: string) => d.subcategories.find((s) => s.slug === slug)?
       <div class="grid" style="--min:220px">
         {subs.map((s) =>
           s.n > 0 ? (
-            <a class="card" href={`/${d.slug}/${s.slug}/`} style="padding:16px;flex-direction:column;gap:4px"><b style="color:var(--ze-navy)">{s.name}</b><span class="muted" style="font-size:14px">{s.n} {s.n === 1 ? 'Article' : 'Articles'}</span></a>
+            <a class={`card sub-card fam-${d.family}`} href={`/${d.slug}/${s.slug}/`}><span class="sub-ic"><Icon name={subIcon(s.name, d.slug)} size={24} /></span><span class="sub-tx"><b style="color:var(--ze-navy)">{s.name}</b><span class="muted" style="font-size:14px">{s.n} {s.n === 1 ? 'Article' : 'Articles'}</span></span></a>
           ) : (
-            <div class="card" style="padding:16px;display:flex;flex-direction:column;gap:4px"><b style="color:var(--ze-ink-2)">{s.name}</b><span class="muted" style="font-size:14px">Coming soon</span></div>
+            <div class={`card sub-card sub-soon fam-${d.family}`}><span class="sub-ic"><Icon name={subIcon(s.name, d.slug)} size={24} /></span><span class="sub-tx"><b style="color:var(--ze-ink-2)">{s.name}</b><span class="muted" style="font-size:14px">Coming soon</span></span></div>
           ),
         )}
       </div>
@@ -56,7 +57,7 @@ const subName = (slug?: string) => d.subcategories.find((s) => s.slug === slug)?
     {pillars.length > 0 && (
       <section class="section">
         <h2 class="h2">Start here</h2>
-        <div class="grid" style="--min:300px">{pillars.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} text={a.data.description} chips={[{ label: subName(a.data.subcategory) ?? 'Guide', cls: 'chip-teal' }]} />)}</div>
+        <div class="grid art-grid">{pillars.map((a) => <ArticleCard a={a} label={subName(a.data.subcategory) ?? d.short} />)}</div>
       </section>
     )}
     {(series.length > 0 || interview.length > 0 || projects.length > 0) && (
@@ -72,8 +73,8 @@ const subName = (slug?: string) => d.subcategories.find((s) => s.slug === slug)?
     <section class="section">
       <h2 class="h2">All {d.name} articles</h2>
       {articles.length > 0 ? (
-        <div class="grid" style="--min:300px">
-          {articles.map((a) => <ItemCard href={articleUrl(a)} title={a.data.title} chips={[{ label: subName(a.data.subcategory) ?? d.short }, { label: ARTICLE_FORMATS[a.data.format] }]} />)}
+        <div class="grid art-grid">
+          {[...articles].sort((x, y) => +y.data.pubDate - +x.data.pubDate).map((a) => <ArticleCard a={a} label={subName(a.data.subcategory) ?? d.short} />)}
         </div>
       ) : (
         <p class="empty">Articles for this discipline are being written and reviewed. Browse the <a href="/engineering-categories/">other disciplines</a> in the meantime.</p>

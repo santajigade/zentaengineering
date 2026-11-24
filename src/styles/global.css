@@ -248,3 +248,10 @@ figure.anim.paused * { animation-play-state: paused !important; }
 @media (max-width: 600px) { .art-body .card-title { font-size: 19px; } }
 .art-meta { margin-top: auto; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--ze-ink-2); }
 .art-meta > * + *::before { content: "\00B7"; margin-right: 14px; }
+/* Discipline page: subcategory cards with icons, article grids */
+.sub-card { padding: 16px; display: flex; flex-direction: row; align-items: center; gap: 14px; }
+.sub-ic { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 12px; display: grid; place-items: center; background: var(--fam-bg, #e6f7f5); color: var(--fam, var(--ze-teal-dark, #0b6e66)); }
+.sub-tx { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+a.sub-card:hover .sub-ic { background: var(--fam, var(--ze-teal)); color: #fff; }
+.sub-soon .sub-ic { opacity: .55; }
+.art-grid { --min: 280px; }
