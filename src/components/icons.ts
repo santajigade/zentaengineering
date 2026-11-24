@@ -24,6 +24,7 @@ export const ICONS: Record<string, string> = {
   'file': '<path d="M6 2h9l5 5v15H6z"></path><path d="M14 2v6h6M9 13h6M9 17h6"></path>',
   'question': '<circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2.5 2-2.5 3.5M12 17h.01"></path>',
   'wrench': '<path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"></path>',
+  'gauge': '<path d="M4 15a8 8 0 1116 0"></path><path d="M12 15l4-5"></path><circle cx="12" cy="15" r="1.5"></circle><path d="M4 19h16"></path>',
   'thermo': '<path d="M10 14V5a2 2 0 014 0v9a4 4 0 11-4 0z"></path><path d="M12 9v7"></path>',
   'wave': '<path d="M2 12c2-5 4-5 6 0s4 5 6 0 4-5 6 0 2 3 2 3"></path>',
   'sliders': '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle>',
@@ -67,8 +68,8 @@ export const DISCIPLINE_ICON: Record<string, string> = {
 
 // Icon per subcategory, chosen by keywords in its name; falls back to the discipline icon.
 const SUB_RULES: [RegExp, string][] = [
-  [/interview|exam/i, 'question'], [/fundamental|theory and|circuit/i, 'book'],
-  [/sensor|transducer|biomedical sensors/i, 'target'], [/measurement|instrumentation|metrolog/i, 'gauge'],
+  [/interview|exam/i, 'question'], [/sensor|transducer/i, 'target'], [/measurement|instrumentation|metrolog/i, 'gauge'],
+  [/fundamental|theory and|circuit/i, 'book'],
   [/signal|wave|rf|antenna|microwave|wireless|cellular|satellite comm/i, 'wave'],
   [/control|plc|dcs|scada|servo|motion|process optim/i, 'sliders'],
   [/network|protocol|routing|switching|internet|iot/i, 'network'], [/security|lock/i, 'lock'],
