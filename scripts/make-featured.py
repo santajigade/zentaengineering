@@ -1,7 +1,7 @@
-# Builds a 1200x630 featured image for each article: discipline chip, title, and the article's first SVG diagram
-# (or scripts/featured-art/<slug>.svg if present) on a large white card. The diagram is cropped to its content and its
-# labels are enlarged (up to 1.4x, smaller if a larger size would overlap other labels, lines or shapes, or clip) so the
-# text stays readable (owner request 24 Nov 2026: keep diagrams, but readable).
+# Builds a 1200x630 featured image for each article: discipline chip and title on the left, and the article's first SVG
+# diagram (or scripts/featured-art/<slug>.svg if present) on a white card on the right. The diagram is cropped to its
+# content and its labels are enlarged (up to 1.4x, only as far as they stay clear of other labels, lines, shapes and the
+# card edge) so the text is readable. Owner approved this layout (layout B) on 24 Nov 2026; ask before changing it.
 # Writes public/images/featured/<slug>.webp (shown on the page) and .jpg (social sharing),
 # and adds an `image:` line to the article front matter if missing.
 # Usage: python3 scripts/make-featured.py [files...]   (default: all articles)  --force to rebuild existing
@@ -11,7 +11,7 @@ from PIL import Image
 sys.path = [d for d in sys.path if os.path.abspath(d or '.') != os.path.dirname(os.path.abspath(__file__))]
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, 'public/images/featured')
+OUT = os.environ.get('FEAT_OUT') or os.path.join(ROOT, 'public/images/featured')   # FEAT_OUT=/tmp/x for previews
 TMP = '/tmp/featured'
 os.makedirs(OUT, exist_ok=True); os.makedirs(TMP, exist_ok=True)
 font = os.path.join(ROOT, 'node_modules/@fontsource-variable/open-sans/files/open-sans-latin-wght-normal.woff2')
@@ -75,6 +75,12 @@ def _frac(px, w, h, r):
     return n / ((x1 - x0) * (y1 - y0))
 
 
+def _edges(E, r):
+    """Number of line or border pixels (sharp colour changes) under rect r in the label-free render."""
+    x0, y0, x1, y1 = max(0, int(r[0])), max(0, int(r[1])), min(E.shape[1], int(r[2]) + 1), min(E.shape[0], int(r[3]) + 1)
+    return int(E[y0:y1, x0:x1].sum()) if x1 > x0 and y1 > y0 else 0
+
+
 def _tight(r):   # glyph box without the line gap above and below
     h = (r[3] - r[1]) * 0.14
     return (r[0], r[1] + h, r[2], r[3] - h)
@@ -115,14 +121,22 @@ def render(p, has_svg):
             pg.screenshot(path=p + '-base.png')
             pg.evaluate("(() => { const a = document.querySelectorAll('style'); a[a.length - 1].remove(); })()")
             im = Image.open(p + '-base.png').convert('RGB'); px = im.load(); W, H = im.size
+            import numpy as np
+            a = np.asarray(im, dtype=np.int16)
+            E = np.zeros(a.shape[:2], bool)
+            E[:, :-1] |= np.abs(a[:, 1:] - a[:, :-1]).max(2) > 60
+            E[:-1, :] |= np.abs(a[1:, :] - a[:-1, :]).max(2) > 60
             ok = True
             for i, r in enumerate(big):
                 if r[2] - r[0] < 1:
                     continue
                 if r[0] < card[0] + 2 or r[1] < card[1] + 2 or r[2] > card[2] - 2 or r[3] > card[3] - 2:
                     ok = False; DBG and print(k, 'clip', r[6]); break
-                if abs(_frac(px, W, H, r) - _frac(px, W, H, small[i])) > 0.02:
+                short = len(r[6].strip()) <= 2   # signs such as + or a single letter sit beside a line on purpose
+                if not short and abs(_frac(px, W, H, r) - _frac(px, W, H, small[i])) > 0.02:
                     ok = False; DBG and print(k, 'shape', r[6]); break
+                if not short and _edges(E, _tight(r)) - _edges(E, _tight(small[i])) > 0.3 * (r[3] - r[1]):
+                    ok = False; DBG and print(k, 'edge', r[6]); break
                 if any(big[j][5] != r[5] and _hit(_tight(r), _tight(big[j])) and not _hit(_tight(small[i]), _tight(small[j])) for j in range(i)):
                     ok = False; DBG and print(k, 'text', r[6]); break
             if ok:
@@ -158,19 +172,20 @@ for f in files:
         art = mark.replace('<svg ', '<svg width="260" height="260" ', 1)
     page = f"""<html><head><style>
 @font-face{{font-family:'Open Sans Variable';src:url(file://{font})}}
-*{{box-sizing:border-box;margin:0}} body{{width:1200px;height:630px;font-family:'Open Sans Variable',Arial,sans-serif;display:flex;flex-direction:column;background:#0b2545;overflow:hidden;color:#fff}}
-.top{{padding:16px 28px 0;display:flex;align-items:center;gap:16px}}
-.chip{{background:#13a89e;font-size:17px;font-weight:600;padding:6px 14px;border-radius:999px}}
-.brand{{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:20px}} .brand svg{{width:38px;height:38px}}
+*{{box-sizing:border-box;margin:0}} body{{width:1200px;height:630px;font-family:'Open Sans Variable',Arial,sans-serif;display:flex;background:#0b2545;overflow:hidden}}
+.l{{width:420px;padding:56px 36px 56px 44px;display:flex;flex-direction:column;color:#fff;position:relative}}
+.l:after{{content:'';position:absolute;right:0;top:56px;bottom:56px;width:4px;background:#f5b800;border-radius:2px}}
+.chip{{align-self:flex-start;background:#13a89e;color:#fff;font-size:20px;font-weight:600;padding:8px 16px;border-radius:999px}}
+h1{{font-size:38px;line-height:1.18;font-weight:800;margin-top:28px}}
+.brand{{margin-top:auto;display:flex;align-items:center;gap:14px;font-size:24px}} .brand svg{{width:52px;height:52px}}
 .brand b{{font-weight:800}} .brand span{{color:#9fd9d4}}
-h1{{padding:6px 28px 0;font-size:34px;line-height:1.15;font-weight:800;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
-.card{{flex:1;min-height:0;margin:12px 20px 20px;background:#fff;border-radius:14px;padding:8px 12px;border-top:5px solid #f5b800;display:flex;align-items:center;justify-content:center}}
+.r{{flex:1;padding:40px 32px 40px 28px;display:flex}}
+.card{{flex:1;min-width:0;background:#fff;border-radius:18px;padding:10px;display:flex;align-items:center;justify-content:center}}
 .card > svg{{width:100%;height:100%;display:block}}
 </style></head><body>
-<div class="top"><div class="chip">{html.escape(names.get(disc, disc))}</div>
-<div class="brand">{mark.replace('<svg ', '<svg width="38" height="38" ', 1)}<div><b>Zenta</b> <span>Engineering</span></div></div></div>
-<h1>{html.escape(title)}</h1>
-<div class="card">{art}</div></body></html>"""
+<div class="l"><div class="chip">{html.escape(names.get(disc, disc))}</div><h1>{html.escape(title)}</h1>
+<div class="brand">{mark.replace('<svg ', '<svg width="52" height="52" ', 1)}<div><b>Zenta</b> <span>Engineering</span></div></div></div>
+<div class="r"><div class="card">{art}</div></div></body></html>"""
     p = f'{TMP}/{slug}'
     open(p + '.html', 'w').write(page)
     k = render(p, bool(m))
@@ -178,7 +193,7 @@ h1{{padding:6px 28px 0;font-size:34px;line-height:1.15;font-weight:800;display:-
     im.save(f'{OUT}/{slug}.webp', 'WEBP', quality=82, method=6)
     im.save(f'{OUT}/{slug}.jpg', 'JPEG', quality=85, optimize=True, progressive=True)
     im.resize((600, 315), Image.LANCZOS).save(f'{OUT}/{slug}-thumb.webp', 'WEBP', quality=78, method=6)  # card thumbnail
-    if 'image:' not in fm:
+    if 'image:' not in fm and not os.environ.get('FEAT_OUT'):
         alt = f'{title}: featured diagram'.replace('"', "'")
         line = f'image: {{ src: /images/featured/{slug}.webp, alt: "{alt}" }}'
         s = re.sub(r'^(focusKeyword: .*)$', lambda m: m.group(1) + '\n' + line, s, count=1, flags=re.M)
