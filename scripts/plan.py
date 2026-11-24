@@ -1,5 +1,9 @@
 # One pillar article per subcategory: (discipline, subcategory slug, title, article slug, format)
 PLAN = {
+'instrumentation-control': [
+ ('measurement-fundamentals','Turndown Ratio Explained: Formula, Examples and Typical Values','turndown-ratio','fundamentals'),
+ ('process-measurement-principles','Bernoulli Equation in Flow Measurement: Why Flow Follows the Square Root of DP','bernoulli-equation-flow-measurement','fundamentals'),
+],
 'mechanical-engineering': [
  ('strength-of-materials','Stress and Strain: Definitions, Types and Hooke\'s Law','stress-and-strain','fundamentals'),
  ('machine-design','Factor of Safety in Machine Design Explained','factor-of-safety','fundamentals'),

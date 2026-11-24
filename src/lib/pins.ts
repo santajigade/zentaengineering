@@ -14,7 +14,7 @@ export const manualPins = new Set(MANUAL as string[]);
 
 /** One colour per discipline (pin backgrounds are multicolour by category). */
 export const CAT_COLOR: Record<string, string> = {
-  'mechanical-engineering': '#e4572e', 'electrical-engineering': '#f5b800', 'electronics-engineering': '#13a89e',
+  'mechanical-engineering': '#e4572e', 'instrumentation-control': '#0ca678', 'electrical-engineering': '#f5b800', 'electronics-engineering': '#13a89e',
   'civil-engineering': '#8d6e63', 'chemical-engineering': '#8e44ad', 'computer-science': '#3d7cf2',
   'automation-robotics': '#ff8c1a', 'ai-data-engineering': '#d6336c', 'telecommunication-engineering': '#00a6d6',
   'petroleum-engineering': '#a0522d', 'renewable-energy': '#2fb344', 'environmental-engineering': '#4caf50',
@@ -108,7 +108,7 @@ export function pinInput(a: Article, kicker: string): PinInput {
 
 import { getDiscipline } from '../data/disciplines';
 const KICKER: Record<string, string> = {
-  'electronics-engineering': 'Electronics Engineering', 'civil-engineering': 'Civil Engineering', 'chemical-engineering': 'Chemical Engineering',
+  'electronics-engineering': 'Electronics Engineering', 'instrumentation-control': 'Instrumentation and Control', 'civil-engineering': 'Civil Engineering', 'chemical-engineering': 'Chemical Engineering',
   'computer-science': 'Computer Science', 'automation-robotics': 'Automation and Robotics', 'ai-data-engineering': 'AI and Data',
   'telecommunication-engineering': 'Telecom Engineering', 'petroleum-engineering': 'Oil and Gas Engineering', 'renewable-energy': 'Renewable Energy',
   'mining-engineering': 'Mining Engineering', 'manufacturing-engineering': 'Manufacturing', 'materials-engineering': 'Materials Engineering',

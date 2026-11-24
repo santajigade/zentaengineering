@@ -35,7 +35,7 @@ export const ICONS: Record<string, string> = {
 // Icon per discipline slug
 export const DISCIPLINE_ICON: Record<string, string> = {
   'mechanical-engineering': 'gear', 'electrical-engineering': 'bolt', 'electronics-engineering': 'chip',
-  'civil-engineering': 'building', 'chemical-engineering': 'flask', 'computer-science': 'code',
+  'civil-engineering': 'building', 'chemical-engineering': 'flask', 'instrumentation-control': 'gauge', 'computer-science': 'code',
   'automation-robotics': 'robot', 'ai-data-engineering': 'brain', 'telecommunication-engineering': 'antenna',
   'petroleum-engineering': 'drop', 'renewable-energy': 'sun', 'environmental-engineering': 'leaf',
   'mining-engineering': 'pick', 'manufacturing-engineering': 'factory', 'materials-engineering': 'layers',

@@ -19,6 +19,7 @@ Rules for every article, lesson, interview set, project and resource. The public
 - Electronics Engineering articles: **Santaji Gadepatil** (set automatically for `discipline: electronics-engineering`).
 - Manufacturing Engineering articles: **Sandip Gadade** (set automatically for `discipline: manufacturing-engineering`).
 - Computer Science and AI and Data articles: **Sayali Ganjale** (set automatically for `discipline: computer-science` and `ai-data-engineering`).
+- Instrumentation and Control articles: **Sunayana Gadepatil** (set automatically for `discipline: instrumentation-control`). Student and exam angle; do not duplicate instrumentationblog.in field topics; at most 1 instrumentationblog.in link per article.
 - All other disciplines: **Editorial Staff**.
 - Reviewer shown as **Technical Team** unless `reviewedBy` names someone else.
 - Leave `author` empty unless an article needs a different author from the rule above.

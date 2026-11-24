@@ -1,0 +1,163 @@
+---
+title: "Turndown Ratio: Formula, Examples and Typical Values"
+description: "Turndown ratio explained: the formula, transmitter rangedown, typical flowmeter values, why DP meters reach only 3:1 to 5:1, and a worked example."
+pubDate: 2026-11-24
+reviewedDate: 2026-11-24
+discipline: instrumentation-control
+subcategory: measurement-fundamentals
+focusKeyword: "turndown ratio"
+image: { src: /images/featured/turndown-ratio.webp, alt: "Turndown Ratio: Formula, Examples and Typical Values: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [turndown-ratio, rangeability, flow-measurement, dp-transmitter, instrument-specifications]
+faq:
+  - q: "What is a good turndown ratio for a flowmeter?"
+    a: "It depends on how much the process flow varies. A meter only needs a turndown a little above the ratio of the highest to the lowest flow you must measure accurately. Orifice plates give about 3:1 to 5:1, turbine meters about 10:1, multipath ultrasonic meters about 50:1, and Coriolis and magnetic meters often 100:1 or more."
+  - q: "Is turndown ratio the same as rangeability?"
+    a: "In flow measurement the two words are usually used for the same idea: maximum flow divided by the minimum flow measured within the stated accuracy. Some writers keep rangeability for the ratio quoted by the maker and turndown for the ratio an application actually uses, so always check what a datasheet means."
+  - q: "How do you write a turndown ratio?"
+    a: "As a ratio with 1 on the right, for example 10:1, read as ten to one. A device with a maximum of 100 m³/h and a minimum of 10 m³/h has a turndown of 10:1."
+  - q: "Why is a high transmitter turndown not always useful?"
+    a: "Accuracy is usually stated as a percentage of the calibrated span. When a transmitter is ranged down to a small span, the fixed part of its error becomes a larger share of that span, so a 100:1 rangedown can carry several times the error of the same unit set near its upper range limit."
+references:
+  - text: "T. R. Kuphaldt, Lessons In Industrial Instrumentation, Instrument turndown, control.com textbook (CC BY 4.0)"
+  - text: "B. G. Liptak (ed.), Instrument Engineers' Handbook, Vol. 1: Process Measurement and Analysis, 4th ed., CRC Press"
+  - text: "R. C. Baker, Flow Measurement Handbook, 2nd ed., Cambridge University Press"
+  - text: "ISO 5167-2:2022 Measurement of fluid flow by means of pressure differential devices, Part 2: Orifice plates"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+**Turndown ratio** is the maximum value an instrument can measure accurately divided by the minimum value it can measure with the same accuracy: TR = Q_max / Q_min. A flowmeter that reads 100 m³/h down to 10 m³/h within its accuracy limit has a 10:1 turndown. Higher turndown means a wider usable range.
+
+</Key>
+
+Every instrument has a range where it works well. Push it too low and the signal sinks into noise, friction or offset error. Turndown ratio puts a number on that usable range, and it is one of the first figures an instrument engineer checks on a flowmeter datasheet. A meter with too little turndown will read well at design flow and badly during start-up, night shifts or reduced throughput.
+
+## Turndown ratio formula
+
+$$
+TR = \frac{Q_{max}}{Q_{min}}
+$$
+
+where Q_max is the highest flow (or pressure, level, heat output) the device handles within its stated accuracy, and Q_min is the lowest. The result is written as a ratio such as 10:1.
+
+The same idea works in the other direction for an application. If a gas line runs between 100,000 and 1,000,000 m³ per day, the process needs a turndown of 10:1, so the meter must offer at least that. If the chosen meter tops out at 2,000,000 m³ per day, it must reach 100,000 m³ per day accurately, which means 20:1 from that meter.
+
+Turndown is also quoted for things that are not measuring devices. A burner with 4:1 turndown can fire down to a quarter of its maximum heat output and still burn cleanly. A control valve's rangeability is the ratio of the largest to the smallest flow it can control.
+
+## Turndown and rangedown on a transmitter
+
+On a pressure or DP transmitter the word means something slightly different. Here it is the **rangedown**: the upper range limit (URL) of the sensor divided by the smallest span you are allowed to calibrate it to.
+
+$$
+TD = \frac{URL}{\text{minimum span}}
+$$
+
+A DP transmitter with a 2500 mbar URL and a 25 mbar minimum span has a 100:1 turndown. That lets one model cover many duties, which suits spares stock. The catch is accuracy. Datasheets give accuracy as a percentage of calibrated span, often with an extra term that grows once the span drops below a stated fraction of URL. Set the same unit to a span of 25 mbar and its error, as a share of that span, can be several times larger than at full URL. So high transmitter turndown buys flexibility, not free precision.
+
+## Why DP flowmeters have low turndown
+
+Orifice plates, venturis, nozzles and pitot tubes all work on the [Bernoulli equation](/instrumentation-control/bernoulli-equation-flow-measurement/), and their differential pressure rises with the **square** of flow:
+
+$$
+\Delta P \propto Q^2 \quad\Rightarrow\quad Q \propto \sqrt{\Delta P}
+$$
+
+At 50% flow the DP is 25% of full scale. At 10% flow it is only 1%. The transmitter's error is a fixed slice of its DP span, so at low flow that slice becomes a large share of a tiny signal. Square root extraction halves the relative error when it converts DP to flow, but it cannot rescue a signal that has almost vanished.
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Graph of differential pressure against flow for a DP flowmeter: the curve rises as the square of flow, so 50 percent flow gives 25 percent DP and 10 percent flow gives only 1 percent DP; the band below about 22 percent flow is shaded red as the region where the fixed transmitter error swamps the signal, and the band above it is shaded green as the usable range, giving roughly 4.5 to 1 turndown">
+<rect x="70" y="30" width="480" height="220" fill="#f7f9fc" stroke="#c9d2de" />
+<rect x="70" y="30" width="107" height="220" fill="#ffe9e7" />
+<rect x="177" y="30" width="373" height="220" fill="#e6f7f5" />
+<g stroke="#c9d2de" stroke-width="1"><path d="M166 30V250M262 30V250M358 30V250M454 30V250M70 195H550M70 140H550M70 85H550" /></g>
+<path d="M70 250Q310 250 550 30" stroke="#0b2545" stroke-width="3" />
+<path class="anim-flow-slow" d="M70 250Q310 250 550 30" stroke="#fff" stroke-width="1.2" />
+<path d="M310 30V250" stroke="#f5b800" stroke-width="2" stroke-dasharray="6 5" />
+<path d="M70 195H310" stroke="#f5b800" stroke-width="2" stroke-dasharray="6 5" />
+<circle cx="310" cy="195" r="6" fill="#f5b800" class="anim-pulse" />
+<path d="M118 30V250" stroke="#b42318" stroke-width="2" stroke-dasharray="6 5" />
+<circle cx="118" cy="248" r="5" fill="#b42318" class="anim-pulse anim-d2" />
+<path d="M177 30V250" stroke="#13a89e" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="310" y="270" text-anchor="middle">50%</text><text x="118" y="270" text-anchor="middle">10%</text><text x="550" y="270" text-anchor="middle">100%</text><text x="70" y="270" text-anchor="middle">0</text>
+<text x="62" y="199" text-anchor="end">25%</text><text x="62" y="34" text-anchor="end">100%</text><text x="62" y="254" text-anchor="end">0</text>
+<text x="310" y="292" text-anchor="middle" font-weight="700">Flow, % of maximum</text>
+<text x="20" y="140" text-anchor="middle" font-weight="700" transform="rotate(-90 20 140)">DP, % of span</text>
+<text x="148" y="60" text-anchor="middle" font-size="11" fill="#b42318">Error</text><text x="148" y="74" text-anchor="middle" font-size="11" fill="#b42318">swamps</text><text x="148" y="88" text-anchor="middle" font-size="11" fill="#b42318">signal</text>
+<text x="420" y="225" text-anchor="middle" font-size="12" fill="#0b6e66" font-weight="700">Usable range, about 4.5:1</text>
+<text x="302" y="186" font-size="11" text-anchor="end">50% flow = 25% DP</text>
+<text x="148" y="130" font-size="11" fill="#b42318" text-anchor="middle">10% flow</text><text x="148" y="144" font-size="11" fill="#b42318" text-anchor="middle">= 1% DP</text>
+</g>
+</svg>
+<figcaption>DP rises with the square of flow. Below about 22% flow (red), a 0.1% of span transmitter error exceeds 1% of the flow reading.</figcaption>
+</figure>
+
+That is why a single orifice meter is usually good for about 3:1 to 5:1. Plants that need more either fit two DP transmitters with different spans on the same orifice (a "stacked" arrangement that switches between them) or choose a different meter.
+
+## Typical turndown ratios
+
+Figures below are typical published values. Makers quote their own, and the ratio always belongs with the accuracy it was stated at.
+
+| Device | Typical turndown | What limits it |
+| --- | --- | --- |
+| Orifice plate with one DP transmitter | 3:1 to 5:1 | Square law, DP falls to a tiny signal |
+| Venturi or flow nozzle | 4:1 to 10:1 | Square law, same as orifice |
+| Turbine meter | 10:1 | Bearing friction and drag at low flow |
+| Vortex meter | 10:1 to 20:1 | Low Reynolds number stops vortex shedding |
+| Rotary positive displacement meter | 10:1 to 80:1 | Leakage past rotors at low flow |
+| Multipath ultrasonic meter | about 50:1 | Timing resolution at low velocity |
+| Magnetic flowmeter | 30:1 to 100:1 or more | Signal noise at very low velocity |
+| Coriolis mass flowmeter | 100:1 or more | Zero stability |
+| Thermal mass flowmeter | 100:1 and above | Sensor noise and heat loss effects |
+
+For an introduction to how each of these meters works, see the flow measurement section at [instrumentationblog.in](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/).
+
+## Worked example: how low can an orifice meter read?
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An orifice meter is calibrated for 0 to 250 mbar DP at maximum flow. The DP transmitter accuracy is ±0.1% of span. The user wants the flow reading to stay within ±1% of reading.</dd>
+<dt>Find</dt><dd>The DP error at 10% flow, and the turndown the meter can deliver.</dd>
+<dt>Assumptions</dt><dd>Only transmitter error is considered; the orifice coefficient is taken as constant. Since Q ∝ √ΔP, the relative flow error is half the relative DP error.</dd>
+<dt>Solution</dt><dd>Transmitter error = 0.001 × 250 = 0.25 mbar<br />At 10% flow: ΔP = 0.1² × 250 = 2.5 mbar, so DP error = 0.25 ÷ 2.5 = 10% and flow error ≈ 5%<br />For a 1% flow error the DP error must be 2% or less: ΔP_min = 0.25 ÷ 0.02 = 12.5 mbar<br />Q_min / Q_max = √(12.5 ÷ 250) = 0.224, so TR = 1 ÷ 0.224 ≈ 4.5</dd>
+<dt>Answer</dt><dd><strong>At 10% flow the reading may be off by about 5%; for ±1% of reading the meter manages only about 4.5:1 turndown</strong></dd>
+<dt>Limitations</dt><dd>The discharge coefficient also drifts at low Reynolds number, and installation effects add error, so real turndown is often a little lower.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/turndown-ratio" title="Turndown Ratio Calculator" />
+
+## Key formulas for turndown ratio
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Turndown ratio | TR = Q_max ÷ Q_min | Q in any consistent flow unit, TR written as TR:1 |
+| Transmitter turndown (rangedown) | TD = URL ÷ span_min | URL and span in the same pressure unit |
+| DP flow relation | Q = K √ΔP | K = meter constant, ΔP in Pa or mbar |
+| Relative flow error from DP error | δQ/Q ≈ ½ × δΔP/ΔP | Fractions or percent |
+| Minimum flow for a target error | Q_min/Q_max = √(e_tx ÷ (2 × e_Q)) | e_tx = transmitter error as a fraction of span, e_Q = allowed flow error as a fraction of reading |
+
+## How to choose a meter with the right turndown
+
+1. Find the real minimum and maximum flows, including start-up, turndown operation and future capacity.
+2. Divide them to get the required turndown, then allow some margin.
+3. Compare with the meter's turndown **at the accuracy you need**, not its widest headline figure.
+4. Check that the maximum flow sits comfortably inside the meter range and not right at its top, since oversizing a meter eats turndown at the bottom.
+5. For DP meters needing more than about 5:1, consider stacked transmitters or another technology.
+
+A low flow cutoff in the transmitter or control system is usually set near the bottom of the usable range, so the reading drops to zero instead of showing noise when the line is shut.
+
+## Turndown ratio interview and viva questions
+
+1. **Define turndown ratio.** It is the maximum measurable value divided by the minimum value measured within the stated accuracy, written as a ratio such as 10:1.
+2. **Why does an orifice plate have low turndown?** DP varies with the square of flow, so at 10% flow the DP is only 1% of span and the transmitter's fixed error becomes a large share of the signal.
+3. **What is the turndown of a DP transmitter?** It is the upper range limit divided by the minimum calibratable span, for example 2500 mbar ÷ 25 mbar = 100:1.
+4. **Does a 100:1 transmitter turndown give 100:1 flow turndown on an orifice?** No. Flow turndown is limited by the square law and by accuracy at low DP, which keeps an orifice meter near 3:1 to 5:1.
+5. **How can you extend the range of an orifice meter?** Fit two DP transmitters with different spans on the same orifice and switch between them, or use a meter with higher turndown such as a Coriolis or magnetic flowmeter.
+6. **What is the turndown required if flow varies from 20 to 160 m³/h?** 160 ÷ 20 = 8, so 8:1.

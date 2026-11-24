@@ -108,6 +108,19 @@ export const DISCIPLINES: Discipline[] = [
 
   // Family 2: Computing and Systems
   {
+    slug: 'instrumentation-control', name: 'Instrumentation and Control Engineering', short: 'Instrumentation and Control', family: 'core',
+    description: 'Measurement fundamentals, sensors and transducers, process measurement principles, signal conditioning and control theory.',
+    subcategories: [
+      s('Measurement Fundamentals'),
+      s('Sensors and Transducers'),
+      s('Process Measurement Principles'),
+      s('Signal Conditioning'),
+      s('Process Control Theory'),
+      s('Control Systems'),
+      s('Interview and Exam Prep', 'interview-exam-prep'),
+    ],
+  },
+  {
     slug: 'computer-science', name: 'Computer Science and Software Engineering', short: 'Computer Science', family: 'computing',
     description: 'Programming, data structures, algorithms, operating systems, databases, architecture and software design.',
     subcategories: [

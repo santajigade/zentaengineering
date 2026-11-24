@@ -89,6 +89,16 @@ export const AUTHORS: Record<string, Person> = {
     photo: '/images/authors/sandip-gadade.webp',
     isPerson: true,
   },
+  'sunayana-gadepatil': {
+    slug: 'sunayana-gadepatil',
+    name: 'Sunayana Gadepatil',
+    role: 'Author, Instrumentation and Control',
+    bio: 'Writes on process instrumentation and measurement at instrumentationblog.in, and the Instrumentation and Control articles on Zenta Engineering, explaining measurement concepts in plain language for students and young engineers.',
+    credentials: [],
+    linkedin: 'https://www.linkedin.com/in/sunayana-gadepatil-instru/',
+    photo: '/images/authors/sunayana-gadepatil.webp',
+    isPerson: true,
+  },
   'sayali-ganjale': {
     slug: 'sayali-ganjale',
     name: 'Sayali Ganjale',
@@ -112,8 +122,8 @@ export const AUTHORS: Record<string, Person> = {
 // Who reviews content (shown as "Reviewed by ...").
 export const REVIEWER_DEFAULT = 'Technical Team';
 
-/** Author rule: Electronics articles by Santaji Gadepatil (6 Nov 2026), Manufacturing by Sandip Gadade (20 Nov 2026), Computer Science and AI and Data by Sayali Ganjale (23 Nov 2026), all others by Editorial Staff. */
-const DISCIPLINE_AUTHOR: Record<string, string> = { 'electronics-engineering': 'santaji-gadepatil', 'manufacturing-engineering': 'sandip-gadade', 'computer-science': 'sayali-ganjale', 'ai-data-engineering': 'sayali-ganjale' };
+/** Author rule: Electronics articles by Santaji Gadepatil (6 Nov 2026), Manufacturing by Sandip Gadade (20 Nov 2026), Computer Science and AI and Data by Sayali Ganjale (23 Nov 2026), Instrumentation and Control by Sunayana Gadepatil (24 Nov 2026), all others by Editorial Staff. */
+const DISCIPLINE_AUTHOR: Record<string, string> = { 'electronics-engineering': 'santaji-gadepatil', 'manufacturing-engineering': 'sandip-gadade', 'computer-science': 'sayali-ganjale', 'ai-data-engineering': 'sayali-ganjale', 'instrumentation-control': 'sunayana-gadepatil' };
 export function authorFor(data: { author?: string; discipline: string }): Person {
   if (data.author && AUTHORS[data.author]) return AUTHORS[data.author];
   return AUTHORS[DISCIPLINE_AUTHOR[data.discipline] ?? 'editorial-staff'];

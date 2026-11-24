@@ -1,0 +1,186 @@
+---
+title: "Bernoulli Equation in Flow Measurement: Square Root of DP"
+description: "The Bernoulli equation in flow measurement: the DP flow equation for orifice, venturi and pitot meters, square root of DP, extraction and a worked example."
+pubDate: 2026-11-24
+reviewedDate: 2026-11-24
+discipline: instrumentation-control
+subcategory: process-measurement-principles
+focusKeyword: "bernoulli equation in flow measurement"
+image: { src: /images/featured/bernoulli-equation-flow-measurement.webp, alt: "Bernoulli Equation in Flow Measurement: Square Root of DP: featured diagram" }
+format: fundamentals
+pillar: true
+math: true
+tags: [bernoulli, dp-flow, orifice-plate, venturi, square-root-extraction]
+faq:
+  - q: "Why is flow proportional to the square root of differential pressure?"
+    a: "Bernoulli's equation says the pressure drop across a restriction equals the gain in kinetic energy per unit volume, which is ½ρv². Velocity, and so volume flow, therefore varies with the square root of the pressure drop. Doubling the flow raises the DP four times."
+  - q: "What is the discharge coefficient of an orifice plate?"
+    a: "It corrects the ideal Bernoulli flow for the vena contracta and friction. For a sharp edged concentric orifice it is usually close to 0.6, while a classical venturi tube is about 0.98 to 0.995. ISO 5167 gives equations for C as a function of beta ratio and Reynolds number."
+  - q: "What is square root extraction in a DP transmitter?"
+    a: "It is a function in the transmitter, control system or a separate module that takes the square root of the DP signal so the output is linear in flow. With it, a 12 mA signal on a 4 to 20 mA loop means 50% flow; without it, 12 mA means 50% DP, which is about 70.7% flow."
+  - q: "Can Bernoulli's equation be used for gas flow measurement?"
+    a: "Yes, with an expansibility factor ε that corrects for the density change of the gas through the restriction. ISO 5167 includes ε in the mass flow equation; it is 1 for liquids and slightly below 1 for gases."
+references:
+  - text: "ISO 5167-1:2022 Measurement of fluid flow by means of pressure differential devices inserted in circular cross section conduits running full, Part 1: General principles and requirements"
+  - text: "ISO 5167-2:2022 Part 2: Orifice plates"
+  - text: "R. C. Baker, Flow Measurement Handbook, 2nd ed., Cambridge University Press"
+  - text: "T. R. Kuphaldt, Lessons In Industrial Instrumentation, Flow measurement chapter, control.com textbook (CC BY 4.0)"
+  - text: "B. G. Liptak (ed.), Instrument Engineers' Handbook, Vol. 1: Process Measurement and Analysis, 4th ed., CRC Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+
+<Key title="Short answer">
+
+The **Bernoulli equation in flow measurement** links the pressure drop across a restriction to the rise in fluid velocity: ΔP = ½ρ(v₂² − v₁²). Combined with continuity, it gives Q = C·E·A₂·√(2ΔP/ρ). Flow therefore follows the square root of differential pressure, which is why orifice, venturi and pitot meters need square root extraction.
+
+</Key>
+
+Differential pressure (DP) meters are still the most widely installed flowmeters in process plants. An orifice plate, a DP transmitter and two impulse lines are cheap, well understood and backed by a full international standard. All of it rests on one result from fluid mechanics. The general [Bernoulli equation](/mechanical-engineering/bernoulli-equation/) covers derivation and assumptions; this article follows it into the instrument loop, from the pipe to the 4 to 20 mA signal.
+
+## The Bernoulli equation in flow measurement: deriving the DP flow equation
+
+Take a horizontal pipe of area A₁ with a restriction of area A₂. For steady, incompressible, frictionless flow, Bernoulli between the upstream tapping (1) and the throat (2) gives:
+
+$$
+p_1 + \tfrac{1}{2}\rho v_1^2 = p_2 + \tfrac{1}{2}\rho v_2^2
+\quad\Rightarrow\quad
+\Delta P = p_1 - p_2 = \tfrac{1}{2}\rho\left(v_2^2 - v_1^2\right)
+$$
+
+The same volume passes both sections, so continuity says A₁v₁ = A₂v₂. Write the diameter ratio as β = d/D, so v₁ = β²v₂. Substituting:
+
+$$
+\Delta P = \tfrac{1}{2}\rho v_2^2\left(1 - \beta^4\right)
+\quad\Rightarrow\quad
+v_2 = \frac{1}{\sqrt{1-\beta^4}}\sqrt{\frac{2\Delta P}{\rho}}
+$$
+
+Multiplying by the throat area gives the ideal volume flow. A real meter loses some energy to friction, and behind an orifice the jet keeps contracting to a vena contracta smaller than the bore. A **discharge coefficient** C, found by calibration, corrects for both:
+
+$$
+Q = C \, E \, A_2 \sqrt{\frac{2\Delta P}{\rho}}, \qquad E = \frac{1}{\sqrt{1-\beta^4}}
+$$
+
+E is the velocity of approach factor. For gases, ISO 5167 adds an expansibility factor ε and writes the equation as mass flow:
+
+$$
+q_m = \frac{C}{\sqrt{1-\beta^4}}\,\varepsilon\,\frac{\pi}{4}d^2\sqrt{2\,\Delta P\,\rho_1}
+$$
+
+Everything in front of the square root is fixed by the meter and the fluid. That leaves the part an instrument engineer cares about:
+
+$$
+Q = K\sqrt{\Delta P}
+$$
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Orifice plate in a pipe with flow arrows: the stream contracts through the bore to a vena contracta downstream, where velocity is highest; a pressure profile line below the pipe drops sharply at the plate, reaches its lowest point at the vena contracta, then partly recovers, leaving a permanent pressure loss; upstream and downstream tappings connect through impulse lines to a DP transmitter above the pipe">
+<rect x="30" y="100" width="540" height="90" fill="#eef6ff" />
+<path d="M30 100H570M30 190H570" stroke="#0b2545" stroke-width="3" />
+<rect x="228" y="100" width="8" height="30" fill="#0b2545" /><rect x="228" y="160" width="8" height="30" fill="#0b2545" />
+<path d="M40 115H200C230 115 240 132 270 136H330C380 136 420 115 560 115" stroke="#13a89e" stroke-width="2" />
+<path d="M40 175H200C230 175 240 158 270 154H330C380 154 420 175 560 175" stroke="#13a89e" stroke-width="2" />
+<g stroke="#13a89e" stroke-width="2.5"><path d="M50 145H110" /><path d="M102 138L112 145L102 152" /><path d="M262 145H342" /><path d="M334 138L344 145L334 152" /><path d="M460 145H520" /><path d="M512 138L522 145L512 152" /></g>
+<g stroke="#fff" stroke-width="1.2"><path class="anim-flow" d="M50 145H110" /><path class="anim-flow" d="M262 145H342" /><path class="anim-flow-slow" d="M460 145H520" /></g>
+<path d="M190 100V60M262 100V60M190 60H215M237 60H262" stroke="#0b2545" stroke-width="2" />
+<rect x="205" y="36" width="42" height="34" rx="5" fill="#fff7e0" stroke="#f5b800" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" fill="#0b2545"><text x="226" y="58" font-size="12" text-anchor="middle" font-weight="700">DP</text>
+<text x="226" y="26" font-size="12" text-anchor="middle">DP transmitter</text>
+<text x="168" y="92" font-size="11" text-anchor="middle">p1</text><text x="282" y="92" font-size="11" text-anchor="middle">p2</text>
+<text x="300" y="130" font-size="10" text-anchor="middle">vena contracta</text>
+<text x="232" y="207" font-size="11" text-anchor="middle">Orifice plate</text></g>
+<path d="M40 225H210L232 268C245 285 290 286 300 286C340 286 360 252 400 248H560" stroke="#b42318" stroke-width="2.5" />
+<path class="anim-flow-slow" d="M40 225H210L232 268C245 285 290 286 300 286C340 286 360 252 400 248H560" stroke="#fff" stroke-width="1" />
+<path d="M560 225V248" stroke="#f5b800" stroke-width="2" /><path d="M555 225H565M555 248H565" stroke="#f5b800" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#b42318"><text x="40" y="218">Static pressure</text><text x="300" y="300" text-anchor="middle">lowest at vena contracta</text><text x="552" y="240" text-anchor="end" fill="#8a6100">Permanent loss</text></g>
+</svg>
+<figcaption>Pressure falls through the orifice as velocity rises, reaches a minimum at the vena contracta, then only partly recovers.</figcaption>
+</figure>
+
+## Why flow follows the square root of DP
+
+The kinetic energy term ½ρv² is squared in velocity, so pressure drop grows as the square of flow. Double the flow and the DP rises four times. Halve it and the DP falls to a quarter.
+
+| Flow, % of max | DP, % of span | 4 to 20 mA from a linear DP transmitter |
+| --- | --- | --- |
+| 100 | 100 | 20.0 mA |
+| 70.7 | 50 | 12.0 mA |
+| 50 | 25 | 8.0 mA |
+| 30 | 9 | 5.44 mA |
+| 10 | 1 | 4.16 mA |
+
+This square law is the reason DP meters have limited [turndown ratio](/instrumentation-control/turndown-ratio/). At 10% flow the transmitter sees just 1% of its span.
+
+## Square root extraction
+
+A DP transmitter measures pressure, but operators and controllers need flow. Somewhere in the loop the signal must be square rooted:
+
+- **In the transmitter.** Most smart DP transmitters have a square root output mode, so the 4 to 20 mA signal is already linear in flow.
+- **In the DCS or PLC.** The transmitter sends linear DP and the control system applies the square root in its input block.
+- **In older systems,** a separate square root extractor module or a gauge with a square root scale did the job.
+
+Only do it in one place. Applying the square root twice, once in the transmitter and again in the DCS, is a common commissioning mistake that makes the flow reading too high at low flow.
+
+Near zero DP the square root curve is very steep, so a tiny offset or noise produces a large flow reading. A **low flow cutoff**, typically a few percent of flow, forces the output to zero below that point.
+
+For the plain relation between pipe area, velocity and flow rate, see the [flow rate formula](https://www.instrumentationblog.in/flow-rate-formula/) on instrumentationblog.in.
+
+## The same equation in other DP meters
+
+- **Venturi tube.** A smooth converging cone, throat and long diverging cone. C is about 0.98 to 0.995 and most of the DP is recovered downstream.
+- **Flow nozzle.** A rounded inlet without the long diffuser. C is high, near 0.99, but recovery is poorer than a venturi.
+- **Pitot tube and averaging pitot.** The impact port brings the flow to rest, so it reads stagnation pressure. The difference from static pressure is ½ρv², giving v = √(2ΔP/ρ) at that point, or across the pipe for an averaging probe.
+- **Elbow meter.** Centrifugal force in a bend makes the outer wall pressure higher than the inner. The DP still follows a square law, though the coefficient usually needs field calibration.
+
+## Permanent pressure loss
+
+Not all the DP is lost. Downstream of the restriction the fluid slows and pressure partly recovers. For an orifice plate, ISO 5167-2 gives an approximation for the permanent loss:
+
+$$
+\Delta\varpi \approx \left(1 - \beta^{1.9}\right)\Delta P
+$$
+
+At β = 0.6 that is about 62% of the measured DP. A venturi loses typically only 5 to 20%, which matters for pumping cost on large lines.
+
+## Worked example: water through an orifice plate
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Water at 20°C (ρ = 998 kg/m³) flows in a 100 mm bore pipe through a concentric orifice of d = 60 mm. The DP transmitter reads 250 mbar (25,000 Pa). Take C = 0.61.</dd>
+<dt>Find</dt><dd>Volume flow, mass flow and approximate permanent pressure loss.</dd>
+<dt>Assumptions</dt><dd>Fully developed turbulent flow, incompressible liquid (ε = 1), C constant at this Reynolds number.</dd>
+<dt>Solution</dt><dd>β = 60 ÷ 100 = 0.6, β⁴ = 0.1296<br />E = 1 ÷ √(1 − 0.1296) = 1.0719<br />A₂ = π/4 × 0.06² = 0.002827 m²<br />√(2ΔP/ρ) = √(2 × 25,000 ÷ 998) = 7.078 m/s<br />Q = 0.61 × 1.0719 × 0.002827 × 7.078 = 0.01309 m³/s = 47.1 m³/h<br />q_m = 0.01309 × 998 = 13.06 kg/s<br />Permanent loss ≈ (1 − 0.6^1.9) × 25,000 ≈ 15,500 Pa = 155 mbar</dd>
+<dt>Answer</dt><dd><strong>About 47.1 m³/h (13.1 kg/s) of water, with roughly 155 mbar of the 250 mbar DP lost permanently</strong></dd>
+<dt>Limitations</dt><dd>C was assumed. For custody or design work, calculate C from the ISO 5167 Reader-Harris/Gallagher equation and iterate with the Reynolds number; check straight pipe lengths too.</dd>
+</dl>
+</Example>
+
+The pipe velocity here is 1.67 m/s, a [Reynolds number](/mechanical-engineering/reynolds-number/) of about 166,000, comfortably turbulent.
+
+<Calculator path="engineering/orifice-flow" title="Orifice Flow Calculator" />
+
+## Key formulas for Bernoulli in flow measurement
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Bernoulli across a restriction | ΔP = ½ρ(v₂² − v₁²) | ΔP in Pa, ρ in kg/m³, v in m/s |
+| Continuity | A₁v₁ = A₂v₂ | A in m² |
+| Beta ratio | β = d ÷ D | d = bore, D = pipe internal diameter |
+| Velocity of approach factor | E = 1 ÷ √(1 − β⁴) | Dimensionless |
+| Volume flow | Q = C·E·A₂·√(2ΔP/ρ) | C = discharge coefficient, Q in m³/s |
+| Mass flow (ISO 5167) | q_m = C·E·ε·(π/4)d²·√(2ΔPρ₁) | ε = expansibility factor, q_m in kg/s |
+| Square root law | Q = K√ΔP, so Q/Q_max = √(ΔP/ΔP_max) | K = meter constant |
+| Pitot tube velocity | v = √(2ΔP/ρ) | ΔP = stagnation minus static pressure |
+| Orifice permanent loss | Δϖ ≈ (1 − β^1.9)ΔP | Approximation from ISO 5167-2 |
+
+## Bernoulli in flow measurement interview and viva questions
+
+1. **Derive why flow is proportional to √ΔP.** Bernoulli gives ΔP = ½ρ(v₂² − v₁²); continuity relates v₁ to v₂; solving gives v₂ ∝ √ΔP, and Q = A₂v₂.
+2. **What does a 12 mA signal mean on a DP flow loop?** If the transmitter output is linear DP, it means 50% DP or 70.7% flow. If square root extraction is on, it means 50% flow.
+3. **Why is the orifice discharge coefficient about 0.6?** The jet keeps contracting after the bore to a vena contracta, so the effective flow area is smaller than the bore area, and friction adds a small loss.
+4. **What is the beta ratio and its usual range?** The bore diameter divided by pipe diameter. ISO 5167 orifice plates are generally used between about 0.1 and 0.75.
+5. **Why is a low flow cutoff needed?** The square root curve is steep near zero, so small DP offsets or noise appear as a large flow; the cutoff forces the reading to zero.
+6. **Why does a venturi have lower permanent pressure loss than an orifice?** Its long diverging cone slows the fluid gradually and recovers most of the pressure, while the orifice jet breaks up into eddies that waste energy.
+7. **What happens if square root extraction is applied in both the transmitter and the DCS?** The flow reading becomes the fourth root of DP, reading too high at all flows below maximum.

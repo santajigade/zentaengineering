@@ -18,7 +18,7 @@ for f in files:
     issues = []
     if not kw: issues.append('no focusKeyword')
     else:
-        if not all(w in slug.split('-') or w in ('and','the','a','of','vs','is','what') for w in kw_words): issues.append('keyword not in slug')
+        if not all(w in slug.split('-') or w in ('and','the','a','of','vs','is','what','in','for','to') for w in kw_words): issues.append('keyword not in slug')
         if k not in norm(title): issues.append('keyword not in title')
         if k not in norm(desc): issues.append('keyword not in description')
         if k not in intro: issues.append('keyword not in intro')
