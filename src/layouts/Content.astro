@@ -1,4 +1,5 @@
 ---
+import { ver } from '../lib/assetver';
 // Shared layout for article-like pages: articles, lessons, interview sets, projects, resources.
 import Base from './Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
@@ -65,7 +66,7 @@ const schema = {
       <ShareBar url={url} title={data.title} image={image} />
       {data.image && (
         <figure style="margin:20px 0 0">
-          <img src={data.image.src} alt={data.image.alt} width="1200" height="630" style="width:100%;height:auto;border-radius:var(--ze-radius);display:block" fetchpriority="high" />
+          <img src={ver(data.image.src)} alt={data.image.alt} width="1200" height="630" style="width:100%;height:auto;border-radius:var(--ze-radius);display:block" fetchpriority="high" />
         </figure>
       )}
       <slot name="top" />

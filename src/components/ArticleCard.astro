@@ -2,13 +2,14 @@
 // Article card with thumbnail, discipline, title, date, reading time and view count (filled in by /api/views.php).
 import { articleUrl, formatDate, type Article } from '../lib/content';
 import { getDiscipline } from '../data/disciplines';
+import { ver } from '../lib/assetver';
 interface Props { a: Article; label?: string }
 const { a, label } = Astro.props;
 const d = getDiscipline(a.data.discipline)!;
 const href = articleUrl(a);
 const words = (a.body ?? '').replace(/<[^>]+>|import .*|[#*_`|$]/g, ' ').split(/\s+/).filter(Boolean).length;
 const mins = Math.max(1, Math.round(words / 200));
-const thumb = a.data.image?.src.replace(/\.webp$/, '-thumb.webp');
+const thumb = ver(a.data.image?.src.replace(/\.webp$/, '-thumb.webp'));
 ---
 <a class={`card art-card fam-${d.family}`} href={href}>
   {thumb ? <img src={thumb} alt="" width="600" height="315" loading="lazy" decoding="async" /> : <div class="art-ph" />}
