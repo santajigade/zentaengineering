@@ -99,11 +99,11 @@ safety-engineering|fire-detection|Gas Detectors: Types and Working Principles|ga
 agricultural-engineering|post-harvest|Grain Storage Structures and Silos|grain-storage-structures|explanation|grain storage|2026-11-23
 aerospace-engineering|avionics|Instrument Landing System (ILS) Explained|instrument-landing-system|working-principle|instrument landing system|2026-11-23
 biomedical-engineering|prosthetics|Exoskeletons in Rehabilitation Engineering|rehabilitation-exoskeletons|explanation|exoskeletons|2026-11-23
-marine-engineering|offshore-structures|Mooring Systems for Floating Structures|mooring-systems|explanation|mooring systems|todo
-mechanical-engineering|pumps-compressors-turbines|Pump Cavitation and NPSH Explained|pump-cavitation-and-npsh|troubleshooting|pump cavitation|todo
-electrical-engineering|protection-relays|Differential Protection of Transformers|transformer-differential-protection|working-principle|differential protection|todo
-electronics-engineering|embedded-systems|UART vs SPI vs I2C Communication Compared|uart-vs-spi-vs-i2c|comparison|uart vs spi vs i2c|todo
-civil-engineering|geotechnical|Soil Compaction Tests: Proctor Test Explained|proctor-compaction-test|explanation|proctor compaction test|todo
+marine-engineering|offshore-structures|Mooring Systems for Floating Structures|mooring-systems|explanation|mooring systems|2026-11-24
+mechanical-engineering|pumps-compressors-turbines|Pump Cavitation and NPSH Explained|pump-cavitation-and-npsh|troubleshooting|pump cavitation|2026-11-24
+electrical-engineering|protection-relays|Differential Protection of Transformers|transformer-differential-protection|working-principle|differential protection|2026-11-24
+electronics-engineering|embedded-systems|UART vs SPI vs I2C Communication Compared|uart-vs-spi-vs-i2c|comparison|uart vs spi vs i2c|2026-11-24
+civil-engineering|geotechnical|Soil Compaction Tests: Proctor Test Explained|proctor-compaction-test|explanation|proctor compaction test|2026-11-24
 chemical-engineering|process-equipment|Storage Tank Types in Process Plants|storage-tank-types|equipment|storage tank types|todo
 computer-science|web-development|Frontend vs Backend Development Explained|frontend-vs-backend|comparison|frontend vs backend|todo
 automation-robotics|industrial-networks|PROFINET vs EtherNet/IP Compared|profinet-vs-ethernet-ip|comparison|profinet vs ethernet/ip|todo
