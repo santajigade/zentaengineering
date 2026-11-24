@@ -93,7 +93,7 @@ export const AUTHORS: Record<string, Person> = {
     slug: 'sunayana-gadepatil',
     name: 'Sunayana Gadepatil',
     role: 'Author, Instrumentation and Control',
-    bio: 'Writes on process instrumentation and measurement at instrumentationblog.in, and the Instrumentation and Control articles on Zenta Engineering, explaining measurement concepts in plain language for students and young engineers.',
+    bio: 'Writes on process instrumentation and measurement at instrumentationblog.in, and the Instrumentation and Control articles on Zenta Engineering, explaining instrumentation measurement concepts for students, technicians and young engineers.',
     credentials: [],
     linkedin: 'https://www.linkedin.com/in/sunayana-gadepatil-instru/',
     photo: '/images/authors/sunayana-gadepatil.webp',
@@ -139,3 +139,10 @@ export const MAIN_NAV = [
   { label: 'Resources', href: '/resources/' },
   { label: 'About Us', href: '/about/' },
 ];
+
+/** Bio as HTML with known site names linked (instrumentationblog.in). */
+const BIO_LINKS: Record<string, string> = { 'instrumentationblog.in': 'https://www.instrumentationblog.in' };
+export const bioHtml = (bio: string) => {
+  const esc = bio.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return Object.entries(BIO_LINKS).reduce((s, [k, u]) => s.split(k).join(`<a href="${u}" target="_blank" rel="noopener">${k}</a>`), esc);
+};

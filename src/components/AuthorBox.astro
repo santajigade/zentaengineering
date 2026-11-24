@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-import type { Person } from '../data/site';
+import { bioHtml, type Person } from '../data/site';
 interface Props { a: Person }
 const { a } = Astro.props;
 ---
@@ -18,6 +18,6 @@ const { a } = Astro.props;
       )}
     </div>
     <span class="muted" style="font-size:14px">{[a.role, ...a.credentials].join(', ')}</span>
-    <p style="margin:0;font-size:15px;line-height:1.6">{a.bio} <a href="/editorial-policy/">Editorial policy</a>.</p>
+    <p style="margin:0;font-size:15px;line-height:1.6"><Fragment set:html={bioHtml(a.bio)} /> <a href="/editorial-policy/">Editorial policy</a>.</p>
   </div>
 </div>
