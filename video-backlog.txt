@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video (oldest first). Delete a line once its video is live.
-automation-robotics/dcs-architecture
-automation-robotics/digital-twin-explained
-automation-robotics/machine-vision-components
-automation-robotics/mechatronic-system-elements
-automation-robotics/modbus-rtu-vs-tcp
-automation-robotics/plc-hardware-selection
 automation-robotics/scada-system-architecture
 automation-robotics/servo-vs-stepper-motor
 automation-robotics/types-of-industrial-robots

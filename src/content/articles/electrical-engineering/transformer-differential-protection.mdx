@@ -1,0 +1,164 @@
+---
+title: "Transformer Differential Protection: Principle, Settings"
+description: "Transformer differential protection explained: circulating current principle, CT matching, vector group, bias slope, inrush blocking and a worked example."
+pubDate: 2026-11-24
+reviewedDate: 2026-11-24
+discipline: electrical-engineering
+subcategory: protection-relays
+focusKeyword: "differential protection"
+image: { src: /images/featured/transformer-differential-protection.webp, alt: "Transformer Differential Protection: Principle, Settings: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [differential-protection, transformer-protection, relay-87t, biased-differential, inrush-current]
+faq:
+  - q: "Why does a transformer differential relay not trip on magnetising inrush?"
+    a: "Inrush current flows on the energised side only, so the relay sees it as differential current. The inrush waveform is rich in second harmonic, and the relay blocks or restrains its biased element while the second harmonic content is above its setting."
+  - q: "What is the ANSI device number for transformer differential protection?"
+    a: "Differential protection is device 87 in IEEE C37.2, and the transformer version is usually written 87T. Restricted earth fault protection, a differential scheme for one winding, is often shown as 87N or 64REF."
+  - q: "Does differential protection replace the Buchholz relay?"
+    a: "No. Differential protection responds to current and may not see a small interturn fault or slow oil problem. The Buchholz relay detects gas and oil surges inside the tank, so the two are used together on oil filled transformers."
+references:
+  - text: "IEEE Std C37.91-2008, IEEE Guide for Protecting Power Transformers"
+  - text: "IEC 60255-187-1:2021, Measuring relays and protection equipment, Part 187-1: Functional requirements for restrained and unrestrained differential protection of motors, generators and transformers"
+  - text: "IEEE Std C37.2-2008, IEEE Standard for Electrical Power System Device Function Numbers, Acronyms, and Contact Designations"
+  - text: "Network Protection and Automation Guide, Alstom Grid (now GE), 2011 edition, Chapter 16: Transformer and Transformer Feeder Protection"
+  - text: "J. L. Blackburn and T. J. Domin, Protective Relaying: Principles and Applications, 4th ed., CRC Press, 2014"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+Differential protection of a transformer compares the currents entering and leaving the protected zone through current transformers on every winding. For load and external faults the matched secondary currents balance and the relay stays stable. An internal fault creates a difference current, and the biased relay trips the breakers on all sides at high speed.
+
+</Key>
+
+Differential protection is the main protection for power transformers above a few MVA, and it is device 87T in IEEE C37.2 numbering. It is a unit scheme: it protects only the zone between its current transformers (CTs), so it needs no time grading with downstream relays and can trip instantly.
+
+
+<ArticleVideo slug="transformer-differential-protection" title="How transformer differential protection works" uploadDate="2026-11-24" />
+
+## Principle of differential protection
+
+The principle is [Kirchhoff's current law](/electrical-engineering/ohms-law-kirchhoffs-laws/). If no current is lost inside a zone, what goes in must come out. CTs are installed on both sides of the transformer, and their secondaries are connected so that, in a healthy condition, the two secondary currents circulate round the pilot wires. This is the Merz-Price circulating current arrangement described in the Network Protection and Automation Guide (NPAG). The relay operating element sits across the midpoint of the pilots, so it only sees the difference between the two CT currents.
+
+For normal load or a fault outside the zone, the same current passes through, the secondaries balance and the operating current is close to zero. For a fault between the CTs, current flows into the zone from one or both sides and the difference no longer cancels. If it exceeds the setting, the relay trips the circuit breakers on every winding.
+
+<figure class="anim">
+<svg width="640" height="330" viewBox="0 0 640 330" fill="none" role="img" aria-label="Merz-Price circulating current differential protection of a two winding transformer: primary current flows from the HV busbar through CT1, the transformer and CT2 to the LV side, the CT secondary currents circulate round the pilot wires through two bias coils, and the operate coil connected across the pilot midpoints carries only the difference current">
+<g stroke="#0b2545" stroke-width="4"><path d="M30 80H610" /></g>
+<g stroke="#fff" stroke-width="1.5"><path class="anim-flow" d="M30 80H610" /></g>
+<rect x="250" y="40" width="140" height="80" rx="6" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
+<circle cx="300" cy="80" r="24" fill="none" stroke="#0b2545" stroke-width="2" />
+<circle cx="340" cy="80" r="24" fill="none" stroke="#0b2545" stroke-width="2" />
+<g fill="#f3ead9" stroke="#0b2545" stroke-width="2"><ellipse cx="140" cy="80" rx="10" ry="22" /><ellipse cx="500" cy="80" rx="10" ry="22" /></g>
+<g stroke="#b42318" stroke-width="3"><path d="M140 102V250H500V102" /><path d="M150 102V180H490V102" /></g>
+<g stroke="#fff" stroke-width="1.2"><path class="anim-flow-slow" d="M150 102V180H490V102" /><path class="anim-flow-slow" d="M500 102V250H140V102" /></g>
+<rect x="200" y="168" width="60" height="24" rx="4" fill="#fff" stroke="#0b2545" stroke-width="2" />
+<rect x="380" y="168" width="60" height="24" rx="4" fill="#fff" stroke="#0b2545" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="2.5"><path d="M320 180V250" /></g>
+<rect x="296" y="200" width="48" height="28" rx="4" fill="#fde7e4" stroke="#b42318" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="320" y="24" font-weight="700">Protected zone between CT1 and CT2</text>
+<text x="60" y="68">HV side</text>
+<text x="585" y="68">LV side</text>
+<text x="140" y="50">CT1</text>
+<text x="500" y="50">CT2</text>
+<text x="320" y="138" font-size="11">Power transformer</text>
+<text x="230" y="161" font-size="11">Bias coil</text>
+<text x="410" y="161" font-size="11">Bias coil</text>
+<text x="320" y="218" font-size="11" font-weight="700" fill="#b42318">87T</text>
+<text x="390" y="220" font-size="11" text-anchor="start">Operate coil: Id</text>
+<text x="320" y="272" font-size="11">Pilot wires: CT secondary currents circulate</text>
+<text x="320" y="300" font-size="11" fill="#b42318">Load or external fault: currents balance, Id near zero, no trip</text>
+<text x="320" y="318" font-size="11" fill="#b42318">Internal fault: currents no longer balance, Id flows, relay trips</text>
+</g>
+</svg>
+<figcaption>Circulating current differential scheme. Through current gives equal CT secondary currents that circulate round the pilots, so the operate coil across the midpoint sees almost nothing.</figcaption>
+</figure>
+
+## Why transformer differential protection is harder than for a busbar
+
+A transformer does not pass the same current on both sides, and several effects create a difference current even with no fault. IEEE C37.91 and NPAG list these:
+
+- Line currents differ by the voltage ratio. CT ratios rarely match exactly, so amplitude matching factors are applied, once by interposing CTs and now in numerical relay software.
+- A delta star transformer such as Dyn11 shifts the line currents by 30 degrees. Electromechanical schemes connected the CTs on the star side in delta and those on the delta side in star. Numerical relays apply a vector group matrix instead.
+- For an external earth fault on an earthed star winding, zero sequence current flows on that side but not in the delta side lines. It must be filtered out, which the delta connected CTs or the relay's zero sequence elimination do.
+- Moving the on-load tap changer changes the ratio, so the matched currents drift apart over the tap range.
+- On a heavy through fault, one CT may saturate before the other and produce a false difference.
+- Energising a transformer draws a large magnetising inrush current on one side only, which the relay sees as internal. Overexcitation raises the magnetising current in the same way.
+
+## Biased (percentage) differential characteristic
+
+To stay stable for mismatch and CT errors, the relay uses a restraint or bias current. One common definition is the average of the matched currents. The operating threshold rises with the bias current, so a larger through current needs a larger difference before tripping. Taking currents into the zone as positive:
+
+$$
+I_d = \left| \bar I_1 + \bar I_2 \right|
+$$
+
+$$
+I_r = \frac{\left| \bar I_1 \right| + \left| \bar I_2 \right|}{2}
+$$
+
+A single slope characteristic trips when:
+
+$$
+I_d > I_{s1} + K \, I_r
+$$
+
+where I_s1 is the minimum pickup and K is the bias slope. Many relays add a second, steeper slope at high bias current to cover CT saturation on severe through faults. IEC 60255-187-1 defines how these restrained characteristics and the unrestrained element are specified and tested.
+
+## Inrush and overexcitation blocking
+
+Magnetising inrush can look like a large internal fault. Its waveform is offset and peaky, with a high second harmonic content, while fault current is mostly fundamental. Transformer relays measure the second harmonic in the differential current and block or restrain the biased element while it exceeds the set percentage of the fundamental. Overexcitation, from high voltage or low frequency, produces a strong fifth harmonic, so many relays also include fifth harmonic blocking. For more on the inrush waveform, see this explanation of [transformer inrush current](https://www.instrumentationblog.in/transformer-inrush-current/).
+
+An unrestrained high set element is added for heavy internal faults. It ignores harmonics and is set above the maximum expected inrush, so a severe fault is cleared even if CT saturation creates harmonics.
+
+## Operation step by step
+
+1. CTs on each winding measure the line currents and send them to the relay.
+2. The relay applies amplitude matching factors and the vector group correction.
+3. It removes zero sequence current where the winding connection requires it.
+4. It calculates the differential and bias currents for each phase.
+5. It checks the second and fifth harmonic blocking, then compares the point against the biased characteristic.
+6. If the point lies in the trip zone, or the unrestrained element picks up, it trips the breakers on all sides.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A 20 MVA, 132/33 kV transformer. HV CT ratio 100/1, LV CT ratio 500/1. Numerical relay with illustrative settings I_s1 = 0.2 per unit and slope K = 30 %. Case A: external fault, matched currents HV 3.6 pu in and LV 4.0 pu out. Case B: internal fault, HV 3.0 pu in and LV 0.5 pu in.</dd>
+<dt>Find</dt><dd>The amplitude matching factors and whether the relay trips in each case.</dd>
+<dt>Assumptions</dt><dd>Vector group and zero sequence correction already applied in the relay, currents in phase on each side, bias current taken as the average of the two currents, no harmonic blocking active.</dd>
+<dt>Solution</dt><dd>HV full load current = 20 000 000 ÷ (√3 × 132 000) = 87.48 A, secondary = 87.48 ÷ 100 = 0.875 A<br />LV full load current = 20 000 000 ÷ (√3 × 33 000) = 349.9 A, secondary = 349.9 ÷ 500 = 0.700 A<br />Matching factors: 1 ÷ 0.875 = 1.143 (HV), 1 ÷ 0.700 = 1.429 (LV)<br />Case A: I_d = 3.6 − 4.0 = 0.4 pu (magnitude), I_r = (3.6 + 4.0) ÷ 2 = 3.8 pu, threshold = 0.2 + 0.3 × 3.8 = 1.34 pu<br />Case B: I_d = 3.0 + 0.5 = 3.5 pu, I_r = (3.0 + 0.5) ÷ 2 = 1.75 pu, threshold = 0.2 + 0.3 × 1.75 = 0.725 pu</dd>
+<dt>Answer</dt><dd><strong>Case A: 0.4 pu is below 1.34 pu, so the relay is stable. Case B: 3.5 pu is above 0.725 pu, so the relay trips.</strong> The matching factors are 1.143 on the HV side and 1.429 on the LV side.</dd>
+<dt>Limitations</dt><dd>The settings are illustrative. Real values come from the relay manual and a setting study that accounts for tap range, CT class and dual slope breakpoints.</dd>
+</dl>
+</Example>
+
+## Key formulas for differential protection
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Full load line current | I_FL = S ÷ (√3 × V) | S in VA, V = line voltage in V, I_FL in A |
+| CT secondary current | I_sec = I_FL ÷ CT ratio | CT ratio as primary/secondary, I_sec in A |
+| Amplitude matching factor | k = 1 ÷ I_sec at full load | makes rated current 1 pu on each side |
+| Differential current | I_d = abs(I_1 + I_2) | matched currents in pu, into the zone positive |
+| Bias current | I_r = (abs(I_1) + abs(I_2)) ÷ 2 | pu, one common definition |
+| Trip condition, single slope | I_d > I_s1 + K × I_r | I_s1 = minimum pickup in pu, K = slope |
+
+## Advantages and limitations
+
+Differential protection is fast, selective and independent of other relays because it only responds to faults inside its zone. It detects phase to phase faults and most winding to earth faults. Its sensitivity to faults near the star point of an impedance earthed winding is low, so restricted earth fault protection is added. It may miss low level interturn faults, which is why the Buchholz relay and backup [overcurrent relays](/electrical-engineering/overcurrent-relay/) remain on large units. It also depends on correct CT wiring, polarity and ratio, so commissioning includes stability tests with primary or secondary injection.
+
+## Applications
+
+Biased differential protection is standard on generator transformers, grid and distribution substation transformers, and large motor feeder transformers. The same principle protects generators, motors, busbars and cables, with lines using communication links instead of pilot wires. For background on the transformer itself, see the [transformer working principle](/electrical-engineering/transformer-working-principle/) and the [circuit breakers](/electrical-engineering/circuit-breaker-working-principle/) that the relay trips.
+
+## Differential protection interview and viva questions
+
+1. **What is the basic principle of differential protection?** The relay compares the currents entering and leaving a zone. For a healthy zone they balance, and an internal fault produces a difference current that operates the relay.
+2. **Why is a bias or restraint current used?** CT errors, ratio mismatch and tap changer movement create a difference current that grows with through current, so the threshold is raised in proportion to the bias current.
+3. **Why does inrush current cause a problem, and how is it handled?** It flows on one side only and looks like an internal fault. The relay detects its high second harmonic content and blocks the biased element.
+4. **How was the 30 degree shift of a delta star transformer compensated in older schemes?** The CTs on the star side were connected in delta and those on the delta side in star, which also removed zero sequence current.
+5. **Why is an unrestrained high set element included?** It clears severe internal faults instantly even when CT saturation produces harmonics that could block the biased element.

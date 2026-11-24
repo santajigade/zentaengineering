@@ -1,0 +1,167 @@
+---
+title: "UART vs SPI vs I2C: Serial Communication Compared"
+description: "UART vs SPI vs I2C compared: wires, clocking, framing, addressing, speed and wiring rules, with a worked transfer time and I2C pull-up example."
+pubDate: 2026-11-24
+reviewedDate: 2026-11-24
+discipline: electronics-engineering
+subcategory: embedded-systems
+focusKeyword: "uart vs spi vs i2c"
+image: { src: /images/featured/uart-vs-spi-vs-i2c.webp, alt: "UART vs SPI vs I2C: Serial Communication Compared: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [uart, spi, i2c, serial-communication, embedded-systems, microcontroller]
+faq:
+  - q: "Which is fastest, UART, SPI or I2C?"
+    a: "SPI is usually the fastest because it is a simple full duplex shift register clocked by the controller, with no addressing or acknowledge overhead. I2C is limited by its open drain bus and pull-up rise time, and UART by the agreed baud rate and the start and stop bits in every frame."
+  - q: "Can I connect more than one device to a UART?"
+    a: "A UART link is point to point: one transmitter drives one receiver on each line. Multidrop networks are built by adding a physical layer such as RS-485 and a protocol with addresses on top, for example Modbus RTU."
+  - q: "Why does I2C need pull-up resistors?"
+    a: "I2C outputs are open drain or open collector. They can only pull SDA and SCL low, so external pull-up resistors return the lines high. This wired AND connection is what allows several devices to share the bus, arbitrate and stretch the clock."
+references:
+  - text: "NXP Semiconductors, UM10204 I2C-bus specification and user manual, Rev. 7.0, 2021"
+  - text: "Motorola (now NXP), SPI Block Guide V03.06, document S12SPIV3/D, 2003"
+  - text: "Texas Instruments, SLVA704, Understanding the I2C Bus, application report, 2015"
+  - text: "Texas Instruments, SLVA689, I2C Bus Pullup Resistor Calculation, application report, 2015"
+  - text: "P. Dhaker, Introduction to SPI Interface, Analog Dialogue, Vol. 52, Analog Devices, 2018"
+  - text: "M. A. Mazidi, S. Naimi and S. Naimi, The AVR Microcontroller and Embedded Systems Using Assembly and C, Pearson"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+UART vs SPI vs I2C compares three serial links. UART is asynchronous and point to point, using TX and RX with start and stop bits. SPI is a synchronous, full duplex bus with clock, two data lines and a chip select per device. I2C is a synchronous, two wire, addressed bus with open drain lines and pull-ups.
+
+</Key>
+
+UART vs SPI vs I2C is one of the first choices in any [microcontroller](/electronics-engineering/microcontroller-vs-microprocessor/) design, because sensors, memories, displays and radio modules each offer one or more of these interfaces. All three send data one bit at a time, but they differ in how the receiver knows when to sample a bit, how many wires they need, how a device is selected and how fast they can run.
+
+<figure class="anim">
+<svg width="640" height="330" viewBox="0 0 640 330" fill="none" role="img" aria-label="Wiring of UART, SPI and I2C: UART connects TX of each device to RX of the other; SPI controller drives SCLK, MOSI and chip select to a peripheral which returns data on MISO; I2C controller and two targets share open drain SDA and SCL lines pulled up to VDD by resistors, with the controller driving SCL">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="105" y="20" font-weight="700">UART</text>
+<text x="320" y="20" font-weight="700">SPI</text>
+<text x="530" y="20" font-weight="700">I2C</text>
+</g>
+<g fill="#e6f6f4" stroke="#0b2545" stroke-width="2">
+<rect x="20" y="40" width="70" height="100" rx="5" /><rect x="120" y="190" width="70" height="100" rx="5" />
+<rect x="225" y="40" width="70" height="100" rx="5" /><rect x="345" y="190" width="70" height="100" rx="5" />
+<rect x="440" y="250" width="70" height="50" rx="5" /><rect x="530" y="250" width="40" height="50" rx="5" /><rect x="585" y="250" width="40" height="50" rx="5" />
+</g>
+<g stroke="#0b2545" stroke-width="3">
+<path d="M90 75H105V225H120" /><path d="M120 255H70V140" />
+<path d="M295 60H335V205H345" /><path d="M295 85H325V230H345" /><path d="M345 255H315V110H295" /><path d="M295 130H305V280H345" />
+<path d="M485 250V170M470 170H625" /><path d="M500 250V200M450 200H625" /><path d="M550 250V170" /><path d="M565 250V200" /><path d="M600 250V170" /><path d="M615 250V200" />
+</g>
+<g stroke="#b42318" stroke-width="1.6">
+<path class="anim-flow" d="M90 75H105V225H120" /><path class="anim-flow" d="M120 255H70V140" />
+<path class="anim-flow" d="M295 60H335V205H345" /><path class="anim-flow" d="M295 85H325V230H345" /><path class="anim-flow" d="M345 255H315V110H295" /><path class="anim-flow" d="M295 130H305V280H345" />
+<path class="anim-flow-slow" d="M450 200H625" />
+</g>
+<g fill="#fff" stroke="#0b2545" stroke-width="1.5"><rect x="445" y="80" width="10" height="45" /><rect x="465" y="80" width="10" height="45" /></g>
+<g stroke="#0b2545" stroke-width="2"><path d="M440 60H500M450 60V80M470 60V80M470 125V170M450 125V200" /></g>
+<g fill="#0b2545"><circle cx="470" cy="170" r="3" /><circle cx="485" cy="170" r="3" /><circle cx="550" cy="170" r="3" /><circle cx="600" cy="170" r="3" /><circle cx="450" cy="200" r="3" /><circle cx="500" cy="200" r="3" /><circle cx="565" cy="200" r="3" /><circle cx="615" cy="200" r="3" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="55" y="95">Device A</text><text x="155" y="245">Device B</text>
+<text x="260" y="160">Controller</text><text x="380" y="182">Peripheral</text>
+<text x="475" y="280">Ctrl</text><text x="550" y="280">T1</text><text x="605" y="280">T2</text>
+<text x="55" y="70">TX</text><text x="55" y="130">RX</text><text x="155" y="230">RX</text><text x="155" y="270">TX</text>
+<text x="262" y="64">SCLK</text><text x="262" y="89">MOSI</text><text x="262" y="114">MISO</text><text x="262" y="134">CS</text>
+<text x="380" y="209">SCLK</text><text x="380" y="234">MOSI</text><text x="380" y="259">MISO</text><text x="380" y="284">CS</text>
+<text x="470" y="54">VDD</text><text x="438" y="107" text-anchor="end">Rp</text>
+<text x="600" y="163">SDA</text><text x="600" y="193">SCL</text>
+<text x="105" y="320">Both sides set the baud rate</text>
+<text x="320" y="320">Controller drives the clock</text>
+<text x="530" y="320">Two shared open drain lines</text>
+</g>
+</svg>
+<figcaption>Typical wiring. UART crosses TX to RX, SPI uses a clock, two data lines and a chip select per peripheral, and I2C shares SDA and SCL among all devices with pull-up resistors.</figcaption>
+</figure>
+
+
+<ArticleVideo slug="uart-vs-spi-vs-i2c" title="How UART, SPI and I2C work" uploadDate="2026-11-24" />
+
+## UART vs SPI vs I2C comparison table
+
+| Feature | UART | SPI | I2C |
+| --- | --- | --- | --- |
+| Clocking | Asynchronous, no clock line | Synchronous, SCLK from the controller | Synchronous, SCL from the controller |
+| Signal lines | TX, RX (plus ground) | SCLK, MOSI, MISO, one CS per peripheral | SDA, SCL |
+| Duplex | Full duplex | Full duplex | Half duplex |
+| Topology | Point to point | One controller, many peripherals | Multi controller, many targets on one bus |
+| Device selection | None, one device per link | Chip select line | 7-bit or 10-bit address in the first byte |
+| Framing | Start bit, 5 to 9 data bits, optional parity, 1 or 2 stop bits | None defined, transfer lasts while CS is active | START, address, data bytes each with ACK, STOP |
+| Acknowledge | None | None | ACK or NACK after every byte |
+| Output type | Push-pull | Push-pull | Open drain with pull-up resistors |
+| Speed | Set by the agreed baud rate | Set by the controller clock and peripheral limits | 100 kbit/s, 400 kbit/s, 1 Mbit/s or 3.4 Mbit/s modes |
+| Formal standard | No single standard | No formal standard, de facto from Motorola | NXP UM10204 specification |
+
+## UART: asynchronous serial
+
+A universal asynchronous receiver transmitter (UART) sends each character as a frame. The line idles high. A low start bit marks the start of the frame, followed by 5 to 9 data bits sent least significant bit first, an optional parity bit and one or two high stop bits. There is no clock wire, so both ends must be configured for the same baud rate and frame format, such as 115200 baud, 8 data bits, no parity and 1 stop bit (8N1). The receiver resynchronises on every start bit and samples near the middle of each bit time.
+
+The TX pin of one device connects to the RX pin of the other, and both share ground. UART defines only the framing. Distance and multidrop wiring come from the physical layer added on top, such as RS-232 or RS-485, which is how [Modbus RTU](/automation-robotics/modbus-rtu-vs-tcp/) runs over UART frames. With 8N1, every byte costs 10 bit times. A detailed walk through the frame and baud rate error is in this guide to [UART frames and baud rate](https://www.instrumentationblog.in/uart-communication-frame-baud-rate/).
+
+## SPI: synchronous full duplex
+
+The Serial Peripheral Interface (SPI) was introduced by Motorola and documented in its SPI block guides. The controller drives the serial clock SCLK and pulls the chip select (CS or SS) of one peripheral low. On each clock edge one bit leaves the controller on MOSI and one bit returns from the peripheral on MISO, so the two shift registers simply exchange contents. Newer documents also name these lines SDO and SDI, or PICO and POCI.
+
+Clock polarity (CPOL) sets the idle level of SCLK, and clock phase (CPHA) sets whether data is sampled on the first or second edge, giving four SPI modes. The controller and peripheral must use the same mode. There is no addressing and no acknowledge, so the controller cannot tell whether a peripheral is present unless it reads back known data. Each extra peripheral needs another CS line, unless the devices support daisy chaining. The low overhead and push-pull outputs make SPI the usual choice for flash memory, ADCs, DACs and displays.
+
+## I2C: two wire addressed bus
+
+The I2C bus, specified by Philips and now NXP in UM10204, uses a serial data line (SDA) and a serial clock line (SCL). Both are open drain, so any device can pull a line low and pull-up resistors return it high. A transfer starts with a START condition, where SDA falls while SCL is high. Next comes a 7-bit address and a read or write bit. The addressed target pulls SDA low during the ninth clock to acknowledge. Data follows in bytes, each acknowledged, and a STOP condition, where SDA rises while SCL is high, ends the transfer.
+
+UM10204 defines Standard-mode up to 100 kbit/s, Fast-mode up to 400 kbit/s, Fast-mode Plus up to 1 Mbit/s and High-speed mode up to 3.4 Mbit/s. In Standard and Fast mode the bus capacitance is limited to 400 pF. The open drain wiring allows several controllers on one bus with arbitration, and lets a slow target hold SCL low to stretch the clock. Open drain wiring limits speed, because each rising edge is set by the pull-up resistor charging the bus capacitance.
+
+The pull-up value has limits at both ends. UM10204 and TI SLVA689 give:
+
+$$
+R_{p(max)} = \frac{t_r}{0.8473 \, C_b}
+$$
+
+$$
+R_{p(min)} = \frac{V_{DD} - V_{OL(max)}}{I_{OL}}
+$$
+
+where t_r is the maximum rise time (1000 ns in Standard-mode, 300 ns in Fast-mode), C_b the bus capacitance, V_OL(max) the low level output voltage (0.4 V) and I_OL the sink current (3 mA in Standard and Fast mode).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A microcontroller must send 256 bytes of data. Options: UART at 115200 baud, 8N1; I2C in Fast-mode at 400 kHz; SPI at 8 MHz. I2C bus at 3.3 V with 200 pF bus capacitance.</dd>
+<dt>Find</dt><dd>The minimum transfer time on each interface, and the allowed I2C pull-up range.</dd>
+<dt>Assumptions</dt><dd>Back to back bytes with no gaps. I2C: one address byte, every byte 9 clock periods including ACK, START and STOP taken as one bit time each, no clock stretching. SPI: 8 clocks per byte.</dd>
+<dt>Solution</dt><dd>UART: 256 × 10 = 2560 bits, 2560 ÷ 115 200 = 22.2 ms<br />I2C: (256 + 1) × 9 + 2 = 2315 bit times, 2315 ÷ 400 000 = 5.79 ms<br />SPI: 256 × 8 = 2048 bits, 2048 ÷ 8 000 000 = 0.256 ms<br />R_p(max) = 300 × 10⁻⁹ ÷ (0.8473 × 200 × 10⁻¹²) = 1770 Ω<br />R_p(min) = (3.3 − 0.4) ÷ 0.003 = 967 Ω</dd>
+<dt>Answer</dt><dd><strong>About 22.2 ms for UART, 5.79 ms for I2C and 0.256 ms for SPI.</strong> The I2C pull-ups must lie between about 967 Ω and 1.77 kΩ, so a standard 1.5 kΩ resistor fits.</dd>
+<dt>Limitations</dt><dd>Real transfers include register address bytes, gaps between bytes, software latency and, for I2C, clock stretching. Peripheral data sheets set the actual maximum SPI clock.</dd>
+</dl>
+</Example>
+
+## Key formulas for UART vs SPI vs I2C
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| UART byte rate | bytes/s = baud ÷ bits per frame | 10 bits per frame for 8N1 |
+| UART transfer time | t = N × bits per frame ÷ baud | N = number of bytes, t in s |
+| SPI transfer time | t = 8N ÷ f_SCLK | f_SCLK in Hz |
+| I2C transfer time | t = ((N + 1) × 9 + 2) ÷ f_SCL | one address byte, 9 clocks per byte, f_SCL in Hz |
+| I2C maximum pull-up | R_p(max) = t_r ÷ (0.8473 × C_b) | t_r in s, C_b in F, R in Ω |
+| I2C minimum pull-up | R_p(min) = (V_DD − V_OL(max)) ÷ I_OL | voltages in V, I_OL in A |
+
+## When to use which interface
+
+Use UART for links to one other device that has no shared clock: GPS and Bluetooth modules, debug consoles, bootloaders and longer cables through RS-232 or RS-485 transceivers. Use SPI when throughput matters and the board can spare pins: flash memory, SD cards, fast ADCs and TFT displays. Use I2C when many slow devices must share two pins: temperature and humidity sensors, EEPROMs, real time clocks, IO expanders and power management chips. I2C and SPI are board level buses intended for short traces, so careful [PCB design](/electronics-engineering/pcb-design-basics/) and good [grounding](/electronics-engineering/pcb-grounding-techniques/) matter as clock rates rise.
+
+## Common problems
+
+UART faults are usually a baud rate or frame format mismatch, or TX wired to TX. SPI faults are usually the wrong CPOL or CPHA mode, a chip select that is not driven, or MISO left driven by an unselected device. I2C faults are usually missing or wrong pull-ups, duplicate addresses, too much bus capacitance for the chosen mode, or a target holding SDA low after a reset.
+
+## UART vs SPI vs I2C interview and viva questions
+
+1. **Why does UART not need a clock line?** Both ends agree on the baud rate in advance, and the receiver resynchronises on the start bit of every frame and samples each bit near its middle.
+2. **What do CPOL and CPHA mean in SPI?** CPOL sets the idle level of the clock and CPHA sets whether data is sampled on the first or second clock edge, giving four SPI modes.
+3. **How is a target selected on an I2C bus?** The controller sends a START condition, then the 7-bit or 10-bit address with a read or write bit, and only the matching target acknowledges.
+4. **Why is SPI faster than I2C?** It uses push-pull outputs and has no address or acknowledge overhead, whereas I2C rise times are set by pull-up resistors charging the bus capacitance.
+5. **What limits the I2C pull-up resistor value?** The maximum value is set by the allowed rise time and the bus capacitance, and the minimum value by the sink current the outputs can take at the low level voltage.

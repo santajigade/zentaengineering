@@ -3,6 +3,7 @@ title: "Life Cycle Assessment (LCA) Explained"
 description: "Life cycle assessment explained: ISO 14040 phases, goal and scope, functional unit, inventory, impact assessment, interpretation and a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-24
 discipline: environmental-engineering
 subcategory: sustainability
 focusKeyword: "life cycle assessment"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Life cycle assessment** (LCA) measures the environmental impacts of a product, process or service across its whole life, from **raw material extraction** through **manufacturing**, **transport**, **use** and **end of life**. Under **ISO 14040 and 14044** it has four phases: **goal and scope definition** (including the **functional unit** and **system boundary**), **life cycle inventory (LCI)** of all inputs and emissions, **life cycle impact assessment (LCIA)** that converts them into impact categories such as climate change, and **interpretation** of results with sensitivity checks.
+**Life cycle assessment** (LCA) measures the environmental impacts of a product, process or service over its whole life, from raw material extraction through manufacturing, transport and use to end of life. Under ISO 14040 and 14044 it has four phases: goal and scope definition, life cycle inventory, life cycle impact assessment, and interpretation of the results.
 
 </Key>
 
@@ -38,16 +39,17 @@ A product that looks green at the point of use may cause large impacts elsewhere
 
 ## The four phases of life cycle assessment
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="ISO 14040 LCA framework: goal and scope definition, inventory analysis and impact assessment stacked on the left, each linked by two way arrows to interpretation on the right; direct applications such as product development, policy and marketing shown outside the framework">
 <rect x="20" y="20" width="400" height="240" rx="10" fill="none" stroke="#0b2545" stroke-width="2" />
 <g stroke="#0b2545" stroke-width="2">
-<rect x="45" y="40" width="190" height="55" rx="6" fill="#e6f6f4" /><rect x="45" y="112" width="190" height="55" rx="6" fill="#eef1f6" /><rect x="45" y="184" width="190" height="55" rx="6" fill="#fff7e0" />
-<rect x="290" y="40" width="110" height="199" rx="6" fill="#ffe9e7" />
+<rect class="anim-blink" x="45" y="40" width="190" height="55" rx="6" fill="#e6f6f4" /><rect class="anim-blink anim-d1" x="45" y="112" width="190" height="55" rx="6" fill="#eef1f6" /><rect class="anim-blink anim-d2" x="45" y="184" width="190" height="55" rx="6" fill="#fff7e0" />
+<rect class="anim-blink anim-d3" x="290" y="40" width="110" height="199" rx="6" fill="#ffe9e7" />
 <rect x="460" y="90" width="125" height="100" rx="6" fill="#ffffff" />
 </g>
 <g stroke="#13a89e" stroke-width="2"><path d="M140 95v17M140 167v17M235 67h55M235 139h55M235 211h55M400 139h60" /></g>
 <g fill="#13a89e"><path d="M135 106l5 8 5-8z" /><path d="M135 178l5 8 5-8z" /><path d="M282 62l8 5-8 5z" /><path d="M282 134l8 5-8 5z" /><path d="M282 206l8 5-8 5z" /><path d="M243 62l-8 5 8 5z" /><path d="M243 134l-8 5 8 5z" /><path d="M243 206l-8 5 8 5z" /><path d="M452 134l8 5-8 5z" /></g>
+<g stroke="#fff" stroke-width="1.2" fill="none"><path class="anim-flow-slow" d="M140 95v17M140 167v17M400 139h60" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" fill="#0b2545" text-anchor="middle">
 <text x="140" y="64" font-weight="700">1. Goal and scope</text><text x="140" y="82" font-size="11">functional unit, boundary</text>
 <text x="140" y="136" font-weight="700">2. Inventory (LCI)</text><text x="140" y="154" font-size="11">inputs and emissions</text>
@@ -97,6 +99,14 @@ Results are checked for completeness, consistency and sensitivity to key assumpt
 </dl>
 </Example>
 
+## Key formulas for life cycle assessment
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Category indicator result | I_c = Σ m_i × CF_i,c | m_i = mass of substance i in kg, CF_i,c = characterisation factor, for climate change in kg CO₂e per kg |
+| Use phase emissions | E_use = P × t × EF | P = power in kW, t = time in h, EF = grid emission factor in kg CO₂e per kWh |
+| Allocated manufacturing impact | E_mfg = E_unit × t ÷ L | E_unit = impact per item, t = hours in the functional unit, L = rated life in h |
+
 ## Types and uses of LCA
 
 - **Attributional LCA:** describes the impacts attributable to a product system as it is.
@@ -123,3 +133,11 @@ In construction, LCA covers embodied carbon in materials such as cement, steel a
 - Drawing comparative public claims without critical review.
 
 LCA is the quantitative backbone of [circular economy principles](/environmental-engineering/circular-economy-principles/) and complements site specific [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/). Used well, it helps engineers make choices that genuinely reduce environmental impact rather than just moving it.
+
+## Life cycle assessment interview and viva questions
+
+1. **What are the four phases of LCA under ISO 14040?** Goal and scope definition, life cycle inventory, life cycle impact assessment and interpretation, carried out iteratively.
+2. **What is a functional unit?** It is the quantified function on which all comparisons are based, such as lighting a given area at a given level for a set time.
+3. **What is the difference between cradle to gate and cradle to grave?** Cradle to gate stops when the product leaves the factory, while cradle to grave also includes use and end of life.
+4. **How is climate change impact calculated in LCIA?** Each greenhouse gas mass is multiplied by its global warming potential and the results are summed in kg CO₂e.
+5. **What is the difference between attributional and consequential LCA?** Attributional LCA describes the impacts of a product system as it is, while consequential LCA estimates how impacts change in the wider economy because of a decision.

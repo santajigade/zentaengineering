@@ -1,0 +1,178 @@
+---
+title: "Pump Cavitation and NPSH: Causes, Symptoms and Fixes"
+description: "Pump cavitation explained: why bubbles form, NPSHa vs NPSH3, symptoms, causes, a diagnostic table, prevention and a worked NPSH margin example."
+pubDate: 2026-11-24
+reviewedDate: 2026-11-24
+discipline: mechanical-engineering
+subcategory: pumps-compressors-turbines
+focusKeyword: "pump cavitation"
+image: { src: /images/featured/pump-cavitation-and-npsh.webp, alt: "Pump Cavitation and NPSH: Causes, Symptoms and Fixes: featured diagram" }
+format: troubleshooting
+pillar: false
+math: true
+tags: [pump-cavitation, npsh, centrifugal-pump, vapour-pressure, troubleshooting]
+faq:
+  - q: "Is NPSH required the point where cavitation starts?"
+    a: "No. NPSH3 is the NPSH available at which the head of the first stage has already dropped by 3%, so the pump is cavitating at that point. Bubbles start to form at a higher NPSH available, which is why a margin above NPSH3 is needed."
+  - q: "Can a pump cavitate when the suction tank is above the pump?"
+    a: "Yes. A positive suction head helps, but NPSH available can still be too low if the liquid is close to its boiling point, the suction line is long or blocked, or the pump runs at a much higher flow than its design point."
+  - q: "How do you tell cavitation from air entrainment?"
+    a: "Both make noise and lower the head. Cavitation depends on suction pressure and liquid temperature and is made worse by raising flow or temperature. Air entrainment comes from vortices, low submergence or leaking suction joints, and the gas bubbles do not collapse back into liquid as vapour bubbles do."
+references:
+  - text: "ANSI/HI 9.6.1-2017, Rotodynamic Pumps Guideline for NPSH Margin, Hydraulic Institute"
+  - text: "ISO 9906:2012, Rotodynamic pumps, Hydraulic performance acceptance tests, Grades 1, 2 and 3"
+  - text: "ANSI/HI 9.6.6-2016, Rotodynamic Pumps for Pump Piping, Hydraulic Institute"
+  - text: "J. F. Gülich, Centrifugal Pumps, 3rd ed., Springer, 2014"
+  - text: "I. J. Karassik, J. P. Messina, P. Cooper and C. C. Heald, Pump Handbook, 4th ed., McGraw-Hill, 2008"
+  - text: "Y. A. Çengel and J. M. Cimbala, Fluid Mechanics: Fundamentals and Applications, 4th ed., McGraw-Hill (saturation properties of water)"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+Pump cavitation is the formation and violent collapse of vapour bubbles inside a pump when the local liquid pressure falls to its vapour pressure, usually at the impeller eye. It causes noise, vibration, loss of head and pitting. It is avoided by keeping NPSH available above the pump's NPSH3 with a margin.
+
+</Key>
+
+Pump cavitation is one of the most common reasons a centrifugal pump gets noisy, loses head and wears out its impeller early. The cause is nearly always on the suction side: there is not enough pressure at the pump inlet above the vapour pressure of the liquid. Engineers measure that margin as net positive suction head (NPSH). Impellers and pump curves are covered in [centrifugal pump working principle](/mechanical-engineering/centrifugal-pump-working-principle/).
+
+
+<ArticleVideo slug="pump-cavitation-and-npsh" title="How pump cavitation happens" uploadDate="2026-11-24" />
+
+## Why pump cavitation happens
+
+Static lift, friction in the suction pipe, fittings and strainer, and the speed rise into the impeller eye all take pressure away from the liquid on its way into the pump. The lowest pressure in the whole system occurs just inside the impeller, on the low pressure side of the vane inlet edges. If the pressure there falls to the vapour pressure of the liquid at its operating temperature, the liquid boils locally and vapour bubbles form.
+
+The bubbles travel outward with the flow into regions where the vanes have raised the pressure. There they condense almost instantly and implode. Each collapse sends out a pressure pulse and a tiny jet of liquid against the nearby metal. Millions of these collapses make the familiar crackling sound and erode the vane surface. The [Bernoulli equation](/mechanical-engineering/bernoulli-equation/) explains why faster flow at the eye means lower static pressure there.
+
+<figure class="anim">
+<svg width="640" height="340" viewBox="0 0 640 340" fill="none" role="img" aria-label="Pump cavitation diagram: on the left an open tank below a centrifugal pump with the suction pipe rising to the impeller eye and the suction lift marked; on the right a graph of liquid pressure along the flow path falling through the suction pipe, dipping below the vapour pressure line at the impeller eye where bubbles form, then rising through the vanes where the bubbles collapse">
+<rect x="30" y="230" width="150" height="85" fill="none" stroke="#0b2545" stroke-width="2" />
+<rect x="32" y="252" width="146" height="61" fill="#cfe8f3" />
+<path d="M32 252H178" stroke="#1d6fa5" stroke-width="2" />
+<g stroke="#0b2545" stroke-width="10" stroke-linejoin="round" fill="none"><path d="M150 300V140H216" /><path d="M300 114V40H330" /></g>
+<g stroke="#cfe8f3" stroke-width="6" stroke-linejoin="round" fill="none"><path d="M150 300V140H216" /><path d="M300 114V40H330" /></g>
+<g stroke="#1d6fa5" stroke-width="2" fill="none"><path class="anim-flow" d="M150 300V140H216" /><path class="anim-flow" d="M300 114V40H330" /></g>
+<rect x="138" y="294" width="24" height="14" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<circle cx="262" cy="140" r="46" fill="#e6eef5" stroke="#0b2545" stroke-width="2.5" />
+<g class="anim-spin-rev"><circle cx="262" cy="140" r="30" fill="#c9ccd1" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#0b2545" stroke-width="3"><path d="M271.7 142.6Q278.1 153.5 276.0 164.2" /><path d="M264.6 149.7Q258.4 160.7 248.0 164.2" /><path d="M254.9 147.1Q242.3 147.2 234.0 140.0" /><path d="M252.3 137.4Q245.9 126.5 248.0 115.8" /><path d="M259.4 130.3Q265.6 119.3 276.0 115.8" /><path d="M269.1 132.9Q281.7 132.8 290.0 140.0" /></g>
+<circle cx="262" cy="140" r="9" fill="#e6eef5" stroke="#0b2545" stroke-width="1.5" /></g>
+<g fill="#fff" stroke="#1d6fa5" stroke-width="1.5"><circle class="anim-blink" cx="256" cy="132" r="3" /><circle class="anim-blink anim-d1" cx="270" cy="136" r="3" /><circle class="anim-blink anim-d2" cx="259" cy="149" r="3" /></g>
+<g fill="#b42318"><circle class="anim-blink anim-d3" cx="282" cy="120" r="3" /><circle class="anim-blink anim-d4" cx="286" cy="156" r="3" /><circle class="anim-blink anim-d5" cx="240" cy="160" r="3" /></g>
+<path d="M120 140V252" stroke="#0b2545" stroke-width="1.2" />
+<path d="M114 140H126M114 252H126" stroke="#0b2545" stroke-width="1.2" />
+<path d="M372 72V300H624" stroke="#0b2545" stroke-width="1.5" />
+<path d="M372 230H624" stroke="#b42318" stroke-width="1.5" stroke-dasharray="6 5" />
+<path d="M372 128L420 158L470 196L512 252L548 212L590 96L620 84" stroke="#1d6fa5" stroke-width="3" />
+<circle class="anim-pulse" cx="512" cy="252" r="6" fill="#b42318" />
+<path d="M470 198V228" stroke="#0b2545" stroke-width="1.5" />
+<path d="M466 206L470 198L474 206M466 220L470 228L474 220" stroke="#0b2545" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="32" y="222">Open tank</text>
+<text x="80" y="285" text-anchor="middle">Liquid</text>
+<text x="150" y="330" text-anchor="middle">Strainer</text>
+<text x="112" y="180" text-anchor="end">Suction</text><text x="112" y="194" text-anchor="end">lift z</text>
+<text x="160" y="128" text-anchor="middle">Suction pipe</text>
+<text x="262" y="205" text-anchor="middle">Impeller eye</text>
+<text x="262" y="219" text-anchor="middle">(lowest pressure)</text>
+<text x="336" y="44">To</text><text x="336" y="58">discharge</text>
+<text x="498" y="24" text-anchor="middle" font-weight="700">Pressure along the flow path</text>
+<text x="378" y="248" fill="#b42318">Vapour pressure p_v</text>
+<text x="380" y="118">Tank surface</text>
+<text x="478" y="186">Suction flange</text>
+<text x="420" y="222" text-anchor="middle">NPSHa</text>
+<text x="512" y="274" text-anchor="middle" fill="#b42318">Bubbles form</text>
+<text x="578" y="160" fill="#b42318">Bubbles</text><text x="578" y="174" fill="#b42318">collapse</text>
+<text x="498" y="318" text-anchor="middle">Tank → suction pipe → eye → vanes → discharge</text>
+</g>
+</svg>
+<figcaption>Pressure falls from the tank surface to the impeller eye. Where it drops below vapour pressure, bubbles form (white); they collapse further along the vanes (red) as the pressure rises.</figcaption>
+</figure>
+
+## NPSH available and NPSH3
+
+NPSH is the total head at the pump suction, measured above the vapour pressure head of the liquid and referred to the impeller datum. NPSH available (NPSHa) is set by the installation: tank pressure, liquid level, suction losses and liquid temperature. NPSH required (NPSHr) is set by the pump design. ISO 9906 and ANSI/HI 9.6.1 define it by test as NPSH3, the NPSH available at which the total head of the first stage has fallen by 3%.
+
+For a pump drawing from a tank, NPSHa is:
+
+$$
+NPSH_a = \frac{p_s - p_v}{\rho g} + z_s - h_f
+$$
+
+where p_s is the absolute pressure on the liquid surface, p_v the vapour pressure at the pumping temperature, ρ the density, z_s the height of the liquid surface above the impeller centreline (negative for a suction lift) and h_f the friction loss in the suction line. From a test gauge at the suction flange, NPSHa = (p_1 − p_v) ÷ (ρg) + v_1² ÷ (2g), with p_1 the absolute pressure corrected to the impeller datum.
+
+NPSH3 is not a safe operating limit. At NPSH3 the head has already dropped, so cavitation is well developed, and bubbles first appear at a higher NPSH available. HI 9.6.1 expresses the needed margin as the NPSH margin ratio, NPSHa ÷ NPSH3. It recommends larger ratios for pumps with high suction energy, because they suffer more damage when they cavitate.
+
+## Symptoms of pump cavitation
+
+- A crackling or rattling noise from the suction end of the casing, often described as pumping gravel.
+- Higher vibration, sometimes with random spikes.
+- A lower discharge head and flow than the pump curve, with a fluctuating discharge pressure and motor current.
+- Pitting or a spongy eroded surface on the vanes near the inlet, on the low pressure side of the vane, found at overhaul.
+- Shorter life of mechanical seals and bearings, caused by the vibration.
+
+## Likely causes of pump cavitation
+
+Anything that lowers p_s or z_s, or raises p_v or h_f, cuts NPSHa:
+
+- Liquid level in the suction tank too low, or the suction lift too high.
+- Hotter liquid than designed. Vapour pressure of water rises from about 2.3 kPa at 20 °C to 19.9 kPa at 60 °C and 47.4 kPa at 80 °C.
+- A blocked suction strainer or filter, or a partly closed suction valve.
+- A suction line that is too long, too small or full of fittings. Friction rises with velocity squared, as in the [Reynolds number](/mechanical-engineering/reynolds-number/) and friction factor relations.
+- Running well to the right of the best efficiency point. NPSH3 rises with flow, so a pump that is fine at design flow can cavitate at high flow.
+- Running at low flow, where suction recirculation at the impeller eye can cause cavitation damage even with adequate NPSHa.
+- A higher speed than the pump was selected for, for example after a variable speed drive change.
+
+## Diagnostic steps for pump cavitation
+
+| Symptom | Likely cause | Check | Fix |
+| --- | --- | --- | --- |
+| Noise and head loss that grow with flow | Operation far right of BEP, NPSH3 above NPSHa | Measure flow, compare NPSH3 on the curve at that flow | Throttle discharge or correct the system curve |
+| Noise appears as the tank empties | Low suction level | Tank level against the design minimum | Raise minimum level or lower the pump |
+| Problem only on hot days or hot batches | Vapour pressure too high | Liquid temperature, then p_v from property tables | Cool the liquid or raise suction pressure |
+| Suction pressure falls over days | Strainer fouling | Differential pressure across the strainer | Clean the strainer, set a cleaning interval |
+| Noise at low flow only | Suction recirculation | Flow compared with the minimum continuous flow | Keep flow above minimum, fit a bypass |
+| Bubbles, noise, vortices at the inlet | Air entrainment, not cavitation | Submergence, suction joint leaks, visible vortex | Increase submergence, fit a vortex breaker, seal joints |
+
+The key test is to measure suction pressure at the flange, convert it to NPSHa with the formula above, and compare it with NPSH3 from the pump curve at the measured flow. Then inspect the impeller at the next opening and record where the pitting is.
+
+## Preventing pump cavitation
+
+On the suction side, raise the liquid level or lower the pump, shorten the suction line and increase its diameter, and remove unnecessary bends and valves. ANSI/HI 9.6.6 gives layout rules for pump suction piping. These include a straight run before the suction flange and an eccentric reducer fitted flat side up so that vapour and air cannot collect at the top. Keep strainers clean. For hot liquids, cool the liquid or pressurise the suction vessel.
+
+On the pump side, choose a pump whose NPSH3 at the operating flow leaves the margin HI 9.6.1 recommends. A lower speed, a larger or double suction impeller, or an inducer lowers NPSH3. A booster pump can raise the suction pressure of the main pump. Where some cavitation cannot be avoided, impeller materials with better erosion resistance, such as stainless steels in place of cast iron, extend life. Vibration monitoring under [predictive maintenance](/manufacturing-engineering/types-of-maintenance/) catches the problem before seals and bearings fail.
+
+## Key formulas for pump cavitation
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| NPSH available (from a tank) | NPSHa = (p_s − p_v) ÷ (ρg) + z_s − h_f | p in Pa absolute, ρ in kg/m³, g = 9.81 m/s², z_s and h_f in m |
+| NPSH available (at the suction flange) | NPSHa = (p_1 − p_v) ÷ (ρg) + v_1² ÷ (2g) | p_1 absolute at the impeller datum in Pa, v_1 in m/s |
+| NPSH3 | NPSHa at 3% drop in first stage head | m, from the pump test |
+| NPSH margin ratio | NPSHa ÷ NPSH3 | dimensionless |
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A pump takes water at 60 °C from an open tank at sea level (101.325 kPa). The liquid surface is 3.0 m below the impeller centreline and the suction line friction loss at duty flow is 1.2 m. The pump curve gives NPSH3 = 3.5 m at that flow.</dd>
+<dt>Find</dt><dd>NPSHa, the NPSH margin ratio, and the effect of the water rising to 80 °C.</dd>
+<dt>Assumptions</dt><dd>Water properties from saturation tables: at 60 °C, p_v = 19.95 kPa and ρ = 983.3 kg/m³; at 80 °C, p_v = 47.41 kPa and ρ = 971.8 kg/m³. g = 9.81 m/s². Friction loss is unchanged.</dd>
+<dt>Solution</dt><dd>At 60 °C: (101 325 − 19 950) ÷ (983.3 × 9.81) = 81 375 ÷ 9646.2 = 8.44 m<br />NPSHa = 8.44 − 3.0 − 1.2 = 4.24 m<br />Margin ratio = 4.24 ÷ 3.5 = 1.21<br />At 80 °C: (101 325 − 47 410) ÷ (971.8 × 9.81) = 53 915 ÷ 9533.4 = 5.66 m<br />NPSHa = 5.66 − 3.0 − 1.2 = 1.46 m, which is below NPSH3</dd>
+<dt>Answer</dt><dd><strong>NPSHa is 4.24 m at 60 °C, a margin ratio of 1.21. At 80 °C NPSHa falls to 1.46 m</strong>, well below NPSH3, so the pump would cavitate heavily and lose head. A flooded suction or a cooler liquid is needed.</dd>
+<dt>Limitations</dt><dd>Friction loss is taken as given; a real check calculates it from pipe length, diameter and fittings at each flow. Whether 1.21 is enough depends on the service and suction energy, judged against HI 9.6.1.</dd>
+</dl>
+</Example>
+
+## Safety when troubleshooting pump cavitation
+
+Isolate and lock out the driver and the suction and discharge valves before opening a casing or a strainer. Hot liquid in a strainer basket can flash to steam when the cover is removed. A pump that has lost suction completely can run dry and overheat its seals, so do not leave a cavitating pump running unattended while testing.
+
+## Pump cavitation interview and viva questions
+
+1. **Where in a centrifugal pump does cavitation start?** At the lowest pressure point, just inside the impeller eye on the low pressure side of the vane inlet edges.
+2. **What is NPSH3?** The NPSH available at which the first stage head falls by 3% in a test to ISO 9906 or HI standards. The pump is already cavitating at that point.
+3. **Why does hot water make cavitation more likely?** Vapour pressure rises with temperature, which reduces NPSH available for the same tank level and suction line.
+4. **Why does cavitation damage the metal?** Vapour bubbles collapse when they reach higher pressure further along the vanes, and each collapse sends a pressure pulse and liquid jet against the surface, which pits it.
+5. **Name three ways to increase NPSH available.** Raise the liquid level or lower the pump, reduce suction line losses with a shorter and larger pipe and a clean strainer, and cool the liquid or pressurise the suction vessel.

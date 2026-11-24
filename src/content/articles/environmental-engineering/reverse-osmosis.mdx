@@ -3,6 +3,7 @@ title: "Reverse Osmosis Water Treatment Explained"
 description: "Reverse osmosis explained: osmotic pressure, how RO membranes work, plant layout, pretreatment, recovery and rejection, uses and a worked seawater example."
 pubDate: 2026-11-08
 reviewedDate: 2026-11-08
+updatedDate: 2026-11-24
 discipline: environmental-engineering
 subcategory: water-treatment
 focusKeyword: "reverse osmosis"
@@ -31,7 +32,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**Reverse osmosis** (RO) is a membrane process that removes dissolved salts and most other contaminants from water. A high pressure pump pushes feed water against a semi-permeable membrane at a pressure greater than the osmotic pressure, so water passes through the membrane while salts are held back. One stream of purified water (permeate) and one stream of concentrated brine (concentrate) leave the unit.
+**Reverse osmosis** (RO) is a membrane process that removes dissolved salts and most other contaminants from water. A high pressure pump pushes feed water against a semi-permeable membrane at a pressure above the osmotic pressure, so water passes through while salts are held back, leaving as purified permeate and a concentrated brine stream.
 
 </Key>
 
@@ -66,7 +67,7 @@ where Jw is the water flux, Js is the salt flux, A and B are the water and salt 
 
 RO plants operate in **cross-flow**: the feed sweeps along the membrane surface rather than being pushed straight through it. The sweeping flow carries rejected salts away as concentrate and limits fouling.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="240" viewBox="0 0 600 240" fill="none" role="img" aria-label="Reverse osmosis process flow. Feed water passes through pretreatment, then a high pressure pump, into a pressure vessel divided by a membrane. Water passes through the membrane to the low pressure permeate side and leaves as product water. The concentrated brine leaves the high pressure side through a control valve.">
 <rect x="50" y="80" width="100" height="50" rx="4" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
 <circle cx="205" cy="105" r="22" fill="#e6f6f4" stroke="#13a89e" stroke-width="2" />
@@ -78,6 +79,8 @@ RO plants operate in **cross-flow**: the feed sweeps along the membrane surface 
 <path d="M505 78L525 94V78L505 94Z" fill="#ffffff" />
 </g>
 <g stroke="#1d4ed8" stroke-width="2"><path d="M310 96V124M420 96V124M305 118L310 124L315 118M415 118L420 124L425 118" /></g>
+<g stroke="#fff" stroke-width="1" fill="none"><path class="anim-flow" d="M10 105H50M150 105H183M227 90H260M470 86H580M365 140V200H580" /></g>
+<g stroke="#fff" stroke-width="1" fill="none"><path class="anim-flow-slow" d="M310 96V124M420 96V124" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="28" y="95">Feed</text>
 <text x="100" y="102">Pretreatment</text>
@@ -132,6 +135,17 @@ The concentrate flow and concentration follow from a simple mass balance: Qf Cf 
 </dl>
 </Example>
 
+## Key formulas for reverse osmosis
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Osmotic pressure (van 't Hoff) | π = i C R T | i = ions per molecule, C in mol/L, R = 0.08314 L·bar/(mol·K), T in K, π in bar |
+| Water flux | J_w = A (ΔP − Δπ) | A = water permeability, ΔP = applied pressure difference, Δπ = osmotic pressure difference |
+| Salt flux | J_s = B (C_f − C_p) | B = salt permeability, C_f and C_p = feed and permeate concentrations |
+| Recovery | r = Q_p ÷ Q_f | Q_p = permeate flow, Q_f = feed flow, m³/h |
+| Salt rejection | R = 1 − C_p ÷ C_f | concentrations in g/L or mg/L |
+| Salt mass balance | Q_f C_f = Q_p C_p + Q_c C_c | Q_c and C_c = concentrate flow and concentration |
+
 ## Advantages and limitations of reverse osmosis
 
 | Advantages | Limitations |
@@ -142,3 +156,11 @@ The concentrate flow and concentration follow from a simple mass balance: Qf Cf 
 | Continuous operation with automatic control | Permeate needs remineralisation for drinking use |
 
 Concentrate disposal is a real environmental issue. Seawater plants usually discharge through diffusers designed to dilute the brine quickly, while inland brackish plants may need evaporation ponds or further treatment. These impacts are assessed during [environmental impact assessment](/environmental-engineering/environmental-impact-assessment/) of new plants. For water reuse, RO often follows biological treatment such as the [activated sludge process](/environmental-engineering/activated-sludge-process/) and ultrafiltration, producing water suitable for industrial use or further purification.
+
+## Reverse osmosis interview and viva questions
+
+1. **What is the difference between osmosis and reverse osmosis?** In osmosis water flows naturally through a membrane into the salty side; in reverse osmosis a pressure greater than the osmotic pressure forces water from the salty side to the dilute side.
+2. **Why does higher pressure give purer permeate?** Water flux rises with applied pressure but salt flux does not, so more water passes for the same amount of salt.
+3. **Why is recovery limited in seawater RO?** As water leaves, the concentrate becomes saltier and its osmotic pressure rises, and scaling risk increases, so seawater systems commonly run at around 35 to 50 percent recovery.
+4. **Why must chlorine be removed before polyamide membranes?** Free chlorine damages polyamide thin film composite membranes, so it is removed upstream, commonly with sodium bisulfite.
+5. **What is an energy recovery device in an RO plant?** A pressure exchanger or turbine that transfers the energy of the high pressure concentrate back to the feed, cutting energy use.

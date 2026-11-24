@@ -3,6 +3,7 @@ title: "3D Printing Technologies: FDM, SLA and SLS Compared"
 description: "3D printing technologies compared: FDM, SLA and SLS working principles, materials, accuracy, strength, cost, post-processing and a build time example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-24
 discipline: manufacturing-engineering
 subcategory: additive-manufacturing
 focusKeyword: "3d printing technologies"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The three most common **3D printing technologies** for polymers build parts layer by layer in different ways. **FDM** (fused deposition modelling) extrudes melted thermoplastic filament through a heated nozzle; it is cheap and simple but shows visible layers and weaker bonding between them. **SLA** (stereolithography) cures liquid photopolymer resin with a UV laser or light source, giving very fine detail and smooth surfaces. **SLS** (selective laser sintering) fuses nylon powder with a laser; unsintered powder supports the part, so no support structures are needed and parts are strong and functional.
+The three most common **3D printing technologies** for polymers build parts layer by layer in different ways. FDM extrudes melted thermoplastic filament through a heated nozzle and is cheap but shows layer lines. SLA cures liquid photopolymer resin with UV light for very fine detail. SLS fuses nylon powder with a laser and needs no supports.
 
 </Key>
 
@@ -66,7 +67,7 @@ A thin layer of polymer **powder**, usually nylon (PA12 or PA11), is spread acro
 - **Strengths:** strong, durable, nearly isotropic parts; no supports; many parts nested in one build; good for functional prototypes and end use parts.
 - **Limitations:** higher machine cost, grainy surface, powder handling, and longer cooling time. Similar technologies include multi jet fusion (MJF).
 
-<figure>
+<figure class="anim">
 <svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Three schematics: FDM with filament feeding a heated nozzle depositing a bead onto a build plate; SLA with a UV laser beam curing resin in a vat while the platform lifts the part; SLS with a laser fusing a layer of powder in a powder bed with a recoater roller spreading new powder">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="13" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="100" y="20">FDM</text><text x="300" y="20">SLA</text><text x="500" y="20">SLS</text></g>
 <g stroke="#0b2545" stroke-width="2">
@@ -86,6 +87,7 @@ A thin layer of polymer **powder**, usually nylon (PA12 or PA11), is spread acro
 </g>
 <path d="M95 130Q100 160 85 168H130" stroke="#13a89e" stroke-width="3" fill="none" />
 <g stroke="#b42318" stroke-width="2"><path d="M300 230L300 225" /><path d="M260 250L295 222" /><path d="M500 55L505 130" /></g>
+<g stroke="#fff" stroke-width="1.2" fill="none"><path class="anim-flow-slow" d="M100 35V75" /><path class="anim-flow-slow" d="M95 130Q100 160 85 168H130" /><path class="anim-flow" d="M260 250L295 222M500 55L505 130" /></g>
 <rect x="245" y="240" width="30" height="20" rx="3" fill="#eef1f6" stroke="#0b2545" stroke-width="1.5" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
 <text x="135" y="45">Filament</text><text x="150" y="98">Hot end</text><text x="100" y="230">Build plate</text><text x="100" y="190" font-size="10">Part</text>
@@ -134,6 +136,14 @@ where V is the deposited volume (part volume times infill fraction, plus walls a
 </dl>
 </Example>
 
+## Key formulas for 3D printing technologies
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Deposited volume (FDM) | V = f × V_solid + V_walls,supports | f = infill fraction, volumes in mm³ or cm³ |
+| Volumetric deposition rate | Q ≈ w × h × v | w = nozzle width in mm, h = layer height in mm, v = print speed in mm/s, Q in mm³/s |
+| Build time estimate | t ≈ V ÷ Q | V in mm³, Q in mm³/s, t in s |
+
 ## Design tips for additive manufacturing
 
 - Orient parts so critical loads run along layers, especially for FDM.
@@ -145,3 +155,11 @@ where V is the deposited volume (part volume times infill fraction, plus walls a
 ## Choosing among 3D printing technologies
 
 Pick FDM for low cost prototypes, jigs and fixtures; SLA for fine detail, smooth surfaces and casting patterns; SLS for durable functional parts and small production runs without supports; and metal AM for high value, complex metal components. Consider volume and cost per part too: for large quantities, injection moulding or [CNC machining](/manufacturing-engineering/cnc-machine-working-principle/) usually becomes cheaper. Polymers used in each process are discussed in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/).
+
+## 3D printing technologies interview and viva questions
+
+1. **Why are FDM parts weaker between layers?** FDM strength is anisotropic: parts are weakest across the layer bonds, so parts are oriented with critical loads running along the layers.
+2. **Why does SLS not need support structures?** The loose unsintered powder around the part supports overhangs and internal features during the build.
+3. **What is the difference between SLA and DLP printing?** SLA traces each cross section with a UV laser, while DLP and MSLA cure a whole layer at once using a projector or LCD masking a UV light.
+4. **What post-processing do SLA parts need?** They are washed in solvent to remove uncured resin and then post-cured under UV light.
+5. **When does injection moulding or CNC machining beat 3D printing?** For large quantities the cost per part of moulding or machining usually becomes lower than additive manufacturing.

@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/environmental-engineering/electrostatic-precipitator.mdx
-src/content/articles/environmental-engineering/environmental-impact-assessment.mdx
-src/content/articles/environmental-engineering/life-cycle-assessment.mdx
-src/content/articles/environmental-engineering/reverse-osmosis.mdx
-src/content/articles/environmental-engineering/solid-waste-management.mdx
-src/content/articles/environmental-engineering/water-treatment-process.mdx
-src/content/articles/manufacturing-engineering/3d-printing-technologies.mdx
-src/content/articles/manufacturing-engineering/cnc-machine-working-principle.mdx
 src/content/articles/manufacturing-engineering/control-charts-spc.mdx
 src/content/articles/manufacturing-engineering/eoq-inventory-model.mdx
 src/content/articles/manufacturing-engineering/manufacturing-processes-classification.mdx

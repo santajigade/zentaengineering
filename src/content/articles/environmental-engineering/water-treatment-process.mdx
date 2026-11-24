@@ -3,6 +3,7 @@ title: "Water Treatment Process Steps Explained"
 description: "Water treatment process steps explained: screening, coagulation, flocculation, sedimentation, filtration, disinfection, sludge handling and a dosing example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-24
 discipline: environmental-engineering
 subcategory: water-treatment
 focusKeyword: "water treatment process"
@@ -29,13 +30,13 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-A conventional **water treatment process** turns raw surface water into safe drinking water in a sequence of steps: **intake and screening** to remove debris, **coagulation** with chemicals such as alum to destabilise fine particles, **flocculation** to grow them into larger flocs, **sedimentation** (clarification) to settle the flocs, **filtration** through sand or membranes to remove remaining particles and pathogens, and **disinfection**, usually with chlorine, to kill microorganisms and leave a protective residual. Extra steps such as aeration, softening, activated carbon or pH correction are added for specific problems.
+A conventional **water treatment process** turns raw surface water into safe drinking water in steps: screening to remove debris, coagulation with alum to destabilise fine particles, flocculation to grow flocs, sedimentation to settle them, filtration through sand or membranes, and disinfection, usually with chlorine, which leaves a protective residual in the network.
 
 </Key>
 
 Rivers, lakes and reservoirs contain silt, algae, bacteria, viruses, organic matter and sometimes chemicals. A treatment plant removes these to meet drinking water standards such as the WHO Guidelines or national standards like IS 10500. The multiple barrier approach, where several steps each remove contaminants, protects public health even if one step underperforms.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="250" viewBox="0 0 600 250" fill="none" role="img" aria-label="Conventional water treatment train: raw water intake with screen, rapid mix tank with coagulant dosing, flocculation tank with slow paddles, sedimentation tank with sludge withdrawal, sand filter, chlorine contact tank, then clear water storage and distribution">
 <g stroke="#0b2545" stroke-width="2">
 <rect x="10" y="90" width="60" height="60" fill="#eef1f6" /><rect x="90" y="90" width="60" height="60" fill="#e6f6f4" /><rect x="170" y="90" width="80" height="60" fill="#e6f6f4" />
@@ -45,6 +46,7 @@ Rivers, lakes and reservoirs contain silt, algae, bacteria, viruses, organic mat
 <g stroke="#13a89e" stroke-width="2"><path d="M70 120h20M150 120h20M250 120h20M370 120h20M450 120h20M530 120h15" /></g>
 <g stroke="#b42318" stroke-width="2"><path d="M120 60V90M500 60V90" /></g>
 <path d="M320 150V180" stroke="#7b8794" stroke-width="2" />
+<g stroke="#fff" stroke-width="1.2" fill="none"><path class="anim-flow" d="M70 120h20M150 120h20M250 120h20M370 120h20M450 120h20M530 120h15" /><path class="anim-flow-slow" d="M120 60V90M500 60V90M320 150V180" /></g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
 <text x="40" y="168">Screen</text><text x="120" y="168">Rapid mix</text><text x="210" y="168">Flocculation</text><text x="320" y="198">Sludge</text><text x="320" y="82">Sedimentation</text><text x="420" y="168">Filter</text><text x="500" y="168">Disinfection</text><text x="567" y="168">Storage</text>
 <text x="120" y="52" fill="#b42318">Coagulant</text><text x="500" y="52" fill="#b42318">Chlorine</text><text x="40" y="82">Raw water</text>
@@ -112,6 +114,14 @@ A typical target is a free chlorine residual of about 0.2 to 0.5 mg/L at the con
 </dl>
 </Example>
 
+## Key formulas for the water treatment process
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Surface overflow rate | SOR = Q ÷ A | Q = flow in m³/h, A = tank surface area in m², SOR in m/h |
+| Daily chemical consumption | M = D × Q_d | D = dose in mg/L, Q_d = flow in L/day, M in mg/day (÷ 10⁶ for kg/day) |
+| Disinfection exposure | CT = C × t | C = disinfectant concentration in mg/L, t = contact time in min |
+
 ## Additional treatment steps
 
 - **Softening** with lime or ion exchange to reduce hardness.
@@ -134,3 +144,11 @@ Sedimentation sludge and filter backwash water contain the removed solids and co
 Plants monitor turbidity, pH, chlorine residual, flow and levels continuously, with laboratory tests for bacteria, metals and other parameters. Accurate [flow measurement](https://www.instrumentationblog.in/category/process-instrumentation/flow-measurement/) paces chemical dosing pumps to the plant flow, and level measurement controls filter levels and storage tanks. Automation through [SCADA systems](/automation-robotics/scada-system-architecture/) helps operators respond quickly to changes in raw water quality.
 
 Used water returning from homes and industry needs a different set of processes, described in the [activated sludge process](/environmental-engineering/activated-sludge-process/).
+
+## Water treatment process interview and viva questions
+
+1. **Why is a coagulant needed?** Fine colloidal particles carry negative surface charges that keep them apart, and the coagulant neutralises these charges so they can stick together.
+2. **What is the difference between coagulation and flocculation?** Coagulation is rapid mixing of the coagulant for a few seconds to a minute; flocculation is gentle mixing over about 20 to 40 minutes so destabilised particles grow into flocs.
+3. **What is the surface overflow rate used for?** It sizes sedimentation tanks as flow divided by surface area, typically about 1 to 2.5 m/h for conventional basins.
+4. **How is a rapid sand filter cleaned?** When the bed clogs and head loss rises, it is backwashed with water and air.
+5. **Why is chlorine preferred over UV for distribution systems?** Chlorine leaves a residual that protects water in the network, while UV disinfects with no residual.

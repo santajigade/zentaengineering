@@ -1,0 +1,179 @@
+---
+title: "Mooring Systems for Floating Structures Explained"
+description: "Mooring systems explained: spread, turret and CALM buoy layouts, catenary vs taut lines, chain, wire and fibre, anchors and a catenary tension example."
+pubDate: 2026-11-24
+reviewedDate: 2026-11-24
+discipline: marine-engineering
+subcategory: offshore-structures
+focusKeyword: "mooring systems"
+image: { src: /images/featured/mooring-systems.webp, alt: "Mooring Systems for Floating Structures Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [mooring-systems, catenary-mooring, taut-mooring, anchors, floating-structures]
+faq:
+  - q: "Why do deepwater moorings use polyester rope instead of chain?"
+    a: "In deep water a steel line becomes very heavy, and much of its strength is used to carry its own weight. Polyester is almost weightless in water and its stretch provides the restoring force, so a taut polyester line needs a smaller seabed footprint and adds less vertical load to the floater."
+  - q: "What is the difference between a spread mooring and a turret mooring?"
+    a: "A spread mooring holds the vessel at a fixed heading with lines from several points around the hull. A turret mooring connects all lines to one turret, and the vessel rotates around it to face the weather, which reduces environmental loads on ship shaped hulls."
+  - q: "Does a catenary anchor take vertical load?"
+    a: "In a correctly designed catenary mooring, part of the line lies on the seabed at the anchor, so the anchor is pulled horizontally. This is why drag embedment anchors suit catenary systems, while taut systems need anchors such as suction piles that can resist an upward pull."
+references:
+  - text: "API RP 2SK, Design and Analysis of Stationkeeping Systems for Floating Structures, 3rd ed., American Petroleum Institute, 2005"
+  - text: "ISO 19901-7:2013, Petroleum and natural gas industries, Specific requirements for offshore structures, Part 7: Stationkeeping systems for floating offshore structures and mobile offshore units"
+  - text: "API RP 2SM, Design, Manufacture, Installation, and Maintenance of Synthetic Fiber Ropes for Offshore Mooring, 2nd ed., American Petroleum Institute, 2014"
+  - text: "O. M. Faltinsen, Sea Loads on Ships and Offshore Structures, Cambridge University Press, 1990"
+  - text: "S. K. Chakrabarti (ed.), Handbook of Offshore Engineering, Vols 1 and 2, Elsevier, 2005"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+Mooring systems are arrangements of lines, connectors and anchors that keep a floating structure on station against wind, waves and current. Lines of chain, steel wire or synthetic fibre run from fairleads on the hull to seabed anchors. Catenary lines resist through their weight; taut lines resist through their elastic stretch.
+
+</Key>
+
+Mooring systems hold semi-submersibles, spars, FPSOs, floating wind turbines and loading buoys within a small circle above their wells, risers or cables. A floating structure has no stiffness of its own in the horizontal plane, so the mooring alone supplies the restoring force when the weather pushes it off position. The floater types themselves are compared in [fixed vs floating offshore structures](/marine-engineering/fixed-vs-floating-offshore-structures/).
+
+
+<ArticleVideo slug="mooring-systems" title="How mooring systems work" uploadDate="2026-11-24" />
+
+## What mooring systems do
+
+Environmental loads on a floater come in three parts. Wind, current and wave drift produce a mean force that pushes the vessel to a steady offset. Waves also cause motions at wave frequency, and slowly varying wave drift and wind gusts cause large low frequency motions near the natural period of the moored system. The mooring has to limit the offset so that risers and cables are not overstressed, and it has to carry the resulting line tensions with an adequate safety factor.
+
+As the floater moves off position, the lines on the weather side tighten and those on the lee side slacken. The difference in their horizontal tensions is the restoring force, and the line type decides how fast it grows with offset.
+
+<figure class="anim">
+<svg width="640" height="340" viewBox="0 0 640 340" fill="none" role="img" aria-label="Mooring systems diagram: a semi-submersible floating at the sea surface with a chain catenary line on the left that hangs in a curve, touches down on the seabed and runs along it to a drag embedment anchor, and a taut synthetic rope on the right running straight to a suction anchor; an arrow shows wind, waves and current pushing the floater and the water depth is marked">
+<rect x="10" y="300" width="620" height="32" fill="#e3d5b8" />
+<path d="M10 300H630" stroke="#0b2545" stroke-width="2" />
+<path d="M10 110H630" stroke="#1d6fa5" stroke-width="2.5" />
+<path class="anim-flow-slow" d="M10 110H630" stroke="#fff" stroke-width="1.5" />
+<rect x="268" y="72" width="104" height="18" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<rect x="280" y="90" width="20" height="50" fill="#c9ccd1" stroke="#0b2545" stroke-width="1.5" />
+<rect x="340" y="90" width="20" height="50" fill="#c9ccd1" stroke="#0b2545" stroke-width="1.5" />
+<rect x="268" y="140" width="104" height="14" rx="4" fill="#c9ccd1" stroke="#0b2545" stroke-width="1.5" />
+<path d="M280 135Q170 300 120 300H46" stroke="#0b2545" stroke-width="3.5" />
+<path d="M360 135L560 288" stroke="#b05f00" stroke-width="3" />
+<g stroke="#fff" stroke-width="1.2"><path class="anim-flow" d="M280 135Q170 300 120 300H46" /><path class="anim-flow" d="M360 135L560 288" /></g>
+<path d="M30 296L46 300L36 310Z" fill="#3d4b5c" stroke="#0b2545" stroke-width="1.5" />
+<rect x="550" y="284" width="26" height="40" rx="3" fill="#3d4b5c" stroke="#0b2545" stroke-width="1.5" />
+<circle class="anim-pulse" cx="280" cy="135" r="5" fill="#b42318" />
+<circle class="anim-pulse" cx="360" cy="135" r="5" fill="#b42318" />
+<circle class="anim-pulse" cx="120" cy="300" r="5" fill="#1d6fa5" />
+<path d="M100 50H220" stroke="#b42318" stroke-width="3" />
+<path class="anim-flow" d="M100 50H220" stroke="#fff" stroke-width="1.2" />
+<path d="M218 44L230 50L218 56Z" fill="#b42318" />
+<path d="M612 110V300" stroke="#0b2545" stroke-width="1.2" />
+<path d="M606 110H618M606 300H618" stroke="#0b2545" stroke-width="1.2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="165" y="38" text-anchor="middle" fill="#b42318">Wind, waves, current</text>
+<text x="320" y="64" text-anchor="middle" font-weight="700">Floater</text>
+<text x="20" y="104">Sea surface</text>
+<text x="272" y="128" text-anchor="end">Fairlead</text>
+<text x="368" y="128">Fairlead</text>
+<text x="215" y="195" text-anchor="end">Chain catenary</text>
+<text x="455" y="196">Taut synthetic rope</text>
+<text x="128" y="284" text-anchor="end">Touchdown point</text>
+<text x="22" y="326">Drag anchor</text>
+<text x="540" y="320" text-anchor="end">Suction anchor</text>
+<text x="300" y="320" text-anchor="middle">Seabed</text>
+<text x="604" y="200" text-anchor="end">Water</text><text x="604" y="214" text-anchor="end">depth</text>
+</g>
+</svg>
+<figcaption>A catenary line resists through its weight and lies on the seabed at the anchor. A taut line runs straight to an anchor that can take an upward pull and resists through stretch.</figcaption>
+</figure>
+
+## Types of mooring systems
+
+### Spread mooring
+
+Groups of lines run from several fairleads around the hull, often from each corner of a semi-submersible or spar. The vessel keeps a fixed heading. Spread moorings suit structures that are not sensitive to the direction of the weather, and FPSOs in sites where the weather comes mostly from one direction.
+
+### Turret mooring
+
+All lines connect to a turret, either built into the hull (internal) or cantilevered off the bow (external), on a large bearing. The ship rotates around the turret and weathervanes to face the weather, which keeps loads on a ship shaped FPSO low in harsh environments. Risers pass up through the turret and a swivel.
+
+### Single point mooring buoy
+
+A catenary anchor leg mooring (CALM) buoy is held by several lines and a tanker moors to it with a hawser, rotating around it while it loads or discharges crude oil.
+
+### Tendons
+
+A tension leg platform is held by vertical steel tendons kept in tension by the platform's excess buoyancy. The tendons stop almost all heave, pitch and roll, which is different from conventional moorings that only control horizontal offset.
+
+## Catenary vs taut mooring systems
+
+| Feature | Catenary mooring | Taut leg mooring |
+| --- | --- | --- |
+| Line material | Chain, or chain with steel wire | Synthetic fibre such as polyester, with chain at each end |
+| Source of restoring force | Weight of the hanging line, which lifts off the seabed as the vessel moves | Elastic stretch of the line |
+| Line at the anchor | Lies on the seabed, so the pull is horizontal | Meets the seabed at an angle, with a vertical pull component |
+| Anchor type | Drag embedment anchor or pile | Suction anchor, pile or vertically loaded anchor |
+| Seabed footprint | Large, line length several times water depth | Smaller |
+| Best suited to | Shallow to moderate depths | Deep and ultra deep water |
+
+A catenary line stores energy by lifting more of its own weight off the seabed as the floater moves away, so its stiffness rises steeply with offset. In deep water a steel catenary becomes very heavy, and the line spends much of its strength holding up its own weight. Polyester is nearly weightless in water, so a taut polyester line keeps the vertical load on the floater low and its stretch provides the stiffness. API RP 2SM covers the design, testing and installation of these fibre ropes. Many systems mix both, with buoys or clump weights added to tune the stiffness.
+
+## Mooring line components and anchors
+
+Chain is rugged and resists abrasion on the seabed, so it is used in the touchdown zone and at the fairlead, where the line passes through chain stoppers and winches. It comes in studlink and studless forms. Steel wire rope, either six strand or spiral strand, is lighter than chain for the same strength and is used in the middle of long lines. Synthetic fibre ropes are used in taut and semi-taut systems. Connectors such as shackles and special links join the segments, and [types of corrosion](/materials-engineering/types-of-corrosion/) and wear are allowed for in the design life.
+
+Anchor choice follows the load direction and the soil. Drag embedment anchors are dragged into the seabed by the line and hold large horizontal loads in clay and sand, but little vertical load. Suction anchors are large steel cylinders sunk into soft soil by pumping water out of the top; they resist both horizontal and vertical loads. Driven piles and vertically loaded anchors also take uplift, and gravity anchors rely on their own weight.
+
+## Catenary equations for a mooring line
+
+For a line of submerged weight w per unit length, with the lower end lying tangent to the seabed and elastic stretch neglected, Faltinsen gives the static catenary relations. With horizontal tension T_H, define a = T_H ÷ w. Then:
+
+$$
+l_s = h \sqrt{1 + \frac{2a}{h}}
+$$
+
+$$
+x = a \cosh^{-1}\left(1 + \frac{h}{a}\right)
+$$
+
+$$
+T = T_H + w h
+$$
+
+where h is the vertical distance from the fairlead to the seabed, l_s the suspended length, x the horizontal distance from the fairlead to the touchdown point and T the line tension at the fairlead. The vertical component of fairlead tension equals the weight of the suspended line, w l_s.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A chain catenary line with submerged weight w = 1.3 kN/m. The fairlead is h = 200 m above the seabed and the horizontal tension in the mean position is T_H = 1000 kN.</dd>
+<dt>Find</dt><dd>The suspended length, the horizontal distance to the touchdown point, the fairlead tension and its angle, and the minimum breaking strength needed against the API RP 2SK intact quasi-static factor.</dd>
+<dt>Assumptions</dt><dd>Static catenary, inextensible line, lower end tangent to a flat seabed. This tension is treated as the maximum quasi-static tension, and the API RP 2SK intact quasi-static safety factor of 2.00 applies.</dd>
+<dt>Solution</dt><dd>a = 1000 ÷ 1.3 = 769.2 m<br />l_s = 200 × √(1 + 2 × 769.2 ÷ 200) = 200 × √8.692 = 589.7 m<br />x = 769.2 × cosh⁻¹(1 + 200 ÷ 769.2) = 769.2 × cosh⁻¹(1.260) = 769.2 × 0.7063 = 543.3 m<br />T = 1000 + 1.3 × 200 = 1260 kN<br />Vertical component = 1.3 × 589.7 = 766.6 kN; angle above horizontal = tan⁻¹(766.6 ÷ 1000) = 37.5°<br />Minimum breaking strength ≥ 2.00 × 1260 = 2520 kN</dd>
+<dt>Answer</dt><dd><strong>About 590 m of line hangs free, touching down 543 m from the fairlead, with a fairlead tension of 1260 kN at 37.5° to the horizontal.</strong> The line needs a minimum breaking strength of at least 2520 kN for this tension.</dd>
+<dt>Limitations</dt><dd>The mean position is not the design case. A real design finds the tension at the maximum offset in the design storm, adds wave frequency and low frequency dynamics, includes line stretch, and checks the damaged condition with one line broken.</dd>
+</dl>
+</Example>
+
+## Key formulas for mooring systems
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Catenary parameter | a = T_H ÷ w | T_H in kN, w = submerged weight in kN/m, a in m |
+| Suspended length | l_s = h × √(1 + 2a ÷ h) | h = fairlead height above seabed in m |
+| Horizontal distance to touchdown | x = a × cosh⁻¹(1 + h ÷ a) | x in m |
+| Fairlead tension | T = T_H + w × h | T in kN |
+| Vertical tension at fairlead | T_V = w × l_s | T_V in kN |
+| Safety factor | SF = MBS ÷ T_max | MBS = minimum breaking strength, T_max = maximum line tension, both in kN |
+
+## Design checks for mooring systems
+
+API RP 2SK and ISO 19901-7 require the mooring to be checked in the intact condition, in the damaged condition with one line broken, and in the transient condition just after a line breaks. API RP 2SK sets safety factors on minimum breaking strength. For intact lines they are 2.00 with quasi-static analysis and 1.67 with dynamic analysis. For one line damaged they are 1.43 and 1.25. ISO 19901-7 frames the same checks as ultimate, accidental and fatigue limit states.
+
+Fatigue matters because a mooring sees millions of wave cycles over its life; the mechanism is explained in [fatigue failure](/materials-engineering/fatigue-failure/). Corrosion and wear of chain near the splash zone and the touchdown point are allowed for in the design. Anchors are checked separately against their holding capacity. Once installed, lines are inspected by ROV, and many floaters carry tension monitoring at the fairleads. Lines also change the floater's weight and stability, discussed in [ship stability basics](/marine-engineering/ship-stability-basics/), and in-field pipelines and risers on [offshore platforms](/petroleum-engineering/offshore-platform-types/) set the limit on allowable offset.
+
+## Mooring systems interview and viva questions
+
+1. **How does a catenary line provide restoring force?** As the floater moves away, more of the heavy line lifts off the seabed, and the extra suspended weight increases the horizontal tension pulling the floater back.
+2. **Why are drag embedment anchors used with catenary moorings?** The line lies on the seabed at the anchor, so the anchor is pulled horizontally, which is the load these anchors are designed to resist.
+3. **Why do taut moorings need suction anchors or piles?** The line meets the seabed at an angle, so the anchor has to resist an upward pull as well as a horizontal one.
+4. **What is the fairlead tension of a catenary line?** It equals the horizontal tension plus the submerged weight per unit length times the fairlead height above the seabed, T = T_H + wh.
+5. **What load cases does API RP 2SK check?** Intact, damaged with one line broken, and transient after a line break, with safety factors of 2.00 and 1.67 intact and 1.43 and 1.25 damaged for quasi-static and dynamic analysis.

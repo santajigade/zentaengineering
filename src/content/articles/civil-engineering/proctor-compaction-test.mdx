@@ -1,0 +1,199 @@
+---
+title: "Proctor Compaction Test: Standard and Modified Explained"
+description: "Proctor compaction test explained: standard and modified methods, procedure, compaction curve, OMC, MDD, zero air voids line and a worked example."
+pubDate: 2026-11-24
+reviewedDate: 2026-11-24
+discipline: civil-engineering
+subcategory: geotechnical
+focusKeyword: "proctor compaction test"
+image: { src: /images/featured/proctor-compaction-test.webp, alt: "Proctor Compaction Test: Standard and Modified Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [proctor-test, soil-compaction, optimum-moisture-content, maximum-dry-density, geotechnical]
+faq:
+  - q: "Why does dry density fall on the wet side of optimum?"
+    a: "Beyond the optimum moisture content the extra water takes up space that soil particles could have filled. The voids are already close to saturated, so the same compactive effort cannot push the particles closer, and the dry density drops while the curve runs roughly parallel to the zero air voids line."
+  - q: "Should I use the standard or modified Proctor test?"
+    a: "Use the one named in the project specification. The modified test applies about 4.5 times more energy per unit volume and was developed for the heavier rollers used on airfields, highways and dams. Many earthworks and embankment specifications still refer to the standard test."
+  - q: "Can the Proctor test be used for clean sand and gravel?"
+    a: "It often gives a poorly defined curve for free draining, cohesionless soils because water drains out and the peak is flat. For these soils, maximum and minimum index density tests and relative density are usually more suitable."
+references:
+  - text: "ASTM D698-12(2021), Standard Test Methods for Laboratory Compaction Characteristics of Soil Using Standard Effort (12 400 ft-lbf/ft³ (600 kN-m/m³)), ASTM International"
+  - text: "ASTM D1557-12(2021), Standard Test Methods for Laboratory Compaction Characteristics of Soil Using Modified Effort (56 000 ft-lbf/ft³ (2700 kN-m/m³)), ASTM International"
+  - text: "IS 2720 (Part 7):1980, Methods of test for soils, Part 7: Determination of water content and dry density relation using light compaction, Bureau of Indian Standards"
+  - text: "IS 2720 (Part 8):1983, Methods of test for soils, Part 8: Determination of water content and dry density relation using heavy compaction, Bureau of Indian Standards"
+  - text: "AASHTO T 99 and T 180, Moisture-Density Relations of Soils, American Association of State Highway and Transportation Officials"
+  - text: "B. M. Das and K. Sobhan, Principles of Geotechnical Engineering, 9th ed., Cengage Learning, 2018"
+  - text: "R. R. Proctor, Fundamental principles of soil compaction, Engineering News-Record, vol. 111, 1933"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+The Proctor compaction test is a laboratory test that compacts soil in a mould at several water contents with a fixed rammer energy, then plots dry density against water content. The peak of that curve gives the maximum dry density and the optimum moisture content, which are used to specify and check field compaction.
+
+</Key>
+
+The Proctor compaction test, introduced by R. R. Proctor in 1933, tells you how dense a soil can be made with a given effort and how much water it needs to get there. Earthworks for embankments, road subgrades, dam cores and backfill behind walls are all specified as a percentage of the laboratory maximum dry density. Two versions are in use: the standard (light) test and the modified (heavy) test.
+
+
+<ArticleVideo slug="proctor-compaction-test" title="How the Proctor compaction test works" uploadDate="2026-11-24" />
+
+## What the Proctor compaction test measures
+
+Compaction pushes soil particles closer together by removing air from the voids. It raises shear strength and stiffness, which matters for [bearing capacity](/civil-engineering/bearing-capacity-of-soil/), and it reduces settlement and permeability. Water helps up to a point: a little moisture lubricates the particles so they slide into a denser packing. Past a certain water content the water itself fills the space and the dry density falls again.
+
+In the test, each specimen is weighed in a mould of known volume, giving the bulk density, and a sample is oven dried to find its water content. The dry density, which is the mass of solids per unit volume, is then plotted against water content. The peak of the curve gives the maximum dry density (MDD), the highest dry density reached with that compactive effort, and the optimum moisture content (OMC), the water content at which the MDD occurs.
+
+<figure class="anim">
+<svg width="680" height="340" viewBox="0 0 680 340" fill="none" role="img" aria-label="Proctor compaction test: on the left a rammer falling freely onto soil compacted in three layers inside a cylindrical mould with a detachable collar on a base plate; on the right the compaction curve of dry density against water content rising to a peak at the maximum dry density and optimum moisture content, lying below the falling zero air voids line">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="130" y="22" font-weight="700">Compaction mould</text>
+<text x="510" y="22" font-weight="700">Compaction curve</text>
+</g>
+<rect x="40" y="292" width="180" height="12" fill="#7b8794" stroke="#0b2545" stroke-width="1.5" />
+<rect x="70" y="140" width="100" height="40" fill="#e6f6f4" stroke="#0b2545" stroke-width="1.5" />
+<rect x="70" y="180" width="100" height="112" fill="#fff" stroke="#0b2545" stroke-width="2" />
+<rect class="anim-blink anim-d1" x="72" y="255" width="96" height="36" fill="#b08a5a" />
+<rect class="anim-blink anim-d2" x="72" y="219" width="96" height="36" fill="#c49b67" />
+<rect class="anim-blink anim-d3" x="72" y="183" width="96" height="36" fill="#d4ad7a" />
+<g stroke="#0b2545" stroke-width="1"><path d="M72 255H168M72 219H168" stroke-dasharray="3 3" /></g>
+<rect x="104" y="40" width="32" height="80" fill="#c9ccd1" stroke="#0b2545" stroke-width="1.5" />
+<rect x="98" y="120" width="44" height="14" rx="2" fill="#3d4b5c" stroke="#0b2545" stroke-width="1.5" />
+<path d="M120 40V30" stroke="#0b2545" stroke-width="3" />
+<path d="M160 46V112" stroke="#b42318" stroke-width="3" />
+<path d="M154 108L160 120L166 108Z" fill="#b42318" />
+<path class="anim-flow" d="M160 46V112" stroke="#fff" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="172" y="66">Free fall</text>
+<text x="172" y="80">310 or 450 mm</text>
+<text x="96" y="76" text-anchor="end">Rammer</text>
+<text x="180" y="164">Collar</text>
+<text x="180" y="226">Mould</text>
+<text x="180" y="240">1000 cm³</text>
+<text x="130" y="322" text-anchor="middle">Base plate</text>
+<g fill="#fff" font-weight="700" text-anchor="middle"><text x="120" y="277">Layer 1</text><text x="120" y="241">Layer 2</text><text x="120" y="205">Layer 3</text></g>
+</g>
+<g stroke="#0b2545" stroke-width="1.5"><path d="M370 50V290H650" /></g>
+<g stroke="#c9ccd1" stroke-width="1"><path d="M370 213.3H650M370 136.7H650M370 60H650" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<g text-anchor="end"><text x="364" y="294">1.70</text><text x="364" y="217">1.80</text><text x="364" y="140">1.90</text><text x="364" y="64">2.00</text></g>
+<g text-anchor="middle"><text x="416.7" y="306">10</text><text x="463.3" y="306">12</text><text x="510" y="306">14</text><text x="556.7" y="306">16</text><text x="603.3" y="306">18</text><text x="650" y="306">20</text></g>
+<text x="510" y="326" text-anchor="middle">Water content w (%)</text>
+<text x="330" y="175" text-anchor="middle" transform="rotate(-90 330 175)">Dry density (g/cm³)</text>
+</g>
+<path d="M485.7 59.9L510 91.2L533.3 120L556.7 147.8L580 174.6L603.3 200.3L626.7 225.2L650 249.2" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 4" />
+<path d="M416.7 259.3C424.5 250.4 447.8 221 463.3 205.7C478.9 190.4 494.4 171.1 510 167.3C525.6 163.5 541.2 172.5 556.7 182.7C572.2 192.9 595.5 221 603.3 228.7" stroke="#0b2545" stroke-width="2.5" />
+<path class="anim-flow-slow" d="M416.7 259.3C424.5 250.4 447.8 221 463.3 205.7C478.9 190.4 494.4 171.1 510 167.3C525.6 163.5 541.2 172.5 556.7 182.7C572.2 192.9 595.5 221 603.3 228.7" stroke="#fff" stroke-width="1.2" />
+<g fill="#0b2545"><circle cx="416.7" cy="259.3" r="3.5" /><circle cx="463.3" cy="205.7" r="3.5" /><circle cx="556.7" cy="182.7" r="3.5" /><circle cx="603.3" cy="228.7" r="3.5" /></g>
+<g stroke="#b42318" stroke-width="1.2" stroke-dasharray="4 3"><path d="M510 167.3V290M370 167.3H510" /></g>
+<circle class="anim-pulse" cx="510" cy="167.3" r="5" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11">
+<text x="386" y="160" fill="#b42318">MDD</text>
+<text x="516" y="284" fill="#b42318">OMC</text>
+<text x="590" y="120" fill="#13a89e">Zero air voids</text>
+<text x="590" y="134" fill="#13a89e">line (S = 1)</text>
+<text x="430" y="275" fill="#0b2545">Dry side</text>
+<text x="590" y="262" fill="#0b2545">Wet side</text>
+</g>
+</svg>
+<figcaption>Left: the rammer falls freely onto each layer of soil in the mould, one layer after another. Right: the compaction curve for an illustrative soil rises to a peak at the MDD and OMC and always stays below the zero air voids line.</figcaption>
+</figure>
+
+## Standard and modified Proctor test compared
+
+The two tests use the same steps. They differ in rammer mass, drop height and number of layers, so the energy delivered to each cubic metre of soil is different. ASTM gives the energy in its test titles; the other values below come from the standards in the reference list.
+
+| Item | Standard (light) | Modified (heavy) |
+| --- | --- | --- |
+| ASTM / AASHTO | ASTM D698, AASHTO T 99 | ASTM D1557, AASHTO T 180 |
+| Indian Standard | IS 2720 (Part 7):1980 | IS 2720 (Part 8):1983 |
+| Rammer | 24.4 N (5.5 lbf); IS 2.6 kg | 44.5 N (10 lbf); IS 4.9 kg |
+| Free drop | 305 mm (12 in); IS 310 mm | 457 mm (18 in); IS 450 mm |
+| Layers | 3 | 5 |
+| Blows per layer, small mould | 25 | 25 |
+| Small mould volume | 944 cm³ (ASTM 101.6 mm); 1000 cm³ (IS) | Same moulds |
+| Compactive energy | 600 kN·m/m³ | 2700 kN·m/m³ |
+
+For coarser soils a larger mould is used with 56 blows per layer, which keeps the energy per unit volume the same. IS 2720 uses a 2250 cm³ mould for soils with particles up to 20 mm, and ASTM D698 Method C uses a 152.4 mm mould. The modified test was developed for the heavier compaction plant used on airfields and highways, and it typically gives a higher MDD at a lower OMC, as Das and Sobhan show.
+
+## Proctor compaction test procedure step by step
+
+1. Air dry the soil, break up the lumps and sieve it (4.75 mm for the small IS mould).
+2. Mix a portion with water to a low starting water content and let it stand so the moisture spreads evenly.
+3. Weigh the empty mould with its base plate, then fit the collar.
+4. Place the soil in equal layers and give each layer the specified number of blows, spread evenly over the surface, with the rammer falling freely through its full drop.
+5. Remove the collar, trim the soil level with the top of the mould and weigh the mould with soil.
+6. Extrude the specimen and take a sample from its middle for an oven dry water content test.
+7. Raise the water content by 1 to 2 percent and repeat until the wet mass falls or stops rising, so the peak is bracketed.
+
+Four or five points are normally used, with about two on each side of the optimum.
+
+## Compaction curve, OMC and zero air voids line
+
+The compaction curve is the dry density plotted against water content for each specimen. On the dry side of optimum, adding water lets the particles move into a denser arrangement, so the dry density rises. On the wet side, water occupies space that solids could fill and the dry density falls.
+
+The zero air voids (ZAV) line is the dry density the soil would have if every void were filled with water (degree of saturation S = 1). It depends only on the water content and the specific gravity of solids Gs. No compaction can remove all the air, so the measured curve always lies below the ZAV line, and on the wet side it runs nearly parallel to it. Lines for 5 or 10 percent air voids are often drawn as well. If a test point plots above the ZAV line, Gs or the water content is wrong.
+
+Compactive effort shifts the curve. More energy raises the MDD and lowers the OMC, so the modified curve sits above and to the left of the standard one. Soil type matters too: well graded sands and gravels reach higher dry densities with sharp peaks, while clays give lower, flatter curves at higher water contents.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An illustrative IS light compaction test in a 1000 cm³ mould (not real laboratory data). Water contents of 10, 12, 14, 16 and 18 percent gave wet soil masses of 1914, 2027, 2120, 2134 and 2100 g. Specific gravity of solids Gs = 2.70.</dd>
+<dt>Find</dt><dd>The dry density at each point, the MDD and OMC, the ZAV dry density at the OMC, and the air content and degree of saturation at the peak.</dd>
+<dt>Assumptions</dt><dd>Density of water 1.00 g/cm³; the peak is taken at the highest measured point.</dd>
+<dt>Solution</dt><dd>Bulk density ρ = mass ÷ 1000, so 1.914, 2.027, 2.120, 2.134 and 2.100 g/cm³.<br />Dry density ρd = ρ ÷ (1 + w): 1.914 ÷ 1.10 = 1.74; 2.027 ÷ 1.12 = 1.81; 2.120 ÷ 1.14 = 1.86; 2.134 ÷ 1.16 = 1.84; 2.100 ÷ 1.18 = 1.78 g/cm³.<br />ZAV at w = 0.14: 2.70 ÷ (1 + 0.14 × 2.70) = 2.70 ÷ 1.378 = 1.96 g/cm³.<br />Void ratio e = 2.70 ÷ 1.86 − 1 = 0.452.<br />Degree of saturation S = 0.14 × 2.70 ÷ 0.452 = 0.84.<br />Air content na = 1 − 1.86 × (1 ÷ 2.70 + 0.14) = 1 − 0.949 = 0.051.</dd>
+<dt>Answer</dt><dd><strong>MDD about 1.86 g/cm³ at an OMC of about 14 percent</strong>. At the peak the soil is about 84 percent saturated with about 5 percent air voids, below the ZAV density of 1.96 g/cm³.</dd>
+<dt>Limitations</dt><dd>A smooth curve drawn through the points can put the true peak slightly away from the 14 percent test point. Gs must be measured for the actual soil, and the values here only illustrate the method.</dd>
+</dl>
+</Example>
+
+## Key formulas for the Proctor compaction test
+
+$$
+\rho_d = \frac{\rho}{1 + w}
+$$
+
+$$
+\rho_{zav} = \frac{G_s \, \rho_w}{1 + w \, G_s}
+$$
+
+$$
+E = \frac{N_L \, N_B \, W \, h}{V}
+$$
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Bulk density | ρ = M ÷ V | M = wet soil mass in g, V = mould volume in cm³ |
+| Dry density | ρd = ρ ÷ (1 + w) | w = water content as a decimal, densities in g/cm³ |
+| Zero air voids density | ρzav = Gs ρw ÷ (1 + w Gs) | Gs = specific gravity of solids, ρw = density of water |
+| Air content | na = 1 − (ρd ÷ ρw)(1 ÷ Gs + w) | na as a decimal of total volume |
+| Compactive energy | E = NL × NB × W × h ÷ V | NL = layers, NB = blows per layer, W = rammer weight in N, h = drop in m, V in m³, E in J/m³ |
+| Relative compaction | RC = ρd,field ÷ MDD × 100 | percent |
+
+You can check the energies in the comparison table with the last formula. For the ASTM standard test, 3 × 25 × 24.4 N × 0.305 m ÷ 0.000944 m³ is about 591 kN·m/m³, which the standard rounds to 600. For the IS heavy test, 5 × 25 × 4.9 × 9.81 N × 0.45 m ÷ 0.001 m³ is about 2700 kN·m/m³.
+
+## Using Proctor test results in the field
+
+The laboratory MDD becomes the target for the site. A specification states a minimum relative compaction, often 90 to 95 percent of standard or modified MDD, and a band of water content around the OMC. The field dry density is measured on each compacted lift with a sand replacement test, a core cutter or a nuclear gauge, and compared with the MDD. For example, a field dry density of 1.78 g/cm³ against an MDD of 1.86 g/cm³ gives a relative compaction of 1.78 ÷ 1.86 = 95.7 percent.
+
+Water content also changes the soil structure. Clays compacted dry of optimum tend to have a flocculated structure with higher permeability, while those compacted wet of optimum are more dispersed, less permeable and more compressible, as Das and Sobhan explain. That is why the water content band matters as much as the density for clay cores and liners. Well compacted subgrade is the base of every [flexible or rigid pavement](/civil-engineering/flexible-vs-rigid-pavement/), and compacted fill under shallow [foundations](/civil-engineering/types-of-foundations/) relies on the same control.
+
+## Factors that affect the compaction curve
+
+- Compactive effort: higher energy raises MDD and lowers OMC.
+- Soil type and grading: well graded granular soils reach higher densities than uniform sands or plastic clays.
+- Water content decides which side of the peak the soil sits on.
+- Reuse of soil: recompacting the same sample breaks particles and can raise the density, so fresh soil for each point is preferred for soils that crush easily.
+- Oversize particles: particles larger than the mould allows must be removed and, if significant, corrected for.
+
+## Proctor compaction test interview and viva questions
+
+1. **What two results does the Proctor compaction test give?** The maximum dry density and the optimum moisture content, read from the peak of the dry density against water content curve.
+2. **What is the difference between the standard and modified Proctor tests?** The modified test uses a heavier rammer, a higher drop and five layers instead of three, giving about 2700 kN·m/m³ against 600 kN·m/m³.
+3. **Why can the compaction curve never cross the zero air voids line?** The ZAV line is the density at full saturation, and compaction cannot remove all the air from the voids.
+4. **What happens to MDD and OMC when the compactive effort increases?** The MDD rises and the OMC falls, so the curve moves up and to the left.
+5. **How are laboratory results used on site?** The field dry density of each lift is compared with the MDD to give relative compaction, which must meet the specified minimum.

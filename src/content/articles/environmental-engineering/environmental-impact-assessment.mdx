@@ -3,6 +3,7 @@ title: "Environmental Impact Assessment: Process and Steps"
 description: "Environmental impact assessment explained: screening, scoping, baseline, impact prediction, mitigation, consultation, EIA report, decision and monitoring."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-24
 discipline: environmental-engineering
 subcategory: eia
 focusKeyword: "environmental impact assessment"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-An **environmental impact assessment** (EIA) is a formal process for identifying, predicting and evaluating the likely environmental and social effects of a proposed project **before** a decision is made to approve it. The main steps are **screening** (does the project need an EIA?), **scoping** (which issues matter?), **baseline studies**, **impact prediction and evaluation**, **mitigation and alternatives**, **public consultation**, the **EIA report**, **review and decision**, and **monitoring and follow-up** through an Environmental Management Plan.
+An **environmental impact assessment** (EIA) is a formal process for identifying, predicting and evaluating the likely environmental and social effects of a proposed project before it is approved. Its main steps are screening, scoping, baseline studies, impact prediction, mitigation and alternatives, the EIA report with public consultation, review and decision, and monitoring through an Environmental Management Plan.
 
 </Key>
 
@@ -44,7 +45,7 @@ Large projects such as power plants, mines, highways, factories and dams can cha
 - Give affected communities a voice through consultation.
 - Set conditions and monitoring for construction and operation.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="EIA process flowchart: project proposal, screening with a branch to no EIA required, scoping, baseline studies, impact prediction and evaluation, mitigation and alternatives, EIA report and EMP, public consultation, review and decision, then monitoring and compliance; public consultation links back to the report">
 <g stroke="#0b2545" stroke-width="2">
 <rect x="20" y="20" width="120" height="40" rx="6" fill="#eef1f6" /><rect x="20" y="90" width="120" height="40" rx="6" fill="#e6f6f4" /><rect x="20" y="160" width="120" height="40" rx="6" fill="#e6f6f4" /><rect x="20" y="230" width="120" height="40" rx="6" fill="#e6f6f4" />
@@ -52,6 +53,7 @@ Large projects such as power plants, mines, highways, factories and dams can cha
 <rect x="450" y="20" width="130" height="40" rx="6" fill="#eef1f6" /></g>
 <g stroke="#13a89e" stroke-width="2"><path d="M80 60v24M80 130v24M80 200v24M140 250h94M310 230v-24M310 160v-24M310 90v-24M380 40h64" /></g>
 <g fill="#13a89e"><path d="M75 84l5 8 5-8z" /><path d="M75 154l5 8 5-8z" /><path d="M75 224l5 8 5-8z" /><path d="M234 245l8 5-8 5z" /><path d="M305 206l5-8 5 8z" /><path d="M305 136l5-8 5 8z" /><path d="M305 66l5-8 5 8z" /><path d="M444 35l8 5-8 5z" /></g>
+<g stroke="#fff" stroke-width="1.2" fill="none"><path class="anim-flow-slow" d="M80 60v24M80 130v24M80 200v24M140 250h94M310 230v-24M310 160v-24M310 90v-24M380 40h64" /></g>
 <path d="M140 110H200" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 3" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="80" y="45">Project proposal</text><text x="80" y="115">1. Screening</text><text x="80" y="185">2. Scoping</text><text x="80" y="255">3. Baseline</text>
@@ -112,6 +114,13 @@ where M is impact magnitude and R is receptor sensitivity, each scored, for exam
 </dl>
 </Example>
 
+## Key formulas for environmental impact assessment
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Significance score | S = M × R | M = impact magnitude score, R = receptor sensitivity score, each for example 1 to 5 |
+| Predicted concentration | C = C_b + ΔC | C_b = baseline concentration, ΔC = predicted project increment, both in µg/m³ |
+
 ## Step 5: mitigation and alternatives
 
 For dust sources like the plant in the example, typical controls include [electrostatic precipitators](/environmental-engineering/electrostatic-precipitator/) or bag filters on stacks and covered storage for fugitive dust.
@@ -141,3 +150,11 @@ Good practice standards such as IFC Performance Standard 1 are widely used by le
 
 
 EIA improves decisions, transparency and project design. Its weaknesses can include poor quality baseline data, consultants paid by the proponent, limited consideration of cumulative impacts, and weak follow-up after approval. **Strategic environmental assessment (SEA)** applies similar thinking at the level of policies, plans and programmes, and [life cycle assessment](/environmental-engineering/life-cycle-assessment/) complements EIA by looking at impacts across the whole supply chain rather than one site.
+
+## Environmental impact assessment interview and viva questions
+
+1. **What is the purpose of screening in EIA?** Screening decides whether a project needs a full EIA, a limited assessment or none, usually from lists of project types and thresholds in the law.
+2. **What does scoping produce?** Scoping identifies the key issues, alternatives, study area and methods, and produces the terms of reference for the study.
+3. **What is the mitigation hierarchy?** Avoid impacts first, then minimise them, restore affected areas, and offset any residual impacts.
+4. **Why are baseline studies needed?** They describe the existing environment so that changes caused by the project can be predicted and later measured.
+5. **What is an Environmental Management Plan?** It is the part of the EIA report that sets out mitigation, responsibilities, budgets and monitoring for construction and operation.
