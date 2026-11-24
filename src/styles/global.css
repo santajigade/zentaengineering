@@ -255,3 +255,8 @@ figure.anim.paused * { animation-play-state: paused !important; }
 a.sub-card:hover .sub-ic { background: var(--fam, var(--ze-teal)); color: #fff; }
 .sub-soon .sub-ic { opacity: .55; }
 .art-grid { --min: 280px; }
+/* Same hover on every subcategory card; "coming soon" cards are not links, so no pointer */
+.sub-card { transition: border-color .15s, box-shadow .15s, transform .15s; }
+.sub-card:hover { border-color: var(--ze-navy); box-shadow: 0 6px 18px rgba(11,37,69,.08); transform: translateY(-2px); }
+.sub-card:hover .sub-ic { background: var(--fam, var(--ze-teal)); color: #fff; opacity: 1; }
+.sub-soon { cursor: default; }
