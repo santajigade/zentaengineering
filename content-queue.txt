@@ -108,7 +108,7 @@ chemical-engineering|process-equipment|Storage Tank Types in Process Plants|stor
 computer-science|web-development|Frontend vs Backend Development Explained|frontend-vs-backend|comparison|frontend vs backend|todo
 automation-robotics|industrial-networks|PROFINET vs EtherNet/IP Compared|profinet-vs-ethernet-ip|comparison|profinet vs ethernet/ip|todo
 ai-data-engineering|data-science|Exploratory Data Analysis (EDA) Steps|exploratory-data-analysis|explanation|exploratory data analysis|todo
-telecommunication-engineering|satellite-communication|Satellite Link Budget Calculation Explained|satellite-link-budget|fundamentals|satellite link budget|todo
+telecommunication-engineering|satellite-communication|Satellite Link Budget Calculation Explained|what-is-satellite-link-budget|fundamentals|satellite link budget|todo
 petroleum-engineering|refining|Fluid Catalytic Cracking (FCC) Process|fluid-catalytic-cracking|working-principle|fluid catalytic cracking|todo
 renewable-energy|ev-charging|EV Battery Management System (BMS) Explained|ev-battery-management-system|fundamentals|battery management system|todo
 environmental-engineering|emissions-compliance|NOx Control: SCR and SNCR Explained|nox-control-scr-sncr|working-principle|nox control|todo

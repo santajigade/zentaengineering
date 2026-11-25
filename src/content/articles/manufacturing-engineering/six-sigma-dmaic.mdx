@@ -3,6 +3,7 @@ title: "Six Sigma DMAIC Methodology Explained"
 description: "Six Sigma DMAIC explained: Define, Measure, Analyse, Improve, Control phases, tools, sigma levels, DPMO, belts and roles, with a worked sigma level example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-25
 discipline: manufacturing-engineering
 subcategory: quality
 focusKeyword: "six sigma dmaic"
@@ -30,7 +31,7 @@ import Calculator from '../../../components/Calculator.astro';
 
 <Key title="Short answer">
 
-**Six Sigma DMAIC** is a structured, data driven method for improving existing processes by reducing variation and defects. Its five phases are: **Define** the problem, customer requirements and project scope; **Measure** current performance and validate the measurement system; **Analyse** data to find root causes; **Improve** the process by testing and implementing solutions; and **Control** the gains with monitoring and standardisation. A **six sigma** process produces about **3.4 defects per million opportunities (DPMO)**. Projects are led by trained **Green Belts** and **Black Belts**.
+**Six Sigma DMAIC** is a structured, data driven method for improving an existing process by reducing variation and defects. Its five phases are Define the problem, Measure current performance, Analyse root causes, Improve the process and Control the gains. A six sigma process produces about 3.4 defects per million opportunities.
 
 </Key>
 
@@ -56,14 +57,14 @@ $$
 
 ## The DMAIC phases
 
-<figure>
+<figure class="anim">
 <svg width="600" height="200" viewBox="0 0 600 200" fill="none" role="img" aria-label="Five connected chevrons labelled Define, Measure, Analyse, Improve and Control, with key questions under each: what is the problem, how big is it, what causes it, how do we fix it, how do we sustain it">
 <g stroke="#0b2545" stroke-width="2">
-<path d="M10 40H110L130 75L110 110H10L30 75Z" fill="#eef1f6" />
-<path d="M125 40H225L245 75L225 110H125L145 75Z" fill="#e6f6f4" />
-<path d="M240 40H340L360 75L340 110H240L260 75Z" fill="#e6f6f4" />
-<path d="M355 40H455L475 75L455 110H355L375 75Z" fill="#fff7e0" />
-<path d="M470 40H570L590 75L570 110H470L490 75Z" fill="#ffe9e7" />
+<path class="anim-blink" d="M10 40H110L130 75L110 110H10L30 75Z" fill="#eef1f6" />
+<path class="anim-blink anim-d1" d="M125 40H225L245 75L225 110H125L145 75Z" fill="#e6f6f4" />
+<path class="anim-blink anim-d2" d="M240 40H340L360 75L340 110H240L260 75Z" fill="#e6f6f4" />
+<path class="anim-blink anim-d3" d="M355 40H455L475 75L455 110H355L375 75Z" fill="#fff7e0" />
+<path class="anim-blink anim-d4" d="M470 40H570L590 75L570 110H470L490 75Z" fill="#ffe9e7" />
 </g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle">
 <text x="72" y="80">Define</text><text x="187" y="80">Measure</text><text x="302" y="80">Analyse</text><text x="417" y="80">Improve</text><text x="532" y="80">Control</text>
@@ -117,6 +118,13 @@ $$
 </dl>
 </Example>
 
+## Key formulas for Six Sigma DMAIC
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Defects per million opportunities | DPMO = defects ÷ (units × opportunities per unit) × 10⁶ | Counts, result in defects per million |
+| Sigma level | Read from the standard DPMO table with the 1.5σ shift | 3.4 DPMO corresponds to 6σ, 233 DPMO to 5σ, 6210 DPMO to 4σ |
+
 ## A worked DMAIC story
 
 Consider a plant where 4% of moulded housings are rejected for short shots, parts not completely filled with plastic.
@@ -159,3 +167,11 @@ The result is documented, savings are confirmed by finance, and the process owne
 ## Making Six Sigma DMAIC work
 
 Success depends on choosing projects linked to business goals and customer needs, leadership support, good data and disciplined tollgate reviews. Projects typically take three to six months. Combined with lean tools that remove the [seven wastes](/manufacturing-engineering/seven-wastes-lean/), DMAIC gives organisations a powerful, repeatable way to improve quality and reduce cost.
+
+## Six Sigma DMAIC interview and viva questions
+
+1. **What do the letters DMAIC stand for?** Define, Measure, Analyse, Improve and Control, the five phases used to improve an existing process.
+2. **Why is gauge R&R done in the Measure phase?** A poor measurement system can hide or invent problems, so repeatability and reproducibility are checked before baseline data are trusted.
+3. **What does 3.4 DPMO mean?** It is the defect rate of a six sigma process, about 3.4 defects per million opportunities when the 1.5σ long term shift is included.
+4. **Which tools are typical of the Analyse phase?** Fishbone diagrams, Pareto charts, 5 Whys, hypothesis tests and regression, used to find and verify root causes.
+5. **What is the role of a Black Belt?** A Black Belt is a full time project leader skilled in advanced statistics, coached by a Master Black Belt and supported by a Champion.

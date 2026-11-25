@@ -1,0 +1,199 @@
+---
+title: "Storage Tank Types in Process Plants"
+description: "Storage tank types explained: fixed roof, floating roof, spheres, bullets, cryogenic and underground tanks, API 650 and API 620 limits, with an example."
+pubDate: 2026-11-25
+reviewedDate: 2026-11-25
+discipline: chemical-engineering
+subcategory: process-equipment
+focusKeyword: "storage tank types"
+image: { src: /images/featured/storage-tank-types.webp, alt: "Storage Tank Types in Process Plants: featured diagram" }
+format: equipment
+pillar: false
+math: true
+tags: [storage-tank, api-650, floating-roof, lpg-sphere, process-equipment]
+faq:
+  - q: "What is the difference between an API 650 and an API 620 tank?"
+    a: "API 650 covers welded steel tanks for oil storage at atmospheric pressure or internal pressures up to 2.5 psig (about 17 kPa). API 620 covers large welded tanks for higher low pressures, up to 15 psig (about 103 kPa), and its annexes cover refrigerated and liquefied gas storage."
+  - q: "Why do gasoline and crude oil tanks have floating roofs?"
+    a: "A floating roof rests on the liquid surface, so there is almost no vapour space above the product. Less vapour space means much lower breathing and filling losses of volatile hydrocarbons, which saves product, cuts emissions and reduces the fire risk inside the tank."
+  - q: "Why is LPG stored in spheres or bullets instead of ordinary tanks?"
+    a: "LPG is a liquid only under pressure at ambient temperature, so it needs a pressure vessel. A sphere holds a large volume with the least wall area and an even stress, while horizontal bullets are cheaper for smaller volumes and are shop built to pressure vessel codes such as ASME Section VIII."
+references:
+  - text: "API Standard 650, Welded Tanks for Oil Storage, 13th ed., American Petroleum Institute"
+  - text: "API Standard 620, Design and Construction of Large, Welded, Low-pressure Storage Tanks, 12th ed., American Petroleum Institute"
+  - text: "API Standard 2000, Venting Atmospheric and Low-pressure Storage Tanks, 7th ed., American Petroleum Institute"
+  - text: "API Standard 625, Tank Systems for Refrigerated Liquefied Gas Storage, American Petroleum Institute"
+  - text: "API MPMS Chapter 19.1 and 19.2, Evaporative Loss from Fixed-Roof and Floating-Roof Tanks, American Petroleum Institute"
+  - text: "NFPA 30, Flammable and Combustible Liquids Code, National Fire Protection Association"
+  - text: "US EPA, 40 CFR Part 280, Technical Standards for Underground Storage Tank Systems"
+  - text: "P. E. Myers, Aboveground Storage Tanks, McGraw-Hill"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Storage tank types** in process plants are grouped by pressure and roof. Atmospheric tanks to API 650 have fixed cone or dome roofs, or external and internal floating roofs for volatile liquids. Pressurised gases such as LPG go in spheres and bullets, liquefied gases in refrigerated tanks, and fuels at stations in underground tanks.
+
+</Key>
+
+The main storage tank types in a refinery, chemical plant or tank farm are chosen from the product's vapour pressure, its temperature, the volume to be stored and the fire and emission rules that apply. A tank that suits diesel would lose gasoline to the air, and a tank that suits gasoline cannot hold propane at all.
+
+
+<ArticleVideo slug="storage-tank-types" title="How storage tank types differ" uploadDate="2026-11-25" />
+
+## How storage tanks are classified
+
+Engineers usually sort tanks by four things:
+
+- Design pressure: atmospheric tanks (API 650, up to 2.5 psig or about 17 kPa internal pressure), low-pressure tanks (API 620, up to 15 psig or about 103 kPa) and pressure vessels for anything higher, such as LPG spheres and bullets built to pressure vessel codes.
+- Temperature: ambient storage, heated storage for heavy oils and bitumen, and refrigerated or cryogenic storage for ammonia, LPG and LNG.
+- Roof: fixed roof (cone or dome) or floating roof (external or internal).
+- Location and build: large field erected aboveground tanks, small shop built tanks, and underground tanks.
+
+The vapour pressure of the stored liquid drives most of these choices. Pressure vessel design itself is covered in [pressure vessels basics](/chemical-engineering/pressure-vessels-basics/).
+
+## Storage tank types by roof design
+
+<figure class="anim">
+<svg width="640" height="300" viewBox="0 0 640 300" fill="none" role="img" aria-label="Three storage tank types side by side: a fixed cone roof tank with a vapour space above the liquid and a breather vent at the apex, an external floating roof tank with the roof deck resting on the liquid and a rolling ladder, and a pressurised sphere on legs with a relief valve on top; product enters each through a bottom inlet nozzle">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="30" y="160" width="160" height="90" fill="#d8ecfa" stroke="none" />
+<path d="M30 250V110L110 85L190 110V250Z" />
+<rect x="104" y="72" width="12" height="13" fill="#eef1f6" />
+<rect x="240" y="140" width="160" height="110" fill="#d8ecfa" stroke="none" />
+<path d="M240 104V250H400V104" />
+<rect x="242" y="132" width="156" height="8" fill="#7b8794" />
+<path d="M400 110L330 132" stroke-width="1.5" />
+<path d="M330 132H345" stroke-width="1.5" />
+<path d="M480 205L472 255M580 205L588 255M500 222L496 255M560 222L564 255" />
+<circle cx="530" cy="160" r="70" fill="#eef1f6" />
+<path d="M466 190A70 70 0 0 0 594 190Z" fill="#d8ecfa" stroke="none" />
+<rect x="524" y="78" width="12" height="12" fill="#fff7e0" />
+</g>
+<path d="M20 250H620" stroke="#7b8794" stroke-width="2" />
+<g stroke="#13a89e" stroke-width="3"><path d="M5 235H30M215 235H240M455 270H530V230" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M5 235H30M215 235H240M455 270H530V230" /></g>
+<circle class="anim-pulse" cx="110" cy="60" r="5" fill="#f5b800" />
+<circle class="anim-pulse" cx="530" cy="66" r="5" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="110" y="140">Vapour space</text><text x="110" y="210">Liquid</text>
+<text x="160" y="66" text-anchor="start">Breather vent</text>
+<text x="248" y="124" text-anchor="start">Floating roof</text><text x="320" y="200">Liquid</text>
+<text x="280" y="98">Open top</text>
+<text x="530" y="140">Vapour under</text><text x="530" y="156">pressure</text><text x="530" y="214">Liquid</text>
+<text x="550" y="72" text-anchor="start">Relief valve</text>
+<text x="110" y="292" font-weight="700">Fixed cone roof</text>
+<text x="320" y="292" font-weight="700">External floating roof</text>
+<text x="530" y="292" font-weight="700">Pressurised sphere</text>
+<text x="2" y="226" text-anchor="start" font-size="11">Inlet</text>
+</g>
+</svg>
+<figcaption>Fixed roof, floating roof and pressurised storage. A fixed roof tank breathes through its vent; a floating roof sits on the liquid; a sphere holds the product under pressure.</figcaption>
+</figure>
+
+### Fixed cone roof tanks
+
+The fixed cone roof tank is the cheapest and most common atmospheric tank: a vertical cylindrical shell on a flat or slightly coned bottom, with a conical roof that is either self-supporting or carried on rafters and columns. API 650 sets a minimum slope of 1 in 16 for supported cone roofs. Above the liquid there is a vapour space that breathes through a vent. When the tank fills, or the sun heats it, vapour is pushed out; when it empties or cools, air is drawn in. API 2000 gives the rules for sizing these normal and emergency vents.
+
+Fixed roof tanks suit low volatility liquids: diesel, kerosene, fuel oil, water, many chemicals and heated heavy products. With volatile liquids the breathing losses become large, as the evaporative loss methods in API MPMS Chapter 19.1 show.
+
+### Dome roof tanks
+
+A dome roof is a fixed roof shaped as part of a sphere. It spans larger diameters without internal columns. Aluminium geodesic domes, covered by API 650 Annex G, are also fitted over existing tanks to keep rain and snow off a floating roof.
+
+### External floating roof tanks
+
+In an external floating roof (EFR) tank the shell has an open top, and a steel roof floats directly on the liquid, rising and falling with the level. Pontoon roofs have buoyant compartments around the rim; double deck roofs have two skins over the whole area. A primary and secondary rim seal close the gap to the shell, a rolling ladder follows the roof, and a roof drain carries rainwater away. API 650 Annex C covers these roofs.
+
+Because there is almost no vapour space, a floating roof cuts evaporation losses sharply (API MPMS Chapter 19.2). EFR tanks are the normal choice for crude oil and gasoline in large sizes.
+
+### Internal floating roof tanks
+
+An internal floating roof (IFR) tank has a fixed roof and, inside it, a light floating deck, often aluminium, resting on the liquid. The fixed roof keeps weather off the deck, and the deck keeps vapour down. API 650 Annex H covers internal floating roofs. Old fixed roof tanks are often converted to IFR when they are moved to more volatile service.
+
+## Pressurised storage: spheres and bullets
+
+Liquids such as propane, butane and LPG, and gases such as ammonia at ambient temperature, need storage under pressure, so they go into pressure vessels.
+
+- **Spheres (Horton spheres):** used for large pressurised volumes. A sphere has the smallest surface for its volume, and its membrane stress is half the hoop stress of a cylinder of the same diameter, so walls are thinner. Spheres sit on legs with bracing and carry pressure relief valves, as shown in the figure.
+- **Bullets:** horizontal cylindrical vessels with hemispherical or ellipsoidal heads, shop built to codes such as ASME Section VIII. They are cheaper for smaller volumes. Mounded bullets are buried under earth for fire protection.
+
+## Refrigerated and cryogenic tanks
+
+Large volumes of liquefied gas are cheaper to store cold at near atmospheric pressure than warm under pressure. Ammonia is held at about minus 33 °C, its normal boiling point, and LNG at about minus 162 °C. API 620 annexes and API 625 cover these tank systems. A full containment LNG tank has an inner tank of 9% nickel steel and an outer tank of prestressed concrete that can hold the liquid if the inner tank leaks. Boil-off vapour is compressed and returned or used as fuel, as described in [LNG process](/petroleum-engineering/lng-process/).
+
+## Underground and shop built tanks
+
+Fuel stations store petrol and diesel in underground storage tanks (USTs). In the United States, 40 CFR Part 280 requires USTs to have leak detection, corrosion protection and spill and overfill prevention, which is why most new ones are double walled. Small shop welded tanks for oilfield production liquids follow API 12F, and many plants use horizontal tanks for day tanks and chemicals. Steel underground tanks need [cathodic protection](/materials-engineering/cathodic-protection/) or a non-metallic outer wall.
+
+## Comparison of storage tank types
+
+| Tank type | Pressure | Typical products | Main feature |
+| --- | --- | --- | --- |
+| Fixed cone roof | Atmospheric (API 650) | Diesel, fuel oil, water, chemicals | Low cost, vapour space with vents |
+| Dome roof | Atmospheric or low pressure | Same as cone roof, large diameters | No internal columns |
+| External floating roof | Atmospheric | Crude oil, gasoline | Roof floats on liquid, low losses |
+| Internal floating roof | Atmospheric | Gasoline, solvents, volatile chemicals | Floating deck under a fixed roof |
+| Low-pressure tank | Up to 15 psig (API 620) | Refrigerated products | Curved roofs and bottoms |
+| Sphere | Pressure vessel | LPG, butane | Large pressurised volume |
+| Bullet | Pressure vessel | LPG, ammonia, smaller volumes | Shop built, can be mounded |
+| Cryogenic full containment | Near atmospheric | LNG, refrigerated ammonia | Double wall, insulated |
+| Underground (UST) | Atmospheric | Fuel at stations | Double wall, leak detection |
+
+## Tank capacity and hydrostatic pressure
+
+For a vertical cylindrical tank of diameter D, the volume held between two liquid heights is:
+
+$$
+V = \frac{\pi}{4} D^2 H
+$$
+
+where H is the height of liquid. The nominal capacity uses the full shell height, but the working capacity runs only from the lowest level the pump can draw down to the highest safe fill level, below the overflow and overfill alarms. The pressure the liquid puts on the bottom is:
+
+$$
+p = \rho g h
+$$
+
+and it is the largest at the bottom course of the shell, which is why the lower shell plates are the thickest. Corrosion of these plates and the floor is a common inspection finding, covered in [types of corrosion](/materials-engineering/types-of-corrosion/).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A vertical cone roof diesel tank, diameter 20 m, shell height 15 m. Maximum safe fill height 14 m, minimum pump-out level 0.5 m. Diesel density 850 kg/m³.</dd>
+<dt>Find</dt><dd>Nominal capacity, working capacity and the liquid pressure on the bottom at maximum fill.</dd>
+<dt>Assumptions</dt><dd>Flat bottom; roof volume and internal fittings ignored; g = 9.81 m/s².</dd>
+<dt>Solution</dt><dd>Area = π/4 × 20² = 314.2 m², so each metre of height holds 314.2 m³<br />Nominal capacity = 314.2 × 15 = 4712 m³<br />Working height = 14 − 0.5 = 13.5 m, working capacity = 314.2 × 13.5 = 4241 m³<br />p = 850 × 9.81 × 14 = 116,739 Pa = 116.7 kPa gauge</dd>
+<dt>Answer</dt><dd><strong>Nominal capacity about 4712 m³, working capacity about 4241 m³, bottom pressure about 117 kPa gauge</strong></dd>
+<dt>Limitations</dt><dd>Real tank tables come from strapping the actual tank and account for bottom shape and fittings; shell thickness comes from the API 650 one-foot method or variable design point method, not from this pressure alone.</dd>
+</dl>
+</Example>
+
+<Calculator path="engineering/vertical-tank-volume" title="Vertical Tank Volume Calculator" />
+
+## Key formulas for storage tank types
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Liquid volume, vertical cylinder | V = (π/4) D² H | V in m³, D diameter in m, H liquid height in m |
+| Working capacity | V_w = (π/4) D² (H_max − H_min) | H_max safe fill height, H_min pump-out level, m |
+| Hydrostatic pressure | p = ρ g h | p in Pa, ρ in kg/m³, g = 9.81 m/s², h depth in m |
+
+## Selecting a storage tank type
+
+- Start with vapour pressure. Low volatility liquids go in fixed roof tanks, volatile liquids in floating roof tanks, and liquids that boil at ambient temperature in pressure vessels or refrigerated tanks.
+- Volume: spheres and large field erected tanks for big volumes; bullets and shop built tanks for small ones.
+- Emissions and fire codes: NFPA 30 sets spacing, venting and bunding rules for flammable and combustible liquids, and local emission rules may require floating roofs.
+- Product quality and temperature: heated tanks with insulation for heavy oils, and internal coatings for products that must not pick up rust.
+- Instrumentation: level, temperature and overfill protection; hydrostatic level methods are explained in [DP transmitter level measurement](https://www.instrumentationblog.in/dp-transmitter-level-measurement/).
+
+Crude and product tanks sit at both ends of a refinery, around the units described in [crude oil distillation](/petroleum-engineering/crude-oil-distillation/).
+
+## Storage tank types interview and viva questions
+
+1. **What is the internal pressure limit of an API 650 tank?** API 650 tanks are atmospheric tanks, with internal pressures up to 2.5 psig (about 17 kPa); higher low pressures up to 15 psig fall under API 620.
+2. **Why does a fixed roof tank need a breather vent?** The vapour space expands and contracts as the tank fills, empties, heats and cools, so the vent lets vapour out and air in to keep the roof and shell within their pressure and vacuum limits, as API 2000 sets out.
+3. **What is the difference between an external and an internal floating roof?** An external floating roof floats in an open top tank exposed to weather, while an internal floating roof is a light deck floating under a fixed roof.
+4. **Why are LPG spheres preferred for large volumes?** A sphere holds the most volume for its surface area, and its membrane stress is half that of a cylinder of the same diameter, so it needs thinner walls.
+5. **What material is used for the inner tank of a full containment LNG tank?** The inner tank is usually 9% nickel steel, which stays tough at about minus 162 °C, inside an outer prestressed concrete tank.

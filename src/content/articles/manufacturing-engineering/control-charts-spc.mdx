@@ -3,6 +3,7 @@ title: "Control Charts in Statistical Process Control"
 description: "Control charts in SPC explained: common and special causes, X-bar and R charts, p and c charts, control limits, Western Electric rules and a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-25
 discipline: manufacturing-engineering
 subcategory: spc
 focusKeyword: "control charts"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Control charts** are the main tool of **statistical process control (SPC)**. They plot a process measurement over time with a **centre line** and **upper and lower control limits**, usually at **±3 standard deviations** of the plotted statistic. Points within the limits with no unusual patterns indicate **common cause** variation: the process is **in control**. Points outside the limits or non-random patterns signal **special causes** that should be investigated. **Variables charts** (X-bar and R, X-bar and S, individuals and moving range) track measurements; **attributes charts** (p, np, c, u) track defectives or defects.
+**Control charts** are the main tool of statistical process control (SPC). They plot a process measurement over time against a centre line and upper and lower control limits, usually at ±3 standard deviations. Points inside the limits with no unusual pattern show a stable process; points outside or non-random patterns signal special causes to investigate.
 
 </Key>
 
@@ -45,14 +46,15 @@ Reacting to common cause noise as if it were a special cause (tampering) actuall
 
 ## Anatomy of a control chart
 
-<figure>
+<figure class="anim">
 <svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="X-bar control chart: horizontal axis is sample number from 1 to 20, vertical axis is sample mean; centre line in the middle with upper and lower control limits; most points vary randomly between the limits, but point 16 lies above the upper control limit and is circled as an out of control signal">
 <path d="M60 20V230H580" stroke="#0b2545" stroke-width="2" />
 <g stroke-width="1.5" stroke-dasharray="6 4"><path d="M60 50H570" stroke="#b42318" /><path d="M60 200H570" stroke="#b42318" /></g>
 <path d="M60 125H570" stroke="#13a89e" stroke-width="2" />
 <polyline points="80,120 105,140 130,110 155,150 180,128 205,100 230,135 255,118 280,160 305,125 330,105 355,145 380,130 405,95 430,138 455,38 480,120 505,142 530,112 555,130" fill="none" stroke="#0b2545" stroke-width="1.5" />
 <g fill="#0b2545"><circle cx="80" cy="120" r="3.5" /><circle cx="105" cy="140" r="3.5" /><circle cx="130" cy="110" r="3.5" /><circle cx="155" cy="150" r="3.5" /><circle cx="180" cy="128" r="3.5" /><circle cx="205" cy="100" r="3.5" /><circle cx="230" cy="135" r="3.5" /><circle cx="255" cy="118" r="3.5" /><circle cx="280" cy="160" r="3.5" /><circle cx="305" cy="125" r="3.5" /><circle cx="330" cy="105" r="3.5" /><circle cx="355" cy="145" r="3.5" /><circle cx="380" cy="130" r="3.5" /><circle cx="405" cy="95" r="3.5" /><circle cx="430" cy="138" r="3.5" /><circle cx="480" cy="120" r="3.5" /><circle cx="505" cy="142" r="3.5" /><circle cx="530" cy="112" r="3.5" /><circle cx="555" cy="130" r="3.5" /></g>
-<circle cx="455" cy="38" r="4" fill="#b42318" /><circle cx="455" cy="38" r="10" stroke="#b42318" stroke-width="2" />
+<polyline class="anim-flow-slow" points="80,120 105,140 130,110 155,150 180,128 205,100 230,135 255,118 280,160 305,125 330,105 355,145 380,130 405,95 430,138 455,38 480,120 505,142 530,112 555,130" fill="none" stroke="#7fd3ff" stroke-width="1.5" />
+<circle cx="455" cy="38" r="4" fill="#b42318" /><circle class="anim-pulse" cx="455" cy="38" r="10" stroke="#b42318" stroke-width="2" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
 <text x="10" y="54" fill="#b42318">UCL</text><text x="10" y="129" fill="#13a89e">CL</text><text x="10" y="204" fill="#b42318">LCL</text>
 <text x="300" y="255" text-anchor="middle">Sample number</text><text x="470" y="28" fill="#b42318">Out of control</text>
@@ -102,6 +104,17 @@ For n = 5, the constants are A₂ = 0.577, D₃ = 0 and D₄ = 2.114 (from stand
 </dl>
 </Example>
 
+## Key formulas for control charts
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| X-bar chart upper limit | UCL = X̿ + A₂R̄ | X̿ grand mean, R̄ average range (units of the measurement), A₂ table constant (0.577 for n = 5) |
+| X-bar chart lower limit | LCL = X̿ − A₂R̄ | Same symbols as above |
+| R chart upper limit | UCL = D₄R̄ | D₄ table constant (2.114 for n = 5) |
+| R chart lower limit | LCL = D₃R̄ | D₃ table constant (0 for n = 5) |
+| Process standard deviation | σ = R̄ ÷ d₂ | d₂ table constant (2.326 for n = 5) |
+| Process capability | Cpk = min(USL − X̿, X̿ − LSL) ÷ 3σ | USL, LSL specification limits, dimensionless result |
+
 ## Rules for detecting out of control signals
 
 Besides points outside the limits, the **Western Electric** and **Nelson rules** look for non-random patterns, for example:
@@ -133,3 +146,11 @@ The value of a chart lies in the reaction to it, so every chart needs a named ow
 
 
 Today, SPC software collects data directly from gauges, CMMs and machine sensors, plots charts in real time on shop floor screens and alerts engineers automatically. Control charts are also the core tool of the **Control** phase of [Six Sigma DMAIC](/manufacturing-engineering/six-sigma-dmaic/), and they help eliminate defects, one of the [seven wastes](/manufacturing-engineering/seven-wastes-lean/) of lean manufacturing. The same ideas apply to process plants, where variables such as temperature, pressure and flow from process instruments are monitored with control charts for consistent quality.
+
+## Control charts interview and viva questions
+
+1. **What is the difference between common cause and special cause variation?** Common cause variation is the inherent noise of a stable process from many small random influences, while special cause variation comes from specific events such as a broken tool or a contaminated batch.
+2. **Why are control limits placed at ±3 sigma?** Shewhart chose ±3 sigma as an economic balance: only about 0.27% of points fall outside by chance, yet real shifts are still detected reasonably quickly.
+3. **When would you use an X-bar and S chart instead of an X-bar and R chart?** When subgroups are larger, above about 10 parts, because the standard deviation uses all the data in the subgroup better than the range.
+4. **Which chart suits a count of scratches per panel of constant size?** A c chart, which plots the number of defects per unit of constant size; a u chart is used when the inspection area varies.
+5. **What is tampering and why is it harmful?** Tampering is adjusting the process in response to common cause noise as if it were a special cause, and it actually increases variation.

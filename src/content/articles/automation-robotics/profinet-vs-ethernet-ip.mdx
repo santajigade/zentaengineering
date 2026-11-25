@@ -1,0 +1,175 @@
+---
+title: "PROFINET vs EtherNet/IP Compared"
+description: "PROFINET vs EtherNet/IP compared: protocol stacks, RT and IRT, CIP implicit and explicit messaging, update times, redundancy, safety and a load example."
+pubDate: 2026-11-25
+reviewedDate: 2026-11-25
+discipline: automation-robotics
+subcategory: industrial-networks
+focusKeyword: "PROFINET vs EtherNet/IP"
+image: { src: /images/featured/profinet-vs-ethernet-ip.webp, alt: "PROFINET vs EtherNet/IP Compared: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [profinet, ethernet-ip, industrial-ethernet, cip, industrial-networks]
+faq:
+  - q: "Can PROFINET and EtherNet/IP run on the same network?"
+    a: "Both use standard IEEE 802.3 Ethernet, so their frames can share cables and managed switches, and some devices support both protocols. In practice each protocol has its own controller and devices, and the network is segmented or given quality of service settings so the I/O traffic of one is not delayed by the other. IRT needs IRT capable switches on its path."
+  - q: "Which is faster, PROFINET or EtherNet/IP?"
+    a: "For ordinary I/O both reach update times of a few milliseconds. For high-end motion, PROFINET IRT uses scheduled communication with cycles down to 31.25 µs, while EtherNet/IP uses CIP Motion with CIP Sync time synchronisation based on IEEE 1588. The controller and devices usually limit speed more than the protocol does."
+  - q: "What file describes a device on each network?"
+    a: "PROFINET devices are described by a GSDML file, an XML based description loaded into the engineering tool. EtherNet/IP devices are described by an EDS (Electronic Data Sheet) file."
+references:
+  - text: "IEC 61158 (all parts), Industrial communication networks, Fieldbus specifications, IEC"
+  - text: "IEC 61784-2, Industrial communication networks, Profiles, Part 2: Additional real-time fieldbus profiles based on ISO/IEC/IEEE 8802-3, IEC"
+  - text: "IEC 62439-2, Industrial communication networks, High availability automation networks, Part 2: Media Redundancy Protocol (MRP), IEC"
+  - text: "PROFIBUS and PROFINET International (PI), PROFINET System Description, Technology and Application"
+  - text: "ODVA, The CIP Networks Library, Volume 2: EtherNet/IP Adaptation of CIP"
+  - text: "ODVA, EtherNet/IP Device Level Ring (DLR) technology overview"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**PROFINET vs EtherNet/IP** compares the two most widely used industrial Ethernet protocols. PROFINET, from PI, sends cyclic I/O data directly in Ethernet frames (RT, or scheduled IRT for motion). EtherNet/IP, from ODVA, carries the Common Industrial Protocol over standard TCP and UDP/IP. Both reach millisecond I/O updates on ordinary switched Ethernet.
+
+</Key>
+
+PROFINET vs EtherNet/IP is a choice most automation engineers face when a new line is specified. Both connect PLCs to remote I/O, drives, robots and instruments over 100 Mbit/s Ethernet, both are standardised in IEC 61158 and IEC 61784-2, and both have safety and motion extensions. They differ in how the data is packed, how devices are addressed and how they handle redundancy and precise timing.
+
+
+<ArticleVideo slug="profinet-vs-ethernet-ip" title="How PROFINET and EtherNet/IP differ" uploadDate="2026-11-25" />
+
+## PROFINET in brief
+
+PROFINET is maintained by PROFIBUS and PROFINET International (PI). A PROFINET IO system has an IO controller (usually a PLC), IO devices (remote I/O, drives, valve terminals) and optionally an IO supervisor for commissioning and diagnostics.
+
+- Cyclic data (RT): I/O data is placed directly in Ethernet frames with EtherType 0x8892, without IP or UDP headers, and given high VLAN priority so switches forward it first.
+- IRT (isochronous real time): a reserved, scheduled part of each cycle for time critical traffic. It needs IRT capable switches, usually built into the devices, and supports cycles down to 31.25 µs for motion control.
+- Conformance classes: CC-A (basic RT), CC-B (adds network diagnostics and topology information) and CC-C (adds IRT).
+- Addressing: each device is identified by a device name. The controller assigns the IP address at start-up using the DCP protocol, so a replacement device only needs the same name.
+- Device description: a GSDML file.
+
+The update time of each device is set in the engineering tool:
+
+$$
+t_{update} = t_{send} \times RR
+$$
+
+where t_send is the send clock (1 ms by default) and RR is the reduction ratio, a power of two such as 1, 2, 4 or 8.
+
+## EtherNet/IP in brief
+
+EtherNet/IP is managed by ODVA. It adapts the Common Industrial Protocol (CIP), the same application layer used by DeviceNet and ControlNet, to standard Ethernet and TCP/IP.
+
+- Implicit messaging: cyclic I/O data sent over UDP, port 2222, in connections set up between a scanner (the controller) and adapters (the devices). Each connection runs at a Requested Packet Interval (RPI), and data can be multicast or unicast in a producer and consumer model.
+- Explicit messaging: request and response messages over TCP, port 44818, for configuration, diagnostics and non-time-critical data.
+- Addressing: ordinary IP addresses, set statically or by DHCP or BOOTP.
+- Motion and time: CIP Sync uses IEEE 1588 precision time; CIP Motion uses it for coordinated drives.
+- Device description: an EDS file.
+
+Each I/O connection carries data in both directions at its RPI, so the frame load per connection is:
+
+$$
+N = \frac{2}{RPI}
+$$
+
+frames per second, with RPI in seconds.
+
+## How PROFINET vs EtherNet/IP stacks differ
+
+<figure class="anim">
+<svg width="640" height="300" viewBox="0 0 640 300" fill="none" role="img" aria-label="Protocol stacks for PROFINET vs EtherNet/IP: in PROFINET, cyclic RT and IRT data goes from the PROFINET IO application straight to Ethernet with EtherType 0x8892, while setup and acyclic data use UDP and IP; in EtherNet/IP, CIP explicit messages use TCP port 44818 and implicit I/O uses UDP port 2222, both over IP and Ethernet">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="30" y="40" width="260" height="35" rx="6" fill="#e6f6f4" />
+<rect x="30" y="95" width="140" height="35" rx="6" fill="#eef1f6" />
+<rect x="30" y="140" width="140" height="30" rx="6" fill="#eef1f6" />
+<rect x="180" y="95" width="110" height="75" rx="6" fill="#fff7e0" />
+<rect x="30" y="190" width="260" height="35" rx="6" fill="#e0ecfb" />
+<rect x="350" y="40" width="260" height="35" rx="6" fill="#e6f6f4" />
+<rect x="350" y="95" width="125" height="35" rx="6" fill="#eef1f6" />
+<rect x="485" y="95" width="125" height="35" rx="6" fill="#fff7e0" />
+<rect x="350" y="140" width="260" height="30" rx="6" fill="#eef1f6" />
+<rect x="350" y="190" width="260" height="35" rx="6" fill="#e0ecfb" />
+</g>
+<g stroke="#13a89e" stroke-width="3"><path d="M100 75V95M100 130V140M100 170V190M235 75V95M235 170V190M412 75V95M412 130V140M412 170V190M547 75V95M547 130V140M547 170V190" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M235 75V95M235 170V190M547 75V95M547 130V140M547 170V190" /><path class="anim-flow-slow" d="M100 75V95M100 130V140M100 170V190M412 75V95M412 130V140M412 170V190" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="160" y="62" font-weight="700">PROFINET IO application</text>
+<text x="100" y="112">UDP: setup,</text><text x="100" y="125">acyclic data</text>
+<text x="100" y="160">IP</text>
+<text x="235" y="122" font-weight="700">RT and IRT</text><text x="235" y="138">cyclic I/O,</text><text x="235" y="154">no IP</text>
+<text x="160" y="212">Ethernet IEEE 802.3</text>
+<text x="480" y="62" font-weight="700">CIP application</text>
+<text x="412" y="112">TCP 44818</text><text x="412" y="125">explicit</text>
+<text x="547" y="112">UDP 2222</text><text x="547" y="125">implicit I/O</text>
+<text x="480" y="160">IP</text>
+<text x="480" y="212">Ethernet IEEE 802.3</text>
+<text x="160" y="255" font-weight="700">PROFINET</text>
+<text x="160" y="275">Cyclic frames use EtherType 0x8892</text>
+<text x="480" y="255" font-weight="700">EtherNet/IP</text>
+<text x="480" y="275">All traffic uses standard TCP or UDP/IP</text>
+</g>
+</svg>
+<figcaption>PROFINET sends cyclic I/O straight to Ethernet, skipping IP; EtherNet/IP sends I/O over UDP and messages over TCP.</figcaption>
+</figure>
+
+PROFINET keeps IP for set-up and acyclic reads and writes, but its cyclic data skips the IP layer, which keeps frames short and processing fast. EtherNet/IP keeps every message inside standard TCP or UDP/IP, so its traffic can be routed between subnets and inspected with ordinary IT tools, while timing still depends on the switches and their quality of service settings.
+
+## PROFINET vs EtherNet/IP comparison table
+
+| Feature | PROFINET | EtherNet/IP |
+| --- | --- | --- |
+| Organisation | PI (PROFIBUS and PROFINET International) | ODVA |
+| Application layer | PROFINET IO | CIP (Common Industrial Protocol) |
+| Cyclic I/O transport | Ethernet frames, EtherType 0x8892, no IP | UDP/IP, port 2222 |
+| Acyclic or explicit | UDP/IP | TCP/IP, port 44818 |
+| Timing setting | Send clock × reduction ratio | RPI per connection |
+| Hard real time | IRT, cycles down to 31.25 µs | CIP Sync (IEEE 1588) with CIP Motion |
+| Device identity | Device name, IP assigned by controller | IP address (static, DHCP or BOOTP) |
+| Device file | GSDML | EDS |
+| Ring redundancy | MRP (IEC 62439-2), up to 200 ms recovery | DLR, under 3 ms recovery for a 50-node ring |
+| Functional safety | PROFIsafe | CIP Safety |
+| Related fieldbus | PROFIBUS DP | DeviceNet, ControlNet |
+
+## Redundancy, safety and diagnostics
+
+PROFINET uses the Media Redundancy Protocol from IEC 62439-2: one ring manager blocks one port of the ring and opens it when a break is detected, with a recovery time of up to 200 ms. IRT systems can use MRPD, which sends frames both ways round the ring for bumpless recovery. EtherNet/IP uses Device Level Ring (DLR), with a ring supervisor; ODVA states a recovery time under 3 ms for a 50-node ring.
+
+Both carry safety data over the same cable as standard data using a black channel approach: PROFIsafe on PROFINET and CIP Safety on EtherNet/IP. Both also offer device diagnostics. PROFINET CC-B adds topology detection through LLDP, so the engineering tool can show which port each device is plugged into.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A packaging line has 20 remote I/O stations. On PROFINET the send clock is 1 ms with reduction ratio 4. On EtherNet/IP each station has one I/O connection at RPI 4 ms. Network speed 100 Mbit/s.</dd>
+<dt>Find</dt><dd>The update time, the cyclic frames per second at the controller, and the share of link capacity if every frame is a minimum Ethernet frame.</dd>
+<dt>Assumptions</dt><dd>One input and one output frame per station per cycle; minimum frame of 64 bytes plus 8 bytes preamble and 12 bytes inter-frame gap = 84 bytes on the wire; no other traffic.</dd>
+<dt>Solution</dt><dd>PROFINET update time = 1 ms × 4 = 4 ms; EtherNet/IP RPI = 4 ms<br />Frames per station = 2 / 0.004 s = 500 per second<br />Total = 20 × 500 = 10,000 frames per second<br />Bit rate = 10,000 × 84 × 8 = 6.72 Mbit/s, which is 6.72 % of 100 Mbit/s</dd>
+<dt>Answer</dt><dd><strong>Both networks update every 4 ms, carry about 10,000 frames per second and use about 6.7% of a 100 Mbit/s link</strong></dd>
+<dt>Limitations</dt><dd>Real frames are larger when stations carry more data, and EtherNet/IP frames carry UDP and IP headers. The controller's frame handling capacity is usually the real limit, so check the vendor's figures.</dd>
+</dl>
+</Example>
+
+## Key formulas for PROFINET vs EtherNet/IP
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| PROFINET update time | t_update = t_send × RR | t_send send clock in ms (1 ms default), RR reduction ratio (1, 2, 4, 8 and so on) |
+| EtherNet/IP frame rate per connection | N = 2 / RPI | N in frames per second, RPI in s |
+| Link load | Load = N_total × L × 8 | Load in bit/s, N_total frames per second, L bytes on the wire per frame |
+
+## When to use each
+
+The controller platform usually decides. PROFINET is the native network of Siemens PLCs and the usual step up from PROFIBUS. EtherNet/IP is the native network of Rockwell Automation (Allen-Bradley) controllers and the usual step up from DeviceNet and ControlNet. Many drives, robots and I/O systems are sold in both versions.
+
+Pick PROFINET when you need IRT motion with very short cycles, name based device replacement, or a migration path from PROFIBUS. Pick EtherNet/IP when the plant standard is a Logix controller, when I/O data must be routed through IP networks, or when DLR's fast ring recovery suits the layout. For older serial and Ethernet devices, [Modbus RTU vs Modbus TCP](/automation-robotics/modbus-rtu-vs-tcp/) is still common alongside either.
+
+The controller side is covered in [PLC hardware selection](/automation-robotics/plc-hardware-selection/), and plant wide systems in [SCADA system architecture](/automation-robotics/scada-system-architecture/) and [DCS architecture](/automation-robotics/dcs-architecture/).
+
+## PROFINET vs EtherNet/IP interview and viva questions
+
+1. **Why does PROFINET RT data not use IP?** Cyclic I/O is placed directly in Ethernet frames with EtherType 0x8892, which keeps frames short and avoids IP and UDP processing in the devices.
+2. **What are implicit and explicit messaging in EtherNet/IP?** Implicit messaging is cyclic I/O data over UDP port 2222 at a set RPI; explicit messaging is request and response traffic over TCP port 44818 for configuration and diagnostics.
+3. **How is a PROFINET update time set?** It is the send clock multiplied by the reduction ratio, for example 1 ms × 4 = 4 ms.
+4. **Which ring redundancy protocols do the two networks use?** PROFINET uses MRP from IEC 62439-2 with recovery up to 200 ms; EtherNet/IP uses DLR, with recovery under 3 ms for a 50-node ring.
+5. **What device description files are used?** PROFINET uses GSDML files and EtherNet/IP uses EDS files.

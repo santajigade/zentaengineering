@@ -1,0 +1,167 @@
+---
+title: "Frontend vs Backend Development Explained"
+description: "Frontend vs backend development compared: what each side does, languages, frameworks, how they talk over HTTP, security, performance and a worked example."
+pubDate: 2026-11-25
+reviewedDate: 2026-11-25
+discipline: computer-science
+subcategory: web-development
+focusKeyword: "frontend vs backend"
+image: { src: /images/featured/frontend-vs-backend.webp, alt: "Frontend vs Backend Development Explained: featured diagram" }
+format: comparison
+pillar: false
+math: true
+tags: [frontend, backend, web-development, full-stack, http]
+faq:
+  - q: "Is frontend or backend harder to learn?"
+    a: "Neither is simply harder; the difficulty is different. Frontend work means handling many browsers, screen sizes, accessibility and user interaction. Backend work means data modelling, databases, security, concurrency and keeping services running. Most learners start with HTML, CSS and JavaScript because the results are visible straight away."
+  - q: "Can JavaScript be used for both frontend and backend?"
+    a: "Yes. JavaScript runs in every browser, and runtimes such as Node.js run it on servers, so one language can cover both sides. Backends are also commonly written in Python, Java, C#, Go, PHP and Ruby."
+  - q: "What is a full stack developer?"
+    a: "A full stack developer works on both the frontend and the backend of an application, from the user interface through the API to the database. In larger teams the work is usually split, with specialists on each side agreeing on the API between them."
+references:
+  - text: "RFC 9110, HTTP Semantics, IETF, 2022"
+  - text: "WHATWG, HTML Living Standard and Fetch Standard (including CORS)"
+  - text: "ECMA-262, ECMAScript Language Specification, Ecma International"
+  - text: "W3C, Web Content Accessibility Guidelines (WCAG) 2.2, 2023"
+  - text: "OWASP Top 10:2021, Open Worldwide Application Security Project"
+  - text: "R. T. Fielding, Architectural Styles and the Design of Network-based Software Architectures, PhD dissertation, University of California, Irvine, 2000"
+  - text: "MDN Web Docs, Learn web development, Mozilla"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Frontend vs backend** divides a web application into two sides. The frontend is the part that runs in the user's browser, built with HTML, CSS and JavaScript, and handles layout and interaction. The backend runs on servers, holds the business logic, talks to databases and returns data to the frontend over HTTP, usually as JSON.
+
+</Key>
+
+Frontend vs backend is the first split most people meet when they learn web development. Click "Pay" on a shopping site and the button, the form and the spinner belong to the frontend; checking stock, charging the card and saving the order happen on the backend. The two are separate programs, often written in different languages, joined by HTTP requests.
+
+
+<ArticleVideo slug="frontend-vs-backend" title="How frontend and backend work" uploadDate="2026-11-25" />
+
+## What frontend development covers
+
+The frontend (client side) is everything the browser downloads and runs. Browsers natively understand three languages:
+
+- HTML for structure and content (headings, forms, buttons), defined by the WHATWG HTML Living Standard.
+- CSS for layout, colour, fonts and responsive design for different screen sizes.
+- JavaScript (standardised as ECMAScript, ECMA-262) for behaviour: reacting to clicks, validating input as the user types, fetching data and updating the page without a reload. Browsers also run WebAssembly.
+
+Most teams use a framework such as React, Angular or Vue to build the interface from reusable components, plus build tools that bundle and minify the code. Frontend developers also handle accessibility to the W3C WCAG guidelines, cross-browser testing and the perceived speed of the page.
+
+## What backend development covers
+
+The backend (server side) runs on machines the user never sees. It handles:
+
+- receiving requests from the frontend and other clients, usually through an API;
+- applying business rules, such as prices, permissions and stock checks;
+- reading and writing data in databases, relational or NoSQL (see [SQL vs NoSQL](/computer-science/sql-vs-nosql/));
+- authentication, sessions and access control;
+- talking to other services, such as payment gateways, email and file storage.
+
+Backends are written in many languages: JavaScript on Node.js, Python, Java, C#, Go, PHP and Ruby, each with web frameworks. Some are compiled and some interpreted, a difference explained in [compiled vs interpreted languages](/computer-science/compiled-vs-interpreted-languages/). Backend work also includes deployment, logging, scaling and keeping the service available.
+
+## How frontend and backend talk to each other
+
+<figure class="anim">
+<svg width="640" height="250" viewBox="0 0 640 250" fill="none" role="img" aria-label="Frontend vs backend: the browser running HTML, CSS and JavaScript sends an HTTP request such as GET /api/orders over the internet to the backend API server, which runs business logic and queries the database; the server returns an HTTP response with a status code and JSON data to the browser">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="20" y="50" width="160" height="140" rx="10" fill="#e6f6f4" />
+<rect x="300" y="50" width="160" height="140" rx="10" fill="#eef1f6" />
+<rect x="520" y="80" width="100" height="80" rx="10" fill="#fff7e0" />
+</g>
+<g stroke="#13a89e" stroke-width="3"><path d="M180 95H300" /><path d="M460 110H520" /></g>
+<g stroke="#1d4ed8" stroke-width="3"><path d="M300 150H180" /><path d="M520 135H460" /></g>
+<g stroke="#fff" stroke-width="2" fill="none">
+<path class="anim-flow" d="M180 95H300" /><path class="anim-flow" d="M460 110H520" />
+<path class="anim-flow anim-d2" d="M300 150H180" /><path class="anim-flow anim-d2" d="M520 135H460" />
+</g>
+<path d="M290 89L300 95L290 101Z M190 144L180 150L190 156Z" fill="#0b2545" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="100" y="35" font-weight="700">Frontend (browser)</text>
+<text x="380" y="35" font-weight="700">Backend (server)</text>
+<text x="570" y="65" font-weight="700">Database</text>
+<text x="100" y="125">HTML, CSS,</text><text x="100" y="141">JavaScript</text>
+<text x="380" y="118">API, business</text><text x="380" y="134">logic, auth</text>
+<text x="570" y="118">Tables or</text><text x="570" y="134">documents</text>
+<text x="240" y="85">HTTP request</text><text x="240" y="174">Response, JSON</text>
+<text x="100" y="215">Runs on the user's device</text>
+<text x="380" y="215">Runs in a data centre or cloud</text>
+</g>
+</svg>
+<figcaption>The frontend sends HTTP requests to the backend API; the backend queries the database and returns a response, usually JSON.</figcaption>
+</figure>
+
+The two sides communicate through HTTP, as described in [how HTTP works](/computer-science/how-http-works/). The frontend sends a request with a method (GET, POST, PUT, DELETE), a path such as /api/orders, headers and sometimes a body. The backend replies with a status code such as 200 OK, 404 Not Found or 500 Internal Server Error, plus a body that is usually JSON.
+
+The contract between the two is the API. Many APIs follow the REST style described by Roy Fielding, where URLs name resources and HTTP methods act on them; see [REST API basics](/computer-science/rest-api-basics/). When the frontend and backend sit on different origins, the browser enforces the CORS rules of the Fetch Standard, so the backend must send headers that allow the frontend's origin.
+
+Pages can be built in different places. With server-side rendering, the backend sends finished HTML. With client-side rendering, the backend sends JSON and JavaScript in the browser builds the page. Many modern sites mix the two.
+
+## Frontend vs backend comparison
+
+| Aspect | Frontend | Backend |
+| --- | --- | --- |
+| Runs on | User's browser or device | Servers or cloud |
+| Main concern | Layout, interaction, accessibility | Business logic, data, security |
+| Core languages | HTML, CSS, JavaScript | JavaScript (Node.js), Python, Java, C#, Go, PHP, Ruby |
+| Typical frameworks | React, Angular, Vue | Express, Django, Spring, ASP.NET |
+| Data storage | Browser storage, cache | Relational and NoSQL databases |
+| Visible to user | Yes, code can be inspected | No, code stays on the server |
+| Testing | UI, browser and accessibility tests | Unit, integration and load tests |
+| Typical bugs | Layout breaks, slow rendering | Wrong data, slow queries, outages |
+
+Both sides need the testing levels covered in [types of software testing](/computer-science/types-of-software-testing/).
+
+## Security on both sides
+
+Never trust the client. Anyone can open the browser's developer tools and change frontend code or send their own requests, so frontend validation only improves the user's experience. The backend must validate every input again, check permissions on every request and store passwords hashed.
+
+The OWASP Top 10:2021 lists the most serious web risks. Broken access control is number one and is a backend responsibility. Injection, which in the 2021 list includes cross-site scripting, needs care on both sides: parameterised queries on the backend and safe output encoding on the frontend. All traffic between the two should use HTTPS.
+
+## Performance: where the time goes
+
+Each request from the browser costs a network round trip time (RTT) plus the time the server spends on it. If the frontend makes n requests one after another, the waiting time is roughly:
+
+$$
+T = n \times (RTT + t_s)
+$$
+
+where t_s is the server processing time per request. When the backend gathers the same data in one request, the frontend pays only one round trip:
+
+$$
+T = RTT + n \times t_s
+$$
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An order page needs a customer record, the order list and the delivery status. Network round trip time 80 ms; server time 20 ms for each item.</dd>
+<dt>Find</dt><dd>The waiting time with three sequential frontend requests, and with one backend endpoint that returns all three items.</dd>
+<dt>Assumptions</dt><dd>Requests are made one after another; download time and browser rendering are ignored; backend calls to the database are fast compared with the network.</dd>
+<dt>Solution</dt><dd>Three requests: T = 3 × (80 + 20) = 300 ms<br />One combined request: T = 80 + 3 × 20 = 140 ms<br />Saving = 300 − 140 = 160 ms</dd>
+<dt>Answer</dt><dd><strong>About 300 ms with three sequential requests and about 140 ms with one combined endpoint</strong></dd>
+<dt>Limitations</dt><dd>Real pages often send requests in parallel, and HTTP/2 multiplexing and caching change the numbers; measure with the browser's network tools.</dd>
+</dl>
+</Example>
+
+## Key formulas for frontend vs backend performance
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Sequential requests | T = n × (RTT + t_s) | T total wait in ms, n number of requests, RTT round trip time in ms, t_s server time per request in ms |
+| One combined request | T = RTT + n × t_s | Same symbols; the backend does the n pieces of work in one request |
+
+## Full stack and choosing a path
+
+A full stack developer covers both sides. In small teams that is common; in larger teams frontend and backend specialists agree on an API and work in parallel. If you enjoy visual design, user interaction and fast feedback, start with the frontend. If you prefer data, algorithms and system design, the backend suits you better. Backend work leans on data structures and databases, for example [database normalization](/computer-science/database-normalization/).
+
+## Frontend vs backend interview and viva questions
+
+1. **What is the main difference between frontend and backend?** The frontend runs in the user's browser and handles what the user sees and does; the backend runs on servers and handles business logic, data storage and security.
+2. **Which languages run natively in a web browser?** HTML, CSS and JavaScript, along with WebAssembly.
+3. **Why must the backend validate input even when the frontend already does?** Users can change frontend code or send their own requests, so the server cannot trust anything that comes from the client.
+4. **What is CORS?** A browser rule from the Fetch Standard that blocks a page from reading responses from another origin unless that server sends headers allowing it.
+5. **What is the difference between server-side and client-side rendering?** In server-side rendering the backend sends finished HTML; in client-side rendering it sends data, and JavaScript in the browser builds the page.

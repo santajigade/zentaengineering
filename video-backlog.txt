@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video (oldest first). Delete a line once its video is live.
-automation-robotics/scada-system-architecture
-automation-robotics/servo-vs-stepper-motor
-automation-robotics/types-of-industrial-robots
-biomedical-engineering/biomaterials-types
-biomedical-engineering/biopotential-measurement-basics
-biomedical-engineering/bioreactor-types
 biomedical-engineering/medical-device-classification
 biomedical-engineering/medical-imaging-modalities
 biomedical-engineering/prosthetic-limbs

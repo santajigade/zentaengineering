@@ -1,0 +1,205 @@
+---
+title: "Satellite Link Budget: Calculation, Formulas and Example"
+description: "Satellite link budget explained: EIRP, free space path loss, G/T, C/N0, C/N, Eb/N0 and link margin, with a worked Ku band GEO downlink calculation."
+pubDate: 2026-11-25
+reviewedDate: 2026-11-25
+discipline: telecommunication-engineering
+subcategory: satellite-communication
+focusKeyword: "satellite link budget"
+image: { src: /images/featured/what-is-satellite-link-budget.webp, alt: "Satellite Link Budget: Calculation, Formulas and Example: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [satellite-communication, link-budget, free-space-path-loss, eirp, g-over-t]
+faq:
+  - q: "Why are link budgets calculated in decibels?"
+    a: "A link budget multiplies and divides many factors: transmit power, two antenna gains, a path loss of the order of 10 to the power 20, noise temperature and bandwidth. In decibels these become additions and subtractions, so each item can be listed in a table and added up, and a change in any one item is easy to see."
+  - q: "What is a good link margin for a satellite link?"
+    a: "There is no single number. The margin must cover the extra losses the link has to survive for the required availability, mainly rain fade at Ku and Ka band, which is predicted from local rain statistics with ITU-R P.618. A C band link in a dry climate needs far less margin than a Ka band link in the tropics."
+  - q: "What does G/T mean on a satellite terminal datasheet?"
+    a: "G/T is the receive antenna gain divided by the system noise temperature, given in dB/K. It is the single figure of merit for a receiving station, because the carrier to noise density ratio rises one for one with it. A bigger dish raises G; a quieter LNB lowers T; both raise G/T."
+references:
+  - text: "T. Pratt and J. E. Allnutt, Satellite Communications, 3rd ed., Wiley, 2019"
+  - text: "G. Maral, M. Bousquet and Z. Sun, Satellite Communications Systems, 6th ed., Wiley, 2020"
+  - text: "ITU-R P.525-4 (2019) Calculation of free-space attenuation, International Telecommunication Union"
+  - text: "ITU-R P.618-14 (2023) Propagation data and prediction methods required for the design of Earth-space telecommunication systems"
+  - text: "ITU-R P.676-13 (2022) Attenuation by atmospheric gases and related effects"
+  - text: "B. Sklar, Digital Communications: Fundamentals and Applications, 2nd ed., Prentice Hall, 2001"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+A **satellite link budget** is a decibel accounting of every gain and loss between transmitter and receiver. Start from the transmitter EIRP, subtract free space path loss and atmospheric losses, add the receive antenna's figure of merit G/T, and get the carrier to noise ratio. The margin above the modem's required value shows whether the link works.
+
+</Key>
+
+A satellite link budget answers one practical question: will enough signal reach the receiver, compared with the noise, for the modem to decode it? A geostationary satellite is more than 35 786 km away, so the received carrier is extremely weak. Engineers therefore list every gain and loss in decibels and add them up, one line at a time, the same way an accountant balances a budget.
+
+<figure class="anim">
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" role="img" aria-label="Satellite downlink and its link budget level diagram: a satellite with EIRP sends a beam through free space and the atmosphere to a ground dish with gain Gr and a receiver with noise temperature Tsys; below, power level steps from EIRP 50 dBW, down 205.6 dB of free space path loss, down 0.5 dB of atmospheric loss, up 41.4 dB of dish gain to a carrier of minus 114.7 dBW, which sits 16.5 dB above the noise power of minus 131.2 dBW">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="10" y="47" width="33" height="11" fill="#0b2545" fill-opacity="0.85" />
+<rect x="77" y="47" width="33" height="11" fill="#0b2545" fill-opacity="0.85" />
+<rect x="45" y="38" width="30" height="28" rx="3" fill="#eef1f6" />
+<path d="M43 52H45M75 52H77" />
+<path d="M64 66L70 74" />
+<path d="M456 72Q462 114 506 120" fill="#eef1f6" />
+<path d="M486 112L470 94" />
+<path d="M492 120V140M478 140H506" />
+<rect x="518" y="78" width="72" height="36" rx="5" fill="#e6f6f4" />
+<path d="M492 128H505V96H518" />
+</g>
+<circle cx="470" cy="94" r="3" fill="#0b2545" />
+<path d="M76 72L460 94" stroke="#13a89e" stroke-width="2.5" />
+<path class="anim-flow" d="M76 72L460 94" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 8" />
+<circle class="anim-pulse" cx="70" cy="74" r="4" fill="#f5b800" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="60" y="92">Satellite</text><text x="60" y="107">EIRP = Pt + Gt</text>
+<text x="260" y="66">Free space path loss Lp</text>
+<text x="290" y="107">Atmosphere and rain La</text>
+<text x="554" y="93">LNB and</text><text x="554" y="107">receiver</text>
+<text x="554" y="130">Tsys</text>
+<text x="492" y="156">Dish Gr</text>
+<text x="300" y="182" font-weight="700">Downlink power levels in the worked example</text>
+</g>
+<g stroke="#7b8794" stroke-width="1.5" stroke-dasharray="5 4"><path d="M400 300H510" /></g>
+<path d="M40 200H170V313H330V314H400V290H510" stroke="#0b2545" stroke-width="2.5" />
+<path class="anim-flow-slow" d="M40 200H170V313H330V314H400V290H510" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 8" />
+<path d="M516 290V300M512 290H520M512 300H520" stroke="#b42318" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="45" y="193">EIRP 50 dBW</text>
+<text x="178" y="255">−205.6 dB path loss</text>
+<text x="300" y="332" text-anchor="middle">−0.5 dB atmosphere</text>
+<text x="394" y="283" text-anchor="end">+41.4 dB dish gain</text>
+<text x="405" y="283">C = −114.7 dBW</text>
+<text x="410" y="316" fill="#7b8794">N = kTB = −131.2 dBW</text>
+<text x="524" y="299" fill="#b42318">C/N 16.5 dB</text>
+</g>
+</svg>
+<figcaption>A GEO downlink and its link budget as a level diagram, using the numbers from the worked example. Levels are drawn to scale in dB.</figcaption>
+</figure>
+
+
+<ArticleVideo slug="what-is-satellite-link-budget" title="How a satellite link budget works" uploadDate="2026-11-25" />
+
+## What a satellite link budget includes
+
+Uplink or downlink, a link budget has the same parts:
+
+- Transmit side: transmitter power Pt, feed and waveguide losses, and transmit antenna gain Gt. Together they give the **EIRP** (effective isotropic radiated power).
+- Path: free space path loss Lp, which is by far the largest term, plus atmospheric gas absorption, rain attenuation and small losses such as antenna pointing error and polarisation mismatch.
+- Receive side: receive antenna gain Gr and the system noise temperature Tsys, combined into the figure of merit **G/T**.
+- Noise and data rate: Boltzmann's constant, the noise bandwidth B and the bit rate Rb turn the received carrier into C/N0, C/N and Eb/N0.
+- Required value and margin: the modem needs a minimum C/N or Eb/N0 for its modulation and coding. The difference between what arrives and what is needed is the **link margin**.
+
+Working in decibels turns all the multiplications into additions. If decibel arithmetic is new to you, this [guide to dB and dBm](https://www.instrumentationblog.in/decibel-in-electronics-db-dbm/) covers the basics; here dBW means decibels relative to 1 W.
+
+## EIRP: transmitter power plus antenna gain
+
+$$
+EIRP = P_t + G_t - L_t \quad \text{(dBW)}
+$$
+
+where Pt is transmitter output in dBW, Gt the transmit antenna gain in dBi and Lt the feed loss in dB. A parabolic dish of diameter D has gain
+
+$$
+G = \eta \left( \frac{\pi D}{\lambda} \right)^2
+$$
+
+with η the aperture efficiency and λ the wavelength. Gain rises with the square of both diameter and frequency, which is why small Ku band dishes can do the work of much larger C band ones. The same relationship is covered in [antenna gain and directivity](/electronics-engineering/antenna-gain-and-directivity/). Satellite operators publish EIRP contour maps, so a ground station designer usually reads the downlink EIRP for their location straight from the map.
+
+## Free space path loss
+
+Free space path loss is the spreading of power over a growing sphere, expressed for two isotropic antennas (ITU-R P.525):
+
+$$
+L_p = \left( \frac{4 \pi d}{\lambda} \right)^2
+$$
+
+In decibels, with d in km and f in GHz:
+
+$$
+L_p\,(\text{dB}) = 20\log_{10} d + 20\log_{10} f + 92.45
+$$
+
+For a geostationary satellite the distance is 35 786 km for a station directly below it and about 41 679 km for a station at 0° elevation, so the slant range depends on where the earth station is. At Ku band frequencies the path loss is about 205 to 206 dB. Because loss rises 20 dB per decade of distance, a GEO link loses about 36 dB more than a LEO link at 550 km at the same frequency, as compared in [GEO vs MEO vs LEO satellites](/telecommunication-engineering/geo-meo-leo-satellites/).
+
+<Calculator path="electronics/free-space-path-loss" title="Free Space Path Loss Calculator" />
+
+## Atmospheric and rain losses
+
+The atmosphere adds loss on top of free space loss. Oxygen and water vapour absorb a small amount (ITU-R P.676). Rain is the big variable above about 10 GHz: drops absorb and scatter the signal, so Ku and especially Ka band links suffer **rain fade**. ITU-R P.618 predicts the attenuation exceeded for a given percentage of the year from local rain rate, elevation angle, frequency and polarisation. That prediction sets the margin the link budget must hold back. Rain also raises the antenna noise temperature, so the carrier falls and the noise rises at the same time.
+
+## G/T and the noise side
+
+The receive station is judged by G/T:
+
+$$
+G/T = G_r - 10\log_{10} T_{sys} \quad \text{(dB/K)}
+$$
+
+Tsys combines the antenna noise temperature (sky, ground and rain seen by the dish) with the noise added by the LNB and the cable. Noise power in bandwidth B is N = kTB, where k = 1.38 × 10⁻²³ J/K, which is −228.6 dBW/K/Hz.
+
+## Carrier to noise ratio and margin
+
+The full chain, in decibels:
+
+$$
+C/N_0 = EIRP - L_p - L_a + G/T - k \quad \text{(dBHz)}
+$$
+
+$$
+C/N = C/N_0 - 10\log_{10} B, \qquad E_b/N_0 = C/N_0 - 10\log_{10} R_b
+$$
+
+Margin = received C/N (or Eb/N0) minus the value the modem needs. The required value depends on the [modulation](/telecommunication-engineering/modulation-techniques/) and error correction code: higher order schemes carry more bits per hertz but need a higher C/N. A complete system has an uplink and a downlink, and their noise adds, so the overall C/N is always a little worse than the weaker of the two.
+
+## Key formulas for satellite link budget
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| EIRP | EIRP = Pt + Gt − Lt | dBW; Pt in dBW, Gt in dBi, Lt in dB |
+| Dish gain | G = η(πD/λ)² | η = efficiency, D = diameter (m), λ = wavelength (m) |
+| Free space path loss | Lp = 20 log d + 20 log f + 92.45 | dB; d in km, f in GHz |
+| Figure of merit | G/T = Gr − 10 log Tsys | dB/K; Tsys in K |
+| Noise power | N = kTB | k = −228.6 dBW/K/Hz, T in K, B in Hz |
+| Carrier to noise density | C/N0 = EIRP − Lp − La + G/T − k | dBHz |
+| Carrier to noise ratio | C/N = C/N0 − 10 log B | dB |
+| Energy per bit to noise density | Eb/N0 = C/N0 − 10 log Rb | dB; Rb in bit/s |
+
+## Worked example: Ku band GEO downlink
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Downlink frequency 12 GHz, slant range 38 000 km, satellite EIRP 50 dBW toward the station, receive dish 1.2 m diameter with aperture efficiency 0.6, system noise temperature 150 K, atmospheric loss 0.5 dB, transponder bandwidth 36 MHz.</dd>
+<dt>Find</dt><dd>Path loss, dish gain, G/T, C/N0, C/N and the clear sky margin if the modem needs C/N of 10 dB.</dd>
+<dt>Assumptions</dt><dd>Clear sky, no pointing or polarisation loss, downlink only (uplink noise ignored), the 10 dB threshold is assumed for illustration.</dd>
+<dt>Solution</dt><dd>λ = c ÷ f = 3 × 10⁸ ÷ 12 × 10⁹ = 0.025 m<br />Lp = 20 log 38 000 + 20 log 12 + 92.45 = 91.6 + 21.6 + 92.45 = 205.6 dB<br />Gr = 10 log [0.6 × (π × 1.2 ÷ 0.025)²] = 41.4 dBi<br />G/T = 41.4 − 10 log 150 = 41.4 − 21.8 = 19.6 dB/K<br />C/N0 = 50 − 205.6 − 0.5 + 19.6 + 228.6 = 92.1 dBHz<br />C/N = 92.1 − 10 log (36 × 10⁶) = 92.1 − 75.6 = 16.5 dB<br />Margin = 16.5 − 10 = 6.5 dB</dd>
+<dt>Answer</dt><dd><strong>C/N = 16.5 dB in clear sky, leaving a margin of about 6.5 dB for rain fade and other impairments</strong></dd>
+<dt>Limitations</dt><dd>Whether 6.5 dB is enough depends on the rain attenuation predicted with ITU-R P.618 for the site and the availability required. Including uplink noise and interference would lower the overall C/N.</dd>
+</dl>
+</Example>
+
+The level diagram above shows the same steps: received carrier C = 50 − 205.6 − 0.5 + 41.4 = −114.7 dBW and noise N = −228.6 + 21.8 + 75.6 = −131.2 dBW, which differ by the same 16.5 dB.
+
+## How to improve a weak satellite link budget
+
+- Bigger receive dish: doubling the diameter adds about 6 dB of gain.
+- Quieter LNB: a lower noise temperature lowers Tsys and raises G/T.
+- More EIRP: a higher power amplifier on the uplink, or a spot beam on the satellite.
+- Lower data rate or more robust coding: reduces the required Eb/N0 or C/N.
+- Lower frequency band: C band suffers much less rain fade than Ku or Ka band.
+
+Satellite power and antenna size are limited by the spacecraft bus, as described in [satellite subsystems](/aerospace-engineering/satellite-subsystems/), which is why ground stations usually carry most of the burden.
+
+## Satellite link budget interview and viva questions
+
+1. **What is the largest loss in a satellite link budget?** Free space path loss, about 205 to 206 dB for a GEO link at Ku band, far larger than atmospheric or equipment losses in clear sky.
+2. **What is EIRP?** The transmitter power plus transmit antenna gain minus feed loss, in dBW: the power an isotropic antenna would need to radiate to give the same signal in the beam direction.
+3. **Why is G/T called the figure of merit of an earth station?** Because C/N0 rises one for one with it, it captures both the dish gain and the system noise temperature in one number.
+4. **How does doubling the frequency affect free space path loss?** Loss rises by 20 log 2, about 6 dB, although a dish of fixed size also gains about 6 dB at the higher frequency.
+5. **Why do Ku and Ka band links need larger margins than C band links?** Rain attenuation increases strongly with frequency above about 10 GHz, so the margin predicted with ITU-R P.618 for the same availability is larger.

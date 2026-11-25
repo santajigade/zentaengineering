@@ -3,6 +3,7 @@ title: "Metal Casting Process: Steps and Types"
 description: "Metal casting process explained: pattern, mould, gating, melting, pouring, solidification and cleaning, the main casting types and Chvorinov's rule example."
 pubDate: 2026-11-09
 reviewedDate: 2026-11-09
+updatedDate: 2026-11-25
 discipline: manufacturing-engineering
 subcategory: manufacturing-processes
 focusKeyword: "metal casting process"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-The **metal casting process** makes a part by pouring molten metal into a mould cavity that has the shape of the part, letting it solidify, and then removing and cleaning the casting. The main steps are pattern and mould making, melting, pouring, solidification, shakeout and finishing. Casting can produce complex shapes in almost any size, from small jewellery pieces to engine blocks and turbine housings.
+The **metal casting process** makes a part by pouring molten metal into a mould cavity shaped like the part, letting it solidify, then removing and cleaning the casting. Its main steps are pattern and mould making, melting, pouring, solidification, shakeout and finishing. It produces complex shapes in almost any size.
 
 </Key>
 
@@ -50,7 +51,7 @@ Using sand casting as the reference case, Groover and Kalpakjian describe the fo
 8. **Shakeout and cleaning.** The sand mould is broken away, the gates and risers are cut off, and the surfaces are cleaned by shot blasting. This finishing work is often called **fettling**.
 9. **Inspection and finishing.** Castings are checked visually and dimensionally, and often by [non-destructive testing methods](/materials-engineering/ndt-methods/) such as radiography for internal porosity. Many are then heat treated and machined.
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 330" width="640" height="330" fill="none" role="img" aria-label="Cross-section of a two part sand mould in a flask: cope on top and drag below separated by the parting line, with pouring basin, sprue, runner, gate, casting cavity containing a core, and a riser">
 <rect x="150" y="50" width="340" height="230" fill="#f2efe6" stroke="#0b2545" stroke-width="2" />
 <path d="M140 160 H500" stroke="#b42318" stroke-width="1.5" stroke-dasharray="6 4" />
@@ -62,6 +63,7 @@ Using sand casting as the reference case, Groover and Kalpakjian describe the fo
 <rect x="340" y="148" width="40" height="24" fill="#d9c9a3" stroke="#0b2545" stroke-width="1.5" />
 <rect x="430" y="70" width="30" height="90" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
 <rect x="420" y="130" width="10" height="20" fill="#ffffff" stroke="#0b2545" stroke-width="1.5" />
+<g stroke="#e8590c" stroke-width="3" fill="none"><path class="anim-flow" d="M207 58V167H290V165H330" /><path class="anim-flow-slow" d="M445 80V140H405" /></g>
 <g stroke="#7b8794" stroke-width="1">
 <path d="M207 62 L120 40" /><path d="M200 110 L120 110" /><path d="M230 174 L200 240" /><path d="M290 170 L280 260" />
 <path d="M360 172 L380 250" /><path d="M445 70 L540 50" /><path d="M415 190 L540 200" />
@@ -120,6 +122,14 @@ where V is volume, A is the surface area through which heat leaves, B is a mould
 </dl>
 </Example>
 
+## Key formulas for the metal casting process
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Solidification time (Chvorinov's rule) | t_s = B (V ÷ A)ⁿ | t_s time (min), B mould constant (min/cm²), V volume (cm³), A cooling surface area (cm²), n usually 2 |
+| Casting modulus | M = V ÷ A | cm |
+| Modulus of a cylindrical riser with H = D | M = D ÷ 6 | D riser diameter (cm) |
+
 ## Common casting defects
 
 Campbell and the ASM Handbook describe a set of defects that every foundry engineer learns to recognise:
@@ -139,3 +149,11 @@ Casting can make complex external and internal shapes in one step, handles very 
 ## Casting compared with other processes
 
 Where very small batches of complex parts are needed, metal [3D printing technologies](/manufacturing-engineering/3d-printing-technologies/) are an alternative, and 3D printed sand moulds and wax patterns now combine both approaches. For high volume parts with simple shapes, forging or machining from bar may be cheaper. Process selection weighs quantity, size, alloy, tolerance and cost together.
+
+## Metal casting process interview and viva questions
+
+1. **What is the difference between the cope and the drag?** In a two part flask the cope is the upper half and the drag the lower half; they meet at the parting line.
+2. **Why is a pattern made larger than the finished part?** It allows for shrinkage as the metal cools and adds extra stock on surfaces that will be machined.
+3. **What does Chvorinov's rule state?** Solidification time equals a mould constant B times the casting modulus V/A raised to the power n, which is usually taken as 2.
+4. **Why must a riser freeze after the casting section it feeds?** The riser supplies liquid metal to make up shrinkage, so its modulus must be larger than the casting's or a shrinkage cavity forms in the casting.
+5. **What causes a misrun or cold shut?** The metal freezes before filling the cavity, or two streams meet without fusing, often because of low pouring temperature or thin sections.

@@ -3,6 +3,7 @@ title: "Time and Motion Study Explained with Examples"
 description: "Time and motion study explained: work study, motion economy, therbligs, stopwatch time study, rating, allowances, standard time, PMTS and a worked example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-25
 discipline: manufacturing-engineering
 subcategory: industrial-engineering
 focusKeyword: "time and motion study"
@@ -30,7 +31,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Time and motion study** is the core technique of **work study** in industrial engineering. **Motion study** (method study), pioneered by Frank and Lillian Gilbreth, analyses how a job is done, breaking it into basic motions (**therbligs**) and applying **principles of motion economy** to find a simpler, safer, faster method. **Time study** (work measurement), developed by F. W. Taylor, measures the time a qualified worker takes using a stopwatch or video, adjusts it by a **performance rating** to get **normal time**, and adds **allowances** for fatigue and delays to set the **standard time**. Standards are used for planning, costing, line balancing and incentives.
+**Time and motion study** is the core work study technique of industrial engineering. Motion study analyses how a job is done and finds a simpler, safer method using therbligs and motion economy. Time study measures a qualified worker's time, adjusts it by a performance rating to normal time, then adds allowances to set the standard time.
 
 </Key>
 
@@ -66,7 +67,7 @@ The Gilbreths classified hand motions into about 17 basic elements, called **the
 - **Workplace arrangement:** fixed places for tools and materials within the normal reach area; gravity feed bins; good lighting and comfortable working height.
 - **Tools and equipment:** use jigs and fixtures instead of holding by hand, combine tools, pre-position tools for use, and use foot controls where suitable.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Top view of a workstation: an operator at the bottom edge with left and right hands; inner arcs show the normal working area reachable with forearms, outer arcs show the maximum working area with arms extended; parts bins and tools are placed inside the normal area, assembly fixture in the centre">
 <rect x="60" y="40" width="480" height="200" rx="6" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
 <g fill="none" stroke-width="2">
@@ -75,6 +76,7 @@ The Gilbreths classified hand motions into about 17 basic elements, called **the
 <path d="M200 240A70 70 0 0 1 340 240" stroke="#13a89e" />
 <path d="M260 240A70 70 0 0 1 400 240" stroke="#13a89e" />
 </g>
+<g fill="none" stroke="#ffffff" stroke-width="1.5"><path class="anim-flow-slow" d="M200 240A70 70 0 0 1 340 240" /><path class="anim-flow-slow" d="M260 240A70 70 0 0 1 400 240" /></g>
 <g stroke="#0b2545" stroke-width="1.5">
 <rect x="270" y="175" width="60" height="40" rx="3" fill="#fff7e0" />
 <rect x="205" y="185" width="40" height="30" rx="3" fill="#e6f6f4" /><rect x="355" y="185" width="40" height="30" rx="3" fill="#e6f6f4" />
@@ -122,6 +124,15 @@ $$
 </dl>
 </Example>
 
+## Key formulas for time and motion study
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Normal time | Normal time = Observed time × Rating ÷ 100 | Times in min per cycle, rating in % of normal pace |
+| Standard time | Standard time = Normal time × (1 + allowance) | Allowance as a fraction of normal time |
+| Standard output | Output = Available time ÷ Standard time | Available time in min per shift, output in parts per shift |
+| Minimum number of stations | N_min = total work content ÷ takt time, rounded up | Both times in the same unit |
+
 ## Other work measurement techniques
 
 - **Predetermined motion time systems (PMTS):** such as MTM (Methods Time Measurement) and MOST, which assign standard times to basic motions, so standards can be set before a job exists.
@@ -148,3 +159,11 @@ Standard times for each task let engineers divide work evenly across stations so
 ## Good practice and human factors
 
 Time and motion study works best when workers understand its purpose and take part. Taylor's era was criticised for treating workers as machines; modern practice focuses on removing wasted motion (one of the [seven wastes](/manufacturing-engineering/seven-wastes-lean/)), improving ergonomics and safety, and setting fair standards. Involving operators in method improvement, as in kaizen, combines their practical knowledge with systematic analysis and gives better and more accepted results.
+
+## Time and motion study interview and viva questions
+
+1. **What are the two parts of work study?** Method study, which records, examines and improves the way work is done, and work measurement, which sets the time a qualified worker needs at a defined performance level.
+2. **Why should method study come before time study?** Measuring an inefficient method only produces an accurate standard for a poor process.
+3. **What are therbligs?** They are the basic hand motions classified by the Gilbreths, about 17 in all, such as search, grasp, position, assemble and release load.
+4. **How is standard time obtained from observed time?** Observed time is multiplied by the performance rating divided by 100 to give normal time, and allowances for personal needs, fatigue and contingencies are then added.
+5. **What is a predetermined motion time system?** A system such as MTM or MOST that assigns standard times to basic motions, so standards can be set before a job exists.

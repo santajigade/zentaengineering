@@ -3,6 +3,7 @@ title: "Classification of Manufacturing Processes"
 description: "Classification of manufacturing processes: casting, forming, machining, joining, additive, finishing and heat treatment, with selection factors and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-25
 discipline: manufacturing-engineering
 subcategory: manufacturing-processes
 focusKeyword: "manufacturing processes"
@@ -29,19 +30,20 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Manufacturing processes** are usually classified by how they change the shape or properties of material. The main groups are: **primary shaping** (casting, moulding, powder metallurgy) from liquid or powder; **forming** (forging, rolling, extrusion, drawing, sheet metal working) by plastic deformation; **material removal** (turning, milling, drilling, grinding and non-traditional methods like EDM and laser cutting); **joining** (welding, brazing, soldering, fastening, adhesive bonding); **additive manufacturing** (3D printing); and **property changing and surface finishing** (heat treatment, coating, plating, polishing). Standards such as **DIN 8580** formalise this grouping.
+**Manufacturing processes** are the methods that change the shape or properties of material to make a part. They are classified into six groups: primary shaping such as casting, forming by plastic deformation, material removal such as machining, joining, additive manufacturing, and property changing and finishing. DIN 8580 formalises this grouping.
 
 </Key>
 
 Every manufactured product, from a bolt to an aircraft engine, is made by a chain of processes. Classifying them helps engineers compare options, choose the most economical route and understand how process choice affects strength, accuracy, surface finish and cost. The classification below follows the logic of DIN 8580 and common textbooks such as Groover and Kalpakjian.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="280" viewBox="0 0 600 280" fill="none" role="img" aria-label="Tree diagram: manufacturing processes branch into six groups: primary shaping, forming, material removal, joining, additive manufacturing, and property change and finishing, each with example processes listed below">
 <rect x="210" y="15" width="180" height="40" rx="6" fill="#0b2545" />
 <text x="300" y="40" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Manufacturing processes</text>
 <path d="M300 55V75M50 75H550M50 75V95M150 75V95M250 75V95M350 75V95M450 75V95M550 75V95" stroke="#0b2545" stroke-width="2" />
+<path class="anim-flow-slow" d="M300 55V75H50V95M300 75H550V95M150 75V95M250 75V95M350 75V95M450 75V95" stroke="#7fd3ff" stroke-width="1.5" />
 <g stroke="#0b2545" stroke-width="1.5">
-<rect x="5" y="95" width="90" height="44" rx="5" fill="#e6f6f4" /><rect x="105" y="95" width="90" height="44" rx="5" fill="#e6f6f4" /><rect x="205" y="95" width="90" height="44" rx="5" fill="#fff7e0" /><rect x="305" y="95" width="90" height="44" rx="5" fill="#fff7e0" /><rect x="405" y="95" width="90" height="44" rx="5" fill="#eef1f6" /><rect x="505" y="95" width="90" height="44" rx="5" fill="#ffe9e7" />
+<rect class="anim-blink" x="5" y="95" width="90" height="44" rx="5" fill="#e6f6f4" /><rect class="anim-blink anim-d1" x="105" y="95" width="90" height="44" rx="5" fill="#e6f6f4" /><rect class="anim-blink anim-d2" x="205" y="95" width="90" height="44" rx="5" fill="#fff7e0" /><rect class="anim-blink anim-d3" x="305" y="95" width="90" height="44" rx="5" fill="#fff7e0" /><rect class="anim-blink anim-d4" x="405" y="95" width="90" height="44" rx="5" fill="#eef1f6" /><rect class="anim-blink anim-d5" x="505" y="95" width="90" height="44" rx="5" fill="#ffe9e7" />
 </g>
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" font-weight="700" fill="#0b2545" text-anchor="middle">
 <text x="50" y="114">Primary</text><text x="50" y="130">shaping</text><text x="150" y="122">Forming</text><text x="250" y="114">Material</text><text x="250" y="130">removal</text><text x="350" y="122">Joining</text><text x="450" y="114">Additive</text><text x="450" y="130">mfg</text><text x="550" y="114">Property</text><text x="550" y="130">and finish</text>
@@ -141,6 +143,13 @@ where C_m is material cost per part, C_t total tooling cost, N the number of par
 </dl>
 </Example>
 
+## Key formulas for manufacturing processes
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Cost per part | C = C_m + C_t ÷ N + C_p | C_m material cost per part, C_t total tooling cost, N number of parts, C_p processing cost per part (consistent currency units) |
+| Break-even quantity of two routes | N = (C_t2 − C_t1) ÷ (per part cost 1 − per part cost 2) | Tooling and per part costs of the two processes, N in parts |
+
 ## Process chains in practice
 
 A car engine connecting rod is a good example of a process chain: a steel billet is hot forged to near net shape, trimmed, heat treated, shot peened to improve fatigue life, then machined on the bores and faces and finally inspected. Each step adds value that the others cannot provide efficiently.
@@ -148,3 +157,11 @@ A car engine connecting rod is a good example of a process chain: a steel billet
 ## Manufacturing processes and sustainability
 
 Process choice also affects energy use, scrap and emissions. Net shape and near net shape processes, such as precision forging, die casting and additive manufacturing, save material compared with machining from solid. Recycling of chips and scrap, efficient furnaces and dry or minimum quantity lubrication machining reduce environmental impact. Combining process knowledge with [lean manufacturing](/manufacturing-engineering/seven-wastes-lean/) thinking and [life cycle assessment](/environmental-engineering/life-cycle-assessment/) helps engineers choose routes that are economical and sustainable.
+
+## Manufacturing processes interview and viva questions
+
+1. **What are the six main groups of manufacturing processes?** Primary shaping, forming, material removal, joining, additive manufacturing, and property changing and finishing, following the logic of DIN 8580.
+2. **How does forming differ from material removal?** Forming changes shape by plastic deformation without removing material, as in forging or rolling, while material removal cuts material away, as in turning, milling or grinding.
+3. **Why does die casting become cheaper than machining at high volume?** Its high die cost is spread over more parts through the C_t ÷ N term, while its material and processing cost per part is lower than machining.
+4. **What is meant by a process chain?** It is the sequence of processes a part passes through, for example a connecting rod that is forged, trimmed, heat treated, shot peened, machined and inspected.
+5. **Why are near net shape processes favoured for sustainability?** Processes such as precision forging, die casting and additive manufacturing save material compared with machining from solid, which cuts scrap and energy use.

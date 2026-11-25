@@ -1,0 +1,181 @@
+---
+title: "Exploratory Data Analysis (EDA): Steps and Methods"
+description: "Exploratory data analysis step by step: data structure, missing values, univariate and bivariate plots, correlation, IQR outliers and a worked example."
+pubDate: 2026-11-25
+reviewedDate: 2026-11-25
+discipline: ai-data-engineering
+subcategory: data-science
+focusKeyword: "exploratory data analysis"
+image: { src: /images/featured/exploratory-data-analysis.webp, alt: "Exploratory Data Analysis (EDA): Steps and Methods: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [exploratory-data-analysis, eda, data-science, box-plot, outliers]
+faq:
+  - q: "What is the difference between EDA and data cleaning?"
+    a: "Data cleaning fixes known problems such as wrong types, duplicates and missing values. Exploratory data analysis is the wider job of understanding the data: it often finds the problems that cleaning then fixes, and it continues after cleaning to study distributions and relationships. In practice the two run back and forth."
+  - q: "Which Python tools are used for exploratory data analysis?"
+    a: "pandas is the usual starting point, with info, describe, isna, value_counts and corr for tables and summaries. matplotlib and seaborn draw histograms, box plots, scatter plots and heat maps. Jupyter notebooks are common because they keep code, plots and notes together."
+  - q: "Should outliers always be removed during EDA?"
+    a: "No. An outlier may be a sensor fault or a typing error, but it may also be the rare event you care about, such as a machine starting to fail. Investigate each one, record what you decided and why, and keep the raw data unchanged."
+references:
+  - text: "J. W. Tukey, Exploratory Data Analysis, Addison-Wesley, 1977"
+  - text: "NIST/SEMATECH e-Handbook of Statistical Methods, Chapter 1: Exploratory Data Analysis, National Institute of Standards and Technology"
+  - text: "H. Wickham, M. Çetinkaya-Rundel and G. Grolemund, R for Data Science, 2nd ed., O'Reilly, 2023"
+  - text: "W. McKinney, Python for Data Analysis, 3rd ed., O'Reilly, 2022"
+  - text: "F. J. Anscombe, Graphs in Statistical Analysis, The American Statistician, 27(1), 17 to 21, 1973"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Exploratory data analysis** (EDA) is the first look at a dataset before any model is built. You check its structure and data types, find missing values and duplicates, summarise and plot each variable, study relationships between variables and investigate outliers, so that problems and patterns are known before modelling starts.
+
+</Key>
+
+Exploratory data analysis is where you find out what your data actually contains, as opposed to what the data dictionary says it contains. John Tukey made the case for it in his 1977 book: look at the data with simple summaries and plots first, and let what you see suggest the questions and the models. It is step 4 of the [data science workflow](/ai-data-engineering/data-science-workflow/).
+
+<figure class="anim">
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Six exploratory data analysis steps in a row: question and data, structure and types, missing values, one variable, relationships, outliers and notes; below them a box plot of ten vibration readings on a scale from 1.5 to 7 mm/s with Q1 2.4, median 2.55, Q3 2.775, lower fence 1.84, upper fence 3.34 and one outlier at 6.9 mm/s">
+<g stroke="#0b2545" stroke-width="2">
+<rect class="anim-blink" x="10" y="20" width="84" height="54" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d1" x="108" y="20" width="84" height="54" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d2" x="206" y="20" width="84" height="54" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d3" x="304" y="20" width="84" height="54" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d4" x="402" y="20" width="84" height="54" rx="6" fill="#fff7e0" />
+<rect class="anim-blink anim-d5" x="500" y="20" width="84" height="54" rx="6" fill="#ffe9e7" />
+</g>
+<g stroke="#13a89e" stroke-width="2"><path d="M94 47H104M192 47H202M290 47H300M388 47H398M486 47H496" /></g>
+<g stroke="#fff" stroke-width="1.5" stroke-dasharray="3 4" fill="none"><path class="anim-flow" d="M94 47H104M192 47H202M290 47H300M388 47H398M486 47H496" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="52" y="43">1. Question</text><text x="52" y="59">and data</text>
+<text x="150" y="43">2. Structure</text><text x="150" y="59">and types</text>
+<text x="248" y="43">3. Missing</text><text x="248" y="59">values</text>
+<text x="346" y="43">4. One</text><text x="346" y="59">variable</text>
+<text x="444" y="43">5. Relations</text><text x="444" y="59">of variables</text>
+<text x="542" y="43">6. Outliers</text><text x="542" y="59">and notes</text>
+<text x="300" y="112" font-weight="700">Steps 4 and 6 example: box plot with 1.5 × IQR fences</text>
+</g>
+<g stroke="#7b8794" stroke-width="1.5" stroke-dasharray="5 4"><path d="M90 150V228M225 150V228" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M114 190H141M175 190H195M114 178V202M195 178V202" />
+<rect x="141" y="172" width="34" height="36" fill="#e6f6f4" />
+<path d="M154 172V208" stroke="#b42318" stroke-width="2.5" />
+<path d="M60 240H560M105 240V246M195 240V246M285 240V246M375 240V246M465 240V246M555 240V246" />
+</g>
+<circle class="anim-pulse" cx="546" cy="190" r="7" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545" text-anchor="middle">
+<text x="90" y="144">lower fence 1.84</text><text x="225" y="144">upper fence 3.34</text>
+<text x="158" y="166">box Q1 to Q3</text>
+<text x="546" y="172" fill="#b42318">outlier 6.9</text>
+<text x="105" y="259">2</text><text x="195" y="259">3</text><text x="285" y="259">4</text><text x="375" y="259">5</text><text x="465" y="259">6</text><text x="555" y="259">7</text>
+<text x="330" y="280">Pump vibration velocity, mm/s</text>
+</g>
+</svg>
+<figcaption>The six steps of exploratory data analysis, and a box plot from the worked example below: one reading sits far beyond the upper fence.</figcaption>
+</figure>
+
+
+<ArticleVideo slug="exploratory-data-analysis" title="How exploratory data analysis works" uploadDate="2026-11-25" />
+
+## Why exploratory data analysis comes first
+
+Summary numbers can hide a lot. In 1973 F. J. Anscombe published four small datasets, now called Anscombe's quartet, that share the same mean of x (9), mean of y (7.50), correlation (0.816) and regression line (y = 3.00 + 0.500x). Plotted, they look nothing alike: one is a clean linear cloud, one is a curve, one is a straight line spoilt by a single outlier, and one is a vertical stack with one far point. A model fitted from the numbers alone would treat all four the same.
+
+EDA also catches dull but costly problems early: a temperature column stored as text, a date in two formats, a sensor that reads zero whenever it is offline. Finding these after a model is in production is much more expensive.
+
+## Exploratory data analysis steps
+
+### 1. Restate the question and know the data
+
+Write down the question the data must answer and where each column comes from. For each variable, note its meaning, unit, how it is measured and how often. A column called "flow" is useless until you know whether it is m³/h or litres per minute, and whether it is instantaneous or averaged.
+
+### 2. Check structure and data types
+
+Count rows and columns, and check that each column has the right type: numbers as numbers, dates as dates, categories as categories. In pandas, `df.shape`, `df.info()` and `df.head()` do this in seconds. Look at the time span and sampling rate for time series, and check for duplicate rows or duplicate keys.
+
+### 3. Find missing values
+
+Count missing values per column (`df.isna().sum()`) and look at where they occur. Missing values that cluster in one week, one site or one machine usually point to an outage or a logging fault, not random loss. Decide whether to drop, fill or flag them, but only after you understand why they are missing. Also watch for disguised missing values such as 0, 9999 or "N/A" typed as text.
+
+### 4. Look at one variable at a time
+
+This is univariate analysis. For numeric columns, compute the count, mean, standard deviation, minimum, quartiles and maximum (`df.describe()`), then draw a histogram and a box plot. Ask:
+
+- Is the distribution symmetric, skewed or split into two peaks (which can mean two operating modes)?
+- Is the mean far from the median? That points to skew or outliers.
+- Are the minimum and maximum physically possible?
+
+For categorical columns, count each level (`value_counts()`). Look for spelling variants of the same category and for rare levels.
+
+### 5. Study relationships between variables
+
+This is bivariate and multivariate analysis. Use scatter plots for two numeric variables, box plots of a numeric variable grouped by a category, and line plots against time. A correlation matrix shown as a heat map gives a quick overview of linear relationships.
+
+The Pearson correlation coefficient r measures the strength of a linear relationship, from minus 1 to plus 1. It does not detect curved relationships, and correlation alone never proves cause. Anscombe's quartet shows why a scatter plot should always sit beside the number.
+
+### 6. Investigate outliers and record findings
+
+Tukey's box plot rule flags a value as a possible outlier when it lies more than 1.5 times the interquartile range (IQR) beyond the quartiles. Check each flagged value before deciding anything: look at the logbook, the sensor and the units. Finish by writing short notes: data problems found, decisions made, patterns seen and new hypotheses. These notes feed feature engineering and model choice.
+
+## Key formulas for exploratory data analysis
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Sample mean | x̄ = Σx ÷ n | x = values, n = number of values; same unit as x |
+| Sample standard deviation | s = √[Σ(x − x̄)² ÷ (n − 1)] | same unit as x |
+| Interquartile range | IQR = Q3 − Q1 | Q1, Q3 = first and third quartiles; same unit as x |
+| Outlier fences | Q1 − 1.5 × IQR and Q3 + 1.5 × IQR | values outside are possible outliers |
+| z-score | z = (x − x̄) ÷ s | dimensionless |
+| Pearson correlation | r = Σ(x − x̄)(y − ȳ) ÷ √[Σ(x − x̄)² Σ(y − ȳ)²] | dimensionless, from −1 to +1 |
+
+The IQR fences in symbols:
+
+$$
+\text{lower} = Q_1 - 1.5\,\text{IQR}, \qquad \text{upper} = Q_3 + 1.5\,\text{IQR}
+$$
+
+## Worked example: finding an outlier in pump vibration data
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Ten daily vibration velocity readings from one pump, in mm/s: 2.1, 2.3, 2.4, 2.4, 2.5, 2.6, 2.7, 2.8, 3.0, 6.9.</dd>
+<dt>Find</dt><dd>The median, quartiles, IQR fences and any outlier; compare the mean and median; check the z-score of the largest value.</dd>
+<dt>Assumptions</dt><dd>Quartiles by linear interpolation, the default in NumPy and pandas. Sample standard deviation with n − 1.</dd>
+<dt>Solution</dt><dd>Median = (2.5 + 2.6) ÷ 2 = 2.55 mm/s<br />Q1 = 2.4 mm/s, Q3 = 2.775 mm/s, IQR = 2.775 − 2.4 = 0.375 mm/s<br />Lower fence = 2.4 − 1.5 × 0.375 = 1.84 mm/s<br />Upper fence = 2.775 + 1.5 × 0.375 = 3.34 mm/s<br />6.9 is above 3.34, so it is flagged; all other values lie inside the fences.<br />Mean = 29.7 ÷ 10 = 2.97 mm/s; without 6.9 the mean is 22.8 ÷ 9 = 2.53 mm/s<br />s = 1.40 mm/s, so z for 6.9 = (6.9 − 2.97) ÷ 1.40 = 2.80</dd>
+<dt>Answer</dt><dd><strong>6.9 mm/s is an outlier by the IQR rule. The mean (2.97 mm/s) is pulled well above the median (2.55 mm/s) by this one reading, yet its z-score is only 2.80, below a common cut-off of 3.</strong></dd>
+<dt>Limitations</dt><dd>The outlier inflates the standard deviation it is judged against, which is why the z-score misses it here; the IQR rule is more robust for small samples. Whether 6.9 mm/s is a fault or a real change in the pump needs an engineering check.</dd>
+</dl>
+</Example>
+
+## Common EDA plots and when to use them
+
+| Plot | Shows | Use for |
+| --- | --- | --- |
+| Histogram | Shape of one numeric variable | Skew, peaks, gaps, impossible values |
+| Box plot | Median, quartiles and outliers | Comparing groups, flagging outliers |
+| Bar chart of counts | Frequency of each category | Rare or misspelt categories |
+| Scatter plot | Two numeric variables | Linear and curved relationships, clusters |
+| Line plot over time | Trend, seasonality, steps | Sensor drift, outages, operating changes |
+| Correlation heat map | r for every pair | Quick screen of linear links |
+
+## Common mistakes in exploratory data analysis
+
+- Trusting summary statistics without plots. Anscombe's quartet is the classic warning.
+- Deleting outliers automatically. In maintenance data, the outlier is often the early sign of the failure you want to predict.
+- Exploring the test set. Decisions made after looking at test data leak information and give an over-optimistic score; see [overfitting and underfitting](/ai-data-engineering/overfitting-and-underfitting/).
+- Ignoring time. Shuffled sensor data hides drift, outages and changes of operating mode.
+- Not writing anything down. Unrecorded cleaning choices cannot be repeated or reviewed.
+
+EDA also tells you what kind of model is worth trying. A clear target column points to [supervised learning](/ai-data-engineering/supervised-vs-unsupervised-learning/); groups that appear in scatter plots without a label suggest clustering. With very large tables, work on a representative sample first, as discussed in [the five Vs of big data](/ai-data-engineering/big-data-five-vs/).
+
+## Exploratory data analysis interview and viva questions
+
+1. **What is the purpose of exploratory data analysis?** To understand the structure, quality, distributions and relationships in a dataset before modelling, so that problems are fixed and modelling choices are based on what the data actually shows.
+2. **What does Anscombe's quartet demonstrate?** Four datasets with the same mean, correlation and regression line look completely different when plotted, so summary statistics must always be checked with plots.
+3. **How does the box plot rule flag outliers?** A value more than 1.5 times the interquartile range below Q1 or above Q3 is flagged as a possible outlier.
+4. **Why can a z-score test miss an outlier in a small sample?** The outlier raises the mean and the standard deviation it is measured against, so its z-score shrinks; in the worked example a clear outlier scored only 2.80.
+5. **Why should you not explore the test set?** Choices made after seeing test data leak information into the model, so the test score no longer gives a fair estimate of performance on new data.

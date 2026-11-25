@@ -3,6 +3,7 @@ title: "Production Planning and Control: Functions and Steps"
 description: "Production planning and control explained: forecasting, aggregate planning, MPS, MRP, routing, loading, scheduling, dispatching, follow-up and an MRP example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-25
 discipline: manufacturing-engineering
 subcategory: production-planning
 focusKeyword: "production planning and control"
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Production planning and control** (PPC) is the function that decides **what, how much, when, where and how** to produce, and then makes sure it happens. **Planning** covers **forecasting**, **aggregate planning**, the **master production schedule (MPS)**, **material requirements planning (MRP)**, **capacity planning**, **routing** and **scheduling**. **Control** covers **dispatching** (releasing work orders), **follow-up or expediting**, and **corrective action** when actual output differs from the plan. The goal is to meet customer demand on time at minimum cost, with balanced inventory and full use of capacity.
+**Production planning and control** (PPC) is the function that decides what, how much, when, where and how to produce, then makes sure it happens. Planning covers forecasting, aggregate planning, the master production schedule, MRP, routing and scheduling; control covers dispatching, follow-up and corrective action, so demand is met on time at minimum cost.
 
 </Key>
 
@@ -45,7 +46,7 @@ A factory has limited machines, people and materials, and many orders competing 
 
 ## The PPC hierarchy
 
-<figure>
+<figure class="anim">
 <svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Planning hierarchy from long term to short term: demand forecast and orders feed aggregate planning, then master production schedule, then MRP using bill of materials and inventory records, then capacity planning, then scheduling and dispatching on the shop floor, with feedback from shop floor control back to planning">
 <g stroke="#0b2545" stroke-width="2">
 <rect x="200" y="15" width="200" height="34" rx="6" fill="#eef1f6" /><rect x="200" y="65" width="200" height="34" rx="6" fill="#e6f6f4" /><rect x="200" y="115" width="200" height="34" rx="6" fill="#e6f6f4" /><rect x="200" y="165" width="200" height="34" rx="6" fill="#fff7e0" /><rect x="200" y="215" width="200" height="34" rx="6" fill="#fff7e0" /><rect x="200" y="260" width="200" height="34" rx="6" fill="#ffe9e7" />
@@ -54,6 +55,8 @@ A factory has limited machines, people and materials, and many orders competing 
 <g stroke="#13a89e" stroke-width="2"><path d="M300 49v12M300 99v12M300 149v12M300 199v12M300 249v7M160 182h36M440 182h-36" /></g>
 <g fill="#13a89e"><path d="M295 60l5 6 5-6z" /><path d="M295 110l5 6 5-6z" /><path d="M295 160l5 6 5-6z" /><path d="M295 210l5 6 5-6z" /><path d="M295 255l5 6 5-6z" /><path d="M194 177l6 5-6 5z" /><path d="M406 177l-6 5 6 5z" /></g>
 <path d="M400 277H560V95H404" stroke="#b42318" stroke-width="2" stroke-dasharray="5 4" fill="none" /><path d="M412 90l-9 5 9 5z" fill="#b42318" />
+<g stroke="#ffffff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M300 49v12M300 99v12M300 149v12M300 199v12M300 249v7M160 182h36M440 182h-36" /></g>
+<path class="anim-flow-slow" d="M400 277H560V95H404" stroke="#ffd2cc" stroke-width="1.5" fill="none" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
 <text x="300" y="37">Forecast and customer orders</text><text x="300" y="87">Aggregate (sales and ops) plan</text><text x="300" y="137">Master production schedule</text><text x="300" y="187">MRP</text><text x="300" y="237">Capacity check, scheduling</text><text x="300" y="282">Dispatch and shop floor control</text>
 <text x="90" y="179">Bill of materials</text><text x="90" y="195">(BOM)</text><text x="510" y="179">Inventory</text><text x="510" y="195">records</text>
@@ -126,6 +129,14 @@ Comparing actual output, lead times and costs with plans, and feeding results ba
 
 Lot sizing in MRP can use lot for lot, fixed order quantities or the [EOQ model](/manufacturing-engineering/eoq-inventory-model/), trading setup cost against inventory carrying cost.
 
+## Key formulas for production planning and control
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Gross requirement of a component | Gross = MPS quantity × quantity per parent from the BOM | Units of the component in the period |
+| Net requirement (MRP) | Net = Gross − On hand − Scheduled receipts + Safety stock | All in units of the component |
+| Order release period | Release = Need period − Lead time | Periods, usually weeks |
+
 ## Production planning and control by type of production
 
 | Production type | Example | PPC focus |
@@ -151,5 +162,12 @@ Planners measure how well the system works with indicators such as on time deliv
 
 Planning tools keep improving, but accurate data and clear ownership remain the foundation.
 
-
 ERP and manufacturing execution systems (MES) connect planning with real time shop floor data from machines and operators. Lean pull systems with kanban complement MRP by controlling work in progress and exposing the [seven wastes](/manufacturing-engineering/seven-wastes-lean/). Demand driven MRP, finite capacity scheduling, digital twins and AI based forecasting help plants react quickly. Accurate standard times from [time and motion study](/manufacturing-engineering/time-and-motion-study/) and reliable equipment through planned [maintenance](/manufacturing-engineering/types-of-maintenance/) remain the foundation of good production planning and control.
+
+## Production planning and control interview and viva questions
+
+1. **What is the difference between the planning and control parts of PPC?** Planning decides what, how much, when and how to produce through forecasting, aggregate planning, the MPS, MRP, routing and scheduling, while control covers dispatching, follow-up and corrective action when output differs from the plan.
+2. **What is the master production schedule?** It breaks the aggregate plan into specific end products and quantities per week, and it is the main link between sales commitments and production.
+3. **How does MRP calculate component requirements?** It explodes the MPS through the bill of materials, nets the result against inventory and scheduled receipts, and offsets orders by lead times.
+4. **What is the difference between level and chase strategies in aggregate planning?** Level production keeps output steady and lets inventory absorb demand swings, while chase changes output to follow demand.
+5. **What are the main limitations of basic MRP?** It assumes fixed lead times and infinite capacity, so capacity checks and lot sizing rules may change the planned orders.

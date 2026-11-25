@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/manufacturing-engineering/control-charts-spc.mdx
-src/content/articles/manufacturing-engineering/eoq-inventory-model.mdx
-src/content/articles/manufacturing-engineering/manufacturing-processes-classification.mdx
-src/content/articles/manufacturing-engineering/metal-casting-process.mdx
-src/content/articles/manufacturing-engineering/production-planning-and-control.mdx
-src/content/articles/manufacturing-engineering/seven-wastes-lean.mdx
-src/content/articles/manufacturing-engineering/six-sigma-dmaic.mdx
-src/content/articles/manufacturing-engineering/time-and-motion-study.mdx
 src/content/articles/manufacturing-engineering/types-of-maintenance.mdx
 src/content/articles/marine-engineering/fixed-vs-floating-offshore-structures.mdx
 src/content/articles/marine-engineering/ship-auxiliary-machinery.mdx
