@@ -1,4 +1,4 @@
-# Manual: check the .csv pin images from outside, as Pinterestbot sees them.
+# Manual: check the .csv pin images and videos from outside, as Pinterestbot sees them.
 # Hostinger's CDN rate-limits bursts from one IP (about 30 fast requests, then HTTP 429),
 # so requests are paced and a 429 is retried with backoff instead of counted as a failure.
 name: Check pin images
@@ -29,6 +29,12 @@ jobs:
             r=$(bash /tmp/fetch.sh "https://zentaengineering.com/pins/$id.jpg" /tmp/m.jpg "Pinterestbot/1.0")
             echo "$r B  $id"
             case "$r" in "200 image/jpeg "*) ;; *) bad=$((bad+1));; esac
+            v=$(basename "$id")
+            if [ -f "public/videos/$v-9x16.mp4" ]; then
+              r=$(bash /tmp/fetch.sh "https://zentaengineering.com/videos/$v-9x16.mp4" /tmp/m.mp4 "Pinterestbot/1.0")
+              echo "$r B  $v-9x16.mp4"
+              case "$r" in "200 video/mp4 "*) ;; *) bad=$((bad+1));; esac
+            fi
           done
           echo "failed: $bad"
           [ "$bad" = 0 ]
