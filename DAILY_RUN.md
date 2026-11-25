@@ -31,6 +31,7 @@ File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that al
 
 ## 2b. Upgrade 8 existing articles
 Take the first 8 file paths in `upgrade-backlog.txt`. For each, bring it up to the current format without changing facts or slug: animate its diagram(s) per the animation rule (no change to geometry or text), rewrite the Short answer box to 40 to 60 words, add the Key formulas table if it uses equations, and add the interview and viva questions section. Use renewable-energy/how-solar-pv-systems-work.mdx as the model. Set `updatedDate` to today. Delete those 8 lines from `upgrade-backlog.txt`. Check them exactly like new articles (missing= must be empty). If the backlog is empty, skip this step.
+Lines with a `# GSC` note are Search Console quick wins: besides the upgrade, rewrite the title (under 60 characters) and description (under 155) so they contain the listed search terms naturally, keep the slug, and add 2 to 3 links to that article from related articles in the same or a nearby discipline.
 
 ## 2c. Explainer videos (every new article, plus 6 from the backlog)
 Every article must have a blue-grid explainer video. Follow `scripts/video/README.md` exactly; it holds the owner's style rules.
