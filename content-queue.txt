@@ -104,11 +104,11 @@ mechanical-engineering|pumps-compressors-turbines|Pump Cavitation and NPSH Expla
 electrical-engineering|protection-relays|Differential Protection of Transformers|transformer-differential-protection|working-principle|differential protection|2026-11-24
 electronics-engineering|embedded-systems|UART vs SPI vs I2C Communication Compared|uart-vs-spi-vs-i2c|comparison|uart vs spi vs i2c|2026-11-24
 civil-engineering|geotechnical|Soil Compaction Tests: Proctor Test Explained|proctor-compaction-test|explanation|proctor compaction test|2026-11-24
-chemical-engineering|process-equipment|Storage Tank Types in Process Plants|storage-tank-types|equipment|storage tank types|todo
-computer-science|web-development|Frontend vs Backend Development Explained|frontend-vs-backend|comparison|frontend vs backend|todo
-automation-robotics|industrial-networks|PROFINET vs EtherNet/IP Compared|profinet-vs-ethernet-ip|comparison|profinet vs ethernet/ip|todo
-ai-data-engineering|data-science|Exploratory Data Analysis (EDA) Steps|exploratory-data-analysis|explanation|exploratory data analysis|todo
-telecommunication-engineering|satellite-communication|Satellite Link Budget Calculation Explained|what-is-satellite-link-budget|fundamentals|satellite link budget|todo
+chemical-engineering|process-equipment|Storage Tank Types in Process Plants|storage-tank-types|equipment|storage tank types|2026-11-25
+computer-science|web-development|Frontend vs Backend Development Explained|frontend-vs-backend|comparison|frontend vs backend|2026-11-25
+automation-robotics|industrial-networks|PROFINET vs EtherNet/IP Compared|profinet-vs-ethernet-ip|comparison|profinet vs ethernet/ip|2026-11-25
+ai-data-engineering|data-science|Exploratory Data Analysis (EDA) Steps|exploratory-data-analysis|explanation|exploratory data analysis|2026-11-25
+telecommunication-engineering|satellite-communication|Satellite Link Budget Calculation Explained|what-is-satellite-link-budget|fundamentals|satellite link budget|2026-11-25
 petroleum-engineering|refining|Fluid Catalytic Cracking (FCC) Process|fluid-catalytic-cracking|working-principle|fluid catalytic cracking|todo
 renewable-energy|ev-charging|EV Battery Management System (BMS) Explained|ev-battery-management-system|fundamentals|battery management system|todo
 environmental-engineering|emissions-compliance|NOx Control: SCR and SNCR Explained|nox-control-scr-sncr|working-principle|nox control|todo
