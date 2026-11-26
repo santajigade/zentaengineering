@@ -1,0 +1,171 @@
+---
+title: "Process Capability: Cp, Cpk, Pp and Ppk Explained"
+description: "Process capability explained: Cp, Cpk, Pp, Ppk and Cpm formulas, what values like 1.33 mean, and a worked shaft diameter example."
+pubDate: 2026-11-26
+reviewedDate: 2026-11-26
+discipline: manufacturing-engineering
+subcategory: spc
+focusKeyword: "process capability"
+image: { src: /images/featured/what-is-process-capability.webp, alt: "Process Capability: Cp, Cpk, Pp and Ppk Explained: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [spc, process-capability, cp-cpk, quality-control, six-sigma]
+faq:
+  - q: "Can Cpk be higher than Cp?"
+    a: "No. Cpk equals Cp when the process mean sits exactly halfway between the specification limits, and it is smaller whenever the mean moves toward either limit. A Cpk value above Cp means a calculation error, usually a wrong limit or a mixed up standard deviation."
+  - q: "What does a negative Cpk mean?"
+    a: "The process mean lies outside the specification limits, so more than half of the output is out of tolerance on that side. The process needs to be re-centred before any capability study is meaningful."
+  - q: "How much data is needed for a process capability study?"
+    a: "Enough to estimate the standard deviation well and to show the process is stable. A common practice in the AIAG SPC manual is at least 25 subgroups, often of 4 or 5 parts each, about 100 readings, taken while a control chart shows no special causes."
+references:
+  - text: "D. C. Montgomery, Introduction to Statistical Quality Control, 8th ed., Wiley, 2019"
+  - text: "AIAG, Statistical Process Control (SPC) Reference Manual, 2nd ed., 2005"
+  - text: "AIAG, Production Part Approval Process (PPAP), 4th ed., 2006"
+  - text: "ISO 22514-2:2017 Statistical methods in process management, Capability and performance, Part 2: Process capability and performance of time-dependent process models"
+  - text: "NIST/SEMATECH e-Handbook of Statistical Methods, Section 6.1.6 What is Process Capability?, National Institute of Standards and Technology"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Process capability** is a measure of how well a stable process can hold a dimension or property within its specification limits. It compares the tolerance width with the natural spread of the process, six standard deviations. Cp looks at spread alone; Cpk also accounts for how far the mean sits from the nearer limit.
+
+</Key>
+
+Process capability tells you whether a stable process can make parts inside the tolerance the drawing asks for. A control chart answers a different question: whether the process is stable at all. Capability only makes sense after that, because the indices assume the spread you measured today is the spread you will get tomorrow. Two numbers do most of the work on the shop floor, Cp and Cpk, and both come from the same two inputs: the specification limits and the process standard deviation.
+
+
+<ArticleVideo slug="what-is-process-capability" title="How process capability works" uploadDate="2026-11-26" />
+
+## Specification limits and natural process spread
+
+The **specification limits** come from the design: an upper specification limit (USL) and a lower specification limit (LSL), for example a shaft diameter of 25.00 ± 0.05 mm. The distance USL − LSL is the tolerance.
+
+The **natural spread** comes from the process. For a normally distributed characteristic, about 99.73% of parts fall within ±3σ of the mean, so the process occupies a band 6σ wide. Capability compares these two widths. If 6σ is smaller than the tolerance, the process has room to spare; if it is wider, some parts will fall outside the limits however carefully the machine is set.
+
+Here σ is the short term (within subgroup) standard deviation. From an X-bar and R chart it is estimated as R-bar divided by the constant d2, which depends on the subgroup size (2.326 for subgroups of 5). The [control charts in SPC](/manufacturing-engineering/control-charts-spc/) article covers how these charts are built.
+
+<figure class="anim">
+<svg width="600" height="330" viewBox="0 0 600 330" fill="none" role="img" aria-label="Process capability diagram for the worked example: a normal curve of shaft diameters with mean 25.01 mm and standard deviation 0.0120 mm sits between the lower specification limit 24.95 mm and upper specification limit 25.05 mm; the mean is offset 0.01 mm from the target 25.00 mm toward the upper limit, so the distance to the USL is 3.32 sigma and a small tail of parts falls above the USL, giving Cp 1.38 and Cpk 1.11; a grey dashed curve shows the same process centred on target">
+<g stroke="#0b2545" stroke-width="1.5"><path d="M40 240H560" /></g>
+<g stroke="#b42318" stroke-width="2"><path d="M121.4 60V240M478.6 60V240" /></g>
+<path d="M300.0 70V240" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="4 4" />
+<path d="M136.6 239.9 L140.7 239.8 L144.8 239.8 L148.9 239.7 L152.9 239.6 L157.0 239.4 L161.1 239.2 L165.2 238.9 L169.3 238.5 L173.4 238.0 L177.5 237.4 L181.5 236.6 L185.6 235.6 L189.7 234.4 L193.8 232.9 L197.9 231.1 L202.0 228.9 L206.0 226.2 L210.1 223.1 L214.2 219.5 L218.3 215.3 L222.4 210.6 L226.5 205.2 L230.6 199.3 L234.6 192.8 L238.7 185.7 L242.8 178.1 L246.9 170.0 L251.0 161.7 L255.1 153.1 L259.2 144.5 L263.2 135.9 L267.3 127.6 L271.4 119.8 L275.5 112.5 L279.6 106.0 L283.7 100.4 L287.7 96.0 L291.8 92.7 L295.9 90.7 L300.0 90.0 L304.1 90.7 L308.2 92.7 L312.3 96.0 L316.3 100.4 L320.4 106.0 L324.5 112.5 L328.6 119.8 L332.7 127.6 L336.8 135.9 L340.8 144.5 L344.9 153.1 L349.0 161.7 L353.1 170.0 L357.2 178.1 L361.3 185.7 L365.4 192.8 L369.4 199.3 L373.5 205.2 L377.6 210.6 L381.7 215.3 L385.8 219.5 L389.9 223.1 L394.0 226.2 L398.0 228.9 L402.1 231.1 L406.2 232.9 L410.3 234.4 L414.4 235.6 L418.5 236.6 L422.5 237.4 L426.6 238.0 L430.7 238.5 L434.8 238.9 L438.9 239.2 L443.0 239.4 L447.1 239.6 L451.1 239.7 L455.2 239.8 L459.3 239.8 L463.4 239.9" stroke="#7b8794" stroke-width="1.5" stroke-dasharray="6 5" />
+<path d="M172.3 239.9 L176.4 239.8 L180.5 239.8 L184.6 239.7 L188.7 239.6 L192.7 239.4 L196.8 239.2 L200.9 238.9 L205.0 238.5 L209.1 238.0 L213.2 237.4 L217.2 236.6 L221.3 235.6 L225.4 234.4 L229.5 232.9 L233.6 231.1 L237.7 228.9 L241.8 226.2 L245.8 223.1 L249.9 219.5 L254.0 215.3 L258.1 210.6 L262.2 205.2 L266.3 199.3 L270.4 192.8 L274.4 185.7 L278.5 178.1 L282.6 170.0 L286.7 161.7 L290.8 153.1 L294.9 144.5 L298.9 135.9 L303.0 127.6 L307.1 119.8 L311.2 112.5 L315.3 106.0 L319.4 100.4 L323.5 96.0 L327.5 92.7 L331.6 90.7 L335.7 90.0 L339.8 90.7 L343.9 92.7 L348.0 96.0 L352.1 100.4 L356.1 106.0 L360.2 112.5 L364.3 119.8 L368.4 127.6 L372.5 135.9 L376.6 144.5 L380.6 153.1 L384.7 161.7 L388.8 170.0 L392.9 178.1 L397.0 185.7 L401.1 192.8 L405.2 199.3 L409.2 205.2 L413.3 210.6 L417.4 215.3 L421.5 219.5 L425.6 223.1 L429.7 226.2 L433.8 228.9 L437.8 231.1 L441.9 232.9 L446.0 234.4 L450.1 235.6 L454.2 236.6 L458.3 237.4 L462.3 238.0 L466.4 238.5 L470.5 238.9 L474.6 239.2 L478.7 239.4 L482.8 239.6 L486.9 239.7 L490.9 239.8 L495.0 239.8 L499.1 239.9 Z" fill="#e6f6f4" stroke="#13a89e" stroke-width="2.5" />
+<path class="anim-blink" d="M478.6 240H516.3" stroke="#b42318" stroke-width="6" />
+<path d="M335.7 90V240" stroke="#0b2545" stroke-width="1.5" />
+<circle class="anim-pulse" cx="335.7" cy="90" r="5" fill="#f5b800" stroke="#0b2545" stroke-width="1.5" />
+<path class="anim-flow" d="M300.0 78H333.7" stroke="#0b2545" stroke-width="2" />
+<path d="M335.7 118H478.6" stroke="#0b2545" stroke-width="1.5" />
+<path d="M341.7 114L335.7 118L341.7 122M472.6 114L478.6 118L472.6 122" stroke="#0b2545" stroke-width="1.5" />
+<path d="M121.4 272H478.6M127.4 268L121.4 272L127.4 276M472.6 268L478.6 272L472.6 276" stroke="#b42318" stroke-width="1.5" />
+<path d="M206.7 302H464.7M212.7 298L206.7 302L212.7 306M458.7 298L464.7 302L458.7 306" stroke="#13a89e" stroke-width="1.5" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="121.4" y="40" fill="#b42318" font-weight="700">LSL</text><text x="121.4" y="54" fill="#b42318">24.95 mm</text>
+<text x="478.6" y="40" fill="#b42318" font-weight="700">USL</text><text x="478.6" y="54" fill="#b42318">25.05 mm</text>
+<text x="294.0" y="66" text-anchor="end" fill="#7b8794">Target 25.00</text>
+<text x="343.7" y="74" text-anchor="start">Mean 25.01</text>
+<text x="407.1" y="110">3.32σ</text>
+<text x="300.0" y="288" fill="#b42318">Tolerance USL − LSL = 0.10 mm</text>
+<text x="335.7" y="320" fill="#13a89e">Process spread 6σ = 0.072 mm</text>
+<text x="490" y="208" text-anchor="start" fill="#b42318">About 446 ppm</text><text x="490" y="224" text-anchor="start" fill="#b42318">above USL</text>
+<text x="80" y="150" text-anchor="middle">Cp = 1.38</text><text x="80" y="168" text-anchor="middle">Cpk = 1.11</text>
+</g>
+</svg>
+<figcaption>Process capability for the worked example. The tolerance (red) is 0.10 mm wide and the 6σ process spread (teal) is 0.072 mm, so Cp = 1.38. The mean sits 0.01 mm above target, only 3.32σ from the USL, so Cpk drops to 1.11 and a small tail of parts falls above the USL. The grey dashed curve is the same process centred on target.</figcaption>
+</figure>
+
+## Cp: the potential capability
+
+$$
+C_p = \frac{USL - LSL}{6\sigma}
+$$
+
+Cp is the ratio of tolerance to process spread. It ignores where the process is centred, so it shows what the process could do if the mean sat exactly in the middle of the tolerance. Cp = 1 means the 6σ band just fills the tolerance, and a centred normal process then makes about 2700 parts per million (0.27%) outside the limits. Cp = 2 means the spread uses half the tolerance.
+
+## Cpk: capability with centring
+
+$$
+C_{pk} = \min\left( \frac{USL - \mu}{3\sigma}, \frac{\mu - LSL}{3\sigma} \right)
+$$
+
+Cpk measures the distance from the mean μ to the nearer specification limit, in units of 3σ. The two terms inside the brackets are often written Cpu and Cpl. When the process is perfectly centred, Cpu = Cpl = Cp = Cpk. When the mean drifts toward one limit, Cpk falls while Cp stays the same, and that gap tells you the fix is to re-centre the process, not to reduce its variation. For a one sided specification, such as a minimum tensile strength or a maximum surface roughness, only the relevant term is used.
+
+A useful way to read Cpk is through the distance to the limit in standard deviations: Z = 3 × Cpk. A Cpk of 1.33 puts the nearer limit 4σ from the mean; a Cpk of 1.67 puts it 5σ away.
+
+## Pp and Ppk: process performance
+
+Pp and Ppk use the same formulas as Cp and Cpk, but with the overall sample standard deviation of all readings instead of the within subgroup estimate. The overall figure includes shifts between subgroups, such as tool wear, material batches and shift changes, so it is usually larger, and Pp and Ppk usually come out lower than Cp and Cpk. ISO 22514-2 and the AIAG SPC manual separate the two families this way: Cp and Cpk describe what the process can do in the short term, while Pp and Ppk describe what it actually delivered over the study period. A big gap between Cpk and Ppk points to variation between subgroups that a control chart should be able to find.
+
+## Cpm: capability around the target
+
+Cp and Cpk do not care whether the mean is on the nominal value, only whether parts are inside the limits. The Taguchi index Cpm penalises distance from the target T:
+
+$$
+C_{pm} = \frac{USL - LSL}{6\sqrt{\sigma^2 + (\mu - T)^2}}
+$$
+
+Cpm equals Cp when μ = T and falls as the mean moves away from target, even while every part is still in tolerance.
+
+## Key formulas for process capability
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Potential capability | Cp = (USL − LSL) / 6σ | USL, LSL in the measured unit; σ = within subgroup standard deviation |
+| Upper capability | Cpu = (USL − μ) / 3σ | μ = process mean |
+| Lower capability | Cpl = (μ − LSL) / 3σ | μ = process mean |
+| Capability with centring | Cpk = min(Cpu, Cpl) | dimensionless |
+| Performance indices | Pp, Ppk: same formulas with overall s | s = overall sample standard deviation |
+| Taguchi index | Cpm = (USL − LSL) / 6√(σ² + (μ − T)²) | T = target value |
+| Sigma estimate from R chart | σ = R-bar / d2 | d2 = 2.326 for subgroups of 5 |
+| Distance to nearer limit | Z = 3 × Cpk | in standard deviations |
+
+<Calculator path="statistics/process-capability" title="Process Capability Calculator" />
+
+## Worked example: shaft diameter on a CNC lathe
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Shaft diameter specification 25.00 ± 0.05 mm, so LSL = 24.95 mm and USL = 25.05 mm. An X-bar and R chart of 25 subgroups of 5 shafts shows a stable process with grand mean 25.01 mm and average range R-bar = 0.028 mm.</dd>
+<dt>Find</dt><dd>σ, Cp, Cpu, Cpl and Cpk, and the expected fraction above the USL.</dd>
+<dt>Assumptions</dt><dd>The diameter is normally distributed and the process is in statistical control. d2 = 2.326 for subgroups of 5.</dd>
+<dt>Solution</dt><dd>σ = R-bar ÷ d2 = 0.028 ÷ 2.326 = 0.01204 mm<br />6σ = 0.0722 mm, 3σ = 0.0361 mm<br />Cp = (25.05 − 24.95) ÷ 0.0722 = 0.10 ÷ 0.0722 = 1.38<br />Cpu = (25.05 − 25.01) ÷ 0.0361 = 0.04 ÷ 0.0361 = 1.11<br />Cpl = (25.01 − 24.95) ÷ 0.0361 = 0.06 ÷ 0.0361 = 1.66<br />Cpk = min(1.11, 1.66) = 1.11<br />Distance to USL: Z = 0.04 ÷ 0.01204 = 3.32σ, which leaves a normal tail of about 0.045%, or about 446 ppm above the USL. Below the LSL, Z = 4.98σ, about 0.3 ppm.</dd>
+<dt>Answer</dt><dd><strong>Cp = 1.38 and Cpk = 1.11, with about 446 ppm of shafts expected above the USL</strong></dd>
+<dt>Limitations</dt><dd>The ppm figures rely on the normal tail, which real processes do not always follow far from the mean. Re-centring the mean on 25.00 mm would raise Cpk to equal Cp, 1.38, and cut the expected out of tolerance fraction to about 33 ppm in total, without any change to the machine's variation.</dd>
+</dl>
+</Example>
+
+Here Cp looks healthy and Cpk does not, so the fix is an offset correction on the lathe rather than a more precise machine.
+
+## What values of Cp and Cpk are acceptable
+
+| Cp (centred process) | Expected out of tolerance, two sided |
+| --- | --- |
+| 1.00 | about 2700 ppm |
+| 1.33 | about 66 ppm |
+| 1.50 | about 6.8 ppm |
+| 1.67 | about 0.54 ppm |
+| 2.00 | about 0.002 ppm |
+
+Montgomery recommends minimum capability of 1.33 for existing processes and 1.50 for new ones, with higher values for safety, strength or critical parameters. In automotive work, the AIAG PPAP manual treats a preliminary Ppk above 1.67 as meeting the acceptance criteria, and 1.33 to 1.67 as possibly acceptable after customer review. A [Six Sigma](/manufacturing-engineering/six-sigma-dmaic/) process has Cp = 2; allowing the conventional 1.5σ long term drift of the mean gives Cpk = 1.5 and the familiar 3.4 defects per million.
+
+## Before you trust a capability index
+
+- Check a control chart first. Indices calculated from a process that is out of control do not describe anything stable.
+- The ppm figures assume a normal distribution. Flatness, runout and other characteristics bounded at zero are often skewed and need a transformation or a non-normal method (ISO 22514-2 covers these).
+- Gauge variation adds to the observed σ, so a poor gauge makes a good process look worse. A gauge study should come before the capability study.
+- An index is an estimate. Montgomery gives confidence intervals for Cp and Cpk, and they are wide when the sample is small, so a Cp from a short run can sit well above or below the true value.
+
+Capability studies feed the wider quality system described in [quality control vs quality assurance](/manufacturing-engineering/quality-control-vs-quality-assurance/), and low Cpk characteristics are natural inputs to a [process FMEA](/safety-engineering/fmea-explained/).
+
+## Process capability interview and viva questions
+
+1. **What is the difference between Cp and Cpk?** Cp compares the tolerance with the 6σ process spread and ignores centring; Cpk uses the distance from the mean to the nearer limit, so it falls when the process is off centre.
+2. **When are Cp and Cpk equal?** When the process mean sits exactly midway between the USL and LSL.
+3. **Why must a process be in control before a capability study?** The indices assume a stable mean and spread; with special causes present, the calculated σ and μ do not predict future output.
+4. **What is the difference between Cpk and Ppk?** Cpk uses the within subgroup standard deviation, usually R-bar over d2, while Ppk uses the overall standard deviation of all readings, so Ppk includes drift between subgroups.
+5. **What fraction is out of tolerance at Cp = 1 for a centred normal process?** About 0.27%, or 2700 ppm, because the specification limits sit at ±3σ.

@@ -1,0 +1,217 @@
+---
+title: "Battery Management System (BMS): Functions and Working"
+description: "Battery management system explained: cell sensing, protection, SoC and SoH estimation, cell balancing, contactors and a worked EV pack example."
+pubDate: 2026-11-26
+reviewedDate: 2026-11-26
+discipline: renewable-energy
+subcategory: ev-charging
+focusKeyword: "battery management system"
+image: { src: /images/featured/what-is-battery-management-system.webp, alt: "Battery Management System (BMS): Functions and Working: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [battery-management-system, bms, lithium-ion, cell-balancing, state-of-charge]
+faq:
+  - q: "Can a lithium-ion pack work without a BMS?"
+    a: "Not safely. Lithium-ion cells have narrow voltage and temperature windows, and a series string drifts out of balance with use. Without a BMS nothing stops one cell being overcharged or overdischarged while the pack voltage still looks normal, which can damage the cell or start thermal runaway."
+  - q: "Why does an EV show a different range after the car has rested?"
+    a: "While driving, the BMS estimates SoC mainly by counting current, which slowly accumulates sensor error. After a rest the cell voltage relaxes towards its open circuit value, and the BMS can correct the SoC from the OCV and SoC curve. The displayed range then jumps to the corrected value."
+  - q: "Why is passive balancing used if it wastes energy?"
+    a: "It is simple, cheap and reliable: one resistor and one switch per cell, usually built into the cell monitoring chip. In a pack that is well matched the imbalance is small, so the energy burned is small too. Active balancing pays off mainly in large packs or ones with poorly matched or aged cells."
+references:
+  - text: "G. L. Plett, Battery Management Systems, Volume I: Battery Modeling, Artech House, 2015"
+  - text: "G. L. Plett, Battery Management Systems, Volume II: Equivalent-Circuit Methods, Artech House, 2016"
+  - text: "D. Andrea, Battery Management Systems for Large Lithium-Ion Battery Packs, Artech House, 2010"
+  - text: "K. W. Beard (ed.), Linden's Handbook of Batteries, 5th ed., McGraw-Hill, 2019"
+  - text: "IEC 62619:2022 Secondary cells and batteries containing alkaline or other non-acid electrolytes, Safety requirements for secondary lithium cells and batteries, for use in industrial applications"
+  - text: "ISO 26262:2018 Road vehicles, Functional safety"
+  - text: "UN ECE Regulation No. 100, Uniform provisions concerning the approval of vehicles with regard to specific requirements for the electric power train"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+A **battery management system** (BMS) is the electronic controller that keeps a lithium-ion pack safe and usable. It measures every cell voltage, the pack current and cell temperatures, estimates state of charge and state of health, balances the cells, sets charge and discharge limits, and opens the contactors when a value goes outside the safe window.
+
+</Key>
+
+A battery management system sits between the cells and everything that uses them: the motor inverter, the charger and the vehicle controller. Lithium-ion cells give high energy density, but each cell has to stay inside a narrow voltage and temperature window. An EV pack strings around a hundred cells in series, and the BMS watches each one, because the pack voltage alone cannot reveal one weak or overcharged cell.
+
+<figure class="anim">
+<svg width="600" height="352" viewBox="0 0 600 352" fill="none" role="img" aria-label="Battery management system block diagram: four of 96 series lithium-ion cells with sense wires from every cell junction to a cell monitoring chip (AFE), a passive balancing bleed resistor across cell 2, an NTC temperature sensor, a current shunt in the negative line, main positive and negative contactors with a precharge resistor, and a BMS controller that reads the AFE and shunt, drives the contactors and talks to the inverter over CAN while discharge current flows from the pack positive through the inverter and back to the pack negative">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="80" y="70" width="60" height="36" rx="4" fill="#e6f6f4" />
+<rect x="80" y="126" width="60" height="36" rx="4" fill="#e6f6f4" />
+<rect x="80" y="182" width="60" height="36" rx="4" fill="#e6f6f4" />
+<rect x="80" y="238" width="60" height="36" rx="4" fill="#e6f6f4" />
+<path d="M110 106V126M110 162V182M110 218V238" />
+<rect x="180" y="48" width="80" height="244" rx="6" fill="#eef1f6" />
+<rect x="290" y="110" width="120" height="90" rx="6" fill="#eef1f6" />
+<rect x="470" y="130" width="100" height="80" rx="6" fill="#eef1f6" />
+<path d="M285 40V16H305M335 16H355V40" />
+<rect x="305" y="10" width="30" height="12" fill="#fff" />
+<path d="M305 34H335M305 34V40M335 34V40" />
+<path d="M305 294H335M305 294V300M335 294V300" />
+<rect x="380" y="294" width="40" height="12" fill="#fff" />
+</g>
+<path d="M110 70V40H305M335 40H520V130" stroke="#13a89e" stroke-width="3" />
+<path d="M520 210V300H420M380 300H335M305 300H110V274" stroke="#13a89e" stroke-width="3" />
+<path class="anim-flow" d="M110 70V40H520V130" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 8" />
+<path class="anim-flow" d="M520 210V300H110V274" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 8" />
+<g stroke="#7b8794" stroke-width="1.5">
+<path d="M110 55H180M110 116H180M110 172H180M110 228H180M110 287H180" />
+</g>
+<g stroke="#e8590c" stroke-width="2" class="anim-blink">
+<path d="M160 116V132M160 156V172" />
+<rect x="154" y="132" width="12" height="24" fill="#ffe8d9" />
+</g>
+<g stroke="#0b2545" stroke-width="1.5" stroke-dasharray="4 4">
+<path d="M320 110V46M320 200V294M400 294V200" />
+</g>
+<path class="anim-flow-slow" d="M260 155H290" stroke="#13a89e" stroke-width="2.5" />
+<path class="anim-flow-slow" d="M410 175H470" stroke="#13a89e" stroke-width="2.5" />
+<circle class="anim-pulse" cx="66" cy="200" r="6" fill="#f5b800" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="110" y="92">Cell 1</text><text x="110" y="148">Cell 2</text><text x="110" y="204">Cell 3</text><text x="110" y="260">Cell 4</text>
+<text x="220" y="150">Cell</text><text x="220" y="166">monitor</text><text x="220" y="182">(AFE)</text>
+<text x="350" y="145" font-weight="700">BMS controller</text><text x="350" y="163">SoC, SoH,</text><text x="350" y="181">limits, faults</text>
+<text x="520" y="165">Inverter</text><text x="520" y="181">and motor</text>
+<text x="440" y="168">CAN</text>
+<text x="400" y="322">Shunt</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
+<text x="362" y="20">Precharge R</text>
+<text x="326" y="62">K+</text>
+<text x="326" y="288">K−</text>
+<text x="56" y="204" text-anchor="end">NTC</text>
+<text x="60" y="322">4 of 96 series cells shown</text>
+<text x="60" y="342" fill="#e8590c">Orange: passive balancing bleed resistor across cell 2</text>
+</g>
+</svg>
+<figcaption>Battery management system in an EV pack. Discharge current leaves the pack positive, flows through the main contactor K+ and the inverter, and returns through the shunt and K− to the pack negative. The cell monitor measures every junction voltage; the controller reads it and the shunt, and drives the contactors.</figcaption>
+</figure>
+
+
+<ArticleVideo slug="what-is-battery-management-system" title="How a battery management system works" uploadDate="2026-11-26" />
+
+## What a battery management system does
+
+Andrea and Plett group the work of a BMS like this:
+
+- Sensing: every series cell voltage, the pack current through a shunt or Hall sensor, cell and coolant temperatures from thermistors, and the pack voltage on both sides of the contactors.
+- Protection: overvoltage, undervoltage, overcurrent, over and under temperature, and loss of insulation between the high voltage system and the chassis. The response is first a reduced current limit, and finally opening the contactors.
+- State estimation: state of charge (SoC), state of health (SoH) and the power the pack can deliver or accept right now.
+- Balancing: bringing cells in a series string back to the same SoC.
+- Thermal management: asking the cooling or heating system for more or less flow.
+- Communication and logging: sending limits and states to the vehicle controller and charger, usually over CAN, and storing faults and history.
+
+## Why lithium-ion cells need a BMS
+
+A lithium-ion cell is only safe and long lived inside its window. The upper charge voltage is typically about 4.2 V for NMC cells and about 3.65 V for LFP cells, and the lower cut off is typically 2.5 to 3.0 V depending on chemistry; the cell datasheet gives the exact values. Overcharge can lead to lithium plating, gas generation and thermal runaway. Overdischarge can dissolve the copper current collector. Charging at low temperature also causes lithium plating, so the BMS cuts or blocks charge current when the cells are cold.
+
+In a series string the same current flows through every cell, but the cells differ slightly in capacity, self discharge and temperature. Over many cycles their SoC drifts apart. The weakest cell reaches the upper limit first on charge and the lower limit first on discharge, so it sets the usable capacity of the whole pack. The comparison of [lithium-ion and lead-acid batteries](/renewable-energy/lithium-ion-vs-lead-acid/) shows why lead-acid strings can get by with float charging and lithium-ion strings cannot.
+
+## BMS architectures
+
+- Centralised: one board with sense wires running to every cell. It is cheap for small packs, but the wiring gets heavy.
+- Distributed or modular: a cell monitoring chip, often called the analog front end (AFE), sits on each module. It measures cell voltages and temperatures and passes them over an isolated daisy chain link to a master controller. Most EV and stationary packs use this layout, including the racks in [battery energy storage systems](/renewable-energy/battery-energy-storage-systems/).
+- Wireless: the module monitors talk to the master by radio, so the daisy chain harness and its connectors are gone.
+
+Because the BMS can disconnect a high voltage battery, its safety functions are developed under ISO 26262 in road vehicles. Industrial lithium batteries are tested to IEC 62619, and UN ECE R100 covers the electric power train for vehicle approval.
+
+## State of charge estimation
+
+State of charge is the remaining charge as a fraction of the present capacity. The basic method is coulomb counting:
+
+$$
+SoC(t) = SoC(0) - \frac{1}{Q_n} \int_0^t \eta \, i(\tau)\, d\tau
+$$
+
+with discharge current positive, Qn the present cell capacity in Ah and η the coulombic efficiency. It is simple, but any offset in the current sensor adds up over time, and so does an error in the starting SoC.
+
+The second method uses the open circuit voltage (OCV), which maps to SoC through a curve measured for the cell. It only holds after the cell has rested and the voltage has relaxed. LFP is hard here because its OCV curve is almost flat across the middle of the SoC range.
+
+Production BMS software combines the two. A model of the cell, usually an equivalent circuit of OCV, a series resistance and one or two RC pairs, predicts the terminal voltage, and a Kalman filter corrects the coulomb count by the difference between predicted and measured voltage. Plett's second volume develops this method in full.
+
+## State of health and power limits
+
+State of health tracks ageing. The two usual measures are capacity fade and resistance growth:
+
+$$
+SoH = \frac{Q_{now}}{Q_{new}} \times 100\%
+$$
+
+A rising series resistance R0 lowers the power the cell can deliver. The BMS limits discharge current so that the terminal voltage stays above the minimum:
+
+$$
+I_{max,dis} = \frac{OCV - V_{min}}{R_0}
+$$
+
+and limits charge current the same way against Vmax. These limits are what the vehicle controller and the DC fast charger read, which is why charging slows down at high SoC, as described in [EV charging levels and connectors](/renewable-energy/ev-charging-levels-and-connectors/).
+
+## Cell balancing: passive and active
+
+Passive balancing switches a bleed resistor across any cell whose SoC is higher than the others and burns its extra charge as heat. The bleed current is
+
+$$
+I_{bleed} = \frac{V_{cell}}{R_{bleed}}, \qquad P = \frac{V_{cell}^2}{R_{bleed}}
+$$
+
+so it is limited to a fraction of an ampere to keep the board cool. Balancing is usually done near the top of charge.
+
+Active balancing moves charge from high cells to low cells with capacitors, inductors or small transformers. It wastes less energy and works faster, but needs more parts and more control.
+
+## Contactors and precharge
+
+Two main contactors, K+ and K−, connect the pack to the high voltage bus. The inverter input has a large DC link capacitor, so closing straight onto it would cause a damaging inrush current. The BMS first closes K− and a precharge contactor in series with a resistor. The capacitor then charges with time constant
+
+$$
+\tau = R_{pre} C_{link}
+$$
+
+When the bus voltage is close to the pack voltage, the BMS closes K+ and opens the precharge path. In a fault it opens the contactors, after first asking the inverter to reduce current where time allows.
+
+## Key formulas for battery management system
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| SoC by coulomb counting | SoC(t) = SoC(0) − (1/Qn) ∫ η i dt | Qn = present capacity (Ah), i = discharge current (A), η = coulombic efficiency |
+| State of health | SoH = Qnow ÷ Qnew × 100% | capacities in Ah |
+| Discharge current limit | Imax,dis = (OCV − Vmin) ÷ R0 | V in volts, R0 = series resistance (Ω) |
+| Passive bleed current | Ibleed = Vcell ÷ Rbleed | A; Vcell in V, Rbleed in Ω |
+| Bleed power | P = Vcell² ÷ Rbleed | W |
+| Precharge time constant | τ = Rpre × Clink | s; R in Ω, C in F |
+
+## Worked example: SoC update and balancing time
+
+<Example>
+<dl>
+<dt>Given</dt><dd>EV pack of 96 cells in series, each 60 Ah, nominal 3.6 V. Starting SoC 80%. Discharge at a constant 30 A for 40 minutes. After the drive, one cell is 2% of capacity above the others. Bleed resistor 33 Ω, cell voltage 4.0 V during balancing.</dd>
+<dt>Find</dt><dd>Pack energy, SoC after the drive, the bleed current and power, and the time to remove the 2% imbalance.</dd>
+<dt>Assumptions</dt><dd>Coulombic efficiency 1, present capacity 60 Ah, cell voltage held at 4.0 V while bleeding, no other balancing.</dd>
+<dt>Solution</dt><dd>Pack energy = 96 × 3.6 V × 60 Ah = 20 736 Wh ≈ 20.7 kWh<br />Charge removed = 30 A × (40 ÷ 60) h = 20 Ah<br />SoC = 80% − (20 ÷ 60) × 100% = 80% − 33.3% = 46.7%<br />Excess charge = 0.02 × 60 Ah = 1.2 Ah<br />Ibleed = 4.0 ÷ 33 = 0.121 A, P = 4.0² ÷ 33 = 0.48 W<br />Balancing time = 1.2 Ah ÷ 0.121 A = 9.9 h</dd>
+<dt>Answer</dt><dd><strong>Pack energy about 20.7 kWh, SoC 46.7% after the drive, bleed current 0.121 A (0.48 W) and about 9.9 h to remove a 2% imbalance</strong></dd>
+<dt>Limitations</dt><dd>Real SoC estimation corrects the coulomb count with a voltage model. Cell voltage falls during bleeding, so the current falls slightly, and a real BMS balances only in certain SoC windows, which spreads the work over several charges.</dd>
+</dl>
+</Example>
+
+At about ten hours for a 2% imbalance, passive balancing can only keep up with slow drift. It cannot make up for a cell with a much lower capacity.
+
+## BMS faults and what they look like
+
+- Sense wire open or high resistance: the cell reads wrong, often flagged as a cell voltage fault. The BMS checks for open wires to catch this.
+- Current sensor offset: SoC drifts during long drives and jumps after rest when the OCV correction is applied.
+- Isolation fault: insulation resistance between the high voltage bus and the chassis falls, and the BMS blocks contactor closing.
+- Thermistor failure: the BMS treats a missing temperature as unsafe and derates current.
+
+The BMS controller itself is an embedded board, so choosing its [microcontroller or microprocessor](/electronics-engineering/microcontroller-vs-microprocessor/) and its link to the AFE follows the same rules as any other safety critical controller.
+
+## Battery management system interview and viva questions
+
+1. **What are the main functions of a battery management system?** Sensing cell voltages, current and temperatures; protection against over and under voltage, overcurrent and temperature limits; SoC and SoH estimation; cell balancing; and contactor control and communication with the vehicle or charger.
+2. **Why is coulomb counting alone not enough for SoC?** Current sensor offset and an uncertain starting SoC add up over time, so the estimate drifts; it has to be corrected with the OCV and a cell model.
+3. **Why is SoC estimation harder for LFP cells?** The LFP open circuit voltage curve is almost flat in the middle of the SoC range, so voltage carries little information about SoC there.
+4. **What is the difference between passive and active balancing?** Passive balancing burns the extra charge of high cells in a bleed resistor; active balancing moves charge from high cells to low cells with capacitors, inductors or transformers.
+5. **Why does a BMS use a precharge resistor?** To charge the inverter DC link capacitor slowly before the main contactor closes, which avoids a large inrush current that would damage the contactors and capacitor.

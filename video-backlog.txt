@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video. Order: not yet pinned by pin date (src/data/pins.json), then already pinned, then the rest, so each article gets its video before its Pinterest pin. Delete a line once its video is live.
-civil-engineering/limit-state-design-rcc
-computer-science/database-normalization
-telecommunication-engineering/modulation-techniques
-petroleum-engineering/offshore-platform-types
-environmental-engineering/electrostatic-precipitator
-mining-engineering/mine-ventilation-systems
 manufacturing-engineering/eoq-inventory-model
 materials-engineering/iron-carbon-phase-diagram
 safety-engineering/mtbf-mttr-availability

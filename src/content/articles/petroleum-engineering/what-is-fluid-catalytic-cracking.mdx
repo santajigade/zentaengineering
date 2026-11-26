@@ -1,0 +1,206 @@
+---
+title: "Fluid Catalytic Cracking (FCC): Process and Working"
+description: "Fluid catalytic cracking explained: riser, reactor, stripper, regenerator, zeolite catalyst, heat balance, products and a worked circulation example."
+pubDate: 2026-11-26
+reviewedDate: 2026-11-26
+discipline: petroleum-engineering
+subcategory: refining
+focusKeyword: "fluid catalytic cracking"
+image: { src: /images/featured/what-is-fluid-catalytic-cracking.webp, alt: "Fluid Catalytic Cracking (FCC): Process and Working: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [refining, fcc, catalytic-cracking, zeolite-catalyst, gasoline]
+faq:
+  - q: "Why is the FCC catalyst a fine powder?"
+    a: "A powder with an average particle size of roughly 60 to 80 micrometres behaves like a liquid when gas flows through it. It can be poured down standpipes, carried up the riser by vapour and kept as a bubbling bed in the regenerator, so the unit can move hundreds of tonnes of catalyst per hour between the reactor and the regenerator without any mechanical conveyor."
+  - q: "What is the difference between FCC and hydrocracking?"
+    a: "Both turn heavy gas oil into lighter products. FCC works at low pressure without added hydrogen, rejects carbon as coke and makes mainly high octane gasoline and olefin rich LPG. A hydrocracker works at high hydrogen pressure, adds hydrogen to the molecules and makes mainly diesel and jet fuel with very little sulphur."
+  - q: "What is light cycle oil?"
+    a: "Light cycle oil (LCO) is the FCC product that boils in the diesel range. It is highly aromatic and has a low cetane number, so it is usually hydrotreated before it goes into the diesel pool or is used as a cutter stock for fuel oil."
+references:
+  - text: "J. H. Gary, G. E. Handwerk and M. J. Kaiser, Petroleum Refining: Technology and Economics, 5th ed., CRC Press, 2007"
+  - text: "R. Sadeghbeigi, Fluid Catalytic Cracking Handbook, 4th ed., Butterworth-Heinemann, 2020"
+  - text: "J. G. Speight, The Chemistry and Technology of Petroleum, 5th ed., CRC Press, 2014"
+  - text: "M. A. Fahim, T. A. Alsahhaf and A. Elkilani, Fundamentals of Petroleum Refining, Elsevier, 2010"
+  - text: "API Recommended Practice 571, Damage Mechanisms Affecting Fixed Equipment in the Refining Industry, 3rd ed., American Petroleum Institute, 2020"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Fluid catalytic cracking** (FCC) is a refinery process that breaks heavy gas oil into gasoline, LPG and light cycle oil on a hot, powdered zeolite catalyst. Feed and catalyst crack in a riser in a few seconds, steam strips the spent catalyst, and a regenerator burns off the coke, which heats the catalyst for the next pass.
+
+</Key>
+
+Fluid catalytic cracking is the main conversion unit in most fuel refineries. It takes vacuum gas oil, which boils too high to be sold as fuel, and cracks the big molecules into gasoline, LPG and lighter gases. The catalyst is a fine powder that flows like a liquid, so it circulates continuously between a reactor, where it picks up coke, and a regenerator, where the coke is burnt off. The first commercial unit started up in 1942 at Baton Rouge, and FCC is still one of the largest sources of gasoline in refineries today.
+
+<figure class="anim">
+<svg width="640" height="400" viewBox="0 0 640 400" fill="none" role="img" aria-label="Fluid catalytic cracking unit schematic: vacuum gas oil feed enters the bottom of the riser where it meets hot regenerated catalyst; the mixture rises into the reactor with cyclones; cracked vapours leave the top to the main fractionator; spent catalyst falls through the steam stripper and a standpipe into the regenerator, where air burns the coke and flue gas leaves the top; hot regenerated catalyst returns down a standpipe to the riser base">
+<defs>
+<marker id="fcc-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#0b2545" /></marker>
+<marker id="fcc-at" viewBox="0 0 10 10" refX="8" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#13a89e" /></marker>
+<marker id="fcc-ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7b8794" /></marker>
+</defs>
+<g stroke="#0b2545" stroke-width="2">
+<rect x="150" y="30" width="120" height="100" rx="10" fill="#eef1f6" />
+<rect x="185" y="130" width="50" height="100" fill="#eef1f6" />
+<path d="M243 44H261V70L255 88H249L243 70Z" fill="#fff" />
+<rect x="400" y="110" width="150" height="210" rx="14" fill="#fff7e0" />
+<path d="M400 200H550" stroke-dasharray="5 4" stroke="#b46b00" />
+</g>
+<path d="M100 360V62H150" stroke="#13a89e" stroke-width="12" />
+<path class="anim-flow" d="M100 360V62H150" stroke="#fff" stroke-width="2.5" stroke-dasharray="6 12" />
+<path d="M210 230V265H398" stroke="#13a89e" stroke-width="5" marker-end="url(#fcc-at)" />
+<path class="anim-flow-slow" d="M210 230V265H390" stroke="#fff" stroke-width="2" stroke-dasharray="6 12" />
+<path d="M475 320V375H100V362" stroke="#13a89e" stroke-width="5" />
+<path class="anim-flow-slow" d="M475 320V375H100V362" stroke="#fff" stroke-width="2" stroke-dasharray="6 12" />
+<path d="M12 340H90" stroke="#0b2545" stroke-width="3" marker-end="url(#fcc-ah)" />
+<path class="anim-flow" d="M12 340H84" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 12" />
+<path d="M210 30V14H330" stroke="#0b2545" stroke-width="3" marker-end="url(#fcc-ah)" />
+<path class="anim-flow" d="M210 30V14H322" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 12" />
+<path d="M285 215H239" stroke="#7b8794" stroke-width="3" marker-end="url(#fcc-ag)" />
+<path d="M630 290H554" stroke="#7b8794" stroke-width="3" marker-end="url(#fcc-ag)" />
+<path class="anim-flow" d="M630 290H560" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 12" />
+<path d="M475 110V70H560" stroke="#7b8794" stroke-width="3" marker-end="url(#fcc-ag)" />
+<path class="anim-flow" d="M475 110V70H552" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 12" />
+<g fill="#f5b800">
+<circle class="anim-pulse" cx="440" cy="295" r="6" />
+<circle class="anim-pulse anim-d1" cx="475" cy="300" r="6" />
+<circle class="anim-pulse anim-d2" cx="510" cy="295" r="6" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="336" y="18">Cracked vapours to main fractionator</text>
+<text x="192" y="95" text-anchor="middle" font-weight="700">Reactor</text>
+<text x="192" y="111" text-anchor="middle">and cyclones</text>
+<text x="88" y="190" text-anchor="end" font-weight="700">Riser</text>
+<text x="88" y="206" text-anchor="end">2 to 3 s</text>
+<text x="12" y="330">VGO feed</text>
+<text x="290" y="219">Steam</text>
+<text x="180" y="170" text-anchor="end">Stripper</text>
+<text x="305" y="256" text-anchor="middle">Spent catalyst</text>
+<text x="475" y="140" text-anchor="middle" font-weight="700">Regenerator</text>
+<text x="475" y="157" text-anchor="middle">650 to 760 °C</text>
+<text x="475" y="250" text-anchor="middle" font-size="11">Coke + O₂ → CO₂ + heat</text>
+<text x="596" y="282" text-anchor="middle">Air</text>
+<text x="566" y="74">Flue gas</text>
+<text x="290" y="393" text-anchor="middle">Hot regenerated catalyst</text>
+</g>
+</svg>
+<figcaption>A side by side FCC unit. Teal lines carry catalyst, navy lines carry hydrocarbons and grey lines carry air, steam and flue gas. Catalyst circulates clockwise: up the riser, down the stripper, into the regenerator and back to the riser base.</figcaption>
+</figure>
+
+
+<ArticleVideo slug="what-is-fluid-catalytic-cracking" title="How fluid catalytic cracking works" uploadDate="2026-11-26" />
+
+## Why refineries need fluid catalytic cracking
+
+Atmospheric and vacuum distillation only separate crude by boiling range, as described in [crude oil distillation](/petroleum-engineering/crude-oil-distillation/). A typical crude gives far more heavy gas oil than the market wants and too little gasoline, so refiners crack it. Fluid catalytic cracking breaks long chain molecules from the vacuum gas oil into shorter ones, and the zeolite catalyst steers the reactions toward branched and aromatic molecules that give gasoline a high octane number. FCC also makes a lot of propylene and butylenes, which feed alkylation units and petrochemical plants.
+
+## FCC feed and catalyst
+
+The usual feed is vacuum gas oil, roughly the 340 to 565 °C boiling cut, often blended with some atmospheric residue in residue FCC units. Metals such as nickel and vanadium, and heavy aromatic molecules that form coke, set how much residue a unit can take.
+
+The catalyst is a zeolite Y crystal, usually ultrastable Y, held in a silica alumina matrix with a binder and clay. Particles average about 60 to 80 micrometres. At that size the powder fluidises when gas blows through it, so it can be moved around the unit like a liquid. For the general families of catalysts and how they act, see [catalyst types](/chemical-engineering/catalyst-types/).
+
+## How fluid catalytic cracking works step by step
+
+### 1. Riser
+
+Hot regenerated catalyst, at about 650 to 730 °C, flows down a standpipe to the bottom of the riser. Lift steam carries it upward, and the preheated feed is sprayed in through atomising nozzles. The oil vaporises on contact with the catalyst and cracks as the mixture travels up the riser in about 2 to 3 seconds. The riser outlet runs at about 500 to 550 °C. Because the vapour and catalyst move up together with little back mixing, the riser behaves close to a plug flow reactor, a model explained in [CSTR vs PFR](/chemical-engineering/cstr-vs-pfr/).
+
+### 2. Reactor and cyclones
+
+At the top of the riser the catalyst must be separated from the vapour quickly, or the products keep cracking into gas and coke. A termination device and a set of cyclones throw the catalyst out of the vapour stream. The cracked vapours leave the top of the reactor vessel for the main fractionator.
+
+### 3. Stripper
+
+Spent catalyst falls into the stripper, where steam rises through it and displaces the hydrocarbons trapped between and inside the particles. Poor stripping sends those hydrocarbons to the regenerator, where they burn, raise the regenerator temperature and waste product.
+
+### 4. Regenerator
+
+The spent catalyst carries a layer of coke. It flows down a standpipe, controlled by a slide valve, into the regenerator. Air from a blower enters through a distributor grid at the bottom and keeps the catalyst as a dense fluidised bed while it burns the coke at about 650 to 760 °C. Cyclones at the top return catalyst fines, and the flue gas leaves through the top. In partial combustion units the flue gas still holds carbon monoxide, which is burnt in a CO boiler; full combustion units burn it to carbon dioxide in the regenerator itself.
+
+### 5. Main fractionator
+
+The reactor vapours are cooled and separated in a [distillation column](/chemical-engineering/distillation-column-working-principle/) into wet gas, gasoline, light cycle oil, heavy cycle oil and slurry oil from the bottom. The wet gas and unstabilised gasoline go to a gas concentration unit that recovers LPG and fuel gas.
+
+## Cracking reactions in the riser
+
+Cracking on the zeolite runs through carbenium ions formed on acid sites. The main reaction is beta scission, which breaks a carbon to carbon bond and makes one smaller paraffin and one olefin. Isomerisation makes branched molecules, and hydrogen transfer converts some olefins into paraffins and aromatics. Some of the heaviest molecules end up as coke on the catalyst. Overall the reactions are endothermic, so the unit has to supply heat for cracking as well as for vaporising the feed.
+
+## Heat balance of an FCC unit
+
+An FCC unit balances its own heat. Burning coke in the regenerator releases heat, the hot catalyst carries that heat to the riser, and there it vaporises the feed and drives the endothermic reactions. The coke yield is usually about 4 to 6 wt% of the feed. If the feed makes more coke, the regenerator runs hotter, the catalyst brings more heat to the riser, and the control system cuts catalyst circulation to hold the riser outlet temperature. The [energy balance](/chemical-engineering/energy-balance/) of the reactor and regenerator together fixes the catalyst to oil ratio.
+
+## Key formulas for fluid catalytic cracking
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Catalyst to oil ratio | C/O = ṁcat ÷ ṁfeed | mass flows in t/h |
+| Conversion | X = 100 − (LCO + HCO + slurry) | wt% or vol% of feed |
+| Delta coke | Δcoke = ṁcoke ÷ ṁcat × 100 | wt% of catalyst |
+| Heat from coke burning | Q = ṁcoke × ΔHc | W; ΔHc in J/kg |
+| Heat carried by catalyst | Q = ṁcat × cp × (Treg − Triser) | cp in J/kg K, T in °C |
+
+Conversion is defined as the share of feed turned into products lighter than light cycle oil, including gas and coke:
+
+$$
+X = 100 - (\text{LCO} + \text{HCO} + \text{slurry}) \quad \text{(wt\%)}
+$$
+
+The catalyst circulation rate and the heat it carries are
+
+$$
+\dot m_{cat} = (C/O)\,\dot m_{feed}, \qquad Q = \dot m_{cat}\, c_p\, (T_{reg} - T_{riser})
+$$
+
+## Worked example: catalyst circulation and heat balance
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Feed rate 200 t/h of vacuum gas oil, catalyst to oil ratio 6, coke yield 5 wt% of feed, regenerator temperature 700 °C, riser outlet 520 °C, catalyst specific heat 1.13 kJ/kg K, product yields of 18 wt% light cycle oil and 7 wt% slurry oil.</dd>
+<dt>Find</dt><dd>Catalyst circulation, delta coke, heat released by burning the coke, heat the catalyst gives up between regenerator and riser outlet, and conversion.</dd>
+<dt>Assumptions</dt><dd>Coke treated as pure carbon burnt fully to CO2 with a heat of combustion of 32.8 MJ/kg; no heavy cycle oil draw; steady state.</dd>
+<dt>Solution</dt><dd>ṁcat = 6 × 200 = 1200 t/h = 333.3 kg/s<br />ṁcoke = 0.05 × 200 = 10 t/h<br />Δcoke = 10 ÷ 1200 × 100 = 0.83 wt%<br />Q from coke = 10 000 kg/h × 32.8 MJ/kg ÷ 3600 = 91.1 MW<br />Q carried by catalyst = 333.3 × 1.13 × (700 − 520) = 67 800 kW = 67.8 MW<br />X = 100 − (18 + 0 + 7) = 75 wt%</dd>
+<dt>Answer</dt><dd><strong>1200 t/h of catalyst, 0.83 wt% delta coke, 91.1 MW released in the regenerator, 67.8 MW delivered to the riser side, and 75 wt% conversion</strong></dd>
+<dt>Limitations</dt><dd>Real coke contains hydrogen and may burn partly to CO, which changes the heat released. The difference between 91.1 MW and 67.8 MW goes into heating the combustion air to regenerator temperature and into heat losses, which a full heat balance would calculate.</dd>
+</dl>
+</Example>
+
+## FCC products and what they are used for
+
+| Product | Typical use |
+| --- | --- |
+| Dry gas (hydrogen, methane, ethane) | Refinery fuel gas |
+| LPG (propane, propylene, butanes, butylenes) | Alkylation feed, petrochemicals, LPG sales |
+| FCC gasoline | Main product, high octane gasoline blending |
+| Light cycle oil | Hydrotreated for diesel or used as fuel oil cutter |
+| Slurry (decant) oil | Fuel oil blending, carbon black feed |
+| Coke | Burnt in the regenerator to supply process heat |
+
+FCC gasoline carries much of the sulphur in the refinery gasoline pool, so many refineries hydrotreat the FCC feed or the gasoline to meet sulphur limits.
+
+## Operating variables
+
+- Riser outlet temperature: a higher temperature raises conversion and the yield of LPG olefins, but also makes more dry gas.
+- Catalyst to oil ratio: more catalyst per tonne of feed raises conversion and coke.
+- Feed quality: paraffinic feeds crack easily; aromatic, high metal and high residue feeds make more coke and gas.
+- Catalyst activity: fresh catalyst is added daily to replace losses and catalyst poisoned by nickel and vanadium.
+- Contact time: a short riser contact time with fast separation at the top limits overcracking.
+
+Erosion from the circulating catalyst, high temperature in the regenerator and refractory damage are the main mechanical concerns in an FCC unit; API RP 571 describes the damage mechanisms inspectors look for.
+
+## Advantages and limitations
+
+Fluid catalytic cracking runs at low pressure, needs no hydrogen and makes high octane gasoline and valuable olefins from a low value feed. Because the catalyst circulates continuously, its activity stays steady and the unit never shuts down to regenerate it. On the other hand, it rejects part of the feed as coke and flue gas carbon dioxide, its gasoline and LCO need sulphur treatment, and the unit is large and mechanically complex, with hot solids moving through valves, cyclones and standpipes.
+
+## Fluid catalytic cracking interview and viva questions
+
+1. **Why is the FCC process called fluid catalytic cracking?** The catalyst is a fine powder that fluidises in gas, so it flows like a liquid between the riser, reactor, stripper and regenerator.
+2. **What supplies the heat for cracking in an FCC unit?** Burning the coke deposited on the catalyst in the regenerator; the hot catalyst carries that heat back to the riser to vaporise the feed and drive the endothermic reactions.
+3. **What is the purpose of the stripper?** Steam removes hydrocarbons trapped in the spent catalyst so they are recovered as product instead of burning in the regenerator.
+4. **What happens if the riser outlet temperature is raised?** Conversion and LPG olefin yield rise, but more dry gas is produced.
+5. **What catalyst is used in fluid catalytic cracking?** A zeolite Y, usually ultrastable Y, in a silica alumina matrix, as particles averaging about 60 to 80 micrometres.

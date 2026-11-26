@@ -1,0 +1,197 @@
+---
+title: "NOx Control: SCR and SNCR Explained"
+description: "NOx control with SCR and SNCR: chemistry, temperature windows, catalyst layout, removal efficiency and a worked ammonia and urea demand example."
+pubDate: 2026-11-26
+reviewedDate: 2026-11-26
+discipline: environmental-engineering
+subcategory: emissions-compliance
+focusKeyword: "nox control"
+image: { src: /images/featured/nox-control-scr-sncr.webp, alt: "NOx Control: SCR and SNCR Explained: featured diagram" }
+format: working-principle
+pillar: false
+math: true
+tags: [nox-control, selective-catalytic-reduction, sncr, air-pollution-control, ammonia-slip, boiler-emissions]
+faq:
+  - q: "Is SCR or SNCR better for NOx control?"
+    a: "SCR removes much more NOx, typically 70 to 90 percent against 30 to 50 percent for SNCR, but it needs a catalyst reactor, more ductwork and periodic catalyst replacement, so it costs far more to build. SNCR suits smaller cuts, retrofits with little space, and boilers where the furnace temperature profile is favourable."
+  - q: "What is ammonia slip?"
+    a: "Ammonia slip is unreacted ammonia that leaves the NOx control system with the flue gas. It happens when too much reagent is injected, when it mixes poorly, or when the gas is too cold for the reaction. Slip is itself a pollutant and also reacts with SO3 to form ammonium bisulfate, which fouls the air preheater."
+  - q: "Can SCR and SNCR be used together?"
+    a: "Yes. A hybrid system injects reagent into the furnace as in SNCR and passes the flue gas through a smaller SCR catalyst downstream. The catalyst uses up the ammonia slip from the furnace stage and adds further NOx reduction, which can suit retrofits where there is no room for a full size SCR reactor."
+references:
+  - text: "U.S. EPA, Air Pollution Control Technology Fact Sheet: Selective Catalytic Reduction (SCR), EPA-452/F-03-032"
+  - text: "U.S. EPA, Air Pollution Control Technology Fact Sheet: Selective Non-Catalytic Reduction (SNCR), EPA-452/F-03-031"
+  - text: "U.S. EPA, EPA Air Pollution Control Cost Manual, 7th ed., Section 4, Chapter 1 (Selective Noncatalytic Reduction) and Chapter 2 (Selective Catalytic Reduction), 2019"
+  - text: "C. D. Cooper and F. C. Alley, Air Pollution Control: A Design Approach, 4th ed., Waveland Press"
+  - text: "N. de Nevers, Air Pollution Control Engineering, 3rd ed., Waveland Press"
+  - text: "European Commission JRC, Best Available Techniques (BAT) Reference Document for Large Combustion Plants, 2017"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**NOx control** means cutting the nitrogen oxides (NO and NO2) formed when fuel burns. The two main methods inject ammonia or urea: SNCR sprays it into hot furnace gas at 870 to 1150 °C and removes 30 to 50 percent, while SCR reacts it over a catalyst at about 300 to 400 °C and removes 70 to 90 percent.
+
+</Key>
+
+NOx control is a standard requirement for boilers, furnaces, gas turbines, cement kilns and incinerators. Nitrogen oxides contribute to ground level ozone, fine particles and acid rain, so permits set NOx limits that combustion alone often cannot meet. Engineers start by burning cleaner, and when that is not enough they add a reduction step in the flue gas. Both SCR and SNCR turn NOx back into nitrogen and water by reacting it with ammonia; they differ in where that happens and whether a catalyst helps.
+
+
+<ArticleVideo slug="nox-control-scr-sncr" title="How NOx control works" uploadDate="2026-11-26" />
+
+## How NOx forms in combustion
+
+Most combustion NOx leaves the flame as nitric oxide (NO), with a smaller share of nitrogen dioxide (NO2). It comes from three routes:
+
+- **Thermal NOx**: nitrogen and oxygen from the combustion air combine at high flame temperature. The rate rises steeply with temperature and with residence time in the hottest zone.
+- **Fuel NOx**: nitrogen chemically bound in the fuel, as in coal and heavy oil, is oxidised during combustion.
+- **Prompt NOx**: a small amount forms early in the flame front from reactions between hydrocarbon fragments and air nitrogen.
+
+This is why the first step of NOx control is combustion modification: low NOx burners, staged air, overfire air and flue gas recirculation lower peak temperature or the oxygen available in the hottest zone. Post-combustion methods such as SNCR and SCR then reduce what remains.
+
+## NOx control with SCR and SNCR in a boiler
+
+In a typical boiler, SNCR uses the furnace itself as the reactor. SCR needs its own reactor, usually placed after the economizer, where the flue gas has cooled to the catalyst's working temperature.
+
+<figure class="anim">
+<svg width="600" height="340" viewBox="0 0 600 340" fill="none" role="img" aria-label="Boiler flue gas path showing where NOx control is installed: SNCR urea or ammonia lances inject into the upper furnace at 870 to 1150 degrees Celsius; the gas then passes the economizer, an ammonia injection grid and an SCR reactor with three catalyst layers at about 300 to 400 degrees Celsius, then the air preheater and on to the particulate collector and stack">
+<path d="M40 300V60H250V300H200V100H130V300Z" fill="#f4f7fb" stroke="#0b2545" stroke-width="2.5" />
+<rect x="320" y="82" width="90" height="190" fill="#f4f7fb" stroke="#0b2545" stroke-width="2.5" />
+<rect x="440" y="230" width="60" height="60" fill="#eef1f6" stroke="#0b2545" stroke-width="2.5" />
+<g fill="none" stroke-linejoin="miter">
+<path d="M249 282H282V70H365V83M365 271V300H470V289M499 260H560V36" stroke="#0b2545" stroke-width="26" />
+<path d="M247 282H282V70H365V86M365 268V300H470V292M497 260H560V30" stroke="#f4f7fb" stroke-width="21" />
+</g>
+<path d="M40 300H130" stroke="#0b2545" stroke-width="2.5" />
+<g fill="#e6f6f4" stroke="#0b2545" stroke-width="1.5">
+<rect x="330" y="125" width="70" height="18" /><rect x="330" y="170" width="70" height="18" /><rect x="330" y="215" width="70" height="18" />
+</g>
+<g stroke="#7b8794" stroke-width="1.5"><path d="M208 200H242M208 212H242M208 224H242M208 236H242M208 248H242" /></g>
+<g stroke="#7b8794" stroke-width="1"><path d="M450 245H490M450 260H490M450 275H490" /></g>
+<ellipse class="anim-pulse" cx="85" cy="265" rx="20" ry="28" fill="#f5b800" />
+<path d="M95 238L118 215V80H225V282H282V70H365V300H470V260H560V45" stroke="#13a89e" stroke-width="2.5" stroke-opacity="0.35" />
+<path class="anim-flow" d="M95 238L118 215V80H225V282H282V70H365V300H470V260H560V45" stroke="#13a89e" stroke-width="2" stroke-dasharray="6 8" />
+<g stroke="#b42318" stroke-width="3"><path d="M18 120H44M18 150H44" /><path d="M320 61V79" /></g>
+<circle class="anim-pulse anim-d1" cx="44" cy="120" r="4" fill="#b42318" />
+<circle class="anim-pulse anim-d2" cx="44" cy="150" r="4" fill="#b42318" />
+<circle class="anim-pulse anim-d3" cx="320" cy="70" r="4" fill="#b42318" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="85" y="48" text-anchor="middle" font-weight="700">Furnace</text>
+<text x="85" y="324" text-anchor="middle">Burners</text>
+<text x="225" y="324" text-anchor="middle">Economizer</text>
+<text x="470" y="324" text-anchor="middle">Air preheater</text>
+<text x="420" y="110" font-weight="700">SCR reactor</text>
+<text x="420" y="126">300 to 400 °C</text>
+<text x="420" y="176">Catalyst</text>
+<text x="420" y="191">layers</text>
+<text x="540" y="56" text-anchor="end">To ESP</text>
+<text x="540" y="71" text-anchor="end">and stack</text>
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#b42318">
+<text x="52" y="124">SNCR</text><text x="52" y="138">lances</text>
+<text x="52" y="160">870 to</text><text x="52" y="174">1150 °C</text>
+<text x="320" y="50" text-anchor="middle">AIG</text>
+</g>
+</svg>
+<figcaption>Where SNCR and SCR sit in a boiler. Flue gas flows from the burners up the furnace, down past the economizer, through the ammonia injection grid (AIG) and the SCR catalyst layers, then through the air preheater to the dust collector and stack.</figcaption>
+</figure>
+
+## Selective non-catalytic reduction (SNCR)
+
+In SNCR, ammonia or a urea solution is sprayed through wall lances or injectors into the upper furnace. With no catalyst, the reaction needs heat, and it only works well in a narrow window of about 870 to 1150 °C. The reagent is called selective because, within that window, it reacts with NOx in preference to the much larger amount of oxygen in the gas.
+
+For ammonia and urea the overall reactions are:
+
+$$
+\mathrm{4NH_3 + 4NO + O_2 \rightarrow 4N_2 + 6H_2O}
+$$
+
+$$
+\mathrm{CO(NH_2)_2 + 2NO + \tfrac{1}{2}O_2 \rightarrow 2N_2 + CO_2 + 2H_2O}
+$$
+
+The temperature window is the central design problem. Above it, ammonia starts to oxidise and can form extra NOx. Below it, the reaction is too slow and unreacted ammonia leaves as **slip**. Boiler load changes move the window up and down the furnace, so systems often have several levels of injectors and switch between them. Residence time in the window and good mixing across a large furnace cross section decide how much of the reagent actually reacts.
+
+SNCR typically achieves 30 to 50 percent NOx reduction. It needs only reagent storage, pumps and injectors, so capital cost is low and it fits most existing boilers. The penalty is high reagent use, because much more than the stoichiometric amount must be injected to reach the target reduction.
+
+## Selective catalytic reduction (SCR)
+
+SCR uses the same ammonia chemistry but lets a catalyst do the work at a much lower temperature. Ammonia, usually anhydrous or aqueous, or ammonia made from urea, is injected through an ammonia injection grid into the flue gas duct. The gas then flows through a reactor with two to four layers of catalyst, often honeycomb or plate elements of vanadium pentoxide on a titanium dioxide support. On the catalyst surface the main reactions are:
+
+$$
+\mathrm{4NO + 4NH_3 + O_2 \rightarrow 4N_2 + 6H_2O}
+$$
+
+$$
+\mathrm{2NO_2 + 4NH_3 + O_2 \rightarrow 3N_2 + 6H_2O}
+$$
+
+Vanadium based catalysts work at about 300 to 400 °C, which on a boiler is usually found between the economizer and the air preheater. SCR typically achieves 70 to 90 percent NOx reduction with an ammonia to NOx ratio close to one, so reagent use per tonne of NOx removed is much lower than for SNCR. More detail on catalyst families is in [types of catalysts](/chemical-engineering/catalyst-types/).
+
+### SCR reactor locations
+
+- **High dust**: before the particulate collector. The gas is already at the right temperature, but fly ash erodes and plugs the catalyst. This is the most common boiler arrangement.
+- **Low dust**: after a hot side particulate collector, giving cleaner gas at the same temperature.
+- **Tail end**: after the [electrostatic precipitator](/environmental-engineering/electrostatic-precipitator/) and the [wet scrubber](/environmental-engineering/wet-scrubber-working-principle/). The catalyst sees clean gas, but the gas must be reheated, which costs energy.
+
+### SCR operating problems
+
+The catalyst also oxidises a small part of the SO2 in the gas to SO3. SO3 and ammonia slip combine to form ammonium bisulfate, a sticky deposit that fouls the cooler air preheater downstream. Catalyst activity also falls over time through poisoning by alkali metals and arsenic, plugging by ash and thermal sintering, so layers are replaced in a planned sequence.
+
+## SCR vs SNCR comparison
+
+| Feature | SNCR | SCR |
+| --- | --- | --- |
+| Reactor | Furnace itself | Separate catalyst reactor |
+| Temperature | About 870 to 1150 °C | About 300 to 400 °C (vanadium catalyst) |
+| Typical NOx reduction | 30 to 50 percent | 70 to 90 percent |
+| Reagent use | High, well above stoichiometric | Close to stoichiometric |
+| Capital cost | Low | High |
+| Main issues | Narrow window, slip, load changes | Catalyst cost, SO3, ammonium bisulfate |
+
+## Key formulas for NOx control
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Removal efficiency | η = (Cin − Cout) ÷ Cin | C in mg/Nm³ or ppm, same basis |
+| NOx removed | m = Q × (Cin − Cout) | Q in Nm³/h, C in kg/Nm³, m in kg/h as NO2 |
+| Reagent molar ratio | NSR = moles NH3 equivalent ÷ moles NOx | dimensionless; 1 mol urea = 2 mol NH3 equivalent |
+| Ammonia demand | mNH3 = (m ÷ 46.01) × NSR × 17.03 | kg/h; 46.01 and 17.03 kg/kmol for NO2 and NH3 |
+
+NOx is reported "as NO2" by convention, so concentrations and mass rates use the molar mass of NO2 even though most of the gas is NO.
+
+## Worked example: ammonia demand for an SCR
+
+<Example>
+<dl>
+<dt>Given</dt><dd>Flue gas flow 500 000 Nm³/h (dry, standard conditions), inlet NOx 400 mg/Nm³ as NO2, required outlet 100 mg/Nm³ as NO2, ammonia to NOx removed molar ratio 1.05.</dd>
+<dt>Find</dt><dd>Required removal efficiency, NOx removed, ammonia demand, and the equivalent urea demand.</dd>
+<dt>Assumptions</dt><dd>Both concentrations are on the same dry and oxygen reference basis. One mole of NH3 reduces one mole of NOx. The 1.05 ratio is assumed for illustration. One mole of urea supplies two moles of NH3.</dd>
+<dt>Solution</dt><dd>η = (400 − 100) ÷ 400 = 0.75, or 75 percent<br />NOx removed = 500 000 × 300 mg/h = 150 kg/h as NO2<br />Moles removed = 150 ÷ 46.01 = 3.26 kmol/h<br />NH3 = 3.26 × 1.05 × 17.03 = 58.3 kg/h<br />Urea = 3.26 × 1.05 ÷ 2 × 60.06 = 102.8 kg/h</dd>
+<dt>Answer</dt><dd><strong>75 percent removal, about 58 kg/h of ammonia or about 103 kg/h of urea</strong></dd>
+<dt>Limitations</dt><dd>A 75 percent cut is within the typical SCR range but above what SNCR alone usually reaches. Real designs check ammonia slip, catalyst volume and mixing, and size storage for the aqueous reagent, which is mostly water.</dd>
+</dl>
+</Example>
+
+Compliance is proved by measuring NOx at the stack, usually with a [continuous emissions monitoring system](/environmental-engineering/cems-overview/) that also tracks oxygen so results can be corrected to the permit's reference basis.
+
+## Choosing a NOx control method
+
+The reduction needed and the plant layout decide the method:
+
+- For a modest cut on an existing boiler with little space, combustion modification plus SNCR is often the cheapest route.
+- For deep reductions, such as those set by the EU Best Available Techniques conclusions for large combustion plants, SCR is usually required.
+- For gas turbines, SCR sits inside the heat recovery steam generator, where the gas is at the right temperature.
+- Where SO2 and dust are high, the reactor location and catalyst pitch must cope with ash and ammonium bisulfate.
+
+The ozone and fine particles that NOx helps form show up in the [air quality index](/environmental-engineering/air-quality-index/) reported to the public.
+
+## NOx control interview and viva questions
+
+1. **Why is the process called selective reduction?** Ammonia reacts preferentially with NOx rather than with the far larger amount of oxygen in the flue gas, within the right temperature range or on the right catalyst.
+2. **What happens if SNCR reagent is injected where the gas is too hot?** Ammonia begins to oxidise and can form additional NOx, so removal falls.
+3. **What happens if it is injected where the gas is too cold?** The reaction is too slow, so unreacted ammonia leaves as slip.
+4. **Why does an SCR on a coal boiler sit between the economizer and the air preheater?** That is where the flue gas is at the catalyst's working temperature of about 300 to 400 °C.
+5. **What is ammonium bisulfate and why does it matter?** It forms when ammonia slip reacts with SO3, and it deposits as a sticky layer that fouls the air preheater.

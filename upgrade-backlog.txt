@@ -1,12 +1,4 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
-src/content/articles/chemical-engineering/cstr-vs-pfr.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: cstr vs pfr; cstr and pfr difference; add 2 to 3 internal links from related articles
-src/content/articles/chemical-engineering/energy-balance.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: energy balance chemical engineering; add 2 to 3 internal links from related articles
-src/content/articles/petroleum-engineering/porosity-and-permeability.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: porosity and permeability; petrophysical properties; add 2 to 3 internal links from related articles
-src/content/articles/mining-engineering/open-pit-mine-design.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: open pit mine design; add 2 to 3 internal links from related articles
-src/content/articles/aerospace-engineering/turbojet-vs-turbofan-vs-turboprop.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: turboprop vs turbofan engines for regional aircraft compared; add 2 to 3 internal links from related articles
-src/content/articles/materials-engineering/case-hardening-methods.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: case hardening methods; add 2 to 3 internal links from related articles
-src/content/articles/mechanical-engineering/fouriers-law-of-heat-conduction.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: fourier's law of heat conduction; add 2 to 3 internal links from related articles
-src/content/articles/renewable-energy/wind-turbine-power-curve.mdx  # GSC 25 Nov: page 1 to 2, retune title and description to: wind turbine power curve; add 2 to 3 internal links from related articles
 src/content/articles/manufacturing-engineering/types-of-maintenance.mdx
 src/content/articles/marine-engineering/fixed-vs-floating-offshore-structures.mdx
 src/content/articles/marine-engineering/ship-auxiliary-machinery.mdx

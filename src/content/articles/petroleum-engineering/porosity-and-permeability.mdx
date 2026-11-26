@@ -1,12 +1,13 @@
 ---
-title: "Porosity and Permeability of Reservoir Rocks"
-description: "Porosity and permeability of reservoir rocks explained: definitions, types, Darcy's law, units, typical values, measurement methods and a worked flow example."
+title: "Porosity and Permeability: Key Petrophysical Properties"
+description: "Porosity and permeability, the key petrophysical properties of reservoir rocks: types, Darcy's law, typical values, measurement and a worked core example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-26
 discipline: petroleum-engineering
 subcategory: reservoir-engineering
 focusKeyword: "porosity and permeability"
-image: { src: /images/featured/porosity-and-permeability.webp, alt: "Porosity and Permeability of Reservoir Rocks: featured diagram" }
+image: { src: /images/featured/porosity-and-permeability.webp, alt: "Porosity and Permeability: Key Petrophysical Properties: featured diagram" }
 format: fundamentals
 pillar: true
 math: true
@@ -29,7 +30,7 @@ import Example from '../../../components/Example.astro';
 
 <Key title="Short answer">
 
-**Porosity and permeability** are the two most important properties of a reservoir rock. **Porosity** (φ) is the fraction of the rock's volume that is pore space, which sets **how much** oil, gas or water the rock can **store**. **Permeability** (k) is the rock's ability to let fluids **flow** through connected pores, measured in **darcies** or millidarcies (mD) and defined by **Darcy's law**. A good reservoir needs both: enough porosity to hold hydrocarbons and enough permeability to produce them at useful rates.
+**Porosity and permeability** are the two key petrophysical properties of a reservoir rock. Porosity (φ) is the fraction of rock volume that is pore space, so it sets how much oil, gas or water the rock can store. Permeability (k), measured in darcies or millidarcies and defined by Darcy's law, is how easily fluid flows through the connected pores.
 
 </Key>
 
@@ -81,7 +82,7 @@ One **darcy** is the permeability that allows 1 cm³/s of a 1 cP fluid to flow t
 | Very good | 100 to 1000 mD |
 | Excellent | Above 1000 mD |
 
-<figure>
+<figure class="anim">
 <svg width="600" height="270" viewBox="0 0 600 270" fill="none" role="img" aria-label="Two rock cores. Left: well sorted large grains with large connected pores, high porosity and high permeability, with flow arrows passing through easily. Right: tightly cemented small grains with isolated small pores, low permeability, flow arrows blocked">
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#0b2545" text-anchor="middle"><text x="150" y="24">Good reservoir rock</text><text x="450" y="24">Tight rock</text></g>
 <rect x="40" y="40" width="220" height="180" fill="#e6f6f4" stroke="#0b2545" stroke-width="2" />
@@ -99,8 +100,10 @@ One **darcy** is the permeability that allows 1 cm³/s of a 1 cP fluid to flow t
 </g>
 <g stroke="#13a89e" stroke-width="2.5" fill="none"><path d="M20 97H280" /><path d="M20 150H280" /></g>
 <g fill="#13a89e"><path d="M280 92l9 5-9 5z" /><path d="M280 145l9 5-9 5z" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none"><path class="anim-flow" d="M20 97H280" /><path class="anim-flow" d="M20 150H280" /></g>
+<path class="anim-flow" d="M320 120H350" stroke="#fff" stroke-width="1.5" />
 <g stroke="#b42318" stroke-width="2.5"><path d="M320 120H350" /><path d="M352 110v20" /></g>
-<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle"><text x="150" y="242">Large connected pores: φ about 25%, k above 100 mD</text><text x="450" y="242">Small, cemented pores: k below 1 mD</text></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle"><text x="158" y="242">Large connected pores: φ about 25%, k above 100 mD</text><text x="450" y="242">Small, cemented pores: k below 1 mD</text></g>
 </svg>
 <figcaption>Well sorted, coarse grains give high porosity and permeability; fine, cemented grains block flow.</figcaption>
 </figure>
@@ -143,6 +146,23 @@ Pressure transient tests, where a well is flowed and then shut in while pressure
 
 Porosity tells how much space exists, but not what fills it. **Water saturation** is the fraction of pore volume filled with water; the rest holds oil or gas. Fine grained rocks with small pores hold more water by capillary forces, so poor permeability often comes with high water saturation. Engineers therefore combine porosity, permeability and saturation into **net pay**: the thickness of rock that meets cut offs for all three and can contribute to production. Thin, high quality layers can matter more than thick, tight ones.
 
-## Why they matter
+## Why these petrophysical properties matter
 
 Porosity, together with reservoir area, thickness and water saturation, gives the volume of hydrocarbons in place. Permeability, with fluid viscosity and pressure, controls how fast wells can produce, how many wells are needed, and whether techniques such as [artificial lift](/petroleum-engineering/artificial-lift-methods/) or hydraulic fracturing are required. Together, porosity and permeability shape every major decision in developing an oil or gas field, from drilling with a [rotary rig](/petroleum-engineering/rotary-drilling-rig-components/) to designing the surface facilities.
+
+## Key formulas for porosity and permeability
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Porosity | φ = Vp ÷ Vb | Vp = pore volume, Vb = bulk rock volume; fraction or percent |
+| Darcy's law (linear flow) | q = k A ΔP ÷ (μ L) | q = flow rate (cm³/s), k in darcy, A in cm², ΔP in atm, μ in cP, L in cm |
+| Permeability from a core test | k = q μ L ÷ (A ΔP) | same units as Darcy's law |
+| Darcy to SI | 1 D ≈ 0.987 × 10⁻¹² m² | 1 D = 1000 mD |
+
+## Porosity and permeability interview and viva questions
+
+1. **What is the difference between total and effective porosity?** Total porosity counts all pore space, connected or isolated, while effective porosity counts only interconnected pores that contribute to flow, which is what matters for production.
+2. **Define one darcy.** It is the permeability that lets 1 cm³/s of a 1 cP fluid flow through a cross section of 1 cm² under a pressure gradient of 1 atm/cm.
+3. **Why can a shale have useful porosity but very low permeability?** Its pores are tiny and poorly connected, so permeability, which depends on pore throat size and connectivity, can be in the nanodarcy to microdarcy range.
+4. **Why does packing, but not grain size, control porosity for ideal spheres?** Uniform small and large spheres in the same packing leave the same fraction of space: about 47.6% for cubic and about 26% for rhombohedral packing. Grain size mainly affects permeability.
+5. **How do core tests, logs and well tests differ for permeability?** Core plugs give a laboratory value by Darcy's law, logs estimate it indirectly from correlations or NMR, and pressure transient well tests give an average over a much larger volume around the well.
