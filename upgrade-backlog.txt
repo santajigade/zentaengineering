@@ -1,4 +1,7 @@
 # Existing articles to upgrade (animation, 40-60 word short answer, key formulas table, interview and viva questions). The daily run upgrades the first 8 and deletes their lines.
+src/content/articles/electronics-engineering/uart-vs-spi-vs-i2c.mdx  # Split long paragraphs, add Tabs (UART/SPI/I2C), Steps, More
+src/content/articles/instrumentation-control/what-is-turndown-ratio.mdx  # Split long paragraphs, add 2 interactive blocks
+src/content/articles/instrumentation-control/bernoulli-equation-flow-measurement.mdx  # Split long paragraphs, add 2 interactive blocks
 src/content/articles/manufacturing-engineering/types-of-maintenance.mdx
 src/content/articles/marine-engineering/fixed-vs-floating-offshore-structures.mdx
 src/content/articles/marine-engineering/ship-auxiliary-machinery.mdx
