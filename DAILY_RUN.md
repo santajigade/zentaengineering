@@ -9,6 +9,7 @@ python3 scripts/queue.py next 5
 Each line: discipline|subcategory|title|slug|format|focus keyword|status.
 File path: `src/content/articles/<discipline>/<slug>.mdx`. Skip any slug that already exists.
 - Slugs for single concept articles (a term, ratio, law, equation, component): use `what-is-<concept>`, e.g. `what-is-turndown-ratio`, even if the queue line has a shorter slug (update the queue line). Comparisons, how-tos and lists keep descriptive slugs. Owner preference, 24 Nov 2026.
+- Writing style (owner rule, 26 Nov 2026): short paragraphs only (max 3 sentences, about 60 words) and at least 2 interactive blocks per article (Tabs, Steps, More, tables). See AUTHORING.md "Short paragraphs and interactive blocks". Apply the same when upgrading backlog articles.
 - Featured image layout is fixed (owner decision, 24 Nov 2026): title left, the article diagram on a white card right (scripts/make-featured.py). The "In this article" list layout is NOT approved.
 
 ## 2. Write each article (hard rules)

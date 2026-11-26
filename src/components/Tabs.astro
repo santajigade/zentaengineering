@@ -1,0 +1,14 @@
+---
+// Tabbed panels. Usage: <Tabs><div data-tab="UART">...markdown...</div><div data-tab="SPI">...</div></Tabs>
+// All panels stay in the HTML (indexed by Google); the script only switches which one is shown.
+---
+<div class="ztabs"><div class="ztabs-bar" role="tablist"></div><div class="ztabs-body"><slot /></div></div>
+<script>
+  document.querySelectorAll<HTMLElement>('.ztabs').forEach((t) => {
+    const bar = t.querySelector('.ztabs-bar')!;
+    const panes = [...t.querySelectorAll<HTMLElement>('.ztabs-body > [data-tab]')];
+    const show = (i: number) => panes.forEach((p, j) => { p.hidden = i !== j; bar.children[j].setAttribute('aria-selected', String(i === j)); });
+    panes.forEach((p, i) => { const b = document.createElement('button'); b.type = 'button'; b.role = 'tab'; b.textContent = p.dataset.tab!; b.onclick = () => show(i); bar.append(b); });
+    show(0);
+  });
+</script>

@@ -76,6 +76,23 @@ Always:
 - Diagrams as SVG with a caption. Equations in LaTeX (`$$ ... $$`).
 - Length: **1,000 to 1,500 words** of body text (FAQ not counted).
 
+## Short paragraphs and interactive blocks (owner rule, 26 Nov 2026)
+- No paragraph longer than 3 sentences or about 60 words. Split long explanations into short paragraphs, bullet lists or the blocks below. `check-article.py` flags any paragraph over 70 words.
+- Use at least 2 interactive or visual blocks per article, where they fit the content:
+  - `<Tabs>` for parallel items (UART / SPI / I2C, types of a device, methods): `<Tabs><div data-tab="UART">
+
+text
+
+</div><div data-tab="SPI">
+
+text
+
+</div></Tabs>` (blank lines inside each div so markdown renders).
+  - `<Steps>` around a numbered markdown list for procedures and sequences.
+  - `<More title="...">` for secondary detail (history, standards, edge cases) so the main flow stays short.
+  - Tables for comparisons and values; `<Key>` for the one fact to remember.
+- Import them like the other components: `import Tabs from '../../../components/Tabs.astro';` (same for Steps, More).
+
 ## Components (MDX)
 ```mdx
 import Key from '../../../components/Key.astro';

@@ -12,7 +12,12 @@ for f in sys.argv[1:]:
     sa = re.search(r'<Key title="Short answer">(.*?)</Key>', body, re.S)
     sa_words = len(sa.group(1).split()) if sa else 0
     math = re.search(r'^math:\s*true', fm, re.M)
+    paras = [x for x in re.split(r'\n\s*\n', b) if x.strip() and not re.match(r'\s*([-*|#>]|\d+\.)', x)]
+    longp = sum(1 for x in paras if len(x.split()) > 70)
+    blocks = len(re.findall(r'<(Tabs|Steps|More)\b', body))
     missing = [n for n, ok in [
+        (f'{longp} paragraph(s) over 70 words', longp == 0),
+        ('2 interactive blocks (Tabs/Steps/More)', blocks >= 2),
         ('Short answer 40-60 words', 40 <= sa_words <= 60),
         ('interview/viva H2', bool(re.search(r'^## .*(interview|viva)', body, re.M | re.I))),
         ('Key formulas H2', not math or bool(re.search(r'^## .*formula', body, re.M | re.I))),

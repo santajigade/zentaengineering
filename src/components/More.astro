@@ -1,0 +1,6 @@
+---
+// Collapsible detail. Usage: <More title="Why there is no acknowledge in SPI">...markdown...</More>
+interface Props { title: string }
+const { title } = Astro.props;
+---
+<details class="zmore"><summary>{title}</summary><div class="zmore-b"><slot /></div></details>
