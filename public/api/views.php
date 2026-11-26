@@ -16,7 +16,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $data[$p] = ($data[$p] ?? 0) + 1;
   ftruncate($fh, 0); rewind($fh); fwrite($fh, json_encode($data));
   flock($fh, LOCK_UN); fclose($fh);
+  // Daily counts for "Popular this week" (last 8 days kept)
+  $df = dirname(__DIR__, 2) . '/article-views-daily.json';
+  if ($dh = @fopen($df, 'c+')) {
+    flock($dh, LOCK_EX);
+    $d = json_decode(stream_get_contents($dh) ?: '{}', true) ?: [];
+    $day = gmdate('Y-m-d'); $d[$day][$p] = ($d[$day][$p] ?? 0) + 1;
+    ksort($d); $d = array_slice($d, -8, null, true);
+    ftruncate($dh, 0); rewind($dh); fwrite($dh, json_encode($d));
+    flock($dh, LOCK_UN); fclose($dh);
+  }
   echo json_encode([$p => $data[$p]]); exit;
+}
+if (isset($_GET['top'])) {
+  // ?top=1 -> top 5 paths by views in the last 7 days; falls back to all-time totals
+  fclose($fh);
+  $d = json_decode(@file_get_contents(dirname(__DIR__, 2) . '/article-views-daily.json') ?: '{}', true) ?: [];
+  $sum = []; $since = gmdate('Y-m-d', time() - 6 * 86400);
+  foreach ($d as $day => $rows) if ($day >= $since) foreach ($rows as $p => $n) $sum[$p] = ($sum[$p] ?? 0) + $n;
+  if (count($sum) < 5) $sum = json_decode(@file_get_contents($file) ?: '{}', true) ?: [];
+  arsort($sum); echo json_encode(array_slice($sum, 0, 8, true)); exit;
 }
 flock($fh, LOCK_SH);
 $data = json_decode(stream_get_contents($fh) ?: '{}', true) ?: [];

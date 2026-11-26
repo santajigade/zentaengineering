@@ -1,0 +1,19 @@
+---
+// Sidebar: 4 most-viewed articles in the last 7 days (numbered list, filled in the browser).
+interface Props { current: string }
+const { current } = Astro.props;
+---
+<section class="card side-rel side-pop" data-current={current} hidden>
+  <span class="toc-label">Popular this week</span>
+  <ul></ul>
+</section>
+<script>
+  const box = document.querySelector<HTMLElement>('.side-pop');
+  if (box) Promise.all([fetch('/api/views.php?top=1').then((r) => r.json()), fetch('/articles-index.json').then((r) => r.json())]).then(([top, idx]) => {
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+    const rows = Object.entries(top as Record<string, number>).filter(([p]) => idx[p] && p !== box.dataset.current).slice(0, 4);
+    if (rows.length < 3) return;
+    box.querySelector('ul')!.innerHTML = rows.map(([p, n], i) => `<li><a href="${p}"><b class="side-n">${String(i + 1).padStart(2, '0')}</b><span><span class="side-t">${esc(idx[p][0])}</span><time>${esc(idx[p][1])} · ${n} views</time></span></a></li>`).join('');
+    box.hidden = false;
+  }).catch(() => {});
+</script>

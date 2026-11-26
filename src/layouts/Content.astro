@@ -1,5 +1,6 @@
 ---
 import { ver } from '../lib/assetver';
+import SidePopular from '../components/SidePopular.astro';
 // Shared layout for article-like pages: articles, lessons, interview sets, projects, resources.
 import Base from './Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
@@ -81,6 +82,7 @@ const schema = {
       <slot name="side" />
       {type === 'Article' && <SideRelated discipline={data.discipline} current={Astro.url.pathname} name={d.short} />}
       <Newsletter variant="side" />
+      {type === 'Article' && <SidePopular current={Astro.url.pathname} />}
       <AdSlot slot="sidebar" minHeight={600} />
       <div class="side-sticky"><Toc headings={headings} /></div>
     </aside>
