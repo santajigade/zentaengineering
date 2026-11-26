@@ -109,11 +109,11 @@ computer-science|web-development|Frontend vs Backend Development Explained|front
 automation-robotics|industrial-networks|PROFINET vs EtherNet/IP Compared|profinet-vs-ethernet-ip|comparison|profinet vs ethernet/ip|2026-11-25
 ai-data-engineering|data-science|Exploratory Data Analysis (EDA) Steps|exploratory-data-analysis|explanation|exploratory data analysis|2026-11-25
 telecommunication-engineering|satellite-communication|Satellite Link Budget Calculation Explained|what-is-satellite-link-budget|fundamentals|satellite link budget|2026-11-25
-petroleum-engineering|refining|Fluid Catalytic Cracking (FCC) Process|what-is-fluid-catalytic-cracking|working-principle|fluid catalytic cracking|todo
-renewable-energy|ev-charging|EV Battery Management System (BMS) Explained|what-is-battery-management-system|fundamentals|battery management system|todo
-environmental-engineering|emissions-compliance|NOx Control: SCR and SNCR Explained|nox-control-scr-sncr|working-principle|nox control|todo
-mining-engineering|exploration|Ore Reserve vs Mineral Resource Explained|ore-reserve-vs-mineral-resource|comparison|ore reserve vs mineral resource|todo
-manufacturing-engineering|spc|Process Capability Cp and Cpk Explained|what-is-process-capability|fundamentals|process capability|todo
+petroleum-engineering|refining|Fluid Catalytic Cracking (FCC) Process|what-is-fluid-catalytic-cracking|working-principle|fluid catalytic cracking|2026-11-26
+renewable-energy|ev-charging|EV Battery Management System (BMS) Explained|what-is-battery-management-system|fundamentals|battery management system|2026-11-26
+environmental-engineering|emissions-compliance|NOx Control: SCR and SNCR Explained|nox-control-scr-sncr|working-principle|nox control|2026-11-26
+mining-engineering|exploration|Ore Reserve vs Mineral Resource Explained|ore-reserve-vs-mineral-resource|comparison|ore reserve vs mineral resource|2026-11-26
+manufacturing-engineering|spc|Process Capability Cp and Cpk Explained|what-is-process-capability|fundamentals|process capability|2026-11-26
 materials-engineering|polymers-and-composites|Fiber Reinforced Composites: Types and Uses|fiber-reinforced-composites|explanation|fiber reinforced composites|todo
 safety-engineering|fire-suppression|Fire Sprinkler System Types Explained|fire-sprinkler-system-types|explanation|fire sprinkler system|todo
 agricultural-engineering|food-processing|Food Drying and Dehydration Methods|food-drying-methods|explanation|food drying|todo
