@@ -114,11 +114,11 @@ renewable-energy|ev-charging|EV Battery Management System (BMS) Explained|what-i
 environmental-engineering|emissions-compliance|NOx Control: SCR and SNCR Explained|nox-control-scr-sncr|working-principle|nox control|2026-11-26
 mining-engineering|exploration|Ore Reserve vs Mineral Resource Explained|ore-reserve-vs-mineral-resource|comparison|ore reserve vs mineral resource|2026-11-26
 manufacturing-engineering|spc|Process Capability Cp and Cpk Explained|what-is-process-capability|fundamentals|process capability|2026-11-26
-materials-engineering|polymers-and-composites|Fiber Reinforced Composites: Types and Uses|fiber-reinforced-composites|explanation|fiber reinforced composites|todo
-safety-engineering|fire-suppression|Fire Sprinkler System Types Explained|fire-sprinkler-system-types|explanation|fire sprinkler system|todo
-agricultural-engineering|food-processing|Food Drying and Dehydration Methods|food-drying-methods|explanation|food drying|todo
-aerospace-engineering|spacecraft|Orbital Mechanics Basics: Kepler's Laws|orbital-mechanics-basics|fundamentals|orbital mechanics|todo
-biomedical-engineering|bioprocess-engineering|Sterilization Methods for Medical Devices|sterilization-methods|explanation|sterilization methods|todo
+materials-engineering|polymers-and-composites|Fiber Reinforced Composites: Types and Uses|fiber-reinforced-composites|explanation|fiber reinforced composites|2026-11-27
+safety-engineering|fire-suppression|Fire Sprinkler System Types Explained|fire-sprinkler-system-types|explanation|fire sprinkler system|2026-11-27
+agricultural-engineering|food-processing|Food Drying and Dehydration Methods|food-drying-methods|explanation|food drying|2026-11-27
+aerospace-engineering|spacecraft|Orbital Mechanics Basics: Kepler's Laws|orbital-mechanics-basics|fundamentals|orbital mechanics|2026-11-27
+biomedical-engineering|bioprocess-engineering|Sterilization Methods for Medical Devices|sterilization-methods|explanation|sterilization methods|2026-11-27
 marine-engineering|marine-safety|MARPOL Annexes Explained|marpol-annexes|explanation|marpol annexes|todo
 mechanical-engineering|hvac-refrigeration|HVAC Load Calculation Basics|hvac-load-calculation|fundamentals|hvac load calculation|todo
 electrical-engineering|earthing|Lightning Protection Systems Explained|lightning-protection-system|explanation|lightning protection system|todo
