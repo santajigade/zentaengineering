@@ -34,7 +34,8 @@ const reviewer = data.reviewedDate ? data.reviewedBy ?? REVIEWER_DEFAULT : null;
 const url = new URL(Astro.url.pathname, SITE.url).href;
 const image = data.image ? new URL(data.image.src.replace(/\.webp$/, '.jpg'), SITE.url).href : undefined;
 const dgm: { src: string; alt: string; width: number; height: number }[] = (diagrams as any)[Astro.url.pathname] ?? [];
-const images = [...(image ? [image] : []), ...dgm.map((x) => ({ '@type': 'ImageObject', contentUrl: new URL(x.src, SITE.url).href, caption: x.alt, width: x.width, height: x.height }))];
+const image169 = image ? image.replace(/\.jpg$/, '-16x9.jpg') : undefined;
+const images = [...(image169 ? [image169] : []), ...(image ? [image] : []), ...dgm.map((x) => ({ '@type': 'ImageObject', contentUrl: new URL(x.src, SITE.url).href, caption: x.alt, width: x.width, height: x.height }))];
 const schema = {
   '@context': 'https://schema.org', '@type': schemaType, headline: data.title, description: data.description,
   datePublished: data.pubDate.toISOString(), dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
