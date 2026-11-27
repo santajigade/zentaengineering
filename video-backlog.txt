@@ -1,10 +1,4 @@
 # Articles still needing a blue-grid explainer video. Order: not yet pinned by pin date (src/data/pins.json), then already pinned, then the rest, so each article gets its video before its Pinterest pin. Delete a line once its video is live.
-manufacturing-engineering/eoq-inventory-model
-materials-engineering/iron-carbon-phase-diagram
-safety-engineering/mtbf-mttr-availability
-biomedical-engineering/medical-device-classification
-marine-engineering/ship-stability-basics
-electrical-engineering/induction-motor-working-principle
 electronics-engineering/logic-gates
 mechanical-engineering/laws-of-thermodynamics
 renewable-energy/how-solar-pv-systems-work

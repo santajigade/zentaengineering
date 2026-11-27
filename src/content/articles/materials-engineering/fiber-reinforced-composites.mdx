@@ -1,0 +1,270 @@
+---
+title: "Fiber Reinforced Composites: Types and Uses"
+description: "Fiber reinforced composites explained: glass, carbon and aramid fibers, matrix types, ply layups, how they are made, the rule of mixtures and an example."
+pubDate: 2026-11-27
+reviewedDate: 2026-11-27
+discipline: materials-engineering
+subcategory: polymers-and-composites
+focusKeyword: "fiber reinforced composites"
+image: { src: /images/featured/fiber-reinforced-composites.webp, alt: "Fiber Reinforced Composites: Types and Uses: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [composites, fiber-reinforced-polymer, carbon-fiber, glass-fiber, rule-of-mixtures]
+faq:
+  - q: "What is the difference between FRP, GFRP and CFRP?"
+    a: "FRP means fiber reinforced polymer, a composite with a polymer matrix. GFRP uses glass fibers and CFRP uses carbon fibers. GFRP is cheaper and widely used in boats, pipes, tanks and wind turbine blades, while CFRP is stiffer and lighter and is used where weight matters most, such as aircraft structures and racing parts."
+  - q: "Why are fiber reinforced composites strong in one direction and weak in another?"
+    a: "The fibers carry most of the load only along their own axis. Across the fibers, the load passes through the much softer matrix, so transverse stiffness and strength are far lower. Designers stack plies at 0, 90 and plus or minus 45 degrees to spread properties over the directions the part is loaded."
+  - q: "Can fiber reinforced composites be recycled?"
+    a: "Thermoset matrix composites cannot be remelted. They can be ground for use as filler, or treated by thermal processes such as pyrolysis to recover fibers, usually with some loss of fiber properties. Thermoplastic matrix composites can be reheated and reformed, which makes recycling easier."
+references:
+  - text: "W. D. Callister Jr. and D. G. Rethwisch, Materials Science and Engineering: An Introduction, 10th ed., Wiley, Chapter 16 Composites"
+  - text: "P. K. Mallick, Fiber-Reinforced Composites: Materials, Manufacturing, and Design, 3rd ed., CRC Press"
+  - text: "D. Hull and T. W. Clyne, An Introduction to Composite Materials, 2nd ed., Cambridge University Press"
+  - text: "ASTM D3039/D3039M, Standard Test Method for Tensile Properties of Polymer Matrix Composite Materials"
+  - text: "FAA, Aviation Maintenance Technician Handbook: Airframe, FAA-H-8083-31B, Chapter 7 Advanced Composite Materials"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
+import More from '../../../components/More.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Fiber reinforced composites** are materials made of strong, stiff fibers such as glass, carbon or aramid embedded in a matrix, usually a polymer resin. The fibers carry most of the load and the matrix holds them in place, transfers load between them and protects them, giving high strength and stiffness for low weight.
+
+</Key>
+
+Fiber reinforced composites combine two materials with different weaknesses. A thin fiber is very strong in tension but cannot carry compression or shear, and a polymer resin is tough but soft. Bonded together, they give a material that can be stiffer than aluminium per unit weight and that resists corrosion.
+
+They are used in aircraft skins, wind turbine blades, boat hulls, pipes, tanks, car body panels and sports equipment. Unlike metals, their properties depend on direction, so a composite part is designed together with its fiber layout.
+
+
+<ArticleVideo slug="fiber-reinforced-composites" title="How pultrusion makes fiber composites" uploadDate="2026-11-27" />
+
+## How fiber reinforced composites work
+
+A composite has three parts: the fibers, the matrix and the interface between them. When the part is loaded along the fibers, both stretch by the same amount, but the fibers are far stiffer, so they take almost all of the force.
+
+The matrix has three jobs. It binds the fibers together, transfers load into them by shear at the interface, and protects them from abrasion, moisture and chemicals. A weak interface lets fibers pull out and lowers strength, which is why fibers are given a surface treatment or sizing before use.
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Structure of a fiber reinforced composite: side view of a unidirectional lamina with stiff fibers running along the load direction inside a polymer matrix, tensile load F applied at both ends along the fibers, a cross section showing fiber ends surrounded by matrix, and a laminate built from 0, 90, plus 45 and minus 45 degree plies stacked in sequence">
+<rect x="90" y="50" width="260" height="110" fill="#e6f6f4" stroke="#0b2545" stroke-width="2"/>
+<path d="M92 63H348" stroke="#0b2545" stroke-width="3"/>
+<path d="M92 75H348" stroke="#0b2545" stroke-width="3"/>
+<path d="M92 87H348" stroke="#0b2545" stroke-width="3"/>
+<path d="M92 99H348" stroke="#0b2545" stroke-width="3"/>
+<path d="M92 111H348" stroke="#0b2545" stroke-width="3"/>
+<path d="M92 123H348" stroke="#0b2545" stroke-width="3"/>
+<path d="M92 135H348" stroke="#0b2545" stroke-width="3"/>
+<path d="M92 147H348" stroke="#0b2545" stroke-width="3"/>
+<g class="anim-pulse"><path d="M84 105H36" stroke="#b42318" stroke-width="4"/><path d="M28 105l12-7v14z" fill="#b42318"/></g>
+<g class="anim-pulse"><path d="M356 105H404" stroke="#b42318" stroke-width="4"/><path d="M412 105l-12-7v14z" fill="#b42318"/></g>
+<rect x="455" y="50" width="110" height="110" fill="#e6f6f4" stroke="#0b2545" stroke-width="2"/>
+<circle cx="466" cy="61" r="7" fill="#0b2545"/>
+<circle cx="466" cy="83" r="7" fill="#0b2545"/>
+<circle cx="466" cy="105" r="7" fill="#0b2545"/>
+<circle cx="466" cy="127" r="7" fill="#0b2545"/>
+<circle cx="466" cy="149" r="7" fill="#0b2545"/>
+<circle cx="488" cy="61" r="7" fill="#0b2545"/>
+<circle cx="488" cy="83" r="7" fill="#0b2545"/>
+<circle cx="488" cy="105" r="7" fill="#0b2545"/>
+<circle cx="488" cy="127" r="7" fill="#0b2545"/>
+<circle cx="488" cy="149" r="7" fill="#0b2545"/>
+<circle cx="510" cy="61" r="7" fill="#0b2545"/>
+<circle cx="510" cy="83" r="7" fill="#0b2545"/>
+<circle cx="510" cy="105" r="7" fill="#0b2545"/>
+<circle cx="510" cy="127" r="7" fill="#0b2545"/>
+<circle cx="510" cy="149" r="7" fill="#0b2545"/>
+<circle cx="532" cy="61" r="7" fill="#0b2545"/>
+<circle cx="532" cy="83" r="7" fill="#0b2545"/>
+<circle cx="532" cy="105" r="7" fill="#0b2545"/>
+<circle cx="532" cy="127" r="7" fill="#0b2545"/>
+<circle cx="532" cy="149" r="7" fill="#0b2545"/>
+<circle cx="554" cy="61" r="7" fill="#0b2545"/>
+<circle cx="554" cy="83" r="7" fill="#0b2545"/>
+<circle cx="554" cy="105" r="7" fill="#0b2545"/>
+<circle cx="554" cy="127" r="7" fill="#0b2545"/>
+<circle cx="554" cy="149" r="7" fill="#0b2545"/>
+<g class="anim-blink anim-d1"><rect x="90" y="190" width="260" height="18" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5"/><clipPath id="frcply0"><rect x="91" y="191" width="258" height="16"/></clipPath><path clip-path="url(#frcply0)" d="M92 199H348" stroke="#8a6d3b" stroke-width="1.5"/><text x="362" y="204" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">0° ply</text></g>
+<g class="anim-blink anim-d2"><rect x="90" y="210" width="260" height="18" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5"/><clipPath id="frcply1"><rect x="91" y="211" width="258" height="16"/></clipPath><path clip-path="url(#frcply1)" d="M100 211V227 M112 211V227 M124 211V227 M136 211V227 M148 211V227 M160 211V227 M172 211V227 M184 211V227 M196 211V227 M208 211V227 M220 211V227 M232 211V227 M244 211V227 M256 211V227 M268 211V227 M280 211V227 M292 211V227 M304 211V227 M316 211V227 M328 211V227 M340 211V227" stroke="#8a6d3b" stroke-width="1.5"/><text x="362" y="224" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">90° ply</text></g>
+<g class="anim-blink anim-d3"><rect x="90" y="230" width="260" height="18" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5"/><clipPath id="frcply2"><rect x="91" y="231" width="258" height="16"/></clipPath><path clip-path="url(#frcply2)" d="M78 247L94 231 M90 247L106 231 M102 247L118 231 M114 247L130 231 M126 247L142 231 M138 247L154 231 M150 247L166 231 M162 247L178 231 M174 247L190 231 M186 247L202 231 M198 247L214 231 M210 247L226 231 M222 247L238 231 M234 247L250 231 M246 247L262 231 M258 247L274 231 M270 247L286 231 M282 247L298 231 M294 247L310 231 M306 247L322 231 M318 247L334 231 M330 247L346 231 M342 247L358 231" stroke="#8a6d3b" stroke-width="1.5"/><text x="362" y="244" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">+45° ply</text></g>
+<g class="anim-blink anim-d4"><rect x="90" y="250" width="260" height="18" fill="#fff7e0" stroke="#0b2545" stroke-width="1.5"/><clipPath id="frcply3"><rect x="91" y="251" width="258" height="16"/></clipPath><path clip-path="url(#frcply3)" d="M78 251L94 267 M90 251L106 267 M102 251L118 267 M114 251L130 267 M126 251L142 267 M138 251L154 267 M150 251L166 267 M162 251L178 267 M174 251L190 267 M186 251L202 267 M198 251L214 267 M210 251L226 267 M222 251L238 267 M234 251L250 267 M246 251L262 267 M258 251L274 267 M270 251L286 267 M282 251L298 267 M294 251L310 267 M306 251L322 267 M318 251L334 267 M330 251L346 267 M342 251L358 267" stroke="#8a6d3b" stroke-width="1.5"/><text x="362" y="264" font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">−45° ply</text></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="220" y="36" font-weight="700">Unidirectional lamina (side view)</text>
+<text x="510" y="36" font-weight="700">Cross section</text>
+<text x="56" y="92">F</text><text x="384" y="92">F</text>
+<text x="510" y="180">Fiber ends in matrix</text>
+<text x="510" y="232">Fibers carry load</text><text x="510" y="248">Matrix binds and</text><text x="510" y="264">protects fibers</text>
+<text x="220" y="292">Laminate: plies stacked at different angles</text>
+</g></svg>
+<figcaption>A unidirectional lamina carries load along its fibers; a laminate stacks plies at different angles to handle loads in several directions.</figcaption>
+</figure>
+
+Short fibers carry less load than continuous ones because stress builds up from each fiber end. Callister gives a critical fiber length below which the fiber cannot be loaded to its full strength.
+
+<More title="Critical fiber length">
+
+The critical length is l_c = σ_f d ÷ (2 τ_c), where σ_f is the fiber tensile strength, d the fiber diameter and τ_c the shear strength of the fiber to matrix bond or of the matrix, whichever is lower. Fibers much longer than l_c behave as continuous fibers.
+
+</More>
+
+## Types of fiber reinforced composites
+
+Composites are grouped by the fiber material, the matrix material and the form of the reinforcement.
+
+### By fiber
+
+<Tabs><div data-tab="Glass">
+
+E-glass is the most common reinforcement. It has a specific gravity of about 2.58, tensile strength of about 3.45 GPa and modulus of about 72.5 GPa (Callister). It is cheap and electrically insulating, and is used in boats, pipes, tanks, panels and wind turbine blades. S-glass has higher strength for more demanding parts.
+
+</div><div data-tab="Carbon">
+
+Standard modulus PAN based carbon fiber has a specific gravity of about 1.78, tensile strength of about 3.8 to 4.2 GPa and modulus of about 230 GPa (Callister). High modulus grades reach 390 to 760 GPa. Carbon is used where stiffness and low weight matter most, such as aircraft structures and racing cars.
+
+Carbon conducts electricity, so it causes galvanic corrosion of aluminium when the two touch in the presence of moisture.
+
+</div><div data-tab="Aramid">
+
+Aramid fibers such as Kevlar 49 have a specific gravity of about 1.44, tensile strength of about 3.6 to 4.1 GPa and modulus of about 131 GPa (Callister). They are tough and resist impact, so they are used in ballistic protection, pressure vessels and parts that must survive impact. Their compressive strength is low.
+
+</div><div data-tab="Natural">
+
+Natural fibers such as flax, jute and hemp are lighter than glass but have lower, more variable properties and absorb moisture. They suit lightly loaded parts such as car interior panels.
+
+</div></Tabs>
+
+### By matrix
+
+- **Polymer matrix composites (PMC)** are the most common. Thermoset matrices are polyester, vinyl ester and epoxy; epoxy gives the best properties and is standard in aerospace. Thermoplastic matrices include polypropylene, polyamide and PEEK. See [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/) for how the two behave.
+- **Metal matrix composites (MMC)**, such as aluminium reinforced with silicon carbide or boron fibers, keep strength at higher temperature than polymers.
+- **Ceramic matrix composites (CMC)**, such as silicon carbide fibers in a silicon carbide matrix, are used for very high temperatures. Here the fibers mainly raise fracture toughness.
+
+### By reinforcement form
+
+- **Continuous aligned (unidirectional)** fibers give the highest strength and stiffness along one axis.
+- **Woven fabrics** put fibers in two directions in a single layer and are easy to drape over curved moulds.
+- **Chopped or short random fibers**, as in chopped strand mat and sheet moulding compound (SMC), give nearly equal properties in the plane at lower strength.
+
+Parts made from continuous fibers are usually laminates: plies are stacked at chosen angles such as 0°, 90°, +45° and −45° so the part can carry tension, compression and shear in several directions.
+
+## How fiber reinforced composites are made
+
+- **Hand lay-up and spray-up:** fabric or chopped fiber is placed in an open mould and wetted with resin. It suits boats and large low volume parts.
+- **Resin transfer moulding (RTM) and vacuum infusion:** dry fiber preforms in a closed mould or under a vacuum bag are filled with resin.
+- **Prepreg and autoclave:** fibers already impregnated with partly cured epoxy are laid up, bagged and cured under heat and pressure. This gives the high fiber content and low voids needed for aircraft parts.
+- **Filament winding:** resin wetted fibers are wound onto a rotating mandrel to make pipes, tanks and pressure vessels.
+- **Compression moulding:** SMC is pressed in heated metal moulds for high volume automotive panels.
+
+Pultrusion makes long straight profiles of constant cross section, such as rods, I-beams, channels and ladder rails. It runs continuously:
+
+<Steps>
+
+1. Continuous fiber rovings and mats are pulled off creels.
+2. The fibers pass through a resin bath and are wetted out.
+3. A guide shapes the wet fibers close to the final profile.
+4. The bundle is pulled through a heated die, where the resin cures.
+5. Caterpillar pullers grip the cured profile and pull the whole line forward.
+6. A saw cuts the profile to length.
+
+</Steps>
+
+<figure class="anim">
+<svg width="640" height="250" viewBox="0 0 640 250" fill="none" role="img" aria-label="Pultrusion line: continuous fiber rovings pulled from creels pass through a resin bath, a preforming guide and a heated die where the resin cures; caterpillar pullers grip the cured profile and pull it forward, and a saw cuts it to length">
+<circle cx="40" cy="60" r="14" fill="#fff7e0" stroke="#0b2545" stroke-width="2"/><circle cx="40" cy="60" r="4" fill="#0b2545"/>
+<circle cx="40" cy="100" r="14" fill="#fff7e0" stroke="#0b2545" stroke-width="2"/><circle cx="40" cy="100" r="4" fill="#0b2545"/>
+<circle cx="40" cy="140" r="14" fill="#fff7e0" stroke="#0b2545" stroke-width="2"/><circle cx="40" cy="140" r="4" fill="#0b2545"/>
+<path d="M130 120H230V170H130Z" fill="#ffe9e7" stroke="#0b2545" stroke-width="2"/><path d="M130 132H230" stroke="#b42318" stroke-width="1.5"/>
+<path d="M40 46 C 90 46 120 140 150 150 H210 C 235 140 250 112 260 112 H320 M40 86 C 90 86 120 140 150 150 H210 C 235 140 250 112 260 112 H320 M40 126 C 90 126 120 140 150 150 H210 C 235 140 250 112 260 112 H320" stroke="#8a6d3b" stroke-width="3"/>
+<path class="anim-flow-slow" d="M40 46 C 90 46 120 140 150 150 H210 C 235 140 250 112 260 112 H320 M40 86 C 90 86 120 140 150 150 H210 C 235 140 250 112 260 112 H320 M40 126 C 90 126 120 140 150 150 H210 C 235 140 250 112 260 112 H320" stroke="#fff" stroke-width="2"/>
+<rect x="256" y="92" width="8" height="40" fill="#c9d2de" stroke="#0b2545" stroke-width="1.5"/>
+<rect x="300" y="92" width="110" height="40" fill="#c9d2de" stroke="#0b2545" stroke-width="2"/>
+<path d="M310 88h10M335 88h10M360 88h10M385 88h10M310 136h10M335 136h10M360 136h10M385 136h10" stroke="#b42318" stroke-width="4"/>
+<rect x="410" y="104" width="225" height="16" fill="#e6f6f4" stroke="#0b2545" stroke-width="2"/>
+<path class="anim-flow-slow" d="M320 112H632" stroke="#0b2545" stroke-width="2"/>
+<rect x="440" y="70" width="90" height="28" rx="14" fill="#eef1f6" stroke="#0b2545" stroke-width="2"/>
+<circle cx="454" cy="84" r="10" fill="#fff" stroke="#0b2545" stroke-width="2"/><path class="anim-spin-rev" d="M446 84H462M454 76V92" stroke="#0b2545" stroke-width="2"/>
+<circle cx="516" cy="84" r="10" fill="#fff" stroke="#0b2545" stroke-width="2"/><path class="anim-spin-rev" d="M508 84H524M516 76V92" stroke="#0b2545" stroke-width="2"/>
+<rect x="440" y="126" width="90" height="28" rx="14" fill="#eef1f6" stroke="#0b2545" stroke-width="2"/>
+<circle cx="454" cy="140" r="10" fill="#fff" stroke="#0b2545" stroke-width="2"/><path class="anim-spin" d="M446 140H462M454 132V148" stroke="#0b2545" stroke-width="2"/>
+<circle cx="516" cy="140" r="10" fill="#fff" stroke="#0b2545" stroke-width="2"/><path class="anim-spin" d="M508 140H524M516 132V148" stroke="#0b2545" stroke-width="2"/>
+<circle cx="590" cy="74" r="20" fill="#fff" stroke="#0b2545" stroke-width="2"/><path class="anim-spin" d="M574 74H606M590 58V90M579 63L601 85M601 63L579 85" stroke="#0b2545" stroke-width="1.5"/><path d="M590 94V104" stroke="#0b2545" stroke-width="2" stroke-dasharray="3 3"/>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="40" y="178">Fiber creels</text><text x="180" y="190">Resin bath</text><text x="260" y="150">Guide</text>
+<text x="355" y="70">Heated die</text><text x="355" y="166">Resin cures</text><text x="485" y="186">Caterpillar pullers</text>
+<text x="590" y="44">Cut-off saw</text>
+<text x="320" y="230">Pull direction →</text>
+</g></svg>
+<figcaption>Pultrusion: fibers are pulled through a resin bath and a heated die, so the cured profile leaves the die continuously.</figcaption>
+</figure>
+
+## Rule of mixtures
+
+For continuous aligned fibers loaded along their length, fibers and matrix strain equally (the isostrain condition). The composite modulus is then the volume weighted average:
+
+$$
+E_{cl} = E_f V_f + E_m V_m
+$$
+
+Loaded across the fibers, fibers and matrix carry the same stress (the isostress condition), and the transverse modulus is much lower:
+
+$$
+\frac{1}{E_{ct}} = \frac{V_f}{E_f} + \frac{V_m}{E_m}
+$$
+
+Density follows the same weighted average, ρ_c = ρ_f V_f + ρ_m V_m. The ratio of load carried by fibers to load carried by the matrix along the fibers is F_f ÷ F_m = E_f V_f ÷ (E_m V_m). These simple equations are the starting point of [stress and strain](/mechanical-engineering/stress-and-strain/) analysis of laminates; properties are confirmed by coupon tests such as ASTM D3039.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A unidirectional carbon fiber and epoxy lamina with fiber volume fraction 0.60. Carbon fiber: E_f = 230 GPa, density 1.78 g/cm³. Epoxy: E_m = 3.5 GPa, density 1.2 g/cm³. Steel for comparison: E = 200 GPa, density 7.85 g/cm³.</dd>
+
+<dt>Find</dt><dd>Longitudinal and transverse modulus, composite density, the share of load carried by the fibers, and specific modulus compared with steel.</dd>
+
+<dt>Assumptions</dt><dd>Perfect bonding, no voids (V_m = 0.40), linear elastic behaviour, load along the fibers for the longitudinal case.</dd>
+
+<dt>Solution</dt><dd>E_cl = 230 × 0.60 + 3.5 × 0.40 = 139.4 GPa<br />1 ÷ E_ct = 0.60 ÷ 230 + 0.40 ÷ 3.5 = 0.1169, so E_ct = 8.55 GPa<br />ρ_c = 1.78 × 0.60 + 1.2 × 0.40 = 1.548 g/cm³<br />Fiber load share = 230 × 0.60 ÷ 139.4 = 0.99</dd>
+
+<dt>Answer</dt><dd><strong>E_cl ≈ 139 GPa along the fibers but only about 8.6 GPa across them; density about 1.55 g/cm³; the fibers carry about 99% of the load; specific modulus 139.4 ÷ 1.548 = 90.1 GPa per g/cm³ against 200 ÷ 7.85 = 25.5 for steel, about 3.5 times higher.</strong></dd>
+
+<dt>Limitations</dt><dd>The transverse formula is a lower bound and usually underestimates measured values. Real laminates contain voids, fiber misalignment and plies at several angles, so test data are used for design.</dd>
+</dl>
+</Example>
+
+## Key formulas for fiber reinforced composites
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Longitudinal modulus (isostrain) | E_cl = E_f V_f + E_m V_m | E in GPa, V_f and V_m = fiber and matrix volume fractions, V_f + V_m = 1 |
+| Transverse modulus (isostress) | 1 ÷ E_ct = V_f ÷ E_f + V_m ÷ E_m | E in GPa |
+| Composite density | ρ_c = ρ_f V_f + ρ_m V_m | ρ in g/cm³ |
+| Load ratio along fibers | F_f ÷ F_m = E_f V_f ÷ (E_m V_m) | F = force carried, N |
+| Critical fiber length | l_c = σ_f d ÷ (2 τ_c) | σ_f = fiber strength, MPa; d = diameter, mm; τ_c = interface or matrix shear strength, MPa |
+
+## Uses, advantages and limitations
+
+Typical uses by fiber:
+
+| Fiber | Typical uses |
+| --- | --- |
+| Glass | Boat hulls, pipes, chemical tanks, wind turbine blades, building panels, pultruded gratings and rebar |
+| Carbon | Aircraft structures, racing cars, bicycle frames, drive shafts, strengthening wraps for concrete |
+| Aramid | Ballistic armour, pressure vessels, impact resistant panels, ropes |
+
+The main advantages are high specific strength and stiffness, good fatigue resistance in carbon composites, corrosion resistance and the freedom to put fibers only where loads run. Large parts can be moulded in one piece, which cuts the number of joints.
+
+Properties across the fibers are low, and impact can cause delamination between plies that is hidden under an undamaged looking surface, as the FAA handbook notes for aircraft.
+
+Thermoset composites are hard to recycle, the matrix limits service temperature, and carbon fiber needs isolating from aluminium. Metals behave more uniformly, as covered in [mechanical properties of materials](/materials-engineering/mechanical-properties-of-materials/); see [aircraft materials](/aerospace-engineering/aircraft-materials/) for where composites sit beside aluminium and titanium.
+
+## Fiber reinforced composites interview and viva questions
+
+1. **What does the matrix do in a fiber reinforced composite?** It binds the fibers, transfers load into them by shear at the interface, and protects them from abrasion, moisture and chemicals.
+2. **When does the isostrain rule of mixtures apply?** It applies to continuous aligned fibers loaded along their length, where fibers and matrix stretch by the same amount, so E_cl = E_f V_f + E_m V_m.
+3. **Why is transverse modulus much lower than longitudinal modulus?** Across the fibers the load must pass through the soft matrix, and the isostress formula is dominated by the low matrix modulus.
+4. **What is critical fiber length?** It is the minimum length a fiber needs to be loaded to its full strength, l_c = σ_f d ÷ (2 τ_c); shorter fibers give little strengthening.
+5. **Why are plies stacked at 0, 90 and plus or minus 45 degrees?** A single ply is strong only along its fibers, so plies at several angles let the laminate carry tension, compression and shear in more than one direction.

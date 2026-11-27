@@ -1,0 +1,221 @@
+---
+title: "Sterilization Methods for Medical Devices"
+description: "Sterilization methods for medical devices: steam, dry heat, ethylene oxide, radiation and hydrogen peroxide, with D value, SAL and a worked example."
+pubDate: 2026-11-27
+reviewedDate: 2026-11-27
+discipline: biomedical-engineering
+subcategory: bioprocess-engineering
+focusKeyword: "sterilization methods"
+image: { src: /images/featured/sterilization-methods.webp, alt: "Sterilization Methods for Medical Devices: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [sterilization, autoclave, ethylene-oxide, gamma-radiation, sterility-assurance-level, medical-devices]
+faq:
+  - q: "What is the most common sterilization method in hospitals?"
+    a: "Steam sterilization in an autoclave. It is fast, leaves no toxic residue, is cheap to run and kills all microorganisms including bacterial spores, so it is the first choice for every reusable instrument that tolerates heat and moisture."
+  - q: "Why are single use plastic devices sterilized with radiation or ethylene oxide?"
+    a: "Many polymers soften, warp or degrade at steam temperatures. Ethylene oxide works at about 37 to 63 °C and gamma or electron beam radiation adds very little heat, so both can sterilize heat sensitive products inside their sealed final packaging."
+  - q: "What is the difference between sterilization and disinfection?"
+    a: "Sterilization destroys all forms of microbial life, including bacterial spores. Disinfection removes many or all pathogenic microorganisms on objects but not necessarily all spores. High level disinfection is accepted for semicritical items such as some endoscopes, while critical items that enter sterile tissue must be sterilized."
+references:
+  - text: "W. A. Rutala, D. J. Weber and HICPAC, Guideline for Disinfection and Sterilization in Healthcare Facilities, CDC, 2008 (updated 2019)"
+  - text: "ANSI/AAMI ST79:2017 Comprehensive guide to steam sterilization and sterility assurance in health care facilities"
+  - text: "ISO 17665:2024 Sterilization of health care products, Moist heat, Requirements for the development, validation and routine control of a sterilization process for medical devices"
+  - text: "ISO 11135:2014 Sterilization of health care products, Ethylene oxide, Requirements for the development, validation and routine control of a sterilization process for medical devices"
+  - text: "ISO 11137-1:2006 Sterilization of health care products, Radiation, Part 1: Requirements for development, validation and routine control of a sterilization process for medical devices"
+  - text: "ISO 11138-3:2017 Sterilization of health care products, Biological indicators, Part 3: Biological indicators for moist heat sterilization processes"
+  - text: "G. McDonnell, Antisepsis, Disinfection, and Sterilization: Types, Action, and Resistance, 2nd ed., ASM Press"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
+import More from '../../../components/More.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Sterilization methods** are validated processes that destroy all microbial life on a medical device, including bacterial spores. The main methods are steam (moist heat), dry heat, ethylene oxide gas, gamma or electron beam radiation and low temperature hydrogen peroxide. Each is validated to a sterility assurance level, normally 10⁻⁶.
+
+</Key>
+
+Choosing between sterilization methods comes down to what the device is made of and how it is packed. A steel forceps goes in the autoclave. A plastic catheter sealed in a pouch goes to ethylene oxide or radiation, because steam would warp it.
+
+Sterility cannot be tested on every item, since the test destroys the product. Instead, the process is validated so the probability of a surviving microorganism is known and very small.
+
+
+<ArticleVideo slug="sterilization-methods" title="How a steam autoclave works" uploadDate="2026-11-27" />
+
+## Which devices need sterilization
+
+The Spaulding classification, used in the CDC guideline, sorts reusable items by the risk of infection from their use:
+
+| Category | Contact | Required treatment | Examples |
+| --- | --- | --- | --- |
+| Critical | Enters sterile tissue or the vascular system | Sterilization | Surgical instruments, implants, urinary catheters |
+| Semicritical | Mucous membranes or non intact skin | At least high level disinfection | Some endoscopes, respiratory therapy equipment |
+| Noncritical | Intact skin only | Low level disinfection | Blood pressure cuffs, bedpans |
+
+Device makers also sterilize single use products in their final packaging. The class of the device in [medical device classification](/biomedical-engineering/medical-device-classification/) does not set the method, but it does set how much evidence the regulator expects.
+
+## How microbes die: D value and SAL
+
+Microbial death under a lethal agent follows first order kinetics. Each equal time interval kills the same fraction of the remaining population.
+
+$$
+N = N_0 \times 10^{-t/D}
+$$
+
+N₀ is the starting population (the bioburden), N the survivors after time t, and D the decimal reduction time: the time at a stated condition for a 90% (one log) reduction. The same idea is used for food in [HTST and UHT pasteurization](/agricultural-engineering/pasteurization-htst-uht/).
+
+The sterility assurance level (SAL) is the probability that a single viable microorganism remains on an item after sterilization. Terminally sterilized medical devices are normally required to reach an SAL of 10⁻⁶, a one in a million chance.
+
+$$
+t = D \times \left( \log_{10} N_0 - \log_{10} \text{SAL} \right)
+$$
+
+Steam cycles are often compared with the lethality value F₀, the equivalent minutes at 121.1 °C, with z = 10 °C (the temperature change that alters D by a factor of 10):
+
+$$
+F_0 = \sum 10^{(T - 121.1)/10} \, \Delta t
+$$
+
+<More title="Biological indicators and the overkill approach">
+
+A biological indicator carries a known population of highly resistant spores. *Geobacillus stearothermophilus* is used for steam and hydrogen peroxide, and *Bacillus atrophaeus* for ethylene oxide and dry heat. ISO 11138-3 requires steam indicators to have a D value at 121 °C of at least 1.5 minutes.
+
+Many hospital and industrial cycles use an overkill design. The cycle gives at least a 12 log reduction of an indicator that is far more resistant than the normal bioburden, so the real SAL is much better than 10⁻⁶.
+
+</More>
+
+## The main sterilization methods
+
+<Tabs><div data-tab="Steam">
+
+Saturated steam under pressure kills by denaturing and coagulating proteins. It is fast, non toxic and cheap, so it is the first choice for anything that tolerates heat and moisture.
+
+CDC lists 121 °C for at least 30 minutes for wrapped items in a gravity displacement sterilizer, and 132 °C for 4 minutes in a prevacuum (dynamic air removal) sterilizer. Air must be removed first, because trapped air insulates the load and stops steam from condensing on it. The process is covered by ISO 17665 and, for hospitals, AAMI ST79.
+
+</div><div data-tab="Dry heat">
+
+Hot air kills by oxidation. It suits powders, oils and glassware that steam cannot penetrate or would damage, and it does not corrode sharp instruments.
+
+It is slow because dry air transfers heat poorly. CDC gives 170 °C for 60 minutes, 160 °C for 120 minutes or 150 °C for 150 minutes.
+
+</div><div data-tab="Ethylene oxide">
+
+Ethylene oxide (EO) gas kills by alkylating proteins and DNA. It works at low temperature, so it treats heat and moisture sensitive devices such as plastics, electronics and long lumens, often in their sealed packs. ISO 11135 covers it.
+
+CDC describes typical conditions of 37 to 63 °C, 40 to 80% relative humidity and an EO concentration of 450 to 1200 mg/L, with exposure of 1 to 6 hours. EO is toxic and a suspected carcinogen, so loads need aeration, for example 8 to 12 hours at 50 to 60 °C, to remove residues.
+
+</div><div data-tab="Radiation">
+
+Gamma rays from cobalt 60 and electron beams break DNA and form free radicals. Industry uses radiation for large volumes of single use products such as syringes, gloves and sutures. Very little heat is produced and the product can be treated in its final packaging.
+
+A dose of 25 kGy is widely used, but ISO 11137 requires the dose to be set and checked against the actual bioburden. Some polymers yellow or turn brittle, so materials must be chosen for radiation, as covered in [biomaterials types](/biomedical-engineering/biomaterials-types/).
+
+</div><div data-tab="Hydrogen peroxide">
+
+Low temperature hydrogen peroxide gas plasma and vaporized hydrogen peroxide systems work at about 37 to 44 °C. CDC lists cycle times of about 28 to 75 minutes, and the by-products are water and oxygen, so no aeration is needed.
+
+Limitations are cellulose (paper, linen) which absorbs the peroxide, liquids, and limits on lumen length and diameter set by each manufacturer.
+
+</div></Tabs>
+
+## Steam autoclave cycle
+
+Most hospital sterilization happens in a prevacuum steam autoclave. Steam fills a jacket and chamber, air and condensate leave through the drain at the bottom, and a temperature sensor in the drain line reads the coolest point of the chamber.
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Prevacuum steam autoclave: steam enters the jacketed chamber at the top, flows over instrument trays, and air and condensate leave through the drain at the bottom past a drain temperature sensor; the cycle runs in four phases: conditioning with vacuum pulses to remove air, exposure at 132 to 134 °C, steam exhaust, and vacuum drying">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="40" y="50" width="300" height="190" rx="10" fill="#eef1f6" />
+<rect x="58" y="68" width="264" height="154" rx="6" fill="#ffffff" />
+<rect x="340" y="80" width="10" height="130" fill="#c9d2de" />
+<rect x="95" y="120" width="190" height="16" rx="3" fill="#f5e6c8" />
+<rect x="95" y="170" width="190" height="16" rx="3" fill="#f5e6c8" />
+<path d="M190 240V275H300" />
+<circle cx="190" cy="258" r="8" fill="#ffe9e7" />
+</g>
+<g stroke="#b42318" stroke-width="3"><path d="M10 30H110V68" /><path d="M120 80V112M260 80V112M120 140V162M260 140V162" stroke-dasharray="5 4" /></g>
+<g stroke="#fff" stroke-width="3" fill="none"><path class="anim-flow" d="M10 30H110V68" /><path class="anim-flow" d="M120 80V112M260 80V112M120 140V162M260 140V162" /></g>
+<g fill="#b42318"><path d="M105 60l5 9 5-9z" /></g>
+<g stroke="#13a89e" stroke-width="3"><path d="M190 225V240" /></g>
+<g stroke="#13a89e" stroke-width="3"><path d="M190 266V275H300" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M190 266V275H300" /></g>
+<g fill="#13a89e"><path d="M300 270l9 5-9 5z" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<rect class="anim-blink" x="390" y="50" width="190" height="40" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d1" x="390" y="105" width="190" height="40" rx="6" fill="#ffe9e7" />
+<rect class="anim-blink anim-d2" x="390" y="160" width="190" height="40" rx="6" fill="#eef1f6" />
+<rect class="anim-blink anim-d3" x="390" y="215" width="190" height="40" rx="6" fill="#fff7e0" />
+</g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="14" y="22">Steam in</text>
+<text x="190" y="62" text-anchor="middle" font-size="11">Steam jacket</text>
+<text x="190" y="104" text-anchor="middle" font-size="11">Chamber</text>
+<text x="190" y="155" text-anchor="middle" font-size="11">Instrument trays</text>
+<text x="362" y="150" font-size="11" transform="rotate(90 362 150)" text-anchor="middle">Door</text>
+<text x="206" y="262" font-size="11">Drain sensor</text>
+<text x="315" y="279" font-size="11">To drain</text>
+<text x="485" y="68" text-anchor="middle" font-weight="700">1 Conditioning</text><text x="485" y="83" text-anchor="middle" font-size="11">vacuum pulses remove air</text>
+<text x="485" y="123" text-anchor="middle" font-weight="700">2 Exposure</text><text x="485" y="138" text-anchor="middle" font-size="11">hold at 132 to 134 °C</text>
+<text x="485" y="178" text-anchor="middle" font-weight="700">3 Exhaust</text><text x="485" y="193" text-anchor="middle" font-size="11">steam released</text>
+<text x="485" y="233" text-anchor="middle" font-weight="700">4 Drying</text><text x="485" y="248" text-anchor="middle" font-size="11">vacuum dries the load</text>
+</g>
+</svg>
+<figcaption>Prevacuum steam autoclave: steam enters at the top, air and condensate leave at the bottom drain, and the cycle runs through four phases.</figcaption>
+</figure>
+
+<Steps>
+
+1. Conditioning: the vacuum pump pulls air out of the chamber and packs, and steam pulses refill it. This repeats several times so no air pockets remain.
+2. Exposure: the chamber holds saturated steam at the set temperature, for example 132 °C for 4 minutes, while the drain sensor confirms the load has reached it.
+3. Exhaust: steam is released and the chamber pressure falls back toward atmospheric.
+4. Drying: a vacuum flashes off condensate so packs come out dry. Wet packs can wick microorganisms through the wrap.
+
+</Steps>
+
+Each load is monitored three ways under AAMI ST79: physical records of time, temperature and pressure, chemical indicators inside and outside the packs, and biological indicators. A daily air removal test checks that the vacuum system works.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A reusable device carries a bioburden of 100 colony forming units (CFU). The resistant organism has a D value of 1.5 minutes at 121 °C. The target SAL is 10⁻⁶.</dd>
+
+<dt>Find</dt><dd>(a) The exposure time at 121 °C to reach the SAL. (b) The survival probability after 15 minutes at 121 °C. (c) The F₀ of a 3 minute hold at 134 °C.</dd>
+
+<dt>Assumptions</dt><dd>First order death kinetics; all of the load is at the stated temperature for the full hold; z = 10 °C; heat up and cool down add no lethality.</dd>
+
+<dt>Solution</dt><dd>(a) Log reductions needed = log₁₀ 100 minus log₁₀ 10⁻⁶ = 2 + 6 = 8. Time = 8 × 1.5 = 12 minutes.<br />(b) N = 100 × 10^(minus 15 ÷ 1.5) = 100 × 10⁻¹⁰ = 10⁻⁸.<br />(c) Lethal rate at 134 °C = 10^((134 minus 121.1) ÷ 10) = 10^1.29 ≈ 19.5. F₀ = 19.5 × 3 ≈ 58.5 minutes.</dd>
+
+<dt>Answer</dt><dd><strong>(a) 12 minutes; (b) a survival probability of 10⁻⁸, better than the target; (c) F₀ ≈ 58.5 minutes</strong></dd>
+
+<dt>Limitations</dt><dd>Real cycles are validated with biological indicators and temperature mapping, not calculation alone. Heat up time, air pockets and wet packs can all reduce the lethality actually delivered.</dd>
+</dl>
+</Example>
+
+## Key formulas for sterilization methods
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Survivor curve | N = N₀ × 10^(minus t ÷ D) | N₀ and N = microorganisms before and after, t = exposure time in min, D = decimal reduction time in min |
+| Log reduction | LR = log₁₀ N₀ minus log₁₀ N | dimensionless, number of 90% reductions |
+| Exposure time for an SAL | t = D × (log₁₀ N₀ minus log₁₀ SAL) | t and D in min, SAL as a probability such as 10⁻⁶ |
+| Lethality, F₀ | F₀ = Σ 10^((T minus 121.1) ÷ 10) × Δt | T = temperature in °C, Δt = time step in min, z = 10 °C |
+
+## Choosing a sterilization method
+
+Start with the device material and design. Use steam whenever the device tolerates it. For heat sensitive reusable items, a hospital usually picks hydrogen peroxide for its short cycle and no aeration, or EO when lumens are long or materials absorb peroxide.
+
+For single use products, manufacturers choose between EO and radiation by material compatibility, packaging and volume. Polymers that suit each process are compared in [thermoplastics vs thermosets](/materials-engineering/thermoplastics-vs-thermosets/). Whatever the method, the cycle is validated to its ISO standard and routinely monitored, and cleaning comes first, because soil shields microbes from every sterilant.
+
+Single use bioprocess equipment, such as the bag systems in [bioreactor types](/biomedical-engineering/bioreactor-types/), is also often supplied presterilized by radiation.
+
+## Sterilization methods interview and viva questions
+
+1. **What is the sterility assurance level?** It is the probability that one viable microorganism survives on an item after sterilization; terminally sterilized medical devices normally need an SAL of 10⁻⁶.
+2. **Define the D value.** The D value is the time at a stated condition, such as 121 °C, needed to kill 90% of the population, which is a one log reduction.
+3. **Why must air be removed in a steam sterilizer?** Trapped air insulates the load and prevents steam from contacting and condensing on surfaces, so parts of the load would not reach sterilizing conditions.
+4. **Why do ethylene oxide sterilized devices need aeration?** EO is toxic and a suspected carcinogen, so residues absorbed into the device and packaging must be removed, for example over 8 to 12 hours at 50 to 60 °C, before use.
+5. **Which biological indicator organism is used for steam?** *Geobacillus stearothermophilus* spores, because they are highly resistant to moist heat; ISO 11138-3 requires a D value at 121 °C of at least 1.5 minutes.

@@ -1,0 +1,222 @@
+---
+title: "Fire Sprinkler System Types Explained"
+description: "Fire sprinkler system types explained: wet pipe, dry pipe, preaction and deluge, how each works, where it fits, head ratings and a design example."
+pubDate: 2026-11-27
+reviewedDate: 2026-11-27
+discipline: safety-engineering
+subcategory: fire-suppression
+focusKeyword: "fire sprinkler system"
+image: { src: /images/featured/fire-sprinkler-system-types.webp, alt: "Fire Sprinkler System Types Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [fire-sprinkler, wet-pipe, dry-pipe, preaction, deluge, nfpa-13]
+faq:
+  - q: "Do all sprinklers go off at once in a fire?"
+    a: "No. In wet pipe, dry pipe and preaction systems each head has its own heat sensitive element, and only the heads heated above their temperature rating open. Only a deluge system, which uses open heads, discharges from every head on the system at the same time."
+  - q: "Why is a wet pipe system preferred when it can be used?"
+    a: "It is the simplest type: the pipes are already full of water, so water discharges as soon as a head opens, with no valve to trip and no detection system to depend on. That makes it the most reliable and cheapest to install and maintain. Its limit is that the pipes must not freeze."
+  - q: "What is the difference between single and double interlock preaction?"
+    a: "In a single interlock system the detection system alone opens the preaction valve and fills the pipes, and water still flows only when a head opens. In a double interlock system the valve opens only when the detection system operates and a head opens and drops the supervisory air pressure."
+references:
+  - text: "NFPA 13, Standard for the Installation of Sprinkler Systems, 2022 ed., National Fire Protection Association"
+  - text: "NFPA 25, Standard for the Inspection, Testing, and Maintenance of Water-Based Fire Protection Systems, 2023 ed., National Fire Protection Association"
+  - text: "EN 12845:2015+A1:2019, Fixed firefighting systems, Automatic sprinkler systems, Design, installation and maintenance"
+  - text: "FM Global Property Loss Prevention Data Sheet 2-0, Installation Guidelines for Automatic Sprinklers"
+  - text: "IS 15105:2002, Design and Installation of Fixed Automatic Sprinkler Fire Extinguishing Systems, Specification, BIS"
+  - text: "SFPE Handbook of Fire Protection Engineering, 5th ed., Springer, 2016"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
+import More from '../../../components/More.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+A **fire sprinkler system** is a network of water filled or air filled pipes with heads that discharge water on a fire. The four main types are wet pipe, dry pipe, preaction and deluge. They differ in what the pipes hold before a fire and what has to happen before water flows.
+
+</Key>
+
+A fire sprinkler system controls or puts out a fire close to where it starts, usually before the fire brigade arrives. The type depends mainly on whether the pipes can freeze, how much damage accidental water would cause and how fast the fire can spread. NFPA 13 in the USA, EN 12845 in Europe and IS 15105 in India set the design rules.
+
+
+<ArticleVideo slug="fire-sprinkler-system-types" title="How a wet pipe sprinkler system works" uploadDate="2026-11-27" />
+
+## Parts of a fire sprinkler system
+
+Every type shares the same basic layout:
+
+- A **water supply**: town main, storage tank with fire pumps, or both.
+- A **control valve** (often an outside screw and yoke gate valve) that isolates the system and is supervised open.
+- A **system valve** at the base of the riser: an alarm check valve, dry pipe valve, preaction valve or deluge valve, depending on the type.
+- A **riser**, cross mains and **branch lines** that carry water to the heads.
+- **Sprinkler heads**, each with a heat sensitive glass bulb or fusible link holding a cap over the orifice, plus a deflector that spreads the water.
+- **Alarms**: a flow switch or pressure switch that signals the fire alarm panel, and often a water motor gong.
+
+<figure class="anim">
+<svg width="600" height="300" viewBox="0 0 600 300" fill="none" role="img" aria-label="Wet pipe fire sprinkler system schematic: water from the supply main passes the control valve, alarm check valve and flow switch, rises up the riser to the branch line under the ceiling, and flows only to the one head opened by the heat of the fire below, while the other closed heads with intact glass bulbs stay shut">
+<g stroke="#8a9bb0" stroke-width="2"><path d="M150 40H590" /><path d="M170 250H590" /></g>
+<g stroke="#1d6fb8" stroke-width="8" stroke-linejoin="round"><path d="M20 280H150V70H560" /></g>
+<g stroke="#fff" stroke-width="3" fill="none"><path class="anim-flow" d="M20 280H150V70H440V86" /></g>
+<g stroke="#0b2545" stroke-width="2" fill="#fff"><path d="M136 222L164 238V222L136 238Z" /><rect x="136" y="170" width="28" height="26" rx="3" fill="#e6f6f4" /><rect x="140" y="118" width="20" height="16" rx="2" fill="#fff7e0" /></g>
+<g stroke="#0b2545" stroke-width="2">
+<path d="M220 74V84M330 74V84M440 74V84M540 74V84" />
+<path d="M210 88H230M320 88H340M430 88H450M530 88H550" stroke-width="3" />
+</g>
+<g fill="#d92d20"><circle cx="220" cy="82" r="3.5" /><circle cx="330" cy="82" r="3.5" /><circle cx="540" cy="82" r="3.5" /></g>
+<g stroke="#1d6fb8" stroke-width="2.5" stroke-linecap="round"><path d="M440 92L400 170M440 92V185M440 92L480 170M440 92L415 180M440 92L465 180" /></g>
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M440 92L400 170M440 92V185M440 92L480 170M440 92L415 180M440 92L465 180" /></g>
+<path class="anim-pulse" d="M440 248C412 246 410 222 424 206C426 220 432 222 434 214C436 202 444 196 446 186C454 202 470 214 466 232C464 244 454 248 440 248Z" fill="#f97316" stroke="#b42318" stroke-width="2" />
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="128" y="234" text-anchor="end">Control valve</text>
+<text x="128" y="187" text-anchor="end">Alarm check valve</text>
+<text x="168" y="131">Flow switch</text>
+<text x="160" y="160">Riser</text>
+<text x="275" y="60" text-anchor="middle">Branch line</text>
+<text x="370" y="32" text-anchor="middle">Ceiling</text>
+<text x="220" y="112" text-anchor="middle">Closed head</text>
+<text x="330" y="112" text-anchor="middle">Closed head</text>
+<text x="452" y="100">Opened head</text>
+<text x="478" y="238">Fire</text>
+<text x="70" y="298" text-anchor="middle">From water supply</text>
+</g>
+</svg>
+<figcaption>Wet pipe system: water is already in the pipes and flows only to the head that the fire has heated past its rating.</figcaption>
+</figure>
+
+## How a sprinkler head opens
+
+A standard head stays shut because a glass bulb or a solder link holds a cap against the orifice. The bulb contains a liquid that expands with heat; at the rated temperature the bulb shatters, the cap falls away and water hits the deflector.
+
+Only the heads heated past their rating open, so in most fires a small number of heads does the work.
+
+<More title="Temperature ratings and bulb colours (NFPA 13)">
+
+| Classification | Rating | Glass bulb colour |
+| --- | --- | --- |
+| Ordinary | 57 to 77 °C (135 to 170 °F) | Orange or red |
+| Intermediate | 79 to 107 °C (175 to 225 °F) | Yellow or green |
+| High | 121 to 149 °C (250 to 300 °F) | Blue |
+
+Ordinary rated heads suit most rooms. Higher ratings are used near heat sources such as skylights, unit heaters and ovens, where the ceiling runs hot in normal use.
+
+</More>
+
+## Four fire sprinkler system types
+
+<Tabs><div data-tab="Wet pipe">
+
+The pipes are full of water under pressure all the time. When a head opens, water discharges at once and the flow lifts the alarm check valve clapper, which sounds the alarm.
+
+Wet pipe is the most common type, and the simplest and most reliable, because nothing has to trip before water flows. NFPA 13 requires the space to be kept at 4 °C (40 °F) or above, so it is used in heated offices, hotels, hospitals, shops and homes. Where a small part of the system can freeze, an antifreeze loop is one option.
+
+</div><div data-tab="Dry pipe">
+
+The pipes hold compressed air or nitrogen instead of water. The air pressure keeps the clapper of the **dry pipe valve** shut against the higher water supply pressure, because the clapper's air side has a much larger area.
+
+When a head opens, air escapes and the pressure falls until the valve trips. Water then fills the pipes and reaches the open head after a delay. Dry pipe systems protect unheated warehouses, car parks and loading docks.
+
+The delay is the weakness. NFPA 13 limits the system size, requires a quick opening device on larger systems and increases the design area by 30% to allow for the extra heads that open while water travels.
+
+</div><div data-tab="Preaction">
+
+The pipes are dry, usually with low pressure supervisory air. A separate fire detection system, such as smoke or heat detectors, must operate before the **preaction valve** opens.
+
+- **Single interlock:** detection opens the valve and fills the pipes; water flows only when a head opens.
+- **Double interlock:** the valve opens only when detection operates and a head opens and drops the air pressure. Used in freezers, where a false fill would freeze in the pipes.
+- **Non-interlock:** either detection or a head opening trips the valve.
+
+Preaction suits data centres, archives, museums and control rooms, where a broken head or pipe must not flood the room.
+
+</div><div data-tab="Deluge">
+
+All heads are **open**, with no bulb or link, and the pipes are empty and at atmospheric pressure. A detection system or manual release opens the **deluge valve**, and water discharges from every head at once.
+
+Deluge systems are used for high hazards where fire can spread very fast or a whole area must be wetted: transformers, aircraft hangars, flammable liquid areas and cooling towers. They need a large water supply because every head flows together.
+
+</div></Tabs>
+
+## Comparing fire sprinkler system types
+
+| Type | Pipes before a fire | What releases water | Typical use |
+| --- | --- | --- | --- |
+| Wet pipe | Water under pressure | Head opens | Heated buildings |
+| Dry pipe | Compressed air or nitrogen | Head opens, air pressure falls, dry pipe valve trips | Unheated spaces |
+| Preaction | Air, low pressure | Detection (and a head, for double interlock) | Data centres, archives, freezers |
+| Deluge | Empty, open heads | Detection or manual release | Transformers, hangars, flammable liquids |
+
+## How water reaches the fire
+
+The sequence for a wet pipe system in the diagram:
+
+<Steps>
+
+1. Hot gases from the fire collect under the ceiling and heat the nearest head.
+2. The glass bulb in that head shatters at its rated temperature and the cap falls away.
+3. Water already in the branch line discharges through the head onto the deflector, which spreads it over the floor area below.
+4. Flow up the riser lifts the alarm check valve clapper and operates the flow switch, which signals the fire alarm panel.
+5. The head keeps flowing until the fire service closes the control valve. A head does not close on its own once it has opened.
+
+</Steps>
+
+## Sprinkler flow and design formulas
+
+The flow from a head depends on its K-factor and the water pressure at the head:
+
+$$
+Q = K\sqrt{P}
+$$
+
+A common standard head has K = 80 in SI units (L/min per bar to the power 0.5), which is K = 5.6 in US units. Design starts from a **density** (water per unit floor area per minute) over a **design area**, both set by the occupancy hazard class.
+
+For a head covering area A at density D:
+
+$$
+Q = D \times A
+$$
+
+Since 1 mm/min over 1 m² equals 1 L/min, the arithmetic in SI units is simple. Under NFPA 13, ordinary hazard Group 1 uses 6.1 mm/min (0.15 gpm/ft²) over 139 m² (1500 ft²), and light hazard uses 4.1 mm/min (0.10 gpm/ft²) over the same area. The minimum operating pressure at any head is 0.5 bar (7 psi).
+
+<Example>
+<dl>
+<dt>Given</dt><dd>An ordinary hazard Group 1 workshop. Design density 6.1 mm/min over a design area of 139 m². Each head covers 12 m² and has K = 80 L/min/bar^0.5.</dd>
+
+<dt>Find</dt><dd>Flow and pressure at each head, number of heads in the design area and total sprinkler flow, for a wet pipe and for a dry pipe system.</dd>
+
+<dt>Assumptions</dt><dd>Every head in the design area flows at the minimum flow; friction losses, hydraulic imbalance and hose stream allowance are ignored.</dd>
+
+<dt>Solution</dt><dd>Flow per head = 6.1 × 12 = 73.2 L/min<br />Pressure = (73.2 ÷ 80)² = 0.84 bar, above the 0.5 bar minimum<br />Wet pipe: 139 ÷ 12 = 11.6, so 12 heads; total = 12 × 73.2 = 878 L/min<br />Dry pipe: design area = 139 × 1.3 = 180.7 m²; 180.7 ÷ 12 = 15.1, so 16 heads; total = 16 × 73.2 = 1171 L/min</dd>
+
+<dt>Answer</dt><dd><strong>Each head needs 73.2 L/min at 0.84 bar. The wet pipe system needs about 878 L/min; the dry pipe version needs about 1171 L/min because of its 30% larger design area.</strong></dd>
+
+<dt>Limitations</dt><dd>A real design is a full hydraulic calculation from the most remote area back to the supply, with pipe friction, elevation and hose allowance, done to the governing standard.</dd>
+</dl>
+</Example>
+
+## Key formulas for a fire sprinkler system
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Head discharge | Q = K √P | Q in L/min, K in L/min/bar^0.5, P = pressure at the head in bar |
+| Required pressure | P = (Q ÷ K)² | bar |
+| Head flow from density | Q = D × A | D = density in mm/min, A = area per head in m², Q in L/min |
+| Heads in design area | n = design area ÷ area per head, rounded up | dimensionless |
+| Dry pipe design area | A_dry = 1.3 × A_wet | m² |
+
+## Choosing and maintaining the system
+
+Start with wet pipe wherever the space stays above freezing, since it has the fewest parts that can fail. Move to dry pipe for unheated areas, preaction where accidental water would cause serious loss, and deluge where the hazard needs the whole area wetted at once. Sprinklers often work alongside [fire detectors](/safety-engineering/types-of-fire-detectors/) and [portable extinguishers matched to the fire class](/safety-engineering/fire-classes-and-extinguishers/).
+
+The water supply is part of the design. Where the town main cannot give the flow and pressure, a tank and fire pump set is added; see [how a centrifugal pump works](/mechanical-engineering/centrifugal-pump-working-principle/). Ships use similar fixed systems under the rules described in [SOLAS lifesaving and firefighting](/marine-engineering/solas-lifesaving-firefighting/).
+
+NFPA 25 sets inspection, testing and maintenance intervals, including checks that control valves are open, flow tests of alarms, and periodic trip tests of dry pipe, preaction and deluge valves. Common faults are closed control valves, painted or obstructed heads, and corrosion and blockage in dry pipe systems that hold trapped moisture.
+
+## Fire sprinkler system interview and viva questions
+
+1. **What is the main difference between wet pipe and dry pipe systems?** A wet pipe system holds water in the pipes at all times, while a dry pipe system holds compressed air or nitrogen and lets water in only after a head opens and the dry pipe valve trips.
+2. **Why does NFPA 13 increase the design area of a dry pipe system?** Water takes time to reach the open head after the valve trips, so more heads open during the delay; the design area is increased by 30% to cover them.
+3. **When would you choose a double interlock preaction system?** Where an accidental fill of the pipes would itself cause damage, such as in freezers, because the valve opens only when detection operates and a head opens.
+4. **How does a deluge system differ from the other types?** Its heads are open, so when the deluge valve opens water discharges from every head at once instead of only from heads heated by the fire.
+5. **What pressure is needed for a K-80 head to deliver 73.2 L/min?** From P = (Q ÷ K)², the pressure is (73.2 ÷ 80)² = 0.84 bar, which is above the 0.5 bar minimum.

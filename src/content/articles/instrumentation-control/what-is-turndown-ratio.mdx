@@ -3,6 +3,7 @@ title: "Turndown Ratio: Formula, Examples and Typical Values"
 description: "Turndown ratio explained: the formula, transmitter rangedown, typical flowmeter values, why DP meters reach only 3:1 to 5:1, and a worked example."
 pubDate: 2026-11-24
 reviewedDate: 2026-11-24
+updatedDate: 2026-11-27
 discipline: instrumentation-control
 subcategory: measurement-fundamentals
 focusKeyword: "turndown ratio"
@@ -30,6 +31,8 @@ import Key from '../../../components/Key.astro';
 import Example from '../../../components/Example.astro';
 import Calculator from '../../../components/Calculator.astro';
 import ArticleVideo from '../../../components/ArticleVideo.astro';
+import Steps from '../../../components/Steps.astro';
+import More from '../../../components/More.astro';
 
 <Key title="Short answer">
 
@@ -52,7 +55,11 @@ where Q_max is the highest flow (or pressure, level, heat output) the device han
 
 The same idea works in the other direction for an application. If a gas line runs between 100,000 and 1,000,000 m³ per day, the process needs a turndown of 10:1, so the meter must offer at least that. If the chosen meter tops out at 2,000,000 m³ per day, it must reach 100,000 m³ per day accurately, which means 20:1 from that meter.
 
+<More title="Turndown outside measurement: burners and control valves">
+
 Turndown is also quoted for things that are not measuring devices. A burner with 4:1 turndown can fire down to a quarter of its maximum heat output and still burn cleanly. A control valve's rangeability is the ratio of the largest to the smallest flow it can control.
+
+</More>
 
 ## Turndown and rangedown on a transmitter
 
@@ -62,7 +69,11 @@ $$
 TD = \frac{URL}{\text{minimum span}}
 $$
 
-A DP transmitter with a 2500 mbar URL and a 25 mbar minimum span has a 100:1 turndown. That lets one model cover many duties, which suits spares stock. The catch is accuracy. Datasheets give accuracy as a percentage of calibrated span, often with an extra term that grows once the span drops below a stated fraction of URL. Set the same unit to a span of 25 mbar and its error, as a share of that span, can be several times larger than at full URL. So high transmitter turndown buys flexibility, not free precision.
+A DP transmitter with a 2500 mbar URL and a 25 mbar minimum span has a 100:1 turndown. That lets one model cover many duties, which suits spares stock.
+
+The catch is accuracy. Datasheets give accuracy as a percentage of calibrated span, often with an extra term that grows once the span drops below a stated fraction of URL. Set the same unit to a span of 25 mbar and its error, as a share of that span, can be several times larger than at full URL.
+
+So high transmitter turndown buys flexibility, not free precision.
 
 ## Why DP flowmeters have low turndown
 
@@ -127,10 +138,17 @@ For an introduction to how each of these meters works, see the flow measurement 
 <Example>
 <dl>
 <dt>Given</dt><dd>An orifice meter is calibrated for 0 to 250 mbar DP at maximum flow. The DP transmitter accuracy is ±0.1% of span. The user wants the flow reading to stay within ±1% of reading.</dd>
+
 <dt>Find</dt><dd>The DP error at 10% flow, and the turndown the meter can deliver.</dd>
+
 <dt>Assumptions</dt><dd>Only transmitter error is considered; the orifice coefficient is taken as constant. Since Q ∝ √ΔP, the relative flow error is half the relative DP error.</dd>
-<dt>Solution</dt><dd>Transmitter error = 0.001 × 250 = 0.25 mbar<br />At 10% flow: ΔP = 0.1² × 250 = 2.5 mbar, so DP error = 0.25 ÷ 2.5 = 10% and flow error ≈ 5%<br />For a 1% flow error the DP error must be 2% or less: ΔP_min = 0.25 ÷ 0.02 = 12.5 mbar<br />Q_min / Q_max = √(12.5 ÷ 250) = 0.224, so TR = 1 ÷ 0.224 ≈ 4.5</dd>
+
+<dt>Solution</dt><dd>Transmitter error = 0.001 × 250 = 0.25 mbar<br />At 10% flow: ΔP = 0.1² × 250 = 2.5 mbar, so DP error = 0.25 ÷ 2.5 = 10% and flow error ≈ 5%</dd>
+
+<dd>For a 1% flow error the DP error must be 2% or less: ΔP_min = 0.25 ÷ 0.02 = 12.5 mbar<br />Q_min / Q_max = √(12.5 ÷ 250) = 0.224, so TR = 1 ÷ 0.224 ≈ 4.5</dd>
+
 <dt>Answer</dt><dd><strong>At 10% flow the reading may be off by about 5%; for ±1% of reading the meter manages only about 4.5:1 turndown</strong></dd>
+
 <dt>Limitations</dt><dd>The discharge coefficient also drifts at low Reynolds number, and installation effects add error, so real turndown is often a little lower.</dd>
 </dl>
 </Example>
@@ -149,11 +167,15 @@ For an introduction to how each of these meters works, see the flow measurement 
 
 ## How to choose a meter with the right turndown
 
+<Steps>
+
 1. Find the real minimum and maximum flows, including start-up, turndown operation and future capacity.
 2. Divide them to get the required turndown, then allow some margin.
 3. Compare with the meter's turndown **at the accuracy you need**, not its widest headline figure.
 4. Check that the maximum flow sits comfortably inside the meter range and not right at its top, since oversizing a meter eats turndown at the bottom.
 5. For DP meters needing more than about 5:1, consider stacked transmitters or another technology.
+
+</Steps>
 
 A low flow cutoff in the transmitter or control system is usually set near the bottom of the usable range, so the reading drops to zero instead of showing noise when the line is shut.
 

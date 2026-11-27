@@ -3,6 +3,7 @@ title: "Types of Maintenance: Breakdown, Preventive and Predictive"
 description: "Types of maintenance compared: breakdown, preventive, predictive, condition based, proactive and RCM, with costs, KPIs like OEE, selection and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-27
 discipline: manufacturing-engineering
 subcategory: maintenance-engineering
 focusKeyword: "types of maintenance"
@@ -27,24 +28,30 @@ references:
 ---
 import Key from '../../../components/Key.astro';
 import Example from '../../../components/Example.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
+import More from '../../../components/More.astro';
 
 <Key title="Short answer">
 
-The main **types of maintenance** are: **breakdown (reactive or corrective) maintenance**, where equipment is repaired after it fails; **preventive maintenance**, done at fixed time or usage intervals to reduce the chance of failure; **predictive (condition based) maintenance**, where equipment condition is monitored and work is done when deterioration is detected; and **proactive maintenance**, which removes root causes of failure. Programmes such as **reliability centred maintenance (RCM)** and **total productive maintenance (TPM)** combine these strategies to maximise availability at the lowest total cost.
+The main **types of maintenance** are breakdown maintenance, where equipment is repaired after it fails; preventive maintenance, done at fixed time or usage intervals; predictive (condition based) maintenance, triggered when monitoring detects deterioration; and proactive maintenance, which removes root causes. RCM and TPM combine these to maximise availability at the lowest total cost.
 
 </Key>
 
-Maintenance keeps machines, plants and buildings working safely and efficiently. Its cost can be a large share of operating budgets, but poor maintenance costs far more through lost production, quality problems, safety incidents and shortened equipment life. Choosing the right type of maintenance for each asset is a key engineering decision. EN 13306 defines the standard terminology used below.
+Maintenance keeps machines, plants and buildings working safely and efficiently. Its cost can be a large share of operating budgets, but poor maintenance costs far more through lost production, quality problems, safety incidents and shortened equipment life.
 
-<figure>
+Choosing the right type of maintenance for each asset is a key engineering decision. EN 13306 defines the standard terminology used below.
+
+<figure class="anim">
 <svg width="600" height="260" viewBox="0 0 600 260" fill="none" role="img" aria-label="Tree diagram: maintenance divides into corrective maintenance (breakdown, immediate or deferred) and preventive maintenance; preventive divides into predetermined (time based, usage based) and condition based (predictive with monitoring); proactive and RCM sit across both as strategy layers">
 <rect x="230" y="15" width="140" height="36" rx="6" fill="#0b2545" />
 <text x="300" y="38" font-family="Open Sans Variable, Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Maintenance</text>
 <path d="M300 51V70M140 70H440M140 70V88M440 70V88M440 124V140M340 140H540M340 140V156M540 140V156" stroke="#0b2545" stroke-width="2" />
+<path class="anim-flow-slow" d="M300 51V70H140V88M300 70H440V88M440 124V140H340V156M440 140H540V156M140 124V156" stroke="#fff" stroke-width="1" />
 <g stroke="#0b2545" stroke-width="2">
-<rect x="60" y="88" width="160" height="36" rx="6" fill="#ffe9e7" /><rect x="360" y="88" width="160" height="36" rx="6" fill="#e6f6f4" />
-<rect x="270" y="156" width="140" height="36" rx="6" fill="#fff7e0" /><rect x="470" y="156" width="125" height="36" rx="6" fill="#e6f6f4" />
-<rect x="60" y="156" width="160" height="36" rx="6" fill="#ffffff" />
+<rect class="anim-blink anim-d1" x="60" y="88" width="160" height="36" rx="6" fill="#ffe9e7" /><rect class="anim-blink anim-d1" x="360" y="88" width="160" height="36" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d3" x="270" y="156" width="140" height="36" rx="6" fill="#fff7e0" /><rect class="anim-blink anim-d3" x="470" y="156" width="125" height="36" rx="6" fill="#e6f6f4" />
+<rect class="anim-blink anim-d2" x="60" y="156" width="160" height="36" rx="6" fill="#ffffff" />
 </g>
 <path d="M140 124V156" stroke="#0b2545" stroke-width="2" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
@@ -78,12 +85,31 @@ Tasks are scheduled at fixed intervals of calendar time or usage: hours, cycles 
 
 Equipment condition is monitored, and work is triggered when measurements show deterioration. Common techniques:
 
-- **Vibration analysis** for rotating machinery (imbalance, misalignment, bearing faults).
-- **Infrared thermography** for electrical connections, bearings and insulation.
-- **Oil analysis** for wear metals, contamination and lubricant condition, linked to [types of lubrication](/mechanical-engineering/types-of-lubrication/).
-- **Ultrasound** for leaks, bearing lubrication and electrical discharge.
-- **Motor current and insulation testing**, such as the [insulation resistance test](/electrical-engineering/insulation-resistance-test/).
-- **Process data** such as pressure, flow and temperature trends.
+<Tabs><div data-tab="Vibration">
+
+Vibration analysis for rotating machinery (imbalance, misalignment, bearing faults).
+
+</div><div data-tab="Thermography">
+
+Infrared thermography for electrical connections, bearings and insulation.
+
+</div><div data-tab="Oil analysis">
+
+Oil analysis for wear metals, contamination and lubricant condition, linked to [types of lubrication](/mechanical-engineering/types-of-lubrication/).
+
+</div><div data-tab="Ultrasound">
+
+Ultrasound for leaks, bearing lubrication and electrical discharge.
+
+</div><div data-tab="Electrical">
+
+Motor current and insulation testing, such as the [insulation resistance test](/electrical-engineering/insulation-resistance-test/).
+
+</div><div data-tab="Process data">
+
+Process data such as pressure, flow and temperature trends.
+
+</div></Tabs>
 
 Modern systems use online sensors, the industrial IoT and machine learning, as explained in [predictive maintenance with machine learning](/ai-data-engineering/predictive-maintenance-machine-learning/).
 
@@ -92,7 +118,15 @@ Modern systems use online sensors, the industrial IoT and machine learning, as e
 
 ## 4. Proactive maintenance and RCM
 
-**Proactive maintenance** targets the root causes of failure, such as misalignment, contamination, poor lubrication or design weaknesses, so that failures do not occur. **Reliability centred maintenance (RCM)** is a structured process (SAE JA1011) that analyses each asset's functions, failure modes and consequences (often using FMEA) to choose the most effective task for each failure mode: condition monitoring, scheduled restoration or replacement, failure finding, redesign, or run to failure.
+**Proactive maintenance** targets the root causes of failure, such as misalignment, contamination, poor lubrication or design weaknesses, so that failures do not occur.
+
+**Reliability centred maintenance (RCM)** is a structured process (SAE JA1011) that analyses each asset's functions, failure modes and consequences, often using FMEA.
+
+<More title="Tasks RCM can choose for a failure mode">
+
+For each failure mode RCM picks the most effective task: condition monitoring, scheduled restoration or replacement, failure finding, redesign, or run to failure.
+
+</More>
 
 ## 5. Total productive maintenance (TPM)
 
@@ -126,21 +160,54 @@ where MTBF is mean time between failures and MTTR is mean time to repair, explai
 <Example>
 <dl>
 <dt>Given</dt><dd>A packaging line runs 6000 hours per year. Under breakdown maintenance it fails every 300 hours on average, with repairs taking 8 hours. A predictive programme is expected to raise MTBF to 900 hours and, because repairs are planned, cut MTTR to 3 hours. Lost production costs 2000 per hour of downtime.</dd>
+
 <dt>Find</dt><dd>Availability and annual downtime cost before and after.</dd>
+
 <dt>Assumptions</dt><dd>Failures spread evenly; downtime counted only for repairs.</dd>
+
 <dt>Solution</dt><dd>Before: A = 300 ÷ 308 = 97.4%; failures = 6000 ÷ 300 = 20; downtime = 160 h; cost = 320 000<br />After: A = 900 ÷ 903 = 99.7%; failures ≈ 6.7; downtime = 20 h; cost = 40 000</dd>
+
 <dt>Answer</dt><dd><strong>Availability rises from 97.4% to 99.7%, and downtime cost falls by about 280 000 per year, which can fund the monitoring programme</strong></dd>
+
 <dt>Limitations</dt><dd>Programme cost, false alarms and remaining random failures must be included in a full business case.</dd>
 </dl>
 </Example>
 
 ## Maintenance planning and the CMMS
 
-Whatever the strategy, good planning makes maintenance efficient. A computerised maintenance management system holds the asset register, task lists, schedules, work orders, spare parts and history. Planners prepare job packages with procedures, parts, tools and permits before work starts, so technicians spend their time on the job rather than waiting or searching. Work is scheduled to fit production windows, and history data feeds reliability analysis of repeat failures.
+Whatever the strategy, good planning makes maintenance efficient. A computerised maintenance management system holds the asset register, task lists, schedules, work orders, spare parts and history. Planners prepare job packages with procedures, parts, tools and permits before work starts, so technicians spend their time on the job rather than waiting or searching.
+
+Work is scheduled to fit production windows, and history data feeds reliability analysis of repeat failures.
 
 ## Choosing among the types of maintenance
 
 The goal is not the most advanced strategy everywhere but the right one for each asset.
 
+<Steps>
 
-Start with an asset criticality ranking based on safety, environmental, production and cost consequences. Apply predictive and proactive strategies to critical assets, preventive tasks where wear is predictable, and run to failure where consequences are minor. Track results with KPIs such as MTBF, MTTR, availability, OEE, planned maintenance percentage and maintenance cost per unit produced, and improve continuously. A balanced mix supports smooth [production planning and control](/manufacturing-engineering/production-planning-and-control/) and keeps machines such as [CNC machines](/manufacturing-engineering/cnc-machine-working-principle/) running reliably.
+1. Rank assets by criticality, based on safety, environmental, production and cost consequences.
+2. Apply predictive and proactive strategies to critical assets, preventive tasks where wear is predictable, and run to failure where consequences are minor.
+3. Track results with KPIs such as MTBF, MTTR, availability, OEE, planned maintenance percentage and maintenance cost per unit produced.
+4. Improve continuously.
+
+</Steps>
+
+A balanced mix supports smooth [production planning and control](/manufacturing-engineering/production-planning-and-control/) and keeps machines such as [CNC machines](/manufacturing-engineering/cnc-machine-working-principle/) running reliably.
+
+## Key formulas for types of maintenance
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Availability | A = MTBF ÷ (MTBF + MTTR) | MTBF and MTTR in hours |
+| Overall equipment effectiveness | OEE = Availability × Performance × Quality | Each factor as a fraction or percent |
+| Failures per year | n = operating hours ÷ MTBF | Hours per year, hours |
+| Annual downtime | t_down = n × MTTR | Hours |
+| Annual downtime cost | Cost = t_down × cost per hour of downtime | Currency per hour |
+
+## Types of maintenance interview and viva questions
+
+1. **What is the difference between preventive and predictive maintenance?** Preventive maintenance is done at fixed time or usage intervals whether needed or not, while predictive maintenance monitors condition and triggers work only when deterioration is detected.
+2. **When is breakdown maintenance the right choice?** For low cost, non-critical items with no safety impact, where redundancy is available or failures are random and cannot be predicted.
+3. **What does RCM do?** It analyses each asset's functions, failure modes and consequences, often with FMEA, and chooses the most effective task for each failure mode.
+4. **What is autonomous maintenance in TPM?** Operators carry out daily cleaning, inspection, lubrication and tightening so small problems are found early.
+5. **How do MTBF and MTTR set availability?** Availability equals MTBF divided by the sum of MTBF and MTTR, so fewer failures or faster repairs both raise it.

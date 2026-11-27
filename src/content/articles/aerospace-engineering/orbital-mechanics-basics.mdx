@@ -1,0 +1,204 @@
+---
+title: "Orbital Mechanics Basics: Kepler's Laws"
+description: "Orbital mechanics basics for students: Kepler's three laws, orbital period, the vis-viva equation, orbit types and a worked example for an elliptical orbit."
+pubDate: 2026-11-27
+reviewedDate: 2026-11-27
+discipline: aerospace-engineering
+subcategory: spacecraft
+focusKeyword: "orbital mechanics"
+image: { src: /images/featured/orbital-mechanics-basics.webp, alt: "Orbital Mechanics Basics: Kepler's Laws: featured diagram" }
+format: fundamentals
+pillar: false
+math: true
+tags: [orbital-mechanics, keplers-laws, vis-viva, orbital-period, satellites]
+faq:
+  - q: "Why does a satellite in orbit not fall to the ground?"
+    a: "It is falling all the time. Gravity pulls it toward the Earth, but it also moves sideways so fast that the ground curves away beneath it as quickly as it falls. At about 7.7 km/s in low orbit the fall and the curvature match, so the satellite keeps going around instead of hitting the surface."
+  - q: "Does the mass of a satellite change its orbit?"
+    a: "No, not in the two body model used here. The satellite's mass cancels out of the equations, so its period and speed depend only on the central body's gravitational parameter and the size and shape of the orbit. A small cubesat and a large station at the same altitude in the same circular orbit move at the same speed."
+  - q: "What is the difference between periapsis, perigee and perihelion?"
+    a: "They all name the point of closest approach. Periapsis is the general term for any central body, perigee is used for orbits around the Earth and perihelion for orbits around the Sun. The farthest point is apoapsis, apogee or aphelion in the same way."
+references:
+  - text: "H. D. Curtis, Orbital Mechanics for Engineering Students, 4th ed., Butterworth-Heinemann, 2020"
+  - text: "D. A. Vallado, Fundamentals of Astrodynamics and Applications, 4th ed., Microcosm Press, 2013"
+  - text: "R. R. Bate, D. D. Mueller and J. E. White, Fundamentals of Astrodynamics, Dover Publications, 1971"
+  - text: "J. R. Wertz and W. J. Larson (eds.), Space Mission Analysis and Design, 3rd ed., Microcosm Press and Kluwer, 1999"
+  - text: "NASA Science, Orbits and Kepler's Laws, NASA Solar System Exploration"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Calculator from '../../../components/Calculator.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
+import More from '../../../components/More.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Orbital mechanics** is the study of how satellites, spacecraft and planets move under gravity. Kepler's three laws describe the result: orbits are ellipses with the central body at one focus, a line to the body sweeps equal areas in equal times, and the square of the period is proportional to the cube of the semi-major axis.
+
+</Key>
+
+Orbital mechanics, also called astrodynamics, tells engineers where a satellite will be, how fast it moves and how much velocity change it needs to reach a new orbit. Mission design, launch windows and ground station planning all build on it, starting with Kepler's three laws and the few equations behind them.
+
+
+<ArticleVideo slug="orbital-mechanics-basics" title="How Kepler's laws shape an orbit" uploadDate="2026-11-27" />
+
+## Newton's gravity and the two body problem
+
+Kepler found his laws from observations. Newton later showed that they follow from his law of gravitation, where the force between two masses falls with the square of the distance between them:
+
+$$
+F = \frac{G M m}{r^2}
+$$
+
+For a small satellite around a large planet, engineers use the two body model. The planet is a point mass (or a uniform sphere), the satellite's mass is negligible, and no other forces act. The product GM is combined into one constant, the gravitational parameter μ. For the Earth, μ = 398 600.4418 km³/s².
+
+The satellite's own mass cancels out of the equations of motion. Only μ and the geometry of the orbit decide how it moves.
+
+<More title="How Kepler found the laws">
+
+Johannes Kepler worked from the planetary observations of Tycho Brahe. He published the first two laws in Astronomia Nova in 1609 and the third in Harmonices Mundi in 1619. Newton's Principia (1687) derived all three from gravitation and the laws of motion, and added the corrections Kepler could not see, such as the fact that both bodies orbit their common centre of mass.
+
+</More>
+
+## Kepler's laws of orbital mechanics
+
+<Tabs><div data-tab="First law">
+
+**The law of ellipses.** Every orbit is a conic section with the central body at one focus. Closed orbits are ellipses, and a circle is the special case where both foci meet at the centre.
+
+The shape is set by the eccentricity e: a circle has e = 0, an ellipse 0 to 1, a parabola exactly 1 and a hyperbola more than 1. Parabolic and hyperbolic paths are open, so the spacecraft escapes and does not return.
+
+</div><div data-tab="Second law">
+
+**The law of equal areas.** The line from the central body to the satellite sweeps out equal areas in equal times. This follows from conservation of angular momentum, because gravity acts along that line and produces no torque.
+
+In practice the satellite moves fastest at periapsis, the closest point, and slowest at apoapsis, the farthest point.
+
+</div><div data-tab="Third law">
+
+**The law of periods.** The square of the orbital period is proportional to the cube of the semi-major axis. Only the semi-major axis matters, not the eccentricity, so a circular orbit and a long thin ellipse with the same a have the same period.
+
+</div></Tabs>
+
+<figure class="anim">
+<svg width="640" height="356" viewBox="0 0 640 356" fill="none" role="img" aria-label="Elliptical orbit with the Earth at one focus: two shaded sectors of equal area are swept in equal times, a wide short sector near periapsis and a long thin sector near apoapsis; equal time markers are spaced far apart near periapsis and close together near apoapsis; the velocity arrow at periapsis is four times longer than at apoapsis">
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="320" y="16" text-anchor="middle" font-weight="700">Equal areas are swept in equal times</text>
+</g>
+<path class="anim-blink" d="M202 175L161.6 93.6L151.5 106.7L142.8 121.7L135.9 138.3L131.5 156.3L130 175L131.5 193.7L135.9 211.7L142.8 228.3L151.5 243.3L161.6 256.4Z" fill="#13a89e" fill-opacity="0.35" />
+<path class="anim-blink anim-d2" d="M202 175L487.6 198.5L488.7 192.3L489.5 186L489.9 179.7L490 175L489.9 170.3L489.5 164L488.7 157.7L487.6 151.5Z" fill="#13a89e" fill-opacity="0.35" />
+<ellipse cx="310" cy="175" rx="180" ry="144" stroke="#0b2545" stroke-width="2" />
+<path d="M130 175H490" stroke="#8a9bb0" stroke-width="1" stroke-dasharray="4 4" />
+<g fill="#0b2545"><circle cx="219" cy="299" r="4" /><circle cx="323" cy="319" r="4" /><circle cx="400" cy="300" r="4" /><circle cx="451" cy="265" r="4" /><circle cx="480" cy="222" r="4" /><circle cx="480" cy="128" r="4" /><circle cx="451" cy="85" r="4" /><circle cx="400" cy="50" r="4" /><circle cx="323" cy="31" r="4" /><circle cx="219" cy="51" r="4" /></g>
+<circle class="anim-pulse" cx="202" cy="175" r="16" fill="#3b82c4" stroke="#0b2545" stroke-width="2" />
+<circle cx="418" cy="175" r="3.5" fill="#0b2545" />
+<g fill="#b42318"><circle cx="130" cy="175" r="7" /><circle cx="490" cy="175" r="7" /></g>
+<g stroke="#b42318" stroke-width="3"><path d="M118 182V250" /><path d="M502 168V160" /></g>
+<g fill="#b42318"><path d="M112 248l6 12 6-12z" /><path d="M496 160l6-12 6 12z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545">
+<text x="104" y="172" text-anchor="end" font-weight="700">Periapsis</text><text x="104" y="188" text-anchor="end">fastest</text>
+<text x="104" y="230" text-anchor="end" fill="#b42318">v large</text>
+<text x="514" y="172" font-weight="700">Apoapsis</text><text x="514" y="188">slowest</text>
+<text x="514" y="152" fill="#b42318">v small</text>
+<text x="215" y="226">Earth at focus</text>
+<text x="418" y="216" text-anchor="middle">Empty focus</text>
+<text x="320" y="346" text-anchor="middle">Dots mark equal time steps along the orbit</text>
+</g>
+</svg>
+<figcaption>Kepler's second law: the shaded sectors take the same time to sweep, so the satellite covers more of its orbit near periapsis than near apoapsis.</figcaption>
+</figure>
+
+## Orbital mechanics equations
+
+The geometry of an ellipse is fixed by the periapsis radius r_p and the apoapsis radius r_a, both measured from the centre of the planet, not from the surface:
+
+$$
+a = \frac{r_p + r_a}{2} \qquad e = \frac{r_a - r_p}{r_a + r_p}
+$$
+
+Kepler's third law in Newton's form gives the period:
+
+$$
+T = 2\pi \sqrt{\frac{a^3}{\mu}}
+$$
+
+The vis-viva equation gives the speed at any radius r on the orbit. It comes from conservation of energy:
+
+$$
+v = \sqrt{\mu \left( \frac{2}{r} - \frac{1}{a} \right)}
+$$
+
+For a circular orbit r = a, so the circular speed is the square root of μ/r. Setting a to infinity gives the escape speed, the square root of 2μ/r. At the Earth's surface (r = 6378 km) that is about 11.2 km/s.
+
+The specific mechanical energy depends only on the semi-major axis, ε = −μ/(2a). It is negative for closed orbits and zero for a parabolic escape path. At periapsis and apoapsis the velocity is perpendicular to the radius, so conservation of angular momentum gives r_p v_p = r_a v_a.
+
+<Calculator path="physics/orbital-period" title="Orbital Period Calculator" />
+
+## Common Earth orbit types
+
+| Orbit | Typical altitude | Period | Typical use |
+| --- | --- | --- | --- |
+| Low Earth orbit (LEO) | About 160 to 2000 km | About 88 to 127 min | Space stations, Earth observation, communication constellations |
+| Medium Earth orbit (MEO) | About 2000 to 35 786 km | Hours | Navigation, such as GPS at about 20 200 km with a period near 12 h |
+| Geostationary orbit (GEO) | 35 786 km, circular, equatorial | One sidereal day, 23 h 56 min | Communication and weather satellites that stay over one point |
+| Highly elliptical orbit (HEO) | Low perigee, very high apogee | Molniya type about 12 h | Long dwell time over high latitudes near apogee |
+
+The GEO altitude comes straight from the third law. Setting T to one sidereal day (86 164 s) gives a = 42 164 km, and subtracting the Earth's equatorial radius of 6378 km leaves 35 786 km. A geostationary satellite then needs a large link margin to close the downlink, which the [satellite link budget](/telecommunication-engineering/what-is-satellite-link-budget/) article works through.
+
+## Solving an orbit from two altitudes
+
+<Steps>
+
+1. Add the Earth's radius to each altitude to get r_p and r_a.
+2. Find the semi-major axis a and the eccentricity e.
+3. Use the third law to get the period T.
+4. Use vis-viva at r_p and r_a to get the speeds at periapsis and apoapsis.
+5. Check the result with r_p v_p = r_a v_a.
+
+</Steps>
+
+<Example>
+<dl>
+<dt>Given</dt><dd>A satellite orbits the Earth with a perigee altitude of 300 km and an apogee altitude of 1000 km. Earth radius R = 6378 km and μ = 398 600 km³/s².</dd>
+<dt>Find</dt><dd>The semi-major axis, eccentricity, period and the speeds at perigee and apogee.</dd>
+<dt>Assumptions</dt><dd>Two body motion, spherical Earth, no drag or other perturbations.</dd>
+
+<dt>Solution</dt><dd>r_p = 6378 + 300 = 6678 km; r_a = 6378 + 1000 = 7378 km<br />a = (6678 + 7378) ÷ 2 = 7028 km<br />e = (7378 − 6678) ÷ (7378 + 6678) = 700 ÷ 14 056 = 0.0498<br />T = 2π × √(7028³ ÷ 398 600) = 5864 s = 97.7 min</dd>
+
+<dd>v_p = √(398 600 × (2 ÷ 6678 − 1 ÷ 7028)) = 7.92 km/s<br />v_a = √(398 600 × (2 ÷ 7378 − 1 ÷ 7028)) = 7.16 km/s<br />Check: 6678 × 7.916 = 52 863 and 7378 × 7.165 = 52 863 km²/s</dd>
+
+<dt>Answer</dt><dd><strong>a = 7028 km, e = 0.050, T = 97.7 min, v_p = 7.92 km/s and v_a = 7.16 km/s</strong></dd>
+<dt>Limitations</dt><dd>Real low orbits decay through atmospheric drag, and the Earth's oblateness slowly rotates the orbit plane and the line of apsides. Precise work uses perturbation models.</dd>
+</dl>
+</Example>
+
+For comparison, a circular orbit at 300 km altitude needs √(398 600 ÷ 6678) = 7.73 km/s. The elliptical orbit is faster than that at perigee because it carries extra energy to climb to 1000 km.
+
+## Key formulas for orbital mechanics
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Gravitational force | F = G M m ÷ r² | G = 6.674 × 10⁻¹¹ N m²/kg², masses in kg, r in m |
+| Semi-major axis | a = (r_p + r_a) ÷ 2 | r_p, r_a = periapsis and apoapsis radius from the centre, km |
+| Eccentricity | e = (r_a − r_p) ÷ (r_a + r_p) | dimensionless, 0 for a circle |
+| Orbital period | T = 2π √(a³ ÷ μ) | T in s, a in km, μ in km³/s² (Earth 398 600) |
+| Vis-viva speed | v = √(μ (2 ÷ r − 1 ÷ a)) | v in km/s, r = current radius in km |
+| Circular and escape speed | v_c = √(μ ÷ r), v_esc = √(2μ ÷ r) | km/s |
+| Specific energy | ε = −μ ÷ (2a) | km²/s² |
+| Angular momentum at apsides | r_p v_p = r_a v_a | km²/s |
+
+## Where orbital mechanics is used
+
+Launch vehicle designers use these equations to set the velocity a [rocket](/aerospace-engineering/rocket-propulsion-basics/) must deliver for a target orbit. Mission planners use them to size transfers. A Hohmann transfer, for example, is half of an ellipse whose periapsis touches the lower orbit and whose apoapsis touches the higher one.
+
+Spacecraft engineers need the orbit to size power, thermal and communication [satellite subsystems](/aerospace-engineering/satellite-subsystems/). The period sets how often a satellite passes over a ground station and how long it spends in eclipse.
+
+## Orbital mechanics interview and viva questions
+
+1. **State Kepler's three laws.** Orbits are ellipses with the central body at one focus; the radius line sweeps equal areas in equal times; and the square of the period is proportional to the cube of the semi-major axis.
+2. **Why is a satellite fastest at periapsis?** Angular momentum is conserved because gravity produces no torque about the central body, so r v is constant at the apsides and the speed is highest where the radius is smallest.
+3. **What does the vis-viva equation give?** It gives the orbital speed at any radius from μ, the current radius and the semi-major axis, and it comes from conservation of energy.
+4. **Do two orbits with the same semi-major axis but different eccentricity have the same period?** Yes. The period depends only on the semi-major axis and μ, so the eccentricity does not change it.
+5. **How is the geostationary altitude found?** Set the period to one sidereal day of 86 164 s in the third law, which gives a semi-major axis of 42 164 km, then subtract the Earth's radius to get 35 786 km.

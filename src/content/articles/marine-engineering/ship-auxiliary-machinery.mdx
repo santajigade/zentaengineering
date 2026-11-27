@@ -3,6 +3,7 @@ title: "Ship Auxiliary Machinery: Purifiers, FWG and Compressors"
 description: "Ship auxiliary machinery explained: centrifugal purifiers, freshwater generators, air compressors, pumps, boilers, oily water separators and an example."
 pubDate: 2026-11-06
 reviewedDate: 2026-11-06
+updatedDate: 2026-11-27
 discipline: marine-engineering
 subcategory: auxiliary-systems
 focusKeyword: "ship auxiliary machinery"
@@ -27,10 +28,12 @@ references:
 ---
 import Key from '../../../components/Key.astro';
 import Example from '../../../components/Example.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
 
 <Key title="Short answer">
 
-**Ship auxiliary machinery** is all the engine room equipment, other than the main propulsion engine, that keeps a ship running. Key items include **centrifugal purifiers and clarifiers** that clean fuel and lubricating oil; **freshwater generators** that make distilled water from seawater using engine waste heat under vacuum, or by **reverse osmosis**; **air compressors** that supply **starting air** at about 30 bar and service air; **pumps** for cooling water, fuel, lube oil, ballast, bilge and fire; **boilers** and **exhaust gas economisers** for steam; **heat exchangers**; **oily water separators**; **sewage plants**; **steering gear**; **refrigeration and HVAC**; and **generators**.
+**Ship auxiliary machinery** is all the engine room equipment, other than the main propulsion engine, that keeps a ship running. It includes centrifugal purifiers that clean fuel and lubricating oil, freshwater generators, starting air compressors at about 25 to 30 bar, pumps, boilers, oily water separators, steering gear, refrigeration and generators.
 
 </Key>
 
@@ -40,7 +43,7 @@ While the main engine gets most attention, a ship cannot sail without dozens of 
 
 Heavy fuel oil and lubricating oil contain water, catalytic fines from refining, sludge and other contaminants that would damage fuel pumps, injectors, piston rings, liners and bearings. Gravity settling in tanks is too slow, so ships use **disc stack centrifugal separators**.
 
-<figure>
+<figure class="anim">
 <svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Disc stack centrifugal purifier cross section: dirty oil enters at the top through the central inlet and flows down to the bottom of the rotating bowl; disc stack in the bowl separates lighter clean oil moving inward to the oil outlet and heavier water moving outward to the water outlet via the gravity disc; solids collect at the bowl periphery and are discharged through sludge ports">
 <path d="M180 70L150 200Q300 260 450 200L420 70Z" fill="#eef1f6" stroke="#0b2545" stroke-width="2" />
 <path d="M290 20V230M310 20V230" stroke="#0b2545" stroke-width="2" />
@@ -49,11 +52,12 @@ Heavy fuel oil and lubricating oil contain water, catalytic fines from refining,
 <g stroke="#b42318" stroke-width="2.5"><path d="M300 5V60" /></g><path d="M295 54l5 9 5-9z" fill="#b42318" />
 <g stroke="#13a89e" stroke-width="2.5"><path d="M290 45H200" /></g><path d="M206 40l-9 5 9 5z" fill="#13a89e" />
 <g stroke="#0b2545" stroke-width="2.5"><path d="M410 60H500" /></g><path d="M494 55l9 5-9 5z" fill="#0b2545" />
+<g stroke="#fff" stroke-width="2" fill="none"><path class="anim-flow" d="M300 5V54" /><path class="anim-flow" d="M290 45H206" /><path class="anim-flow" d="M410 60H494" /></g>
 <path d="M300 230V260" stroke="#0b2545" stroke-width="5" />
 <path d="M280 270H320" stroke="#0b2545" stroke-width="2" />
 <g font-family="Open Sans Variable, Arial, sans-serif" font-size="11" fill="#0b2545">
 <text x="310" y="14" fill="#b42318">Dirty oil in</text><text x="120" y="40" fill="#13a89e">Clean oil out</text><text x="505" y="64">Water out</text><text x="505" y="78" font-size="10">(gravity disc)</text>
-<text x="420" y="130">Disc stack</text><text x="60" y="210" fill="#8a6d3b">Sludge at bowl</text><text x="60" y="224" fill="#8a6d3b">wall, discharged</text>
+<text x="442" y="130">Disc stack</text><text x="60" y="210" fill="#8a6d3b">Sludge at bowl</text><text x="60" y="224" fill="#8a6d3b">wall, discharged</text>
 <text x="330" y="268">Drive spindle</text>
 </g>
 </svg>
@@ -65,6 +69,8 @@ The bowl spins at about 6000 to 10 000 rpm, creating forces thousands of times g
 $$
 v = \frac{d^2\,(\rho_p - \rho_o)\,\omega^2 r}{18\,\mu}
 $$
+
+Here v is the settling velocity of a particle or droplet, d its diameter, ρ_p its density, ρ_o the oil density, ω the bowl angular speed, r the radius and μ the oil viscosity.
 
 - **Purifier:** separates oil, water and solids; a **gravity disc** sized for oil density positions the oil and water interface.
 - **Clarifier:** removes solids only, more efficient for fine particles.
@@ -78,7 +84,19 @@ Ships need fresh water for boilers, engine cooling, drinking (after treatment) a
 
 ### Vacuum evaporator type
 
-A **plate or shell and tube evaporator** under vacuum (created by a seawater driven ejector) boils seawater at about 40 to 60 °C, using heat from the main engine **jacket cooling water**. Vapour passes a demister to remove droplets, then condenses in a **condenser** cooled by seawater. A **distillate pump** delivers fresh water through a **salinometer**, which dumps water back to the evaporator if salinity exceeds about 2 to 10 ppm. The brine ejector removes concentrated brine. Output on large ships is typically 20 to 50 tonnes per day, with very low energy cost because the heat is waste heat. Heat exchanger principles are explained in [heat exchanger types](/chemical-engineering/heat-exchanger-types/).
+A **plate or shell and tube evaporator** works under vacuum and uses heat from the main engine **jacket cooling water**. Output on large ships is typically 20 to 50 tonnes per day, with very low energy cost because the heat is waste heat.
+
+<Steps>
+
+1. A seawater driven **ejector** creates the vacuum, so seawater boils at about 40 to 60 °C.
+2. The vapour passes a **demister** that removes droplets.
+3. The vapour condenses in a **condenser** cooled by seawater.
+4. A **distillate pump** delivers fresh water through a **salinometer**, which dumps water back to the evaporator if salinity exceeds about 2 to 10 ppm.
+5. The **brine ejector** removes the concentrated brine.
+
+</Steps>
+
+Heat exchanger principles are explained in [heat exchanger types](/chemical-engineering/heat-exchanger-types/).
 
 ### Reverse osmosis
 
@@ -88,9 +106,19 @@ High pressure pumps force seawater through semi-permeable membranes that reject 
 
 Ships have several compressed air systems:
 
-- **Starting air:** two or more **two stage reciprocating compressors** with intercooling and aftercooling charge **air receivers** to about 25 to 30 bar for starting main and auxiliary engines. Rules require enough air for a set number of starts.
-- **Control and service air:** about 7 bar, reduced from starting air or produced by screw compressors, then dried and filtered for pneumatic controls and tools.
-- **Emergency air compressor:** hand or diesel driven, to start an auxiliary engine from a dead ship condition.
+<Tabs><div data-tab="Starting air">
+
+Two or more **two stage reciprocating compressors** with intercooling and aftercooling charge **air receivers** to about 25 to 30 bar for starting main and auxiliary engines. Rules require enough air for a set number of starts.
+
+</div><div data-tab="Control and service air">
+
+About 7 bar, reduced from starting air or produced by screw compressors, then dried and filtered for pneumatic controls and tools.
+
+</div><div data-tab="Emergency air">
+
+A hand or diesel driven emergency compressor starts an auxiliary engine from a dead ship condition.
+
+</div></Tabs>
 
 Safety features include relief valves on each stage and receiver, fusible plugs, drain valves for condensate and oil, and non return valves. Multistage compression with intercooling reduces the work needed, a direct application of the [laws of thermodynamics](/mechanical-engineering/laws-of-thermodynamics/).
 
@@ -107,10 +135,15 @@ Safety features include relief valves on each stage and receiver, fusible plugs,
 <Example>
 <dl>
 <dt>Given</dt><dd>A ship's main engine burns 40 t of heavy fuel per day. The fuel contains 0.5% water by mass. The purifier must handle the daily consumption in 20 hours of operation, and the manufacturer recommends running at about 70% of rated throughput for good separation.</dd>
+
 <dt>Find</dt><dd>Required throughput and water removed per day.</dd>
+
 <dt>Assumptions</dt><dd>Fuel density about 0.97 t/m³ at separation temperature; all water removed.</dd>
+
 <dt>Solution</dt><dd>Volume per day = 40 ÷ 0.97 = 41.2 m³; flow = 41.2 ÷ 20 = 2.06 m³/h = 2060 L/h<br />Rated capacity needed = 2060 ÷ 0.70 ≈ 2940 L/h<br />Water removed = 0.005 × 40 = 0.2 t = 200 kg per day</dd>
+
 <dt>Answer</dt><dd><strong>Run the purifier at about 2060 L/h, using a unit rated for about 3000 L/h; it removes about 200 kg of water per day</strong></dd>
+
 <dt>Limitations</dt><dd>Lower flow improves separation of catalytic fines; fuel quality reports may require slower rates or series operation.</dd>
 </dl>
 </Example>
@@ -119,5 +152,23 @@ Safety features include relief valves on each stage and receiver, fusible plugs,
 
 Many auxiliary systems are duplicated, with one running and one on standby, so that a single failure does not stop the ship.
 
+Planned maintenance systems schedule overhauls of purifier bowls, compressor valves, evaporator plate cleaning and pump seals by running hours, supported by condition monitoring of vibration, temperatures and pressures.
 
-Planned maintenance systems schedule overhauls of purifier bowls, compressor valves, evaporator plate cleaning and pump seals by running hours, supported by condition monitoring of vibration, temperatures and pressures. Engineers must also comply with MARPOL record keeping for oil, sludge and bilge water. Well maintained ship auxiliary machinery keeps the main [two-stroke marine diesel engine](/marine-engineering/two-stroke-marine-diesel-engine/) supplied with clean fuel, cooling water and starting air, and keeps the ship safe and compliant.
+Engineers must also comply with MARPOL record keeping for oil, sludge and bilge water. Well maintained ship auxiliary machinery keeps the main [two-stroke marine diesel engine](/marine-engineering/two-stroke-marine-diesel-engine/) supplied with clean fuel, cooling water and starting air, and keeps the ship safe and compliant.
+
+## Key formulas for ship auxiliary machinery
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Settling velocity in a centrifuge (Stokes) | v = d² (ρ_p − ρ_o) ω² r ÷ (18 μ) | v in m/s, d in m, ρ in kg/m³, ω in rad/s, r in m, μ in Pa·s |
+| Purifier throughput | Q = m_fuel ÷ (ρ × t) | Q in m³/h, m_fuel in t per day, ρ in t/m³, t = operating hours per day |
+| Rated purifier capacity | Q_rated = Q ÷ load fraction | load fraction about 0.70 for good separation |
+| Water removed | m_w = water fraction × m_fuel | t per day |
+
+## Ship auxiliary machinery interview and viva questions
+
+1. **What is the difference between a purifier and a clarifier?** A purifier separates oil, water and solids and discharges water through an outlet set by a gravity disc or water transducer, while a clarifier removes only solids and has no water outlet.
+2. **Why is heavy fuel heated to about 98 °C before separation?** Heating lowers the oil's viscosity and density, which increases the settling velocity of water and solids and improves separation.
+3. **How can a freshwater generator boil seawater with engine jacket water?** It runs under vacuum, so seawater boils at about 40 to 60 °C, which waste heat from the jacket cooling water can supply.
+4. **What does the salinometer in a freshwater generator do?** It checks the distillate and dumps it back to the evaporator if salinity exceeds about 2 to 10 ppm.
+5. **Why are starting air compressors two stage with intercooling?** Multistage compression with intercooling reduces the work needed to reach the 25 to 30 bar starting air pressure.

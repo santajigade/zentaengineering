@@ -1,0 +1,231 @@
+---
+title: "Food Drying and Dehydration Methods Explained"
+description: "Food drying explained: water activity, drying rate periods, sun, cabinet, drum, spray, fluidized bed and freeze drying, with a worked tray dryer example."
+pubDate: 2026-11-27
+reviewedDate: 2026-11-27
+discipline: agricultural-engineering
+subcategory: food-processing
+focusKeyword: "food drying"
+image: { src: /images/featured/food-drying-methods.webp, alt: "Food Drying and Dehydration Methods Explained: featured diagram" }
+format: explanation
+pillar: false
+math: true
+tags: [food-drying, dehydration, spray-drying, freeze-drying, water-activity]
+faq:
+  - q: "What is the difference between drying and dehydration of food?"
+    a: "The two words are often used for the same thing: removing water from food by evaporation or sublimation. Some texts keep drying for sun drying and use dehydration for drying in machines under controlled temperature, humidity and airflow."
+  - q: "Why are vegetables blanched before drying?"
+    a: "Blanching is a short heat treatment in hot water or steam that inactivates enzymes. Without it, enzymes keep working in the dried product and cause off flavours, browning and loss of colour during storage."
+  - q: "Why is freeze dried food better quality but more expensive?"
+    a: "In freeze drying the water is frozen and then removed by sublimation under vacuum, so the food stays cold, keeps its shape and loses little flavour, and it rehydrates quickly. The freezing, the vacuum and the long drying cycle make it the most energy intensive and costly drying method."
+references:
+  - text: "P. J. Fellows, Food Processing Technology: Principles and Practice, 4th ed., Woodhead Publishing (Elsevier), 2017"
+  - text: "R. P. Singh and D. R. Heldman, Introduction to Food Engineering, 5th ed., Academic Press, 2014"
+  - text: "C. J. Geankoplis, Transport Processes and Separation Process Principles, 4th ed., Prentice Hall, 2003"
+  - text: "A. S. Mujumdar (ed.), Handbook of Industrial Drying, 4th ed., CRC Press, 2014"
+  - text: "FAO, Fruit and Vegetable Processing, FAO Agricultural Services Bulletin 119, 1995"
+---
+import Key from '../../../components/Key.astro';
+import Example from '../../../components/Example.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
+import More from '../../../components/More.astro';
+import ArticleVideo from '../../../components/ArticleVideo.astro';
+
+<Key title="Short answer">
+
+**Food drying** is the removal of water from food, usually by heated air or by sublimation under vacuum, until water activity is too low for microbes and enzymes to spoil it. The main methods are sun and solar drying, hot air cabinet and tunnel drying, drum drying, spray drying, fluidized bed drying and freeze drying.
+
+</Key>
+
+Food drying is one of the oldest ways to preserve food and is still widely used. Taking water out stops spoilage and cuts the weight and volume of the product, so it costs less to pack, store and transport.
+
+Fruits and vegetables arrive with a lot of water and many are sensitive to heat, so food drying needs more care over temperature and quality than [grain drying](/agricultural-engineering/grain-drying-methods/).
+
+
+<ArticleVideo slug="food-drying-methods" title="How a spray dryer works" uploadDate="2026-11-27" />
+
+## Why food drying preserves food
+
+What matters is not the total water content but the **water activity** (a_w): the ratio of the water vapour pressure over the food to that over pure water at the same temperature. Pure water has a_w = 1. Microbes need free water, and each group stops growing below a certain water activity.
+
+| Organism group | Approximate minimum a_w for growth |
+| --- | --- |
+| Most bacteria | 0.91 |
+| Most yeasts | 0.88 |
+| Most moulds | 0.80 |
+| Xerophilic moulds and osmophilic yeasts | about 0.60 to 0.61 |
+
+Below about 0.6 almost no microbe can grow. Enzyme activity and browning slow down at low water activity but do not stop, so dried foods go into moisture proof packs and some vegetables are blanched first.
+
+## How food drying works: heat and mass transfer
+
+Drying moves heat into the food and water out of it at the same time. In hot air drying the air brings the latent heat for evaporation and carries the vapour away (see [modes of heat transfer](/mechanical-engineering/modes-of-heat-transfer/)).
+
+Plot drying rate against moisture content for a sample under constant air conditions and you get the drying curve, with three periods:
+
+<Steps>
+
+1. **Initial adjustment period.** The food surface heats or cools to the wet bulb temperature of the air.
+2. **Constant rate period.** The surface stays covered with free water and evaporates like a wet bulb, so the rate depends only on air temperature, humidity and velocity. The food surface stays at the wet bulb temperature.
+3. **Falling rate period.** Below the **critical moisture content** the surface starts to dry out. Water must now move from inside the piece to the surface, mainly by diffusion, and the rate falls steadily. Most food drying happens in this period.
+
+</Steps>
+
+In the constant rate period the heat arriving by convection equals the heat used for evaporation, so the drying rate per unit area is:
+
+$$
+R_c = \frac{h \,(T - T_w)}{\lambda_w}
+$$
+
+where h is the convective heat transfer coefficient (W/m²K), T the air dry bulb temperature, T_w the wet bulb temperature and λ_w the latent heat of evaporation at T_w (J/kg). The drying time for the constant rate period follows from a mass balance:
+
+$$
+t_c = \frac{L_s \,(X_1 - X_2)}{A \, R_c}
+$$
+
+with L_s the mass of dry solid, A the drying area and X the moisture content on a dry basis (kg water per kg dry solid). Thin slices shorten the falling rate period because water has a shorter path to the surface.
+
+<More title="Wet basis and dry basis moisture">
+
+Plants quote moisture on a **wet basis**, M = water mass ÷ total mass × 100%. Drying calculations use the **dry basis**, X = water mass ÷ dry solid mass, because the dry solid does not change. X = M ÷ (100 − M), so 88% wet basis is about 7.3 kg water per kg dry solid.
+
+</More>
+
+## Food drying methods
+
+<Tabs><div data-tab="Sun and solar">
+
+Grapes, apricots, figs, fish and some vegetables are spread in the sun on trays or mats. It costs almost nothing but is slow, depends on the weather and exposes food to dust, insects, birds and rain.
+
+Solar dryers use a covered cabinet with a collector that heats the air, so drying is faster and cleaner.
+
+</div><div data-tab="Hot air">
+
+**Cabinet (tray) dryers** circulate heated air across trays of product in an insulated cabinet. They suit small plants and batches of fruit and vegetable pieces.
+
+**Tunnel dryers** move trucks of trays through a tunnel with air flowing the same way as the product (co-current) or against it (counter current). **Belt dryers** carry pieces on a perforated belt through zones at different air temperatures.
+
+</div><div data-tab="Drum">
+
+A thin film of puree, paste or liquid is spread on the outside of a slowly rotating drum heated inside by steam. It dries within one revolution and is scraped off by a knife as flakes or sheets.
+
+It is used for potato flakes, cooked cereals, baby foods and fruit purees, which can taste slightly cooked.
+
+</div><div data-tab="Spray">
+
+Spray drying turns milk, coffee extract and eggs into powders. The concentrated feed is broken into a fine mist by a rotary atomizer or pressure nozzle at the top of a large chamber.
+
+Hot air, typically entering at about 150 to 300 °C, dries the droplets within seconds. Evaporation keeps them near the wet bulb temperature, so heat damage stays small. Powder falls to the cone and a cyclone separates fine particles from the exhaust air.
+
+</div><div data-tab="Fluidized bed">
+
+Hot air blows up through a perforated plate fast enough to lift peas, diced vegetables, grains or powders, so the bed behaves like a boiling liquid. Each particle is surrounded by air, so drying is fast and even. It only works for small, uniform particles that do not stick.
+
+</div><div data-tab="Freeze">
+
+The food is frozen, then placed in a vacuum chamber below the triple point of water (about 611 Pa and 0.01 °C). Heat from the shelves makes the ice sublime straight to vapour, which is collected on a cold condenser.
+
+Freeze dried coffee, fruit and meals keep their shape, colour and flavour and rehydrate quickly, but freezing, vacuum and long cycles make it the most expensive method.
+
+</div></Tabs>
+
+<figure class="anim">
+<svg width="600" height="290" viewBox="0 0 600 290" fill="none" role="img" aria-label="Cabinet tray dryer for food drying: fresh air enters at the top left and mixes with recirculated air, a fan pushes the air through a steam or electric heater, hot air flows horizontally across four trays of food pieces, the moist air rises at the right side, part leaves through the exhaust and the rest returns through the top duct to the fan">
+<g stroke="#0b2545" stroke-width="2">
+<rect x="40" y="60" width="460" height="200" fill="#f7f9fc" />
+<path d="M120 102H470" />
+<path d="M130 20V60M150 20V60" />
+<path d="M400 20V60M420 20V60" />
+<circle cx="80" cy="150" r="24" fill="#eef1f6" />
+</g>
+<g class="anim-spin"><path d="M80 150L80 130M80 150L97 160M80 150L63 160" stroke="#0b2545" stroke-width="5" stroke-linecap="round" /></g>
+<path d="M125 120l10 10-10 10 10 10-10 10 10 10-10 10 10 10-10 10 10 10" stroke="#b42318" stroke-width="2.5" />
+<g fill="#e8d3a8" stroke="#8a6d3b" stroke-width="1.5">
+<rect x="180" y="132" width="260" height="8" /><rect x="180" y="167" width="260" height="8" /><rect x="180" y="202" width="260" height="8" /><rect x="180" y="237" width="260" height="8" />
+</g>
+<g stroke="#b42318" stroke-width="2.5"><path d="M150 124H460M150 159H460M150 194H460M150 229H460" /></g>
+<g stroke="#13a89e" stroke-width="2.5"><path d="M480 240V82H95V126" /><path d="M410 82V20" /><path d="M140 20V82" /></g>
+<g stroke="#fff" stroke-width="1.5" fill="none">
+<path class="anim-flow" d="M150 124H460M150 159H460M150 194H460M150 229H460" />
+<path class="anim-flow-slow" d="M480 240V82H95V126" />
+<path class="anim-flow-slow" d="M410 82V22" />
+<path class="anim-flow-slow" d="M140 22V82" />
+</g>
+<g fill="#b42318"><path d="M458 119l10 5-10 5z" /><path d="M458 154l10 5-10 5z" /><path d="M458 189l10 5-10 5z" /><path d="M458 224l10 5-10 5z" /></g>
+<g fill="#13a89e"><path d="M405 28l5-10 5 10z" /><path d="M135 74l5 10 5-10z" /><path d="M90 116l5 10 5-10z" /></g>
+<g font-family="Open Sans Variable, Arial, sans-serif" font-size="12" fill="#0b2545" text-anchor="middle">
+<text x="140" y="14">Fresh air in</text><text x="410" y="14">Moist exhaust</text>
+<text x="290" y="96" font-size="11">Recirculated air (return duct)</text>
+<text x="80" y="195">Fan</text><text x="135" y="245">Heater</text><text x="310" y="280">Trays of food pieces</text><text x="548" y="165">Moist air</text><text x="548" y="181">rising</text>
+<text x="310" y="152" font-size="10" fill="#b42318">Hot air across trays</text>
+</g>
+</svg>
+<figcaption>Cabinet tray dryer: a fan drives heated air across the trays; most of the moist air is recirculated and part is exhausted and replaced with fresh air.</figcaption>
+</figure>
+
+Recirculating part of the warm air saves heat, but too much raises the air humidity and slows drying, so the exhaust damper sets the balance.
+
+## Comparing food drying methods
+
+| Method | Typical foods | Product form | Quality and cost |
+| --- | --- | --- | --- |
+| Sun and solar | Grapes, apricots, figs, fish | Pieces, whole fruit | Low cost, slow, hygiene risk |
+| Cabinet, tunnel, belt | Vegetable and fruit pieces | Pieces, slices | Moderate cost, some shrinkage and browning |
+| Drum | Potato flakes, cereals, purees | Flakes, sheets | Low cost for pastes, possible cooked flavour |
+| Spray | Milk, coffee, eggs | Powder | Seconds of drying, good for heat sensitive liquids |
+| Fluidized bed | Peas, diced vegetables, granules | Small particles | Fast and even, needs uniform particles |
+| Freeze | Coffee, fruit, ready meals | Pieces, granules | Best quality, highest cost |
+
+## Pretreatment and quality changes
+
+Pieces shrink, and if the surface dries much faster than the inside a hard skin forms that slows further drying. This **case hardening** is avoided with moderate air temperatures in the falling rate period.
+
+Heat also promotes non enzymic (Maillard) browning and loss of vitamins such as vitamin C. Dried products are judged by colour, flavour and rehydration.
+
+<More title="Common pretreatments before drying">
+
+- **Blanching** of vegetables in hot water or steam to inactivate enzymes.
+- **Sulphiting** of light coloured fruits such as apricots to limit browning, where food regulations allow it.
+- **Osmotic dehydration** in sugar or salt solution to remove part of the water before air drying.
+- **Cutting into thin, even pieces** so the falling rate period is shorter and drying is uniform.
+
+</More>
+
+The whole process runs under a food safety plan built on [HACCP principles](/agricultural-engineering/haccp-principles/). For liquids, [pasteurization](/agricultural-engineering/pasteurization-htst-uht/) usually comes before concentration and spray drying.
+
+<Example>
+<dl>
+<dt>Given</dt><dd>20 kg of carrot slices at 88% moisture (wet basis) are dried to 8%. Latent heat 2.4 MJ/kg. In the constant rate period, air at 60 °C (wet bulb 30 °C) flows over 4 m² of trays, h = 25 W/m²K, λ_w = 2.43 MJ/kg.</dd>
+
+<dt>Find</dt><dd>Water removed, dried mass, heat for evaporation and the constant drying rate.</dd>
+
+<dt>Assumptions</dt><dd>No loss of dry solids; dryer thermal efficiency 40%.</dd>
+
+<dt>Solution</dt><dd>Water removed = 20 × (88 − 8) ÷ (100 − 8) = 20 × 80 ÷ 92 = 17.39 kg<br />Dried product = 20 − 17.39 = 2.61 kg (2.4 kg of dry solids)<br />X₁ = 88 ÷ 12 = 7.33, X₂ = 8 ÷ 92 = 0.087 kg/kg</dd>
+
+<dt>Solution (heat and rate)</dt><dd>Heat = 17.39 × 2.4 = 41.7 MJ, or 41.7 ÷ 0.4 = 104 MJ of dryer heat<br />R_c = 25 × (60 − 30) ÷ 2 430 000 = 3.09 × 10⁻⁴ kg/m²s = 1.11 kg/m²h<br />Over 4 m²: 4 × 1.11 = 4.44 kg/h</dd>
+
+<dt>Answer</dt><dd><strong>About 17.4 kg of water removed, 2.61 kg of dried carrot, about 42 MJ for evaporation (104 MJ dryer heat) and about 4.4 kg/h in the constant rate period</strong></dd>
+
+<dt>Limitations</dt><dd>Most drying happens in the slower, diffusion controlled falling rate period, so total time cannot come from the constant rate alone.</dd>
+</dl>
+</Example>
+
+## Key formulas for food drying
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Wet basis moisture | M = m_w ÷ (m_w + m_s) × 100% | m_w = water mass, m_s = dry solid mass, kg |
+| Dry basis moisture | X = m_w ÷ m_s = M ÷ (100 − M) | kg water per kg dry solid |
+| Water to remove | m_water = m₁ × (M₁ − M₂) ÷ (100 − M₂) | m₁ = initial mass in kg, M₁ and M₂ in % wet basis |
+| Constant drying rate | R_c = h (T − T_w) ÷ λ_w | h in W/m²K, T and T_w in °C, λ_w in J/kg, R_c in kg/m²s |
+| Constant rate drying time | t_c = L_s (X₁ − X₂) ÷ (A R_c) | L_s = dry solid in kg, A in m², t_c in s |
+
+## Food drying interview and viva questions
+
+1. **Why is water activity more useful than moisture content for food safety?** Water activity measures the free water microbes need; most bacteria need a_w above about 0.91 and most moulds above about 0.80.
+2. **What controls the drying rate in the constant rate period?** The surface is still wet, so only external conditions matter: air temperature, humidity and velocity, through h and the dry bulb minus wet bulb difference.
+3. **What is the critical moisture content?** It is the moisture content at which the constant rate period ends and the falling rate period begins, because water can no longer reach the surface fast enough to keep it wet.
+4. **Why does spray drying cause little heat damage even with very hot inlet air?** Evaporation keeps the droplets near the wet bulb temperature, and drying takes only seconds.
+5. **What is case hardening?** A hard surface layer that forms when the surface dries much faster than the inside; moderate air temperatures in the falling rate period prevent it.

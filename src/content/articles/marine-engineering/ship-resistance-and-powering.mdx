@@ -3,6 +3,7 @@ title: "Ship Resistance and Powering Basics"
 description: "Ship resistance explained: frictional and residuary resistance, Froude and Reynolds numbers, the ITTC 1957 line and a worked powering example."
 pubDate: 2026-11-10
 reviewedDate: 2026-11-10
+updatedDate: 2026-11-27
 discipline: marine-engineering
 subcategory: naval-architecture
 focusKeyword: "ship resistance"
@@ -28,10 +29,12 @@ references:
 ---
 import Key from '../../../components/Key.astro';
 import Example from '../../../components/Example.astro';
+import Tabs from '../../../components/Tabs.astro';
+import Steps from '../../../components/Steps.astro';
 
 <Key title="Short answer">
 
-**Ship resistance** is the force the water and air exert against a ship moving at constant speed. It is made up mainly of **frictional resistance**, from water shearing along the wetted hull, and **residuary resistance**, which includes wave making and viscous pressure losses. Resistance times speed gives the **effective power**. Dividing effective power by the propulsive and shaft efficiencies gives the power the engine must deliver.
+**Ship resistance** is the force water and air exert against a ship moving at constant speed. It is mainly frictional resistance from water shearing along the wetted hull plus residuary resistance from wave making and viscous pressure losses. Resistance times speed gives effective power, and dividing by the propulsive and shaft efficiencies gives the engine power.
 
 </Key>
 
@@ -58,7 +61,18 @@ $$
 Re = \frac{V L}{\nu}, \qquad Fn = \frac{V}{\sqrt{g L}}
 $$
 
-where V is ship speed, L is waterline length, ν is the kinematic viscosity of water and g is gravitational acceleration. Wave patterns of a model and a ship are similar when Froude numbers are equal. Matching Froude number at model scale gives a Reynolds number far smaller than the ship's, so friction cannot be scaled directly. This is why Froude split the resistance: the model is towed at the correct Froude number, its frictional part is estimated from a flat plate formula and subtracted, and the residuary coefficient is assumed to be the same for model and ship.
+where V is ship speed, L is waterline length, ν is the kinematic viscosity of water and g is gravitational acceleration. Wave patterns of a model and a ship are similar when Froude numbers are equal.
+
+Matching Froude number at model scale gives a Reynolds number far smaller than the ship's, so friction cannot be scaled directly. This is why Froude split the resistance:
+
+<Steps>
+
+1. The model is towed at the correct Froude number and its total resistance is measured.
+2. Its frictional part is estimated from a flat plate formula and subtracted.
+3. The residuary coefficient is assumed to be the same for model and ship.
+4. The ship's own frictional coefficient and a correlation allowance are added back (see the next section).
+
+</Steps>
 
 ## Resistance coefficients and the ITTC 1957 line
 
@@ -74,7 +88,9 @@ $$
 C_F = \frac{0.075}{(\log_{10} Re - 2)^2}
 $$
 
-The total coefficient for the ship is then built up as CT = CF + CR + CA, where CR is the residuary coefficient from model tests or a systematic series and CA is a correlation allowance that accounts for hull roughness and other full scale effects. Many tanks also use a form factor (1 + k) multiplying CF, which is the three dimensional method described by Molland and in the ITTC procedures.
+The total coefficient for the ship is then built up as CT = CF + CR + CA, where CR is the residuary coefficient from model tests or a systematic series and CA is a correlation allowance that accounts for hull roughness and other full scale effects.
+
+Many tanks also use a form factor (1 + k) multiplying CF, which is the three dimensional method described by Molland and in the ITTC procedures.
 
 ## Powering: from resistance to engine power
 
@@ -86,14 +102,27 @@ $$
 
 The propeller does not deliver this power perfectly. The propulsion chain has several efficiencies:
 
-- **Hull efficiency ηH = (1 - t)/(1 - w):** combines the thrust deduction fraction t (the propeller increases the resistance of the hull) and the wake fraction w (the propeller works in water slowed by the hull).
-- **Open water efficiency ηO:** efficiency of the propeller tested alone in uniform flow.
-- **Relative rotative efficiency ηR:** corrects for the non uniform wake behind the hull.
-- **Shaft efficiency ηS:** bearing and stern tube losses between the engine and propeller.
+<Tabs><div data-tab="Hull ηH">
+
+**Hull efficiency ηH = (1 - t)/(1 - w):** combines the thrust deduction fraction t (the propeller increases the resistance of the hull) and the wake fraction w (the propeller works in water slowed by the hull).
+
+</div><div data-tab="Open water ηO">
+
+**Open water efficiency ηO:** efficiency of the propeller tested alone in uniform flow.
+
+</div><div data-tab="Relative rotative ηR">
+
+**Relative rotative efficiency ηR:** corrects for the non uniform wake behind the hull.
+
+</div><div data-tab="Shaft ηS">
+
+**Shaft efficiency ηS:** bearing and stern tube losses between the engine and propeller.
+
+</div></Tabs>
 
 The quasi propulsive coefficient is ηD = ηH ηO ηR, so delivered power PD = PE / ηD, and brake power PB = PD / ηS when there is no gearbox.
 
-<figure>
+<figure class="anim">
 <svg viewBox="0 0 640 310" width="640" height="310" fill="none" role="img" aria-label="Diagram of the ship power chain from engine brake power through shaft power, delivered power and thrust power to effective power, and a breakdown of total resistance into frictional resistance, residuary resistance and air and appendage resistance.">
 <g stroke="#0b2545" stroke-width="1.5">
 <rect x="20" y="40" width="100" height="56" rx="4" fill="#fff6d6" />
@@ -106,6 +135,7 @@ The quasi propulsive coefficient is ηD = ηH ηO ηR, so delivered power PD = P
 <path d="M370 68 H391" /><path d="M386 63 L394 68 L386 73" />
 <path d="M495 68 H516" /><path d="M511 63 L519 68 L511 73" />
 <rect x="220" y="150" width="200" height="38" rx="4" fill="#e6eef7" />
+<g stroke="#fff" stroke-width="1.5"><path class="anim-flow" d="M120 68 H136" /><path class="anim-flow" d="M245 68 H261" /><path class="anim-flow" d="M370 68 H386" /><path class="anim-flow" d="M495 68 H511" /></g>
 <rect x="30" y="232" width="170" height="44" rx="4" fill="#ffffff" />
 <rect x="235" y="232" width="170" height="44" rx="4" fill="#ffffff" />
 <rect x="440" y="232" width="170" height="44" rx="4" fill="#ffffff" />
@@ -134,10 +164,19 @@ The quasi propulsive coefficient is ηD = ηH ηO ηR, so delivered power PD = P
 <Example>
 <dl>
 <dt>Given</dt><dd>Cargo ship, waterline length L = 100 m, wetted surface S = 2500 m², speed 15 knots. Residuary coefficient from model tests CR = 0.0006, correlation allowance CA = 0.0004. Seawater ρ = 1025 kg/m³, ν = 1.1883 × 10⁻⁶ m²/s (ITTC value at 15 °C). Quasi propulsive coefficient ηD = 0.70, shaft efficiency ηS = 0.98.</dd>
+
 <dt>Find</dt><dd>Froude number, Reynolds number, total ship resistance, effective power, delivered power and brake power.</dd>
+
 <dt>Assumptions</dt><dd>Calm deep water; air and appendage resistance included in CA for simplicity; direct drive with no gearbox; 1 knot = 0.5144 m/s; g = 9.81 m/s². The coefficient values are illustrative inputs, not data for a real ship.</dd>
-<dt>Solution</dt><dd>V = 15 × 0.5144 = 7.716 m/s<br />Fn = 7.716 / √(9.81 × 100) = 0.246<br />Re = 7.716 × 100 / (1.1883 × 10⁻⁶) = 6.49 × 10⁸<br />CF = 0.075 / (log10(6.49 × 10⁸) - 2)² = 0.075 / (8.812 - 2)² = 0.001616<br />CT = 0.001616 + 0.0006 + 0.0004 = 0.002616<br />RT = 0.5 × 1025 × 2500 × 7.716² × 0.002616 = 199.6 kN<br />PE = 199.6 × 7.716 = 1540 kW<br />PD = 1540 / 0.70 = 2200 kW<br />PB = 2200 / 0.98 = 2245 kW</dd>
+
+<dt>Solution</dt><dd>V = 15 × 0.5144 = 7.716 m/s<br />Fn = 7.716 / √(9.81 × 100) = 0.246<br />Re = 7.716 × 100 / (1.1883 × 10⁻⁶) = 6.49 × 10⁸</dd>
+
+<dd>CF = 0.075 / (log10(6.49 × 10⁸) - 2)² = 0.075 / (8.812 - 2)² = 0.001616<br />CT = 0.001616 + 0.0006 + 0.0004 = 0.002616</dd>
+
+<dd>RT = 0.5 × 1025 × 2500 × 7.716² × 0.002616 = 199.6 kN<br />PE = 199.6 × 7.716 = 1540 kW<br />PD = 1540 / 0.70 = 2200 kW<br />PB = 2200 / 0.98 = 2245 kW</dd>
+
 <dt>Answer</dt><dd><strong>Total resistance about 200 kN, effective power about 1.54 MW, brake power about 2.24 MW at 15 knots in calm water</strong></dd>
+
 <dt>Limitations</dt><dd>A real engine rating adds a sea margin for weather and fouling and an engine margin. CR changes strongly with speed and hull form, so it must come from model tests or a recognised systematic series.</dd>
 </dl>
 </Example>
@@ -146,7 +185,9 @@ In this example friction gives 0.001616 of the 0.002616 total, about 62 percent 
 
 ## How ship resistance changes with speed
 
-At low Froude numbers, frictional resistance dominates and total resistance rises roughly with the square of speed. As speed increases, the bow and stern wave systems grow and interfere. Wave making resistance rises much faster than speed squared, with humps and hollows depending on whether the bow and stern waves reinforce or cancel. Since power is resistance times speed, power rises faster still. This is why slow steaming, reducing service speed by a few knots, is so effective at cutting fuel use.
+At low Froude numbers, frictional resistance dominates and total resistance rises roughly with the square of speed. As speed increases, the bow and stern wave systems grow and interfere. Wave making resistance rises much faster than speed squared, with humps and hollows depending on whether the bow and stern waves reinforce or cancel. Since power is resistance times speed, power rises faster still.
+
+This is why slow steaming, reducing service speed by a few knots, is so effective at cutting fuel use.
 
 ## Ways to reduce ship resistance
 
@@ -157,6 +198,27 @@ At low Froude numbers, frictional resistance dominates and total resistance rise
 - **Appendages:** aligning rudders, brackets and fins with the local flow cuts their drag.
 
 Hull form choices also affect [ship stability](/marine-engineering/ship-stability-basics/), so the naval architect balances resistance against stability, cargo capacity and seakeeping.
+
+## Key formulas for ship resistance
+
+| Quantity | Formula | Symbols and units |
+| --- | --- | --- |
+| Reynolds number | Re = V L ÷ ν | V in m/s, L = waterline length in m, ν = kinematic viscosity in m²/s |
+| Froude number | Fn = V ÷ √(g L) | g = 9.81 m/s² |
+| Total resistance | RT = ½ ρ S V² CT | RT in N, ρ in kg/m³, S = wetted surface in m² |
+| ITTC 1957 friction line | CF = 0.075 ÷ (log10 Re − 2)² | dimensionless |
+| Total coefficient | CT = CF + CR + CA | CR = residuary, CA = correlation allowance |
+| Effective power | PE = RT V | W |
+| Hull efficiency | ηH = (1 − t) ÷ (1 − w) | t = thrust deduction fraction, w = wake fraction |
+| Delivered and brake power | PD = PE ÷ ηD, PB = PD ÷ ηS | ηD = ηH ηO ηR, ηS = shaft efficiency |
+
+## Ship resistance interview and viva questions
+
+1. **Why can a model test not match both Reynolds and Froude numbers?** Matching the Froude number at model scale gives a Reynolds number far smaller than the ship's, so friction cannot be scaled directly and Froude's method separates it out.
+2. **What is the ITTC 1957 line used for?** It gives the frictional resistance coefficient CF as a function of Reynolds number, for both model and ship, in the ITTC resistance test procedure.
+3. **What are the wake fraction and the thrust deduction fraction?** The wake fraction w accounts for the propeller working in water slowed by the hull, and the thrust deduction fraction t accounts for the propeller increasing the hull resistance; together they give ηH = (1 − t) ÷ (1 − w).
+4. **Why does slow steaming cut fuel use so effectively?** Wave making resistance rises much faster than speed squared, and power is resistance times speed, so a few knots less speed reduces power sharply.
+5. **Why does hull fouling matter for slow and medium speed ships?** Friction is the largest part of their resistance, about 62 percent in the worked example, and fouling raises hull roughness and therefore frictional resistance.
 
 ## Related reading
 

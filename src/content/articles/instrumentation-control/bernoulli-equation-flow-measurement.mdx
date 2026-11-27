@@ -3,6 +3,7 @@ title: "Bernoulli Equation in Flow Measurement: Square Root of DP"
 description: "The Bernoulli equation in flow measurement: the DP flow equation for orifice, venturi and pitot meters, square root of DP, extraction and a worked example."
 pubDate: 2026-11-24
 reviewedDate: 2026-11-24
+updatedDate: 2026-11-27
 discipline: instrumentation-control
 subcategory: process-measurement-principles
 focusKeyword: "bernoulli equation in flow measurement"
@@ -31,6 +32,8 @@ import Key from '../../../components/Key.astro';
 import Example from '../../../components/Example.astro';
 import Calculator from '../../../components/Calculator.astro';
 import ArticleVideo from '../../../components/ArticleVideo.astro';
+import Tabs from '../../../components/Tabs.astro';
+import More from '../../../components/More.astro';
 
 <Key title="Short answer">
 
@@ -38,7 +41,9 @@ The **Bernoulli equation in flow measurement** links the pressure drop across a 
 
 </Key>
 
-Differential pressure (DP) meters are still the most widely installed flowmeters in process plants. An orifice plate, a DP transmitter and two impulse lines are cheap, well understood and backed by a full international standard. All of it rests on one result from fluid mechanics. The general [Bernoulli equation](/mechanical-engineering/bernoulli-equation/) covers derivation and assumptions; this article follows it into the instrument loop, from the pipe to the 4 to 20 mA signal.
+Differential pressure (DP) meters are still the most widely installed flowmeters in process plants. An orifice plate, a DP transmitter and two impulse lines are cheap, well understood and backed by a full international standard.
+
+All of it rests on one result from fluid mechanics. The general [Bernoulli equation](/mechanical-engineering/bernoulli-equation/) covers derivation and assumptions; this article follows it into the instrument loop, from the pipe to the 4 to 20 mA signal.
 
 
 <ArticleVideo slug="bernoulli-equation-flow-measurement" title="How Bernoulli measures flow" uploadDate="2026-11-24" />
@@ -67,11 +72,17 @@ $$
 Q = C \, E \, A_2 \sqrt{\frac{2\Delta P}{\rho}}, \qquad E = \frac{1}{\sqrt{1-\beta^4}}
 $$
 
-E is the velocity of approach factor. For gases, ISO 5167 adds an expansibility factor ε and writes the equation as mass flow:
+E is the velocity of approach factor.
+
+<More title="Gas flow: the ISO 5167 mass flow form">
+
+For gases, ISO 5167 adds an expansibility factor ε and writes the equation as mass flow:
 
 $$
 q_m = \frac{C}{\sqrt{1-\beta^4}}\,\varepsilon\,\frac{\pi}{4}d^2\sqrt{2\,\Delta P\,\rho_1}
 $$
+
+</More>
 
 Everything in front of the square root is fixed by the meter and the fluid. That leaves the part an instrument engineer cares about:
 
@@ -133,10 +144,23 @@ For the plain relation between pipe area, velocity and flow rate, see the [flow 
 
 ## The same equation in other DP meters
 
-- **Venturi tube.** A smooth converging cone, throat and long diverging cone. C is about 0.98 to 0.995 and most of the DP is recovered downstream.
-- **Flow nozzle.** A rounded inlet without the long diffuser. C is high, near 0.99, but recovery is poorer than a venturi.
-- **Pitot tube and averaging pitot.** The impact port brings the flow to rest, so it reads stagnation pressure. The difference from static pressure is ½ρv², giving v = √(2ΔP/ρ) at that point, or across the pipe for an averaging probe.
-- **Elbow meter.** Centrifugal force in a bend makes the outer wall pressure higher than the inner. The DP still follows a square law, though the coefficient usually needs field calibration.
+<Tabs><div data-tab="Venturi tube">
+
+A smooth converging cone, throat and long diverging cone. C is about 0.98 to 0.995 and most of the DP is recovered downstream.
+
+</div><div data-tab="Flow nozzle">
+
+A rounded inlet without the long diffuser. C is high, near 0.99, but recovery is poorer than a venturi.
+
+</div><div data-tab="Pitot tube">
+
+Pitot tube and averaging pitot: The impact port brings the flow to rest, so it reads stagnation pressure. The difference from static pressure is ½ρv², giving v = √(2ΔP/ρ) at that point, or across the pipe for an averaging probe.
+
+</div><div data-tab="Elbow meter">
+
+Centrifugal force in a bend makes the outer wall pressure higher than the inner. The DP still follows a square law, though the coefficient usually needs field calibration.
+
+</div></Tabs>
 
 ## Permanent pressure loss
 
@@ -153,10 +177,17 @@ At β = 0.6 that is about 62% of the measured DP. A venturi loses typically only
 <Example>
 <dl>
 <dt>Given</dt><dd>Water at 20°C (ρ = 998 kg/m³) flows in a 100 mm bore pipe through a concentric orifice of d = 60 mm. The DP transmitter reads 250 mbar (25,000 Pa). Take C = 0.61.</dd>
+
 <dt>Find</dt><dd>Volume flow, mass flow and approximate permanent pressure loss.</dd>
+
 <dt>Assumptions</dt><dd>Fully developed turbulent flow, incompressible liquid (ε = 1), C constant at this Reynolds number.</dd>
-<dt>Solution</dt><dd>β = 60 ÷ 100 = 0.6, β⁴ = 0.1296<br />E = 1 ÷ √(1 − 0.1296) = 1.0719<br />A₂ = π/4 × 0.06² = 0.002827 m²<br />√(2ΔP/ρ) = √(2 × 25,000 ÷ 998) = 7.078 m/s<br />Q = 0.61 × 1.0719 × 0.002827 × 7.078 = 0.01309 m³/s = 47.1 m³/h<br />q_m = 0.01309 × 998 = 13.06 kg/s<br />Permanent loss ≈ (1 − 0.6^1.9) × 25,000 ≈ 15,500 Pa = 155 mbar</dd>
+
+<dt>Solution</dt><dd>β = 60 ÷ 100 = 0.6, β⁴ = 0.1296<br />E = 1 ÷ √(1 − 0.1296) = 1.0719<br />A₂ = π/4 × 0.06² = 0.002827 m²<br />√(2ΔP/ρ) = √(2 × 25,000 ÷ 998) = 7.078 m/s</dd>
+
+<dd>Q = 0.61 × 1.0719 × 0.002827 × 7.078 = 0.01309 m³/s = 47.1 m³/h<br />q_m = 0.01309 × 998 = 13.06 kg/s<br />Permanent loss ≈ (1 − 0.6^1.9) × 25,000 ≈ 15,500 Pa = 155 mbar</dd>
+
 <dt>Answer</dt><dd><strong>About 47.1 m³/h (13.1 kg/s) of water, with roughly 155 mbar of the 250 mbar DP lost permanently</strong></dd>
+
 <dt>Limitations</dt><dd>C was assumed. For custody or design work, calculate C from the ISO 5167 Reader-Harris/Gallagher equation and iterate with the Reynolds number; check straight pipe lengths too.</dd>
 </dl>
 </Example>
